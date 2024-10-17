@@ -1,0 +1,307 @@
+,teamId,location,name,playerId,firstName,lastName,height,weight,athleteAge,draftRd,position,exp,headshot,fullName
+1,22,Arizona,Cardinals,3886809,Andre,Baccellia,70,175,27,,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/3886809.png,Andre Baccellia
+22,22,Arizona,Cardinals,4037235,Greg,Dortch,67,175,26,,WR,4,https://a.espncdn.com/i/headshots/nfl/players/full/4037235.png,Greg Dortch
+28,22,Arizona,Cardinals,4432708,Marvin,Harrison Jr.,76,205,22,1.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4432708.png,Marvin Harrison Jr.
+38,22,Arizona,Cardinals,3059722,Zay,Jones,74,200,29,2.0,WR,8,https://a.espncdn.com/i/headshots/nfl/players/full/3059722.png,Zay Jones
+43,22,Arizona,Cardinals,2576581,Chris,Moore,73,200,31,4.0,WR,9,https://a.espncdn.com/i/headshots/nfl/players/full/2576581.png,Chris Moore
+51,22,Arizona,Cardinals,4875912,Tejhaun,Palmer,74,210,24,6.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4875912.png,Tejhaun Palmer
+53,22,Arizona,Cardinals,2978109,Zach,Pascal,74,215,29,,WR,7,https://a.espncdn.com/i/headshots/nfl/players/full/2978109.png,Zach Pascal
+71,22,Arizona,Cardinals,4428811,Xavier,Weaver,73,180,24,,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4428811.png,Xavier Weaver
+76,22,Arizona,Cardinals,4360761,Michael,Wilson,74,213,24,3.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4360761.png,Michael Wilson
+86,1,Atlanta,Falcons,4369886,Chris,Blair,74,198,27,,WR,1,https://a.espncdn.com/i/headshots/nfl/players/full/4369886.png,Chris Blair
+95,1,Atlanta,Falcons,4363551,Dylan,Drummond,72,186,24,,WR,1,https://a.espncdn.com/i/headshots/nfl/players/full/4363551.png,Dylan Drummond
+111,1,Atlanta,Falcons,3047876,KhaDarel,Hodge,74,208,29,,WR,5,https://a.espncdn.com/i/headshots/nfl/players/full/3047876.png,KhaDarel Hodge
+120,1,Atlanta,Falcons,4426502,Drake,London,76,213,23,1.0,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4426502.png,Drake London
+124,1,Atlanta,Falcons,4379569,Jesse,Matthews,72,190,25,,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4379569.png,Jesse Matthews
+126,1,Atlanta,Falcons,3728262,Ray-Ray,McCloud III,69,190,28,6.0,WR,7,https://a.espncdn.com/i/headshots/nfl/players/full/3728262.png,Ray-Ray McCloud III
+129,1,Atlanta,Falcons,4040655,Darnell,Mooney,71,177,26,5.0,WR,5,https://a.espncdn.com/i/headshots/nfl/players/full/4040655.png,Darnell Mooney
+130,1,Atlanta,Falcons,4372485,Rondale,Moore,67,181,24,2.0,WR,4,https://a.espncdn.com/i/headshots/nfl/players/full/4372485.png,Rondale Moore
+149,1,Atlanta,Falcons,4428796,Casey,Washington,72,200,23,6.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4428796.png,Casey Washington
+155,33,Baltimore,Ravens,2971618,Nelson,Agholor,72,200,31,1.0,WR,10,https://a.espncdn.com/i/headshots/nfl/players/full/2971618.png,Nelson Agholor
+160,33,Baltimore,Ravens,4360939,Rashod,Bateman,73,195,24,1.0,WR,4,https://a.espncdn.com/i/headshots/nfl/players/full/4360939.png,Rashod Bateman
+167,33,Baltimore,Ravens,4240069,Malik,Cunningham,73,186,26,,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4240069.png,Malik Cunningham
+170,33,Baltimore,Ravens,4429615,Zay,Flowers,69,175,24,1.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4429615.png,Zay Flowers
+174,33,Baltimore,Ravens,4411193,Deonte,Harty,66,170,26,,WR,6,https://a.espncdn.com/i/headshots/nfl/players/full/4411193.png,Deonte Harty
+187,33,Baltimore,Ravens,3046401,Keith,Kirkwood,75,210,30,,WR,5,https://a.espncdn.com/i/headshots/nfl/players/full/3046401.png,Keith Kirkwood
+197,33,Baltimore,Ravens,3050487,Anthony,Miller,71,190,30,2.0,WR,6,https://a.espncdn.com/i/headshots/nfl/players/full/3050487.png,Anthony Miller
+225,33,Baltimore,Ravens,4428763,Dayton,Wade,69,184,24,,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4428763.png,Dayton Wade
+226,33,Baltimore,Ravens,4696882,Devontez,Walker,73,198,23,4.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4696882.png,Devontez Walker
+227,33,Baltimore,Ravens,4241424,Tylan,Wallace,71,202,25,4.0,WR,4,https://a.espncdn.com/i/headshots/nfl/players/full/4241424.png,Tylan Wallace
+242,2,Buffalo,Bills,4426800,Ahmarean,Brown,68,170,23,,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4426800.png,Ahmarean Brown
+251,2,Buffalo,Bills,4635008,Keon,Coleman,76,215,21,2.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4635008.png,Keon Coleman
+253,2,Buffalo,Bills,2976499,Amari,Cooper,73,211,30,1.0,WR,10,https://a.espncdn.com/i/headshots/nfl/players/full/2976499.png,Amari Cooper
+272,2,Buffalo,Bills,4240380,KJ,Hamler,69,178,25,2.0,WR,4,https://a.espncdn.com/i/headshots/nfl/players/full/4240380.png,KJ Hamler
+275,2,Buffalo,Bills,2991662,Mack,Hollins,76,221,31,4.0,WR,8,https://a.espncdn.com/i/headshots/nfl/players/full/2991662.png,Mack Hollins
+296,2,Buffalo,Bills,3121427,Curtis,Samuel,71,195,28,2.0,WR,8,https://a.espncdn.com/i/headshots/nfl/players/full/3121427.png,Curtis Samuel
+297,2,Buffalo,Bills,4373678,Khalil,Shakir,72,190,24,5.0,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4373678.png,Khalil Shakir
+298,2,Buffalo,Bills,4241476,Tyrell,Shavers,76,211,25,,WR,1,https://a.espncdn.com/i/headshots/nfl/players/full/4241476.png,Tyrell Shavers
+308,2,Buffalo,Bills,4036448,Jalen,Virgil,73,210,26,,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4036448.png,Jalen Virgil
+319,29,Carolina,Panthers,3728254,Deon,Cain,74,202,28,6.0,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/3728254.png,Deon Cain
+322,29,Carolina,Panthers,3929637,Dan,Chisena,75,203,27,,WR,4,https://a.espncdn.com/i/headshots/nfl/players/full/3929637.png,Dan Chisena
+325,29,Carolina,Panthers,4695883,Jalen,Coker,75,213,22,,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4695883.png,Jalen Coker
+347,29,Carolina,Panthers,3932905,Diontae,Johnson,70,183,28,3.0,WR,6,https://a.espncdn.com/i/headshots/nfl/players/full/3932905.png,Diontae Johnson
+352,29,Carolina,Panthers,4430034,Xavier,Legette,75,227,23,1.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4430034.png,Xavier Legette
+356,29,Carolina,Panthers,4426485,Jonathan,Mingo,74,220,23,2.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4426485.png,Jonathan Mingo
+358,29,Carolina,Panthers,4212909,David,Moore,72,220,29,7.0,WR,6,https://a.espncdn.com/i/headshots/nfl/players/full/4212909.png,David Moore
+361,29,Carolina,Panthers,5215426,Praise,Olatoke,74,205,24,,WR,0,,Praise Olatoke
+377,29,Carolina,Panthers,16460,Adam,Thielen,74,195,34,,WR,11,https://a.espncdn.com/i/headshots/nfl/players/full/16460.png,Adam Thielen
+379,29,Carolina,Panthers,4374187,Deven,Thompkins,68,155,24,,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4374187.png,Deven Thompkins
+395,3,Chicago,Bears,15818,Keenan,Allen,74,211,32,3.0,WR,12,https://a.espncdn.com/i/headshots/nfl/players/full/15818.png,Keenan Allen
+409,3,Chicago,Bears,2580216,DeAndre,Carter,68,190,31,,WR,7,https://a.espncdn.com/i/headshots/nfl/players/full/2580216.png,DeAndre Carter
+425,3,Chicago,Bears,4569510,John,Jackson III,73,215,25,,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4569510.png,John Jackson III
+427,3,Chicago,Bears,4039043,Collin,Johnson,78,222,27,5.0,WR,4,https://a.espncdn.com/i/headshots/nfl/players/full/4039043.png,Collin Johnson
+433,3,Chicago,Bears,4035693,Velus,Jones Jr.,72,200,27,3.0,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4035693.png,Velus Jones Jr.
+441,3,Chicago,Bears,3915416,DJ,Moore,71,210,27,1.0,WR,7,https://a.espncdn.com/i/headshots/nfl/players/full/3915416.png,DJ Moore
+444,3,Chicago,Bears,4431299,Rome,Odunze,75,215,22,1.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4431299.png,Rome Odunze
+454,3,Chicago,Bears,4565908,Tyler,Scott,71,185,23,4.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4565908.png,Tyler Scott
+466,3,Chicago,Bears,4027873,Samori,Toure,73,191,26,7.0,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4027873.png,Samori Toure
+468,3,Chicago,Bears,3119317,Nsimba,Webster,70,180,28,,WR,4,https://a.espncdn.com/i/headshots/nfl/players/full/3119317.png,Nsimba Webster
+486,4,Cincinnati,Bengals,5192448,Cole,Burgess,73,192,24,,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/5192448.png,Cole Burgess
+488,4,Cincinnati,Bengals,4429033,Jermaine,Burton,72,200,23,3.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4429033.png,Jermaine Burton
+490,4,Cincinnati,Bengals,4362628,Ja'Marr,Chase,72,201,24,1.0,WR,4,https://a.espncdn.com/i/headshots/nfl/players/full/4362628.png,Ja'Marr Chase
+502,4,Cincinnati,Bengals,4239993,Tee,Higgins,76,219,25,2.0,WR,5,https://a.espncdn.com/i/headshots/nfl/players/full/4239993.png,Tee Higgins
+509,4,Cincinnati,Bengals,4368003,Andrei,Iosivas,75,205,25,6.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4368003.png,Andrei Iosivas
+510,4,Cincinnati,Bengals,3931391,Trenton,Irwin,74,200,28,,WR,5,https://a.espncdn.com/i/headshots/nfl/players/full/3931391.png,Trenton Irwin
+517,4,Cincinnati,Bengals,4257188,Charlie,Jones,72,183,25,4.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4257188.png,Charlie Jones
+533,4,Cincinnati,Bengals,4035776,Kendric,Pryor,71,189,26,,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4035776.png,Kendric Pryor
+553,5,Cleveland,Browns,4570409,David,Bell,73,212,23,3.0,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4570409.png,David Bell
+563,5,Cleveland,Browns,4243830,Jaelon,Darden,68,175,25,4.0,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4243830.png,Jaelon Darden
+592,5,Cleveland,Browns,4241463,Jerry,Jeudy,73,195,25,1.0,WR,5,https://a.espncdn.com/i/headshots/nfl/players/full/4241463.png,Jerry Jeudy
+600,5,Cleveland,Browns,4372414,Elijah,Moore,70,180,24,2.0,WR,4,https://a.espncdn.com/i/headshots/nfl/players/full/4372414.png,Elijah Moore
+606,5,Cleveland,Browns,3916204,James,Proche II,71,193,28,6.0,WR,5,https://a.espncdn.com/i/headshots/nfl/players/full/3916204.png,James Proche II
+617,5,Cleveland,Browns,4428678,Jamari,Thrash,72,190,23,5.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4428678.png,Jamari Thrash
+618,5,Cleveland,Browns,4369863,Cedric,Tillman,75,215,24,3.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4369863.png,Cedric Tillman
+621,5,Cleveland,Browns,4240600,Kadarius,Toney,72,193,25,1.0,WR,4,https://a.espncdn.com/i/headshots/nfl/players/full/4240600.png,Kadarius Toney
+628,5,Cleveland,Browns,4360174,Michael,Woods II,73,204,24,6.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4360174.png,Michael Woods II
+641,6,Dallas,Cowboys,4692835,Jalen,Brooks,74,205,24,7.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4692835.png,Jalen Brooks
+646,6,Dallas,Cowboys,16731,Brandin,Cooks,70,189,31,1.0,WR,11,https://a.espncdn.com/i/headshots/nfl/players/full/16731.png,Brandin Cooks
+656,6,Dallas,Cowboys,5083754,Ryan,Flournoy,73,200,24,6.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/5083754.png,Ryan Flournoy
+661,6,Dallas,Cowboys,4036163,Kelvin,Harmon,74,215,27,6.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4036163.png,Kelvin Harmon
+671,6,Dallas,Cowboys,4241389,CeeDee,Lamb,74,200,25,1.0,WR,5,https://a.espncdn.com/i/headshots/nfl/players/full/4241389.png,CeeDee Lamb
+680,6,Dallas,Cowboys,4426990,Jalen,Moreno-Cropper,72,172,23,,WR,1,https://a.espncdn.com/i/headshots/nfl/players/full/4426990.png,Jalen Moreno-Cropper
+700,6,Dallas,Cowboys,4249417,Jalen,Tolbert,73,195,25,3.0,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4249417.png,Jalen Tolbert
+701,6,Dallas,Cowboys,3676833,KaVontae,Turpin,69,153,28,,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/3676833.png,KaVontae Turpin
+709,6,Dallas,Cowboys,4371974,Seth,Williams,74,211,24,6.0,WR,1,https://a.espncdn.com/i/headshots/nfl/players/full/4371974.png,Seth Williams
+718,7,Denver,Broncos,4034704,Michael,Bandy,70,190,26,,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4034704.png,Michael Bandy
+736,7,Denver,Broncos,4431280,Troy,Franklin,75,180,21,4.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4431280.png,Troy Franklin
+740,7,Denver,Broncos,4039057,Lil'Jordan,Humphrey,76,225,26,,WR,5,https://a.espncdn.com/i/headshots/nfl/players/full/4039057.png,Lil'Jordan Humphrey
+755,7,Denver,Broncos,4686472,Marvin,Mims Jr.,71,182,22,2.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4686472.png,Marvin Mims Jr.
+762,7,Denver,Broncos,4362019,A.T.,Perry,77,205,24,6.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4362019.png,A.T. Perry
+764,7,Denver,Broncos,3115306,Josh,Reynolds,75,192,29,4.0,WR,7,https://a.espncdn.com/i/headshots/nfl/players/full/3115306.png,Josh Reynolds
+767,7,Denver,Broncos,3871102,David,Sills V,75,211,28,,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/3871102.png,David Sills V
+775,7,Denver,Broncos,3128429,Courtland,Sutton,76,216,29,2.0,WR,7,https://a.espncdn.com/i/headshots/nfl/players/full/3128429.png,Courtland Sutton
+782,7,Denver,Broncos,4569559,Devaughn,Vele,77,210,26,7.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4569559.png,Devaughn Vele
+813,8,Detroit,Lions,4373266,Antoine,Green,74,199,24,7.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4373266.png,Antoine Green
+823,8,Detroit,Lions,3126997,Tom,Kennedy,70,195,28,,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/3126997.png,Tom Kennedy
+843,8,Detroit,Lions,3134353,Tim,Patrick,77,210,30,,WR,7,https://a.espncdn.com/i/headshots/nfl/players/full/3134353.png,Tim Patrick
+845,8,Detroit,Lions,4258195,Donovan,Peoples-Jones,74,204,25,6.0,WR,5,https://a.espncdn.com/i/headshots/nfl/players/full/4258195.png,Donovan Peoples-Jones
+848,8,Detroit,Lions,2973405,Kalif,Raymond,68,180,30,,WR,8,https://a.espncdn.com/i/headshots/nfl/players/full/2973405.png,Kalif Raymond
+853,8,Detroit,Lions,16799,Allen,Robinson,74,210,31,2.0,WR,11,https://a.espncdn.com/i/headshots/nfl/players/full/16799.png,Allen Robinson
+858,8,Detroit,Lions,3128451,Tre'Quan,Smith,74,210,28,3.0,WR,6,https://a.espncdn.com/i/headshots/nfl/players/full/3128451.png,Tre'Quan Smith
+860,8,Detroit,Lions,4374302,Amon-Ra,St. Brown,72,202,24,4.0,WR,4,https://a.espncdn.com/i/headshots/nfl/players/full/4374302.png,Amon-Ra St. Brown
+866,8,Detroit,Lions,4569371,Isaiah,Williams,70,186,23,,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4569371.png,Isaiah Williams
+867,8,Detroit,Lions,4426388,Jameson,Williams,73,180,23,1.0,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4426388.png,Jameson Williams
+888,9,Green Bay,Packers,4361432,Romeo,Doubs,74,204,24,4.0,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4361432.png,Romeo Doubs
+898,9,Green Bay,Packers,4689334,Malik,Heath,74,213,24,,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4689334.png,Malik Heath
+899,9,Green Bay,Packers,4244768,Julian,Hicks,74,201,25,,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4244768.png,Julian Hicks
+904,9,Green Bay,Packers,4426479,Cornelius,Johnson,75,212,23,7.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4426479.png,Cornelius Johnson
+906,9,Green Bay,Packers,4373077,Malik,Knowles,74,196,24,,WR,1,https://a.espncdn.com/i/headshots/nfl/players/full/4373077.png,Malik Knowles
+910,9,Green Bay,Packers,4370162,T.J.,Luther,71,189,24,,WR,1,https://a.espncdn.com/i/headshots/nfl/players/full/4370162.png,T.J. Luther
+914,9,Green Bay,Packers,4259305,Bo,Melton,71,189,25,7.0,WR,1,https://a.espncdn.com/i/headshots/nfl/players/full/4259305.png,Bo Melton
+924,9,Green Bay,Packers,4362249,Jayden,Reed,71,187,24,2.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4362249.png,Jayden Reed
+940,9,Green Bay,Packers,4248528,Christian,Watson,76,208,25,2.0,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4248528.png,Christian Watson
+942,9,Green Bay,Packers,4428850,Dontayvion,Wicks,73,206,23,5.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4428850.png,Dontayvion Wicks
+960,34,Houston,Texans,4258173,Nico,Collins,76,222,25,3.0,WR,4,https://a.espncdn.com/i/headshots/nfl/players/full/4258173.png,Nico Collins
+962,34,Houston,Texans,4366031,Tank,Dell,70,165,24,3.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4366031.png,Tank Dell
+963,34,Houston,Texans,2976212,Stefon,Diggs,72,191,30,5.0,WR,10,https://a.espncdn.com/i/headshots/nfl/players/full/2976212.png,Stefon Diggs
+983,34,Houston,Texans,4686422,Xavier,Hutchinson,75,210,24,6.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4686422.png,Xavier Hutchinson
+984,34,Houston,Texans,4385430,Xavier,Johnson,73,210,25,,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4385430.png,Xavier Johnson
+985,34,Houston,Texans,4242504,Johnny,Johnson III,73,199,25,,WR,1,https://a.espncdn.com/i/headshots/nfl/players/full/4242504.png,Johnny Johnson III
+993,34,Houston,Texans,4567096,John,Metchie III,72,195,24,2.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4567096.png,John Metchie III
+1011,34,Houston,Texans,3917960,Steven,Sims,70,176,27,,WR,4,https://a.espncdn.com/i/headshots/nfl/players/full/3917960.png,Steven Sims
+1025,34,Houston,Texans,4430681,Jared,Wayne,75,210,24,,WR,1,https://a.espncdn.com/i/headshots/nfl/players/full/4430681.png,Jared Wayne
+1028,34,Houston,Texans,15880,Robert,Woods,72,193,32,2.0,WR,12,https://a.espncdn.com/i/headshots/nfl/players/full/15880.png,Robert Woods
+1049,11,Indianapolis,Colts,4688813,Josh,Downs,69,171,23,3.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4688813.png,Josh Downs
+1050,11,Indianapolis,Colts,4061956,Ashton,Dulin,74,215,27,,WR,6,https://a.espncdn.com/i/headshots/nfl/players/full/4061956.png,Ashton Dulin
+1062,11,Indianapolis,Colts,4429684,Anthony,Gould,68,174,23,5.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4429684.png,Anthony Gould
+1080,11,Indianapolis,Colts,4597500,Adonai,Mitchell,74,205,22,2.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4597500.png,Adonai Mitchell
+1081,11,Indianapolis,Colts,4249030,D.J.,Montgomery,73,201,27,,WR,4,https://a.espncdn.com/i/headshots/nfl/players/full/4249030.png,D.J. Montgomery
+1089,11,Indianapolis,Colts,4360078,Alec,Pierce,75,211,24,2.0,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4360078.png,Alec Pierce
+1091,11,Indianapolis,Colts,4035687,Michael,Pittman Jr.,76,223,27,2.0,WR,5,https://a.espncdn.com/i/headshots/nfl/players/full/4035687.png,Michael Pittman Jr.
+1106,11,Indianapolis,Colts,3051889,Laquon,Treadwell,74,215,29,1.0,WR,6,https://a.espncdn.com/i/headshots/nfl/players/full/3051889.png,Laquon Treadwell
+1109,11,Indianapolis,Colts,3128317,Juwann,Winfree,73,210,28,6.0,WR,4,https://a.espncdn.com/i/headshots/nfl/players/full/3128317.png,Juwann Winfree
+1119,30,Jacksonville,Jaguars,4426893,Joshua,Cephus,74,193,23,,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4426893.png,Joshua Cephus
+1125,30,Jacksonville,Jaguars,4241588,Elijah,Cooks,76,215,26,,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4241588.png,Elijah Cooks
+1127,30,Jacksonville,Jaguars,4243537,Gabe,Davis,74,210,25,4.0,WR,5,https://a.espncdn.com/i/headshots/nfl/players/full/4243537.png,Gabe Davis
+1130,30,Jacksonville,Jaguars,4039050,Devin,Duvernay,71,200,27,3.0,WR,5,https://a.espncdn.com/i/headshots/nfl/players/full/4039050.png,Devin Duvernay
+1154,30,Jacksonville,Jaguars,4245131,Tim,Jones,73,200,26,,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4245131.png,Tim Jones
+1155,30,Jacksonville,Jaguars,3895856,Christian,Kirk,71,200,27,2.0,WR,7,https://a.espncdn.com/i/headshots/nfl/players/full/3895856.png,Christian Kirk
+1174,30,Jacksonville,Jaguars,5208436,Louis,Rees-Zammit,74,209,23,,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/5208436.png,Louis Rees-Zammit
+1183,30,Jacksonville,Jaguars,4432773,Brian,Thomas Jr.,76,205,22,1.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4432773.png,Brian Thomas Jr.
+1184,30,Jacksonville,Jaguars,4244856,Austin,Trammell,70,185,26,,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4244856.png,Austin Trammell
+1187,30,Jacksonville,Jaguars,4432620,Parker,Washington,70,212,22,6.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4432620.png,Parker Washington
+1188,30,Jacksonville,Jaguars,5089537,David,White Jr.,76,200,24,,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/5089537.png,David White Jr.
+1194,12,Kansas City,Chiefs,4241372,Hollywood,Brown,69,180,27,1.0,WR,6,https://a.espncdn.com/i/headshots/nfl/players/full/4241372.png,Hollywood Brown
+1211,12,Kansas City,Chiefs,4035004,Mecole,Hardman,70,187,26,2.0,WR,6,https://a.espncdn.com/i/headshots/nfl/players/full/4035004.png,Mecole Hardman
+1229,12,Kansas City,Chiefs,4430191,Skyy,Moore,70,195,24,2.0,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4430191.png,Skyy Moore
+1239,12,Kansas City,Chiefs,4372716,Nikko,Remigio,69,187,24,,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4372716.png,Nikko Remigio
+1240,12,Kansas City,Chiefs,4428331,Rashee,Rice,73,204,24,2.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4428331.png,Rashee Rice
+1242,12,Kansas City,Chiefs,4360306,Justyn,Ross,76,210,24,,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4360306.png,Justyn Ross
+1246,12,Kansas City,Chiefs,3120348,JuJu,Smith-Schuster,73,215,27,2.0,WR,8,https://a.espncdn.com/i/headshots/nfl/players/full/3120348.png,JuJu Smith-Schuster
+1256,12,Kansas City,Chiefs,4248822,Montrell,Washington,70,170,25,5.0,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4248822.png,Montrell Washington
+1258,12,Kansas City,Chiefs,3118892,Justin,Watson,74,215,28,5.0,WR,7,https://a.espncdn.com/i/headshots/nfl/players/full/3118892.png,Justin Watson
+1264,12,Kansas City,Chiefs,4683062,Xavier,Worthy,71,165,21,1.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4683062.png,Xavier Worthy
+1269,13,Las Vegas,Raiders,3919510,Alex,Bachman,72,190,28,,WR,1,https://a.espncdn.com/i/headshots/nfl/players/full/3919510.png,Alex Bachman
+1287,13,Las Vegas,Raiders,4427209,Jeff,Foreman,72,186,24,,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4427209.png,Jeff Foreman
+1292,13,Las Vegas,Raiders,3932430,Jalen,Guyton,73,212,27,,WR,5,https://a.espncdn.com/i/headshots/nfl/players/full/3932430.png,Jalen Guyton
+1301,13,Las Vegas,Raiders,4426399,Ramel,Keyton,74,191,24,,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4426399.png,Ramel Keyton
+1309,13,Las Vegas,Raiders,4589248,Tyreik,McAllister,71,180,26,,WR,1,https://a.espncdn.com/i/headshots/nfl/players/full/4589248.png,Tyreik McAllister
+1313,13,Las Vegas,Raiders,3916433,Jakobi,Meyers,74,200,27,,WR,6,https://a.espncdn.com/i/headshots/nfl/players/full/3916433.png,Jakobi Meyers
+1333,13,Las Vegas,Raiders,4428718,Tre,Tucker,69,185,23,3.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4428718.png,Tre Tucker
+1334,13,Las Vegas,Raiders,4036211,DJ,Turner,69,205,27,,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4036211.png,DJ Turner
+1339,13,Las Vegas,Raiders,3910176,Kristian,Wilkerson,73,214,27,,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/3910176.png,Kristian Wilkerson
+1348,24,Los Angeles,Chargers,3115394,DJ,Chark Jr.,75,200,28,2.0,WR,7,https://a.espncdn.com/i/headshots/nfl/players/full/3115394.png,DJ Chark Jr.
+1351,24,Los Angeles,Chargers,4362477,Derius,Davis,68,165,24,4.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4362477.png,Derius Davis
+1359,24,Los Angeles,Chargers,4360739,Simi,Fehoko,76,218,26,5.0,WR,4,https://a.espncdn.com/i/headshots/nfl/players/full/4360739.png,Simi Fehoko
+1361,24,Los Angeles,Chargers,4036026,Dez,Fitzpatrick,74,208,26,4.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4036026.png,Dez Fitzpatrick
+1378,24,Los Angeles,Chargers,4379405,Jaylen,Johnson,74,194,24,,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4379405.png,Jaylen Johnson
+1380,24,Los Angeles,Chargers,4429025,Quentin,Johnston,76,215,23,1.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4429025.png,Quentin Johnston
+1385,24,Los Angeles,Chargers,4612826,Ladd,McConkey,72,185,22,2.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4612826.png,Ladd McConkey
+1394,24,Los Angeles,Chargers,4242433,Joshua,Palmer,73,210,25,3.0,WR,4,https://a.espncdn.com/i/headshots/nfl/players/full/4242433.png,Joshua Palmer
+1398,24,Los Angeles,Chargers,4241802,Jalen,Reagor,71,197,25,1.0,WR,5,https://a.espncdn.com/i/headshots/nfl/players/full/4241802.png,Jalen Reagor
+1399,24,Los Angeles,Chargers,4686781,Brenden,Rice,75,210,22,7.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4686781.png,Brenden Rice
+1419,14,Los Angeles,Rams,4360797,Tutu,Atwell,69,165,25,2.0,WR,4,https://a.espncdn.com/i/headshots/nfl/players/full/4360797.png,Tutu Atwell
+1424,14,Los Angeles,Rams,4035793,Quintez,Cephus,73,208,26,5.0,WR,4,https://a.espncdn.com/i/headshots/nfl/players/full/4035793.png,Quintez Cephus
+1447,14,Los Angeles,Rams,2310331,Tyler,Johnson,73,208,26,5.0,WR,4,https://a.espncdn.com/i/headshots/nfl/players/full/2310331.png,Tyler Johnson
+1454,14,Los Angeles,Rams,2977187,Cooper,Kupp,74,207,31,3.0,WR,8,https://a.espncdn.com/i/headshots/nfl/players/full/2977187.png,Cooper Kupp
+1466,14,Los Angeles,Rams,4426515,Puka,Nacua,74,212,23,5.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4426515.png,Puka Nacua
+1473,14,Los Angeles,Rams,3043116,Demarcus,Robinson,73,202,30,4.0,WR,9,https://a.espncdn.com/i/headshots/nfl/players/full/3043116.png,Demarcus Robinson
+1476,14,Los Angeles,Rams,4386544,Xavier,Smith,69,176,27,,WR,1,https://a.espncdn.com/i/headshots/nfl/players/full/4386544.png,Xavier Smith
+1479,14,Los Angeles,Rams,4360282,Drake,Stoops,70,189,25,,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4360282.png,Drake Stoops
+1488,14,Los Angeles,Rams,4569382,Jordan,Whittington,73,202,24,6.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4569382.png,Jordan Whittington
+1489,14,Los Angeles,Rams,4385438,Sam,Wiglusz,72,187,25,,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4385438.png,Sam Wiglusz
+1499,15,Miami,Dolphins,16733,Odell,Beckham Jr.,71,200,31,1.0,WR,10,https://a.espncdn.com/i/headshots/nfl/players/full/16733.png,Odell Beckham Jr.
+1501,15,Miami,Dolphins,3123075,Braxton,Berrios,69,185,29,6.0,WR,7,https://a.espncdn.com/i/headshots/nfl/players/full/3123075.png,Braxton Berrios
+1516,15,Miami,Dolphins,3052056,River,Cracraft,72,198,29,,WR,6,https://a.espncdn.com/i/headshots/nfl/players/full/3052056.png,River Cracraft
+1517,15,Miami,Dolphins,4879650,Grant,DuBose,74,201,23,7.0,WR,1,https://a.espncdn.com/i/headshots/nfl/players/full/4879650.png,Grant DuBose
+1520,15,Miami,Dolphins,4043016,Dee,Eskridge,69,190,27,2.0,WR,4,https://a.espncdn.com/i/headshots/nfl/players/full/4043016.png,Dee Eskridge
+1521,15,Miami,Dolphins,4362186,Erik,Ezukanma,74,206,24,4.0,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4362186.png,Erik Ezukanma
+1531,15,Miami,Dolphins,3116406,Tyreek,Hill,70,191,30,5.0,WR,9,https://a.espncdn.com/i/headshots/nfl/players/full/3116406.png,Tyreek Hill
+1565,15,Miami,Dolphins,4371986,Anthony,Schwartz,72,186,24,3.0,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4371986.png,Anthony Schwartz
+1574,15,Miami,Dolphins,4372016,Jaylen,Waddle,70,185,25,1.0,WR,4,https://a.espncdn.com/i/headshots/nfl/players/full/4372016.png,Jaylen Waddle
+1576,15,Miami,Dolphins,4569603,Malik,Washington,68,191,23,6.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4569603.png,Malik Washington
+1577,15,Miami,Dolphins,4567506,Tahj,Washington,70,174,23,7.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4567506.png,Tahj Washington
+1581,16,Minnesota,Vikings,4429205,Jordan,Addison,71,175,22,1.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4429205.png,Jordan Addison
+1605,16,Minnesota,Vikings,4047839,N'Keal,Harry,76,225,26,1.0,WR,6,https://a.espncdn.com/i/headshots/nfl/players/full/4047839.png,N'Keal Harry
+1608,16,Minnesota,Vikings,3915802,Lucky,Jackson,72,186,27,,WR,1,https://a.espncdn.com/i/headshots/nfl/players/full/3915802.png,Lucky Jackson
+1610,16,Minnesota,Vikings,4046715,Trishton,Jackson,73,191,26,,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4046715.png,Trishton Jackson
+1611,16,Minnesota,Vikings,4262921,Justin,Jefferson,73,195,25,1.0,WR,5,https://a.espncdn.com/i/headshots/nfl/players/full/4262921.png,Justin Jefferson
+1614,16,Minnesota,Vikings,4360637,Jeshaun,Jones,73,188,24,,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4360637.png,Jeshaun Jones
+1628,16,Minnesota,Vikings,4382466,Jalen,Nailor,72,190,25,6.0,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4382466.png,Jalen Nailor
+1633,16,Minnesota,Vikings,3115255,Brandon,Powell,68,181,29,,WR,7,https://a.espncdn.com/i/headshots/nfl/players/full/3115255.png,Brandon Powell
+1645,16,Minnesota,Vikings,3122168,Trent,Sherfield Sr.,73,206,28,,WR,7,https://a.espncdn.com/i/headshots/nfl/players/full/3122168.png,Trent Sherfield Sr.
+1648,16,Minnesota,Vikings,4240121,Thayer,Thomas,72,195,26,,WR,1,https://a.espncdn.com/i/headshots/nfl/players/full/4240121.png,Thayer Thomas
+1662,17,New England,Patriots,4692022,Javon,Baker,73,202,22,4.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4692022.png,Javon Baker
+1669,17,New England,Patriots,3045523,Kendrick,Bourne,73,205,29,,WR,8,https://a.espncdn.com/i/headshots/nfl/players/full/3045523.png,Kendrick Bourne
+1670,17,New England,Patriots,4429022,Kayshon,Boutte,71,197,22,6.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4429022.png,Kayshon Boutte
+1675,17,New England,Patriots,4427095,DeMario,Douglas,68,192,23,6.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4427095.png,DeMario Douglas
+1691,17,New England,Patriots,3115328,Jalen,Hurd,77,230,28,3.0,WR,4,https://a.espncdn.com/i/headshots/nfl/players/full/3115328.png,Jalen Hurd
+1692,17,New England,Patriots,5160748,JaQuae,Jackson,73,184,24,,WR,0,,JaQuae Jackson
+1698,17,New England,Patriots,4887705,John,Jiles,75,220,24,,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4887705.png,John Jiles
+1712,17,New England,Patriots,3916566,K.J.,Osborn,72,200,27,5.0,WR,5,https://a.espncdn.com/i/headshots/nfl/players/full/3916566.png,K.J. Osborn
+1717,17,New England,Patriots,4430637,Ja'Lynn,Polk,73,203,22,2.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4430637.png,Ja'Lynn Polk
+1730,17,New England,Patriots,4362921,Tyquan,Thornton,74,185,24,2.0,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4362921.png,Tyquan Thornton
+1742,18,New Orleans,Saints,4372758,Kevin,Austin Jr.,74,200,24,,WR,1,https://a.espncdn.com/i/headshots/nfl/players/full/4372758.png,Kevin Austin Jr.
+1766,18,New Orleans,Saints,4698301,Jermaine,Jackson,67,170,24,,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4698301.png,Jermaine Jackson
+1779,18,New Orleans,Saints,4427985,Bub,Means,74,215,23,5.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4427985.png,Bub Means
+1783,18,New Orleans,Saints,4361370,Chris,Olave,72,187,24,1.0,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4361370.png,Chris Olave
+1789,18,New Orleans,Saints,3127306,Dante,Pettis,73,195,28,2.0,WR,6,https://a.espncdn.com/i/headshots/nfl/players/full/3127306.png,Dante Pettis
+1799,18,New Orleans,Saints,4032473,Rashid,Shaheed,72,180,26,,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4032473.png,Rashid Shaheed
+1802,18,New Orleans,Saints,3932442,Equanimeous,St. Brown,77,214,28,6.0,WR,7,https://a.espncdn.com/i/headshots/nfl/players/full/3932442.png,Equanimeous St. Brown
+1805,18,New Orleans,Saints,4573697,Mason,Tipton,71,187,24,,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4573697.png,Mason Tipton
+1812,18,New Orleans,Saints,4036335,Cedrick,Wilson Jr.,74,197,29,6.0,WR,7,https://a.espncdn.com/i/headshots/nfl/players/full/4036335.png,Cedrick Wilson Jr.
+1831,19,New York,Giants,4362227,Bryce,Ford-Wheaton,75,220,24,,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4362227.png,Bryce Ford-Wheaton
+1840,19,New York,Giants,4242540,Isaiah,Hodgins,75,200,25,6.0,WR,4,https://a.espncdn.com/i/headshots/nfl/players/full/4242540.png,Isaiah Hodgins
+1842,19,New York,Giants,4692590,Jalin,Hyatt,72,185,23,3.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4692590.png,Jalin Hyatt
+1844,19,New York,Giants,4361778,Kearis,Jackson,71,196,24,,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4361778.png,Kearis Jackson
+1865,19,New York,Giants,4595348,Malik,Nabers,72,200,21,1.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4595348.png,Malik Nabers
+1871,19,New York,Giants,4424106,Gunner,Olszewski,72,190,27,,WR,6,https://a.espncdn.com/i/headshots/nfl/players/full/4424106.png,Gunner Olszewski
+1877,19,New York,Giants,4569587,Wan'Dale,Robinson,68,185,23,2.0,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4569587.png,Wan'Dale Robinson
+1884,19,New York,Giants,3916945,Darius,Slayton,73,198,27,5.0,WR,6,https://a.espncdn.com/i/headshots/nfl/players/full/3916945.png,Darius Slayton
+1885,19,New York,Giants,4240573,Ihmir,Smith-Marsette,73,185,25,5.0,WR,4,https://a.espncdn.com/i/headshots/nfl/players/full/4240573.png,Ihmir Smith-Marsette
+1897,20,New York,Jets,16800,Davante,Adams,73,215,31,2.0,WR,11,https://a.espncdn.com/i/headshots/nfl/players/full/16800.png,Davante Adams
+1903,20,New York,Jets,4689988,Jason,Brownlee,75,202,25,,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4689988.png,Jason Brownlee
+1905,20,New York,Jets,3929636,Irvin,Charles,76,219,27,,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/3929636.png,Irvin Charles
+1910,20,New York,Jets,4613104,Malachi,Corley,71,215,22,3.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4613104.png,Malachi Corley
+1920,20,New York,Jets,4427278,Xavier,Gipson,69,189,23,,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4427278.png,Xavier Gipson
+1929,20,New York,Jets,3128390,Allen,Lazard,77,227,28,,WR,6,https://a.espncdn.com/i/headshots/nfl/players/full/3128390.png,Allen Lazard
+1948,20,New York,Jets,4360803,Marcus,Riley,71,175,25,,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4360803.png,Marcus Riley
+1956,20,New York,Jets,4240577,Brandon,Smith,74,220,25,,WR,1,https://a.espncdn.com/i/headshots/nfl/players/full/4240577.png,Brandon Smith
+1961,20,New York,Jets,4408988,Malik,Taylor,73,220,28,,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4408988.png,Malik Taylor
+1970,20,New York,Jets,3045138,Mike,Williams,76,218,30,1.0,WR,8,https://a.espncdn.com/i/headshots/nfl/players/full/3045138.png,Mike Williams
+1973,20,New York,Jets,4569618,Garrett,Wilson,72,183,24,1.0,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4569618.png,Garrett Wilson
+1983,21,Philadelphia,Eagles,4047646,A.J.,Brown,73,226,27,2.0,WR,6,https://a.espncdn.com/i/headshots/nfl/players/full/4047646.png,A.J. Brown
+1987,21,Philadelphia,Eagles,3121410,Parris,Campbell,72,208,27,2.0,WR,6,https://a.espncdn.com/i/headshots/nfl/players/full/3121410.png,Parris Campbell
+1990,21,Philadelphia,Eagles,3926231,Britain,Covey,68,173,27,,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/3926231.png,Britain Covey
+1996,21,Philadelphia,Eagles,4361409,Jahan,Dotson,71,184,24,1.0,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4361409.png,Jahan Dotson
+2005,21,Philadelphia,Eagles,4689546,Danny,Gray,72,200,25,3.0,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4689546.png,Danny Gray
+2031,21,Philadelphia,Eagles,4429019,Marcus,Rosemy-Jacksaint,73,205,22,,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4429019.png,Marcus Rosemy-Jacksaint
+2032,21,Philadelphia,Eagles,3052177,John,Ross,71,190,28,1.0,WR,6,https://a.espncdn.com/i/headshots/nfl/players/full/3052177.png,John Ross
+2036,21,Philadelphia,Eagles,4428532,Ainias,Smith,69,176,23,5.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4428532.png,Ainias Smith
+2037,21,Philadelphia,Eagles,4241478,DeVonta,Smith,72,170,25,1.0,WR,4,https://a.espncdn.com/i/headshots/nfl/players/full/4241478.png,DeVonta Smith
+2048,21,Philadelphia,Eagles,4686104,Johnny,Wilson,78,228,23,6.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4686104.png,Johnny Wilson
+2056,23,Pittsburgh,Steelers,4243389,Calvin,Austin III,69,162,25,4.0,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4243389.png,Calvin Austin III
+2082,23,Pittsburgh,Steelers,3930066,Van,Jefferson,73,200,28,2.0,WR,5,https://a.espncdn.com/i/headshots/nfl/players/full/3930066.png,Van Jefferson
+2083,23,Pittsburgh,Steelers,4035198,Brandon,Johnson,74,195,26,,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4035198.png,Brandon Johnson
+2098,23,Pittsburgh,Steelers,4247812,Lance,McCutcheon,75,202,25,,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4247812.png,Lance McCutcheon
+2099,23,Pittsburgh,Steelers,3914397,Scotty,Miller,69,174,27,6.0,WR,6,https://a.espncdn.com/i/headshots/nfl/players/full/3914397.png,Scotty Miller
+2109,23,Pittsburgh,Steelers,4426354,George,Pickens,75,200,23,2.0,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4426354.png,George Pickens
+2119,23,Pittsburgh,Steelers,4035656,Ben,Skowronek,75,224,27,7.0,WR,4,https://a.espncdn.com/i/headshots/nfl/players/full/4035656.png,Ben Skowronek
+2127,23,Pittsburgh,Steelers,4050373,Quez,Watkins,72,193,26,6.0,WR,5,https://a.espncdn.com/i/headshots/nfl/players/full/4050373.png,Quez Watkins
+2132,23,Pittsburgh,Steelers,4431492,Roman,Wilson,70,186,23,3.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4431492.png,Roman Wilson
+2135,25,San Francisco,49ers,4360438,Brandon,Aiyuk,72,200,26,1.0,WR,5,https://a.espncdn.com/i/headshots/nfl/players/full/4360438.png,Brandon Aiyuk
+2144,25,San Francisco,49ers,4372063,Ronnie,Bell,72,190,24,7.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4372063.png,Ronnie Bell
+2153,25,San Francisco,49ers,2578533,Chris,Conley,75,205,31,3.0,WR,10,https://a.espncdn.com/i/headshots/nfl/players/full/2578533.png,Chris Conley
+2154,25,San Francisco,49ers,4575665,Jacob,Cowing,69,171,23,4.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4575665.png,Jacob Cowing
+2172,25,San Francisco,49ers,3886598,Jauan,Jennings,75,212,27,7.0,WR,4,https://a.espncdn.com/i/headshots/nfl/players/full/3886598.png,Jauan Jennings
+2191,25,San Francisco,49ers,4571579,Terique,Owens,75,193,25,,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4571579.png,Terique Owens
+2192,25,San Francisco,49ers,4428209,Ricky,Pearsall,73,190,24,1.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4428209.png,Ricky Pearsall
+2198,25,San Francisco,49ers,3126486,Deebo,Samuel Sr.,72,215,28,2.0,WR,6,https://a.espncdn.com/i/headshots/nfl/players/full/3126486.png,Deebo Samuel Sr.
+2200,25,San Francisco,49ers,3040569,Trent,Taylor,68,178,30,5.0,WR,7,https://a.espncdn.com/i/headshots/nfl/players/full/3040569.png,Trent Taylor
+2219,26,Seattle,Seahawks,4360405,Jake,Bobo,76,207,26,,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4360405.png,Jake Bobo
+2221,26,Seattle,Seahawks,3932423,Miles,Boykin,76,222,28,3.0,WR,6,https://a.espncdn.com/i/headshots/nfl/players/full/3932423.png,Miles Boykin
+2251,26,Seattle,Seahawks,2577327,Tyler,Lockett,70,182,32,3.0,WR,10,https://a.espncdn.com/i/headshots/nfl/players/full/2577327.png,Tyler Lockett
+2257,26,Seattle,Seahawks,4047650,DK,Metcalf,76,235,26,2.0,WR,6,https://a.espncdn.com/i/headshots/nfl/players/full/4047650.png,DK Metcalf
+2272,26,Seattle,Seahawks,4243160,Laviska,Shenault Jr.,73,225,26,2.0,WR,5,https://a.espncdn.com/i/headshots/nfl/players/full/4243160.png,Laviska Shenault Jr.
+2274,26,Seattle,Seahawks,4039244,Marcus,Simms,72,197,26,,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4039244.png,Marcus Simms
+2277,26,Seattle,Seahawks,4430878,Jaxon,Smith-Njigba,72,197,22,1.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4430878.png,Jaxon Smith-Njigba
+2285,26,Seattle,Seahawks,4241983,Cody,White,75,215,25,,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4241983.png,Cody White
+2292,26,Seattle,Seahawks,4401805,Dareke,Young,74,224,25,7.0,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4401805.png,Dareke Young
+2311,27,Tampa Bay,Buccaneers,16737,Mike,Evans,77,231,31,1.0,WR,11,https://a.espncdn.com/i/headshots/nfl/players/full/16737.png,Mike Evans
+2317,27,Tampa Bay,Buccaneers,3116165,Chris,Godwin,73,209,28,3.0,WR,8,https://a.espncdn.com/i/headshots/nfl/players/full/3116165.png,Chris Godwin
+2330,27,Tampa Bay,Buccaneers,4429006,Rakim,Jarrett,72,192,23,,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4429006.png,Rakim Jarrett
+2331,27,Tampa Bay,Buccaneers,5097554,Kameron,Johnson,70,170,22,,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/5097554.png,Kameron Johnson
+2336,27,Tampa Bay,Buccaneers,4363528,Tanner,Knue,71,178,24,,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4363528.png,Tanner Knue
+2341,27,Tampa Bay,Buccaneers,4430834,Jalen,McMillan,73,192,22,3.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4430834.png,Jalen McMillan
+2344,27,Tampa Bay,Buccaneers,4369466,Ryan,Miller,74,221,24,,WR,1,https://a.espncdn.com/i/headshots/nfl/players/full/4369466.png,Ryan Miller
+2350,27,Tampa Bay,Buccaneers,4426407,Trey,Palmer,73,190,23,6.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4426407.png,Trey Palmer
+2354,27,Tampa Bay,Buccaneers,2976592,Sterling,Shepard,70,194,31,2.0,WR,9,https://a.espncdn.com/i/headshots/nfl/players/full/2976592.png,Sterling Shepard
+2359,27,Tampa Bay,Buccaneers,3126115,Cody,Thompson,74,205,28,,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/3126115.png,Cody Thompson
+2378,10,Tennessee,Titans,3045144,Tyler,Boyd,74,203,29,2.0,WR,9,https://a.espncdn.com/i/headshots/nfl/players/full/3045144.png,Tyler Boyd
+2383,10,Tennessee,Titans,4567156,Treylon,Burks,74,225,24,1.0,WR,3,https://a.espncdn.com/i/headshots/nfl/players/full/4567156.png,Treylon Burks
+2391,10,Tennessee,Titans,4250945,Colton,Dowell,75,212,25,7.0,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4250945.png,Colton Dowell
+2401,10,Tennessee,Titans,15795,DeAndre,Hopkins,73,212,32,1.0,WR,11,https://a.espncdn.com/i/headshots/nfl/players/full/15795.png,DeAndre Hopkins
+2403,10,Tennessee,Titans,4427575,Jha'Quan,Jackson,69,188,24,6.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4427575.png,Jha'Quan Jackson
+2410,10,Tennessee,Titans,4057082,Mason,Kinsey,70,200,26,,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4057082.png,Mason Kinsey
+2416,10,Tennessee,Titans,4245144,Tay,Martin,75,185,26,,WR,1,https://a.espncdn.com/i/headshots/nfl/players/full/4245144.png,Tay Martin
+2425,10,Tennessee,Titans,4362617,Bryce,Oliver,73,214,24,,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4362617.png,Bryce Oliver
+2430,10,Tennessee,Titans,3925357,Calvin,Ridley,73,190,29,1.0,WR,6,https://a.espncdn.com/i/headshots/nfl/players/full/3925357.png,Calvin Ridley
+2445,10,Tennessee,Titans,3929785,Nick,Westbrook-Ikhine,74,211,27,,WR,5,https://a.espncdn.com/i/headshots/nfl/players/full/3929785.png,Nick Westbrook-Ikhine
+2457,28,Washington,Commanders,4361577,Dyami,Brown,72,195,24,3.0,WR,4,https://a.espncdn.com/i/headshots/nfl/players/full/4361577.png,Dyami Brown
+2458,28,Washington,Commanders,3121409,Noah,Brown,74,225,28,7.0,WR,8,https://a.espncdn.com/i/headshots/nfl/players/full/3121409.png,Noah Brown
+2463,28,Washington,Commanders,2576716,Jamison,Crowder,69,177,31,4.0,WR,10,https://a.espncdn.com/i/headshots/nfl/players/full/2576716.png,Jamison Crowder
+2492,28,Washington,Commanders,4426948,Luke,McCaffrey,74,198,23,3.0,WR,0,https://a.espncdn.com/i/headshots/nfl/players/full/4426948.png,Luke McCaffrey
+2493,28,Washington,Commanders,3121422,Terry,McLaurin,72,210,29,3.0,WR,6,https://a.espncdn.com/i/headshots/nfl/players/full/3121422.png,Terry McLaurin
+2514,28,Washington,Commanders,4690070,Mitchell,Tinsley,73,205,25,,WR,2,https://a.espncdn.com/i/headshots/nfl/players/full/4690070.png,Mitchell Tinsley
+2515,28,Washington,Commanders,4360763,Brycen,Tremayne,76,212,24,,WR,1,https://a.espncdn.com/i/headshots/nfl/players/full/4360763.png,Brycen Tremayne
+2523,28,Washington,Commanders,3917914,Olamide,Zaccheaus,68,193,27,,WR,6,https://a.espncdn.com/i/headshots/nfl/players/full/3917914.png,Olamide Zaccheaus
