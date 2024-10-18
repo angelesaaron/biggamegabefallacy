@@ -264,7 +264,7 @@ def run_wr_model(model, week, td_binary, rec, yds, tgts, age, rd, height, fq):
 st.title("Big Game Fallacy?")
 st.write("Is Big Game Gabe coming out next week? See what the model says")
 
-tab_player, tab_gabedavis, tab_faq = st.tabs(["Player Selection", 'Gabe Davis', 'FAQ'])
+tab_player, tab_gabedavis, tab_faq = st.tabs(["Receiver Selection", 'Gabe Davis', 'FAQ'])
 
 col1, col2, col3 = st.sidebar.columns([1,8,1])
 with col1:
@@ -322,7 +322,7 @@ with tab_gabedavis:
 with tab_player:
     
     # Player Selection Header
-    st.subheader("Choose a player:")
+    st.subheader("Choose a receiver:")
     # Prompt for selecting team
     dfTeams = load_teams()
     default_team = 'Jacksonville Jaguars'
