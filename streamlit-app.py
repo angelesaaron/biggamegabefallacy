@@ -375,6 +375,7 @@ with tab_player:
                         else:
                             nextWeek = nextWeek
                         nextWeek = nextWeek.astype(int)
+                        #st.write(nextWeek)
                         #st.write(type(nextWeek))
 
 
@@ -386,7 +387,7 @@ with tab_player:
                         #### UI ELEMENTS
 
                         # Week
-                        paramWeek = st.slider('Upcoming NFL Week: ', min_value=1, max_value=18, value=nextWeek)
+                        paramWeek = st.number_input('Upcoming NFL Week: ', min_value=1, max_value=18, value=nextWeek)
 
                         # Count Stats
                         st.markdown("Please input the **previous** week game statistics: ")
