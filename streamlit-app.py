@@ -17,6 +17,8 @@ from sklearn.ensemble._forest import ForestClassifier
 import joblib
 import pickle
 
+rapidapi_key = st.secrets["api"]["rapidapi_key"]
+
 st.set_page_config(page_title="Big Game Fallacy?", initial_sidebar_state="expanded")
 
 #####################################################
@@ -38,7 +40,7 @@ def load_roster(teamid):
     
     # API HEADERS
     headers = {
-        "x-rapidapi-key": "REDACTED",
+        "x-rapidapi-key": rapidapi_key,
         "x-rapidapi-host": "nfl-api1.p.rapidapi.com"
     }
     # GET Request
@@ -116,7 +118,7 @@ def scrape_game_log(playerExperience):
     
     logurl = "https://nfl-api1.p.rapidapi.com/player-game-log"
     headers = {
-        "x-rapidapi-key": "REDACTED",
+        "x-rapidapi-key": rapidapi_key,
         "x-rapidapi-host": "nfl-api1.p.rapidapi.com"
     }
 
