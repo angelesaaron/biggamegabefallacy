@@ -280,7 +280,7 @@ with tab_gabedavis:
                                             'receivingYards': 'Rec. Yards',
                                             'receivingTouchdowns':'Rec. TDs',
                                             'receptions':'Receptions'})
-        st.dataframe(df, hide_index=True)
+        st.dataframe(df)# hide_index=True)
     except Exception as e:
         st.error(f"Error loading file: {e}")
 
@@ -346,7 +346,7 @@ with tab_player:
                                                                         'receivingTouchdowns':'TDS',
                                                                         'receptions':'REC'})
                         st.write('Game Log')
-                        st.dataframe(gameLogDisplay, hide_index=True)
+                        st.dataframe(gameLogDisplay)#, hide_index=True)
                         st.divider()
                         #st.dataframe(gameLog)
 
