@@ -236,10 +236,21 @@ def load_wr_model():
     model = joblib.load('models/wr-model.pkl')
     return model
 
-def run_wr_model(model, week, td_binary, rec, yds, tgts, age, rd, height, fmbl):
-    parameters = [[week, td_binary, rec, yds, tgts, age, rd, height, fmbl]]
+def run_wr_model(model, week, td_binary, rec, yds, tgts, age, rd, height, fq):
+    # Ensure parameters are correctly formatted
+    parameters = np.array([[float(week), int(td_binary), float(rec), float(yds), 
+                            float(tgts), float(age), float(rd), float(height), 
+                            float(fq)]])
+    
+    # Make sure the shape is correct
+    print("Parameters:", parameters)
+    print("Shape:", parameters.shape)
+
+    # Perform prediction
     likelihood = model.predict_proba(parameters)[:, 1]
+    
     return likelihood[0]
+
 
 
 
