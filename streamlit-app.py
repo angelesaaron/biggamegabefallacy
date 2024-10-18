@@ -369,11 +369,13 @@ with tab_player:
                         prevFmbl = df_previous_game['fumbles']
                         prevWeek = df_previous_game['week']
 
-                        nextWeek = (df_previous_game['week']).astype(int) + 1
+                        nextWeek = (df_previous_game['week']) + 1
                         if nextWeek > 18:
                             nextWeek = 0
                         else:
                             nextWeek = nextWeek
+                        nextWeek = nextWeek.astype(int)
+                        #st.write(type(nextWeek))
 
 
                         ## Player Data
