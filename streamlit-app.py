@@ -293,27 +293,43 @@ def run_wr_model(model, week, lag_yds, cumulative_yards_per_game, cumulative_rec
     return likelihood[0]
 
 # AMERICAN ODDS with Vig Adjustment
-def decimal_to_american_odds(percentage, vig=0.05):
+def decimal_to_american_odds(percentage, vig=0.10):
     if percentage <= 0 or percentage >= 1:
         if percentage == 0:
             return "> +1000"
-        else: 
+        else:
             raise ValueError("Percentage must be in the range (0, 1)")
 
-    if percentage < 0.5:
-        # Convert to positive American odds for less likely outcomes (underdogs)
-        american_odds = 100 * (1 - percentage) / percentage
-        # Apply vig by reducing positive odds
-        american_odds *= (1 - vig)
+    # Calculate adjusted probability with vig
+    adjusted_probability = percentage / (1 + vig)
+
+    if adjusted_probability < 0.5:
+        # Convert to positive American odds for underdogs
+        american_odds = 100 * (1 - adjusted_probability) / adjusted_probability
         direction = '+'
     else:
-        # Convert to negative American odds for more likely outcomes (favorites)
-        american_odds = -100 / (percentage / (1 - percentage))
-        # Apply vig by increasing the negative odds
-        american_odds *= (1 + vig)
+        # Convert to negative American odds for favorites
+        american_odds = -100 / (adjusted_probability / (1 - adjusted_probability))
         direction = ''
 
-    return f"{direction}{round(american_odds)}"
+def decimal_to_american_odds(probability):
+    probability = round(probability * 100)
+    if probability < 0 or probability > 100:
+        raise ValueError("Probability must be between 0 and 100.")
+    
+    if probability == 0:
+        return float('inf')  # Infinite odds for 0% probability (no chance of winning)
+    elif probability == 100:
+        return -1  # This means a guaranteed win, represented as negative infinity odds
+
+    if probability < 50:  # Positive odds
+        odds = (100 / (probability / 100)) - 100
+        direction = '+'
+    else:  # Negative odds
+        odds = (probability / (1 - (probability / 100))) * -1
+        direction = ''
+    
+    return f"{direction}{round(odds)}"
 
 
 
