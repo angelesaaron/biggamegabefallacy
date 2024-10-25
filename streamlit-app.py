@@ -396,7 +396,7 @@ with tab_player:
                                                                         'receivingTargets':'Targets'
                                                                         })
                     st.write('Game Log')
-                    st.dataframe(gameLogDisplay)#, hide_index=True)
+                    st.dataframe(gameLogDisplay.tail(10))#, hide_index=True)
                     st.divider()
                     #st.dataframe(gameLog)
 
