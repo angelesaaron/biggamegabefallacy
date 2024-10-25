@@ -25,12 +25,13 @@ st.set_page_config(page_title="Big Game Fallacy?", initial_sidebar_state="expand
 ########### Load and Prep Data ######################
 ####################################################
 
+# LOAD TEAMS -------------------------------------------------------------------------
 def load_teams():
     dfTeams = pd.read_csv('data/teamList.csv')
     dfTeams['FullName'] = dfTeams['location'] + ' ' + dfTeams['name']
     return dfTeams
 
-
+# LOAD ROSTER -------------------------------------------------------------------------
 def load_roster(teamid):
     
     # Roster URL for API
@@ -113,7 +114,7 @@ def load_roster(teamid):
 
     return rosterWR
 
-
+# LOAD GAME LOG -------------------------------------------------------------------------
 def scrape_game_log(playerExperience):
     
     logurl = "https://nfl-api1.p.rapidapi.com/player-game-log"
@@ -195,11 +196,56 @@ def scrape_game_log(playerExperience):
         gameLog['receivingYards'] = pd.to_numeric(gameLog['receivingYards'], errors='coerce').fillna(0).astype(int)
         gameLog['receivingTargets'] = pd.to_numeric(gameLog['receivingTargets'], errors ='coerce').fillna(0). astype(int)
         gameLog['fumbles'] = pd.to_numeric(gameLog['fumbles'], errors ='coerce').fillna(0). astype(int)
+        gameLog = gameLog[gameLog['seasonType'] == 'Regular Season']
         gameLogFin = gameLog.sort_values(by=['seasonYr', 'seasonType', 'week'], ascending=[True, True, True])
+        
         return gameLogFin
     else:
         print("No data available")
         return pd.DataFrame()  # Return empty DataFrame if no data was collected
+
+# GENERATE FEATURES -------------------------------------------
+def add_new_features_lag(data):
+    # Sort data to ensure calculations are in the correct order
+    data = data.sort_values(by=['fullName', 'seasonYr', 'week']).reset_index(drop=True)
+    # Calculate weeks played for each season and player
+    data['weeks_played'] = data.groupby(['seasonYr', 'fullName']).cumcount() + 1
+
+    # Lag all cumulative and rolling calculations by shifting by 1 week
+    # 1. Total Receiving Yards per Game (Lagged)
+    data['cumulative_receiving_yards'] = data.groupby(['seasonYr', 'fullName'])['receivingYards'].cumsum().shift(1)
+    data['cumulative_yards_per_game'] = data['cumulative_receiving_yards'] / (data['weeks_played'] - 1)
+    # 2. Total Receptions per Game (Lagged)
+    data['cumulative_receptions'] = data.groupby(['seasonYr', 'fullName'])['receptions'].cumsum().shift(1)
+    data['cumulative_receptions_per_game'] = data['cumulative_receptions'] / (data['weeks_played'] - 1)
+    # 3. Total Touchdowns per Game (Lagged)
+    data['cumulative_receiving_touchdowns'] = data.groupby(['seasonYr', 'fullName'])['receivingTouchdowns'].cumsum().shift(1)
+    data['cumulative_tds_per_game'] = data['cumulative_receiving_touchdowns'] / (data['weeks_played'] - 1)
+    # 4. Cumulative Target Share per Game (Lagged)
+    data['cumulative_targets'] = data.groupby(['seasonYr', 'fullName'])['receivingTargets'].cumsum().shift(1)
+    data['cumulative_targets_per_game'] = data['cumulative_targets'] / (data['weeks_played'] - 1)
+    # 5. 3-Game Average Receiving Yards (Lagged)
+    data['avg_receiving_yards_last_3'] = data.groupby(['seasonYr', 'fullName'])['receivingYards']\
+        .rolling(window=3, min_periods=1).mean().shift(1).reset_index(level=[0, 1], drop=True)
+    # 6. 3-Game Average Receptions (Lagged)
+    data['avg_receptions_last_3'] = data.groupby(['seasonYr', 'fullName'])['receptions']\
+        .rolling(window=3, min_periods=1).mean().shift(1).reset_index(level=[0, 1], drop=True)
+    # 7. 3-Game Average Touchdowns (Lagged)
+    data['avg_tds_last_3'] = data.groupby(['seasonYr', 'fullName'])['receivingTouchdowns']\
+        .rolling(window=3, min_periods=1).mean().shift(1).reset_index(level=[0, 1], drop=True)
+    # 8. 3-Game Average Targets (Lagged)
+    data['avg_targets_last_3'] = data.groupby(['seasonYr', 'fullName'])['receivingTargets']\
+        .rolling(window=3, min_periods=1).mean().shift(1).reset_index(level=[0, 1], drop=True)
+    # 9. Yards per Reception (Lagged for each game)
+    data['yards_per_reception'] = (data['receivingYards'] / data['receptions']).shift(1)
+    data['yards_per_reception'].replace([float('inf'), -float('inf')], 0, inplace=True)  # Handle division by zero
+    # 10. Touchdown Rate per Target (Lagged cumulative touchdowns per cumulative targets)
+    data['td_rate_per_target'] = (data['cumulative_receiving_touchdowns'] / data['cumulative_targets']).shift(1)
+    data['td_rate_per_target'].replace([float('inf'), -float('inf')], 0, inplace=True)  # Handle division by zero
+    # Fill in NaNs for rows where calculations are not available (e.g., first game of season)
+    data.fillna(0, inplace=True)
+    data['is_first_week'] = (data['weeks_played'] == 1).astype(int)
+    return data
 
 def get_experience_value(player_row):
     exp_value = player_row['exp'].values
@@ -225,24 +271,17 @@ def create_player_experience_df(playerID, adjusted_exp):
     
     return df
 
-def load_gabedavis_model():
-    model = joblib.load('models/random_forest_model.pkl')
-    return model
-    
-def run_gabedavis_model(model, week, rec, yds, tds, tgts):
-    next_week_stats = [[week, tds, rec, yds, tgts]]
-    likelihood = model.predict_proba(next_week_stats)[:, 1]
-    return likelihood[0]
-
 def load_wr_model():
     model = joblib.load('models/wr-model.pkl')
     return model
 
-def run_wr_model(model, week, td_binary, rec, yds, tgts, age, rd, height, fq):
+def run_wr_model(model, week, lag_yds, cumulative_yards_per_game, cumulative_receptions_per_game, cumulative_targets_per_game, avg_receiving_yards_last_3, avg_receptions_last_3, avg_targets_last_3, yards_per_reception, td_rate_per_target, is_first_week):
     # Ensure parameters are correctly formatted
-    parameters = np.array([[float(week), int(td_binary), float(rec), float(yds), 
-                            float(tgts), float(age), float(rd), float(height), 
-                            float(fq)]])
+    parameters = np.array([[float(week), float(lag_yds), float(cumulative_yards_per_game), 
+                            float(cumulative_receptions_per_game), float(cumulative_targets_per_game), 
+                            float(avg_receiving_yards_last_3), float(avg_receptions_last_3), 
+                            float(avg_targets_last_3), float(yards_per_reception), 
+                            float(td_rate_per_target), int(is_first_week)]])
     
     # Make sure the shape is correct
     print("Parameters:", parameters)
@@ -250,9 +289,22 @@ def run_wr_model(model, week, td_binary, rec, yds, tgts, age, rd, height, fq):
 
     # Perform prediction
     likelihood = model.predict_proba(parameters)[:, 1]
-    
     return likelihood[0]
 
+# AMERICAN ODDS
+def decimal_to_american_odds(percentage):
+    if percentage <= 0 or percentage >= 1:
+        raise ValueError("Percentage must be in the range (0, 1)")
+
+    if percentage < 0.5:
+        # Convert to positive American odds for less likely outcomes
+        american_odds = 100 * (1 - percentage) / percentage
+        direction = '+'
+    else:
+        # Convert to negative American odds for more likely outcomes
+        american_odds = -100 / (percentage / (1 - percentage))
+        direction = '-'
+    return f"{direction}{round(american_odds)}"
 
 
 
@@ -264,7 +316,8 @@ def run_wr_model(model, week, td_binary, rec, yds, tgts, age, rd, height, fq):
 st.title("Big Game Fallacy?")
 st.write("Is Big Game Gabe coming out next week? See what the model says")
 
-tab_player, tab_gabedavis, tab_faq = st.tabs(["Receiver Selection", 'Gabe Davis', 'FAQ'])
+#tab_player, tab_gabedavis, tab_faq = st.tabs(["Receiver Selection", 'Gabe Davis', 'FAQ'])
+tab_player, tab_faq = st.tabs(["Receiver Selection", 'FAQ'])
 
 col1, col2, col3 = st.sidebar.columns([1,8,1])
 with col1:
@@ -277,42 +330,6 @@ with col3:
 st.sidebar.markdown(" ## Big Game Gabe Theory")
 st.sidebar.markdown('''The Big Game Gabe fallacy is something my friends and I coined while following Gabe Davis, especially in fantasy football and prop bets. It’s based on the observation that Davis seems to have a huge, standout performance roughly once every four or five weeks. Despite underwhelming stretches, when he "goes off," it’s often in a spectacular fashion with long touchdowns and big yardage totals. We started calling these systematic but explosive games “Big Game Gabe” moments. It’s become a running joke when betting on his performance, as we wait for his patented once-a-month breakout
 ''')
-#########################################
-##### (Default) Gabe Davis Tab ##########
-#########################################
-with tab_gabedavis:
-    # Game Log
-    st.write("Here is Gabe Davis' game log since becoming an established receiver with Buffalo 2021:")
-    file_path = "data/G.DavisGameLog.csv"  # Update this with your local file path
-    try:
-        df = pd.read_csv(file_path)
-        df = df[['seasonYr', 'week', 'receptions', 'receivingYards', 'receivingTouchdowns']]
-        df['seasonYr'] = df['seasonYr'].astype(str)
-        df = df.rename(columns={'seasonYr':'Season',
-                                            'week':'Week',
-                                            'receivingYards': 'Rec. Yards',
-                                            'receivingTouchdowns':'Rec. TDs',
-                                            'receptions':'Receptions'})
-        st.dataframe(df)# hide_index=True)
-    except Exception as e:
-        st.error(f"Error loading file: {e}")
-
-    st.write("I've trained random forest model to calculate the likelihood of a Gabe Davis scoring a TD next week.")
-
-    st.write("Please enter the upcoming NFL Week, and  Gabe Davis' previous game stats: ")
-
-    # MODEL
-    model = load_gabedavis_model()
-    weekNo = st.number_input("What is the upcoming week?", min_value = 1, max_value = 18, step = 1)
-    gabe_prevYds = st.number_input("How many yards did Gabe have last week?", min_value = 0, step=1)
-    gabe_prevRec = st.number_input("How many receptions did Gabe have last week?", min_value = 0, step=1)
-    gabe_prevTD = st.number_input("How many touchdowns did Gabe have last week?", min_value = 0, step=1)
-    gabe_prevTgts = st.number_input("How many targets did Gabe have last week?", min_value = 0, step=1)
-
-    if st.button("Predict"):
-        td_likelihood = run_gabedavis_model(model, weekNo, gabe_prevRec, gabe_prevYds, gabe_prevTD, gabe_prevTgts)
-        st.write(f'The likelihood of Gabe Davis scoring a touchdown this week is: {td_likelihood*100}%')
-
 
 #########################################
 ##### Player Tab ########################
@@ -321,18 +338,22 @@ with tab_gabedavis:
 
 with tab_player:
     
-    # Player Selection Header
+    # Player Selection Header ------------------------------------
     st.subheader("Choose a receiver:")
     # Prompt for selecting team
     dfTeams = load_teams()
     default_team = 'Jacksonville Jaguars'
+
+    # TEAM SELECT BOX --------------------------------
     selected_team = st.selectbox("Select an NFL team:", dfTeams['FullName'], index = 14)
     selected_team_row = dfTeams[dfTeams['FullName'] == selected_team]
     # Display the ID value based on the selected row
     if not selected_team_row.empty:
-        team_id = selected_team_row['id'].values[0]  # Retrieve the PlayerID from the selected row
+        team_id = selected_team_row['id'].values[0]  # Retrieve the TeamID from the selected row
         #st.write(f"Team ID: {team_id}")
         dfRoster = load_roster(team_id)
+
+        # PLAYER SELECT BOX ------------------------------
         selected_player = st.selectbox("Select an receiver:", dfRoster['fullName'], index=2)
         selected_player_row = dfRoster[dfRoster['fullName'] == selected_player]
         if not selected_player_row.empty:
@@ -343,109 +364,114 @@ with tab_player:
             st.divider()
             exp_value = get_experience_value(selected_player_row)
             #st.write(selected_player_row['exp'].values[0])
+
+            # PLAYER EXPERIENCE BOX ------------------------------
             st.subheader(f"{selected_player_row['fullName'].values[0]} - Game Log:")
-            lookback = st.number_input("How many years to look back?:", min_value = 1, step = 1)
-            if lookback != 0:
-                adjusted_exp = adjust_experience(exp_value, lookback)
-                #st.write(f"Historical Year Range: {adjusted_exp} years")
-                playerExperienceDF = create_player_experience_df(player_id, adjusted_exp)
-                if not playerExperienceDF.empty:
-                    gameLog = scrape_game_log(playerExperienceDF)
-                    if not gameLog.empty:
-                        gameLogDisplay = gameLog[['seasonYr', 'week', 'receptions', 'receivingYards', 'receivingTouchdowns']]
-                        gameLogDisplay = gameLogDisplay.rename(columns={'seasonYr':'Season',
+
+            # Look back hard coded to 3 years (same as model trained) 
+
+            adjusted_exp = adjust_experience(exp_value, 3)
+
+            # Generate player experience DF for game log loop
+            playerExperienceDF = create_player_experience_df(player_id, adjusted_exp)
+
+            if not playerExperienceDF.empty:
+                # SCRAPE GAME LOG DATA
+
+                gameLog = scrape_game_log(playerExperienceDF)
+                if not gameLog.empty:
+
+                    # GENERATE FEATURES
+                    gameLog['fullName'] = selected_player_row['fullName'].iloc[0]
+                    gameLog.to_csv('testgamelog.csv', index=False)
+                    gameData = add_new_features_lag(gameLog)
+
+                    # DISPLAY GAME LOG
+                    gameLogDisplay = gameLog[['seasonYr', 'week', 'receptions', 'receivingYards', 'receivingTouchdowns']]
+                    gameLogDisplay = gameLogDisplay.rename(columns={'seasonYr':'Season',
                                                                         'week':'Week',
                                                                         'receivingYards': 'REC YDS',
                                                                         'receivingTouchdowns':'TDS',
                                                                         'receptions':'REC'})
-                        st.write('Game Log')
-                        st.dataframe(gameLogDisplay)#, hide_index=True)
-                        st.divider()
-                        #st.dataframe(gameLog)
+                    st.write('Game Log')
+                    st.dataframe(gameLogDisplay)#, hide_index=True)
+                    st.divider()
+                    #st.dataframe(gameLog)
 
-                        ########################################################################
-                        ############################# MODEL ####################################
+                    ########################################################################
+                    ############################# MODEL ####################################
 
-                        st.subheader("Touchdown Likelihood:")
-                        st.write(f"Calculate the likelihood for {selected_player_row['fullName'].values[0]} to score a touchdown next week.")
-                        #### DATA
-                        wrmodel = load_wr_model()
+                    st.subheader("Touchdown Likelihood:")
+                    st.write(f"Calculate the likelihood for {selected_player_row['fullName'].values[0]} to score a touchdown next week.")
+                    #### Load Model
+                    wrmodel = load_wr_model()
 
-                        ## Game Log Data
-                        gameLog['td'] = (gameLog['receivingTouchdowns'] > 0).astype(int)
-                        df_previous_game = gameLog.iloc[-1]
-                        prevYds = df_previous_game['receivingYards']
-                        prevRec = df_previous_game['receptions']
-                        prevTDFlag = df_previous_game['td']
-                        prevTD = df_previous_game['receivingTouchdowns']
-                        prevTgts = df_previous_game['receivingTargets']
-                        prevFmbl = df_previous_game['fumbles']
-                        prevWeek = df_previous_game['week']
+                    ## Game Log Data ------------------------------------------------------
 
-                        nextWeek = (df_previous_game['week']) + 1
-                        if nextWeek > 18:
-                            nextWeek = 0
-                        else:
-                            nextWeek = nextWeek
-                        nextWeek = nextWeek.astype(int)
-                        #st.write(nextWeek)
-                        #st.write(type(nextWeek))
+                    # 1. BINARY FLAG
+                    gameData['td'] = (gameData['receivingTouchdowns'] > 0).astype(int)
 
+                    # 2. PREVIOUS GAME STATS
+                    df_previous_game = gameData.iloc[-1]
+                    lag_Yds = df_previous_game['receivingYards']
+                    lag_REC = df_previous_game['receptions']
+                    lag_td = df_previous_game['td']
+                    lag_REC_TD = df_previous_game['receivingTouchdowns']
+                    lag_TGT = df_previous_game['receivingTargets']
 
-                        ## Player Data
-                        height = selected_player_row['height']
-                        age = selected_player_row['athleteAge']
-                        draftRd = selected_player_row['draftRd']
+                    # 3. OTHER PARAMETERS
+                    cumulative_yards_per_game = df_previous_game['cumulative_yards_per_game']
+                    cumulative_receptions_per_game = df_previous_game['cumulative_receptions_per_game']
+                    cumulative_targets_per_game = df_previous_game['cumulative_targets_per_game']
+                    avg_receiving_yards_last_3 = df_previous_game['avg_receiving_yards_last_3']
+                    avg_receptions_last_3 = df_previous_game['avg_receptions_last_3']
+                    avg_targets_last_3 = df_previous_game['avg_targets_last_3']
+                    yards_per_reception = df_previous_game['yards_per_reception']
+                    td_rate_per_target = df_previous_game['td_rate_per_target']
+                    is_first_week = df_previous_game['is_first_week']
 
-                        #### UI ELEMENTS
+                    # 4. GET NEXT WEEK otherwise default to WEEK 1
+                    nextWeek = (df_previous_game['week']) + 1
+                    if nextWeek > 18:
+                        nextWeek = 1
+                    else:
+                        nextWeek = nextWeek
+                    
+                    #nextWeek = nextWeek.astype(int)
 
-                        # Week
-                        paramWeek = st.number_input('Upcoming NFL Week: ', min_value=1, max_value=18, value=nextWeek)
+                    #### UI ELEMENTS
 
-                        # Count Stats
-                        st.markdown("Please input the **previous** week game statistics: ")
-                        st.caption("This will default to last game statistics for the selected player.")
-                        paramRec = st.number_input('Receptions: ', min_value=0, value=prevRec, step=1)
-                        paramYds = st.number_input("Receiving Yards: ", min_value=0, value=prevYds, step=1)
-                        paramTD = st.number_input("Touchdowns: ", min_value=0, value=prevTD, step=1)
+                    # Week
+                    paramWeek = st.number_input('Upcoming NFL Week: ', min_value=1, max_value=18, value=nextWeek)
 
-                        # TD Binary Conversion
-                        if paramTD > 0:
-                            paramTDFlag = 1
-                        else: 
-                            paramTDFlag = 0
+                    # INPUTS
+                    st.markdown("Please input the **previous** week game statistics: ")
+                    st.caption("This will default to last game statistics for the selected player.")
+                    paramRec = st.number_input('Receptions: ', min_value=0, value=lag_REC, step=1)
+                    paramYds = st.number_input("Receiving Yards: ", min_value=0, value=lag_Yds, step=1)
+                    paramTD = st.number_input("Touchdowns: ", min_value=0, value=lag_REC_TD, step=1)
+                    paramTgts = st.number_input("Targets: ", min_value=0, value=lag_TGT, step=1)
 
-                        paramTgts = st.number_input("Targets: ", min_value=0, value=prevTgts, step=1)
-                        paramFmbl = st.number_input("Fumbles: ", min_value=0, value=prevFmbl, step=1)
+                    # Processing 
 
-                        # Processing 
+                    # PREDICTION
+                    if st.button("Predict "):
+                        td_likelihood = run_wr_model(wrmodel, paramWeek, paramYds, cumulative_yards_per_game, cumulative_receptions_per_game, cumulative_targets_per_game, avg_receiving_yards_last_3, avg_receptions_last_3, avg_targets_last_3, yards_per_reception, td_rate_per_target, is_first_week)
 
-                        # PREDICTION
-
-                        if st.button("Predict "):
-                            td_likelihood = run_wr_model(wrmodel, paramWeek, paramTDFlag, paramRec, paramYds, paramTgts, age, draftRd, height, paramFmbl)
-                            
-                            st.markdown(f'''
+                        st.markdown(f'''
                             The likelihood of {selected_player_row['fullName'].values[0]} scoring a touchdown is **{round(td_likelihood*100, 2)} %**
                             ''')
 
+                        odds = decimal_to_american_odds(td_likelihood)
 
-
-
-
-                        
-
-
-                        
-                        
-
+                        st.markdown(f'''
+                            The expected American Odds of {selected_player_row['fullName'].values[0]} scoring a touchdown is **{odds}**
+                            ''')
 
                         
-                    else:
-                        ("No game log.")
-                    
                 else:
-                    ("No experience based on parameters.")
+                    ("No game log. Model cannot predict without historical game data.")
+                    
             else:
                 st.write("No year limit selected.")
         else:
@@ -520,6 +546,7 @@ with tab_faq:
 #st.write("### Select a Range")
 #range_val = st.slider("Select a range", 0, 100, (25, 75))
 #st.write(f"Selected range: {range_val}")
+
 
 
 # In[ ]:
