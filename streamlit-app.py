@@ -14,6 +14,7 @@ from sklearn.metrics import accuracy_score
 from sklearn.cluster import KMeans
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble._forest import ForestClassifier
+import altair as alt
 import joblib
 import pickle
 
@@ -291,20 +292,29 @@ def run_wr_model(model, week, lag_yds, cumulative_yards_per_game, cumulative_rec
     likelihood = model.predict_proba(parameters)[:, 1]
     return likelihood[0]
 
-# AMERICAN ODDS
-def decimal_to_american_odds(percentage):
+# AMERICAN ODDS with Vig Adjustment
+def decimal_to_american_odds(percentage, vig=0.05):
     if percentage <= 0 or percentage >= 1:
-        raise ValueError("Percentage must be in the range (0, 1)")
+        if percentage == 0:
+            return "> +1000"
+        else: 
+            raise ValueError("Percentage must be in the range (0, 1)")
 
     if percentage < 0.5:
-        # Convert to positive American odds for less likely outcomes
+        # Convert to positive American odds for less likely outcomes (underdogs)
         american_odds = 100 * (1 - percentage) / percentage
+        # Apply vig by reducing positive odds
+        american_odds *= (1 - vig)
         direction = '+'
     else:
-        # Convert to negative American odds for more likely outcomes
+        # Convert to negative American odds for more likely outcomes (favorites)
         american_odds = -100 / (percentage / (1 - percentage))
-        direction = '-'
+        # Apply vig by increasing the negative odds
+        american_odds *= (1 + vig)
+        direction = ''
+
     return f"{direction}{round(american_odds)}"
+
 
 
 
@@ -366,24 +376,30 @@ with tab_player:
             #st.write(selected_player_row['exp'].values[0])
 
             # PLAYER EXPERIENCE BOX ------------------------------
-            st.subheader(f"{selected_player_row['fullName'].values[0]} - Game Log:")
+            st.subheader(f"{selected_player_row['fullName'].values[0]} - Historical Data:")
 
             # Look back hard coded to 3 years (same as model trained) 
 
             adjusted_exp = adjust_experience(exp_value, 3)
+            lookbackTime = datetime.now().year - 3
 
             # Generate player experience DF for game log loop
             playerExperienceDF = create_player_experience_df(player_id, adjusted_exp)
 
             if not playerExperienceDF.empty:
                 # SCRAPE GAME LOG DATA
+                try:
+                    gameLog = scrape_game_log(playerExperienceDF)
+                except ValueError as e:
+                    st.write("Game Log Data not found!")
+                    gameLog = pd.DataFrame()
 
-                gameLog = scrape_game_log(playerExperienceDF)
+                #gameLog = scrape_game_log(playerExperienceDF)
                 if not gameLog.empty:
 
                     # GENERATE FEATURES
                     gameLog['fullName'] = selected_player_row['fullName'].iloc[0]
-                    gameLog.to_csv('testgamelog.csv', index=False)
+                    #gameLog.to_csv('testgamelog.csv', index=False)
                     gameData = add_new_features_lag(gameLog)
 
                     # DISPLAY GAME LOG
@@ -395,11 +411,46 @@ with tab_player:
                                                                         'receptions':'Receptions',
                                                                         'receivingTargets':'Targets'
                                                                         })
-                    st.write('Game Log')
-                    st.dataframe(gameLogDisplay.tail(10))#, hide_index=True)
-                    st.divider()
-                    #st.dataframe(gameLog)
 
+                    with st.expander("View Game Log", expanded=False):
+                        st.dataframe(gameLogDisplay)#, hide_index=True)
+                    
+                    #### DATA VISUALIZATION ------
+
+                    # Create a select box for users to choose the Y variable
+                    with st.expander("View Chart Data", expanded=False): 
+                        y_variable = st.selectbox(
+                            'Select Variable',
+                            options=['TD', 'Yards', 'Receptions', 'Targets'],
+                            index=0  # Default index
+                        )
+
+                        # Determine aggregation method based on selected variable
+                        displayVar = ''
+                        if y_variable == 'TD':
+                            # Sum for touchdowns
+                            week_data = gameLogDisplay.groupby('Week').agg({'TD': 'sum'}).reset_index()
+                            displayVar = 'Total'
+                        else:
+                            # Average for other variables
+                            week_data = gameLogDisplay.groupby('Week').agg({y_variable: 'mean'}).reset_index()
+                            displayVar = 'Average'
+
+                        # Create the Altair bar chart
+                        chart = alt.Chart(week_data).mark_bar().encode(
+                            x=alt.X('Week:O', title='Week'),
+                            y=alt.Y(f'{y_variable}:Q', title=f'Total {y_variable.capitalize()}' if y_variable == 'TD' else f'Average {y_variable.capitalize()}'),
+                            tooltip=['Week:O', f'{y_variable}:Q']  # Show tooltip on hover
+                        ).properties(
+                            title=f'{displayVar} {y_variable.capitalize()} by Week since {lookbackTime}',
+                            width=600,
+                            height=400
+                        )
+
+                        # Display the chart in Streamlit
+                        st.altair_chart(chart, use_container_width=True)
+
+                    st.divider()
                     ########################################################################
                     ############################# MODEL ####################################
 
