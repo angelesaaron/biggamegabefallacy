@@ -387,12 +387,14 @@ with tab_player:
                     gameData = add_new_features_lag(gameLog)
 
                     # DISPLAY GAME LOG
-                    gameLogDisplay = gameLog[['seasonYr', 'week', 'receptions', 'receivingYards', 'receivingTouchdowns']]
+                    gameLogDisplay = gameLog[['seasonYr', 'week', 'receptions', 'receivingTargets' ,'receivingYards', 'receivingTouchdowns']]
                     gameLogDisplay = gameLogDisplay.rename(columns={'seasonYr':'Season',
                                                                         'week':'Week',
-                                                                        'receivingYards': 'REC YDS',
-                                                                        'receivingTouchdowns':'TDS',
-                                                                        'receptions':'REC'})
+                                                                        'receivingYards': 'Yards',
+                                                                        'receivingTouchdowns':'TD',
+                                                                        'receptions':'Receptions',
+                                                                        'receivingTargets':'Targets'
+                                                                        })
                     st.write('Game Log')
                     st.dataframe(gameLogDisplay)#, hide_index=True)
                     st.divider()
@@ -520,13 +522,6 @@ with tab_faq:
             Each tree considers different subsets of the data, making the model more robust to overfitting and better at generalizing to unseen data.
             ''', unsafe_allow_html=True)
 
-    expand_faq5 = st.expander('''What is the Gabe Davis Model?''')
-    with expand_faq5:
-        st.write('''
-        The Gabe Davis model is a Random Forest model specifically trained on Gabe Davis' personal game logs to explore the "Big Game Gabe" fallacy.
-        It uses the same approach as the touchdown likelihood model, analyzing features like his previous game statistics, player details, and trends over time to predict when he's most likely to have a breakout performance.
-        By focusing solely on Davis' data, the model aims to identify patterns and predict his personal likelihood of having one of his signature big games every few weeks. 
-        ''', unsafe_allow_html=True)
     
     ##########
 
