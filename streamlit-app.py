@@ -313,7 +313,7 @@ with tab_top_players:
                         # Set a base size for the images and scale it based on td_likelihood
                         #base_size = 2.5  # Base size of the image
                         max_size = 3  # Cap the maximum image size
-                        base_multiplier = 2
+                        base_multiplier = 4
                         image_size = min(row['td_likelihood'] * base_multiplier, max_size)  # Scale and cap image size
 
                         fig.add_layout_image(
