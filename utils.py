@@ -102,7 +102,7 @@ def load_roster(teamid):
     ]
 
     roster = pd.DataFrame(rows, columns=column_headers)
-    rosterWR = roster[roster['position'] == 'WR']
+    rosterWR = roster[roster['position'].isin(['WR', 'TE'])]
     rosterWR = rosterWR[rosterWR['activestatus'] == '1']
     rosterWR = rosterWR.drop('activestatus', axis=1)
     rosterWR['fullName'] = rosterWR['firstName'] + ' ' + rosterWR['lastName']
