@@ -1,14 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
-
-
+from utils import *
 import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import requests
-from datetime import datetime
+from datetime import datetime, timedelta
 from sklearn.model_selection import TimeSeriesSplit
 from sklearn.metrics import accuracy_score
 from sklearn.cluster import KMeans
@@ -17,325 +16,10 @@ from sklearn.ensemble._forest import ForestClassifier
 import altair as alt
 import joblib
 import pickle
-
-rapidapi_key = st.secrets["api"]["rapidapi_key"]
+import plotly.express as px
 
 st.set_page_config(page_title="Big Game Fallacy?", initial_sidebar_state="expanded")
 
-#####################################################
-########### Load and Prep Data ######################
-####################################################
-
-# LOAD TEAMS -------------------------------------------------------------------------
-def load_teams():
-    dfTeams = pd.read_csv('data/teamList.csv')
-    dfTeams['FullName'] = dfTeams['location'] + ' ' + dfTeams['name']
-    return dfTeams
-
-# LOAD ROSTER -------------------------------------------------------------------------
-def load_roster(teamid):
-    
-    # Roster URL for API
-    rosterurl = "https://nfl-api1.p.rapidapi.com/nflteamplayers"
-
-    querystring = {"teamid":teamid}
-    
-    # API HEADERS
-    headers = {
-        "x-rapidapi-key": rapidapi_key,
-        "x-rapidapi-host": "nfl-api1.p.rapidapi.com"
-    }
-    # GET Request
-    rosterResponse = requests.get(rosterurl, headers=headers, params=querystring)
-    json_data = rosterResponse.json()
-
-    # Extract team information
-    team_info = json_data["team"]
-    team_id = team_info["id"]
-    team_location = team_info["location"]
-    team_name = team_info["name"]
-    
-    rows = []
-
-    # Extract player information
-    for athlete in json_data['team']["athletes"]:
-        athlete_id = athlete["id"]
-        athlete_first_name = athlete["firstName"]
-        athlete_last_name = athlete["lastName"]
-        athlete_height = athlete["height"]
-        athlete_weight = athlete["weight"]
-        athlete_age = athlete.get('age', {})
-        
-        draft_info = athlete.get("draft", {})
-        draft_rd = draft_info.get('round', None) 
-        
-        position_abbreviation = athlete["position"]["abbreviation"]
-        exp = athlete["experience"]["years"]
-        
-        headshot = athlete.get("headshot", {}).get('href', None)
-
-        row = [
-            team_id,
-            team_location,
-            team_name,
-            athlete_id,
-            athlete_first_name,
-            athlete_last_name,
-            athlete_height,
-            athlete_weight,
-            athlete_age,
-            draft_rd,
-            position_abbreviation,
-            exp,
-            headshot
-        ]
-        rows.append(row)
-
-    column_headers = [
-        "teamId",
-        "location",
-        "name",
-        "playerId",
-        "firstName",
-        "lastName",
-        "height",
-        "weight",
-        "athleteAge",
-        "draftRd",
-        "position",
-        "exp",
-        "headshot"
-    ]
-
-    roster = pd.DataFrame(rows, columns=column_headers)
-
-    rosterWR = roster[roster['position'] == 'WR']
-    rosterWR['fullName'] = rosterWR['firstName'] + ' ' + rosterWR['lastName']
-    rosterWR.loc[rosterWR['exp'] == 0, 'exp'] = 1
-
-    return rosterWR
-
-# LOAD GAME LOG -------------------------------------------------------------------------
-def scrape_game_log(playerExperience):
-    
-    logurl = "https://nfl-api1.p.rapidapi.com/player-game-log"
-    headers = {
-        "x-rapidapi-key": rapidapi_key,
-        "x-rapidapi-host": "nfl-api1.p.rapidapi.com"
-    }
-
-    # Initialize list to hold rows of data
-    rows = []
-
-    # Iterate through playerExperience DataFrame
-    for index, row in playerExperience.iterrows():
-        querystring = {"playerId": row['playerId'], "season": str(row['Year'])}
-        logresponse = requests.get(logurl, headers=headers, params=querystring)
-
-        # Check for successful response
-        if logresponse.status_code != 200:
-            print(f"Error fetching data for playerId {row['playerId']} in season {row['Year']}")
-            continue
-
-        json_data = logresponse.json()
-
-        # Check if 'player_game_log' exists in the response
-        if "player_game_log" not in json_data:
-            print(f"'player_game_log' key missing for playerId {row['playerId']} in season {row['Year']}")
-            continue
-        
-        player_game_log = json_data.get("player_game_log", {})
-        labels = player_game_log.get("names", [])
-
-        # Iterate through the seasonTypes and their events
-        for season in player_game_log.get("seasonTypes", []):
-            season_name = season.get("displayName", "Unknown")
-            for category in season.get("categories", []):
-                for event in category.get("events", []):
-                    event_stats = event.get("stats", [])
-                    event_id = event.get("eventId", "Unknown")
-
-                    # Extract game data
-                    game_data = player_game_log.get("events", {}).get(event_id, {})
-                    week = game_data.get("week", "Unknown")
-                    game_date = game_data.get("gameDate", "Unknown")
-                    home_score = game_data.get("homeTeamScore", "Unknown")
-                    away_score = game_data.get("awayTeamScore", "Unknown")
-                    game_result = game_data.get("gameResult", "Unknown")
-
-                    # Prepare a row with stats and additional metadata
-                    row_data = event_stats + [
-                        week,
-                        game_date,
-                        home_score,
-                        away_score,
-                        game_result,
-                        event_id,
-                        season_name
-                    ]
-
-                    # Append other columns from the input row (excluding playerId and Year)
-                    row_data += row.drop(['playerId', 'Year']).tolist()  # Include other columns
-
-                    rows.append(row_data)
-
-    # Define column headers, including all columns from the input DataFrame
-    column_headers = labels + [
-        "week", "date", "homeScore", 
-        "awayScore", "result", "eventId", "seasonName"
-    ] + [col for col in playerExperience.columns if col not in ['playerId', 'Year']]  # Keep all other columns
-
-    # Create the DataFrame
-    if rows:  # Check if rows are populated
-        gameLog = pd.DataFrame(rows, columns=column_headers)
-        gameLog['seasonYr'] = gameLog['seasonName'].str.slice(0, 4)
-        gameLog['seasonType'] = gameLog['seasonName'].str.slice(4)
-        gameLog['seasonYr'] = gameLog['seasonYr'].str.strip()
-        gameLog['seasonType'] = gameLog['seasonType'].str.strip()
-        gameLog['receivingTouchdowns'] = pd.to_numeric(gameLog['receivingTouchdowns'], errors='coerce').fillna(0).astype(int)
-        gameLog['receptions'] = pd.to_numeric(gameLog['receptions'], errors='coerce').fillna(0).astype(int)
-        gameLog['receivingYards'] = pd.to_numeric(gameLog['receivingYards'], errors='coerce').fillna(0).astype(int)
-        gameLog['receivingTargets'] = pd.to_numeric(gameLog['receivingTargets'], errors ='coerce').fillna(0). astype(int)
-        gameLog['fumbles'] = pd.to_numeric(gameLog['fumbles'], errors ='coerce').fillna(0). astype(int)
-        gameLog = gameLog[gameLog['seasonType'] == 'Regular Season']
-        gameLogFin = gameLog.sort_values(by=['seasonYr', 'seasonType', 'week'], ascending=[True, True, True])
-        
-        return gameLogFin
-    else:
-        print("No data available")
-        return pd.DataFrame()  # Return empty DataFrame if no data was collected
-
-# GENERATE FEATURES -------------------------------------------
-def add_new_features_lag(data):
-    # Sort data to ensure calculations are in the correct order
-    data = data.sort_values(by=['fullName', 'seasonYr', 'week']).reset_index(drop=True)
-    # Calculate weeks played for each season and player
-    data['weeks_played'] = data.groupby(['seasonYr', 'fullName']).cumcount() + 1
-
-    # Lag all cumulative and rolling calculations by shifting by 1 week
-    # 1. Total Receiving Yards per Game (Lagged)
-    data['cumulative_receiving_yards'] = data.groupby(['seasonYr', 'fullName'])['receivingYards'].cumsum().shift(1)
-    data['cumulative_yards_per_game'] = data['cumulative_receiving_yards'] / (data['weeks_played'] - 1)
-    # 2. Total Receptions per Game (Lagged)
-    data['cumulative_receptions'] = data.groupby(['seasonYr', 'fullName'])['receptions'].cumsum().shift(1)
-    data['cumulative_receptions_per_game'] = data['cumulative_receptions'] / (data['weeks_played'] - 1)
-    # 3. Total Touchdowns per Game (Lagged)
-    data['cumulative_receiving_touchdowns'] = data.groupby(['seasonYr', 'fullName'])['receivingTouchdowns'].cumsum().shift(1)
-    data['cumulative_tds_per_game'] = data['cumulative_receiving_touchdowns'] / (data['weeks_played'] - 1)
-    # 4. Cumulative Target Share per Game (Lagged)
-    data['cumulative_targets'] = data.groupby(['seasonYr', 'fullName'])['receivingTargets'].cumsum().shift(1)
-    data['cumulative_targets_per_game'] = data['cumulative_targets'] / (data['weeks_played'] - 1)
-    # 5. 3-Game Average Receiving Yards (Lagged)
-    data['avg_receiving_yards_last_3'] = data.groupby(['seasonYr', 'fullName'])['receivingYards']\
-        .rolling(window=3, min_periods=1).mean().shift(1).reset_index(level=[0, 1], drop=True)
-    # 6. 3-Game Average Receptions (Lagged)
-    data['avg_receptions_last_3'] = data.groupby(['seasonYr', 'fullName'])['receptions']\
-        .rolling(window=3, min_periods=1).mean().shift(1).reset_index(level=[0, 1], drop=True)
-    # 7. 3-Game Average Touchdowns (Lagged)
-    data['avg_tds_last_3'] = data.groupby(['seasonYr', 'fullName'])['receivingTouchdowns']\
-        .rolling(window=3, min_periods=1).mean().shift(1).reset_index(level=[0, 1], drop=True)
-    # 8. 3-Game Average Targets (Lagged)
-    data['avg_targets_last_3'] = data.groupby(['seasonYr', 'fullName'])['receivingTargets']\
-        .rolling(window=3, min_periods=1).mean().shift(1).reset_index(level=[0, 1], drop=True)
-    # 9. Yards per Reception (Lagged for each game)
-    data['yards_per_reception'] = (data['receivingYards'] / data['receptions']).shift(1)
-    data['yards_per_reception'].replace([float('inf'), -float('inf')], 0, inplace=True)  # Handle division by zero
-    # 10. Touchdown Rate per Target (Lagged cumulative touchdowns per cumulative targets)
-    data['td_rate_per_target'] = (data['cumulative_receiving_touchdowns'] / data['cumulative_targets']).shift(1)
-    data['td_rate_per_target'].replace([float('inf'), -float('inf')], 0, inplace=True)  # Handle division by zero
-    # Fill in NaNs for rows where calculations are not available (e.g., first game of season)
-    data.fillna(0, inplace=True)
-    data['is_first_week'] = (data['weeks_played'] == 1).astype(int)
-    return data
-
-def get_experience_value(player_row):
-    exp_value = player_row['exp'].values
-    if exp_value.size > 0:
-        exp_value = exp_value
-    else:
-        exp_value[0] = 0
-    return exp_value[0]
-
-def adjust_experience(exp, lookback):
-    if exp > lookback:
-        return lookback
-    else:
-        return exp
-    
-def create_player_experience_df(playerID, adjusted_exp):
-    current_year = datetime.now().year
-    years = [current_year - i for i in range(adjusted_exp)]
-    df = pd.DataFrame({
-        'playerId': [playerID] * adjusted_exp,  # Same player ID for each row
-        'Year': years  # List of years
-    })
-    
-    return df
-
-def load_wr_model():
-    model = joblib.load('models/wr-model.pkl')
-    return model
-
-def run_wr_model(model, week, lag_yds, cumulative_yards_per_game, cumulative_receptions_per_game, cumulative_targets_per_game, avg_receiving_yards_last_3, avg_receptions_last_3, avg_targets_last_3, yards_per_reception, td_rate_per_target, is_first_week):
-    # Ensure parameters are correctly formatted
-    parameters = np.array([[float(week), float(lag_yds), float(cumulative_yards_per_game), 
-                            float(cumulative_receptions_per_game), float(cumulative_targets_per_game), 
-                            float(avg_receiving_yards_last_3), float(avg_receptions_last_3), 
-                            float(avg_targets_last_3), float(yards_per_reception), 
-                            float(td_rate_per_target), int(is_first_week)]])
-    
-    # Make sure the shape is correct
-    print("Parameters:", parameters)
-    print("Shape:", parameters.shape)
-
-    # Perform prediction
-    likelihood = model.predict_proba(parameters)[:, 1]
-    return likelihood[0]
-
-# AMERICAN ODDS with Vig Adjustment
-def decimal_to_american_odds(percentage, vig=0.10):
-    if percentage <= 0 or percentage >= 1:
-        if percentage == 0:
-            return "> +1000"
-        else:
-            raise ValueError("Percentage must be in the range (0, 1)")
-
-    # Calculate adjusted probability with vig
-    adjusted_probability = percentage / (1 + vig)
-
-    if adjusted_probability < 0.5:
-        # Convert to positive American odds for underdogs
-        american_odds = 100 * (1 - adjusted_probability) / adjusted_probability
-        direction = '+'
-    else:
-        # Convert to negative American odds for favorites
-        american_odds = -100 / (adjusted_probability / (1 - adjusted_probability))
-        direction = ''
-
-def decimal_to_american_odds(probability):
-    probability = round(probability * 100)
-    if probability < 0 or probability > 100:
-        raise ValueError("Probability must be between 0 and 100.")
-    
-    if probability == 0:
-        return float('inf')  # Infinite odds for 0% probability (no chance of winning)
-    elif probability == 100:
-        return -1  # This means a guaranteed win, represented as negative infinity odds
-
-    if probability < 50:  # Positive odds
-        odds = (100 / (probability / 100)) - 100
-        direction = '+'
-    else:  # Negative odds
-        odds = (probability / (1 - (probability / 100))) * -1
-        direction = ''
-    
-    return f"{direction}{round(odds)}"
-
-
-
-
-################################################################################################################################################
-    
 ##########################################
 ##  Title, Tabs, and Sidebar            ##
 ##########################################
@@ -343,7 +27,7 @@ st.title("Big Game Fallacy?")
 st.write("Is Big Game Gabe coming out next week? See what the model says")
 
 #tab_player, tab_gabedavis, tab_faq = st.tabs(["Receiver Selection", 'Gabe Davis', 'FAQ'])
-tab_player, tab_faq = st.tabs(["Receiver Selection", 'FAQ'])
+tab_player, tab_top_players, tab_faq = st.tabs(["Receiver Selection", "Best Odds", 'FAQ'])
 
 col1, col2, col3 = st.sidebar.columns([1,8,1])
 with col1:
@@ -380,7 +64,7 @@ with tab_player:
         dfRoster = load_roster(team_id)
 
         # PLAYER SELECT BOX ------------------------------
-        selected_player = st.selectbox("Select an receiver:", dfRoster['fullName'], index=2)
+        selected_player = st.selectbox("Select an receiver:", dfRoster['fullName'], index=0)
         selected_player_row = dfRoster[dfRoster['fullName'] == selected_player]
         if not selected_player_row.empty:
             player_id = selected_player_row['playerId'].values[0]
@@ -549,6 +233,123 @@ with tab_player:
     else:
         st.write("No team selected.")
 
+# TOP PLAYERS TAB ---------------------------------------------------------------------------------------------------------------       
+with tab_top_players:
+    st.markdown(" ### Team Best Odds this Week")
+    
+    # 1. Year/Week Inputs -------------------
+
+    # 1.1 Year + Week from function
+    year, week = get_current_nfl_week()
+    # 1.2 Year Input
+    current_year = st.number_input('Year: ' ,min_value=2021, value=year, max_value=year, step=1)
+    # 1.3 Week Input
+    upcoming_week = st.number_input('Week: ', min_value=1, max_value=18, value=week, step=1)
+
+    # 2. Data Sourcing/Ingestion ------------
+
+    # 2.1 Load Team List
+    dfTeams = load_teams()
+
+    # 2.2 Select Box for Teams
+    selected_team_odds = st.multiselect("Select an NFL team(s):", dfTeams['FullName'])
+    #st.write("This may take a few seconds to load.")
+
+    if not selected_team_odds:
+        st.warning("Please select at least one NFL team.")
+    else:
+        selected_team_odds_rows = dfTeams[dfTeams['FullName'].isin(selected_team_odds)]
+        all_rosters = []
+        st.write("This may take a few seconds to load.")
+
+        # 2.3 Get Team IDs
+        if not selected_team_odds_rows.empty:
+            team_ids = selected_team_odds_rows['id']
+            
+            # 2.4 Load Rosters
+            for team_id in team_ids:
+                dfRoster = load_roster(team_id)
+                if not dfRoster.empty:
+                    all_rosters.append(dfRoster)
+
+                # 2.5 Consolidate Rosters
+                if all_rosters:
+                    combined_roster_df = pd.concat(all_rosters, ignore_index=True)
+
+                    # 3 Model -------------------------
+
+                    # 3.1 Instantiate Model
+                    wrmodel = load_wr_model()
+
+                    # 3.2 Call Model
+                    topodds = get_all_player_logs_and_odds(combined_roster_df, wrmodel, current_year, upcoming_week)
+                    # 3.3 Print Data
+                    topoddsDisplay = topodds[['Player', 'td_likelihood','odds']].sort_values(by='td_likelihood',ascending=False)
+                    topoddsDisplay['td_likelihood'] = topoddsDisplay['td_likelihood'] * 100
+                    topoddsDisplay = topoddsDisplay.rename(columns={'td_likelihood': 'TD Likelihood %', 'odds':'Model Odds'})
+                    st.dataframe(topoddsDisplay)
+
+                    # 4. Bubble Chart -------------------
+
+                    # 4.1 Hover Elements
+                    topodds['hover_text'] = (
+                        topodds['Player'] + '<br>' +
+                        'TD Likelihood: ' + (round(topodds['td_likelihood']* 100)).astype(str) +  '%' +'<br>' +
+                        'TD Rate per Target: ' + (round(topodds['td_rate_per_target']*100).astype(str)) + '%' + '<br>' +
+                        'Season TD Total: ' + topodds['season_td_total'].astype(str) + '<br>' +
+                        'Odds: ' + topodds['odds'].astype(str)
+                    )
+                    fig = px.scatter(
+                        topodds,
+                        x='season_td_total',
+                        y='td_rate_per_target',
+                        size='td_likelihood',
+                        hover_name= 'hover_text',
+                        title='Player Touchdown Likelihood Bubble Chart'
+                    )
+
+                    # Add images to the scatter plot as layout shapes
+                    for i, row in topodds.iterrows():
+                        # Set a base size for the images and scale it based on td_likelihood
+                        #base_size = 2.5  # Base size of the image
+                        max_size = 3  # Cap the maximum image size
+                        base_multiplier = 2
+                        image_size = min(row['td_likelihood'] * base_multiplier, max_size)  # Scale and cap image size
+
+                        fig.add_layout_image(
+                            dict(
+                                source=row['headshot'],
+                                x=row['season_td_total'],
+                                y=row['td_rate_per_target'],
+                                xref="x",
+                                yref="y",
+                                sizex=image_size,  # Set the width of the image
+                                sizey=image_size,  # Set the height of the image
+                                opacity=1,  # Adjust opacity as needed
+                                layer="above",
+                                xanchor="center",  # Center the image on the x position
+                                yanchor="middle"   # Center the image on the y position
+                            )
+                        )
+
+                    # Update layout
+                    fig.update_layout(
+                        xaxis_title='Season TD Total',
+                        yaxis_title='TD Rate per Target',
+                        showlegend=False,
+                        height=600,
+                        width=800  # Set a consistent height for the chart
+                    )
+
+                    # Display the Plotly figure in Streamlit
+                    st.plotly_chart(fig, use_container_width=True)
+
+                else:
+                    st.write("No rosters available for the selected teams.")
+
+
+
+# FAQ TAB -----------------------------------------------------------------------------------------------------------------------
 with tab_faq:
     st.markdown(" ### Frequently Asked Questions 🔎 ")
     st.write("Both the touchdown likelihood model and the Gabe Davis model are still being continually refined and improved to enhance their accuracy and predictive capabilities.")
