@@ -44,8 +44,6 @@ st.sidebar.markdown('''The Big Game Gabe fallacy is something my friends and I c
 #########################################
 ##### Player Tab ########################
 #########################################
-
-
 with tab_player:
     
     # Player Selection Header ------------------------------------
@@ -68,12 +66,9 @@ with tab_player:
         selected_player_row = dfRoster[dfRoster['fullName'] == selected_player]
         if not selected_player_row.empty:
             player_id = selected_player_row['playerId'].values[0]
-            #st.dataframe(selected_player_row)
-            #st.write(f"Player ID: {player_id}")
             st.image(selected_player_row['headshot'].values[0], width=300)
             st.divider()
             exp_value = get_experience_value(selected_player_row)
-            #st.write(selected_player_row['exp'].values[0])
 
             # PLAYER EXPERIENCE BOX ------------------------------
             st.subheader(f"{selected_player_row['fullName'].values[0]} - Historical Data:")
@@ -94,9 +89,7 @@ with tab_player:
                     st.write("Game Log Data not found!")
                     gameLog = pd.DataFrame()
 
-                #gameLog = scrape_game_log(playerExperienceDF)
                 if not gameLog.empty:
-
                     # GENERATE FEATURES
                     gameLog['fullName'] = selected_player_row['fullName'].iloc[0]
                     #gameLog.to_csv('testgamelog.csv', index=False)
@@ -140,7 +133,7 @@ with tab_player:
                         chart = alt.Chart(week_data).mark_bar().encode(
                             x=alt.X('Week:O', title='Week'),
                             y=alt.Y(f'{y_variable}:Q', title=f'Total {y_variable.capitalize()}' if y_variable == 'TD' else f'Average {y_variable.capitalize()}'),
-                            tooltip=['Week:O', f'{y_variable}:Q']  # Show tooltip on hover
+                            tooltip=['Week:O', f'{y_variable}:Q']  
                         ).properties(
                             title=f'{displayVar} {y_variable.capitalize()} by Week since {lookbackTime}',
                             width=600,
@@ -198,6 +191,8 @@ with tab_player:
                     paramWeek = st.number_input('Upcoming NFL Week: ', min_value=1, max_value=18, value=nextWeek)
 
                     # INPUTS
+                    st.write("Individual Calc")
+                    st.dataframe(df_previous_game)
                     st.markdown("Please input the **previous** week game statistics: ")
                     st.caption("This will default to last game statistics for the selected player.")
                     paramRec = st.number_input('Receptions: ', min_value=0, value=lag_REC, step=1)
@@ -233,7 +228,9 @@ with tab_player:
     else:
         st.write("No team selected.")
 
-# TOP PLAYERS TAB ---------------------------------------------------------------------------------------------------------------       
+#########################################
+##### Teams Tab ########################
+#########################################     
 with tab_top_players:
     st.markdown(" ### Team Best Odds this Week")
     
@@ -330,8 +327,9 @@ with tab_top_players:
             else:
                 st.write("No rosters available for the selected teams.")
 
-
-# FAQ TAB -----------------------------------------------------------------------------------------------------------------------
+#########################################
+##### FAQ Tab ########################
+#########################################
 with tab_faq:
     st.markdown(" ### Frequently Asked Questions 🔎 ")
     st.write("Both the touchdown likelihood model and the Gabe Davis model are still being continually refined and improved to enhance their accuracy and predictive capabilities.")
@@ -374,27 +372,6 @@ with tab_faq:
 
     
     ##########
-
-
-
-# Display the roster
-# st.write("### Data Preview")
-# st.dataframe(data)
-
-# Plot using matplotlib or seaborn
-# st.write("### Data Plot")
-# fig, ax = plt.subplots()
-# sns.scatterplot(data=data, x='week', y='fPts', ax=ax)
-# st.pyplot(fig)
-
-# Add widgets like sliders, buttons, etc.
-#st.write("### Select a Range")
-#range_val = st.slider("Select a range", 0, 100, (25, 75))
-#st.write(f"Selected range: {range_val}")
-
-
-
-# In[ ]:
 
 
 

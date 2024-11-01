@@ -313,59 +313,50 @@ def decimal_to_american_odds(probability):
 
 @st.cache_data
 def get_all_player_logs_and_odds(dfRoster, _wrmodel, upcoming_year, upcoming_week):
-    # Initialize an empty list to store each player's processed data
+
     player_data = []
 
-    # Loop through each player in the roster
+    # 1. Iterate through entire list of players from teams selected in the selectbox to get game data
     for _, player_row in dfRoster.iterrows():
         player_id = player_row['playerId']
         player_name = player_row['fullName']
         headshot = player_row['headshot']
-        #st.write(player_row['exp'])
-        # Get player experience
+        # 1.1 Get player experience DF
         exp_value = get_experience_value(player_row)
         adjusted_exp = adjust_experience(exp_value, 3)
 
-        # Create the DataFrame of player experience for the API
+        # 1.2 Create the DataFrame of player experience for the API
         playerExperienceDF = create_player_experience_df(player_id, adjusted_exp)
 
-        # Fetch game logs and process if data exists
+        # 1.3 Fetch game logs and process if data exists
         if not playerExperienceDF.empty:
             try:
                 gameLog = scrape_game_log(playerExperienceDF)
             except ValueError as e:
-                #st.write(f"{player_name} - game log data not found!")
                 gameLog = pd.DataFrame()
             if not gameLog.empty:
-                # Add player name column
                 gameLog['fullName'] = player_name
-                #st.dataframe(gameLog)
-                # Generate lagged features
                 gameData = add_new_features_lag(gameLog)
                 gameData['seasonYr'] = gameData['seasonYr'].astype(int)
-                # Filter for the prior week
-                prior_week_data = gameData[(gameData['seasonYr'] == upcoming_year) & (gameData['week'] == upcoming_week)]
-                #st.dataframe(prior_week_data)
+
+                # 1.4 Source Prior Week from incoming parameter and check if prior week is empty, otherwise look back
+                # one more week
                 prior_week = upcoming_week - 1 
-                # If there's no data for the prior week, skip this player
+                prior_week_data = gameData[(gameData['seasonYr'] == upcoming_year) & (gameData['week'] == prior_week)]
+
                 while prior_week_data.empty and prior_week > 0:
-                    #st.write(f'{player_name} for Week {prior_week} data empty')
                     prior_week -=1
                     prior_week_data = gameData[(gameData['seasonYr'] == upcoming_year) & (gameData['week'] == prior_week)]
 
                 if prior_week_data.empty:
-                    #st.write(f'No data available for {player_name} in the weeks leading up to Week {upcoming_week}. Skipping player.')
                     continue
 
                 if len(prior_week_data) != 1:
-                    #st.write(f'{player_name} not equal to 1')
                     continue
 
-                #st.write(player_name)
-                #st.dataframe(prior_week_data)
                 prior_week_data = prior_week_data.replace([np.inf, -np.inf], 0).fillna(0)
 
-                # Features
+                # 2. Create Features for Model from Prior Week Game Data
                 lag_yds = prior_week_data['receivingYards'].values[0]
                 cumulative_yards_per_game = prior_week_data['cumulative_yards_per_game'].values[0]
                 cumulative_receptions_per_game = prior_week_data['cumulative_receptions_per_game'].values[0]
@@ -376,15 +367,15 @@ def get_all_player_logs_and_odds(dfRoster, _wrmodel, upcoming_year, upcoming_wee
                 yards_per_reception = prior_week_data['yards_per_reception'].values[0]
                 td_rate_per_target = prior_week_data['td_rate_per_target'].values[0]
                 is_first_week = prior_week_data['is_first_week'].values[0]
-                # 
+                # 2.1 Display Features
                 cumulative_receiving_touchdowns = prior_week_data['cumulative_receiving_touchdowns'].values[0]
 
-                # Calculate touchdown likelihood
+                # 2.2 Calculate touchdown likelihood
                 td_likelihood = run_wr_model(_wrmodel, upcoming_week, lag_yds, cumulative_yards_per_game, cumulative_receptions_per_game, cumulative_targets_per_game, avg_receiving_yards_last_3, avg_receptions_last_3, avg_targets_last_3, yards_per_reception, td_rate_per_target, is_first_week)
 
                 if td_likelihood is None:
                     td_likelihood = 0
-                # Store the player name and calculated odds
+                # 2.3 Store the player name and calculated odds
                 player_data.append({
                     'Player': player_name,
                     'headshot': headshot,
@@ -394,40 +385,38 @@ def get_all_player_logs_and_odds(dfRoster, _wrmodel, upcoming_year, upcoming_wee
                     'odds': decimal_to_american_odds(td_likelihood)
                 })
 
-    #st.dataframe(player_data)
-    # Convert results to a DataFrame and sort by TD likelihood (ascending for lowest odds)
     player_df = pd.DataFrame(player_data)#.sort_values(by='td_likelihood').head(15)
     
     return player_df
 
 # GET NFL Season Start ---------------------------------
 def get_current_nfl_week():
+    # 1. Instantiate Today
     today = datetime.today()
-    # Define NFL season start dates, with each season starting on the first Thursday after Labor Day
+    # 2. Define NFL season start dates, with each season starting on the first Thursday after Labor Day
     nfl_start_dates = {
         2024: datetime(2024, 9, 5),
-        2025: datetime(2025, 9, 4),
-        # Add additional years as needed
+        2025: datetime(2025, 9, 5),
     }
     
-    # Determine the NFL season start date and current season year
+    # 3. Pull NFL Start date for Current Year
     current_year = today.year
     nfl_start = nfl_start_dates.get(current_year, None)
     
-    # If today is before the NFL season start, return Week 1 of the current season
+    # 4. If today < NFL season start, return Week 1
     if nfl_start and today < nfl_start:
         return current_year, 1
 
-    # Calculate the first Tuesday after the season's start week
+    # 5. Calculate first tuesday - as want to define weeks tuesday - monday, tuesday to monday ....
     first_tuesday = nfl_start + timedelta(days=(8 - nfl_start.weekday()) % 7)
     
-    # Calculate the number of days since the first Tuesday
+    # 6. Calculate the number of days since the first Tuesday
     days_since_first_tuesday = (today - first_tuesday).days
     
-    # Calculate the current NFL week if within the season (Weeks 1–18)
+    # 7. Calculate the current NFL week if within the season (Weeks 1–18)
     if 0 <= days_since_first_tuesday < 18 * 7:
         week = days_since_first_tuesday // 7 + 2
         return current_year, week
     
-    # If today is after Week 18, return Week 1 of the next season
+    # 8. Catch all -- if today is after Week 18, return Week 1 of the next season
     return current_year + 1, 1
