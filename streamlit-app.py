@@ -238,64 +238,49 @@ with tab_top_players:
     st.markdown(" ### Team Best Odds this Week")
     
     # 1. Year/Week Inputs -------------------
-
-    # 1.1 Year + Week from function
     year, week = get_current_nfl_week()
-    # 1.2 Year Input
-    current_year = st.number_input('Year: ' ,min_value=2021, value=year, max_value=year, step=1)
-    # 1.3 Week Input
-    upcoming_week = st.number_input('Week: ', min_value=1, max_value=18, value=week, step=1)
+    current_year = st.number_input('Year:', min_value=2021, value=year, max_value=year, step=1)
+    upcoming_week = st.number_input('Week:', min_value=1, max_value=18, value=week, step=1)
 
     # 2. Data Sourcing/Ingestion ------------
-
-    # 2.1 Load Team List
     dfTeams = load_teams()
-
-    # 2.2 Select Box for Teams
     selected_team_odds = st.multiselect("Select an NFL team(s):", dfTeams['FullName'])
-    #st.write("This may take a few seconds to load.")
 
     if not selected_team_odds:
         st.warning("Please select at least one NFL team.")
     else:
         selected_team_odds_rows = dfTeams[dfTeams['FullName'].isin(selected_team_odds)]
         all_rosters = []
-        st.write("This may take a few seconds to load.")
 
-        # 2.3 Get Team IDs
         if not selected_team_odds_rows.empty:
             team_ids = selected_team_odds_rows['id']
             
-            # 2.4 Load Rosters
             for team_id in team_ids:
                 dfRoster = load_roster(team_id)
                 if not dfRoster.empty:
                     all_rosters.append(dfRoster)
 
-                # 2.5 Consolidate Rosters
-                if all_rosters:
-                    combined_roster_df = pd.concat(all_rosters, ignore_index=True)
+            # Check if we have collected rosters for any selected teams
+            if all_rosters:
+                combined_roster_df = pd.concat(all_rosters, ignore_index=True)
 
-                    # 3 Model -------------------------
+                # 3. Model -------------------------
+                wrmodel = load_wr_model()
+                topodds = get_all_player_logs_and_odds(combined_roster_df, wrmodel, current_year, upcoming_week)
 
-                    # 3.1 Instantiate Model
-                    wrmodel = load_wr_model()
-
-                    # 3.2 Call Model
-                    topodds = get_all_player_logs_and_odds(combined_roster_df, wrmodel, current_year, upcoming_week)
-                    # 3.3 Print Data
-                    topoddsDisplay = topodds[['Player', 'td_likelihood','odds']].sort_values(by='td_likelihood',ascending=False)
+                # Only proceed if topodds is not empty
+                if not topodds.empty:
+                    # Display Data
+                    topoddsDisplay = topodds[['Player', 'td_likelihood', 'odds']].sort_values(by='td_likelihood', ascending=False)
                     topoddsDisplay['td_likelihood'] = topoddsDisplay['td_likelihood'] * 100
-                    topoddsDisplay = topoddsDisplay.rename(columns={'td_likelihood': 'TD Likelihood %', 'odds':'Model Odds'})
+                    topoddsDisplay = topoddsDisplay.rename(columns={'td_likelihood': 'TD Likelihood %', 'odds': 'Model Odds'})
                     st.dataframe(topoddsDisplay)
 
                     # 4. Bubble Chart -------------------
-
-                    # 4.1 Hover Elements
                     topodds['hover_text'] = (
                         topodds['Player'] + '<br>' +
-                        'TD Likelihood: ' + (round(topodds['td_likelihood']* 100)).astype(str) +  '%' +'<br>' +
-                        'TD Rate per Target: ' + (round(topodds['td_rate_per_target']*100).astype(str)) + '%' + '<br>' +
+                        'TD Likelihood: ' + (round(topodds['td_likelihood'] * 100)).astype(str) + '%' + '<br>' +
+                        'TD Rate per Target: ' + (round(topodds['td_rate_per_target'] * 100)).astype(str) + '%' + '<br>' +
                         'Season TD Total: ' + topodds['season_td_total'].astype(str) + '<br>' +
                         'Odds: ' + topodds['odds'].astype(str)
                     )
@@ -304,17 +289,15 @@ with tab_top_players:
                         x='season_td_total',
                         y='td_rate_per_target',
                         size='td_likelihood',
-                        hover_name= 'hover_text',
+                        hover_name='hover_text',
                         title='Player Touchdown Likelihood Bubble Chart'
                     )
 
                     # Add images to the scatter plot as layout shapes
                     for i, row in topodds.iterrows():
-                        # Set a base size for the images and scale it based on td_likelihood
-                        #base_size = 2.5  # Base size of the image
-                        max_size = 3  # Cap the maximum image size
+                        max_size = 3
                         base_multiplier = 4
-                        image_size = min(row['td_likelihood'] * base_multiplier, max_size)  # Scale and cap image size
+                        image_size = min(row['td_likelihood'] * base_multiplier, max_size)
 
                         fig.add_layout_image(
                             dict(
@@ -323,12 +306,12 @@ with tab_top_players:
                                 y=row['td_rate_per_target'],
                                 xref="x",
                                 yref="y",
-                                sizex=image_size,  # Set the width of the image
-                                sizey=image_size,  # Set the height of the image
-                                opacity=1,  # Adjust opacity as needed
+                                sizex=image_size,
+                                sizey=image_size,
+                                opacity=1,
                                 layer="above",
-                                xanchor="center",  # Center the image on the x position
-                                yanchor="middle"   # Center the image on the y position
+                                xanchor="center",
+                                yanchor="middle"
                             )
                         )
 
@@ -338,16 +321,14 @@ with tab_top_players:
                         yaxis_title='TD Rate per Target',
                         showlegend=False,
                         height=600,
-                        width=800, # Set a consistent height for the chart
+                        width=800,
                         dragmode='pan'
                     )
-
-                    # Display the Plotly figure in Streamlit
                     st.plotly_chart(fig, use_container_width=True)
-
                 else:
-                    st.write("No rosters available for the selected teams.")
-
+                    st.write("No odds data available for the selected players.")
+            else:
+                st.write("No rosters available for the selected teams.")
 
 
 # FAQ TAB -----------------------------------------------------------------------------------------------------------------------
