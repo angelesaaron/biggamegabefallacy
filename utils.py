@@ -13,7 +13,6 @@ from sklearn.ensemble._forest import ForestClassifier
 import altair as alt
 import joblib
 import pickle
-import plotly.express as px
 
 # API KEY
 rapidapi_key = st.secrets["api"]["rapidapi_key"]
