@@ -191,8 +191,6 @@ with tab_player:
                     paramWeek = st.number_input('Upcoming NFL Week: ', min_value=1, max_value=18, value=nextWeek)
 
                     # INPUTS
-                    st.write("Individual Calc")
-                    st.dataframe(df_previous_game)
                     st.markdown("Please input the **previous** week game statistics: ")
                     st.caption("This will default to last game statistics for the selected player.")
                     paramRec = st.number_input('Receptions: ', min_value=0, value=lag_REC, step=1)
