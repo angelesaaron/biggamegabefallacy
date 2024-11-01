@@ -291,7 +291,7 @@ with tab_top_players:
                     # Add images to the scatter plot as layout shapes
                     for i, row in topodds.iterrows():
                         max_size = 3
-                        base_multiplier = 4
+                        base_multiplier = 3
                         image_size = min(row['td_likelihood'] * base_multiplier, max_size)
 
                         fig.add_layout_image(
