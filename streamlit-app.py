@@ -338,7 +338,8 @@ with tab_top_players:
                         yaxis_title='TD Rate per Target',
                         showlegend=False,
                         height=600,
-                        width=800  # Set a consistent height for the chart
+                        width=800, # Set a consistent height for the chart
+                        dragmode='pan'
                     )
 
                     # Display the Plotly figure in Streamlit
