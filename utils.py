@@ -13,6 +13,7 @@ from sklearn.ensemble._forest import ForestClassifier
 import altair as alt
 import joblib
 import pickle
+import os
 
 # API KEY
 rapidapi_key = st.secrets["api"]["rapidapi_key"]
@@ -291,6 +292,7 @@ def run_wr_model(model, week, lag_yds, cumulative_yards_per_game, cumulative_rec
     return likelihood[0]
 
 def decimal_to_american_odds(probability):
+
     if probability is None:
         probability = 0
     probability = round(probability * 100)
@@ -311,6 +313,27 @@ def decimal_to_american_odds(probability):
     
     return f"{direction}{round(odds)}"
 
+def decimal_to_american_odds_without_direction(probability):
+    if probability is None:
+        probability = 0
+    probability = round(probability * 100)
+    if probability < 0 or probability > 100:
+        raise ValueError("Probability must be between 0 and 100.")
+    
+    if probability == 0:
+        return float('inf')  # Infinite odds for 0% probability (no chance of winning)
+    elif probability == 100:
+        return -1  # This means a guaranteed win, represented as negative infinity odds
+
+    if probability < 50:  # Positive odds
+        odds = (100 / (probability / 100)) - 100
+        direction = '+'
+    else:  # Negative odds
+        odds = (probability / (1 - (probability / 100))) * -1
+        direction = ''
+    
+    return round(odds)
+    
 @st.cache_data
 def get_all_player_logs_and_odds(dfRoster, _wrmodel, upcoming_year, upcoming_week):
 
@@ -420,3 +443,48 @@ def get_current_nfl_week():
     
     # 8. Catch all -- if today is after Week 18, return Week 1 of the next season
     return current_year + 1, 1
+
+def create_player_odds_df(odds, player):
+    # Initialize an empty DataFrame
+    df_combined = pd.DataFrame()
+
+    # Get the current NFL week
+    try:
+        year, week = get_current_nfl_week()
+    except Exception as e:
+        st.write(f"Error getting current NFL week: {e}")
+        return df_combined  # Return an empty DataFrame
+
+    # Construct the file path for the sportsbook data
+    file_path = f'data/weeklyodds/week_{week}_odds.csv'
+    
+    # Check if the file exists
+    if not os.path.exists(file_path):
+        st.write(f"File does not exist: {file_path}")
+        return df_combined  # Return an empty DataFrame
+
+    # Load the sportsbook data
+    try:
+        sportsbookData = pd.read_csv(file_path)
+    except Exception as e:
+        st.write(f"Error reading CSV file: {e}")
+        return df_combined  # Return an empty DataFrame
+
+    # Create a DataFrame for the player and model odds
+    data = {
+        'Player': [player],
+        'Model': [odds]
+    }
+    df_player_odds = pd.DataFrame(data)
+    # Join sportsbook data on player and add all columns from sportsbook data
+    df_combined = pd.merge(df_player_odds, sportsbookData, on='Player', how='left')
+    df_combined = df_combined.drop(columns='Unnamed: 0')
+
+    # Return the combined DataFrame
+    return df_combined
+
+
+
+
+
+        

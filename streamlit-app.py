@@ -214,7 +214,46 @@ with tab_player:
                             The expected American Odds of {selected_player_row['fullName'].values[0]} scoring a touchdown is **{odds}**
                             ''')
 
-                        
+                        # HEAT MAP
+
+                        # 1. Get integer odds
+                        intOdds = decimal_to_american_odds_without_direction(td_likelihood)
+
+                        # 2. Create df to source odds
+                        playerOddsDF = create_player_odds_df(intOdds, selected_player_row['fullName'].values[0])
+
+                        # 3. Melt the Data for HeatMap
+                        df_melted = playerOddsDF.melt(id_vars=['Player', 'Model'], var_name='Provider', value_name='Odds')
+
+                        # 4.  Calculate the difference between provider odds and model odds
+                        df_melted['Difference'] = df_melted['Odds'] - df_melted['Model']
+
+                        # 5. Pivot the DataFrame for the heatmap
+                        heatmap_data = df_melted.pivot("Player", "Provider", "Odds")  
+                        difference_data = df_melted.pivot("Player", "Provider", "Difference")  
+                        annot_data = heatmap_data.applymap(lambda x: f"+{round(x)}" if pd.notna(x) and x > 0 else (str(round(x)) if pd.notna(x) else ""))
+
+                        # 6.  Green for negative, Red for positive
+                        cmap = sns.diverging_palette(10, 150, s=100, l=50, as_cmap=True)  
+                        plt.figure(figsize=(9, 5))
+                        ax = sns.heatmap(
+                            difference_data,
+                            annot = annot_data,
+                            fmt="",
+                            cmap=cmap, 
+                            center=0, 
+                            cbar=False,
+                            linewidths=.5
+                        )
+
+                        # 7. Update titles and labels
+                        plt.title('Odds Comparison Heatmap')
+                        ax.set_xlabel("")
+                        ax.set_ylabel("")
+
+                        # 8. Show the plot in Streamlit
+                        st.pyplot(plt)
+                        plt.clf()  # Clear the current figure after displaying
                 else:
                     ("No game log. Model cannot predict without historical game data.")
                     
@@ -320,6 +359,9 @@ with tab_top_players:
                         dragmode='pan'
                     )
                     st.plotly_chart(fig, use_container_width=True)
+
+                    book_odds = pd.read_csv('data/weeklyodds/week_9_odds.csv')
+                    st.dataframe(book_odds)
                 else:
                     st.write("No odds data available for the selected players.")
             else:
