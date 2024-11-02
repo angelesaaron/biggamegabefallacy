@@ -229,8 +229,9 @@ with tab_player:
                         df_melted['Difference'] = df_melted['Odds'] - df_melted['Model']
 
                         # 5. Pivot the DataFrame for the heatmap
-                        heatmap_data = df_melted.pivot("Player", "Provider", "Odds")  
-                        difference_data = df_melted.pivot("Player", "Provider", "Difference")  
+                        # Fix the pivot error
+                        heatmap_data = df_melted.pivot(index="Player", columns="Provider", values="Odds")
+                        difference_data = df_melted.pivot(index="Player", columns="Provider", values="Difference") 
                         annot_data = heatmap_data.applymap(lambda x: f"+{round(x)}" if pd.notna(x) and x > 0 else (str(round(x)) if pd.notna(x) else ""))
 
                         # 6.  Green for negative, Red for positive
