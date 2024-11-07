@@ -1,58 +1,389 @@
-,Player,DraftKings,BetOnline.ag,FanDuel,BetRivers,Bovada
-0,Derrick Henry,-300,-333,-290,-560,-315
-1,Ja'Marr Chase,-130,-125,-120,-134,-130
-2,Chase Brown,-120,-125,-115,-132,-121
-3,Zay Flowers,110,130,145,125,110
-4,Lamar Jackson,150,150,160,107,150
-5,Mark Andrews,205,190,210,155,205
-6,Diontae Johnson,250,270,290,285,N/A
-7,Rashod Bateman,230,280,290,240,230
-8,Isaiah Likely,300,400,500,330,310
-9,Justice Hill,300,400,470,360,300
-10,Mike Gesicki,225,210,230,175,225
-11,Charlie Kolar,400,450,500,350,400
-12,Andrei Iosivas,280,280,270,265,280
-13,Nelson Agholor,400,600,500,460,425
-14,Trayveon Williams,450,500,550,650,450
-15,Jermaine Burton,450,500,N/A,650,450
-16,Cincinnati Bengals D/ST,550,N/A,N/A,N/A,550
-17,Joe Burrow,550,550,600,510,550
-18,Drew Sample,600,650,550,650,600
-19,Baltimore Ravens D/ST,450,N/A,N/A,N/A,450
-20,Trenton Irwin,650,600,500,600,650
-21,Patrick Ricard,800,1900,1600,1200,N/A
-22,Tylan Wallace,1000,1900,1500,1300,1000
-23,Devontez Walker,1200,1100,N/A,1200,1200
-24,Tanner Hudson,1100,1000,900,1100,1100
-25,Chris Evans,1700,N/A,N/A,N/A,1700
-26,Charlie Jones,1500,1400,N/A,N/A,1500
-27,Tee Higgins,N/A,-125,N/A,140,N/A
-28,Kendric Pryor,N/A,1100,1100,1400,N/A
-29,Erick All,N/A,650,N/A,N/A,N/A
-30,DeAndre Carter,N/A,1900,N/A,N/A,N/A
-31,Cole Kmet,N/A,350,N/A,N/A,N/A
-32,Kendrick Bourne,N/A,450,N/A,N/A,N/A
-33,Rhamondre Stevenson,N/A,140,N/A,N/A,N/A
-34,Hunter Henry,N/A,300,N/A,N/A,N/A
-35,Marcedes Lewis,N/A,1900,N/A,N/A,N/A
-36,DJ Moore,N/A,210,N/A,N/A,N/A
-37,Antonio Gibson,N/A,600,N/A,N/A,N/A
-38,JaMycal Hasty,N/A,1300,N/A,N/A,N/A
-39,Tyler Scott,N/A,3400,N/A,N/A,N/A
-40,Kayshon Boutte,N/A,350,N/A,N/A,N/A
-41,DeMario Douglas,N/A,350,N/A,N/A,N/A
-42,Gerald Everett,N/A,1100,N/A,N/A,N/A
-43,Roschon Johnson,N/A,240,N/A,N/A,N/A
-44,Austin Hooper,N/A,900,N/A,N/A,N/A
-45,Jaheim Bell,N/A,3400,N/A,N/A,N/A
-46,Drake Maye,N/A,290,N/A,N/A,N/A
-47,D'Andre Swift,N/A,100,N/A,N/A,N/A
-48,Rome Odunze,N/A,230,N/A,N/A,N/A
-49,Caleb Williams,N/A,325,N/A,N/A,N/A
-50,Keenan Allen,N/A,240,N/A,N/A,N/A
-51,Keaton Mitchell,N/A,N/A,470,475,N/A
-52,Baltimore Ravens Defense,N/A,N/A,550,N/A,N/A
-53,Khalil Herbert,N/A,N/A,550,800,N/A
-54,Cincinnati Bengals Defense,N/A,N/A,650,N/A,N/A
-55,Kendall Milton,N/A,N/A,N/A,1200,N/A
-56,Tanner McLachlan,N/A,N/A,N/A,2400,N/A
+,Player,DraftKings,BetOnline.ag,FanDuel,BetRivers,BetMGM,Bovada
+0,Derrick Henry,-285,-333,-280,-500,-300,-290
+1,Chase Brown,-125,-125,-125,-129,-120,-125
+2,Zay Flowers,100,120,140,123,140,100
+3,Ja'Marr Chase,-130,-125,-125,-122,-125,-130
+4,Lamar Jackson,155,140,160,112,150,155
+5,Mark Andrews,170,180,185,143,200,170
+6,Rashod Bateman,245,300,310,240,275,245
+7,Diontae Johnson,235,280,320,280,275,N/A
+8,Charlie Kolar,265,350,440,240,450,N/A
+9,Mike Gesicki,215,210,240,150,225,215
+10,Andrei Iosivas,270,260,280,205,250,270
+11,Keaton Mitchell,425,N/A,480,460,500,425
+12,Justice Hill,425,450,480,335,450,425
+13,Nelson Agholor,400,450,500,475,500,400
+14,Trayveon Williams,425,500,550,510,500,425
+15,Khalil Herbert,425,N/A,550,450,550,N/A
+16,Jermaine Burton,425,400,550,475,450,425
+17,Joe Burrow,500,550,550,550,550,500
+18,Cincinnati Bengals D/ST,500,N/A,N/A,N/A,500,500
+19,Drew Sample,550,500,550,575,600,550
+20,Baltimore Ravens D/ST,500,N/A,N/A,N/A,450,500
+21,Trenton Irwin,600,500,550,360,500,600
+22,Tanner Hudson,650,750,900,650,N/A,650
+23,Tylan Wallace,950,1100,1800,1300,1200,1000
+24,Patrick Ricard,950,1400,1700,1200,1400,1000
+25,Devontez Walker,1100,1100,N/A,1200,1200,1100
+26,Tanner McLachlan,1100,1100,N/A,2000,1200,1100
+27,Kendall Milton,1400,1400,N/A,1400,N/A,1400
+28,Tyrone Tracy Jr.,100,-111,-120,N/A,N/A,100
+29,Chuba Hubbard,125,100,100,N/A,N/A,125
+30,Malik Nabers,125,120,140,N/A,N/A,125
+31,Wan'Dale Robinson,190,260,280,N/A,N/A,190
+32,Theo Johnson,205,325,370,N/A,N/A,N/A
+33,Devin Singletary,225,240,230,N/A,N/A,225
+34,Daniel Jones,290,250,220,N/A,N/A,290
+35,Adam Thielen,275,N/A,N/A,N/A,N/A,275
+36,Xavier Legette,340,325,360,N/A,N/A,340
+37,Miles Sanders,400,400,490,N/A,N/A,400
+38,Ja'Tavion Sanders,380,500,600,N/A,N/A,380
+39,David Moore,425,450,470,N/A,N/A,425
+40,Carolina Panthers D/ST,450,N/A,N/A,N/A,N/A,450
+41,New York Giants D/ST,380,N/A,N/A,N/A,N/A,380
+42,Bryce Young,650,700,550,N/A,N/A,650
+43,Jalen Coker,550,550,500,N/A,N/A,550
+44,Chris Manhertz,650,1100,1700,N/A,N/A,650
+45,Daniel Bellinger,650,1100,1700,N/A,N/A,650
+46,Jalin Hyatt,600,550,500,N/A,N/A,600
+47,Ihmir Smith-Marsette,650,900,1200,N/A,N/A,650
+48,Eric Gray,750,1100,1700,N/A,N/A,750
+49,Jordan Matthews,1600,1400,1700,N/A,N/A,1600
+50,Raheem Blackshear,1600,1900,2300,N/A,N/A,1600
+51,Bryce Ford-Wheaton,2200,1900,N/A,N/A,N/A,2200
+52,Feleipe Franks,2800,3400,4500,N/A,N/A,2800
+53,Bijan Robinson,-150,-167,N/A,N/A,N/A,-150
+54,Alvin Kamara,-135,-167,N/A,N/A,N/A,-136
+55,Drake London,135,140,N/A,N/A,N/A,135
+56,Taysom Hill,130,160,N/A,N/A,N/A,130
+57,Darnell Mooney,150,150,N/A,N/A,N/A,150
+58,Tyler Allgeier,180,170,N/A,N/A,N/A,180
+59,Kyle Pitts,190,200,N/A,N/A,N/A,190
+60,Ray-Ray McCloud III,255,220,N/A,N/A,N/A,255
+61,KhaDarel Hodge,320,300,N/A,N/A,N/A,N/A
+62,Cedrick Wilson Jr.,320,300,N/A,N/A,N/A,320
+63,Mason Tipton,310,300,N/A,N/A,N/A,N/A
+64,Jamaal Williams,500,500,N/A,N/A,N/A,500
+65,Juwan Johnson,475,400,N/A,N/A,N/A,475
+66,New Orleans Saints D/ST,475,N/A,N/A,N/A,N/A,475
+67,Atlanta Falcons D/ST,425,N/A,N/A,N/A,N/A,425
+68,Jordan Mims,600,600,N/A,N/A,N/A,600
+69,Foster Moreau,500,650,N/A,N/A,N/A,500
+70,Marquez Valdes-Scantling,600,550,N/A,N/A,N/A,N/A
+71,Charlie Woerner,600,500,N/A,N/A,N/A,600
+72,Kirk Cousins,700,650,N/A,N/A,N/A,700
+73,Equanimeous St. Brown,750,N/A,N/A,N/A,N/A,750
+74,Derek Carr,900,1000,N/A,N/A,N/A,900
+75,Casey Washington,900,900,N/A,N/A,N/A,900
+76,Adam Prentice,1200,1100,N/A,N/A,N/A,1200
+77,Avery Williams,1300,2400,N/A,N/A,N/A,1300
+78,Ross Dwelley,1500,1900,N/A,N/A,N/A,1500
+79,Jase McClellan,1500,1400,N/A,N/A,N/A,1500
+80,Jermaine Jackson,1800,1700,N/A,N/A,N/A,N/A
+81,Dallin Holker,1500,1400,N/A,N/A,N/A,1500
+82,Jonathan Taylor,-185,-200,N/A,N/A,N/A,-186
+83,James Cook,-160,-125,N/A,N/A,N/A,-159
+84,Josh Allen,115,120,N/A,N/A,N/A,115
+85,Amari Cooper,155,160,N/A,N/A,N/A,155
+86,Khalil Shakir,155,150,N/A,N/A,N/A,155
+87,Alec Pierce,205,270,N/A,N/A,N/A,205
+88,Dalton Kincaid,225,220,N/A,N/A,N/A,225
+89,Michael Pittman Jr.,200,210,N/A,N/A,N/A,200
+90,Josh Downs,205,200,N/A,N/A,N/A,205
+91,Ray Davis,265,280,N/A,N/A,N/A,265
+92,Adonai Mitchell,260,400,N/A,N/A,N/A,260
+93,Mack Hollins,350,350,N/A,N/A,N/A,350
+94,Trey Sermon,450,500,N/A,N/A,N/A,450
+95,Dawson Knox,380,450,N/A,N/A,N/A,380
+96,Curtis Samuel,500,450,N/A,N/A,N/A,500
+97,Indianapolis Colts D/ST,500,N/A,N/A,N/A,N/A,500
+98,Buffalo Bills D/ST,425,N/A,N/A,N/A,N/A,425
+99,Mo Alie-Cox,500,650,N/A,N/A,N/A,500
+100,Drew Ogletree,700,800,N/A,N/A,N/A,700
+101,Ty Johnson,700,900,N/A,N/A,N/A,700
+102,Kylen Granson,700,800,N/A,N/A,N/A,700
+103,Tyler Goodson,900,N/A,N/A,N/A,N/A,900
+104,Ashton Dulin,1000,1100,N/A,N/A,N/A,1000
+105,Joe Flacco,1200,1400,N/A,N/A,N/A,N/A
+106,Will Mallory,1400,1700,N/A,N/A,N/A,1400
+107,Reggie Gilliam,1700,1900,N/A,N/A,N/A,1700
+108,Quintin Morris,2000,1900,N/A,N/A,N/A,2000
+109,Jalen Virgil,2000,N/A,N/A,N/A,N/A,2000
+110,Evan Hull,1900,N/A,N/A,N/A,N/A,1900
+111,D'Andre Swift,110,100,100,N/A,N/A,110
+112,Rhamondre Stevenson,160,150,170,N/A,N/A,160
+113,DJ Moore,180,190,200,N/A,N/A,180
+114,Keenan Allen,225,230,250,N/A,N/A,225
+115,Rome Odunze,220,230,280,N/A,N/A,220
+116,Roschon Johnson,275,260,280,N/A,N/A,N/A
+117,Cole Kmet,310,290,310,N/A,N/A,310
+118,Caleb Williams,340,325,340,N/A,N/A,340
+119,Hunter Henry,330,325,400,N/A,N/A,330
+120,Drake Maye,380,325,390,N/A,N/A,380
+121,DeMario Douglas,380,350,480,N/A,N/A,380
+122,New England Patriots D/ST,425,N/A,N/A,N/A,N/A,425
+123,Chicago Bears D/ST,370,N/A,N/A,N/A,N/A,370
+124,Kayshon Boutte,400,400,500,N/A,N/A,400
+125,Ja'Lynn Polk,425,600,850,N/A,N/A,425
+126,Kendrick Bourne,450,450,600,N/A,N/A,450
+127,Antonio Gibson,600,600,650,N/A,N/A,600
+128,Gerald Everett,850,1000,1100,N/A,N/A,850
+129,Austin Hooper,950,900,1000,N/A,N/A,N/A
+130,JaMycal Hasty,1100,1100,N/A,N/A,N/A,1100
+131,Travis Homer,1400,N/A,1700,N/A,N/A,1400
+132,DeAndre Carter,1700,1900,2500,N/A,N/A,1700
+133,Javon Baker,1400,N/A,1700,N/A,N/A,1400
+134,Marcedes Lewis,1700,1900,2800,N/A,N/A,1700
+135,Tyler Scott,2800,3400,3300,N/A,N/A,2800
+136,Jaheim Bell,4000,3400,2900,N/A,N/A,4000
+137,Kareem Hunt,-145,-167,N/A,N/A,N/A,-145
+138,Travis Kelce,125,140,N/A,N/A,N/A,125
+139,DeAndre Hopkins,155,160,N/A,N/A,N/A,155
+140,Javonte Williams,185,180,N/A,N/A,N/A,185
+141,Xavier Worthy,190,190,N/A,N/A,N/A,190
+142,Courtland Sutton,270,260,N/A,N/A,N/A,270
+143,Kansas City Chiefs D/ST,380,N/A,N/A,N/A,N/A,380
+144,Bo Nix,400,350,N/A,N/A,N/A,N/A
+145,Patrick Mahomes,425,400,N/A,N/A,N/A,425
+146,Denver Broncos D/ST,450,N/A,N/A,N/A,N/A,450
+147,Noah Gray,475,550,N/A,N/A,N/A,475
+148,Jaleel McLaughlin,500,450,N/A,N/A,N/A,500
+149,Lil'Jordan Humphrey,500,500,N/A,N/A,N/A,500
+150,Samaje Perine,550,550,N/A,N/A,N/A,550
+151,Clyde Edwards-Helaire,550,550,N/A,N/A,N/A,550
+152,Carson Steele,550,550,N/A,N/A,N/A,550
+153,Troy Franklin,550,600,N/A,N/A,N/A,550
+154,Devaughn Vele,550,450,N/A,N/A,N/A,550
+155,Justin Watson,600,600,N/A,N/A,N/A,600
+156,Audric Estime,600,600,N/A,N/A,N/A,600
+157,Mecole Hardman,650,650,N/A,N/A,N/A,650
+158,Adam Trautman,700,750,N/A,N/A,N/A,700
+159,Lucas Krull,900,900,N/A,N/A,N/A,900
+160,Greg Dulcich,900,900,N/A,N/A,N/A,900
+161,Nate Adkins,900,900,N/A,N/A,N/A,900
+162,Marvin Mims Jr.,950,1000,N/A,N/A,N/A,1000
+163,Michael Burton,2500,N/A,N/A,N/A,N/A,2500
+164,Aaron Jones,-105,-125,-110,N/A,N/A,-106
+165,Justin Jefferson,-105,-125,-110,N/A,N/A,-106
+166,Tank Bigsby,160,180,160,N/A,N/A,160
+167,Travis Etienne Jr.,170,210,180,N/A,N/A,170
+168,Jordan Addison,205,220,240,N/A,N/A,205
+169,Evan Engram,180,220,240,N/A,N/A,180
+170,Cam Akers,230,250,370,N/A,N/A,230
+171,Brian Thomas Jr,190,190,200,N/A,N/A,190
+172,T.J. Hockenson,255,240,270,N/A,N/A,255
+173,Sam Darnold,295,400,470,N/A,N/A,295
+174,Trevor Lawrence,330,400,490,N/A,N/A,N/A
+175,Jalen Nailor,370,450,490,N/A,N/A,370
+176,Parker Washington,320,325,350,N/A,N/A,320
+177,Gabe Davis,330,300,350,N/A,N/A,330
+178,Josh Oliver,380,550,650,N/A,N/A,380
+179,Minnesota Vikings D/ST,425,N/A,N/A,N/A,N/A,425
+180,Jacksonville Jaguars D/ST,475,N/A,N/A,N/A,N/A,475
+181,Brenton Strange,550,800,850,N/A,N/A,550
+182,Brandon Powell,700,800,950,N/A,N/A,700
+183,Ty Chandler,650,900,1200,N/A,N/A,650
+184,Tim Jones,600,700,850,N/A,N/A,600
+185,D'Ernest Johnson,750,750,800,N/A,N/A,750
+186,Johnny Mundt,900,1300,1400,N/A,N/A,900
+187,Trent Sherfield,850,800,900,N/A,N/A,850
+188,Luke Farrell,950,1300,1600,N/A,N/A,1000
+189,C.J. Ham,1100,1400,2000,N/A,N/A,1100
+190,Josiah Deguara,2000,1900,2400,N/A,N/A,2000
+191,Brian Robinson Jr.,-110,-111,N/A,N/A,N/A,-110
+192,Najee Harris,-110,-125,N/A,N/A,N/A,-110
+193,Jayden Daniels,120,120,N/A,N/A,N/A,120
+194,Austin Ekeler,130,130,N/A,N/A,N/A,130
+195,Terry McLaurin,115,130,N/A,N/A,N/A,115
+196,Jeremy McNichols,245,240,N/A,N/A,N/A,245
+197,George Pickens,200,180,N/A,N/A,N/A,200
+198,Jaylen Warren,220,250,N/A,N/A,N/A,220
+199,Zach Ertz,270,300,N/A,N/A,N/A,270
+200,Noah Brown,300,290,N/A,N/A,N/A,300
+201,Pat Freiermuth,270,325,N/A,N/A,N/A,270
+202,Dyami Brown,340,600,N/A,N/A,N/A,N/A
+203,Calvin Austin III,330,400,N/A,N/A,N/A,330
+204,Van Jefferson,330,400,N/A,N/A,N/A,330
+205,Russell Wilson,380,400,N/A,N/A,N/A,380
+206,Pittsburgh Steelers D/ST,450,N/A,N/A,N/A,N/A,450
+207,Washington Commanders D/ST,425,N/A,N/A,N/A,N/A,425
+208,Olamide Zaccheaus,650,600,N/A,N/A,N/A,650
+209,Luke McCaffrey,700,750,N/A,N/A,N/A,700
+210,Darnell Washington,550,700,N/A,N/A,N/A,550
+211,Ben Sinnott,750,1100,N/A,N/A,N/A,750
+212,Scott Miller,800,800,N/A,N/A,N/A,800
+213,Connor Heyward,1500,1400,N/A,N/A,N/A,1500
+214,MyCole Pruitt,1400,1400,N/A,N/A,N/A,1400
+215,John Bates,2200,1700,N/A,N/A,N/A,2200
+216,Jonathan Ward,1900,1900,N/A,N/A,N/A,1900
+217,Rodney Williams,2500,N/A,N/A,N/A,N/A,2500
+218,J.K. Dobbins,-170,-143,N/A,N/A,N/A,-170
+219,Tony Pollard,110,120,N/A,N/A,N/A,110
+220,Ladd McConkey,155,170,N/A,N/A,N/A,155
+221,Quentin Johnston,255,260,N/A,N/A,N/A,255
+222,Kimani Vidal,330,N/A,N/A,N/A,N/A,330
+223,Calvin Ridley,265,260,N/A,N/A,N/A,265
+224,Joshua Palmer,350,325,N/A,N/A,N/A,350
+225,Will Dissly,370,350,N/A,N/A,N/A,370
+226,Justin Herbert,380,400,N/A,N/A,N/A,380
+227,Hayden Hurst,450,450,N/A,N/A,N/A,450
+228,Los Angeles Chargers D/ST,350,N/A,N/A,N/A,N/A,N/A
+229,Tennessee Titans D/ST,425,N/A,N/A,N/A,N/A,425
+230,Nick Westbrook-Ikhine,390,400,N/A,N/A,N/A,390
+231,Julius Chestnut,450,N/A,N/A,N/A,N/A,450
+232,Mason Rudolph,500,N/A,N/A,N/A,N/A,N/A
+233,DJ Chark Jr.,600,N/A,N/A,N/A,N/A,N/A
+234,Jalen Reagor,600,N/A,N/A,N/A,N/A,N/A
+235,Hassan Haskins,850,N/A,N/A,N/A,N/A,850
+236,Tyler Boyd,700,750,N/A,N/A,N/A,700
+237,Chigoziem Okonkwo,700,650,N/A,N/A,N/A,700
+238,Stone Smartt,1300,N/A,N/A,N/A,N/A,1300
+239,Josh Whyle,1000,1000,N/A,N/A,N/A,1000
+240,Derius Davis,1500,N/A,N/A,N/A,N/A,1500
+241,Jha'Quan Jackson,1100,N/A,N/A,N/A,N/A,1100
+242,Nick Vannett,1400,1400,N/A,N/A,N/A,1400
+243,Bryce Oliver,2000,N/A,N/A,N/A,N/A,2000
+244,Mason Kinsey,3500,N/A,N/A,N/A,N/A,3500
+245,Breece Hall,-140,-167,-155,N/A,N/A,-141
+246,James Conner,-125,-143,-115,N/A,N/A,-125
+247,Davante Adams,130,130,120,N/A,N/A,130
+248,Garrett Wilson,135,130,125,N/A,N/A,135
+249,Marvin Harrison Jr.,175,180,185,N/A,N/A,175
+250,Trey McBride,170,200,185,N/A,N/A,170
+251,Kyler Murray,220,240,220,N/A,N/A,220
+252,Michael Wilson,310,350,370,N/A,N/A,310
+253,Tyler Conklin,310,400,470,N/A,N/A,310
+254,Braelon Allen,295,350,420,N/A,N/A,295
+255,Trey Benson,400,N/A,-115,N/A,N/A,400
+256,New York Jets D/ST,425,N/A,N/A,N/A,N/A,425
+257,Greg Dortch,475,N/A,600,N/A,N/A,475
+258,Xavier Gipson,450,N/A,950,N/A,N/A,450
+259,Arizona Cardinals D/ST,450,N/A,N/A,N/A,N/A,450
+260,Zay Jones,500,N/A,800,N/A,N/A,500
+261,Emari Demercado,550,N/A,350,N/A,N/A,550
+262,Malachi Corley,650,N/A,1000,N/A,N/A,650
+263,Jeremy Ruckert,750,900,1200,N/A,N/A,750
+264,Elijah Higgins,900,N/A,1500,N/A,N/A,900
+265,Zach Pascal,1100,N/A,2000,N/A,N/A,1100
+266,Aaron Rodgers,1000,900,1000,N/A,N/A,1000
+267,Kenny Yeboah,1400,1700,2000,N/A,N/A,1400
+268,Irvin Charles,1300,N/A,2100,N/A,N/A,1300
+269,Tip Reiman,1300,N/A,2200,N/A,N/A,1300
+270,Israel Abanikanda,1900,N/A,N/A,N/A,N/A,1900
+271,Isaiah Davis,2000,N/A,2900,N/A,N/A,2000
+272,Saquon Barkley,-210,-200,N/A,N/A,N/A,-210
+273,Jalen Hurts,100,-111,N/A,N/A,N/A,100
+274,A.J. Brown,125,N/A,N/A,N/A,N/A,125
+275,DeVonta Smith,155,140,N/A,N/A,N/A,160
+276,CeeDee Lamb,150,170,N/A,N/A,N/A,150
+277,Rico Dowdle,175,170,N/A,N/A,N/A,175
+278,Dallas Goedert,220,300,N/A,N/A,N/A,220
+279,Jahan Dotson,245,240,N/A,N/A,N/A,245
+280,Dalvin Cook,310,N/A,N/A,N/A,N/A,310
+281,Jake Ferguson,265,300,N/A,N/A,N/A,265
+282,Ezekiel Elliott,310,290,N/A,N/A,N/A,310
+283,Jalen Tolbert,310,350,N/A,N/A,N/A,310
+284,Grant Calcaterra,400,N/A,N/A,N/A,N/A,N/A
+285,Ainias Smith,450,N/A,N/A,N/A,N/A,450
+286,Johnny Wilson,450,N/A,N/A,N/A,N/A,450
+287,Philadelphia Eagles D/ST,400,N/A,N/A,N/A,N/A,400
+288,Kenneth Gainwell,500,450,N/A,N/A,N/A,500
+289,Dallas Cowboys D/ST,500,N/A,N/A,N/A,N/A,500
+290,Cooper Rush,600,650,N/A,N/A,N/A,600
+291,KaVontae Turpin,500,N/A,N/A,N/A,N/A,500
+292,Jack Stoll,700,N/A,N/A,N/A,N/A,700
+293,Jalen Brooks,650,N/A,N/A,N/A,N/A,650
+294,Will Shipley,1000,1700,N/A,N/A,N/A,1000
+295,Hunter Luepke,1200,1100,N/A,N/A,N/A,1200
+296,Ryan Flournoy,1600,N/A,N/A,N/A,N/A,1600
+297,Deuce Vaughn,1800,1400,N/A,N/A,N/A,1800
+298,Brevyn Spann-Ford,1500,1700,N/A,N/A,N/A,1500
+299,Luke Schoonmaker,1600,N/A,N/A,N/A,N/A,1600
+300,Jahmyr Gibbs,-145,-167,-155,N/A,N/A,-145
+301,David Montgomery,-140,-167,-145,N/A,N/A,-141
+302,Joe Mixon,-140,-200,-230,N/A,N/A,-141
+303,Amon-Ra St. Brown,110,110,130,N/A,N/A,110
+304,Nico Collins,115,N/A,140,N/A,N/A,115
+305,Sam LaPorta,215,260,260,N/A,N/A,215
+306,Tank Dell,200,180,140,N/A,N/A,200
+307,Jameson Williams,275,250,270,N/A,N/A,275
+308,Dalton Schultz,230,290,250,N/A,N/A,230
+309,C.J. Stroud,400,550,480,N/A,N/A,400
+310,Robert Woods,350,500,550,N/A,N/A,350
+311,Xavier Hutchinson,380,500,700,N/A,N/A,380
+312,Dare Ogunbowale,425,400,430,N/A,N/A,425
+313,Tim Patrick,400,450,600,N/A,N/A,400
+314,Kalif Raymond,475,550,700,N/A,N/A,475
+315,Houston Texans D/ST,550,N/A,N/A,N/A,N/A,550
+316,Detroit Lions D/ST,450,N/A,N/A,N/A,N/A,450
+317,John Metchie III,550,600,700,N/A,N/A,550
+318,Cade Stover,550,900,1000,N/A,N/A,550
+319,Brock Wright,800,1000,1000,N/A,N/A,800
+320,Allen Robinson II,800,N/A,700,N/A,N/A,800
+321,Teagan Quitoriano,950,1100,1800,N/A,N/A,1000
+322,Craig Reynolds,1100,1700,1800,N/A,N/A,1100
+323,Jared Goff,1100,1100,1300,N/A,N/A,1100
+324,Isaiah Williams,1300,1300,N/A,N/A,N/A,1300
+325,J.J. Taylor,1300,1300,N/A,N/A,N/A,1300
+326,Kyren Williams,-240,N/A,N/A,N/A,N/A,-240
+327,De'Von Achane,-115,N/A,N/A,N/A,N/A,-115
+328,Puka Nacua,135,N/A,N/A,N/A,N/A,135
+329,Tyreek Hill,120,N/A,N/A,N/A,N/A,120
+330,Raheem Mostert,135,N/A,N/A,N/A,N/A,135
+331,Cooper Kupp,140,N/A,N/A,N/A,N/A,140
+332,Demarcus Robinson,175,N/A,N/A,N/A,N/A,175
+333,Jaylen Waddle,185,N/A,N/A,N/A,N/A,185
+334,Jonnu Smith,190,N/A,N/A,N/A,N/A,190
+335,Colby Parkinson,450,N/A,N/A,N/A,N/A,450
+336,Blake Corum,425,N/A,N/A,N/A,N/A,425
+337,Hunter Long,425,N/A,N/A,N/A,N/A,425
+338,Tua Tagovailoa,500,N/A,N/A,N/A,N/A,500
+339,Tutu Atwell,550,N/A,N/A,N/A,N/A,550
+340,Odell Beckham Jr.,500,N/A,N/A,N/A,N/A,500
+341,Jaylen Wright,600,N/A,N/A,N/A,N/A,600
+342,Los Angeles Rams D/ST,475,N/A,N/A,N/A,N/A,N/A
+343,Miami Dolphins D/ST,475,N/A,N/A,N/A,N/A,475
+344,Matthew Stafford,750,N/A,N/A,N/A,N/A,750
+345,Tyler Johnson,850,N/A,N/A,N/A,N/A,850
+346,Ronnie Rivers,1200,N/A,N/A,N/A,N/A,1200
+347,Alec Ingold,950,N/A,N/A,N/A,N/A,1000
+348,Durham Smythe,1200,N/A,N/A,N/A,N/A,1200
+349,Davis Allen,1300,N/A,N/A,N/A,N/A,1300
+350,River Cracraft,1200,N/A,N/A,N/A,N/A,1200
+351,Xavier Smith,1500,N/A,N/A,N/A,N/A,1500
+352,Cody Schrader,1700,N/A,N/A,N/A,N/A,1700
+353,Jeff Wilson Jr.,1900,N/A,N/A,N/A,N/A,1900
+354,Malik Washington,1100,N/A,N/A,N/A,N/A,1100
+355,Dee Eskridge,2000,N/A,N/A,N/A,N/A,2000
+356,Tanner Conner,2000,N/A,N/A,N/A,N/A,2000
+357,Julian Hill,2000,N/A,N/A,N/A,N/A,2000
+358,Tee Higgins,N/A,140,N/A,N/A,N/A,N/A
+359,Isaiah Likely,N/A,400,N/A,N/A,N/A,N/A
+360,Charlie Jones,N/A,1100,1100,N/A,1400,N/A
+361,Darius Slayton,N/A,300,N/A,N/A,N/A,N/A
+362,Justyn Ross,N/A,1900,N/A,N/A,N/A,N/A
+363,Carson Wentz,N/A,1900,N/A,N/A,N/A,N/A
+364,Peyton Hendershot,N/A,1700,N/A,N/A,N/A,N/A
+365,Chris Moore,N/A,1700,N/A,N/A,N/A,N/A
+366,Trey Lance,N/A,2400,N/A,N/A,N/A,N/A
+367,Baltimore Ravens Defense,N/A,N/A,550,N/A,N/A,N/A
+368,Cincinnati Bengals Defense,N/A,N/A,600,N/A,N/A,N/A
+369,Kendric Pryor,N/A,N/A,1100,900,N/A,N/A
+370,New York Giants Defense,N/A,N/A,650,N/A,N/A,N/A
+371,Carolina Panthers Defense,N/A,N/A,850,N/A,N/A,N/A
+372,Ian Thomas,N/A,N/A,1400,N/A,N/A,N/A
+373,Deven Thompkins,N/A,N/A,1600,N/A,N/A,N/A
+374,Tommy Tremble,N/A,N/A,1700,N/A,N/A,N/A
+375,Chicago Bears Defense,N/A,N/A,800,N/A,N/A,N/A
+376,New England Patriots Defense,N/A,N/A,1000,N/A,N/A,N/A
+377,Minnesota Vikings Defense,N/A,N/A,800,N/A,N/A,N/A
+378,Jacksonville Jaguars Defense,N/A,N/A,900,N/A,N/A,N/A
+379,New York Jets Defense,N/A,N/A,750,N/A,N/A,N/A
+380,Arizona Cardinals Defense,N/A,N/A,900,N/A,N/A,N/A
+381,DeeJay Dallas,N/A,N/A,3100,N/A,N/A,N/A
+382,Brenden Bates,N/A,N/A,3700,N/A,N/A,N/A
+383,Anthony Firkser,N/A,N/A,4300,N/A,N/A,N/A
+384,Dameon Pierce,N/A,N/A,430,N/A,N/A,N/A
+385,Detroit Lions Defense,N/A,N/A,650,N/A,N/A,N/A
+386,Houston Texans Defense,N/A,N/A,750,N/A,N/A,N/A
+387,No Touchdown,N/A,N/A,N/A,N/A,15000,N/A
