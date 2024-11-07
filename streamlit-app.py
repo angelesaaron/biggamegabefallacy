@@ -177,11 +177,7 @@ with tab_player:
                     is_first_week = df_previous_game['is_first_week']
 
                     # 4. GET NEXT WEEK otherwise default to WEEK 1
-                    nextWeek = (df_previous_game['week']) + 1
-                    if nextWeek > 18:
-                        nextWeek = 1
-                    else:
-                        nextWeek = nextWeek
+                    thisYear, nextWeek = get_current_nfl_week()
                     
                     #nextWeek = nextWeek.astype(int)
 
