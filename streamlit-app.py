@@ -357,8 +357,8 @@ with tab_top_players:
                     )
                     st.plotly_chart(fig, use_container_width=True)
 
-                    book_odds = pd.read_csv('data/weeklyodds/week_9_odds.csv')
-                    st.dataframe(book_odds)
+                    #book_odds = pd.read_csv('data/weeklyodds/week_9_odds.csv')
+                    #st.dataframe(book_odds)
                 else:
                     st.write("No odds data available for the selected players.")
             else:
