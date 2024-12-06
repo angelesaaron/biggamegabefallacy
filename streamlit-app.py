@@ -21,14 +21,17 @@ import plotly.express as px
 st.set_page_config(page_title="Big Game Fallacy?", initial_sidebar_state="expanded")
 
 ##########################################
-##  Title, Tabs, and Sidebar            ##
+##     Title, Tabs, and Sidebar         ##
 ##########################################
+
+# Title 
 st.title("Big Game Fallacy?")
 st.write("Is Big Game Gabe coming out next week? See what the model says")
 
-#tab_player, tab_gabedavis, tab_faq = st.tabs(["Receiver Selection", 'Gabe Davis', 'FAQ'])
-tab_player, tab_top_players, tab_faq = st.tabs(["Receiver Selection", "Best Odds", 'FAQ'])
+# Tabs
+tab_player, tab_best_odds, tab_faq = st.tabs(["Receiving TD Model", "Weekly Best Odds", 'FAQ'])
 
+# Sidebar
 col1, col2, col3 = st.sidebar.columns([1,8,1])
 with col1:
     st.write("")
@@ -41,328 +44,212 @@ st.sidebar.markdown(" ## Big Game Gabe Theory")
 st.sidebar.markdown('''The Big Game Gabe fallacy is something my friends and I coined while following Gabe Davis, especially in fantasy football and prop bets. It’s based on the observation that Davis seems to have a huge, standout performance roughly once every four or five weeks. Despite underwhelming stretches, when he "goes off," it’s often in a spectacular fashion with long touchdowns and big yardage totals. We started calling these systematic but explosive games “Big Game Gabe” moments. It’s become a running joke when betting on his performance, as we wait for his patented once-a-month breakout
 ''')
 
-#########################################
-##### Player Tab ########################
-#########################################
+##########################################
+##       1. Player Tab                  ##
+##########################################
+
 with tab_player:
-    
-    # Player Selection Header ------------------------------------
+
+    # Prompt 1 - Player Selection ------------------------------------------------------------------------------------
+
+    # Text
     st.subheader("Choose a receiver:")
-    # Prompt for selecting team
-    dfTeams = load_teams()
-    default_team = 'Jacksonville Jaguars'
 
-    # TEAM SELECT BOX --------------------------------
-    selected_team = st.selectbox("Select an NFL team:", dfTeams['FullName'], index = 14)
+    # Load Teams
+    dfTeams = load_teams()
+
+    # Validate Team Data
+    if dfTeams.empty or 'FullName' not in dfTeams.columns:
+        st.error("Team data is unavailable. Please check back later.")
+        st.stop()
+
+    # Validate Default Index = Jacksonville Jaguars
+    try:
+        default_team_index = dfTeams[dfTeams['FullName'] == 'Jacksonville Jaguars'].index[0]
+    except IndexError:
+        default_team_index = 0
+    default_team_index= int(default_team_index) # Fallback to the first option if default is not found
+
+    # Team Select Drop Down
+    selected_team = st.selectbox("Select an NFL team:", dfTeams['FullName'], index=default_team_index)
+
+    # Validate Selected Team
     selected_team_row = dfTeams[dfTeams['FullName'] == selected_team]
-    # Display the ID value based on the selected row
-    if not selected_team_row.empty:
-        team_id = selected_team_row['id'].values[0]  # Retrieve the TeamID from the selected row
-        #st.write(f"Team ID: {team_id}")
-        dfRoster = load_roster(team_id)
+    if selected_team_row.empty:
+        st.warning("Invalid team selected. Please try again.")
+        st.stop()
 
-        # PLAYER SELECT BOX ------------------------------
-        selected_player = st.selectbox("Select an receiver:", dfRoster['fullName'], index=0)
-        selected_player_row = dfRoster[dfRoster['fullName'] == selected_player]
-        if not selected_player_row.empty:
-            player_id = selected_player_row['playerId'].values[0]
-            st.image(selected_player_row['headshot'].values[0], width=300)
-            st.divider()
-            exp_value = get_experience_value(selected_player_row)
+    # Validate team_id
+    team_id = selected_team_row['id'].values[0]
+    if not team_id or not isinstance(team_id, (int, str, np.int64)):
+        st.error("Invalid team ID. Unable to load roster for the selected team.")
+        st.stop()
 
-            # PLAYER EXPERIENCE BOX ------------------------------
-            st.subheader(f"{selected_player_row['fullName'].values[0]} - Historical Data:")
-
-            # Look back hard coded to 3 years (same as model trained) 
-
-            adjusted_exp = adjust_experience(exp_value, 3)
-            lookbackTime = datetime.now().year - 3
-
-            # Generate player experience DF for game log loop
-            playerExperienceDF = create_player_experience_df(player_id, adjusted_exp)
-
-            if not playerExperienceDF.empty:
-                # SCRAPE GAME LOG DATA
-                try:
-                    gameLog = scrape_game_log(playerExperienceDF)
-                except ValueError as e:
-                    st.write("Game Log Data not found!")
-                    gameLog = pd.DataFrame()
-
-                if not gameLog.empty:
-                    # GENERATE FEATURES
-                    gameLog['fullName'] = selected_player_row['fullName'].iloc[0]
-                    #gameLog.to_csv('testgamelog.csv', index=False)
-                    gameData = add_new_features_lag(gameLog)
-
-                    # DISPLAY GAME LOG
-                    gameLogDisplay = gameLog[['seasonYr', 'week', 'receptions', 'receivingTargets' ,'receivingYards', 'receivingTouchdowns']]
-                    gameLogDisplay = gameLogDisplay.rename(columns={'seasonYr':'Season',
-                                                                        'week':'Week',
-                                                                        'receivingYards': 'Yards',
-                                                                        'receivingTouchdowns':'TD',
-                                                                        'receptions':'Receptions',
-                                                                        'receivingTargets':'Targets'
-                                                                        })
-
-                    with st.expander("View Game Log", expanded=False):
-                        st.dataframe(gameLogDisplay)#, hide_index=True)
-                    
-                    #### DATA VISUALIZATION ------
-
-                    # Create a select box for users to choose the Y variable
-                    with st.expander("View Chart Data", expanded=False): 
-                        y_variable = st.selectbox(
-                            'Select Variable',
-                            options=['TD', 'Yards', 'Receptions', 'Targets'],
-                            index=0  # Default index
-                        )
-
-                        # Determine aggregation method based on selected variable
-                        displayVar = ''
-                        if y_variable == 'TD':
-                            # Sum for touchdowns
-                            week_data = gameLogDisplay.groupby('Week').agg({'TD': 'sum'}).reset_index()
-                            displayVar = 'Total'
-                        else:
-                            # Average for other variables
-                            week_data = gameLogDisplay.groupby('Week').agg({y_variable: 'mean'}).reset_index()
-                            displayVar = 'Average'
-
-                        # Create the Altair bar chart
-                        chart = alt.Chart(week_data).mark_bar().encode(
-                            x=alt.X('Week:O', title='Week'),
-                            y=alt.Y(f'{y_variable}:Q', title=f'Total {y_variable.capitalize()}' if y_variable == 'TD' else f'Average {y_variable.capitalize()}'),
-                            tooltip=['Week:O', f'{y_variable}:Q']  
-                        ).properties(
-                            title=f'{displayVar} {y_variable.capitalize()} by Week since {lookbackTime}',
-                            width=600,
-                            height=400
-                        )
-
-                        # Display the chart in Streamlit
-                        st.altair_chart(chart, use_container_width=True)
-
-                    st.divider()
-                    ########################################################################
-                    ############################# MODEL ####################################
-
-                    st.subheader("Touchdown Likelihood:")
-                    st.write(f"Calculate the likelihood for {selected_player_row['fullName'].values[0]} to score a touchdown next week.")
-                    #### Load Model
-                    wrmodel = load_wr_model()
-
-                    ## Game Log Data ------------------------------------------------------
-
-                    # 1. BINARY FLAG
-                    gameData['td'] = (gameData['receivingTouchdowns'] > 0).astype(int)
-
-                    # 2. PREVIOUS GAME STATS
-                    df_previous_game = gameData.iloc[-1]
-                    lag_Yds = df_previous_game['receivingYards']
-                    lag_REC = df_previous_game['receptions']
-                    lag_td = df_previous_game['td']
-                    lag_REC_TD = df_previous_game['receivingTouchdowns']
-                    lag_TGT = df_previous_game['receivingTargets']
-
-                    # 3. OTHER PARAMETERS
-                    cumulative_yards_per_game = df_previous_game['cumulative_yards_per_game']
-                    cumulative_receptions_per_game = df_previous_game['cumulative_receptions_per_game']
-                    cumulative_targets_per_game = df_previous_game['cumulative_targets_per_game']
-                    avg_receiving_yards_last_3 = df_previous_game['avg_receiving_yards_last_3']
-                    avg_receptions_last_3 = df_previous_game['avg_receptions_last_3']
-                    avg_targets_last_3 = df_previous_game['avg_targets_last_3']
-                    yards_per_reception = df_previous_game['yards_per_reception']
-                    td_rate_per_target = df_previous_game['td_rate_per_target']
-                    is_first_week = df_previous_game['is_first_week']
-
-                    # 4. GET NEXT WEEK otherwise default to WEEK 1
-                    thisYear, nextWeek = get_current_nfl_week()
-                    
-                    #nextWeek = nextWeek.astype(int)
-
-                    #### UI ELEMENTS
-
-                    # Week
-                    paramWeek = st.number_input('Upcoming NFL Week: ', min_value=1, max_value=18, value=nextWeek)
-
-                    # INPUTS
-                    st.markdown("Please input the **previous** week game statistics: ")
-                    st.caption("This will default to last game statistics for the selected player.")
-                    paramRec = st.number_input('Receptions: ', min_value=0, value=lag_REC, step=1)
-                    paramYds = st.number_input("Receiving Yards: ", min_value=0, value=lag_Yds, step=1)
-                    paramTD = st.number_input("Touchdowns: ", min_value=0, value=lag_REC_TD, step=1)
-                    paramTgts = st.number_input("Targets: ", min_value=0, value=lag_TGT, step=1)
-
-                    # Processing 
-
-                    # PREDICTION
-                    if st.button("Predict "):
-                        td_likelihood = run_wr_model(wrmodel, paramWeek, paramYds, cumulative_yards_per_game, cumulative_receptions_per_game, cumulative_targets_per_game, avg_receiving_yards_last_3, avg_receptions_last_3, avg_targets_last_3, yards_per_reception, td_rate_per_target, is_first_week)
-
-                        st.markdown(f'''
-                            The likelihood of {selected_player_row['fullName'].values[0]} scoring a touchdown is **{round(td_likelihood*100, 2)} %**
-                            ''')
-
-                        odds = decimal_to_american_odds(td_likelihood)
-
-                        st.markdown(f'''
-                            The expected American Odds of {selected_player_row['fullName'].values[0]} scoring a touchdown is **{odds}**
-                            ''')
-
-                        # HEAT MAP
-
-                        # 1. Get integer odds
-                        intOdds = decimal_to_american_odds_without_direction(td_likelihood)
-
-                        # 2. Create df to source odds
-                        playerOddsDF = create_player_odds_df(intOdds, selected_player_row['fullName'].values[0])
-
-                        # 3. Melt the Data for HeatMap
-                        df_melted = playerOddsDF.melt(id_vars=['Player', 'Model'], var_name='Provider', value_name='Odds')
-
-                        # 4.  Calculate the difference between provider odds and model odds
-                        df_melted['Difference'] = df_melted['Odds'] - df_melted['Model']
-
-                        # 5. Pivot the DataFrame for the heatmap
-                        # Fix the pivot error
-                        heatmap_data = df_melted.pivot(index="Player", columns="Provider", values="Odds")
-                        difference_data = df_melted.pivot(index="Player", columns="Provider", values="Difference") 
-                        annot_data = heatmap_data.applymap(lambda x: f"+{round(x)}" if pd.notna(x) and x > 0 else (str(round(x)) if pd.notna(x) else ""))
-
-                        # 6.  Green for negative, Red for positive
-                        cmap = sns.diverging_palette(10, 150, s=100, l=50, as_cmap=True)  
-                        plt.figure(figsize=(9, 5))
-                        ax = sns.heatmap(
-                            difference_data,
-                            annot = annot_data,
-                            fmt="",
-                            cmap=cmap, 
-                            center=0, 
-                            cbar=False,
-                            linewidths=.5
-                        )
-
-                        # 7. Update titles and labels
-                        plt.title('Odds Comparison Heatmap')
-                        ax.set_xlabel("")
-                        ax.set_ylabel("")
-
-                        # 8. Show the plot in Streamlit
-                        st.pyplot(plt)
-                        plt.clf()  # Clear the current figure after displaying
-                else:
-                    ("No game log. Model cannot predict without historical game data.")
-                    
-            else:
-                st.write("No year limit selected.")
-        else:
-            st.write("No player selected.")
-            
-    else:
-        st.write("No team selected.")
-
-#########################################
-##### Teams Tab ########################
-#########################################     
-with tab_top_players:
-    st.markdown(" ### Team Best Odds this Week")
+    # Prompt 2 - Player Selection -------------------------------------------------------------------------------------
     
-    # 1. Year/Week Inputs -------------------
+    # Load Roster
+    dfRoster = get_team_roster(team_id)
+    if dfRoster.empty or 'fullName' not in dfRoster.columns:
+        st.error("Roster data is unavailable for the selected team.")
+        st.stop()
+    
+    # Player Select Drop Down
+    selected_player = st.selectbox("Select a receiver:", dfRoster['fullName'], index=6)
+
+    # Validate Selected Player
+    selected_player_row = validate_active_player(dfRoster, selected_player)
+    # Validate Player ID
+    player_id = selected_player_row['playerId']
+    if not player_id or not isinstance(player_id, (int, str, np.int64)):
+        st.error("Invalid player ID. Unable to load player for the selected team.")
+        st.stop()
+    
+    # Validate Player Image
+    player_image = selected_player_row['headshot']
+    if not player_image or not isinstance(player_image, str):
+        st.error("Unable to load headshot for the selected player.")
+
+    # Display Image
+    st.image(player_image, width=300)
+    st.divider()
+
+    # Data Retrieval 1 - Player Data -----------------------------------------------------------------------------------
+    try:
+        gameLogData = load_data(selected_player_row)
+    except ValueError as e:
+        st.error(str(e))
+        st.stop()
+
+    # Model Parameters 1 -----------------------------------------------------------------------------------------------
+    try:
+        stats = extract_previous_game_stats(gameLogData)
+        required_keys = [
+            'nextWeek', 'lag_yds', 'cumulative_yards_per_game', 
+            'cumulative_receptions_per_game', 'cumulative_targets_per_game', 
+            'avg_receiving_yards_last_3', 'avg_receptions_last_3', 
+            'avg_targets_last_3', 'yards_per_reception', 
+            'td_rate_per_target', 'is_first_week'
+        ]
+        missing_keys = [key for key in required_keys if key not in stats]
+        if missing_keys:
+            raise ValueError(f"Missing required stats keys: {missing_keys}")
+
+    except ValueError as e:
+        st.error(f"Error extracting game stats: {str(e)}")
+        st.stop()
+
+
+    # Display Week + Year
+    # Get Week + Year
     year, week = get_current_nfl_week()
-    current_year = st.number_input('Year:', min_value=2021, value=year, max_value=year, step=1)
-    upcoming_week = st.number_input('Week:', min_value=1, max_value=18, value=week, step=1)
+    st.markdown(f'''
+    Click `Predict` to see:  {selected_player_row['fullName']} - NFL Week {week} anytime touchdown scorer odds.
+    ''')
+    # Execute Model 1 ----------------------------------------------------------------------------------------------------
+    if st.button("Predict "):
 
-    # 2. Data Sourcing/Ingestion ------------
-    dfTeams = load_teams()
-    selected_team_odds = st.multiselect("Select an NFL team(s):", dfTeams['FullName'])
+        try:
+            # Run Model
+            td_likelihood = run_td_model(stats)
 
-    if not selected_team_odds:
-        st.warning("Please select at least one NFL team.")
-    else:
-        selected_team_odds_rows = dfTeams[dfTeams['FullName'].isin(selected_team_odds)]
-        all_rosters = []
+            # Validate Model Output
+            if not isinstance(td_likelihood, (float, int)):
+                raise ValueError("Prediction returned an invalid result.")
 
-        if not selected_team_odds_rows.empty:
-            team_ids = selected_team_odds_rows['id']
+            # Display Likelihood
+            # st.markdown(f'''
+            #     The likelihood of {selected_player_row['fullName']} scoring a receiving touchdown is: 
+            #     ##### {round(td_likelihood*100, 2)} %
+            #     ''')
+            # Using HTML to center content
+
+            st.markdown(f"""
+                <div style="text-align: left;">
+                    <p>The likelihood of {selected_player_row['fullName']} scoring a receiving touchdown is: </p>
+                </div>
+                <div style="text-align: center;">
+                    <h5>{round(td_likelihood*100, 2)} %</h5>
+                </div>
+            """, unsafe_allow_html=True)
+
+            # Fetch Odds
+            odds_str, odds, favor = decimal_to_american_odds(td_likelihood)
+
+            # Display Odds
+            # st.markdown(f'''
+            #     The expected American Odds of {selected_player_row['fullName']} scoring a receiving touchdown is: 
+            #     ##### {odds_str}
+            #     ''')
+            st.markdown(f"""
+                <div style="text-align: left;">
+                    <p>The expected American Odds of {selected_player_row['fullName']} scoring a receiving touchdown is: </p>
+                </div>
+                <div style="text-align: center;">
+                    <h5>{odds_str}</h5>
+                </div>
+            """, unsafe_allow_html=True)
             
-            for team_id in team_ids:
-                dfRoster = load_roster(team_id)
-                if not dfRoster.empty:
-                    all_rosters.append(dfRoster)
+            # Get Individual Player Odds ---------------------------------------------------------------------------------
+            combineddf = create_player_odds_df(odds, selected_player_row['fullName'])
+            
+            # Create Heatmap
+            create_heatmap(combineddf)
+            
+        except ValueError as e:
+            st.error(f"Error during prediction: {str(e)}")
+            st.stop()
 
-            # Check if we have collected rosters for any selected teams
-            if all_rosters:
-                combined_roster_df = pd.concat(all_rosters, ignore_index=True)
 
-                # 3. Model -------------------------
-                wrmodel = load_wr_model()
-                topodds = get_all_player_logs_and_odds(combined_roster_df, wrmodel, current_year, upcoming_week)
+##########################################
+##       2. Weekly Best Odds            ##
+##########################################
+with tab_best_odds:
 
-                # Only proceed if topodds is not empty
-                if not topodds.empty:
-                    # Display Data
-                    topoddsDisplay = topodds[['Player', 'td_likelihood', 'odds']].sort_values(by='td_likelihood', ascending=False)
-                    topoddsDisplay['td_likelihood'] = topoddsDisplay['td_likelihood'] * 100
-                    topoddsDisplay = topoddsDisplay.rename(columns={'td_likelihood': 'TD Likelihood %', 'odds': 'Model Odds'})
-                    st.dataframe(topoddsDisplay)
+    # Get Year + Week
+    year, week = get_current_nfl_week()
 
-                    # 4. Bubble Chart -------------------
-                    topodds['hover_text'] = (
-                        topodds['Player'] + '<br>' +
-                        'TD Likelihood: ' + (round(topodds['td_likelihood'] * 100)).astype(str) + '%' + '<br>' +
-                        'TD Rate per Target: ' + (round(topodds['td_rate_per_target'] * 100)).astype(str) + '%' + '<br>' +
-                        'Season TD Total: ' + topodds['season_td_total'].astype(str) + '<br>' +
-                        'Odds: ' + topodds['odds'].astype(str)
-                    )
-                    fig = px.scatter(
-                        topodds,
-                        x='season_td_total',
-                        y='td_rate_per_target',
-                        size='td_likelihood',
-                        hover_name='hover_text',
-                        title='Player Touchdown Likelihood Bubble Chart'
-                    )
+    # Title
+    st.markdown(f'''
+    ### NFL Week {week} - Model's Value Anytime TD Odds
+    ''')
+    st.divider()
 
-                    # Add images to the scatter plot as layout shapes
-                    for i, row in topodds.iterrows():
-                        max_size = 3
-                        base_multiplier = 3
-                        image_size = min(row['td_likelihood'] * base_multiplier, max_size)
+    # Model's Best Odds
+    st.markdown(f'''
+    ##### Model's Best Odds in Week {week}
+    ''')
 
-                        fig.add_layout_image(
-                            dict(
-                                source=row['headshot'],
-                                x=row['season_td_total'],
-                                y=row['td_rate_per_target'],
-                                xref="x",
-                                yref="y",
-                                sizex=image_size,
-                                sizey=image_size,
-                                opacity=1,
-                                layer="above",
-                                xanchor="center",
-                                yanchor="middle"
-                            )
-                        )
+    # Get the model odds
+    modelOdds = best_odds_model()
 
-                    # Update layout
-                    fig.update_layout(
-                        xaxis_title='Season TD Total',
-                        yaxis_title='TD Rate per Target',
-                        showlegend=False,
-                        height=600,
-                        width=800,
-                        dragmode='pan'
-                    )
-                    st.plotly_chart(fig, use_container_width=True)
+    # Data Validation for modelOdds
+    if modelOdds is not None and not modelOdds.empty:
+        st.table(modelOdds)
+    else:
+        st.warning("No model odds available for this week.")
 
-                    #book_odds = pd.read_csv('data/weeklyodds/week_9_odds.csv')
-                    #st.dataframe(book_odds)
-                else:
-                    st.write("No odds data available for the selected players.")
-            else:
-                st.write("No rosters available for the selected teams.")
+    st.divider()
+    
+    # Best Value on Sports Book
+    provider_list = ['DraftKings', 'FanDuel', 'BetOnline.ag', 'BetRivers', 'BetMGM', 'Bovada']
+
+    # Validate provider selection
+    provider = st.selectbox("Choose a provider:", provider_list, index=0)
+    # Model's Best Odds
+    st.markdown(f'''
+    ##### {provider} Best Value Odds in Week {week}
+    ''')
+
+    # Data Validation for provider odds
+    if provider is not None and provider in provider_list:
+        providerOdds = best_odds_provider(provider)
+
+        if providerOdds is not None and not providerOdds.empty:
+            st.table(providerOdds)
+        else:
+            st.warning(f"No odds available for {provider}.")
+        
+        
 
 #########################################
 ##### FAQ Tab ########################
@@ -407,9 +294,7 @@ with tab_faq:
             Each tree considers different subsets of the data, making the model more robust to overfitting and better at generalizing to unseen data.
             ''', unsafe_allow_html=True)
 
+
+
+
     
-    ##########
-
-
-
-
