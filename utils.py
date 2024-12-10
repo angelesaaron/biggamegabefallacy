@@ -14,6 +14,7 @@ import altair as alt
 import joblib
 import pickle
 import os
+import pytz
 
 # API KEY
 rapidapi_key = st.secrets["api"]["rapidapi_key"]
@@ -420,11 +421,14 @@ def run_td_model(stats_dict):
 # GET NFL Season Start -------------------------------------------------------------------
 def get_current_nfl_week():
     # 1. Instantiate Today
-    today = datetime.today()
+    eastern = pytz.timezone('US/Eastern')
+    # Get the current date and time in US/Eastern
+    today = datetime.now(eastern)
+    #today = datetime.today()
     # 2. Define NFL season start dates, with each season starting on the first Thursday after Labor Day
     nfl_start_dates = {
-        2024: datetime(2024, 9, 5),
-        2025: datetime(2025, 9, 5),
+        2024: eastern.localize(datetime(2024, 9, 5)),
+        2025: eastern.localize(datetime(2025, 9, 5)),
     }
     
     # 3. Pull NFL Start date for Current Year

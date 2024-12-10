@@ -17,6 +17,7 @@ import altair as alt
 import joblib
 import pickle
 import plotly.express as px
+import pytz
 
 st.set_page_config(page_title="Big Game Fallacy?", initial_sidebar_state="expanded")
 
@@ -29,7 +30,6 @@ st.title("Big Game Gabe Touchdown Model?")
 st.write("Pick an NFL pass catcher and see if they're due for a Gabe Davis style Big Game")
 year, week = get_current_nfl_week()
 st.write(f"Week {week}")
-st.write(datetime.today())
 # Tabs
 tab_player, tab_best_odds, tab_performance, tab_faq = st.tabs(["Receiving TD Model", "Weekly Best Odds", 'Past Performance', 'FAQ'])
 
