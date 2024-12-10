@@ -731,7 +731,6 @@ def get_all_odds():
         print("Error: 'Player' column not found in sportsbookOdds.")
         return
 
-    st.dataframe(sportsbookOdds)
 
     # JOIN
     totalOdds = pd.merge(modelOdds, sportsbookOdds, how='left', on='Player')
