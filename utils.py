@@ -194,6 +194,9 @@ def load_data(player_row):
     # Define file path to check for existing CSV
     file_path = f"data/playerData/{year}_week{week}/{player_row['firstName']}_{player_row['lastName']}_{year}_week{week}_data.csv"
 
+    # Ensure the directory exists before saving the CSV
+    os.makedirs(os.path.dirname(file_path), exist_ok=True)
+
     # Check if the CSV exists, if so, load it and return
     if os.path.exists(file_path):
         print(f"Loading existing data for playerId {player_row['playerId']}...")
