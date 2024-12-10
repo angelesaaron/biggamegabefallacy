@@ -557,7 +557,7 @@ def load_or_fetch_odds(reload_odds=False):
 
     # If reload_odds is True, always fetch data, even if CSV exists
     if reload_odds:
-        print("Reloading odds from source...")
+        st.write("Reloading odds from source...")
         odds_df = get_sportsbook_odds()  # Call your function to fetch data
         if odds_df is not None:
             # Save the DataFrame to a CSV file
@@ -581,7 +581,7 @@ def load_or_fetch_odds(reload_odds=False):
                 return None
         else:
             # CSV exists, load the data
-            print("CSV file found. Loading data...")
+            st.write("CSV file found. Loading data...")
             odds_df = pd.read_csv(csv_file)
 
     return odds_df
