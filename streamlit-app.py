@@ -255,7 +255,7 @@ with tab_best_odds:
 ##################################
 with tab_performance:
     # Unit Size
-    unit_size = st.number_input("Choose unit size:", min_value= 0, step=1, placeholder = 10)
+    unit_size = st.number_input("Choose unit size:", min_value=0, step=1, value=10)
     # Best Value on Sports Book
     st.markdown(f'''
                 ### Last Week Model Picks
