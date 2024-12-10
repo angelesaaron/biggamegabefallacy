@@ -25,11 +25,11 @@ st.set_page_config(page_title="Big Game Fallacy?", initial_sidebar_state="expand
 ##########################################
 
 # Title 
-st.title("Big Game Fallacy?")
-st.write("Is Big Game Gabe coming out next week? See what the model says")
+st.title("Big Game Gabe Touchdown Model?")
+st.write("Pick an NFL pass catcher and see if they're due for a Gabe Davis style Big Game")
 
 # Tabs
-tab_player, tab_best_odds, tab_faq = st.tabs(["Receiving TD Model", "Weekly Best Odds", 'FAQ'])
+tab_player, tab_best_odds, tab_performance, tab_faq = st.tabs(["Receiving TD Model", "Weekly Best Odds", 'Past Performance', 'FAQ'])
 
 # Sidebar
 col1, col2, col3 = st.sidebar.columns([1,8,1])
@@ -205,6 +205,7 @@ with tab_player:
 ##########################################
 with tab_best_odds:
 
+    # Model Best Odds -------------------------------------------------------------------
     # Get Year + Week
     year, week = get_current_nfl_week()
 
@@ -212,8 +213,6 @@ with tab_best_odds:
     st.markdown(f'''
     ### NFL Week {week} - Model's Value Anytime TD Odds
     ''')
-    st.divider()
-
     # Model's Best Odds
     st.markdown(f'''
     ##### Model's Best Odds in Week {week}
@@ -224,7 +223,7 @@ with tab_best_odds:
 
     # Data Validation for modelOdds
     if modelOdds is not None and not modelOdds.empty:
-        st.table(modelOdds)
+        st.dataframe(modelOdds, use_container_width = True)
     else:
         st.warning("No model odds available for this week.")
 
@@ -245,11 +244,66 @@ with tab_best_odds:
         providerOdds = best_odds_provider(provider)
 
         if providerOdds is not None and not providerOdds.empty:
-            st.table(providerOdds)
+            st.dataframe(providerOdds, use_container_width = True)
         else:
             st.warning(f"No odds available for {provider}.")
         
-        
+
+
+##################################
+##     3. Past Performance      ##
+##################################
+with tab_performance:
+    # Unit Size
+    unit_size = st.number_input("Choose unit size:", min_value= 0, step=1, placeholder = 10)
+    # Best Value on Sports Book
+    st.markdown(f'''
+                ### Last Week Model Picks
+                To change provider, navigate to `Weekly Best Odds Tab`
+                ''')
+    
+    percent, winnings, performance = get_past_performance(provider="Sportsbook", unit=unit_size, is_model=True)
+
+
+     # Check for None and handle appropriately
+    if percent is not None:
+        st.metric("Winning %", f"{percent * 100}%")
+    else:
+        st.metric("Winning %", "Data not available")  # Show a default message if percent is None
+
+    if winnings is not None:
+        st.metric("Net Balance", f"{round(winnings, 2)}")
+    else:
+        st.metric("Net Balance", "Data not available")  # Show a default message if winnings is None
+
+    # Display performance data
+    st.dataframe(performance, use_container_width=True)
+
+    st.divider()
+
+    st.markdown(f'''
+                ### Last Week Best Value Picks - {provider}
+                To change provider, navigate to `Weekly Best Odds Tab`
+                ''')
+    
+    percent_provider, winnings_provider, performance_provider = get_past_performance(provider, unit=unit_size, is_model=False)
+
+
+     # Check for None and handle appropriately
+    if percent_provider is not None:
+        st.metric("Winning %", f"{percent_provider* 100}%")
+    else:
+        st.metric("Winning %", "Data not available")  # Show a default message if percent is None
+
+    if winnings_provider is not None:
+        st.metric("Net Balance", f"{round(winnings_provider, 2)}")
+    else:
+        st.metric("Net Balance", "Data not available")  # Show a default message if winnings is None
+
+    # Display performance data
+    st.dataframe(performance_provider, use_container_width=True)
+    
+
 
 #########################################
 ##### FAQ Tab ########################
@@ -294,6 +348,15 @@ with tab_faq:
             Each tree considers different subsets of the data, making the model more robust to overfitting and better at generalizing to unseen data.
             ''', unsafe_allow_html=True)
 
+    st.divider()
+    # Add Button to Reload Odds
+    reload_odds = st.button('Reload Odds')
+
+    if reload_odds:
+        # Call the function to reload odds (this will replace the downstream CSVs)
+        reload_sportsbook_odds()
+        load_or_fetch_odds(reload_odds=True)
+        st.success('Odds have been reloaded and the downstream CSVs have been updated.')
 
 
 

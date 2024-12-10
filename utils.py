@@ -19,6 +19,7 @@ import os
 rapidapi_key = st.secrets["api"]["rapidapi_key"]
 odds_api_key = st.secrets["api"]['odds_api_key']
 
+
 # LOAD TEAMS -----------------------------------------------------------------------------
 def load_teams():
     dfTeams = pd.read_csv('data/teamList.csv')
@@ -539,33 +540,46 @@ def get_sportsbook_odds():
 
         # Save the DataFrame to a CSV file
         year, week = get_current_nfl_week()
-        odds_df.to_csv(f'data/weeklyodds/odds_{year}_week{week}.csv')
+        return odds_df
 
     except requests.exceptions.RequestException as e:
         print(f"Error during API request: {e}")
         return None
 
 # FETCH SPORTSBOOK ODDS ------------------------------------------------------------------
-def load_or_fetch_odds():
+def load_or_fetch_odds(reload_odds=False):
     # Define the path to your CSV file
     year, week = get_current_nfl_week()
     csv_file = f'data/sportsbookOdds/odds_{year}_week{week}.csv'
 
-    # Check if the CSV file exists
-    if not os.path.exists(csv_file):
-        # CSV doesn't exist, fetch and process the data
-        print("CSV file not found. Fetching data...")
+    # If reload_odds is True, always fetch data, even if CSV exists
+    if reload_odds:
+        print("Reloading odds from source...")
         odds_df = get_sportsbook_odds()  # Call your function to fetch data
         if odds_df is not None:
             # Save the DataFrame to a CSV file
-            odds_df.to_csv(csv_file)
+            odds_df.to_csv(csv_file, index=False)
+            print("Data fetched and saved.")
         else:
             print("Error fetching data.")
             return None
     else:
-        # CSV exists, load the data
-        print("CSV file found. Loading data...")
-        odds_df = pd.read_csv(csv_file)
+        # Check if the CSV file exists
+        if not os.path.exists(csv_file):
+            # CSV doesn't exist, fetch and process the data
+            print("CSV file not found. Fetching data...")
+            odds_df = get_sportsbook_odds()  # Call your function to fetch data
+            if odds_df is not None:
+                # Save the DataFrame to a CSV file
+                odds_df.to_csv(csv_file, index=False)
+                print("Data fetched and saved.")
+            else:
+                print("Error fetching data.")
+                return None
+        else:
+            # CSV exists, load the data
+            print("CSV file found. Loading data...")
+            odds_df = pd.read_csv(csv_file)
 
     return odds_df
 
@@ -702,7 +716,6 @@ def get_all_odds():
         print("Error: 'Player' column not found in modelOdds.")
         return
     
-    st.dataframe(modelOdds)
 
     # Get SportsBook Odds
     sportsbookOdds = load_or_fetch_odds()
@@ -724,6 +737,7 @@ def get_all_odds():
     # Clean Data Set
     totalOdds = totalOdds.loc[totalOdds['TD_Likelihood'].notna() & (totalOdds['TD_Likelihood'] != '')]
 
+
     totalOdds.to_csv(file_path)
 
     return totalOdds
@@ -731,6 +745,19 @@ def get_all_odds():
 # MODEL BEST ODDS ------------------------------------------------------------------------
 def best_odds_model():
     odds = get_all_odds()
+
+    # get year + week
+    year, week = get_current_nfl_week()
+
+    file_path = f"data/historicalOdds/model/{year}_week{week}_valuepicks.csv"
+    if os.path.exists(file_path):
+        odds = pd.read_csv(file_path)
+        odds['Odds'] = round(odds['Model_Odds'])
+        odds['Odds'] = odds.apply(lambda row: f"+{round(row['Odds'])}" if row['Favor'] == 1 else round(row['Odds']), axis=1)
+        odds = odds[['Player', 'Odds']].head(30)
+        odds = odds.reset_index(drop=True)
+        odds.index = odds.index+1
+        return odds
 
     # Check if the necessary columns exist in the DataFrame
     required_columns = ['Player', 'TD_Likelihood', 'Model_Odds', 'Favor']
@@ -746,7 +773,10 @@ def best_odds_model():
     odds = odds.dropna(subset=['TD_Likelihood', 'Model_Odds'])
 
     # Sort data by TD_Likelihood in descending order
-    odds = odds.sort_values(by='TD_Likelihood', ascending=False)
+    odds = odds.sort_values(by='TD_Likelihood', ascending=True)
+
+    # to CSV
+    odds.to_csv(file_path)
 
     # Round Odds
     odds['Odds'] = round(odds['Model_Odds'])
@@ -755,7 +785,7 @@ def best_odds_model():
     odds['Odds'] = odds.apply(lambda row: f"+{round(row['Odds'])}" if row['Favor'] == 1 else round(row['Odds']), axis=1)
 
     # Segment data fields
-    odds = odds[['Player', 'Odds']].head(20)
+    odds = odds[['Player', 'Odds']].head(30)
     odds = odds.reset_index(drop=True)
     odds.index = odds.index+1
 
@@ -765,6 +795,27 @@ def best_odds_model():
 def best_odds_provider(provider):
     # Check if 'provider' column exists in the DataFrame
     combinedOdds = get_all_odds()
+
+    # get year + week 
+    year, week = get_current_nfl_week()
+
+     # Check if File Path Already Exists
+    file_path = f"data/historicalOdds/{provider}/{year}_week{week}_valuepicks.csv"
+
+    if os.path.exists(file_path):
+        odds = pd.read_csv(file_path)
+
+        # DATA PROCESSING 
+
+        # Formatting
+        odds['Odds'] = odds.apply(lambda row: f"+{round(row['Model_Odds'])}" if row['Favor'] == 1 else round(row['Model_Odds']), axis=1)
+        odds[provider] = odds[provider].apply(lambda x: f"+{int(x)}" if x > 0 else str(int(x)))
+
+        # Subsetting
+        odds = odds[['Player', 'Odds', provider]].head(30)
+        odds = odds.reset_index(drop=True)
+        odds.index = odds.index+1
+        return odds
 
     # Validate provider column
     if provider not in combinedOdds.columns:
@@ -786,18 +837,146 @@ def best_odds_provider(provider):
     # Calculate the Difference between Model_Odds and provider odds
     odds['Difference'] = odds['Model_Odds'] - odds[provider]
 
+    # Calculate the implied probability
+    odds['Model_Probability'] = odds['Model_Odds'].apply(implied_probability)
+    odds[f'{provider}_Probability'] = odds[provider].apply(implied_probability)
+    odds['Weight'] = 1 - odds['Model_Probability']
+    odds["WeightedValue"] = (odds[f'{provider}_Probability'] - odds["Model_Probability"]) * odds["Weight"]
+
     # Sort by the difference in ascending order
-    odds = odds.sort_values(by='Difference', ascending=True)
+    odds = odds.sort_values(by='WeightedValue', ascending=True)
+
+    # # Put to CSV
+    odds.to_csv(file_path)
 
     # Round Model_Odds and add prefix if Favor == 1
     odds['Odds'] = odds.apply(lambda row: f"+{round(row['Model_Odds'])}" if row['Favor'] == 1 else round(row['Model_Odds']), axis=1)
+
 
     # Format provider odds with a "+" prefix if positive, else leave as is
     odds[provider] = odds[provider].apply(lambda x: f"+{int(x)}" if x > 0 else str(int(x)))
 
     # Select top 20 rows
-    odds = odds[['Player', 'Odds', provider]].head(20)
+    odds = odds[['Player', 'Odds', provider]].head(30)
     odds = odds.reset_index(drop=True)
     odds.index = odds.index+1
 
     return odds
+
+# VALUE BALANCING - IMPLIED PROBABILITY --------------------------------------------------
+def implied_probability(odds):
+    if odds > 0:
+        return 100/(odds+100)
+    else:
+        return - odds / (-odds + 100)
+
+# GET PAST MODEL + PICK PERFORMANCE
+def get_past_performance(provider, unit, is_model=True):
+    # Get year and week
+    year, week = get_current_nfl_week()
+    last_week = max(week - 1, 1)
+
+    # Define the file path for last week's data
+    if is_model:
+        file_path_lastweek = f"data/historicalOdds/model/{year}_week{last_week}_valuepicks.csv"
+    else:
+        file_path_lastweek = f"data/historicalOdds/{provider}/{year}_week{last_week}_valuepicks.csv"
+
+    # Check if the file exists
+    if not os.path.exists(file_path_lastweek):
+        st.write(f"The historical stats for {provider} do not exist. Unable to retrieve past performance.")
+        return None, None, pd.DataFrame()
+
+    # Read the historical odds data
+    lastWeekOdds = pd.read_csv(file_path_lastweek)
+    lastWeekOdds['Touchdowns'] = None
+
+    # Loop over each player and get touchdown data
+    for idx, row in lastWeekOdds.iterrows():
+        player_name = row['Player']
+        first_name, last_name = player_name.split(' ', 1)
+        file_name = f"{first_name}_{last_name}.csv"
+        file_path = f"data/playerData/{year}_week{week}/{first_name}_{last_name}_{year}_week{week}_data.csv"
+
+        # Check if the player file exists and load it
+        if os.path.exists(file_path):
+            player_df = pd.read_csv(file_path)
+            filtered_row = player_df[(player_df['week'] == last_week) & (player_df['seasonYr'] == year)]
+
+            if not filtered_row.empty:
+                lastWeekOdds.at[idx, 'Touchdowns'] = filtered_row.iloc[0]['receivingTouchdowns']
+
+    # Set odds based on the source (Model or Provider)
+    if is_model:
+        lastWeekOdds = lastWeekOdds.sort_values('TD_Likelihood', ascending=False)
+        lastWeekOdds['Sportsbook'] = lastWeekOdds.apply(lambda row: row['DraftKings'] if pd.notnull(row['DraftKings']) else (row['FanDuel'] if pd.notnull(row['FanDuel']) else None), axis=1)
+        lastWeekOdds = lastWeekOdds[lastWeekOdds['Sportsbook'].notna()]
+    else:
+        lastWeekOdds = lastWeekOdds.sort_values('WeightedValue', ascending=True)
+        lastWeekOdds['Sportsbook'] = lastWeekOdds[provider]
+        
+    
+    lastWeekOdds = lastWeekOdds[lastWeekOdds['Sportsbook'].notna()]
+    lastWeekOdds = lastWeekOdds.fillna(0)
+
+    # Apply Winnings calculation
+    lastWeekOdds['Win'] = lastWeekOdds.apply(lambda row: calculate_win(row, unit, provider), axis=1)
+
+    # Format odds
+    lastWeekOdds['Odds'] = lastWeekOdds.apply(lambda row: f"+{round(row['Model_Odds'])}" if row['Favor'] == 1 else round(row['Model_Odds']), axis=1)
+    lastWeekOdds['Sportsbook'] = lastWeekOdds['Sportsbook'].apply(lambda x: f"+{int(x)}" if x > 0 else str(int(x)))
+
+    # Select top 30 rows
+    lastWeekOdds = lastWeekOdds[['Player', 'Odds', 'Sportsbook', 'Touchdowns', 'Win']].head(30)
+    lastWeekOdds = lastWeekOdds.reset_index(drop=True)
+    lastWeekOdds.index = lastWeekOdds.index + 1
+
+    # Style the DataFrame for Streamlit
+    styledOdds = lastWeekOdds.style.apply(highlight_rows, axis=1)
+
+    # Calculate KPIs
+    percent = (lastWeekOdds['Touchdowns'] > 0).sum() / len(lastWeekOdds)
+    winnings = (lastWeekOdds['Win']).sum()
+
+    return percent, winnings, styledOdds
+
+# CALCULATE BET RESULT -------------------------------------------------------------------------
+def calculate_win(row, unit, provider):
+    if row['Touchdowns'] > 0:
+        odds = row[provider]
+        if odds > 0:
+            return unit * (odds / 100)  # Positive odds calculation
+        else:
+            return unit / (abs(odds) / 100)  # Negative odds calculation
+    else:
+        return -(unit)
+
+# HIGHLIGHT WINNING ROWS -------------------------------------------------------------------------
+def highlight_rows(row):
+    # Highlight rows where Touchdowns > 3
+    if row["Touchdowns"] > 0:
+        return ["background-color: green"] * len(row)
+    else:
+        return [""] * len(row)
+
+def reload_sportsbook_odds():
+    # Get Year + Week
+    year, week = get_current_nfl_week()
+    # Delete CSVs
+
+    # 1. sportsbook odds
+    sportsbook_path = f"data/sportsbookOdds/odds_{year}_week{week}.csv"
+    if os.path.exists(sportsbook_path):
+        os.remove(sportsbook_path)
+        st.writef(f"File {sportsbook_path} has been deleted.")
+    
+    # 2. combined odds
+    combined_path = f"data/combinedOdds/odds_{year}_week{week}_combined_odds.csv"
+    if os.path.exists(combined_path):
+        os.remove(combined_path)
+        st.writef(f"File {combined_path} has been deleted.")
+    
+    # 3. retrigger load odds
+
+    load_or_fetch_odds(reload_odds=True)
+
