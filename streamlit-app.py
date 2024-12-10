@@ -350,12 +350,10 @@ with tab_faq:
 
     st.divider()
     # Add Button to Reload Odds
-    reload_odds = st.button('Reload Odds')
 
-    if reload_odds:
+    if st.button('Reload Odds'):
         # Call the function to reload odds (this will replace the downstream CSVs)
         reload_sportsbook_odds()
-        load_or_fetch_odds(reload_odds=True)
         st.success('Odds have been reloaded and the downstream CSVs have been updated.')
 
 

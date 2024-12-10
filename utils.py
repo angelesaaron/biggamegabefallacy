@@ -199,7 +199,7 @@ def load_data(player_row):
 
     # Check if the CSV exists, if so, load it and return
     if os.path.exists(file_path):
-        print(f"Loading existing data for playerId {player_row['playerId']}...")
+        st.write(f"Loading existing data for playerId {player_row['fullName']}...")
         game_log = pd.read_csv(file_path)
         return game_log
 
@@ -312,6 +312,7 @@ def load_data(player_row):
 
     # Save the data to CSV
     game_log.to_csv(file_path, index=False)
+    st.write(f"New data cached for {player_row['fullName']}")
 
     return game_log
 
@@ -570,7 +571,7 @@ def load_or_fetch_odds(reload_odds=False):
         # Check if the CSV file exists
         if not os.path.exists(csv_file):
             # CSV doesn't exist, fetch and process the data
-            print("CSV file not found. Fetching data...")
+            #st.write("CSV file not found. Fetching data...")
             odds_df = get_sportsbook_odds()  # Call your function to fetch data
             if odds_df is not None:
                 # Save the DataFrame to a CSV file
@@ -581,7 +582,7 @@ def load_or_fetch_odds(reload_odds=False):
                 return None
         else:
             # CSV exists, load the data
-            st.write("CSV file found. Loading data...")
+            #st.write("CSV file found. Loading data...")
             odds_df = pd.read_csv(csv_file)
 
     return odds_df
@@ -598,8 +599,6 @@ def create_player_odds_df(odds, player_name):
         'Model': [odds]
     }
     df_player_odds = pd.DataFrame(data)
-    st.dataframe(df_player_odds)
-    st.dataframe(sportsbookData)
     # Join sportsbook data on player and add all columns from sportsbook data
     df_combined = pd.merge(df_player_odds, sportsbookData, on='Player', how='left')
 
