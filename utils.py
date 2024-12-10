@@ -602,7 +602,6 @@ def create_player_odds_df(odds, player_name):
     st.dataframe(sportsbookData)
     # Join sportsbook data on player and add all columns from sportsbook data
     df_combined = pd.merge(df_player_odds, sportsbookData, on='Player', how='left')
-    df_combined = df_combined.drop(columns='Unnamed: 0')
 
     # Return the combined DataFrame
     return df_combined
