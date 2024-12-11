@@ -651,14 +651,17 @@ def get_total_model_odds():
         return odds_df
     # Get Roster
     fullRoster = load_roster()
+    actives = fullRoster[fullRoster['activestatus'] == 1]
     # Load Game Log Data 
     gameLogData = load_data_for_roster(fullRoster)
+    # Filter gameLogData to include only active players
+    active_gameLogData = gameLogData[gameLogData['fullName'].isin(actives['fullName'])]
 
     results = []
-    for player_name in gameLogData['fullName'].unique():
+    for player_name in active_gameLogData['fullName'].unique():
         try:
             # Filter player-specific game log data
-            player_data = gameLogData[gameLogData['fullName'] == player_name]
+            player_data = active_gameLogData[active_gameLogData['fullName'] == player_name]
 
             # Step 2: Ensure player data is available
             if player_data.empty:
@@ -697,6 +700,7 @@ def get_all_odds():
     # Check if File Path exists
     if os.path.exists(file_path):
         totalOdds = pd.read_csv(file_path)
+
         return totalOdds
     
 
@@ -908,21 +912,11 @@ def get_past_performance(provider, unit, is_model=True):
             print(f"No game log data found for player: {player_name}. Skipping...")
             continue
 
-        # Assuming last_week and year are defined
-        while last_week > 0:
-            filtered_row = player_df[(player_df['week'] == last_week) & (player_df['seasonYr'] == year)]
-            if not filtered_row.empty:
-                # Found data for the last week
-                break
-            else:
-                # No data for this week, check the previous week
-                print(f"No game log entry found for {player_name} for week {last_week}, season {year}. Trying previous week...")
-                last_week -= 1
-
-        if last_week == 0:
-            print(f"No game log entry found for {player_name} from weeks 1 to {year}. Skipping...")
+        # Filter for the specific week and year
+        filtered_row = player_df[(player_df['week'] == last_week) & (player_df['seasonYr'] == year)]
+        if filtered_row.empty:
+            print(f"No game log entry found for {player_name} for week {last_week}, season {year}. Skipping...")
             continue
-
         if not filtered_row.empty:
             lastWeekOdds.at[idx, 'Touchdowns'] = filtered_row.iloc[0]['receivingTouchdowns']
 
