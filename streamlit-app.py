@@ -23,7 +23,7 @@ st.set_page_config(page_title="Big Game Fallacy?", initial_sidebar_state="expand
 
 ##########################################
 ##     Title, Tabs, and Sidebar         ##
-##########################################
+##########################################3
 
 # Title 
 st.title("Big Game Gabe Touchdown Model?")
@@ -104,7 +104,7 @@ with tab_player:
     player_id = selected_player_row['playerId']
     if not player_id or not isinstance(player_id, (int, str, np.int64)):
         st.error("Invalid player ID. Unable to load player for the selected team.")
-        st.stop()
+
     
     # Validate Player Image
     player_image = selected_player_row['headshot']
@@ -117,14 +117,21 @@ with tab_player:
 
     # Data Retrieval 1 - Player Data -----------------------------------------------------------------------------------
     try:
-        gameLogData = load_data(selected_player_row)
+        gameLogData = load_data_for_roster(dfRoster)
     except ValueError as e:
         st.error(str(e))
         st.stop()
 
+    playerData = gameLogData[gameLogData['fullName'] == selected_player_row['fullName']]
+
+    # Validate that data exists for the selected player
+    if playerData.empty:
+        st.warning(f"No game data found for player: {selected_player_row['fullName']}. Please check your input or data source.")
+        st.stop()
+
     # Model Parameters 1 -----------------------------------------------------------------------------------------------
     try:
-        stats = extract_previous_game_stats(gameLogData)
+        stats = extract_previous_game_stats(playerData)
         required_keys = [
             'nextWeek', 'lag_yds', 'cumulative_yards_per_game', 
             'cumulative_receptions_per_game', 'cumulative_targets_per_game', 
@@ -351,7 +358,6 @@ with tab_faq:
             ''', unsafe_allow_html=True)
 
     st.divider()
-    # Add Button to Reload Odds
 
     if st.button('Reload Odds'):
         # Call the function to reload odds (this will replace the downstream CSVs)
