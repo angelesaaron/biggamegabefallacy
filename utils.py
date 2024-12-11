@@ -164,158 +164,147 @@ def validate_active_player(dfRoster, selected_player):
 
     return selected_player_row.iloc[0]  # Return the row for the active player
 
-# LOAD PLAYER GAME LOG DATA --------------------------------------------------------------
-def load_data(player_row):
-    # Validate `player_row`
-    if not isinstance(player_row, pd.Series):
-        raise ValueError("Invalid player_row. Expected a pandas Series.")
-    
-    if 'playerId' not in player_row or pd.isna(player_row['playerId']):
-        raise ValueError("Invalid player_row: Missing or invalid 'playerId'.")
-    
-    if 'exp' not in player_row or not isinstance(player_row['exp'], (int, float, np.int64, np.float64)) or pd.isna(player_row['exp']):
-        exp = 1
-    else:
-        exp = int(player_row['exp']) + 1
-    
-    # Calculate adjusted experience and years
-    lookback = 3
-    adjusted_exp = min(exp, lookback)
-    current_year = datetime.now().year
-    years = [current_year - i for i in range(adjusted_exp)]
-
-    # Create player experience DataFrame
-    player_experience_df = pd.DataFrame({
-        'playerId': [player_row['playerId']] * adjusted_exp,
-        'fullName': [player_row['fullName']] * adjusted_exp,
-        'Year': years
-    })
+# LOAD DATA
+def load_data_for_roster(roster_df):
+    if not isinstance(roster_df, pd.DataFrame):
+        raise ValueError("Invalid roster_df. Expected a pandas DataFrame.")
 
     year, week = get_current_nfl_week()
-    # Define file path to check for existing CSV
-    file_path = f"data/playerData/{year}_week{week}/{player_row['firstName']}_{player_row['lastName']}_{year}_week{week}_data.csv"
 
-    # Ensure the directory exists before saving the CSV
+    # Define the final results file path
+    file_path = f"data/playerData/{year}_week{week}/roster_game_logs.csv"
     os.makedirs(os.path.dirname(file_path), exist_ok=True)
 
-    # Check if the CSV exists, if so, load it and return
+    # Check if the combined CSV already exists
     if os.path.exists(file_path):
-        st.write(f"Loading existing data for playerId {player_row['fullName']}...")
-        game_log = pd.read_csv(file_path)
-        return game_log
+        st.write(f"Loading existing data for NFL {year} - Week {week}...")
+        return pd.read_csv(file_path)
 
-    # Fetch game log data
+    all_game_logs = []
+
     log_url = "https://nfl-api1.p.rapidapi.com/player-game-log"
     headers = {
         "x-rapidapi-key": rapidapi_key,
         "x-rapidapi-host": "nfl-api1.p.rapidapi.com"
     }
-    rows, labels = [], []
-    
 
-    for _, row in player_experience_df.iterrows():
-        querystring = {"playerId": row["playerId"], "season": str(row["Year"])}
-        try:
-            response = requests.get(log_url, headers=headers, params=querystring)
-            response.raise_for_status()
-            json_data = response.json()
+    for _, player_row in roster_df.iterrows():
+        # Validate player_row
+        if 'playerId' not in player_row or pd.isna(player_row['playerId']):
+            continue
 
-            if "player_game_log" not in json_data or not json_data:
-                print(f"No game log found for playerId {row['playerId']} in season {row['Year']}.")
+        if 'exp' not in player_row or not isinstance(player_row['exp'], (int, float, np.int64, np.float64)) or pd.isna(player_row['exp']):
+            exp = 1
+        else:
+            exp = int(player_row['exp']) + 1
+
+        # Calculate adjusted experience and years
+        lookback = 3
+        adjusted_exp = min(exp, lookback)
+        current_year = datetime.now().year
+        years = [current_year - i for i in range(adjusted_exp)]
+
+        # Create player experience DataFrame
+        player_experience_df = pd.DataFrame({
+            'playerId': [player_row['playerId']] * adjusted_exp,
+            'fullName': [player_row['fullName']] * adjusted_exp,
+            'Year': years
+        })
+
+        rows, labels = [], []
+
+        for _, row in player_experience_df.iterrows():
+            querystring = {"playerId": row["playerId"], "season": str(row["Year"])}
+            try:
+                response = requests.get(log_url, headers=headers, params=querystring)
+                response.raise_for_status()
+                json_data = response.json()
+
+                if "player_game_log" not in json_data or not json_data:
+                    continue
+
+                player_game_log = json_data["player_game_log"]
+                if not player_game_log:
+                    continue
+
+                labels = player_game_log.get("names", [])
+
+                for season in player_game_log.get("seasonTypes", []):
+                    season_name = season.get("displayName", "Unknown")
+                    for category in season.get("categories", []):
+                        for event in category.get("events", []):
+                            event_stats = event.get("stats", [])
+                            event_id = event.get("eventId", "Unknown")
+                            game_data = player_game_log.get("events", {}).get(event_id, {})
+
+                            row_data = event_stats + [
+                                game_data.get("week", "Unknown"),
+                                game_data.get("gameDate", "Unknown"),
+                                game_data.get("homeTeamScore", "Unknown"),
+                                game_data.get("awayTeamScore", "Unknown"),
+                                game_data.get("gameResult", "Unknown"),
+                                event_id,
+                                season_name
+                            ]
+                            row_data += row.drop(["playerId", "Year"]).tolist()
+                            rows.append(row_data)
+
+            except requests.exceptions.RequestException as e:
+                print(f"Error fetching data for playerId {row['playerId']} in season {row['Year']}: {e}")
                 continue
 
-            player_game_log = json_data["player_game_log"]
-            if not player_game_log:  # Further check for empty 'player_game_log'
-                print(f"player_game_log is empty for playerId {row['playerId']} in season {row['Year']}. Skipping...")
-                continue  # Skip if player_game_log is empty
+        if rows:
+            # Process game log data for the player
+            column_headers = labels + [
+                "week", "date", "homeScore", "awayScore", "result",
+                "eventId", "seasonName"
+            ] + [col for col in player_experience_df.columns if col not in ["playerId", "Year"]]
 
-            labels = player_game_log.get("names", [])
+            game_log = pd.DataFrame(rows, columns=column_headers)
+            game_log["seasonYr"] = game_log["seasonName"].str.slice(0, 4).str.strip()
+            game_log["seasonType"] = game_log["seasonName"].str.slice(4).str.strip()
+            game_log = game_log[game_log["seasonType"] == "Regular Season"]
 
-            for season in player_game_log.get("seasonTypes", []):
-                season_name = season.get("displayName", "Unknown")
-                for category in season.get("categories", []):
-                    for event in category.get("events", []):
-                        event_stats = event.get("stats", [])
-                        event_id = event.get("eventId", "Unknown")
-                        game_data = player_game_log.get("events", {}).get(event_id, {})
+            numeric_columns = ["receivingTouchdowns", "receptions", "receivingYards", "receivingTargets", "fumbles"]
+            for col in numeric_columns:
+                game_log[col] = pd.to_numeric(game_log[col], errors="coerce").fillna(0).astype(int)
 
-                        row_data = event_stats + [
-                            game_data.get("week", "Unknown"),
-                            game_data.get("gameDate", "Unknown"),
-                            game_data.get("homeTeamScore", "Unknown"),
-                            game_data.get("awayTeamScore", "Unknown"),
-                            game_data.get("gameResult", "Unknown"),
-                            event_id,
-                            season_name
-                        ]
-                        row_data += row.drop(["playerId", "Year"]).tolist()
-                        rows.append(row_data)
+            game_log.sort_values(by=["seasonYr", "seasonType", "week"], inplace=True)
 
-        except requests.exceptions.RequestException as e:
-            print(f"Error fetching data for playerId {row['playerId']} in season {row['Year']}: {e}")
-            continue
-    if not rows:
-        print("No data collected.")
-        return pd.DataFrame()
+            # Add lagged features
+            game_log = game_log.sort_values(by=["fullName", "seasonYr", "week"]).reset_index(drop=True)
+            game_log["weeks_played"] = game_log.groupby(["seasonYr", "fullName"]).cumcount() + 1
 
-    # Process game log data
-    column_headers = labels + [
-        "week", "date", "homeScore", "awayScore", "result",
-        "eventId", "seasonName"
-    ] + [col for col in player_experience_df.columns if col not in ["playerId", "Year"]]
+            def calculate_lagged_features(group):
+                group["cumulative_receiving_yards"] = group["receivingYards"].cumsum().shift(1)
+                group["cumulative_receptions"] = group["receptions"].cumsum().shift(1)
+                group["cumulative_receiving_touchdowns"] = group["receivingTouchdowns"].cumsum().shift(1)
+                group["cumulative_targets"] = group["receivingTargets"].cumsum().shift(1)
+                group["cumulative_yards_per_game"] = group["cumulative_receiving_yards"] / (group["weeks_played"] - 1)
+                group["cumulative_receptions_per_game"] = group["cumulative_receptions"] / (group["weeks_played"] - 1)
+                group["cumulative_tds_per_game"] = group["cumulative_receiving_touchdowns"] / (group["weeks_played"] - 1)
+                group["cumulative_targets_per_game"] = group["cumulative_targets"] / (group["weeks_played"] - 1)
+                group["avg_receiving_yards_last_3"] = group["receivingYards"].rolling(window=3, min_periods=1).mean().shift(1)
+                group["avg_receptions_last_3"] = group["receptions"].rolling(window=3, min_periods=1).mean().shift(1)
+                group["avg_tds_last_3"] = group["receivingTouchdowns"].rolling(window=3, min_periods=1).mean().shift(1)
+                group["avg_targets_last_3"] = group["receivingTargets"].rolling(window=3, min_periods=1).mean().shift(1)
+                group["yards_per_reception"] = (group["receivingYards"] / group["receptions"]).shift(1).replace([float("inf"), -float("inf")], 0)
+                group["td_rate_per_target"] = (group["cumulative_receiving_touchdowns"] / group["cumulative_targets"]).shift(1).replace([float("inf"), -float("inf")], 0)
+                return group
 
-    game_log = pd.DataFrame(rows, columns=column_headers)
-    game_log["seasonYr"] = game_log["seasonName"].str.slice(0, 4).str.strip()
-    game_log["seasonType"] = game_log["seasonName"].str.slice(4).str.strip()
-    game_log = game_log[game_log["seasonType"] == "Regular Season"]
+            game_log = game_log.groupby(["seasonYr", "fullName"]).apply(calculate_lagged_features)
+            game_log.fillna(0, inplace=True)
+            game_log["is_first_week"] = (game_log["weeks_played"] == 1).astype(int)
+            game_log['td'] = (game_log['receivingTouchdowns'] > 0).astype(int)
 
-    numeric_columns = ["receivingTouchdowns", "receptions", "receivingYards", "receivingTargets", "fumbles"]
-    for col in numeric_columns:
-        game_log[col] = pd.to_numeric(game_log[col], errors="coerce").fillna(0).astype(int)
+            all_game_logs.append(game_log)
 
-    game_log.sort_values(by=["seasonYr", "seasonType", "week"], inplace=True)
+    # Combine all player game logs and save the final results
+    final_game_logs = pd.concat(all_game_logs, ignore_index=True) if all_game_logs else pd.DataFrame()
+    final_game_logs.to_csv(file_path, index=False)
+    st.write(f"New data cached for week {week}, year {year}")
 
-    # Add lagged features
-    game_log = game_log.sort_values(by=["fullName", "seasonYr", "week"]).reset_index(drop=True)
-    game_log["weeks_played"] = game_log.groupby(["seasonYr", "fullName"]).cumcount() + 1
-
-    def calculate_lagged_features(group):
-        # Cumulative Features
-        group["cumulative_receiving_yards"] = group["receivingYards"].cumsum().shift(1)
-        group["cumulative_receptions"] = group["receptions"].cumsum().shift(1)
-        group["cumulative_receiving_touchdowns"] = group["receivingTouchdowns"].cumsum().shift(1)
-        group["cumulative_targets"] = group["receivingTargets"].cumsum().shift(1)
-
-        # Lagged Per-Game Features
-        group["cumulative_yards_per_game"] = group["cumulative_receiving_yards"] / (group["weeks_played"] - 1)
-        group["cumulative_receptions_per_game"] = group["cumulative_receptions"] / (group["weeks_played"] - 1)
-        group["cumulative_tds_per_game"] = group["cumulative_receiving_touchdowns"] / (group["weeks_played"] - 1)
-        group["cumulative_targets_per_game"] = group["cumulative_targets"] / (group["weeks_played"] - 1)
-
-        # Rolling Features (3-game averages)
-        group["avg_receiving_yards_last_3"] = group["receivingYards"].rolling(window=3, min_periods=1).mean().shift(1)
-        group["avg_receptions_last_3"] = group["receptions"].rolling(window=3, min_periods=1).mean().shift(1)
-        group["avg_tds_last_3"] = group["receivingTouchdowns"].rolling(window=3, min_periods=1).mean().shift(1)
-        group["avg_targets_last_3"] = group["receivingTargets"].rolling(window=3, min_periods=1).mean().shift(1)
-
-        # Yards per Reception and Touchdown Rate per Target
-        group["yards_per_reception"] = (group["receivingYards"] / group["receptions"]).shift(1).replace([float("inf"), -float("inf")], 0)
-        group["td_rate_per_target"] = (group["cumulative_receiving_touchdowns"] / group["cumulative_targets"]).shift(1).replace([float("inf"), -float("inf")], 0)
-
-        return group
-
-    # Handle division by zero and first-week cases
-    game_log = game_log.groupby(["seasonYr", "fullName"]).apply(calculate_lagged_features)
-    game_log.fillna(0, inplace=True)
-    game_log["is_first_week"] = (game_log["weeks_played"] == 1).astype(int)
-
-    game_log['td'] = (game_log['receivingTouchdowns'] > 0).astype(int)
-
-    # Save the data to CSV
-    game_log.to_csv(file_path, index=False)
-    st.write(f"New data cached for {player_row['fullName']}")
-
-    return game_log
+    return final_game_logs
 
 # EXTRACT PREVIOUS GAME ------------------------------------------------------------------
 def extract_previous_game_stats(gameData):
@@ -655,29 +644,28 @@ def get_total_model_odds():
     year, week = get_current_nfl_week()
     # Get File if already exists
     file_path = f'data/modelOdds/{year}_NFL_Week{week}_BestOdds.csv'
+
     # Check if File Path exists
     if os.path.exists(file_path):
         odds_df = pd.read_csv(file_path)
         return odds_df
     # Get Roster
     fullRoster = load_roster()
+    # Load Game Log Data 
+    gameLogData = load_data_for_roster(fullRoster)
 
     results = []
-
-    # Iterate over each player in the roster
-    for _, player_row in fullRoster.iterrows():
+    for player_name in gameLogData['fullName'].unique():
         try:
-            # Step 1: Validate active player
-            if player_row['activestatus'] != 1:
-                continue  # Skip inactive players
+            # Filter player-specific game log data
+            player_data = gameLogData[gameLogData['fullName'] == player_name]
 
-            # Step 2: Load data
-            game_log = load_data(player_row)
-            if game_log.empty:
+            # Step 2: Ensure player data is available
+            if player_data.empty:
                 continue  # Skip if no game log data available
 
             # Step 3: Extract previous game statistics
-            stats = extract_previous_game_stats(game_log)
+            stats = extract_previous_game_stats(player_data)
 
             # Step 4: Run the touchdown model
             td_likelihood = run_td_model(stats)
@@ -685,16 +673,15 @@ def get_total_model_odds():
 
             # Step 5: Store the result
             results.append({
-                "Player": player_row['fullName'],
+                "Player": player_name,
                 "TD_Likelihood": td_likelihood,
                 "Model_Odds": odds,
                 "Favor": favor
             })
 
         except Exception as e:
-            print(f"Error processing player {player_row['fullName']}: {e}")
+            print(f"Error processing player {player_name}: {e}")
             continue  # Skip any player that causes an error
-
     # Convert results to a DataFrame
     odds_df = pd.DataFrame(results)
     odds_df.to_csv(file_path, index=False)
@@ -711,6 +698,7 @@ def get_all_odds():
     if os.path.exists(file_path):
         totalOdds = pd.read_csv(file_path)
         return totalOdds
+    
 
     # Get Model Output
     modelOdds = get_total_model_odds()
@@ -726,7 +714,6 @@ def get_all_odds():
 
     # Get SportsBook Odds
     sportsbookOdds = load_or_fetch_odds()
-    
     # Validate sportsbookOdds
     if sportsbookOdds is None or sportsbookOdds.empty:
         print("Error: Sportsbook odds data is empty or could not be fetched.")
@@ -779,7 +766,7 @@ def best_odds_model():
     odds = odds.dropna(subset=['TD_Likelihood', 'Model_Odds'])
 
     # Sort data by TD_Likelihood in descending order
-    odds = odds.sort_values(by='TD_Likelihood', ascending=True)
+    odds = odds.sort_values(by='TD_Likelihood', ascending=False)
 
     # to CSV
     odds.to_csv(file_path)
@@ -810,7 +797,6 @@ def best_odds_provider(provider):
 
     if os.path.exists(file_path):
         odds = pd.read_csv(file_path)
-
         # DATA PROCESSING 
 
         # Formatting
@@ -849,6 +835,10 @@ def best_odds_provider(provider):
     odds['Weight'] = 1 - odds['Model_Probability']
     odds["WeightedValue"] = (odds[f'{provider}_Probability'] - odds["Model_Probability"]) * odds["Weight"]
 
+    # Filter Out Anything Less Than 800
+    odds = odds[odds['Model_Odds'] <= 800]
+    # Filter Out Bad Value Plays
+    odds = odds[odds['WeightedValue'] <= 0.0000]
     # Sort by the difference in ascending order
     odds = odds.sort_values(by='WeightedValue', ascending=True)
 
@@ -897,20 +887,44 @@ def get_past_performance(provider, unit, is_model=True):
     lastWeekOdds = pd.read_csv(file_path_lastweek)
     lastWeekOdds['Touchdowns'] = None
 
-    # Loop over each player and get touchdown data
+    # Load the roster
+    roster = load_roster()
+    if roster.empty:
+        raise ValueError("Roster is empty. Please check the data source.")
+    # Load game log data for the roster
+    gameLogData = load_data_for_roster(roster)
+    if gameLogData.empty:
+        raise ValueError("Game log data is empty. Please ensure the data source is valid and populated.")
+
+
+
+      # Loop over each player and get touchdown data
     for idx, row in lastWeekOdds.iterrows():
         player_name = row['Player']
-        first_name, last_name = player_name.split(' ', 1)
-        file_name = f"{first_name}_{last_name}.csv"
-        file_path = f"data/playerData/{year}_week{week}/{first_name}_{last_name}_{year}_week{week}_data.csv"
 
-        # Check if the player file exists and load it
-        if os.path.exists(file_path):
-            player_df = pd.read_csv(file_path)
+        # Filter the game log data for the specific player
+        player_df = gameLogData[gameLogData['fullName'] == player_name]
+        if player_df.empty:
+            print(f"No game log data found for player: {player_name}. Skipping...")
+            continue
+
+        # Assuming last_week and year are defined
+        while last_week > 0:
             filtered_row = player_df[(player_df['week'] == last_week) & (player_df['seasonYr'] == year)]
-
             if not filtered_row.empty:
-                lastWeekOdds.at[idx, 'Touchdowns'] = filtered_row.iloc[0]['receivingTouchdowns']
+                # Found data for the last week
+                break
+            else:
+                # No data for this week, check the previous week
+                print(f"No game log entry found for {player_name} for week {last_week}, season {year}. Trying previous week...")
+                last_week -= 1
+
+        if last_week == 0:
+            print(f"No game log entry found for {player_name} from weeks 1 to {year}. Skipping...")
+            continue
+
+        if not filtered_row.empty:
+            lastWeekOdds.at[idx, 'Touchdowns'] = filtered_row.iloc[0]['receivingTouchdowns']
 
     # Set odds based on the source (Model or Provider)
     if is_model:
@@ -965,6 +979,7 @@ def highlight_rows(row):
     else:
         return [""] * len(row)
 
+# RELOAD SPORTSBOOK ODDS
 def reload_sportsbook_odds():
     # Get Year + Week
     year, week = get_current_nfl_week()
@@ -974,15 +989,14 @@ def reload_sportsbook_odds():
     sportsbook_path = f"data/sportsbookOdds/odds_{year}_week{week}.csv"
     if os.path.exists(sportsbook_path):
         os.remove(sportsbook_path)
-        st.writef(f"File {sportsbook_path} has been deleted.")
+        st.write(f"File {sportsbook_path} has been deleted.")
     
     # 2. combined odds
     combined_path = f"data/combinedOdds/odds_{year}_week{week}_combined_odds.csv"
     if os.path.exists(combined_path):
         os.remove(combined_path)
-        st.writef(f"File {combined_path} has been deleted.")
+        st.write(f"File {combined_path} has been deleted.")
     
     # 3. retrigger load odds
 
     load_or_fetch_odds(reload_odds=True)
-
