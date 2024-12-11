@@ -990,6 +990,8 @@ def reload_sportsbook_odds():
     if os.path.exists(combined_path):
         os.remove(combined_path)
         st.write(f"File {combined_path} has been deleted.")
+
+    # 3. delete best value picks
     
     # 3. retrigger load odds
 
