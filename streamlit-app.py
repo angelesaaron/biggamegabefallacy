@@ -300,7 +300,7 @@ with tab_performance:
 
      # Check for None and handle appropriately
     if percent_provider is not None:
-        st.metric("Winning %", f"{percent_provider* 100}%")
+        st.metric("Winning %", f"{round(percent_provider* 100)}%")
     else:
         st.metric("Winning %", "Data not available")  # Show a default message if percent is None
 
