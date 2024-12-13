@@ -729,7 +729,7 @@ def get_all_odds():
 
     # JOIN
     totalOdds = pd.merge(modelOdds, sportsbookOdds, how='left', on='Player')
-    totalOdds = totalOdds[['Player', 'TD_Likelihood', 'Model_Odds', 'Favor', 'DraftKings', 'FanDuel', 'BetOnline.ag', 'BetRivers', 'BetMGM', 'Bovada']]
+    totalOdds = totalOdds[['Player', 'TD_Likelihood', 'Model_Odds', 'Favor', 'DraftKings', 'FanDuel', 'BetOnline.ag', 'BetRivers', 'BetMGM']]
     
     # Clean Data Set
     totalOdds = totalOdds.loc[totalOdds['TD_Likelihood'].notna() & (totalOdds['TD_Likelihood'] != '')]
@@ -992,7 +992,7 @@ def reload_sportsbook_odds():
         st.write(f"File {combined_path} has been deleted.")
 
     # 3. delete best value picks
-    providers = ['DraftKings', 'FanDuel', 'BetOnline.ag', 'BetRivers', 'BetMGM', 'Bovada']
+    providers = ['DraftKings', 'FanDuel', 'BetOnline.ag', 'BetRivers', 'BetMGM']
     for provider in providers:
         file_path = f"data/historicalOdds/{provider}/{year}_week{week}_valuepicks.csv"
         if os.path.exists(file_path):

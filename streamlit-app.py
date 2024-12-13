@@ -239,7 +239,7 @@ with tab_best_odds:
     st.divider()
     
     # Best Value on Sports Book
-    provider_list = ['DraftKings', 'FanDuel', 'BetOnline.ag', 'BetRivers', 'BetMGM', 'Bovada']
+    provider_list = ['DraftKings', 'FanDuel', 'BetOnline.ag', 'BetRivers', 'BetMGM']
 
     # Validate provider selection
     provider = st.selectbox("Choose a provider:", provider_list, index=0)
