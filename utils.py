@@ -992,6 +992,12 @@ def reload_sportsbook_odds():
         st.write(f"File {combined_path} has been deleted.")
 
     # 3. delete best value picks
+    providers = ['DraftKings', 'FanDuel', 'BetOnline.ag', 'BetRivers', 'BetMGM', 'Bovada']
+    for provider in providers:
+        file_path = f"data/historicalOdds/{provider}/{year}_week{week}_valuepicks.csv"
+        if os.path.exists(file_path):
+            os.remove(file_path)
+            st.write(f"{provider} - Week {week} odds deleted!")
     
     # 3. retrigger load odds
 
