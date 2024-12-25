@@ -115,9 +115,11 @@ with tab_player:
     st.image(player_image, width=300)
     st.divider()
 
+    # Load Full Roster
+    dfFullRoster = load_roster()
     # Data Retrieval 1 - Player Data -----------------------------------------------------------------------------------
     try:
-        gameLogData = load_data_for_roster(dfRoster)
+        gameLogData = load_data_for_roster(dfFullRoster)
     except ValueError as e:
         st.error(str(e))
         st.stop()
