@@ -67,7 +67,7 @@ with tab_player:
 
     # Validate Default Index = Jacksonville Jaguars
     try:
-        default_team_index = dfTeams[dfTeams['FullName'] == 'Jacksonville Jaguars'].index[0]
+        default_team_index = dfTeams[dfTeams['FullName'] == 'Minnesota Vikings'].index[0]
     except IndexError:
         default_team_index = 0
     default_team_index= int(default_team_index) # Fallback to the first option if default is not found
