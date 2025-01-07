@@ -23,10 +23,17 @@ odds_api_key = st.secrets["api"]['odds_api_key']
 
 # LOAD TEAMS -----------------------------------------------------------------------------
 def load_teams():
-    dfTeams = pd.read_csv('data/teamList.csv')
-    dfTeams = dfTeams[['id', 'abbrev', 'location', 'name']]
-    dfTeams['FullName'] = dfTeams['location'] + ' ' + dfTeams['name']
-    return dfTeams
+    year, week = get_current_nfl_week()
+    if week > 18:
+        dfTeams = pd.read_csv('data/teamList_playoff.csv')
+        dfTeams = dfTeams[['id', 'abbrev', 'location', 'name']]
+        dfTeams['FullName'] = dfTeams['location'] + ' ' + dfTeams['name']
+        return dfTeams
+    else:
+        dfTeams = pd.read_csv('data/teamList.csv')
+        dfTeams = dfTeams[['id', 'abbrev', 'location', 'name']]
+        dfTeams['FullName'] = dfTeams['location'] + ' ' + dfTeams['name']
+        return dfTeams
 
 # LOAD ROSTER ----------------------------------------------------------------------------
 def load_roster():
@@ -409,6 +416,7 @@ def run_td_model(stats_dict):
 
 # GET NFL Season Start -------------------------------------------------------------------
 def get_current_nfl_week():
+    return 2024, 18
     # 1. Instantiate Today
     eastern = pytz.timezone('US/Eastern')
     # Get the current date and time in US/Eastern
