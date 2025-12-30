@@ -24,16 +24,26 @@ router = APIRouter()
 
 @router.get("/current")
 async def get_current_week_predictions(
+    week: Optional[int] = Query(None, description="Week number (defaults to current week)"),
+    year: Optional[int] = Query(None, description="Season year (defaults to current year)"),
     limit: int = Query(100, description="Max number of predictions to return"),
     db: AsyncSession = Depends(get_db)
 ):
     """
-    Get all predictions for the current NFL week with player details.
+    Get all predictions for the current or specified NFL week with player details.
 
-    If no predictions exist for the current week, falls back to the most recent week
+    If no predictions exist for the requested week, falls back to the most recent week
     with available predictions and includes metadata to inform the frontend.
     """
-    current_year, current_week = get_current_nfl_week()
+    # Use provided week/year or default to current
+    if week is None or year is None:
+        current_year, current_week = get_current_nfl_week()
+        if week is None:
+            week = current_week
+        if year is None:
+            year = current_year
+    else:
+        current_year, current_week = year, week
 
     result = await db.execute(
         select(
@@ -51,16 +61,16 @@ async def get_current_week_predictions(
             Player.headshot_url
         )
         .join(Player, Prediction.player_id == Player.player_id)
-        .where(Prediction.season_year == current_year)
-        .where(Prediction.week == current_week)
+        .where(Prediction.season_year == year)
+        .where(Prediction.week == week)
         .order_by(Prediction.td_likelihood.desc())
         .limit(limit)
     )
     rows = result.all()
 
     is_fallback = False
-    fallback_year = current_year
-    fallback_week = current_week
+    fallback_year = year
+    fallback_week = week
 
     # If no predictions for current week, fall back to most recent week with data
     if not rows:
