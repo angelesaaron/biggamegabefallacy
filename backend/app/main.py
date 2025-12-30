@@ -4,7 +4,7 @@ from contextlib import asynccontextmanager
 
 from app.config import settings
 from app.database import engine, Base
-from app.api import players, predictions, odds, value_picks, performance, admin, game_logs
+from app.api import players, predictions, odds, value_picks, performance, admin, game_logs, weeks
 
 
 @asynccontextmanager
@@ -47,6 +47,7 @@ app.include_router(value_picks.router, prefix="/api/value-picks", tags=["Value P
 app.include_router(performance.router, prefix="/api/performance", tags=["Performance"])
 app.include_router(admin.router, prefix="/api/admin", tags=["Admin"])
 app.include_router(game_logs.router, prefix="/api/game-logs", tags=["Game Logs"])
+app.include_router(weeks.router)
 
 
 @app.get("/")
