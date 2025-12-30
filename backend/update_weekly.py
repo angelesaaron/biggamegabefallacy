@@ -12,6 +12,7 @@ Usage:
 """
 import asyncio
 import sys
+import os
 from pathlib import Path
 from datetime import datetime
 
@@ -354,12 +355,16 @@ async def main():
     print(f"  4. API calls: ~2 for schedule + ~538 for game logs + ~16 for odds = ~556 calls")
     print()
 
-    response = input("Continue? (yes/no): ")
-    if response.lower() not in ['yes', 'y']:
-        print("\nCancelled.")
-        return
-
-    print()
+    # Skip confirmation in CI/CD environments
+    if not os.environ.get('CI'):
+        response = input("Continue? (yes/no): ")
+        if response.lower() not in ['yes', 'y']:
+            print("\nCancelled.")
+            return
+        print()
+    else:
+        print("Running in CI/CD mode - auto-confirming...")
+        print()
 
     client = Tank01Client()
 
