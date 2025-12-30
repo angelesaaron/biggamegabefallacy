@@ -34,10 +34,16 @@ def get_current_nfl_week_from_schedule(db_session=None) -> Tuple[int, int]:
     try:
         today = datetime.now().strftime("%Y%m%d")
 
-        # Find games on or after today, ordered by date
+        # Find games happening today or within next 4 days
+        # NFL weeks run Thu-Mon, so 4-day window captures current week without jumping ahead
+        from datetime import datetime, timedelta
+        today_dt = datetime.now()
+        two_days_from_now = (today_dt + timedelta(days=4)).strftime("%Y%m%d")
+
         result = db_session.execute(
             select(Schedule)
             .where(Schedule.game_date >= today)
+            .where(Schedule.game_date <= two_days_from_now)
             .order_by(Schedule.game_date, Schedule.week)
             .limit(1)
         )
