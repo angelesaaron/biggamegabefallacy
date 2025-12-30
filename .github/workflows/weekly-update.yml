@@ -1,0 +1,51 @@
+name: Weekly NFL Data Update
+
+on:
+  schedule:
+    # Every Tuesday at 12:00 PM UTC (7 AM EST / 4 AM PST)
+    # Runs after Monday Night Football is complete
+    - cron: '0 12 * * 2'
+
+  # Allows manual triggering from GitHub Actions tab
+  workflow_dispatch:
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        working-directory: ./backend
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run weekly update
+        working-directory: ./backend
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          TANK01_API_KEY: ${{ secrets.TANK01_API_KEY }}
+          NFL_SEASON_YEAR: 2025
+        run: |
+          echo "Starting weekly update..."
+          python update_weekly.py
+
+          echo "Generating predictions..."
+          python generate_predictions.py
+
+          echo "Weekly update complete!"
+
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "Weekly update failed! Check logs at:"
+          echo "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
