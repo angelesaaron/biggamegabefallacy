@@ -42,7 +42,7 @@ export function ProbabilityChart({ data }: ProbabilityChartProps) {
                 borderRadius: '8px',
                 color: '#fff',
               }}
-              formatter={(value: number | undefined, _name: string, props: any) => {
+              formatter={(value: number | undefined, _name: string | undefined, props: any) => {
                 if (value === undefined) return ['', ''];
                 const scored = props.payload.scored;
                 return [
