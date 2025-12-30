@@ -108,6 +108,24 @@ Users can click any player in the Weekly View to navigate directly to that playe
   - Is designed to be revisited and retrained as more data accumulates
 - Odds comparisons are performed using player prop data embedded directly in Tank01 responses
 
+### Weekly Data Updates
+
+The application automatically updates data every Tuesday at 7 AM EST (after Monday Night Football) via GitHub Actions:
+
+**Update Process:**
+- Fetches schedule for current and next week
+- Updates game logs for the previous week's completed games
+- Refreshes sportsbook odds for upcoming games
+- Generates new touchdown predictions
+
+**Idempotent Design (Safe to Run Multiple Times):**
+- **Schedule**: Updates existing games, adds new ones (no duplicates)
+- **Game Logs**: Skips existing logs, only adds new ones (no duplicates)
+- **Odds**: Deletes and refreshes all odds for the target week (ensures latest odds)
+- **API Calls**: Makes ~556 calls per run regardless of existing data
+
+Running the update script multiple times for the same week is safe but uses API quota. The automated workflow ensures data stays fresh without manual intervention.
+
 ---
 
 ## Intended Audience
