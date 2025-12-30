@@ -27,8 +27,13 @@ async def get_current_week_predictions(
     limit: int = Query(100, description="Max number of predictions to return"),
     db: AsyncSession = Depends(get_db)
 ):
-    """Get all predictions for the current NFL week with player details"""
-    year, week = get_current_nfl_week()
+    """
+    Get all predictions for the current NFL week with player details.
+
+    If no predictions exist for the current week, falls back to the most recent week
+    with available predictions and includes metadata to inform the frontend.
+    """
+    current_year, current_week = get_current_nfl_week()
 
     result = await db.execute(
         select(
@@ -46,12 +51,47 @@ async def get_current_week_predictions(
             Player.headshot_url
         )
         .join(Player, Prediction.player_id == Player.player_id)
-        .where(Prediction.season_year == year)
-        .where(Prediction.week == week)
+        .where(Prediction.season_year == current_year)
+        .where(Prediction.week == current_week)
         .order_by(Prediction.td_likelihood.desc())
         .limit(limit)
     )
     rows = result.all()
+
+    is_fallback = False
+    fallback_year = current_year
+    fallback_week = current_week
+
+    # If no predictions for current week, fall back to most recent week with data
+    if not rows:
+        logger.warning(f"No predictions found for {current_year} Week {current_week}, falling back to most recent week")
+        is_fallback = True
+
+        # Find most recent predictions
+        fallback_result = await db.execute(
+            select(
+                Prediction.player_id,
+                Prediction.season_year,
+                Prediction.week,
+                Prediction.td_likelihood,
+                Prediction.model_odds,
+                Prediction.favor,
+                Prediction.created_at,
+                Player.full_name,
+                Player.team_name,
+                Player.position,
+                Player.jersey_number,
+                Player.headshot_url
+            )
+            .join(Player, Prediction.player_id == Player.player_id)
+            .order_by(Prediction.season_year.desc(), Prediction.week.desc(), Prediction.td_likelihood.desc())
+            .limit(limit)
+        )
+        rows = fallback_result.all()
+
+        if rows:
+            fallback_year = rows[0].season_year
+            fallback_week = rows[0].week
 
     # Convert to dict format
     predictions = []
@@ -71,7 +111,16 @@ async def get_current_week_predictions(
             "created_at": row.created_at.isoformat() if row.created_at else None
         })
 
-    return predictions
+    return {
+        "predictions": predictions,
+        "metadata": {
+            "current_week": current_week,
+            "current_year": current_year,
+            "showing_week": fallback_week,
+            "showing_year": fallback_year,
+            "is_fallback": is_fallback
+        }
+    }
 
 
 @router.get("/{player_id}", response_model=PredictionResponse | None)

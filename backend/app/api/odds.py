@@ -21,6 +21,7 @@ async def sync_odds_for_week_task(season: int, week: int):
     Background task to sync odds for a specific week.
     """
     from app.database import AsyncSessionLocal
+    from app.models.player import Player
 
     logger.info(f"Starting background odds sync for {season} Week {week}")
 
@@ -39,6 +40,11 @@ async def sync_odds_for_week_task(season: int, week: int):
                 logger.warning(f"No games found for {season} Week {week}")
                 return
 
+            # Get all valid player IDs to check foreign key constraints
+            player_result = await db.execute(select(Player.player_id))
+            valid_player_ids = {row[0] for row in player_result.all()}
+            logger.info(f"Found {len(valid_player_ids)} valid players in database")
+
             # Delete existing odds for this week (refresh)
             await db.execute(
                 delete(SportsbookOdds)
@@ -47,11 +53,14 @@ async def sync_odds_for_week_task(season: int, week: int):
             await db.commit()
 
             total_saved = 0
+            skipped_players = set()
 
             for game in games:
+                game_id = game.game_id  # Store game_id before potential rollback
+
                 try:
                     # Fetch odds using gameID
-                    response = await client.get_betting_odds(game_id=game.game_id)
+                    response = await client.get_betting_odds(game_id=game_id)
 
                     if not response or 'body' not in response:
                         continue
@@ -62,9 +71,9 @@ async def sync_odds_for_week_task(season: int, week: int):
                         continue
 
                     if isinstance(body, dict):
-                        game_data = body if body.get('gameID') == game.game_id else None
+                        game_data = body if body.get('gameID') == game_id else None
                     elif isinstance(body, list):
-                        game_data = next((g for g in body if g.get('gameID') == game.game_id), None)
+                        game_data = next((g for g in body if g.get('gameID') == game_id), None)
                     else:
                         continue
 
@@ -78,6 +87,11 @@ async def sync_odds_for_week_task(season: int, week: int):
                         anytd = prop.get('propBets', {}).get('anytd')
 
                         if not player_id or not anytd:
+                            continue
+
+                        # Skip players not in our database to avoid foreign key violations
+                        if player_id not in valid_player_ids:
+                            skipped_players.add(player_id)
                             continue
 
                         # Parse odds
@@ -95,7 +109,7 @@ async def sync_odds_for_week_task(season: int, week: int):
                         for sportsbook in ['draftkings', 'fanduel']:
                             odds_record = SportsbookOdds(
                                 player_id=player_id,
-                                game_id=game.game_id,
+                                game_id=game_id,
                                 season_year=season,
                                 week=week,
                                 sportsbook=sportsbook,
@@ -108,9 +122,12 @@ async def sync_odds_for_week_task(season: int, week: int):
                     await db.commit()
 
                 except Exception as e:
-                    logger.error(f"Error syncing odds for game {game.game_id}: {str(e)}")
+                    logger.error(f"Error syncing odds for game {game_id}: {str(e)}")
                     await db.rollback()
                     continue
+
+            if skipped_players:
+                logger.warning(f"Skipped {len(skipped_players)} players not in database")
 
             logger.info(f"Background odds sync complete: {total_saved} records saved")
 
