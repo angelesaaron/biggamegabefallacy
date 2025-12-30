@@ -271,6 +271,9 @@ async def sync_odds_for_next_week(db, client, current_season, current_week):
     for i, game in enumerate(games, 1):
         game_id = game.game_id  # Store game_id before potential rollback
 
+        # Create a list to batch insert odds for this game
+        odds_to_add = []
+
         try:
             # Fetch odds using gameID
             response = await client.get_betting_odds(game_id=game_id)
@@ -318,7 +321,7 @@ async def sync_odds_for_next_week(db, client, current_season, current_week):
                 except (ValueError, TypeError):
                     continue
 
-                # Save for both DraftKings and FanDuel
+                # Create odds records for both DraftKings and FanDuel
                 for sportsbook in ['draftkings', 'fanduel']:
                     odds_record = SportsbookOdds(
                         player_id=player_id,
@@ -328,11 +331,14 @@ async def sync_odds_for_next_week(db, client, current_season, current_week):
                         sportsbook=sportsbook,
                         anytime_td_odds=odds_value
                     )
+                    odds_to_add.append(odds_record)
+
+            # Only add and commit if we have valid odds to insert
+            if odds_to_add:
+                for odds_record in odds_to_add:
                     db.add(odds_record)
-
-                total_saved += 2
-
-            await db.commit()
+                await db.commit()
+                total_saved += len(odds_to_add)
 
             if i % 5 == 0:
                 print(f"   [{i}/{len(games)}] Synced {total_saved} odds records so far...")
