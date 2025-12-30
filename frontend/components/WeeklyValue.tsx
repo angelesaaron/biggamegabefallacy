@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { ValuePlayerCard } from '@/components/ValuePlayerCard';
 import { GamblingDisclaimer } from '@/components/GamblingDisclaimer';
-import { TrendingUp, TrendingDown } from 'lucide-react';
+import { TrendingUp, TrendingDown, AlertTriangle } from 'lucide-react';
 
 interface Prediction {
   player_id: string;
@@ -25,12 +25,21 @@ interface ValuePick extends Prediction {
   has_edge?: boolean;
 }
 
+interface PredictionsMetadata {
+  current_week: number;
+  current_year: number;
+  showing_week: number;
+  showing_year: number;
+  is_fallback: boolean;
+}
+
 interface WeeklyValueProps {
   onPlayerClick?: (playerId: string) => void;
 }
 
 export default function WeeklyValue({ onPlayerClick }: WeeklyValueProps) {
   const [predictions, setPredictions] = useState<ValuePick[]>([]);
+  const [metadata, setMetadata] = useState<PredictionsMetadata | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedSportsbook, setSelectedSportsbook] = useState<
@@ -50,16 +59,25 @@ export default function WeeklyValue({ onPlayerClick }: WeeklyValueProps) {
         const response = await fetch(`${API_URL}/api/predictions/current`);
         if (!response.ok) throw new Error('Failed to fetch predictions');
 
-        const preds: Prediction[] = await response.json();
+        const data = await response.json();
+        const preds: Prediction[] = data.predictions || [];
+        const meta: PredictionsMetadata = data.metadata;
+
+        setMetadata(meta);
+
+        // If no predictions at all, show error
+        if (!preds || preds.length === 0) {
+          setPredictions([]);
+          setLoading(false);
+          return;
+        }
 
         // Fetch odds for each prediction
         const predsWithOdds = await Promise.all(
-          preds.map(async (pred: Prediction) => {
+          preds.map(async (pred: Prediction, index: number) => {
             try {
-              const oddsData = await fetch(
-                `${API_URL}/api/odds/comparison/${pred.player_id}?week=${pred.week}&year=${pred.season_year}`
-              ).then((r) => r.json());
-
+              const oddsUrl = `${API_URL}/api/odds/comparison/${pred.player_id}?week=${pred.week}&year=${pred.season_year}`;
+              const oddsData = await fetch(oddsUrl).then((r) => r.json());
               const modelProb = parseFloat(pred.td_likelihood);
               const sbOdds = oddsData.sportsbook_odds?.[selectedSportsbook];
 
@@ -134,6 +152,22 @@ export default function WeeklyValue({ onPlayerClick }: WeeklyValueProps) {
     );
   }
 
+  // If no predictions available at all (even with fallback)
+  if (!predictions || predictions.length === 0) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-xl p-6 text-center">
+          <p className="text-yellow-200 text-lg font-medium mb-2">No predictions available</p>
+          <p className="text-yellow-200/80 text-sm">
+            {metadata?.current_week
+              ? `Week ${metadata.current_week} predictions haven't been generated yet. Check back soon!`
+              : 'No prediction data found in the database.'}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="relative">
       {/* Hero Background */}
@@ -149,10 +183,25 @@ export default function WeeklyValue({ onPlayerClick }: WeeklyValueProps) {
 
       {/* Content */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Fallback Warning */}
+        {metadata?.is_fallback && (
+          <div className="mb-6 bg-yellow-500/10 border border-yellow-500/30 rounded-xl p-4 flex items-start gap-3">
+            <AlertTriangle className="w-5 h-5 text-yellow-500 shrink-0 mt-0.5" />
+            <div className="flex-1">
+              <p className="text-yellow-200 font-medium mb-1">
+                Week {metadata.current_week} predictions not yet available
+              </p>
+              <p className="text-yellow-200/80 text-sm">
+                Showing Week {metadata.showing_week} data. The weekly batch job may still be running or encountered an issue.
+              </p>
+            </div>
+          </div>
+        )}
+
         {/* Header */}
         <div className="mb-8 bg-gray-900/40 backdrop-blur-sm border border-gray-800 rounded-xl p-6 max-md:p-4">
           <h2 className="text-3xl max-md:text-2xl text-white mb-2">
-            Week {predictions.length > 0 ? predictions[0].week : '?'} Value Plays
+            {metadata?.showing_week ? `Week ${metadata.showing_week}` : predictions.length > 0 && predictions[0]?.week ? `Week ${predictions[0].week}` : 'Weekly'} Value Plays
           </h2>
           <p className="text-gray-400 max-md:text-sm">
             Players with the highest model edge vs sportsbook odds
@@ -160,11 +209,11 @@ export default function WeeklyValue({ onPlayerClick }: WeeklyValueProps) {
         </div>
 
       {/* Filters */}
-      <div className="mb-6 flex items-center gap-4 max-md:flex-col max-md:items-stretch max-md:gap-3 bg-gray-900/40 backdrop-blur-sm border border-gray-800 rounded-xl p-4">
-        <div className="flex gap-2 bg-gray-900/50 rounded-lg p-1">
+      <div className="mb-6 flex items-center gap-4 max-md:flex-col max-md:items-stretch max-md:gap-3 bg-gray-900/40 backdrop-blur-sm border border-gray-800 rounded-xl p-4 max-md:p-3">
+        <div className="flex gap-2 bg-gray-900/50 rounded-lg p-1 w-full md:w-auto">
           <button
             onClick={() => setSelectedSportsbook('draftkings')}
-            className={`px-4 py-2 max-md:flex-1 max-md:px-3 rounded-md transition-all ${
+            className={`flex-1 md:flex-initial px-4 py-2 max-md:px-3 max-md:py-1.5 max-md:text-sm rounded-md transition-all ${
               selectedSportsbook === 'draftkings'
                 ? 'bg-purple-600 text-white'
                 : 'text-gray-400 hover:text-white'
@@ -174,7 +223,7 @@ export default function WeeklyValue({ onPlayerClick }: WeeklyValueProps) {
           </button>
           <button
             onClick={() => setSelectedSportsbook('fanduel')}
-            className={`px-4 py-2 max-md:flex-1 max-md:px-3 rounded-md transition-all ${
+            className={`flex-1 md:flex-initial px-4 py-2 max-md:px-3 max-md:py-1.5 max-md:text-sm rounded-md transition-all ${
               selectedSportsbook === 'fanduel'
                 ? 'bg-purple-600 text-white'
                 : 'text-gray-400 hover:text-white'
@@ -184,7 +233,7 @@ export default function WeeklyValue({ onPlayerClick }: WeeklyValueProps) {
           </button>
         </div>
 
-        <label className="flex items-center gap-2 text-sm text-gray-400 cursor-pointer">
+        <label className="flex items-center gap-2 text-sm max-md:text-xs text-gray-400 cursor-pointer">
           <input
             type="checkbox"
             checked={showOnlyEdge}

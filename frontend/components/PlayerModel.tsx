@@ -38,7 +38,10 @@ export function PlayerModel({ initialPlayerId }: PlayerModelProps) {
       try {
         const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
         const response = await fetch(`${API_URL}/api/predictions/current`);
-        const predictions = await response.json();
+        const data = await response.json();
+
+        // Handle new API format (object with predictions array) or old format (direct array)
+        const predictions = data.predictions || data;
 
         // Transform to Player format
         const uniquePlayers = predictions.reduce((acc: Player[], pred: any) => {
@@ -68,7 +71,6 @@ export function PlayerModel({ initialPlayerId }: PlayerModelProps) {
         }
         setLoading(false);
       } catch (err) {
-        console.error('Failed to load players:', err);
         setLoading(false);
       }
     }
@@ -128,6 +130,8 @@ export function PlayerModel({ initialPlayerId }: PlayerModelProps) {
           sportsbookOdds: sbOddsStr,
           edge,
           edgeValue,
+          week: predData.week,
+          year: predData.season_year,
         };
 
         // Transform game logs and calculate player stats
@@ -167,7 +171,7 @@ export function PlayerModel({ initialPlayerId }: PlayerModelProps) {
 
         setSelectedPlayerData({ prediction, gameLogs, weeklyData });
       } catch (err) {
-        console.error('Failed to load player data:', err);
+        // Silently handle errors
       }
     }
 

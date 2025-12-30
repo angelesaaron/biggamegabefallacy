@@ -7,6 +7,8 @@ interface Prediction {
   sportsbookOdds: string;
   edge: 'positive' | 'neutral' | 'negative';
   edgeValue: number;
+  week?: number;
+  year?: number;
 }
 
 interface PredictionSummaryProps {
@@ -69,6 +71,11 @@ export function PredictionSummary({ prediction }: PredictionSummaryProps) {
         <div className="text-center">
           <div className="text-sm max-md:text-xs text-gray-500 mb-2 max-md:mb-1">Sportsbook Odds</div>
           <div className="text-2xl max-md:text-lg text-white">{prediction.sportsbookOdds}</div>
+          {prediction.week && prediction.year && (
+            <div className="text-xs text-gray-500 mt-1">
+              {prediction.year} Week {prediction.week}
+            </div>
+          )}
         </div>
       </div>
 
