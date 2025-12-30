@@ -1,0 +1,2514 @@
+{
+    "statusCode": 200,
+    "body": [
+      {
+        "Receiving": {
+          "receptions": "3",
+          "recTD": "0",
+          "longRec": "56",
+          "targets": "4",
+          "recYds": "74",
+          "recAvg": "24.7"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "snapCounts": {
+          "offSnapPct": "0.60",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "35",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20250921_LV@WSH",
+        "fantasyPoints": "10.4",
+        "fantasyPointsDefault": {
+          "standard": "7.4",
+          "PPR": "10.4",
+          "halfPPR": "8.9"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "5",
+          "recTD": "0",
+          "longRec": "14",
+          "targets": "9",
+          "recYds": "48",
+          "recAvg": "9.6"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "snapCounts": {
+          "offSnapPct": "0.91",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "63",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20250911_WSH@GB",
+        "fantasyPoints": "9.8",
+        "fantasyPointsDefault": {
+          "standard": "4.8",
+          "PPR": "9.8",
+          "halfPPR": "7.3"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "2",
+          "recTD": "0",
+          "longRec": "14",
+          "targets": "4",
+          "recYds": "27",
+          "recAvg": "13.5"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "snapCounts": {
+          "offSnapPct": "0.79",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "55",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20250907_NYG@WSH",
+        "fantasyPoints": "4.7",
+        "fantasyPointsDefault": {
+          "standard": "2.7",
+          "PPR": "4.7",
+          "halfPPR": "3.7"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "3",
+          "recTD": "1",
+          "longRec": "36",
+          "targets": "7",
+          "recYds": "51",
+          "recAvg": "17.0"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "scoringPlays": [
+          {
+            "score": "Terry McLaurin 36 Yd pass from Jayden Daniels (Two-Point Pass Conversion Failed)",
+            "scorePeriod": "Q2",
+            "homeScore": "14",
+            "awayScore": "12",
+            "teamID": "32",
+            "scoreDetails": "5 plays, 56 yards, 1:44",
+            "scoreType": "TD",
+            "scoreTime": "7:05",
+            "team": "WSH",
+            "playerIDs": [
+              "4426348",
+              "3121422"
+            ]
+          }
+        ],
+        "snapCounts": {
+          "offSnapPct": "0.86",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "68",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20250126_WSH@PHI",
+        "fantasyPoints": "14.1",
+        "fantasyPointsDefault": {
+          "standard": "11.1",
+          "PPR": "14.1",
+          "halfPPR": "12.6"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "4",
+          "recTD": "1",
+          "longRec": "58",
+          "targets": "6",
+          "recYds": "87",
+          "recAvg": "21.8"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "scoringPlays": [
+          {
+            "score": "Terry McLaurin 58 Yd pass from Jayden Daniels (Zane Gonzalez Kick)",
+            "scorePeriod": "Q2",
+            "homeScore": "14",
+            "awayScore": "17",
+            "teamID": "32",
+            "scoreDetails": "3 plays, 70 yards, 1:21",
+            "scoreType": "TD",
+            "scoreTime": "6:23",
+            "team": "WSH",
+            "playerIDs": [
+              "4426348",
+              "3121422",
+              "3043234"
+            ]
+          }
+        ],
+        "snapCounts": {
+          "offSnapPct": "0.93",
+          "defSnap": "0",
+          "stSnap": "1",
+          "stSnapPct": "0.03",
+          "offSnap": "70",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20250118_WSH@DET",
+        "fantasyPoints": "18.7",
+        "fantasyPointsDefault": {
+          "standard": "14.7",
+          "PPR": "18.7",
+          "halfPPR": "16.7"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "7",
+          "recTD": "1",
+          "longRec": "35",
+          "targets": "10",
+          "recYds": "89",
+          "recAvg": "12.7"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "scoringPlays": [
+          {
+            "score": "Terry McLaurin 5 Yd pass from Jayden Daniels (Zane Gonzalez Kick)",
+            "scorePeriod": "Q4",
+            "homeScore": "17",
+            "awayScore": "20",
+            "teamID": "32",
+            "scoreDetails": "4 plays, 13 yards, 2:10",
+            "scoreType": "TD",
+            "scoreTime": "9:46",
+            "team": "WSH",
+            "playerIDs": [
+              "4426348",
+              "3121422",
+              "3043234"
+            ]
+          }
+        ],
+        "snapCounts": {
+          "offSnapPct": "0.78",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "57",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20250112_WSH@TB",
+        "fantasyPoints": "21.9",
+        "fantasyPointsDefault": {
+          "standard": "14.9",
+          "PPR": "21.9",
+          "halfPPR": "18.4"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "8",
+          "recTD": "1",
+          "longRec": "13",
+          "targets": "12",
+          "recYds": "62",
+          "recAvg": "7.8"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "scoringPlays": [
+          {
+            "score": "Terry McLaurin 5 Yd pass from Marcus Mariota (Zane Gonzalez Kick)",
+            "scorePeriod": "Q4",
+            "homeScore": "19",
+            "awayScore": "23",
+            "teamID": "32",
+            "scoreDetails": "11 plays, 91 yards, 3:15",
+            "scoreType": "TD",
+            "scoreTime": "0:03",
+            "team": "WSH",
+            "playerIDs": [
+              "2576980",
+              "3121422",
+              "3043234"
+            ]
+          }
+        ],
+        "snapCounts": {
+          "offSnapPct": "0.91",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "53",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20250105_WSH@DAL",
+        "fantasyPoints": "20.2",
+        "fantasyPointsDefault": {
+          "standard": "12.2",
+          "PPR": "20.2",
+          "halfPPR": "16.2"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "1",
+          "recTD": "0",
+          "longRec": "5",
+          "targets": "7",
+          "recYds": "5",
+          "recAvg": "5.0"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "snapCounts": {
+          "offSnapPct": "0.82",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "68",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20241229_ATL@WSH",
+        "fantasyPoints": "1.5",
+        "fantasyPointsDefault": {
+          "standard": "0.5",
+          "PPR": "1.5",
+          "halfPPR": "1.0"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "5",
+          "recTD": "1",
+          "longRec": "32",
+          "targets": "6",
+          "recYds": "60",
+          "recAvg": "12.0"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "scoringPlays": [
+          {
+            "score": "Terry McLaurin 32 Yd pass from Jayden Daniels (Zane Gonzalez Kick)",
+            "scorePeriod": "Q2",
+            "homeScore": "14",
+            "awayScore": "21",
+            "teamID": "32",
+            "scoreDetails": "8 plays, 96 yards, 3:43",
+            "scoreType": "TD",
+            "scoreTime": "6:46",
+            "team": "WSH",
+            "playerIDs": [
+              "4426348",
+              "3121422",
+              "3043234"
+            ]
+          }
+        ],
+        "snapCounts": {
+          "offSnapPct": "0.91",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "62",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20241222_PHI@WSH",
+        "fantasyPoints": "17.0",
+        "fantasyPointsDefault": {
+          "standard": "12.0",
+          "PPR": "17.0",
+          "halfPPR": "14.5"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "7",
+          "recTD": "2",
+          "longRec": "25",
+          "targets": "10",
+          "recYds": "73",
+          "recAvg": "10.4"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "scoringPlays": [
+          {
+            "score": "Terry McLaurin 16 Yd pass from Jayden Daniels (Greg Joseph Kick)",
+            "scorePeriod": "Q1",
+            "homeScore": "0",
+            "awayScore": "7",
+            "teamID": "32",
+            "scoreDetails": "12 plays, 56 yards, 6:39",
+            "scoreType": "TD",
+            "scoreTime": "5:28",
+            "team": "WSH",
+            "playerIDs": [
+              "4426348",
+              "3121422",
+              "3975763"
+            ]
+          },
+          {
+            "score": "Terry McLaurin 3 Yd pass from Jayden Daniels (Greg Joseph Kick)",
+            "scorePeriod": "Q2",
+            "homeScore": "0",
+            "awayScore": "14",
+            "teamID": "32",
+            "scoreDetails": "10 plays, 53 yards, 5:47",
+            "scoreType": "TD",
+            "scoreTime": "5:38",
+            "team": "WSH",
+            "playerIDs": [
+              "4426348",
+              "3121422",
+              "3975763"
+            ]
+          }
+        ],
+        "snapCounts": {
+          "offSnapPct": "0.90",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "70",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20241215_WSH@NO",
+        "fantasyPoints": "26.3",
+        "fantasyPointsDefault": {
+          "standard": "19.3",
+          "PPR": "26.3",
+          "halfPPR": "22.8"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "8",
+          "recTD": "2",
+          "longRec": "16",
+          "targets": "8",
+          "recYds": "73",
+          "recAvg": "9.1"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "scoringPlays": [
+          {
+            "score": "Terry McLaurin 16 Yd pass from Jayden Daniels (Zane Gonzalez Kick)",
+            "scorePeriod": "Q1",
+            "homeScore": "21",
+            "awayScore": "0",
+            "teamID": "32",
+            "scoreDetails": "3 plays, 24 yards, 1:09",
+            "scoreType": "TD",
+            "scoreTime": "0:24",
+            "team": "WSH",
+            "playerIDs": [
+              "4426348",
+              "3121422",
+              "3043234"
+            ]
+          },
+          {
+            "score": "Terry McLaurin 3 Yd pass from Jayden Daniels (Zane Gonzalez Kick)",
+            "scorePeriod": "Q2",
+            "homeScore": "28",
+            "awayScore": "0",
+            "teamID": "32",
+            "scoreDetails": "9 plays, 34 yards, 4:20",
+            "scoreType": "TD",
+            "scoreTime": "10:59",
+            "team": "WSH",
+            "playerIDs": [
+              "4426348",
+              "3121422",
+              "3043234"
+            ]
+          }
+        ],
+        "snapCounts": {
+          "offSnapPct": "0.80",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "66",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20241201_TEN@WSH",
+        "fantasyPoints": "27.3",
+        "fantasyPointsDefault": {
+          "standard": "19.3",
+          "PPR": "27.3",
+          "halfPPR": "23.3"
+        }
+      },
+      {
+        "Defense": {
+          "fumblesLost": "0",
+          "defensiveInterceptions": "0",
+          "forcedFumbles": "0",
+          "fumbles": "0",
+          "fumblesRecovered": "1"
+        },
+        "Receiving": {
+          "receptions": "5",
+          "recTD": "1",
+          "longRec": "86",
+          "targets": "6",
+          "recYds": "102",
+          "recAvg": "20.4"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "scoringPlays": [
+          {
+            "score": "Terry McLaurin 86 Yd pass from Jayden Daniels (Austin Seibert PAT Failed)",
+            "scorePeriod": "Q4",
+            "homeScore": "26",
+            "awayScore": "27",
+            "teamID": "32",
+            "scoreDetails": "1 play, 86 yards, 0:12",
+            "scoreType": "TD",
+            "scoreTime": "0:21",
+            "team": "WSH",
+            "playerIDs": [
+              "4426348",
+              "3121422",
+              "3821683"
+            ]
+          }
+        ],
+        "snapCounts": {
+          "offSnapPct": "0.81",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "57",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20241124_DAL@WSH",
+        "fantasyPoints": "22.2",
+        "fantasyPointsDefault": {
+          "standard": "16.2",
+          "PPR": "21.2",
+          "halfPPR": "18.7"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "1",
+          "recTD": "0",
+          "longRec": "10",
+          "targets": "2",
+          "recYds": "10",
+          "recAvg": "10.0"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "snapCounts": {
+          "offSnapPct": "0.71",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "47",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20241114_WSH@PHI",
+        "fantasyPoints": "2.0",
+        "fantasyPointsDefault": {
+          "standard": "1.0",
+          "PPR": "2.0",
+          "halfPPR": "1.5"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "5",
+          "recTD": "0",
+          "longRec": "54",
+          "targets": "6",
+          "recYds": "113",
+          "recAvg": "22.6"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "snapCounts": {
+          "offSnapPct": "0.89",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "57",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20241110_PIT@WSH",
+        "fantasyPoints": "16.3",
+        "fantasyPointsDefault": {
+          "standard": "11.3",
+          "PPR": "16.3",
+          "halfPPR": "13.8"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "2",
+          "recTD": "2",
+          "longRec": "18",
+          "targets": "3",
+          "recYds": "19",
+          "recAvg": "9.5"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "scoringPlays": [
+          {
+            "score": "Terry McLaurin 1 Yd pass from Jayden Daniels (Austin Seibert Kick)",
+            "scorePeriod": "Q1",
+            "homeScore": "0",
+            "awayScore": "7",
+            "teamID": "32",
+            "scoreDetails": "3 plays, 31 yards, 1:11",
+            "scoreType": "TD",
+            "scoreTime": "7:04",
+            "team": "WSH",
+            "playerIDs": [
+              "4426348",
+              "3121422",
+              "3821683"
+            ]
+          },
+          {
+            "score": "Terry McLaurin 18 Yd pass from Jayden Daniels (Austin Seibert Kick)",
+            "scorePeriod": "Q2",
+            "homeScore": "7",
+            "awayScore": "21",
+            "teamID": "32",
+            "scoreDetails": "12 plays, 87 yards, 5:13",
+            "scoreType": "TD",
+            "scoreTime": "0:06",
+            "team": "WSH",
+            "playerIDs": [
+              "4426348",
+              "3121422",
+              "3821683"
+            ]
+          }
+        ],
+        "snapCounts": {
+          "offSnapPct": "0.74",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "46",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20241103_WSH@NYG",
+        "fantasyPoints": "15.9",
+        "fantasyPointsDefault": {
+          "standard": "13.9",
+          "PPR": "15.9",
+          "halfPPR": "14.9"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "5",
+          "recTD": "0",
+          "longRec": "61",
+          "targets": "8",
+          "recYds": "125",
+          "recAvg": "25.0"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "snapCounts": {
+          "offSnapPct": "0.72",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "53",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20241027_CHI@WSH",
+        "fantasyPoints": "17.5",
+        "fantasyPointsDefault": {
+          "standard": "12.5",
+          "PPR": "17.5",
+          "halfPPR": "15.0"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "6",
+          "recTD": "0",
+          "longRec": "25",
+          "targets": "6",
+          "recYds": "98",
+          "recAvg": "16.3"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "snapCounts": {
+          "offSnapPct": "0.71",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "49",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20241020_CAR@WSH",
+        "fantasyPoints": "15.8",
+        "fantasyPointsDefault": {
+          "standard": "9.8",
+          "PPR": "15.8",
+          "halfPPR": "12.8"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "6",
+          "recTD": "2",
+          "longRec": "14",
+          "targets": "7",
+          "recYds": "53",
+          "recAvg": "8.8"
+        },
+        "Rushing": {
+          "rushAvg": "0.0",
+          "rushYds": "0",
+          "carries": "1",
+          "longRush": "0",
+          "rushTD": "0"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "scoringPlays": [
+          {
+            "score": "Terry McLaurin 7 Yd pass from Jayden Daniels (Austin Seibert Kick)",
+            "scorePeriod": "Q2",
+            "homeScore": "10",
+            "awayScore": "10",
+            "teamID": "32",
+            "scoreDetails": "8 plays, 70 yards, 3:39",
+            "scoreType": "TD",
+            "scoreTime": "4:16",
+            "team": "WSH",
+            "playerIDs": [
+              "4426348",
+              "3121422",
+              "3821683"
+            ]
+          },
+          {
+            "score": "Terry McLaurin 6 Yd pass from Jayden Daniels (Austin Seibert Kick)",
+            "scorePeriod": "Q4",
+            "homeScore": "27",
+            "awayScore": "20",
+            "teamID": "32",
+            "scoreDetails": "12 plays, 70 yards, 4:56",
+            "scoreType": "TD",
+            "scoreTime": "12:12",
+            "team": "WSH",
+            "playerIDs": [
+              "4426348",
+              "3121422",
+              "3821683"
+            ]
+          }
+        ],
+        "snapCounts": {
+          "offSnapPct": "0.80",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "47",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20241013_WSH@BAL",
+        "fantasyPoints": "23.5",
+        "fantasyPointsDefault": {
+          "standard": "17.3",
+          "PPR": "23.3",
+          "halfPPR": "20.3"
+        }
+      },
+      {
+        "Defense": {
+          "totalTackles": "1",
+          "fumblesLost": "1",
+          "defTD": "0",
+          "forcedFumbles": "0",
+          "fumbles": "1",
+          "fumblesRecovered": "0",
+          "soloTackles": "1",
+          "tfl": "0",
+          "qbHits": "0",
+          "defensiveInterceptions": "0",
+          "sacks": "0",
+          "passDeflections": "0"
+        },
+        "Receiving": {
+          "receptions": "4",
+          "recTD": "0",
+          "longRec": "66",
+          "targets": "8",
+          "recYds": "112",
+          "recAvg": "28.0"
+        },
+        "Rushing": {
+          "rushAvg": "2.0",
+          "rushYds": "2",
+          "carries": "1",
+          "longRush": "2",
+          "rushTD": "0"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "snapCounts": {
+          "offSnapPct": "0.67",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "45",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20241006_CLE@WSH",
+        "fantasyPoints": "15.6",
+        "fantasyPointsDefault": {
+          "standard": "10.4",
+          "PPR": "14.4",
+          "halfPPR": "12.4"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "7",
+          "recTD": "1",
+          "longRec": "15",
+          "targets": "10",
+          "recYds": "52",
+          "recAvg": "7.4"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "scoringPlays": [
+          {
+            "score": "Terry McLaurin 10 Yd pass from Jayden Daniels (Jayden Daniels Pass to Zach Ertz for Two-Point Conversion)",
+            "scorePeriod": "Q4",
+            "homeScore": "14",
+            "awayScore": "35",
+            "teamID": "32",
+            "scoreDetails": "12 plays, 70 yards, 6:41",
+            "scoreType": "TD",
+            "scoreTime": "8:30",
+            "team": "WSH",
+            "playerIDs": [
+              "4426348",
+              "3121422",
+              "15835"
+            ]
+          }
+        ],
+        "snapCounts": {
+          "offSnapPct": "0.71",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "51",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20240929_WSH@ARI",
+        "fantasyPoints": "18.2",
+        "fantasyPointsDefault": {
+          "standard": "11.2",
+          "PPR": "18.2",
+          "halfPPR": "14.7"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "4",
+          "recTD": "1",
+          "longRec": "55",
+          "targets": "6",
+          "recYds": "100",
+          "recAvg": "25.0"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "scoringPlays": [
+          {
+            "score": "Terry McLaurin 27 Yd pass from Jayden Daniels (Austin Seibert Kick)",
+            "scorePeriod": "Q4",
+            "homeScore": "26",
+            "awayScore": "38",
+            "teamID": "32",
+            "scoreDetails": "12 plays, 70 yards, 7:32",
+            "scoreType": "TD",
+            "scoreTime": "2:10",
+            "team": "WSH",
+            "playerIDs": [
+              "4426348",
+              "3121422",
+              "3821683"
+            ]
+          }
+        ],
+        "snapCounts": {
+          "offSnapPct": "0.85",
+          "defSnap": "0",
+          "stSnap": "1",
+          "stSnapPct": "0.04",
+          "offSnap": "50",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20240923_WSH@CIN",
+        "fantasyPoints": "20.0",
+        "fantasyPointsDefault": {
+          "standard": "16.0",
+          "PPR": "20.0",
+          "halfPPR": "18.0"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "6",
+          "recTD": "0",
+          "longRec": "12",
+          "targets": "8",
+          "recYds": "22",
+          "recAvg": "3.7"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "snapCounts": {
+          "offSnapPct": "0.92",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "66",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20240915_NYG@WSH",
+        "fantasyPoints": "8.2",
+        "fantasyPointsDefault": {
+          "standard": "2.2",
+          "PPR": "8.2",
+          "halfPPR": "5.2"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "2",
+          "recTD": "0",
+          "longRec": "11",
+          "targets": "4",
+          "recYds": "17",
+          "recAvg": "8.5"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "snapCounts": {
+          "offSnapPct": "0.81",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "48",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20240908_WSH@TB",
+        "fantasyPoints": "3.7",
+        "fantasyPointsDefault": {
+          "standard": "1.7",
+          "PPR": "3.7",
+          "halfPPR": "2.7"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "2",
+          "recTD": "0",
+          "longRec": "20",
+          "targets": "3",
+          "recYds": "27",
+          "recAvg": "13.5"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20240817_WSH@MIA",
+        "fantasyPoints": "4.7",
+        "fantasyPointsDefault": {
+          "standard": "2.7",
+          "PPR": "4.7",
+          "halfPPR": "3.7"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "1",
+          "recTD": "0",
+          "longRec": "3",
+          "targets": "1",
+          "recYds": "3",
+          "recAvg": "3.0"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20240810_WSH@NYJ",
+        "fantasyPoints": "1.3",
+        "fantasyPointsDefault": {
+          "standard": "0.3",
+          "PPR": "1.3",
+          "halfPPR": "0.8"
+        }
+      },
+      {
+        "Defense": {
+          "totalTackles": "1",
+          "defTD": "0",
+          "forcedFumbles": "0",
+          "soloTackles": "1",
+          "tfl": "0",
+          "qbHits": "0",
+          "defensiveInterceptions": "0",
+          "sacks": "0",
+          "passDeflections": "0"
+        },
+        "Receiving": {
+          "receptions": "6",
+          "recTD": "0",
+          "longRec": "19",
+          "targets": "8",
+          "recYds": "56",
+          "recAvg": "9.3"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "snapCounts": {
+          "offSnapPct": "0.88",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "43",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20240107_DAL@WSH",
+        "fantasyPoints": "13.6",
+        "fantasyPointsDefault": {
+          "standard": "5.6",
+          "PPR": "11.6",
+          "halfPPR": "8.6"
+        }
+      },
+      {
+        "Defense": {
+          "totalTackles": "1",
+          "defTD": "0",
+          "forcedFumbles": "0",
+          "soloTackles": "1",
+          "tfl": "0",
+          "qbHits": "0",
+          "defensiveInterceptions": "0",
+          "sacks": "1",
+          "passDeflections": "0"
+        },
+        "Receiving": {
+          "receptions": "4",
+          "recTD": "1",
+          "longRec": "42",
+          "targets": "7",
+          "recYds": "61",
+          "recAvg": "15.3"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "scoringPlays": [
+          {
+            "score": "Terry McLaurin 3 Yd pass from Sam Howell (Joey Slye Kick)",
+            "scorePeriod": "Q2",
+            "homeScore": "10",
+            "awayScore": "10",
+            "teamID": "32",
+            "scoreDetails": "9 plays, 84 yards, 5:18",
+            "scoreType": "TD",
+            "scoreTime": "4:33",
+            "team": "WSH",
+            "playerIDs": [
+              "4426875",
+              "3121422",
+              "3124084"
+            ]
+          }
+        ],
+        "snapCounts": {
+          "offSnapPct": "0.89",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "41",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20231231_SF@WSH",
+        "fantasyPoints": "19.1",
+        "fantasyPointsDefault": {
+          "standard": "12.1",
+          "PPR": "16.1",
+          "halfPPR": "14.1"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "3",
+          "recTD": "0",
+          "longRec": "29",
+          "targets": "5",
+          "recYds": "50",
+          "recAvg": "16.7"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "snapCounts": {
+          "offSnapPct": "0.92",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "56",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20231224_WSH@NYJ",
+        "fantasyPoints": "8.0",
+        "fantasyPointsDefault": {
+          "standard": "5.0",
+          "PPR": "8.0",
+          "halfPPR": "6.5"
+        }
+      },
+      {
+        "Defense": {
+          "totalTackles": "1",
+          "defTD": "0",
+          "forcedFumbles": "0",
+          "soloTackles": "1",
+          "tfl": "0",
+          "qbHits": "0",
+          "defensiveInterceptions": "0",
+          "sacks": "0",
+          "passDeflections": "0"
+        },
+        "Receiving": {
+          "receptions": "6",
+          "recTD": "1",
+          "longRec": "48",
+          "targets": "12",
+          "recYds": "141",
+          "recAvg": "23.5"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "scoringPlays": [
+          {
+            "score": "Terry McLaurin 29 Yd pass from Jacoby Brissett (Joey Slye Kick)",
+            "scorePeriod": "Q4",
+            "homeScore": "28",
+            "awayScore": "14",
+            "teamID": "32",
+            "scoreDetails": "5 plays, 67 yards, 1:48",
+            "scoreType": "TD",
+            "scoreTime": "7:17",
+            "team": "WSH",
+            "playerIDs": [
+              "2578570",
+              "3121422",
+              "3124084"
+            ]
+          }
+        ],
+        "snapCounts": {
+          "offSnapPct": "0.85",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "51",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20231217_WSH@LAR",
+        "fantasyPoints": "28.1",
+        "fantasyPointsDefault": {
+          "standard": "20.1",
+          "PPR": "26.1",
+          "halfPPR": "23.1"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "0",
+          "recTD": "0",
+          "longRec": "0",
+          "targets": "3",
+          "recYds": "0",
+          "recAvg": "0.0"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "snapCounts": {
+          "offSnapPct": "0.82",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "45",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20231203_MIA@WSH",
+        "fantasyPoints": "0.0",
+        "fantasyPointsDefault": {
+          "standard": "0.0",
+          "PPR": "0.0",
+          "halfPPR": "0.0"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "4",
+          "recTD": "0",
+          "longRec": "24",
+          "targets": "11",
+          "recYds": "50",
+          "recAvg": "12.5"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "snapCounts": {
+          "offSnapPct": "0.85",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "66",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20231123_WSH@DAL",
+        "fantasyPoints": "9.0",
+        "fantasyPointsDefault": {
+          "standard": "5.0",
+          "PPR": "9.0",
+          "halfPPR": "7.0"
+        }
+      },
+      {
+        "Defense": {
+          "totalTackles": "1",
+          "defTD": "0",
+          "forcedFumbles": "0",
+          "soloTackles": "1",
+          "tfl": "0",
+          "qbHits": "0",
+          "defensiveInterceptions": "0",
+          "sacks": "0",
+          "passDeflections": "0"
+        },
+        "Receiving": {
+          "receptions": "5",
+          "recTD": "0",
+          "longRec": "11",
+          "targets": "7",
+          "recYds": "43",
+          "recAvg": "8.6"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "snapCounts": {
+          "offSnapPct": "0.80",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "65",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20231119_NYG@WSH",
+        "fantasyPoints": "11.3",
+        "fantasyPointsDefault": {
+          "standard": "4.3",
+          "PPR": "9.3",
+          "halfPPR": "6.8"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "4",
+          "recTD": "0",
+          "longRec": "13",
+          "targets": "8",
+          "recYds": "33",
+          "recAvg": "8.3"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "snapCounts": {
+          "offSnapPct": "0.87",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "53",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20231112_WSH@SEA",
+        "fantasyPoints": "7.3",
+        "fantasyPointsDefault": {
+          "standard": "3.3",
+          "PPR": "7.3",
+          "halfPPR": "5.3"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "5",
+          "recTD": "0",
+          "longRec": "36",
+          "targets": "8",
+          "recYds": "73",
+          "recAvg": "14.6"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "snapCounts": {
+          "offSnapPct": "0.86",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "67",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20231105_WSH@NE",
+        "fantasyPoints": "12.3",
+        "fantasyPointsDefault": {
+          "standard": "7.3",
+          "PPR": "12.3",
+          "halfPPR": "9.8"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "5",
+          "recTD": "1",
+          "longRec": "26",
+          "targets": "12",
+          "recYds": "63",
+          "recAvg": "12.6"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "scoringPlays": [
+          {
+            "score": "Terry McLaurin 26 Yd pass from Sam Howell (Joey Slye Kick)",
+            "scorePeriod": "Q1",
+            "homeScore": "7",
+            "awayScore": "0",
+            "teamID": "32",
+            "scoreDetails": "3 plays, 62 yards, 0:54",
+            "scoreType": "TD",
+            "scoreTime": "7:13",
+            "team": "WSH",
+            "playerIDs": [
+              "4426875",
+              "3121422",
+              "3124084"
+            ]
+          }
+        ],
+        "snapCounts": {
+          "offSnapPct": "0.94",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "68",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20231029_PHI@WSH",
+        "fantasyPoints": "17.3",
+        "fantasyPointsDefault": {
+          "standard": "12.3",
+          "PPR": "17.3",
+          "halfPPR": "14.8"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "6",
+          "recTD": "0",
+          "longRec": "31",
+          "targets": "9",
+          "recYds": "90",
+          "recAvg": "15.0"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "snapCounts": {
+          "offSnapPct": "0.88",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "61",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20231022_WSH@NYG",
+        "fantasyPoints": "15.0",
+        "fantasyPointsDefault": {
+          "standard": "9.0",
+          "PPR": "15.0",
+          "halfPPR": "12.0"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "6",
+          "recTD": "0",
+          "longRec": "22",
+          "targets": "11",
+          "recYds": "81",
+          "recAvg": "13.5"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "snapCounts": {
+          "offSnapPct": "0.84",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "43",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20231015_WSH@ATL",
+        "fantasyPoints": "14.1",
+        "fantasyPointsDefault": {
+          "standard": "8.1",
+          "PPR": "14.1",
+          "halfPPR": "11.1"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "4",
+          "recTD": "0",
+          "longRec": "32",
+          "targets": "5",
+          "recYds": "49",
+          "recAvg": "12.3"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "snapCounts": {
+          "offSnapPct": "0.83",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "58",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20231005_CHI@WSH",
+        "fantasyPoints": "8.9",
+        "fantasyPointsDefault": {
+          "standard": "4.9",
+          "PPR": "8.9",
+          "halfPPR": "6.9"
+        }
+      },
+      {
+        "Defense": {
+          "fumblesLost": "0",
+          "defensiveInterceptions": "0",
+          "forcedFumbles": "0",
+          "defTD": "1",
+          "fumbles": "0",
+          "fumblesRecovered": "1"
+        },
+        "Receiving": {
+          "receptions": "8",
+          "recTD": "0",
+          "longRec": "24",
+          "targets": "10",
+          "recYds": "86",
+          "recAvg": "10.8"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "scoringPlays": [
+          {
+            "score": "Terry McLaurin 0 Yd Fumble Recovery (Joey Slye Kick)",
+            "scorePeriod": "Q2",
+            "homeScore": "7",
+            "awayScore": "14",
+            "teamID": "32",
+            "scoreDetails": "7 plays, 75 yards, 3:21",
+            "scoreType": "TD",
+            "scoreTime": "12:56",
+            "team": "WSH",
+            "playerIDs": [
+              "3121422",
+              "3124084"
+            ]
+          }
+        ],
+        "snapCounts": {
+          "offSnapPct": "0.81",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "63",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20231001_WSH@PHI",
+        "fantasyPoints": "23.6",
+        "fantasyPointsDefault": {
+          "standard": "14.6",
+          "PPR": "22.6",
+          "halfPPR": "18.6"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "6",
+          "recTD": "0",
+          "longRec": "12",
+          "targets": "6",
+          "recYds": "41",
+          "recAvg": "6.8"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "snapCounts": {
+          "offSnapPct": "0.81",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "44",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20230924_BUF@WSH",
+        "fantasyPoints": "10.1",
+        "fantasyPointsDefault": {
+          "standard": "4.1",
+          "PPR": "10.1",
+          "halfPPR": "7.1"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "5",
+          "recTD": "1",
+          "longRec": "30",
+          "targets": "6",
+          "recYds": "54",
+          "recAvg": "10.8"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "scoringPlays": [
+          {
+            "score": "Terry McLaurin 30 Yd pass from Sam Howell (Joey Slye Kick)",
+            "scorePeriod": "Q3",
+            "homeScore": "21",
+            "awayScore": "21",
+            "teamID": "32",
+            "scoreDetails": "5 plays, 57 yards, 2:01",
+            "scoreType": "TD",
+            "scoreTime": "11:47",
+            "team": "WSH",
+            "playerIDs": [
+              "4426875",
+              "3121422",
+              "3124084"
+            ]
+          }
+        ],
+        "snapCounts": {
+          "offSnapPct": "0.74",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "54",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20230917_WSH@DEN",
+        "fantasyPoints": "16.4",
+        "fantasyPointsDefault": {
+          "standard": "11.4",
+          "PPR": "16.4",
+          "halfPPR": "13.9"
+        }
+      },
+      {
+        "Defense": {
+          "totalTackles": "1",
+          "defTD": "0",
+          "forcedFumbles": "0",
+          "soloTackles": "1",
+          "tfl": "0",
+          "qbHits": "0",
+          "defensiveInterceptions": "0",
+          "sacks": "0",
+          "passDeflections": "0"
+        },
+        "Receiving": {
+          "receptions": "2",
+          "recTD": "0",
+          "longRec": "19",
+          "targets": "4",
+          "recYds": "31",
+          "recAvg": "15.5"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "snapCounts": {
+          "offSnapPct": "0.89",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "63",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20230910_ARI@WSH",
+        "fantasyPoints": "7.1",
+        "fantasyPointsDefault": {
+          "standard": "3.1",
+          "PPR": "5.1",
+          "halfPPR": "4.1"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "3",
+          "recTD": "0",
+          "longRec": "13",
+          "targets": "3",
+          "recYds": "39",
+          "recAvg": "13.0"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20230821_BAL@WSH",
+        "fantasyPoints": "6.9",
+        "fantasyPointsDefault": {
+          "standard": "3.9",
+          "PPR": "6.9",
+          "halfPPR": "5.4"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "1",
+          "recTD": "0",
+          "longRec": "7",
+          "targets": "1",
+          "recYds": "7",
+          "recAvg": "7.0"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20230811_WSH@CLE",
+        "fantasyPoints": "1.7",
+        "fantasyPointsDefault": {
+          "standard": "0.7",
+          "PPR": "1.7",
+          "halfPPR": "1.2"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "3",
+          "recTD": "1",
+          "longRec": "52",
+          "targets": "6",
+          "recYds": "74",
+          "recAvg": "24.7"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "scoringPlays": [
+          {
+            "score": "Terry McLaurin 16 Yd pass from Sam Howell (Joey Slye Kick)",
+            "scorePeriod": "Q1",
+            "homeScore": "7",
+            "awayScore": "0",
+            "teamID": "32",
+            "scoreDetails": "2 plays, 20 yards, 0:37",
+            "scoreType": "TD",
+            "scoreTime": "11:08",
+            "team": "WSH",
+            "playerIDs": [
+              "4426875",
+              "3121422",
+              "3124084"
+            ]
+          }
+        ],
+        "snapCounts": {
+          "offSnapPct": "0.76",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "50",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20230108_DAL@WSH",
+        "fantasyPoints": "16.4",
+        "fantasyPointsDefault": {
+          "standard": "13.4",
+          "PPR": "16.4",
+          "halfPPR": "14.9"
+        }
+      },
+      {
+        "Defense": {
+          "totalTackles": "1",
+          "defTD": "0",
+          "forcedFumbles": "0",
+          "soloTackles": "1",
+          "tfl": "0",
+          "qbHits": "0",
+          "defensiveInterceptions": "0",
+          "sacks": "0",
+          "passDeflections": "0"
+        },
+        "Receiving": {
+          "receptions": "2",
+          "recTD": "0",
+          "longRec": "23",
+          "targets": "5",
+          "recYds": "25",
+          "recAvg": "12.5"
+        },
+        "Rushing": {
+          "rushAvg": "12.0",
+          "rushYds": "12",
+          "carries": "1",
+          "longRush": "12",
+          "rushTD": "0"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "snapCounts": {
+          "offSnapPct": "0.81",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "56",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20230101_CLE@WSH",
+        "fantasyPoints": "7.9",
+        "fantasyPointsDefault": {
+          "standard": "3.7",
+          "PPR": "5.7",
+          "halfPPR": "4.7"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "4",
+          "recTD": "1",
+          "longRec": "51",
+          "targets": "5",
+          "recYds": "77",
+          "recAvg": "19.3"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "scoringPlays": [
+          {
+            "score": "Terry McLaurin 3 Yd pass from Taylor Heinicke (Joey Slye Kick)",
+            "scorePeriod": "Q3",
+            "homeScore": "21",
+            "awayScore": "14",
+            "teamID": "32",
+            "scoreDetails": "4 plays, 75 yards, 2:06",
+            "scoreType": "TD",
+            "scoreTime": "2:46",
+            "team": "WSH",
+            "playerIDs": [
+              "2565969",
+              "3121422",
+              "3124084"
+            ]
+          }
+        ],
+        "snapCounts": {
+          "offSnapPct": "0.93",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "68",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20221224_WSH@SF",
+        "fantasyPoints": "17.7",
+        "fantasyPointsDefault": {
+          "standard": "13.7",
+          "PPR": "17.7",
+          "halfPPR": "15.7"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "6",
+          "recTD": "0",
+          "longRec": "20",
+          "targets": "6",
+          "recYds": "70",
+          "recAvg": "11.7"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "snapCounts": {
+          "offSnapPct": "0.92",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "58",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20221218_NYG@WSH",
+        "fantasyPoints": "13.0",
+        "fantasyPointsDefault": {
+          "standard": "7.0",
+          "PPR": "13.0",
+          "halfPPR": "10.0"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "8",
+          "recTD": "1",
+          "longRec": "20",
+          "targets": "12",
+          "recYds": "105",
+          "recAvg": "13.1"
+        },
+        "cbsLongName": "Terry McLaurin",
+        "longName": "Terry McLaurin",
+        "playerAbv": "T. McLaurin",
+        "playerID": "3121422",
+        "playerName": "Terry McLaurin",
+        "scoringPlays": [
+          {
+            "score": "Terry McLaurin 19 Yd pass from Taylor Heinicke (Joey Slye Kick)",
+            "scorePeriod": "Q1",
+            "homeScore": "0",
+            "awayScore": "10",
+            "teamID": "32",
+            "scoreDetails": "8 plays, 62 yards, 4:04",
+            "scoreType": "TD",
+            "scoreTime": "2:27",
+            "team": "WSH",
+            "playerIDs": [
+              "2565969",
+              "3121422",
+              "3124084"
+            ]
+          }
+        ],
+        "snapCounts": {
+          "offSnapPct": "0.91",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "77",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20221204_WSH@NYG",
+        "fantasyPoints": "24.5",
+        "fantasyPointsDefault": {
+          "standard": "16.5",
+          "PPR": "24.5",
+          "halfPPR": "20.5"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "4",
+          "recTD": "0",
+          "longRec": "26",
+          "targets": "6",
+          "recYds": "48",
+          "recAvg": "12.0"
+        },
+        "Rushing": {
+          "rushAvg": "5.0",
+          "rushYds": "5",
+          "carries": "1",
+          "longRush": "5",
+          "rushTD": "0"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "playerName": "Terry McLaurin",
+        "snapCounts": {
+          "offSnapPct": "0.82",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "51",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20221127_ATL@WSH",
+        "fantasyPoints": "9.5",
+        "fantasyPointsDefault": {
+          "standard": "5.3",
+          "PPR": "9.3",
+          "halfPPR": "7.3"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "4",
+          "recTD": "0",
+          "longRec": "19",
+          "targets": "7",
+          "recYds": "55",
+          "recAvg": "13.8"
+        },
+        "Rushing": {
+          "rushAvg": "1.0",
+          "rushYds": "1",
+          "carries": "1",
+          "longRush": "1",
+          "rushTD": "0"
+        },
+        "cbsLongName": "Terry McLaurin",
+        "longName": "Terry McLaurin",
+        "playerAbv": "T. McLaurin",
+        "playerID": "3121422",
+        "playerName": "Terry McLaurin",
+        "snapCounts": {
+          "offSnapPct": "0.72",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "49",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20221120_WSH@HOU",
+        "fantasyPoints": "9.8",
+        "fantasyPointsDefault": {
+          "standard": "5.6",
+          "PPR": "9.6",
+          "halfPPR": "7.6"
+        }
+      },
+      {
+        "Defense": {
+          "totalTackles": "1",
+          "defTD": "0",
+          "forcedFumbles": "0",
+          "soloTackles": "1",
+          "tfl": "0",
+          "qbHits": "0",
+          "defensiveInterceptions": "0",
+          "sacks": "0",
+          "passDeflections": "0"
+        },
+        "Receiving": {
+          "receptions": "8",
+          "recTD": "0",
+          "longRec": "41",
+          "targets": "11",
+          "recYds": "128",
+          "recAvg": "16.0"
+        },
+        "longName": "Terry McLaurin",
+        "playerID": "3121422",
+        "playerName": "Terry McLaurin",
+        "snapCounts": {
+          "offSnapPct": "0.86",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "71",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20221114_WSH@PHI",
+        "fantasyPoints": "22.8",
+        "fantasyPointsDefault": {
+          "standard": "12.8",
+          "PPR": "20.8",
+          "halfPPR": "16.8"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "5",
+          "recTD": "0",
+          "longRec": "18",
+          "targets": "9",
+          "recYds": "56",
+          "recAvg": "11.2"
+        },
+        "longName": "Terry McLaurin",
+        "playerAbv": "T. McLaurin",
+        "playerID": "3121422",
+        "playerName": "Terry McLaurin",
+        "snapCounts": {
+          "offSnapPct": "1.00",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "64",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20221106_MIN@WSH",
+        "fantasyPoints": "10.6",
+        "fantasyPointsDefault": {
+          "standard": "5.6",
+          "PPR": "10.6",
+          "halfPPR": "8.1"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "6",
+          "recTD": "0",
+          "longRec": "42",
+          "targets": "8",
+          "recYds": "113",
+          "recAvg": "18.8"
+        },
+        "Rushing": {
+          "rushAvg": "-7.0",
+          "rushYds": "-7",
+          "carries": "1",
+          "longRush": "-7",
+          "rushTD": "0"
+        },
+        "longName": "Terry McLaurin",
+        "playerAbv": "T. McLaurin",
+        "playerID": "3121422",
+        "playerName": "Terry McLaurin",
+        "snapCounts": {
+          "offSnapPct": "0.95",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "58",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20221030_WSH@IND",
+        "fantasyPoints": "16.8",
+        "fantasyPointsDefault": {
+          "standard": "10.6",
+          "PPR": "16.6",
+          "halfPPR": "13.6"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "5",
+          "recTD": "1",
+          "longRec": "37",
+          "targets": "8",
+          "recYds": "73",
+          "recAvg": "14.6"
+        },
+        "longName": "Terry McLaurin",
+        "playerAbv": "T. McLaurin",
+        "playerID": "3121422",
+        "playerName": "Terry McLaurin",
+        "scoringPlays": [
+          {
+            "score": "Terry McLaurin 37 Yd pass from Taylor Heinicke (Joey Slye Kick)",
+            "scorePeriod": "Q3",
+            "homeScore": "17",
+            "awayScore": "14",
+            "teamID": "32",
+            "scoreDetails": "5 plays, 74 yards, 3:11",
+            "scoreType": "TD",
+            "scoreTime": "11:49",
+            "team": "WSH",
+            "playerIDs": [
+              "2565969",
+              "3121422",
+              "3124084"
+            ]
+          }
+        ],
+        "snapCounts": {
+          "offSnapPct": "0.95",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "70",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20221023_GB@WSH",
+        "fantasyPoints": "18.3",
+        "fantasyPointsDefault": {
+          "standard": "13.3",
+          "PPR": "18.3",
+          "halfPPR": "15.8"
+        }
+      },
+      {
+        "Defense": {
+          "fumblesLost": "0",
+          "defensiveInterceptions": "0",
+          "forcedFumbles": "0",
+          "fumbles": "1",
+          "fumblesRecovered": "1"
+        },
+        "Receiving": {
+          "receptions": "3",
+          "recTD": "0",
+          "longRec": "17",
+          "targets": "4",
+          "recYds": "41",
+          "recAvg": "13.7"
+        },
+        "Rushing": {
+          "rushAvg": "5.5",
+          "rushYds": "11",
+          "carries": "2",
+          "longRush": "6",
+          "rushTD": "0"
+        },
+        "longName": "Terry McLaurin",
+        "playerAbv": "T. McLaurin",
+        "playerID": "3121422",
+        "playerName": "Terry McLaurin",
+        "snapCounts": {
+          "offSnapPct": "0.98",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "56",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20221013_WSH@CHI",
+        "fantasyPoints": "9.6",
+        "fantasyPointsDefault": {
+          "standard": "5.2",
+          "PPR": "8.2",
+          "halfPPR": "6.7"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "5",
+          "recTD": "0",
+          "longRec": "34",
+          "targets": "6",
+          "recYds": "76",
+          "recAvg": "15.2"
+        },
+        "longName": "Terry McLaurin",
+        "playerAbv": "T. McLaurin",
+        "playerID": "3121422",
+        "playerName": "Terry McLaurin",
+        "snapCounts": {
+          "offSnapPct": "0.98",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "62",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20221009_TEN@WSH",
+        "fantasyPoints": "12.6",
+        "fantasyPointsDefault": {
+          "standard": "7.6",
+          "PPR": "12.6",
+          "halfPPR": "10.1"
+        }
+      },
+      {
+        "Defense": {
+          "totalTackles": "1",
+          "defTD": "0",
+          "forcedFumbles": "0",
+          "soloTackles": "1",
+          "tfl": "0",
+          "qbHits": "0",
+          "defensiveInterceptions": "0",
+          "sacks": "0",
+          "passDeflections": "0"
+        },
+        "Receiving": {
+          "receptions": "2",
+          "recTD": "0",
+          "longRec": "9",
+          "targets": "6",
+          "recYds": "15",
+          "recAvg": "7.5"
+        },
+        "longName": "Terry McLaurin",
+        "playerAbv": "T. McLaurin",
+        "playerID": "3121422",
+        "playerName": "Terry McLaurin",
+        "snapCounts": {
+          "offSnapPct": "0.95",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "70",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20221002_WSH@DAL",
+        "fantasyPoints": "5.5",
+        "fantasyPointsDefault": {
+          "standard": "1.5",
+          "PPR": "3.5",
+          "halfPPR": "2.5"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "6",
+          "recTD": "0",
+          "longRec": "45",
+          "targets": "9",
+          "recYds": "102",
+          "recAvg": "17.0"
+        },
+        "longName": "Terry McLaurin",
+        "playerAbv": "T. McLaurin",
+        "playerID": "3121422",
+        "playerName": "Terry McLaurin",
+        "snapCounts": {
+          "offSnapPct": "0.88",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "68",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20220925_PHI@WSH",
+        "fantasyPoints": "16.2",
+        "fantasyPointsDefault": {
+          "standard": "10.2",
+          "PPR": "16.2",
+          "halfPPR": "13.2"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "4",
+          "recTD": "0",
+          "longRec": "35",
+          "targets": "8",
+          "recYds": "75",
+          "recAvg": "18.8"
+        },
+        "Rushing": {
+          "rushAvg": "7.0",
+          "rushYds": "7",
+          "carries": "1",
+          "longRush": "7",
+          "rushTD": "0"
+        },
+        "longName": "Terry McLaurin",
+        "playerAbv": "T. McLaurin",
+        "playerID": "3121422",
+        "playerName": "Terry McLaurin",
+        "snapCounts": {
+          "offSnapPct": "0.89",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "66",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20220918_WSH@DET",
+        "fantasyPoints": "12.4",
+        "fantasyPointsDefault": {
+          "standard": "8.2",
+          "PPR": "12.2",
+          "halfPPR": "10.2"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "2",
+          "recTD": "1",
+          "longRec": "49",
+          "targets": "4",
+          "recYds": "58",
+          "recAvg": "29.0"
+        },
+        "longName": "Terry McLaurin",
+        "playerAbv": "T. McLaurin",
+        "playerID": "3121422",
+        "playerName": "Terry McLaurin",
+        "scoringPlays": [
+          {
+            "score": "Terry McLaurin 49 Yd pass from Carson Wentz (Two-Point Pass Conversion Failed)",
+            "scorePeriod": "Q4",
+            "homeScore": "20",
+            "awayScore": "22",
+            "teamID": "32",
+            "scoreDetails": "4 plays, 78 yards, 2:09",
+            "scoreType": "TD",
+            "scoreTime": "9:36",
+            "team": "WSH",
+            "playerIDs": [
+              "2573079",
+              "3121422"
+            ]
+          }
+        ],
+        "snapCounts": {
+          "offSnapPct": "0.90",
+          "defSnap": "0",
+          "stSnap": "0",
+          "stSnapPct": "0.00",
+          "offSnap": "69",
+          "defSnapPct": "0.00"
+        },
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20220911_JAX@WSH",
+        "fantasyPoints": "13.8",
+        "fantasyPointsDefault": {
+          "standard": "11.8",
+          "PPR": "13.8",
+          "halfPPR": "12.8"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "2",
+          "recTD": "0",
+          "longRec": "18",
+          "targets": "2",
+          "recYds": "27",
+          "recAvg": "13.5"
+        },
+        "longName": "Terry McLaurin",
+        "playerAbv": "T. McLaurin",
+        "playerID": "3121422",
+        "playerName": "Terry McLaurin",
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20220820_WSH@KC",
+        "fantasyPoints": "4.7",
+        "fantasyPointsDefault": {
+          "standard": "2.7",
+          "PPR": "4.7",
+          "halfPPR": "3.7"
+        }
+      },
+      {
+        "Receiving": {
+          "receptions": "1",
+          "recTD": "0",
+          "longRec": "16",
+          "targets": "2",
+          "recYds": "16",
+          "recAvg": "16.0"
+        },
+        "longName": "Terry McLaurin",
+        "playerAbv": "T. McLaurin",
+        "playerID": "3121422",
+        "playerName": "Terry McLaurin",
+        "team": "WSH",
+        "teamAbv": "WSH",
+        "teamID": "32",
+        "gameID": "20220813_CAR@WSH",
+        "fantasyPoints": "2.6",
+        "fantasyPointsDefault": {
+          "standard": "1.6",
+          "PPR": "2.6",
+          "halfPPR": "2.1"
+        }
+      }
+    ]
+  }

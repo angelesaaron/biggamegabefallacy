@@ -1,0 +1,5509 @@
+{
+    "statusCode": 200,
+    "body": [
+      {
+        "gameID": "20250907_ARI@NO",
+        "awayTeam": "ARI",
+        "gameDate": "20250907",
+        "homeTeam": "NO",
+        "last_updated_e_time": "1754949986.6076572",
+        "teamIDAway": "1",
+        "teamIDHome": "23",
+        "playerProps": [
+          {
+            "propBets": {
+              "firsttd": "400",
+              "anytd": "-140",
+              "rushyds": "67.5"
+            },
+            "playerID": "3045147"
+          },
+          {
+            "propBets": {
+              "rushyds": "58.5",
+              "firsttd": "600",
+              "anytd": "100",
+              "recyds": "30.5"
+            },
+            "playerID": "3054850"
+          },
+          {
+            "propBets": {
+              "firsttd": "700",
+              "anytd": "125",
+              "recyds": "59.5"
+            },
+            "playerID": "4432708"
+          },
+          {
+            "propBets": {
+              "firsttd": "900",
+              "anytd": "185",
+              "recyds": "59.5"
+            },
+            "playerID": "4361307"
+          },
+          {
+            "propBets": {
+              "rushyds": "26.5",
+              "firsttd": "900",
+              "passyds": "222.5",
+              "anytd": "190"
+            },
+            "playerID": "3917315"
+          },
+          {
+            "propBets": {
+              "firsttd": "1200",
+              "anytd": "265"
+            },
+            "playerID": "4429275"
+          },
+          {
+            "propBets": {
+              "firsttd": "1200",
+              "anytd": "200",
+              "recyds": "44.5"
+            },
+            "playerID": "4361370"
+          },
+          {
+            "propBets": {
+              "firsttd": "1500",
+              "anytd": "320"
+            },
+            "playerID": "3059722"
+          },
+          {
+            "propBets": {
+              "firsttd": "1600",
+              "anytd": "360"
+            },
+            "playerID": "4360761"
+          },
+          {
+            "propBets": {
+              "firsttd": "1900",
+              "anytd": "370"
+            },
+            "playerID": "3929645"
+          },
+          {
+            "propBets": {
+              "firsttd": "1900",
+              "anytd": "340",
+              "recyds": "32.5"
+            },
+            "playerID": "4032473"
+          },
+          {
+            "propBets": {
+              "firsttd": "2000",
+              "anytd": "450"
+            },
+            "playerID": "4426339"
+          },
+          {
+            "propBets": {
+              "firsttd": "2500",
+              "anytd": "550"
+            },
+            "playerID": "16731"
+          },
+          {
+            "propBets": {
+              "firsttd": "2500",
+              "anytd": "500"
+            },
+            "playerID": "4599739"
+          },
+          {
+            "propBets": {
+              "firsttd": "2800",
+              "anytd": "650"
+            },
+            "playerID": "4037235"
+          },
+          {
+            "propBets": {
+              "firsttd": "2800",
+              "anytd": "500"
+            },
+            "playerID": "4569559"
+          },
+          {
+            "propBets": {
+              "firsttd": "3000",
+              "anytd": "800"
+            },
+            "playerID": "4362478"
+          },
+          {
+            "propBets": {
+              "firsttd": "3500",
+              "anytd": "850"
+            },
+            "playerID": "4426844"
+          },
+          {
+            "propBets": {
+              "firsttd": "3500",
+              "anytd": "1000"
+            },
+            "playerID": "4428811"
+          },
+          {
+            "propBets": {
+              "firsttd": "4000",
+              "anytd": "1000"
+            },
+            "playerID": "4682652"
+          },
+          {
+            "propBets": {
+              "firsttd": "4500",
+              "anytd": "1200"
+            },
+            "playerID": "4360739"
+          },
+          {
+            "propBets": {
+              "firsttd": "5000",
+              "anytd": "1400"
+            },
+            "playerID": "4696700"
+          },
+          {
+            "propBets": {
+              "firsttd": "5500",
+              "anytd": "1300"
+            },
+            "playerID": "4036335"
+          },
+          {
+            "propBets": {
+              "firsttd": "6000",
+              "anytd": "1700"
+            },
+            "playerID": "4242214"
+          },
+          {
+            "propBets": {
+              "firsttd": "6000",
+              "anytd": "1300"
+            },
+            "playerID": "4573697"
+          },
+          {
+            "propBets": {
+              "firsttd": "6500",
+              "anytd": "1700"
+            },
+            "playerID": "3914151"
+          },
+          {
+            "propBets": {
+              "firsttd": "6500",
+              "anytd": "1800"
+            },
+            "playerID": "4875912"
+          },
+          {
+            "propBets": {
+              "firsttd": "8000",
+              "anytd": "2000"
+            },
+            "playerID": "4034862"
+          },
+          {
+            "propBets": {
+              "firsttd": "10000",
+              "anytd": "2200"
+            },
+            "playerID": "3127306"
+          },
+          {
+            "propBets": {
+              "firsttd": "11000",
+              "anytd": "2500"
+            },
+            "playerID": "4372758"
+          },
+          {
+            "propBets": {
+              "anytd": "1500"
+            },
+            "playerID": "4240657"
+          }
+        ],
+        "sportsBooks": [
+          {
+            "sportsBook": "ballybet",
+            "odds": {
+              "totalUnder": "42",
+              "awayTeamSpread": "-5.5",
+              "awayTeamSpreadOdds": "-112",
+              "homeTeamSpread": "+5.5",
+              "homeTeamSpreadOdds": "-109",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "-245",
+              "homeTeamMLOdds": "+195",
+              "totalOver": "42",
+              "impliedTotals": {
+                "awayTotal": "23.75",
+                "homeTotal": "18.25"
+              }
+            }
+          },
+          {
+            "sportsBook": "bet365",
+            "odds": {
+              "totalUnder": "42.5",
+              "awayTeamSpread": "-6",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "+6",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "-240",
+              "homeTeamMLOdds": "+195",
+              "totalOver": "42.5",
+              "impliedTotals": {
+                "awayTotal": "24.25",
+                "homeTotal": "18.25"
+              }
+            }
+          },
+          {
+            "sportsBook": "betmgm",
+            "odds": {
+              "totalUnder": "42.5",
+              "awayTeamSpread": "-6",
+              "awayTeamSpreadOdds": "-105",
+              "homeTeamSpread": "+6",
+              "homeTeamSpreadOdds": "-115",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "-250",
+              "homeTeamMLOdds": "+200",
+              "totalOver": "42.5",
+              "impliedTotals": {
+                "awayTotal": "24.25",
+                "homeTotal": "18.25"
+              }
+            }
+          },
+          {
+            "sportsBook": "betrivers",
+            "odds": {
+              "totalUnder": "42",
+              "awayTeamSpread": "-5.5",
+              "awayTeamSpreadOdds": "-112",
+              "homeTeamSpread": "+5.5",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-112",
+              "totalUnderOdds": "-112",
+              "awayTeamMLOdds": "-245",
+              "homeTeamMLOdds": "+190",
+              "totalOver": "42",
+              "impliedTotals": {
+                "awayTotal": "23.75",
+                "homeTotal": "18.25"
+              }
+            }
+          },
+          {
+            "sportsBook": "caesars_sportsbook",
+            "odds": {
+              "totalUnder": "42.5",
+              "awayTeamSpread": "-6",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "+6",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "-240",
+              "homeTeamMLOdds": "+196",
+              "totalOver": "42.5",
+              "impliedTotals": {
+                "awayTotal": "24.25",
+                "homeTotal": "18.25"
+              }
+            }
+          },
+          {
+            "sportsBook": "draftkings",
+            "odds": {
+              "totalUnder": "42.5",
+              "awayTeamSpread": "-5.5",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "+5.5",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "-238",
+              "homeTeamMLOdds": "+195",
+              "totalOver": "42.5",
+              "impliedTotals": {
+                "awayTotal": "24.0",
+                "homeTotal": "18.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "espnbet",
+            "odds": {
+              "totalUnder": "42.5",
+              "awayTeamSpread": "-5.5",
+              "awayTeamSpreadOdds": "-115",
+              "homeTeamSpread": "+5.5",
+              "homeTeamSpreadOdds": "-105",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "-250",
+              "homeTeamMLOdds": "+210",
+              "totalOver": "42.5",
+              "impliedTotals": {
+                "awayTotal": "24.0",
+                "homeTotal": "18.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "fanduel",
+            "odds": {
+              "totalUnder": "41.5",
+              "awayTeamSpread": "-5.5",
+              "awayTeamSpreadOdds": "-115",
+              "homeTeamSpread": "+5.5",
+              "homeTeamSpreadOdds": "-105",
+              "totalOverOdds": "-115",
+              "totalUnderOdds": "-105",
+              "awayTeamMLOdds": "-260",
+              "homeTeamMLOdds": "+215",
+              "totalOver": "41.5",
+              "impliedTotals": {
+                "awayTotal": "23.5",
+                "homeTotal": "18.0"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "gameID": "20250907_BAL@BUF",
+        "awayTeam": "BAL",
+        "gameDate": "20250907",
+        "homeTeam": "BUF",
+        "last_updated_e_time": "1754949986.6100202",
+        "teamIDAway": "3",
+        "teamIDHome": "4",
+        "playerProps": [
+          {
+            "propBets": {
+              "rushyds": "87.5",
+              "firsttd": "500",
+              "anytd": "-150",
+              "lasttd": "650",
+              "twotd": "410",
+              "threetd": "2200"
+            },
+            "playerID": "3043078"
+          },
+          {
+            "propBets": {
+              "comp": "19.5",
+              "rushyds": "31.5",
+              "firsttd": "600",
+              "anytd": "-115",
+              "twotd": "550",
+              "passatt": "30.5",
+              "passtd": "1.5",
+              "passyds": "236.5",
+              "lasttd": "700",
+              "threetd": "3000"
+            },
+            "playerID": "3918298"
+          },
+          {
+            "propBets": {
+              "rushyds": "54.5",
+              "firsttd": "650",
+              "anytd": "-110",
+              "lasttd": "800",
+              "twotd": "600",
+              "threetd": "3300"
+            },
+            "playerID": "4379399"
+          },
+          {
+            "propBets": {
+              "comp": "18.5",
+              "rushyds": "45.5",
+              "firsttd": "1300",
+              "anytd": "210",
+              "twotd": "1900",
+              "passatt": "26.5",
+              "passtd": "1.5",
+              "passyds": "233.5",
+              "lasttd": "1300",
+              "threetd": "12500"
+            },
+            "playerID": "3916387"
+          },
+          {
+            "propBets": {
+              "firsttd": "1500",
+              "anytd": "180",
+              "lasttd": "1000",
+              "twotd": "1600",
+              "threetd": "12500"
+            },
+            "playerID": "3116365"
+          },
+          {
+            "propBets": {
+              "firsttd": "1200",
+              "anytd": "180",
+              "twotd": "1500",
+              "recs": "4.5",
+              "lasttd": "1100",
+              "threetd": "10000",
+              "recyds": "53.5"
+            },
+            "playerID": "4429615"
+          },
+          {
+            "propBets": {
+              "firsttd": "1300",
+              "anytd": "185",
+              "lasttd": "1100",
+              "twotd": "1600",
+              "threetd": "12500"
+            },
+            "playerID": "4635008"
+          },
+          {
+            "propBets": {
+              "firsttd": "1300",
+              "anytd": "185",
+              "lasttd": "1100",
+              "twotd": "1600",
+              "threetd": "12500"
+            },
+            "playerID": "4373678"
+          },
+          {
+            "propBets": {
+              "firsttd": "1700",
+              "anytd": "230",
+              "lasttd": "1200",
+              "twotd": "2200",
+              "threetd": "15000"
+            },
+            "playerID": "4360939"
+          },
+          {
+            "propBets": {
+              "firsttd": "1600",
+              "anytd": "240",
+              "lasttd": "1300",
+              "twotd": "2200"
+            },
+            "playerID": "4385690"
+          },
+          {
+            "propBets": {
+              "firsttd": "1700",
+              "anytd": "230",
+              "lasttd": "1200",
+              "twotd": "2200",
+              "threetd": "15000"
+            },
+            "playerID": "4361050"
+          },
+          {
+            "propBets": {
+              "firsttd": "1800",
+              "anytd": "270"
+            },
+            "playerID": "4242433"
+          },
+          {
+            "propBets": {
+              "firsttd": "3000",
+              "anytd": "500",
+              "lasttd": "2200",
+              "twotd": "6000"
+            },
+            "playerID": "4429501"
+          },
+          {
+            "propBets": {
+              "firsttd": "2200",
+              "anytd": "380",
+              "lasttd": "1900",
+              "twotd": "4500"
+            },
+            "playerID": "3930086"
+          },
+          {
+            "propBets": {
+              "firsttd": "2700",
+              "anytd": "410",
+              "lasttd": "2000",
+              "twotd": "4500"
+            },
+            "playerID": "15795"
+          },
+          {
+            "propBets": {
+              "firsttd": "3300",
+              "anytd": "600",
+              "lasttd": "2700",
+              "twotd": "10000"
+            },
+            "playerID": "4372414"
+          },
+          {
+            "propBets": {
+              "firsttd": "3000",
+              "anytd": "490",
+              "lasttd": "2200",
+              "twotd": "6000"
+            },
+            "playerID": "3121427"
+          },
+          {
+            "propBets": {
+              "firsttd": "3300",
+              "anytd": "500",
+              "lasttd": "2200",
+              "twotd": "6500"
+            },
+            "playerID": "4038441"
+          },
+          {
+            "propBets": {
+              "firsttd": "3300",
+              "anytd": "550",
+              "lasttd": "2500",
+              "twotd": "8000"
+            },
+            "playerID": "4241263"
+          },
+          {
+            "propBets": {
+              "firsttd": "7000",
+              "anytd": "1000",
+              "lasttd": "3500"
+            },
+            "playerID": "4596334"
+          },
+          {
+            "propBets": {
+              "firsttd": "3300",
+              "anytd": "600",
+              "lasttd": "2700",
+              "twotd": "10000"
+            },
+            "playerID": "4241476"
+          },
+          {
+            "propBets": {
+              "firsttd": "3500",
+              "anytd": "700",
+              "lasttd": "3300",
+              "twotd": "10000"
+            },
+            "playerID": "3915411"
+          },
+          {
+            "propBets": {
+              "firsttd": "10000",
+              "anytd": "2200",
+              "lasttd": "8000"
+            },
+            "playerID": "2975417"
+          },
+          {
+            "propBets": {
+              "firsttd": "5500",
+              "anytd": "1000",
+              "lasttd": "4500"
+            },
+            "playerID": "4241424"
+          },
+          {
+            "propBets": {
+              "firsttd": "7000",
+              "anytd": "1000",
+              "lasttd": "3500"
+            },
+            "playerID": "4690013"
+          },
+          {
+            "propBets": {
+              "firsttd": "5500",
+              "anytd": "1200"
+            },
+            "playerID": "4431509"
+          },
+          {
+            "propBets": {
+              "firsttd": "10000",
+              "anytd": "2200",
+              "lasttd": "10000"
+            },
+            "playerID": "4039505"
+          },
+          {
+            "propBets": {
+              "firsttd": "8000",
+              "anytd": "1300",
+              "lasttd": "5500"
+            },
+            "playerID": "4696882"
+          },
+          {
+            "propBets": {
+              "firsttd": "8000",
+              "anytd": "1300",
+              "lasttd": "5500"
+            },
+            "playerID": "4690143"
+          },
+          {
+            "propBets": {
+              "firsttd": "6500",
+              "anytd": "1200"
+            },
+            "playerID": "4573699"
+          },
+          {
+            "propBets": {
+              "firsttd": "7000",
+              "anytd": "1200"
+            },
+            "playerID": "4243160"
+          },
+          {
+            "propBets": {
+              "firsttd": "8000",
+              "anytd": "1600"
+            },
+            "playerID": "3139602"
+          },
+          {
+            "propBets": {
+              "firsttd": "9000",
+              "anytd": "1900"
+            },
+            "playerID": "4429805"
+          }
+        ],
+        "sportsBooks": [
+          {
+            "sportsBook": "ballybet",
+            "odds": {
+              "totalUnder": "51.5",
+              "awayTeamSpread": "+1.5",
+              "awayTeamSpreadOdds": "-113",
+              "homeTeamSpread": "-1.5",
+              "homeTeamSpreadOdds": "-108",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "even",
+              "homeTeamMLOdds": "-122",
+              "totalOver": "51.5",
+              "impliedTotals": {
+                "awayTotal": "25.0",
+                "homeTotal": "26.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "bet365",
+            "odds": {
+              "totalUnder": "52",
+              "awayTeamSpread": "+1",
+              "awayTeamSpreadOdds": "-105",
+              "homeTeamSpread": "-1",
+              "homeTeamSpreadOdds": "-115",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "even",
+              "homeTeamMLOdds": "-120",
+              "totalOver": "52",
+              "impliedTotals": {
+                "awayTotal": "25.5",
+                "homeTotal": "26.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "betmgm",
+            "odds": {
+              "totalUnder": "52.5",
+              "awayTeamSpread": "+1.5",
+              "awayTeamSpreadOdds": "-118",
+              "homeTeamSpread": "-1.5",
+              "homeTeamSpreadOdds": "-102",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "-102",
+              "homeTeamMLOdds": "-118",
+              "totalOver": "52.5",
+              "impliedTotals": {
+                "awayTotal": "25.5",
+                "homeTotal": "27.0"
+              }
+            }
+          },
+          {
+            "sportsBook": "betrivers",
+            "odds": {
+              "totalUnder": "51.5",
+              "awayTeamSpread": "+1.5",
+              "awayTeamSpreadOdds": "-114",
+              "homeTeamSpread": "-1.5",
+              "homeTeamSpreadOdds": "-109",
+              "totalOverOdds": "-112",
+              "totalUnderOdds": "-112",
+              "awayTeamMLOdds": "-103",
+              "homeTeamMLOdds": "-124",
+              "totalOver": "51.5",
+              "impliedTotals": {
+                "awayTotal": "25.0",
+                "homeTotal": "26.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "caesars_sportsbook",
+            "odds": {
+              "totalUnder": "52",
+              "awayTeamSpread": "+1",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "-1",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "even",
+              "homeTeamMLOdds": "-120",
+              "totalOver": "52",
+              "impliedTotals": {
+                "awayTotal": "25.5",
+                "homeTotal": "26.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "draftkings",
+            "odds": {
+              "totalUnder": "51.5",
+              "awayTeamSpread": "+1.5",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "-1.5",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "+105",
+              "homeTeamMLOdds": "-125",
+              "totalOver": "51.5",
+              "impliedTotals": {
+                "awayTotal": "25.0",
+                "homeTotal": "26.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "espnbet",
+            "odds": {
+              "totalUnder": "52.5",
+              "awayTeamSpread": "+1.5",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "-1.5",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "even",
+              "totalUnderOdds": "-120",
+              "awayTeamMLOdds": "+105",
+              "homeTeamMLOdds": "-125",
+              "totalOver": "52.5",
+              "impliedTotals": {
+                "awayTotal": "25.5",
+                "homeTotal": "27.0"
+              }
+            }
+          },
+          {
+            "sportsBook": "fanduel",
+            "odds": {
+              "totalUnder": "51.5",
+              "awayTeamSpread": "+1.5",
+              "awayTeamSpreadOdds": "-115",
+              "homeTeamSpread": "-1.5",
+              "homeTeamSpreadOdds": "-105",
+              "totalOverOdds": "-120",
+              "totalUnderOdds": "-102",
+              "awayTeamMLOdds": "-102",
+              "homeTeamMLOdds": "-116",
+              "totalOver": "51.5",
+              "impliedTotals": {
+                "awayTotal": "25.0",
+                "homeTotal": "26.5"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "gameID": "20250907_CAR@JAX",
+        "awayTeam": "CAR",
+        "gameDate": "20250907",
+        "homeTeam": "JAX",
+        "last_updated_e_time": "1754949986.6070714",
+        "teamIDAway": "5",
+        "teamIDHome": "15",
+        "playerProps": [
+          {
+            "propBets": {
+              "rushyds": "60.5",
+              "firsttd": "600",
+              "longrush": "13.5",
+              "anytd": "-110",
+              "recyds": "11.5"
+            },
+            "playerID": "4241416"
+          },
+          {
+            "propBets": {
+              "firsttd": "800",
+              "anytd": "125",
+              "recyds": "68.5"
+            },
+            "playerID": "4432773"
+          },
+          {
+            "propBets": {
+              "firsttd": "900",
+              "anytd": "165"
+            },
+            "playerID": "4429013"
+          },
+          {
+            "propBets": {
+              "firsttd": "900",
+              "anytd": "165"
+            },
+            "playerID": "4239996"
+          },
+          {
+            "propBets": {
+              "rushrec": "61.5",
+              "firsttd": "950",
+              "anytd": "145",
+              "recs": "4.5",
+              "recyds": "60.5"
+            },
+            "playerID": "4685472"
+          },
+          {
+            "propBets": {
+              "firsttd": "1000",
+              "anytd": "165",
+              "recyds": "49.5"
+            },
+            "playerID": "4685415"
+          },
+          {
+            "propBets": {
+              "firsttd": "1600",
+              "anytd": "255"
+            },
+            "playerID": "4430034"
+          },
+          {
+            "propBets": {
+              "firsttd": "1600",
+              "anytd": "285",
+              "recyds": "26.5"
+            },
+            "playerID": "4430539"
+          },
+          {
+            "propBets": {
+              "firsttd": "1600",
+              "anytd": "310"
+            },
+            "playerID": "4882093"
+          },
+          {
+            "propBets": {
+              "firsttd": "1800",
+              "anytd": "360"
+            },
+            "playerID": "4361577"
+          },
+          {
+            "propBets": {
+              "firsttd": "1800",
+              "anytd": "340"
+            },
+            "playerID": "4695883"
+          },
+          {
+            "propBets": {
+              "firsttd": "1800",
+              "anytd": "340"
+            },
+            "playerID": "4432620"
+          },
+          {
+            "propBets": {
+              "intsthrown": "0.5",
+              "rushyds": "13.5",
+              "firsttd": "1800",
+              "anytd": "400",
+              "passtd": "1.5",
+              "longrush": "8.5",
+              "passyds": "213.5"
+            },
+            "playerID": "4685720"
+          },
+          {
+            "propBets": {
+              "firsttd": "1900",
+              "anytd": "360"
+            },
+            "playerID": "4038815"
+          },
+          {
+            "propBets": {
+              "firsttd": "1900",
+              "anytd": "350"
+            },
+            "playerID": "3135321"
+          },
+          {
+            "propBets": {
+              "intsthrown": "0.5",
+              "rushyds": "13.5",
+              "firsttd": "2000",
+              "anytd": "425",
+              "passtd": "1.5",
+              "longrush": "8.5",
+              "passyds": "237.5"
+            },
+            "playerID": "4360310"
+          },
+          {
+            "propBets": {
+              "firsttd": "2000",
+              "anytd": "330",
+              "recyds": "35.5"
+            },
+            "playerID": "16460"
+          },
+          {
+            "propBets": {
+              "firsttd": "2200",
+              "anytd": "370",
+              "recyds": "16.5"
+            },
+            "playerID": "4431588"
+          },
+          {
+            "propBets": {
+              "firsttd": "3000",
+              "anytd": "600"
+            },
+            "playerID": "4685350"
+          },
+          {
+            "propBets": {
+              "firsttd": "3000",
+              "anytd": "550"
+            },
+            "playerID": "3052096"
+          },
+          {
+            "propBets": {
+              "firsttd": "4000",
+              "anytd": "950"
+            },
+            "playerID": "4911851"
+          },
+          {
+            "propBets": {
+              "firsttd": "4000",
+              "anytd": "850"
+            },
+            "playerID": "4683243"
+          },
+          {
+            "propBets": {
+              "firsttd": "4000",
+              "anytd": "1000"
+            },
+            "playerID": "3931391"
+          },
+          {
+            "propBets": {
+              "firsttd": "4000",
+              "anytd": "900"
+            },
+            "playerID": "4212909"
+          },
+          {
+            "propBets": {
+              "firsttd": "4500",
+              "anytd": "800"
+            },
+            "playerID": "4708486"
+          },
+          {
+            "propBets": {
+              "firsttd": "4500",
+              "anytd": "1000"
+            },
+            "playerID": "4244049"
+          },
+          {
+            "propBets": {
+              "firsttd": "5500",
+              "anytd": "1400"
+            },
+            "playerID": "4259308"
+          },
+          {
+            "propBets": {
+              "firsttd": "5500",
+              "anytd": "1300"
+            },
+            "playerID": "4426893"
+          },
+          {
+            "propBets": {
+              "firsttd": "5500",
+              "anytd": "1200"
+            },
+            "playerID": "4239944"
+          },
+          {
+            "propBets": {
+              "firsttd": "6000",
+              "anytd": "1300"
+            },
+            "playerID": "4244856"
+          },
+          {
+            "propBets": {
+              "kickpts": "7.5",
+              "xpm": "1.5",
+              "fgm": "2.5"
+            },
+            "playerID": "4686361"
+          }
+        ],
+        "sportsBooks": [
+          {
+            "sportsBook": "ballybet",
+            "odds": {
+              "totalUnder": "45.5",
+              "awayTeamSpread": "+3",
+              "awayTeamSpreadOdds": "-113",
+              "homeTeamSpread": "-3",
+              "homeTeamSpreadOdds": "-108",
+              "totalOverOdds": "-113",
+              "totalUnderOdds": "-108",
+              "awayTeamMLOdds": "+125",
+              "homeTeamMLOdds": "-152",
+              "totalOver": "45.5",
+              "impliedTotals": {
+                "awayTotal": "21.25",
+                "homeTotal": "24.25"
+              }
+            }
+          },
+          {
+            "sportsBook": "bet365",
+            "odds": {
+              "totalUnder": "46",
+              "awayTeamSpread": "+2.5",
+              "awayTeamSpreadOdds": "-105",
+              "homeTeamSpread": "-2.5",
+              "homeTeamSpreadOdds": "-115",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "+125",
+              "homeTeamMLOdds": "-150",
+              "totalOver": "46",
+              "impliedTotals": {
+                "awayTotal": "21.75",
+                "homeTotal": "24.25"
+              }
+            }
+          },
+          {
+            "sportsBook": "betmgm",
+            "odds": {
+              "totalUnder": "46.5",
+              "awayTeamSpread": "+2.5",
+              "awayTeamSpreadOdds": "even",
+              "homeTeamSpread": "-2.5",
+              "homeTeamSpreadOdds": "-120",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "+135",
+              "homeTeamMLOdds": "-160",
+              "totalOver": "46.5",
+              "impliedTotals": {
+                "awayTotal": "22.0",
+                "homeTotal": "24.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "betrivers",
+            "odds": {
+              "totalUnder": "45.5",
+              "awayTeamSpread": "+3",
+              "awayTeamSpreadOdds": "-114",
+              "homeTeamSpread": "-3",
+              "homeTeamSpreadOdds": "-109",
+              "totalOverOdds": "-114",
+              "totalUnderOdds": "-109",
+              "awayTeamMLOdds": "+123",
+              "homeTeamMLOdds": "-152",
+              "totalOver": "45.5",
+              "impliedTotals": {
+                "awayTotal": "21.25",
+                "homeTotal": "24.25"
+              }
+            }
+          },
+          {
+            "sportsBook": "caesars_sportsbook",
+            "odds": {
+              "totalUnder": "46",
+              "awayTeamSpread": "+3",
+              "awayTeamSpreadOdds": "-115",
+              "homeTeamSpread": "-3",
+              "homeTeamSpreadOdds": "-105",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "+130",
+              "homeTeamMLOdds": "-155",
+              "totalOver": "46",
+              "impliedTotals": {
+                "awayTotal": "21.5",
+                "homeTotal": "24.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "draftkings",
+            "odds": {
+              "totalUnder": "45.5",
+              "awayTeamSpread": "+3",
+              "awayTeamSpreadOdds": "-112",
+              "homeTeamSpread": "-3",
+              "homeTeamSpreadOdds": "-108",
+              "totalOverOdds": "-115",
+              "totalUnderOdds": "-105",
+              "awayTeamMLOdds": "+130",
+              "homeTeamMLOdds": "-155",
+              "totalOver": "45.5",
+              "impliedTotals": {
+                "awayTotal": "21.25",
+                "homeTotal": "24.25"
+              }
+            }
+          },
+          {
+            "sportsBook": "espnbet",
+            "odds": {
+              "totalUnder": "45.5",
+              "awayTeamSpread": "+3",
+              "awayTeamSpreadOdds": "-115",
+              "homeTeamSpread": "-3",
+              "homeTeamSpreadOdds": "-105",
+              "totalOverOdds": "-115",
+              "totalUnderOdds": "-105",
+              "awayTeamMLOdds": "+125",
+              "homeTeamMLOdds": "-145",
+              "totalOver": "45.5",
+              "impliedTotals": {
+                "awayTotal": "21.25",
+                "homeTotal": "24.25"
+              }
+            }
+          },
+          {
+            "sportsBook": "fanduel",
+            "odds": {
+              "totalUnder": "45.5",
+              "awayTeamSpread": "+2.5",
+              "awayTeamSpreadOdds": "-100",
+              "homeTeamSpread": "-2.5",
+              "homeTeamSpreadOdds": "-122",
+              "totalOverOdds": "-115",
+              "totalUnderOdds": "-105",
+              "awayTeamMLOdds": "+128",
+              "homeTeamMLOdds": "-152",
+              "totalOver": "45.5",
+              "impliedTotals": {
+                "awayTotal": "21.5",
+                "homeTotal": "24.0"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "gameID": "20250907_CIN@CLE",
+        "awayTeam": "CIN",
+        "gameDate": "20250907",
+        "homeTeam": "CLE",
+        "last_updated_e_time": "1754949986.6073625",
+        "teamIDAway": "7",
+        "teamIDHome": "8",
+        "playerProps": [
+          {
+            "propBets": {
+              "rushyds": "65.5",
+              "firsttd": "450",
+              "anytd": "-145",
+              "twotd": "450",
+              "recs": "2.5",
+              "rushrec": "88.5",
+              "longrush": "15.5",
+              "lasttd": "550",
+              "threetd": "2200",
+              "recyds": "19.5"
+            },
+            "playerID": "4362238"
+          },
+          {
+            "propBets": {
+              "firsttd": "460",
+              "anytd": "-135",
+              "twotd": "490",
+              "recs": "7.5",
+              "lasttd": "600",
+              "threetd": "2700",
+              "recyds": "82.5"
+            },
+            "playerID": "4362628"
+          },
+          {
+            "propBets": {
+              "firsttd": "700",
+              "anytd": "125",
+              "twotd": "950",
+              "recs": "5.5",
+              "lasttd": "850",
+              "threetd": "5500",
+              "recyds": "62.5"
+            },
+            "playerID": "4239993"
+          },
+          {
+            "propBets": {
+              "firsttd": "1100",
+              "anytd": "190",
+              "lasttd": "1000",
+              "twotd": "1600",
+              "threetd": "12500"
+            },
+            "playerID": "4372019"
+          },
+          {
+            "propBets": {
+              "firsttd": "1200",
+              "anytd": "200",
+              "twotd": "1700",
+              "recs": "4.5",
+              "lasttd": "1000",
+              "threetd": "12500",
+              "recyds": "59.5"
+            },
+            "playerID": "4241463"
+          },
+          {
+            "propBets": {
+              "firsttd": "1600",
+              "anytd": "250",
+              "lasttd": "1200",
+              "twotd": "2500",
+              "recs": "5.5",
+              "recyds": "43.5"
+            },
+            "playerID": "3123076"
+          },
+          {
+            "propBets": {
+              "firsttd": "1800",
+              "anytd": "360",
+              "lasttd": "1800",
+              "twotd": "4000",
+              "recs": "1.5",
+              "recyds": "19.5"
+            },
+            "playerID": "4368003"
+          },
+          {
+            "propBets": {
+              "firsttd": "1300",
+              "anytd": "225"
+            },
+            "playerID": "4685702"
+          },
+          {
+            "propBets": {
+              "firsttd": "1500",
+              "anytd": "260",
+              "lasttd": "1200",
+              "twotd": "2500"
+            },
+            "playerID": "5081397"
+          },
+          {
+            "propBets": {
+              "firsttd": "1400",
+              "anytd": "260",
+              "lasttd": "1300",
+              "twotd": "2700",
+              "recs": "2.5",
+              "recyds": "21.5"
+            },
+            "playerID": "3116164"
+          },
+          {
+            "propBets": {
+              "comp": "24.5",
+              "intsthrown": "0.5",
+              "rushyds": "9.5",
+              "firsttd": "3000",
+              "anytd": "700",
+              "twotd": "10000",
+              "passatt": "36.5",
+              "passtd": "1.5",
+              "longrush": "7.5",
+              "passyds": "263.5",
+              "lasttd": "2200"
+            },
+            "playerID": "3915511"
+          },
+          {
+            "propBets": {
+              "firsttd": "1800",
+              "anytd": "300",
+              "lasttd": "1400",
+              "twotd": "3000",
+              "recs": "2.5",
+              "recyds": "29.5"
+            },
+            "playerID": "4369863"
+          },
+          {
+            "propBets": {
+              "firsttd": "3500",
+              "anytd": "600",
+              "lasttd": "2200",
+              "twotd": "10000"
+            },
+            "playerID": "3116389"
+          },
+          {
+            "propBets": {
+              "firsttd": "3000",
+              "anytd": "550",
+              "lasttd": "1900",
+              "twotd": "8000"
+            },
+            "playerID": "4428678"
+          },
+          {
+            "propBets": {
+              "firsttd": "2800",
+              "anytd": "500"
+            },
+            "playerID": "4429033"
+          },
+          {
+            "propBets": {
+              "firsttd": "2800",
+              "anytd": "500"
+            },
+            "playerID": "5083076"
+          },
+          {
+            "propBets": {
+              "firsttd": "8000",
+              "anytd": "1800",
+              "lasttd": "6000"
+            },
+            "playerID": "4429299"
+          },
+          {
+            "propBets": {
+              "firsttd": "5000",
+              "anytd": "850",
+              "lasttd": "3000",
+              "twotd": "12500"
+            },
+            "playerID": "4036131"
+          },
+          {
+            "propBets": {
+              "firsttd": "3500",
+              "anytd": "600",
+              "lasttd": "2000",
+              "twotd": "8000"
+            },
+            "playerID": "3932905"
+          },
+          {
+            "propBets": {
+              "firsttd": "7500",
+              "anytd": "1600",
+              "lasttd": "7500"
+            },
+            "playerID": "4249836"
+          },
+          {
+            "propBets": {
+              "firsttd": "5000",
+              "anytd": "850",
+              "lasttd": "3000",
+              "twotd": "12500"
+            },
+            "playerID": "3050481"
+          },
+          {
+            "propBets": {
+              "firsttd": "10000",
+              "anytd": "2200",
+              "lasttd": "8000"
+            },
+            "playerID": "2580216"
+          },
+          {
+            "propBets": {
+              "comp": "21.5",
+              "intsthrown": "0.5",
+              "firsttd": "7500",
+              "anytd": "1900",
+              "passatt": "34.5",
+              "passtd": "1.5",
+              "passyds": "221.5",
+              "lasttd": "8000"
+            },
+            "playerID": "11252"
+          },
+          {
+            "propBets": {
+              "firsttd": "8000",
+              "anytd": "1800",
+              "lasttd": "6500"
+            },
+            "playerID": "4257188"
+          },
+          {
+            "propBets": {
+              "firsttd": "6500",
+              "anytd": "1000",
+              "lasttd": "3500"
+            },
+            "playerID": "3127310"
+          },
+          {
+            "propBets": {
+              "firsttd": "8000",
+              "anytd": "1500"
+            },
+            "playerID": "4700712"
+          },
+          {
+            "propBets": {
+              "firsttd": "8000",
+              "anytd": "1800",
+              "lasttd": "6500"
+            },
+            "playerID": "4362018"
+          },
+          {
+            "propBets": {
+              "kickpts": "5.5",
+              "xpm": "1.5",
+              "fgm": "1.5"
+            },
+            "playerID": "15965"
+          },
+          {
+            "propBets": {
+              "kickpts": "7.5",
+              "xpm": "1.5",
+              "fgm": "2.5"
+            },
+            "playerID": "4360234"
+          }
+        ],
+        "sportsBooks": [
+          {
+            "sportsBook": "ballybet",
+            "odds": {
+              "totalUnder": "44.5",
+              "awayTeamSpread": "-5.5",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "+5.5",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-109",
+              "totalUnderOdds": "-112",
+              "awayTeamMLOdds": "-235",
+              "homeTeamMLOdds": "+190",
+              "totalOver": "44.5",
+              "impliedTotals": {
+                "awayTotal": "25.0",
+                "homeTotal": "19.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "bet365",
+            "odds": {
+              "totalUnder": "45",
+              "awayTeamSpread": "-5.5",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "+5.5",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "-245",
+              "homeTeamMLOdds": "+200",
+              "totalOver": "45",
+              "impliedTotals": {
+                "awayTotal": "25.25",
+                "homeTotal": "19.75"
+              }
+            }
+          },
+          {
+            "sportsBook": "betmgm",
+            "odds": {
+              "totalUnder": "44.5",
+              "awayTeamSpread": "-5.5",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "+5.5",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-115",
+              "totalUnderOdds": "-105",
+              "awayTeamMLOdds": "-250",
+              "homeTeamMLOdds": "+200",
+              "totalOver": "44.5",
+              "impliedTotals": {
+                "awayTotal": "25.0",
+                "homeTotal": "19.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "betrivers",
+            "odds": {
+              "totalUnder": "44.5",
+              "awayTeamSpread": "-5.5",
+              "awayTeamSpreadOdds": "-112",
+              "homeTeamSpread": "+5.5",
+              "homeTeamSpreadOdds": "-112",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-113",
+              "awayTeamMLOdds": "-235",
+              "homeTeamMLOdds": "+175",
+              "totalOver": "44.5",
+              "impliedTotals": {
+                "awayTotal": "25.0",
+                "homeTotal": "19.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "caesars_sportsbook",
+            "odds": {
+              "totalUnder": "45",
+              "awayTeamSpread": "-5.5",
+              "awayTeamSpreadOdds": "-115",
+              "homeTeamSpread": "+5.5",
+              "homeTeamSpreadOdds": "-105",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "-260",
+              "homeTeamMLOdds": "+210",
+              "totalOver": "45",
+              "impliedTotals": {
+                "awayTotal": "25.25",
+                "homeTotal": "19.75"
+              }
+            }
+          },
+          {
+            "sportsBook": "draftkings",
+            "odds": {
+              "totalUnder": "45.5",
+              "awayTeamSpread": "-5.5",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "+5.5",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-105",
+              "totalUnderOdds": "-115",
+              "awayTeamMLOdds": "-230",
+              "homeTeamMLOdds": "+190",
+              "totalOver": "45.5",
+              "impliedTotals": {
+                "awayTotal": "25.5",
+                "homeTotal": "20.0"
+              }
+            }
+          },
+          {
+            "sportsBook": "espnbet",
+            "odds": {
+              "totalUnder": "45.5",
+              "awayTeamSpread": "-5.5",
+              "awayTeamSpreadOdds": "-115",
+              "homeTeamSpread": "+5.5",
+              "homeTeamSpreadOdds": "-105",
+              "totalOverOdds": "-105",
+              "totalUnderOdds": "-115",
+              "awayTeamMLOdds": "-240",
+              "homeTeamMLOdds": "+200",
+              "totalOver": "45.5",
+              "impliedTotals": {
+                "awayTotal": "25.5",
+                "homeTotal": "20.0"
+              }
+            }
+          },
+          {
+            "sportsBook": "fanduel",
+            "odds": {
+              "totalUnder": "45.5",
+              "awayTeamSpread": "-5.5",
+              "awayTeamSpreadOdds": "-115",
+              "homeTeamSpread": "+5.5",
+              "homeTeamSpreadOdds": "-105",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "-240",
+              "homeTeamMLOdds": "+198",
+              "totalOver": "45.5",
+              "impliedTotals": {
+                "awayTotal": "25.5",
+                "homeTotal": "20.0"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "gameID": "20250907_DET@GB",
+        "awayTeam": "DET",
+        "gameDate": "20250907",
+        "homeTeam": "GB",
+        "last_updated_e_time": "1754949986.6096787",
+        "teamIDAway": "11",
+        "teamIDHome": "12",
+        "playerProps": [
+          {
+            "propBets": {
+              "rushyds": "68.5",
+              "firsttd": "425",
+              "anytd": "-175",
+              "recs": "3.5",
+              "rushrec": "96.5",
+              "longrush": "18.5",
+              "recyds": "23.5"
+            },
+            "playerID": "4429795"
+          },
+          {
+            "propBets": {
+              "rushyds": "74.5",
+              "firsttd": "475",
+              "anytd": "-170",
+              "recs": "2.5",
+              "rushrec": "93.5",
+              "longrush": "14.5",
+              "recyds": "15.5"
+            },
+            "playerID": "4047365"
+          },
+          {
+            "propBets": {
+              "rushrec": "55.5",
+              "rushyds": "41.5",
+              "firsttd": "750",
+              "longrush": "11.5",
+              "anytd": "110",
+              "recyds": "10.5"
+            },
+            "playerID": "4035538"
+          },
+          {
+            "propBets": {
+              "firsttd": "900",
+              "anytd": "120",
+              "recs": "6.5",
+              "recyds": "67.5"
+            },
+            "playerID": "4374302"
+          },
+          {
+            "propBets": {
+              "firsttd": "1100",
+              "anytd": "185",
+              "recs": "3.5",
+              "recyds": "45.5"
+            },
+            "playerID": "4701936"
+          },
+          {
+            "propBets": {
+              "firsttd": "1100",
+              "anytd": "180",
+              "recyds": "36.5"
+            },
+            "playerID": "4572680"
+          },
+          {
+            "propBets": {
+              "firsttd": "1200",
+              "anytd": "185"
+            },
+            "playerID": "4361432"
+          },
+          {
+            "propBets": {
+              "firsttd": "1200",
+              "anytd": "190"
+            },
+            "playerID": "4362249"
+          },
+          {
+            "propBets": {
+              "firsttd": "1200",
+              "anytd": "195",
+              "recs": "3.5",
+              "recyds": "52.5"
+            },
+            "playerID": "4426388"
+          },
+          {
+            "propBets": {
+              "firsttd": "1300",
+              "anytd": "205",
+              "recs": "4.5",
+              "recyds": "41.5"
+            },
+            "playerID": "4430027"
+          },
+          {
+            "propBets": {
+              "firsttd": "1900",
+              "anytd": "300"
+            },
+            "playerID": "4428850"
+          },
+          {
+            "propBets": {
+              "firsttd": "2200",
+              "anytd": "425"
+            },
+            "playerID": "4429023"
+          },
+          {
+            "propBets": {
+              "firsttd": "2500",
+              "anytd": "500"
+            },
+            "playerID": "3149687"
+          },
+          {
+            "propBets": {
+              "comp": "20.5",
+              "intsthrown": "0.5",
+              "rushyds": "5.5",
+              "firsttd": "2500",
+              "anytd": "500",
+              "passatt": "31.5",
+              "passtd": "1.5",
+              "longrush": "4.5",
+              "passyds": "236.5"
+            },
+            "playerID": "4036378"
+          },
+          {
+            "propBets": {
+              "firsttd": "2500",
+              "anytd": "500"
+            },
+            "playerID": "4887558"
+          },
+          {
+            "propBets": {
+              "firsttd": "3000",
+              "anytd": "550"
+            },
+            "playerID": "3134353"
+          },
+          {
+            "propBets": {
+              "firsttd": "3000",
+              "anytd": "550"
+            },
+            "playerID": "5123663"
+          },
+          {
+            "propBets": {
+              "firsttd": "3000",
+              "anytd": "650"
+            },
+            "playerID": "4431487"
+          },
+          {
+            "propBets": {
+              "firsttd": "3500",
+              "anytd": "700"
+            },
+            "playerID": "4689334"
+          },
+          {
+            "propBets": {
+              "firsttd": "4000",
+              "anytd": "850"
+            },
+            "playerID": "4596439"
+          },
+          {
+            "propBets": {
+              "firsttd": "4000",
+              "anytd": "750"
+            },
+            "playerID": "4428085"
+          },
+          {
+            "propBets": {
+              "firsttd": "4500",
+              "anytd": "800"
+            },
+            "playerID": "2973405"
+          },
+          {
+            "propBets": {
+              "firsttd": "4500",
+              "anytd": "800"
+            },
+            "playerID": "4242392"
+          },
+          {
+            "propBets": {
+              "comp": "23.5",
+              "intsthrown": "0.5",
+              "rushyds": "0.5",
+              "firsttd": "5500",
+              "anytd": "1100",
+              "passatt": "32.5",
+              "passtd": "1.5",
+              "passyds": "242.5"
+            },
+            "playerID": "3046779"
+          },
+          {
+            "propBets": {
+              "firsttd": "6000",
+              "anytd": "1200"
+            },
+            "playerID": "4035004"
+          },
+          {
+            "propBets": {
+              "firsttd": "6000",
+              "anytd": "1200"
+            },
+            "playerID": "4421446"
+          },
+          {
+            "propBets": {
+              "firsttd": "6000",
+              "anytd": "1300"
+            },
+            "playerID": "4373030"
+          },
+          {
+            "propBets": {
+              "firsttd": "6500",
+              "anytd": "1300"
+            },
+            "playerID": "4259305"
+          },
+          {
+            "propBets": {
+              "firsttd": "9000",
+              "anytd": "2200"
+            },
+            "playerID": "4912274"
+          },
+          {
+            "propBets": {
+              "firsttd": "9000",
+              "anytd": "2200"
+            },
+            "playerID": "4608362"
+          },
+          {
+            "propBets": {
+              "kickpts": "6.5",
+              "xpm": "1.5",
+              "fgm": "2.5"
+            },
+            "playerID": "4689936"
+          },
+          {
+            "propBets": {
+              "kickpts": "7.5",
+              "xpm": "1.5",
+              "fgm": "2.5"
+            },
+            "playerID": "16339"
+          }
+        ],
+        "sportsBooks": [
+          {
+            "sportsBook": "ballybet",
+            "odds": {
+              "totalUnder": "49",
+              "awayTeamSpread": "+1.5",
+              "awayTeamSpreadOdds": "-113",
+              "homeTeamSpread": "-1.5",
+              "homeTeamSpreadOdds": "-108",
+              "totalOverOdds": "-112",
+              "totalUnderOdds": "-109",
+              "awayTeamMLOdds": "even",
+              "homeTeamMLOdds": "-121",
+              "totalOver": "49",
+              "impliedTotals": {
+                "awayTotal": "23.75",
+                "homeTotal": "25.25"
+              }
+            }
+          },
+          {
+            "sportsBook": "bet365",
+            "odds": {
+              "totalUnder": "49.5",
+              "awayTeamSpread": "+2",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "-2",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "+110",
+              "homeTeamMLOdds": "-130",
+              "totalOver": "49.5",
+              "impliedTotals": {
+                "awayTotal": "23.75",
+                "homeTotal": "25.75"
+              }
+            }
+          },
+          {
+            "sportsBook": "betmgm",
+            "odds": {
+              "totalUnder": "49.5",
+              "awayTeamSpread": "+1.5",
+              "awayTeamSpreadOdds": "-115",
+              "homeTeamSpread": "-1.5",
+              "homeTeamSpreadOdds": "-105",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "even",
+              "homeTeamMLOdds": "-120",
+              "totalOver": "49.5",
+              "impliedTotals": {
+                "awayTotal": "24.0",
+                "homeTotal": "25.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "betrivers",
+            "odds": {
+              "totalUnder": "49",
+              "awayTeamSpread": "+1.5",
+              "awayTeamSpreadOdds": "-113",
+              "homeTeamSpread": "-1.5",
+              "homeTeamSpreadOdds": "-109",
+              "totalOverOdds": "-113",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "-103",
+              "homeTeamMLOdds": "-122",
+              "totalOver": "49",
+              "impliedTotals": {
+                "awayTotal": "23.75",
+                "homeTotal": "25.25"
+              }
+            }
+          },
+          {
+            "sportsBook": "caesars_sportsbook",
+            "odds": {
+              "totalUnder": "49.5",
+              "awayTeamSpread": "+2",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "-2",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "+105",
+              "homeTeamMLOdds": "-125",
+              "totalOver": "49.5",
+              "impliedTotals": {
+                "awayTotal": "23.75",
+                "homeTotal": "25.75"
+              }
+            }
+          },
+          {
+            "sportsBook": "draftkings",
+            "odds": {
+              "totalUnder": "49.5",
+              "awayTeamSpread": "+1.5",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "-1.5",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "+105",
+              "homeTeamMLOdds": "-125",
+              "totalOver": "49.5",
+              "impliedTotals": {
+                "awayTotal": "24.0",
+                "homeTotal": "25.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "espnbet",
+            "odds": {
+              "totalUnder": "49.5",
+              "awayTeamSpread": "+2",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "-2",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "+105",
+              "homeTeamMLOdds": "-125",
+              "totalOver": "49.5",
+              "impliedTotals": {
+                "awayTotal": "23.75",
+                "homeTotal": "25.75"
+              }
+            }
+          },
+          {
+            "sportsBook": "fanduel",
+            "odds": {
+              "totalUnder": "49.5",
+              "awayTeamSpread": "+1.5",
+              "awayTeamSpreadOdds": "-114",
+              "homeTeamSpread": "-1.5",
+              "homeTeamSpreadOdds": "-106",
+              "totalOverOdds": "-114",
+              "totalUnderOdds": "-106",
+              "awayTeamMLOdds": "+102",
+              "homeTeamMLOdds": "-120",
+              "totalOver": "49.5",
+              "impliedTotals": {
+                "awayTotal": "24.0",
+                "homeTotal": "25.5"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "gameID": "20250907_HOU@LAR",
+        "awayTeam": "HOU",
+        "gameDate": "20250907",
+        "homeTeam": "LAR",
+        "last_updated_e_time": "1754949986.6098502",
+        "teamIDAway": "13",
+        "teamIDHome": "19",
+        "playerProps": [
+          {
+            "propBets": {
+              "firsttd": "400",
+              "anytd": "-170",
+              "rushyds": "73.5"
+            },
+            "playerID": "4430737"
+          },
+          {
+            "propBets": {
+              "firsttd": "800",
+              "anytd": "135",
+              "recyds": "59.5"
+            },
+            "playerID": "16800"
+          },
+          {
+            "propBets": {
+              "firsttd": "800",
+              "anytd": "120",
+              "recyds": "77.5"
+            },
+            "playerID": "4258173"
+          },
+          {
+            "propBets": {
+              "firsttd": "800",
+              "anytd": "130",
+              "recyds": "73.5"
+            },
+            "playerID": "4426515"
+          },
+          {
+            "propBets": {
+              "firsttd": "1000",
+              "anytd": "200"
+            },
+            "playerID": "3128720"
+          },
+          {
+            "propBets": {
+              "firsttd": "1300",
+              "anytd": "260"
+            },
+            "playerID": "4360238"
+          },
+          {
+            "propBets": {
+              "firsttd": "1500",
+              "anytd": "265",
+              "recyds": "36.5"
+            },
+            "playerID": "3895856"
+          },
+          {
+            "propBets": {
+              "firsttd": "1500",
+              "anytd": "275"
+            },
+            "playerID": "4429059"
+          },
+          {
+            "propBets": {
+              "firsttd": "1600",
+              "anytd": "330"
+            },
+            "playerID": "4877706"
+          },
+          {
+            "propBets": {
+              "firsttd": "1600",
+              "anytd": "295",
+              "recyds": "28.5"
+            },
+            "playerID": "3117256"
+          },
+          {
+            "propBets": {
+              "firsttd": "1700",
+              "anytd": "330"
+            },
+            "playerID": "2573401"
+          },
+          {
+            "propBets": {
+              "firsttd": "1800",
+              "anytd": "350"
+            },
+            "playerID": "4360797"
+          },
+          {
+            "propBets": {
+              "firsttd": "1900",
+              "anytd": "400"
+            },
+            "playerID": "4429096"
+          },
+          {
+            "propBets": {
+              "intsthrown": "0.5",
+              "rushyds": "9.5",
+              "firsttd": "2000",
+              "anytd": "450",
+              "passtd": "1.5",
+              "longrush": "6.5",
+              "passyds": "240.5"
+            },
+            "playerID": "4432577"
+          },
+          {
+            "propBets": {
+              "firsttd": "2500",
+              "anytd": "550"
+            },
+            "playerID": "4710341"
+          },
+          {
+            "propBets": {
+              "firsttd": "2500",
+              "anytd": "475"
+            },
+            "playerID": "4569382"
+          },
+          {
+            "propBets": {
+              "firsttd": "2800",
+              "anytd": "550"
+            },
+            "playerID": "4686422"
+          },
+          {
+            "propBets": {
+              "firsttd": "3000",
+              "anytd": "650"
+            },
+            "playerID": "4570037"
+          },
+          {
+            "propBets": {
+              "firsttd": "3000",
+              "anytd": "550"
+            },
+            "playerID": "4426496"
+          },
+          {
+            "propBets": {
+              "firsttd": "3500",
+              "anytd": "650"
+            },
+            "playerID": "4586312"
+          },
+          {
+            "propBets": {
+              "firsttd": "3500",
+              "anytd": "700"
+            },
+            "playerID": "2983509"
+          },
+          {
+            "propBets": {
+              "firsttd": "3500",
+              "anytd": "750"
+            },
+            "playerID": "4242557"
+          },
+          {
+            "propBets": {
+              "firsttd": "4500",
+              "anytd": "1000"
+            },
+            "playerID": "4040774"
+          },
+          {
+            "propBets": {
+              "firsttd": "4500",
+              "anytd": "1100"
+            },
+            "playerID": "4243003"
+          },
+          {
+            "propBets": {
+              "intsthrown": "0.5",
+              "passtd": "1.5",
+              "firsttd": "4500",
+              "passyds": "236.5",
+              "anytd": "1100"
+            },
+            "playerID": "12483"
+          },
+          {
+            "propBets": {
+              "firsttd": "5500",
+              "anytd": "1200"
+            },
+            "playerID": "3926231"
+          },
+          {
+            "propBets": {
+              "firsttd": "5500",
+              "anytd": "1500"
+            },
+            "playerID": "4710855"
+          },
+          {
+            "propBets": {
+              "firsttd": "6000",
+              "anytd": "1500"
+            },
+            "playerID": "4426553"
+          },
+          {
+            "propBets": {
+              "firsttd": "6000",
+              "anytd": "1600"
+            },
+            "playerID": "4432338"
+          },
+          {
+            "propBets": {
+              "firsttd": "6000",
+              "anytd": "1400"
+            },
+            "playerID": "4391845"
+          },
+          {
+            "propBets": {
+              "firsttd": "7000",
+              "anytd": "1600"
+            },
+            "playerID": "3123075"
+          },
+          {
+            "propBets": {
+              "firsttd": "7500",
+              "anytd": "1600"
+            },
+            "playerID": "3118892"
+          },
+          {
+            "propBets": {
+              "firsttd": "8000",
+              "anytd": "1800"
+            },
+            "playerID": "4386544"
+          },
+          {
+            "propBets": {
+              "kickpts": "6.5",
+              "xpm": "1.5",
+              "fgm": "1.5"
+            },
+            "playerID": "2971573"
+          },
+          {
+            "propBets": {
+              "kickpts": "6.5",
+              "xpm": "1.5",
+              "fgm": "2.5"
+            },
+            "playerID": "4566192"
+          }
+        ],
+        "sportsBooks": [
+          {
+            "sportsBook": "ballybet",
+            "odds": {
+              "totalUnder": "44.5",
+              "awayTeamSpread": "+3",
+              "awayTeamSpreadOdds": "-118",
+              "homeTeamSpread": "-3",
+              "homeTeamSpreadOdds": "-104",
+              "totalOverOdds": "-112",
+              "totalUnderOdds": "-109",
+              "awayTeamMLOdds": "+130",
+              "homeTeamMLOdds": "-159",
+              "totalOver": "44.5",
+              "impliedTotals": {
+                "awayTotal": "20.75",
+                "homeTotal": "23.75"
+              }
+            }
+          },
+          {
+            "sportsBook": "bet365",
+            "odds": {
+              "totalUnder": "44.5",
+              "awayTeamSpread": "+2.5",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "-2.5",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "+120",
+              "homeTeamMLOdds": "-140",
+              "totalOver": "44.5",
+              "impliedTotals": {
+                "awayTotal": "21.0",
+                "homeTotal": "23.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "betmgm",
+            "odds": {
+              "totalUnder": "44.5",
+              "awayTeamSpread": "+2.5",
+              "awayTeamSpreadOdds": "even",
+              "homeTeamSpread": "-2.5",
+              "homeTeamSpreadOdds": "-120",
+              "totalOverOdds": "-115",
+              "totalUnderOdds": "-105",
+              "awayTeamMLOdds": "+130",
+              "homeTeamMLOdds": "-155",
+              "totalOver": "44.5",
+              "impliedTotals": {
+                "awayTotal": "21.0",
+                "homeTotal": "23.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "betrivers",
+            "odds": {
+              "totalUnder": "44.5",
+              "awayTeamSpread": "+3",
+              "awayTeamSpreadOdds": "-120",
+              "homeTeamSpread": "-3",
+              "homeTeamSpreadOdds": "-105",
+              "totalOverOdds": "-112",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "+128",
+              "homeTeamMLOdds": "-159",
+              "totalOver": "44.5",
+              "impliedTotals": {
+                "awayTotal": "20.75",
+                "homeTotal": "23.75"
+              }
+            }
+          },
+          {
+            "sportsBook": "caesars_sportsbook",
+            "odds": {
+              "totalUnder": "44.5",
+              "awayTeamSpread": "+2.5",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "-2.5",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "+118",
+              "homeTeamMLOdds": "-140",
+              "totalOver": "44.5",
+              "impliedTotals": {
+                "awayTotal": "21.0",
+                "homeTotal": "23.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "draftkings",
+            "odds": {
+              "totalUnder": "44.5",
+              "awayTeamSpread": "+2.5",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "-2.5",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "+114",
+              "homeTeamMLOdds": "-135",
+              "totalOver": "44.5",
+              "impliedTotals": {
+                "awayTotal": "21.0",
+                "homeTotal": "23.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "espnbet",
+            "odds": {
+              "totalUnder": "44.5",
+              "awayTeamSpread": "+2.5",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "-2.5",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "+120",
+              "homeTeamMLOdds": "-140",
+              "totalOver": "44.5",
+              "impliedTotals": {
+                "awayTotal": "21.0",
+                "homeTotal": "23.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "fanduel",
+            "odds": {
+              "totalUnder": "44.5",
+              "awayTeamSpread": "+2.5",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "-2.5",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-105",
+              "totalUnderOdds": "-115",
+              "awayTeamMLOdds": "+110",
+              "homeTeamMLOdds": "-130",
+              "totalOver": "44.5",
+              "impliedTotals": {
+                "awayTotal": "21.0",
+                "homeTotal": "23.5"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "gameID": "20250907_LV@NE",
+        "awayTeam": "LV",
+        "gameDate": "20250907",
+        "homeTeam": "NE",
+        "last_updated_e_time": "1754949986.6074977",
+        "teamIDAway": "17",
+        "teamIDHome": "22",
+        "playerProps": [
+          {
+            "propBets": {
+              "rushrec": "91.5",
+              "rushyds": "67.5",
+              "firsttd": "550",
+              "longrush": "16.5",
+              "anytd": "-110",
+              "recyds": "19.5"
+            },
+            "playerID": "4890973"
+          },
+          {
+            "propBets": {
+              "firsttd": "700",
+              "anytd": "135"
+            },
+            "playerID": "4432710"
+          },
+          {
+            "propBets": {
+              "firsttd": "700",
+              "anytd": "145"
+            },
+            "playerID": "4569173"
+          },
+          {
+            "propBets": {
+              "firsttd": "1000",
+              "anytd": "175",
+              "recyds": "55.5"
+            },
+            "playerID": "4432665"
+          },
+          {
+            "propBets": {
+              "firsttd": "1000",
+              "anytd": "200",
+              "recyds": "49.5"
+            },
+            "playerID": "2976212"
+          },
+          {
+            "propBets": {
+              "firsttd": "1100",
+              "anytd": "210",
+              "recyds": "54.5"
+            },
+            "playerID": "3916433"
+          },
+          {
+            "propBets": {
+              "firsttd": "1400",
+              "anytd": "265",
+              "recyds": "30.5"
+            },
+            "playerID": "3046439"
+          },
+          {
+            "propBets": {
+              "intsthrown": "0.5",
+              "rushyds": "25.5",
+              "firsttd": "1400",
+              "anytd": "310",
+              "passtd": "1.5",
+              "longrush": "11.5",
+              "passyds": "217.5"
+            },
+            "playerID": "4431452"
+          },
+          {
+            "propBets": {
+              "firsttd": "1400",
+              "anytd": "285"
+            },
+            "playerID": "2576414"
+          },
+          {
+            "propBets": {
+              "firsttd": "1600",
+              "anytd": "320",
+              "recyds": "32.5"
+            },
+            "playerID": "4427095"
+          },
+          {
+            "propBets": {
+              "firsttd": "1900",
+              "anytd": "380"
+            },
+            "playerID": "4432775"
+          },
+          {
+            "propBets": {
+              "intsthrown": "0.5",
+              "rushyds": "4.5",
+              "firsttd": "2000",
+              "anytd": "450",
+              "passtd": "1.5",
+              "longrush": "4.5",
+              "passyds": "218.5"
+            },
+            "playerID": "15864"
+          },
+          {
+            "propBets": {
+              "firsttd": "2000",
+              "anytd": "400"
+            },
+            "playerID": "4428718"
+          },
+          {
+            "propBets": {
+              "firsttd": "2200",
+              "anytd": "475"
+            },
+            "playerID": "4429022"
+          },
+          {
+            "propBets": {
+              "firsttd": "2200",
+              "anytd": "450"
+            },
+            "playerID": "4613202"
+          },
+          {
+            "propBets": {
+              "firsttd": "2500",
+              "anytd": "475"
+            },
+            "playerID": "4603186"
+          },
+          {
+            "propBets": {
+              "firsttd": "2500",
+              "anytd": "600"
+            },
+            "playerID": "4695193"
+          },
+          {
+            "propBets": {
+              "firsttd": "2500",
+              "anytd": "600"
+            },
+            "playerID": "2991662"
+          },
+          {
+            "propBets": {
+              "firsttd": "3000",
+              "anytd": "800"
+            },
+            "playerID": "4692022"
+          },
+          {
+            "propBets": {
+              "firsttd": "3000",
+              "anytd": "650"
+            },
+            "playerID": "3045523"
+          },
+          {
+            "propBets": {
+              "firsttd": "3000",
+              "anytd": "800"
+            },
+            "playerID": "4360294"
+          },
+          {
+            "propBets": {
+              "firsttd": "3000",
+              "anytd": "700"
+            },
+            "playerID": "3043275"
+          },
+          {
+            "propBets": {
+              "firsttd": "3500",
+              "anytd": "700"
+            },
+            "playerID": "4429086"
+          },
+          {
+            "propBets": {
+              "firsttd": "4500",
+              "anytd": "1200"
+            },
+            "playerID": "4361777"
+          },
+          {
+            "propBets": {
+              "firsttd": "5500",
+              "anytd": "1200"
+            },
+            "playerID": "4430104"
+          },
+          {
+            "propBets": {
+              "firsttd": "5500",
+              "anytd": "1400"
+            },
+            "playerID": "4361100"
+          },
+          {
+            "propBets": {
+              "firsttd": "7000",
+              "anytd": "2000"
+            },
+            "playerID": "4045305"
+          },
+          {
+            "propBets": {
+              "firsttd": "8000",
+              "anytd": "2200"
+            },
+            "playerID": "4039043"
+          },
+          {
+            "propBets": {
+              "firsttd": "8000",
+              "anytd": "2000"
+            },
+            "playerID": "4366963"
+          },
+          {
+            "propBets": {
+              "firsttd": "8000",
+              "anytd": "2000"
+            },
+            "playerID": "4361426"
+          },
+          {
+            "propBets": {
+              "firsttd": "9000",
+              "anytd": "2500"
+            },
+            "playerID": "4379769"
+          },
+          {
+            "propBets": {
+              "kickpts": "6.5",
+              "xpm": "1.5",
+              "fgm": "1.5"
+            },
+            "playerID": "3051909"
+          },
+          {
+            "propBets": {
+              "kickpts": "7.5",
+              "xpm": "1.5",
+              "fgm": "2.5"
+            },
+            "playerID": "4569923"
+          }
+        ],
+        "sportsBooks": [
+          {
+            "sportsBook": "ballybet",
+            "odds": {
+              "totalUnder": "42.5",
+              "awayTeamSpread": "+3",
+              "awayTeamSpreadOdds": "-113",
+              "homeTeamSpread": "-3",
+              "homeTeamSpreadOdds": "-108",
+              "totalOverOdds": "-109",
+              "totalUnderOdds": "-112",
+              "awayTeamMLOdds": "+130",
+              "homeTeamMLOdds": "-159",
+              "totalOver": "42.5",
+              "impliedTotals": {
+                "awayTotal": "19.75",
+                "homeTotal": "22.75"
+              }
+            }
+          },
+          {
+            "sportsBook": "bet365",
+            "odds": {
+              "totalUnder": "42.5",
+              "awayTeamSpread": "+3",
+              "awayTeamSpreadOdds": "-115",
+              "homeTeamSpread": "-3",
+              "homeTeamSpreadOdds": "-105",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "+135",
+              "homeTeamMLOdds": "-160",
+              "totalOver": "42.5",
+              "impliedTotals": {
+                "awayTotal": "19.75",
+                "homeTotal": "22.75"
+              }
+            }
+          },
+          {
+            "sportsBook": "betmgm",
+            "odds": {
+              "totalUnder": "42.5",
+              "awayTeamSpread": "+3",
+              "awayTeamSpreadOdds": "-115",
+              "homeTeamSpread": "-3",
+              "homeTeamSpreadOdds": "-105",
+              "totalOverOdds": "-105",
+              "totalUnderOdds": "-115",
+              "awayTeamMLOdds": "+140",
+              "homeTeamMLOdds": "-165",
+              "totalOver": "42.5",
+              "impliedTotals": {
+                "awayTotal": "19.75",
+                "homeTotal": "22.75"
+              }
+            }
+          },
+          {
+            "sportsBook": "betrivers",
+            "odds": {
+              "totalUnder": "42.5",
+              "awayTeamSpread": "+3",
+              "awayTeamSpreadOdds": "-114",
+              "homeTeamSpread": "-3",
+              "homeTeamSpreadOdds": "-109",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-112",
+              "awayTeamMLOdds": "+120",
+              "homeTeamMLOdds": "-159",
+              "totalOver": "42.5",
+              "impliedTotals": {
+                "awayTotal": "19.75",
+                "homeTotal": "22.75"
+              }
+            }
+          },
+          {
+            "sportsBook": "caesars_sportsbook",
+            "odds": {
+              "totalUnder": "42.5",
+              "awayTeamSpread": "+3",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "-3",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "+140",
+              "homeTeamMLOdds": "-165",
+              "totalOver": "42.5",
+              "impliedTotals": {
+                "awayTotal": "19.75",
+                "homeTotal": "22.75"
+              }
+            }
+          },
+          {
+            "sportsBook": "draftkings",
+            "odds": {
+              "totalUnder": "42.5",
+              "awayTeamSpread": "+3",
+              "awayTeamSpreadOdds": "-105",
+              "homeTeamSpread": "-3",
+              "homeTeamSpreadOdds": "-115",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "+140",
+              "homeTeamMLOdds": "-166",
+              "totalOver": "42.5",
+              "impliedTotals": {
+                "awayTotal": "19.75",
+                "homeTotal": "22.75"
+              }
+            }
+          },
+          {
+            "sportsBook": "espnbet",
+            "odds": {
+              "totalUnder": "42.5",
+              "awayTeamSpread": "+3",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "-3",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "+135",
+              "homeTeamMLOdds": "-155",
+              "totalOver": "42.5",
+              "impliedTotals": {
+                "awayTotal": "19.75",
+                "homeTotal": "22.75"
+              }
+            }
+          },
+          {
+            "sportsBook": "fanduel",
+            "odds": {
+              "totalUnder": "42.5",
+              "awayTeamSpread": "+2.5",
+              "awayTeamSpreadOdds": "-100",
+              "homeTeamSpread": "-2.5",
+              "homeTeamSpreadOdds": "-122",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "+130",
+              "homeTeamMLOdds": "-154",
+              "totalOver": "42.5",
+              "impliedTotals": {
+                "awayTotal": "20.0",
+                "homeTotal": "22.5"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "gameID": "20250907_MIA@IND",
+        "awayTeam": "MIA",
+        "gameDate": "20250907",
+        "homeTeam": "IND",
+        "last_updated_e_time": "1754949986.6069252",
+        "teamIDAway": "20",
+        "teamIDHome": "14",
+        "playerProps": [
+          {
+            "propBets": {
+              "rushyds": "78.5",
+              "firsttd": "370",
+              "anytd": "-170",
+              "twotd": "350",
+              "rushrec": "95.5",
+              "longrush": "16.5",
+              "lasttd": "500",
+              "threetd": "1700",
+              "recyds": "11.5"
+            },
+            "playerID": "4242335"
+          },
+          {
+            "propBets": {
+              "rushyds": "71.5",
+              "firsttd": "550",
+              "anytd": "-130",
+              "twotd": "500",
+              "longrush": "16.5",
+              "lasttd": "600",
+              "threetd": "2700"
+            },
+            "playerID": "4429160"
+          },
+          {
+            "propBets": {
+              "firsttd": "900",
+              "anytd": "140",
+              "twotd": "1100",
+              "recs": "5.5",
+              "lasttd": "850",
+              "threetd": "7000",
+              "recyds": "68.5"
+            },
+            "playerID": "3116406"
+          },
+          {
+            "propBets": {
+              "firsttd": "1000",
+              "anytd": "175",
+              "lasttd": "950",
+              "twotd": "1600",
+              "threetd": "12500"
+            },
+            "playerID": "4035687"
+          },
+          {
+            "propBets": {
+              "firsttd": "1100",
+              "anytd": "200",
+              "lasttd": "1000",
+              "twotd": "1700",
+              "threetd": "12500"
+            },
+            "playerID": "4688813"
+          },
+          {
+            "propBets": {
+              "firsttd": "1100",
+              "anytd": "195"
+            },
+            "playerID": "4711533"
+          },
+          {
+            "propBets": {
+              "comp": "19.5",
+              "rushyds": "29.5",
+              "firsttd": "1100",
+              "anytd": "210",
+              "twotd": "1800",
+              "passatt": "30.5",
+              "passtd": "1.5",
+              "longrush": "11.5",
+              "passyds": "196.5",
+              "lasttd": "1100",
+              "threetd": "12500"
+            },
+            "playerID": "3917792"
+          },
+          {
+            "propBets": {
+              "firsttd": "1100",
+              "anytd": "200",
+              "lasttd": "1000",
+              "twotd": "1700",
+              "threetd": "12500"
+            },
+            "playerID": "4360078"
+          },
+          {
+            "propBets": {
+              "firsttd": "1100",
+              "anytd": "185",
+              "twotd": "1600",
+              "recs": "4.5",
+              "lasttd": "1000",
+              "threetd": "12500",
+              "recyds": "52.5"
+            },
+            "playerID": "4372016"
+          },
+          {
+            "propBets": {
+              "firsttd": "1400",
+              "anytd": "250",
+              "lasttd": "1300",
+              "twotd": "2500"
+            },
+            "playerID": "4431459"
+          },
+          {
+            "propBets": {
+              "firsttd": "1300",
+              "anytd": "255"
+            },
+            "playerID": "4682745"
+          },
+          {
+            "propBets": {
+              "firsttd": "1800",
+              "anytd": "350",
+              "lasttd": "1600",
+              "twotd": "4000"
+            },
+            "playerID": "4597500"
+          },
+          {
+            "propBets": {
+              "firsttd": "1800",
+              "anytd": "350",
+              "lasttd": "1600",
+              "twotd": "4000"
+            },
+            "playerID": "4061956"
+          },
+          {
+            "propBets": {
+              "firsttd": "2700",
+              "anytd": "400",
+              "lasttd": "1600",
+              "twotd": "5500"
+            },
+            "playerID": "2576925"
+          },
+          {
+            "propBets": {
+              "firsttd": "3500",
+              "anytd": "600",
+              "lasttd": "2200",
+              "twotd": "7500"
+            },
+            "playerID": "4874509"
+          },
+          {
+            "propBets": {
+              "firsttd": "2700",
+              "anytd": "400",
+              "lasttd": "1600",
+              "twotd": "5000"
+            },
+            "playerID": "4569603"
+          },
+          {
+            "propBets": {
+              "firsttd": "2800",
+              "anytd": "500"
+            },
+            "playerID": "4035886"
+          },
+          {
+            "propBets": {
+              "firsttd": "3500",
+              "anytd": "650",
+              "lasttd": "2700",
+              "twotd": "10000"
+            },
+            "playerID": "3929785"
+          },
+          {
+            "propBets": {
+              "firsttd": "3300",
+              "anytd": "800",
+              "lasttd": "3500",
+              "twotd": "12500"
+            },
+            "playerID": "2998565"
+          },
+          {
+            "propBets": {
+              "firsttd": "3300",
+              "anytd": "800",
+              "lasttd": "3500",
+              "twotd": "12500"
+            },
+            "playerID": "4722908"
+          },
+          {
+            "propBets": {
+              "firsttd": "3500",
+              "anytd": "700"
+            },
+            "playerID": "4047422"
+          },
+          {
+            "propBets": {
+              "firsttd": "3500",
+              "anytd": "650",
+              "lasttd": "2700",
+              "twotd": "10000"
+            },
+            "playerID": "4043016"
+          },
+          {
+            "propBets": {
+              "firsttd": "3500",
+              "anytd": "600",
+              "lasttd": "2200",
+              "twotd": "7500"
+            },
+            "playerID": "4429676"
+          },
+          {
+            "propBets": {
+              "comp": "22.5",
+              "intsthrown": "0.5",
+              "rushyds": "1.5",
+              "firsttd": "6000",
+              "anytd": "1200",
+              "passatt": "31.5",
+              "passtd": "1.5",
+              "passyds": "244.5",
+              "lasttd": "4500"
+            },
+            "playerID": "4241479"
+          },
+          {
+            "propBets": {
+              "firsttd": "8000",
+              "anytd": "1900",
+              "lasttd": "8000"
+            },
+            "playerID": "4365395"
+          },
+          {
+            "propBets": {
+              "firsttd": "6000",
+              "anytd": "1400"
+            },
+            "playerID": "4362186"
+          },
+          {
+            "propBets": {
+              "firsttd": "10000",
+              "anytd": "2200",
+              "lasttd": "8000"
+            },
+            "playerID": "3917668"
+          },
+          {
+            "propBets": {
+              "firsttd": "7000",
+              "anytd": "1500"
+            },
+            "playerID": "4249030"
+          },
+          {
+            "propBets": {
+              "firsttd": "7500",
+              "anytd": "1700"
+            },
+            "playerID": "4362523"
+          },
+          {
+            "propBets": {
+              "firsttd": "7500",
+              "anytd": "1900"
+            },
+            "playerID": "3051889"
+          },
+          {
+            "propBets": {
+              "kickpts": "6.5",
+              "xpm": "1.5",
+              "fgm": "2.5"
+            },
+            "playerID": "4571557"
+          },
+          {
+            "propBets": {
+              "kickpts": "7.5",
+              "xpm": "1.5",
+              "fgm": "2.5"
+            },
+            "playerID": "3124679"
+          }
+        ],
+        "sportsBooks": [
+          {
+            "sportsBook": "ballybet",
+            "odds": {
+              "totalUnder": "46",
+              "awayTeamSpread": "+1",
+              "awayTeamSpreadOdds": "-114",
+              "homeTeamSpread": "-1",
+              "homeTeamSpreadOdds": "-107",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "-107",
+              "homeTeamMLOdds": "-114",
+              "totalOver": "46",
+              "impliedTotals": {
+                "awayTotal": "22.5",
+                "homeTotal": "23.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "bet365",
+            "odds": {
+              "totalUnder": "46.5",
+              "awayTeamSpread": "+1",
+              "awayTeamSpreadOdds": "-120",
+              "homeTeamSpread": "-1",
+              "homeTeamSpreadOdds": "even",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "-105",
+              "homeTeamMLOdds": "-115",
+              "totalOver": "46.5",
+              "impliedTotals": {
+                "awayTotal": "22.75",
+                "homeTotal": "23.75"
+              }
+            }
+          },
+          {
+            "sportsBook": "betmgm",
+            "odds": {
+              "totalUnder": "46.5",
+              "awayTeamSpread": "+1.5",
+              "awayTeamSpreadOdds": "-120",
+              "homeTeamSpread": "-1.5",
+              "homeTeamSpreadOdds": "even",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "-105",
+              "homeTeamMLOdds": "-115",
+              "totalOver": "46.5",
+              "impliedTotals": {
+                "awayTotal": "22.5",
+                "homeTotal": "24.0"
+              }
+            }
+          },
+          {
+            "sportsBook": "betrivers",
+            "odds": {
+              "totalUnder": "46",
+              "awayTeamSpread": "+1",
+              "awayTeamSpreadOdds": "-115",
+              "homeTeamSpread": "-1",
+              "homeTeamSpreadOdds": "-108",
+              "totalOverOdds": "-112",
+              "totalUnderOdds": "-112",
+              "awayTeamMLOdds": "-108",
+              "homeTeamMLOdds": "-115",
+              "totalOver": "46",
+              "impliedTotals": {
+                "awayTotal": "22.5",
+                "homeTotal": "23.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "caesars_sportsbook",
+            "odds": {
+              "totalUnder": "46.5",
+              "awayTeamSpread": "PK",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "PK",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "-110",
+              "homeTeamMLOdds": "-110",
+              "totalOver": "46.5",
+              "impliedTotals": {}
+            }
+          },
+          {
+            "sportsBook": "draftkings",
+            "odds": {
+              "totalUnder": "45.5",
+              "awayTeamSpread": "+1.5",
+              "awayTeamSpreadOdds": "-115",
+              "homeTeamSpread": "-1.5",
+              "homeTeamSpreadOdds": "-105",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "-105",
+              "homeTeamMLOdds": "-115",
+              "totalOver": "45.5",
+              "impliedTotals": {
+                "awayTotal": "22.0",
+                "homeTotal": "23.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "espnbet",
+            "odds": {
+              "totalUnder": "45.5",
+              "awayTeamSpread": "+1",
+              "awayTeamSpreadOdds": "-105",
+              "homeTeamSpread": "-1",
+              "homeTeamSpreadOdds": "-115",
+              "totalOverOdds": "-120",
+              "totalUnderOdds": "even",
+              "awayTeamMLOdds": "-105",
+              "homeTeamMLOdds": "-115",
+              "totalOver": "45.5",
+              "impliedTotals": {
+                "awayTotal": "22.25",
+                "homeTotal": "23.25"
+              }
+            }
+          },
+          {
+            "sportsBook": "fanduel",
+            "odds": {
+              "totalUnder": "46.5",
+              "awayTeamSpread": "+1.5",
+              "awayTeamSpreadOdds": "-120",
+              "homeTeamSpread": "-1.5",
+              "homeTeamSpreadOdds": "-102",
+              "totalOverOdds": "-105",
+              "totalUnderOdds": "-115",
+              "awayTeamMLOdds": "-102",
+              "homeTeamMLOdds": "-116",
+              "totalOver": "46.5",
+              "impliedTotals": {
+                "awayTotal": "22.5",
+                "homeTotal": "24.0"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "gameID": "20250907_NYG@WSH",
+        "awayTeam": "NYG",
+        "gameDate": "20250907",
+        "homeTeam": "WSH",
+        "last_updated_e_time": "1754949986.607217",
+        "teamIDAway": "24",
+        "teamIDHome": "32",
+        "playerProps": [
+          {
+            "propBets": {
+              "firsttd": "750",
+              "anytd": "120",
+              "recyds": "59.5"
+            },
+            "playerID": "3121422"
+          },
+          {
+            "propBets": {
+              "firsttd": "750",
+              "anytd": "140"
+            },
+            "playerID": "4362619"
+          },
+          {
+            "propBets": {
+              "intsthrown": "0.5",
+              "rushyds": "53.5",
+              "firsttd": "800",
+              "anytd": "140",
+              "passtd": "1.5",
+              "longrush": "16.5",
+              "passyds": "222.5"
+            },
+            "playerID": "4426348"
+          },
+          {
+            "propBets": {
+              "firsttd": "850",
+              "anytd": "160",
+              "recyds": "37.5"
+            },
+            "playerID": "3126486"
+          },
+          {
+            "propBets": {
+              "firsttd": "950",
+              "anytd": "160"
+            },
+            "playerID": "4360516"
+          },
+          {
+            "propBets": {
+              "firsttd": "1000",
+              "anytd": "145",
+              "recyds": "74.5"
+            },
+            "playerID": "4595348"
+          },
+          {
+            "propBets": {
+              "firsttd": "1100",
+              "anytd": "215",
+              "recyds": "18.5"
+            },
+            "playerID": "3068267"
+          },
+          {
+            "propBets": {
+              "firsttd": "1100",
+              "anytd": "210",
+              "recyds": "32.5"
+            },
+            "playerID": "15835"
+          },
+          {
+            "propBets": {
+              "firsttd": "1200",
+              "anytd": "235"
+            },
+            "playerID": "4575131"
+          },
+          {
+            "propBets": {
+              "firsttd": "1300",
+              "anytd": "235"
+            },
+            "playerID": "4696981"
+          },
+          {
+            "propBets": {
+              "firsttd": "1500",
+              "anytd": "260"
+            },
+            "playerID": "4569587"
+          },
+          {
+            "propBets": {
+              "firsttd": "1600",
+              "anytd": "245",
+              "recyds": "23.5"
+            },
+            "playerID": "3916945"
+          },
+          {
+            "propBets": {
+              "firsttd": "2200",
+              "anytd": "400",
+              "recyds": "27.5"
+            },
+            "playerID": "4429148"
+          },
+          {
+            "propBets": {
+              "firsttd": "2200",
+              "anytd": "475"
+            },
+            "playerID": "4602667"
+          },
+          {
+            "propBets": {
+              "comp": "21.5",
+              "intsthrown": "0.5",
+              "rushyds": "9.5",
+              "firsttd": "2200",
+              "anytd": "475",
+              "passatt": "33.5",
+              "passtd": "1.5",
+              "longrush": "5.5",
+              "passyds": "218.5"
+            },
+            "playerID": "14881"
+          },
+          {
+            "propBets": {
+              "firsttd": "2500",
+              "anytd": "500"
+            },
+            "playerID": "3121409"
+          },
+          {
+            "propBets": {
+              "firsttd": "2800",
+              "anytd": "650"
+            },
+            "playerID": "3127586"
+          },
+          {
+            "propBets": {
+              "firsttd": "3000",
+              "anytd": "500"
+            },
+            "playerID": "4692590"
+          },
+          {
+            "propBets": {
+              "firsttd": "3000",
+              "anytd": "600"
+            },
+            "playerID": "4040761"
+          },
+          {
+            "propBets": {
+              "firsttd": "3500",
+              "anytd": "750"
+            },
+            "playerID": "4048228"
+          },
+          {
+            "propBets": {
+              "firsttd": "3500",
+              "anytd": "700"
+            },
+            "playerID": "4690923"
+          },
+          {
+            "propBets": {
+              "firsttd": "5500",
+              "anytd": "1400"
+            },
+            "playerID": "3916566"
+          },
+          {
+            "propBets": {
+              "firsttd": "6000",
+              "anytd": "1200"
+            },
+            "playerID": "4240573"
+          },
+          {
+            "propBets": {
+              "firsttd": "6500",
+              "anytd": "1300"
+            },
+            "playerID": "4361516"
+          },
+          {
+            "propBets": {
+              "firsttd": "6500",
+              "anytd": "1700"
+            },
+            "playerID": "4036348"
+          },
+          {
+            "propBets": {
+              "firsttd": "6500",
+              "anytd": "1200"
+            },
+            "playerID": "4039057"
+          },
+          {
+            "propBets": {
+              "firsttd": "6500",
+              "anytd": "1500"
+            },
+            "playerID": "4426948"
+          },
+          {
+            "propBets": {
+              "firsttd": "7500",
+              "anytd": "1600"
+            },
+            "playerID": "4367209"
+          },
+          {
+            "propBets": {
+              "firsttd": "8000",
+              "anytd": "1700"
+            },
+            "playerID": "2531358"
+          },
+          {
+            "propBets": {
+              "firsttd": "8000",
+              "anytd": "2000"
+            },
+            "playerID": "2576581"
+          },
+          {
+            "propBets": {
+              "kickpts": "5.5",
+              "xpm": "1.5",
+              "fgm": "1.5"
+            },
+            "playerID": "12460"
+          },
+          {
+            "propBets": {
+              "kickpts": "7.5",
+              "xpm": "1.5",
+              "fgm": "2.5"
+            },
+            "playerID": "4249087"
+          }
+        ],
+        "sportsBooks": [
+          {
+            "sportsBook": "ballybet",
+            "odds": {
+              "totalUnder": "45.5",
+              "awayTeamSpread": "+6.5",
+              "awayTeamSpreadOdds": "-109",
+              "homeTeamSpread": "-6.5",
+              "homeTeamSpreadOdds": "-112",
+              "totalOverOdds": "-109",
+              "totalUnderOdds": "-112",
+              "awayTeamMLOdds": "+250",
+              "homeTeamMLOdds": "-335",
+              "totalOver": "45.5",
+              "impliedTotals": {
+                "awayTotal": "19.5",
+                "homeTotal": "26.0"
+              }
+            }
+          },
+          {
+            "sportsBook": "bet365",
+            "odds": {
+              "totalUnder": "46",
+              "awayTeamSpread": "+6.5",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "-6.5",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "+230",
+              "homeTeamMLOdds": "-280",
+              "totalOver": "46",
+              "impliedTotals": {
+                "awayTotal": "19.75",
+                "homeTotal": "26.25"
+              }
+            }
+          },
+          {
+            "sportsBook": "betmgm",
+            "odds": {
+              "totalUnder": "45.5",
+              "awayTeamSpread": "+6.5",
+              "awayTeamSpreadOdds": "-105",
+              "homeTeamSpread": "-6.5",
+              "homeTeamSpreadOdds": "-115",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "+240",
+              "homeTeamMLOdds": "-300",
+              "totalOver": "45.5",
+              "impliedTotals": {
+                "awayTotal": "19.5",
+                "homeTotal": "26.0"
+              }
+            }
+          },
+          {
+            "sportsBook": "betrivers",
+            "odds": {
+              "totalUnder": "45.5",
+              "awayTeamSpread": "+6.5",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "-6.5",
+              "homeTeamSpreadOdds": "-112",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-113",
+              "awayTeamMLOdds": "+240",
+              "homeTeamMLOdds": "-335",
+              "totalOver": "45.5",
+              "impliedTotals": {
+                "awayTotal": "19.5",
+                "homeTotal": "26.0"
+              }
+            }
+          },
+          {
+            "sportsBook": "caesars_sportsbook",
+            "odds": {
+              "totalUnder": "46",
+              "awayTeamSpread": "+6.5",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "-6.5",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "+228",
+              "homeTeamMLOdds": "-285",
+              "totalOver": "46",
+              "impliedTotals": {
+                "awayTotal": "19.75",
+                "homeTotal": "26.25"
+              }
+            }
+          },
+          {
+            "sportsBook": "draftkings",
+            "odds": {
+              "totalUnder": "45.5",
+              "awayTeamSpread": "+6.5",
+              "awayTeamSpreadOdds": "-105",
+              "homeTeamSpread": "-6.5",
+              "homeTeamSpreadOdds": "-115",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "+230",
+              "homeTeamMLOdds": "-285",
+              "totalOver": "45.5",
+              "impliedTotals": {
+                "awayTotal": "19.5",
+                "homeTotal": "26.0"
+              }
+            }
+          },
+          {
+            "sportsBook": "espnbet",
+            "odds": {
+              "totalUnder": "45.5",
+              "awayTeamSpread": "+6.5",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "-6.5",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "+250",
+              "homeTeamMLOdds": "-300",
+              "totalOver": "45.5",
+              "impliedTotals": {
+                "awayTotal": "19.5",
+                "homeTotal": "26.0"
+              }
+            }
+          },
+          {
+            "sportsBook": "fanduel",
+            "odds": {
+              "totalUnder": "45.5",
+              "awayTeamSpread": "+6.5",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "-6.5",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-105",
+              "totalUnderOdds": "-115",
+              "awayTeamMLOdds": "+245",
+              "homeTeamMLOdds": "-300",
+              "totalOver": "45.5",
+              "impliedTotals": {
+                "awayTotal": "19.5",
+                "homeTotal": "26.0"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "gameID": "20250907_PIT@NYJ",
+        "awayTeam": "PIT",
+        "gameDate": "20250907",
+        "homeTeam": "NYJ",
+        "last_updated_e_time": "1754949986.6067812",
+        "teamIDAway": "26",
+        "teamIDHome": "25",
+        "playerProps": [
+          {
+            "propBets": {
+              "rushyds": "49.5",
+              "firsttd": "550",
+              "longrush": "13.5",
+              "anytd": "125",
+              "recyds": "16.5"
+            },
+            "playerID": "4427366"
+          },
+          {
+            "propBets": {
+              "intsthrown": "0.5",
+              "rushyds": "44.5",
+              "firsttd": "700",
+              "anytd": "165",
+              "passtd": "0.5",
+              "longrush": "14.5",
+              "passyds": "172.5"
+            },
+            "playerID": "4362887"
+          },
+          {
+            "propBets": {
+              "firsttd": "700",
+              "anytd": "165"
+            },
+            "playerID": "4819231"
+          },
+          {
+            "propBets": {
+              "rushyds": "49.5",
+              "firsttd": "750",
+              "anytd": "180",
+              "recyds": "19.5"
+            },
+            "playerID": "4569987"
+          },
+          {
+            "propBets": {
+              "firsttd": "800",
+              "anytd": "185",
+              "recyds": "54.5"
+            },
+            "playerID": "4047650"
+          },
+          {
+            "propBets": {
+              "firsttd": "950",
+              "anytd": "195",
+              "recyds": "54.5"
+            },
+            "playerID": "4569618"
+          },
+          {
+            "propBets": {
+              "firsttd": "1100",
+              "anytd": "280"
+            },
+            "playerID": "4685247"
+          },
+          {
+            "propBets": {
+              "firsttd": "1400",
+              "anytd": "330"
+            },
+            "playerID": "3054212"
+          },
+          {
+            "propBets": {
+              "firsttd": "1500",
+              "anytd": "380"
+            },
+            "playerID": "4361411"
+          },
+          {
+            "propBets": {
+              "firsttd": "1700",
+              "anytd": "425",
+              "recyds": "21.5"
+            },
+            "playerID": "4243389"
+          },
+          {
+            "propBets": {
+              "firsttd": "2000",
+              "anytd": "500"
+            },
+            "playerID": "4431492"
+          },
+          {
+            "propBets": {
+              "firsttd": "2200",
+              "anytd": "550"
+            },
+            "playerID": "4808766"
+          },
+          {
+            "propBets": {
+              "firsttd": "3000",
+              "anytd": "800"
+            },
+            "playerID": "4371733"
+          },
+          {
+            "propBets": {
+              "firsttd": "3000",
+              "anytd": "750"
+            },
+            "playerID": "3128390"
+          },
+          {
+            "propBets": {
+              "firsttd": "3000",
+              "anytd": "750"
+            },
+            "playerID": "3115306"
+          },
+          {
+            "propBets": {
+              "firsttd": "3000",
+              "anytd": "750"
+            },
+            "playerID": "15880"
+          },
+          {
+            "propBets": {
+              "firsttd": "3500",
+              "anytd": "950"
+            },
+            "playerID": "4695404"
+          },
+          {
+            "propBets": {
+              "intsthrown": "0.5",
+              "passtd": "1.5",
+              "rushyds": "0.5",
+              "firsttd": "3500",
+              "passyds": "205.5",
+              "anytd": "1000"
+            },
+            "playerID": "8439"
+          },
+          {
+            "propBets": {
+              "firsttd": "3500",
+              "anytd": "950"
+            },
+            "playerID": "4361372"
+          },
+          {
+            "propBets": {
+              "firsttd": "3500",
+              "anytd": "950"
+            },
+            "playerID": "4430802"
+          },
+          {
+            "propBets": {
+              "firsttd": "4500",
+              "anytd": "1300"
+            },
+            "playerID": "4241401"
+          },
+          {
+            "propBets": {
+              "firsttd": "4500",
+              "anytd": "1000"
+            },
+            "playerID": "4429105"
+          },
+          {
+            "propBets": {
+              "firsttd": "5000",
+              "anytd": "1300"
+            },
+            "playerID": "3914397"
+          },
+          {
+            "propBets": {
+              "firsttd": "5500",
+              "anytd": "1700"
+            },
+            "playerID": "4427278"
+          },
+          {
+            "propBets": {
+              "firsttd": "5500",
+              "anytd": "1600"
+            },
+            "playerID": "4250764"
+          },
+          {
+            "propBets": {
+              "firsttd": "6000",
+              "anytd": "1800"
+            },
+            "playerID": "4613104"
+          },
+          {
+            "propBets": {
+              "firsttd": "6000",
+              "anytd": "1400"
+            },
+            "playerID": "4035656"
+          },
+          {
+            "propBets": {
+              "firsttd": "6500",
+              "anytd": "1800"
+            },
+            "playerID": "2310331"
+          },
+          {
+            "propBets": {
+              "firsttd": "8000",
+              "anytd": "2200"
+            },
+            "playerID": "4241961"
+          },
+          {
+            "propBets": {
+              "firsttd": "8000",
+              "anytd": "1700"
+            },
+            "playerID": "4035198"
+          },
+          {
+            "propBets": {
+              "firsttd": "11000",
+              "anytd": "2800"
+            },
+            "playerID": "4035537"
+          },
+          {
+            "propBets": {
+              "kickpts": "7.5",
+              "xpm": "1.5",
+              "fgm": "1.5"
+            },
+            "playerID": "17372"
+          }
+        ],
+        "sportsBooks": [
+          {
+            "sportsBook": "ballybet",
+            "odds": {
+              "totalUnder": "39",
+              "awayTeamSpread": "-3",
+              "awayTeamSpreadOdds": "-113",
+              "homeTeamSpread": "+3",
+              "homeTeamSpreadOdds": "-109",
+              "totalOverOdds": "-108",
+              "totalUnderOdds": "-113",
+              "awayTeamMLOdds": "-165",
+              "homeTeamMLOdds": "+133",
+              "totalOver": "39",
+              "impliedTotals": {
+                "awayTotal": "21.0",
+                "homeTotal": "18.0"
+              }
+            }
+          },
+          {
+            "sportsBook": "bet365",
+            "odds": {
+              "totalUnder": "38.5",
+              "awayTeamSpread": "-3",
+              "awayTeamSpreadOdds": "-105",
+              "homeTeamSpread": "+3",
+              "homeTeamSpreadOdds": "-115",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "-160",
+              "homeTeamMLOdds": "+135",
+              "totalOver": "38.5",
+              "impliedTotals": {
+                "awayTotal": "20.75",
+                "homeTotal": "17.75"
+              }
+            }
+          },
+          {
+            "sportsBook": "betmgm",
+            "odds": {
+              "totalUnder": "38.5",
+              "awayTeamSpread": "-3",
+              "awayTeamSpreadOdds": "-115",
+              "homeTeamSpread": "+3",
+              "homeTeamSpreadOdds": "-105",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "-160",
+              "homeTeamMLOdds": "+135",
+              "totalOver": "38.5",
+              "impliedTotals": {
+                "awayTotal": "20.75",
+                "homeTotal": "17.75"
+              }
+            }
+          },
+          {
+            "sportsBook": "betrivers",
+            "odds": {
+              "totalUnder": "39",
+              "awayTeamSpread": "-3",
+              "awayTeamSpreadOdds": "-114",
+              "homeTeamSpread": "+3",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-109",
+              "totalUnderOdds": "-114",
+              "awayTeamMLOdds": "-165",
+              "homeTeamMLOdds": "+123",
+              "totalOver": "39",
+              "impliedTotals": {
+                "awayTotal": "21.0",
+                "homeTotal": "18.0"
+              }
+            }
+          },
+          {
+            "sportsBook": "caesars_sportsbook",
+            "odds": {
+              "totalUnder": "38.5",
+              "awayTeamSpread": "-3",
+              "awayTeamSpreadOdds": "-105",
+              "homeTeamSpread": "+3",
+              "homeTeamSpreadOdds": "-115",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "-160",
+              "homeTeamMLOdds": "+135",
+              "totalOver": "38.5",
+              "impliedTotals": {
+                "awayTotal": "20.75",
+                "homeTotal": "17.75"
+              }
+            }
+          },
+          {
+            "sportsBook": "draftkings",
+            "odds": {
+              "totalUnder": "38.5",
+              "awayTeamSpread": "-3",
+              "awayTeamSpreadOdds": "-105",
+              "homeTeamSpread": "+3",
+              "homeTeamSpreadOdds": "-115",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "-155",
+              "homeTeamMLOdds": "+130",
+              "totalOver": "38.5",
+              "impliedTotals": {
+                "awayTotal": "20.75",
+                "homeTotal": "17.75"
+              }
+            }
+          },
+          {
+            "sportsBook": "espnbet",
+            "odds": {
+              "totalUnder": "38.5",
+              "awayTeamSpread": "-3",
+              "awayTeamSpreadOdds": "-115",
+              "homeTeamSpread": "+3",
+              "homeTeamSpreadOdds": "-105",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "-155",
+              "homeTeamMLOdds": "+135",
+              "totalOver": "38.5",
+              "impliedTotals": {
+                "awayTotal": "20.75",
+                "homeTotal": "17.75"
+              }
+            }
+          },
+          {
+            "sportsBook": "fanduel",
+            "odds": {
+              "totalUnder": "38.5",
+              "awayTeamSpread": "-3",
+              "awayTeamSpreadOdds": "-115",
+              "homeTeamSpread": "+3",
+              "homeTeamSpreadOdds": "-105",
+              "totalOverOdds": "-115",
+              "totalUnderOdds": "-105",
+              "awayTeamMLOdds": "-164",
+              "homeTeamMLOdds": "+138",
+              "totalOver": "38.5",
+              "impliedTotals": {
+                "awayTotal": "20.75",
+                "homeTotal": "17.75"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "gameID": "20250907_SF@SEA",
+        "awayTeam": "SF",
+        "gameDate": "20250907",
+        "homeTeam": "SEA",
+        "last_updated_e_time": "1754949986.6094933",
+        "teamIDAway": "28",
+        "teamIDHome": "29",
+        "playerProps": [
+          {
+            "propBets": {
+              "firsttd": "425",
+              "anytd": "-155",
+              "rushyds": "70.5"
+            },
+            "playerID": "3117251"
+          },
+          {
+            "propBets": {
+              "firsttd": "600",
+              "anytd": "100",
+              "rushyds": "59.5"
+            },
+            "playerID": "4567048"
+          },
+          {
+            "propBets": {
+              "firsttd": "850",
+              "anytd": "150"
+            },
+            "playerID": "3040151"
+          },
+          {
+            "propBets": {
+              "firsttd": "950",
+              "anytd": "175"
+            },
+            "playerID": "3886598"
+          },
+          {
+            "propBets": {
+              "firsttd": "1000",
+              "anytd": "175"
+            },
+            "playerID": "4428209"
+          },
+          {
+            "propBets": {
+              "firsttd": "1000",
+              "anytd": "180",
+              "recyds": "60.5"
+            },
+            "playerID": "4430878"
+          },
+          {
+            "propBets": {
+              "firsttd": "1200",
+              "anytd": "215",
+              "recyds": "42.5"
+            },
+            "playerID": "2977187"
+          },
+          {
+            "propBets": {
+              "firsttd": "1500",
+              "anytd": "295"
+            },
+            "playerID": "4575665"
+          },
+          {
+            "propBets": {
+              "firsttd": "1600",
+              "anytd": "295"
+            },
+            "playerID": "4426385"
+          },
+          {
+            "propBets": {
+              "firsttd": "2000",
+              "anytd": "390"
+            },
+            "playerID": "4678006"
+          },
+          {
+            "propBets": {
+              "firsttd": "2000",
+              "anytd": "370",
+              "recyds": "19.5"
+            },
+            "playerID": "4576297"
+          },
+          {
+            "propBets": {
+              "firsttd": "2000",
+              "anytd": "450"
+            },
+            "playerID": "4372561"
+          },
+          {
+            "propBets": {
+              "firsttd": "2000",
+              "anytd": "380"
+            },
+            "playerID": "4597703"
+          },
+          {
+            "propBets": {
+              "firsttd": "2200",
+              "anytd": "390"
+            },
+            "playerID": "3051738"
+          },
+          {
+            "propBets": {
+              "firsttd": "2500",
+              "passyds": "245.5",
+              "anytd": "550"
+            },
+            "playerID": "4361741"
+          },
+          {
+            "propBets": {
+              "firsttd": "3000",
+              "anytd": "750"
+            },
+            "playerID": "4887918"
+          },
+          {
+            "propBets": {
+              "intsthrown": "0.5",
+              "rushyds": "11.5",
+              "firsttd": "3000",
+              "anytd": "650",
+              "passtd": "1.5",
+              "longrush": "6.5",
+              "passyds": "211.5"
+            },
+            "playerID": "3912547"
+          },
+          {
+            "propBets": {
+              "firsttd": "3000",
+              "anytd": "700"
+            },
+            "playerID": "3115378"
+          },
+          {
+            "propBets": {
+              "firsttd": "3500",
+              "anytd": "800"
+            },
+            "playerID": "4242540"
+          },
+          {
+            "propBets": {
+              "firsttd": "3500",
+              "anytd": "750"
+            },
+            "playerID": "4685397"
+          },
+          {
+            "propBets": {
+              "firsttd": "3500",
+              "anytd": "750"
+            },
+            "playerID": "4808830"
+          },
+          {
+            "propBets": {
+              "firsttd": "4000",
+              "anytd": "850"
+            },
+            "playerID": "4360405"
+          },
+          {
+            "propBets": {
+              "firsttd": "4000",
+              "anytd": "900"
+            },
+            "playerID": "4040612"
+          },
+          {
+            "propBets": {
+              "firsttd": "4000",
+              "anytd": "900"
+            },
+            "playerID": "16002"
+          },
+          {
+            "propBets": {
+              "firsttd": "4500",
+              "anytd": "950"
+            },
+            "playerID": "4431479"
+          },
+          {
+            "propBets": {
+              "firsttd": "5000",
+              "anytd": "1100"
+            },
+            "playerID": "4429835"
+          },
+          {
+            "propBets": {
+              "firsttd": "5000",
+              "anytd": "1000"
+            },
+            "playerID": "2975863"
+          },
+          {
+            "propBets": {
+              "firsttd": "6000",
+              "anytd": "1500"
+            },
+            "playerID": "4691688"
+          },
+          {
+            "propBets": {
+              "firsttd": "7000",
+              "anytd": "1600"
+            },
+            "playerID": "3917960"
+          },
+          {
+            "propBets": {
+              "firsttd": "7500",
+              "anytd": "1800"
+            },
+            "playerID": "4401805"
+          },
+          {
+            "propBets": {
+              "firsttd": "8000",
+              "anytd": "1900"
+            },
+            "playerID": "4241983"
+          },
+          {
+            "propBets": {
+              "firsttd": "8000",
+              "anytd": "1900"
+            },
+            "playerID": "4360290"
+          },
+          {
+            "propBets": {
+              "kickpts": "6.5",
+              "xpm": "1.5",
+              "fgm": "2.5"
+            },
+            "playerID": "4372066"
+          },
+          {
+            "propBets": {
+              "kickpts": "6.5",
+              "xpm": "1.5",
+              "fgm": "2.5"
+            },
+            "playerID": "2473037"
+          }
+        ],
+        "sportsBooks": [
+          {
+            "sportsBook": "ballybet",
+            "odds": {
+              "totalUnder": "45.5",
+              "awayTeamSpread": "-2.5",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "+2.5",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "-134",
+              "homeTeamMLOdds": "+110",
+              "totalOver": "45.5",
+              "impliedTotals": {
+                "awayTotal": "24.0",
+                "homeTotal": "21.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "bet365",
+            "odds": {
+              "totalUnder": "45",
+              "awayTeamSpread": "-2",
+              "awayTeamSpreadOdds": "-115",
+              "homeTeamSpread": "+2",
+              "homeTeamSpreadOdds": "-105",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "-135",
+              "homeTeamMLOdds": "+115",
+              "totalOver": "45",
+              "impliedTotals": {
+                "awayTotal": "23.5",
+                "homeTotal": "21.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "betmgm",
+            "odds": {
+              "totalUnder": "45.5",
+              "awayTeamSpread": "-2.5",
+              "awayTeamSpreadOdds": "-105",
+              "homeTeamSpread": "+2.5",
+              "homeTeamSpreadOdds": "-115",
+              "totalOverOdds": "-105",
+              "totalUnderOdds": "-115",
+              "awayTeamMLOdds": "-130",
+              "homeTeamMLOdds": "+110",
+              "totalOver": "45.5",
+              "impliedTotals": {
+                "awayTotal": "24.0",
+                "homeTotal": "21.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "betrivers",
+            "odds": {
+              "totalUnder": "45.5",
+              "awayTeamSpread": "-2.5",
+              "awayTeamSpreadOdds": "-112",
+              "homeTeamSpread": "+2.5",
+              "homeTeamSpreadOdds": "-112",
+              "totalOverOdds": "-112",
+              "totalUnderOdds": "-112",
+              "awayTeamMLOdds": "-136",
+              "homeTeamMLOdds": "+108",
+              "totalOver": "45.5",
+              "impliedTotals": {
+                "awayTotal": "24.0",
+                "homeTotal": "21.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "caesars_sportsbook",
+            "odds": {
+              "totalUnder": "45",
+              "awayTeamSpread": "-2.5",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "+2.5",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "-140",
+              "homeTeamMLOdds": "+118",
+              "totalOver": "45",
+              "impliedTotals": {
+                "awayTotal": "23.75",
+                "homeTotal": "21.25"
+              }
+            }
+          },
+          {
+            "sportsBook": "draftkings",
+            "odds": {
+              "totalUnder": "45.5",
+              "awayTeamSpread": "-2.5",
+              "awayTeamSpreadOdds": "-112",
+              "homeTeamSpread": "+2.5",
+              "homeTeamSpreadOdds": "-108",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "-142",
+              "homeTeamMLOdds": "+120",
+              "totalOver": "45.5",
+              "impliedTotals": {
+                "awayTotal": "24.0",
+                "homeTotal": "21.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "espnbet",
+            "odds": {
+              "totalUnder": "44.5",
+              "awayTeamSpread": "-2.5",
+              "awayTeamSpreadOdds": "-120",
+              "homeTeamSpread": "+2.5",
+              "homeTeamSpreadOdds": "even",
+              "totalOverOdds": "-120",
+              "totalUnderOdds": "even",
+              "awayTeamMLOdds": "-140",
+              "homeTeamMLOdds": "+120",
+              "totalOver": "44.5",
+              "impliedTotals": {
+                "awayTotal": "23.5",
+                "homeTotal": "21.0"
+              }
+            }
+          },
+          {
+            "sportsBook": "fanduel",
+            "odds": {
+              "totalUnder": "45.5",
+              "awayTeamSpread": "-2.5",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "+2.5",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-105",
+              "totalUnderOdds": "-115",
+              "awayTeamMLOdds": "-136",
+              "homeTeamMLOdds": "+116",
+              "totalOver": "45.5",
+              "impliedTotals": {
+                "awayTotal": "24.0",
+                "homeTotal": "21.5"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "gameID": "20250907_TB@ATL",
+        "awayTeam": "TB",
+        "gameDate": "20250907",
+        "homeTeam": "ATL",
+        "last_updated_e_time": "1754949986.6078174",
+        "teamIDAway": "30",
+        "teamIDHome": "2",
+        "playerProps": [
+          {
+            "propBets": {
+              "rushrec": "86.5",
+              "rushyds": "66.5",
+              "firsttd": "450",
+              "longrush": "15.5",
+              "anytd": "-155",
+              "recyds": "16.5"
+            },
+            "playerID": "4596448"
+          },
+          {
+            "propBets": {
+              "rushrec": "101.5",
+              "rushyds": "76.5",
+              "firsttd": "450",
+              "longrush": "16.5",
+              "anytd": "-165",
+              "recyds": "20.5"
+            },
+            "playerID": "4430807"
+          },
+          {
+            "propBets": {
+              "firsttd": "750",
+              "anytd": "115",
+              "recyds": "69.5"
+            },
+            "playerID": "16737"
+          },
+          {
+            "propBets": {
+              "firsttd": "800",
+              "anytd": "120",
+              "recyds": "68.5"
+            },
+            "playerID": "4426502"
+          },
+          {
+            "propBets": {
+              "firsttd": "1100",
+              "anytd": "170",
+              "recyds": "50.5"
+            },
+            "playerID": "4567750"
+          },
+          {
+            "propBets": {
+              "firsttd": "1200",
+              "anytd": "205"
+            },
+            "playerID": "4373626"
+          },
+          {
+            "propBets": {
+              "firsttd": "1200",
+              "anytd": "215",
+              "recyds": "34.5"
+            },
+            "playerID": "4243331"
+          },
+          {
+            "propBets": {
+              "firsttd": "1300",
+              "anytd": "250"
+            },
+            "playerID": "4697815"
+          },
+          {
+            "propBets": {
+              "firsttd": "1600",
+              "anytd": "255"
+            },
+            "playerID": "4040655"
+          },
+          {
+            "propBets": {
+              "intsthrown": "0.5",
+              "rushyds": "12.5",
+              "firsttd": "1700",
+              "anytd": "340",
+              "passtd": "1.5",
+              "longrush": "8.5",
+              "passyds": "242.5"
+            },
+            "playerID": "3052587"
+          },
+          {
+            "propBets": {
+              "firsttd": "1700",
+              "anytd": "280",
+              "recyds": "38.5"
+            },
+            "playerID": "4360248"
+          },
+          {
+            "propBets": {
+              "firsttd": "1800",
+              "anytd": "330"
+            },
+            "playerID": "3728262"
+          },
+          {
+            "propBets": {
+              "firsttd": "2000",
+              "anytd": "390"
+            },
+            "playerID": "4426407"
+          },
+          {
+            "propBets": {
+              "firsttd": "2200",
+              "anytd": "400"
+            },
+            "playerID": "2976592"
+          },
+          {
+            "propBets": {
+              "firsttd": "2200",
+              "anytd": "500"
+            },
+            "playerID": "4430871"
+          },
+          {
+            "propBets": {
+              "firsttd": "2500",
+              "anytd": "475"
+            },
+            "playerID": "3047876"
+          },
+          {
+            "propBets": {
+              "firsttd": "2800",
+              "anytd": "550"
+            },
+            "playerID": "4608810"
+          },
+          {
+            "propBets": {
+              "firsttd": "2800",
+              "anytd": "450"
+            },
+            "playerID": "4428796"
+          },
+          {
+            "propBets": {
+              "firsttd": "4000",
+              "anytd": "750"
+            },
+            "playerID": "3061612"
+          },
+          {
+            "propBets": {
+              "firsttd": "4000",
+              "anytd": "950"
+            },
+            "playerID": "4372505"
+          },
+          {
+            "propBets": {
+              "intsthrown": "0.5",
+              "passtd": "1.5",
+              "firsttd": "4000",
+              "passyds": "219.5",
+              "anytd": "800"
+            },
+            "playerID": "4360423"
+          },
+          {
+            "propBets": {
+              "firsttd": "4000",
+              "anytd": "800"
+            },
+            "playerID": "4035020"
+          },
+          {
+            "propBets": {
+              "firsttd": "6000",
+              "anytd": "1200"
+            },
+            "playerID": "4369886"
+          },
+          {
+            "propBets": {
+              "firsttd": "6000",
+              "anytd": "1200"
+            },
+            "playerID": "4248425"
+          },
+          {
+            "propBets": {
+              "firsttd": "6500",
+              "anytd": "1600"
+            },
+            "playerID": "5097554"
+          },
+          {
+            "propBets": {
+              "firsttd": "6500",
+              "anytd": "1400"
+            },
+            "playerID": "4034779"
+          },
+          {
+            "propBets": {
+              "firsttd": "6500",
+              "anytd": "1500"
+            },
+            "playerID": "4369466"
+          },
+          {
+            "propBets": {
+              "firsttd": "6500",
+              "anytd": "1600"
+            },
+            "playerID": "4374045"
+          },
+          {
+            "propBets": {
+              "firsttd": "7500",
+              "anytd": "1800"
+            },
+            "playerID": "4361112"
+          },
+          {
+            "propBets": {
+              "firsttd": "8000",
+              "anytd": "1800"
+            },
+            "playerID": "4034948"
+          },
+          {
+            "propBets": {
+              "kickpts": "6.5",
+              "xpm": "1.5",
+              "fgm": "2.5"
+            },
+            "playerID": "3049899"
+          },
+          {
+            "propBets": {
+              "kickpts": "7.5",
+              "xpm": "1.5",
+              "fgm": "2.5"
+            },
+            "playerID": "3150744"
+          }
+        ],
+        "sportsBooks": [
+          {
+            "sportsBook": "ballybet",
+            "odds": {
+              "totalUnder": "49",
+              "awayTeamSpread": "-1.5",
+              "awayTeamSpreadOdds": "-113",
+              "homeTeamSpread": "+1.5",
+              "homeTeamSpreadOdds": "-108",
+              "totalOverOdds": "-109",
+              "totalUnderOdds": "-112",
+              "awayTeamMLOdds": "-125",
+              "homeTeamMLOdds": "+104",
+              "totalOver": "49",
+              "impliedTotals": {
+                "awayTotal": "25.25",
+                "homeTotal": "23.75"
+              }
+            }
+          },
+          {
+            "sportsBook": "bet365",
+            "odds": {
+              "totalUnder": "48.5",
+              "awayTeamSpread": "-1.5",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "+1.5",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "-125",
+              "homeTeamMLOdds": "+105",
+              "totalOver": "48.5",
+              "impliedTotals": {
+                "awayTotal": "25.0",
+                "homeTotal": "23.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "betmgm",
+            "odds": {
+              "totalUnder": "48.5",
+              "awayTeamSpread": "-1.5",
+              "awayTeamSpreadOdds": "-115",
+              "homeTeamSpread": "+1.5",
+              "homeTeamSpreadOdds": "-105",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "-125",
+              "homeTeamMLOdds": "+105",
+              "totalOver": "48.5",
+              "impliedTotals": {
+                "awayTotal": "25.0",
+                "homeTotal": "23.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "betrivers",
+            "odds": {
+              "totalUnder": "49",
+              "awayTeamSpread": "-1.5",
+              "awayTeamSpreadOdds": "-114",
+              "homeTeamSpread": "+1.5",
+              "homeTeamSpreadOdds": "-109",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-113",
+              "awayTeamMLOdds": "-127",
+              "homeTeamMLOdds": "+102",
+              "totalOver": "49",
+              "impliedTotals": {
+                "awayTotal": "25.25",
+                "homeTotal": "23.75"
+              }
+            }
+          },
+          {
+            "sportsBook": "caesars_sportsbook",
+            "odds": {
+              "totalUnder": "48.5",
+              "awayTeamSpread": "-1.5",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "+1.5",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "-130",
+              "homeTeamMLOdds": "+110",
+              "totalOver": "48.5",
+              "impliedTotals": {
+                "awayTotal": "25.0",
+                "homeTotal": "23.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "draftkings",
+            "odds": {
+              "totalUnder": "48.5",
+              "awayTeamSpread": "-1.5",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "+1.5",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "-125",
+              "homeTeamMLOdds": "+105",
+              "totalOver": "48.5",
+              "impliedTotals": {
+                "awayTotal": "25.0",
+                "homeTotal": "23.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "espnbet",
+            "odds": {
+              "totalUnder": "48.5",
+              "awayTeamSpread": "-2",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "+2",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-105",
+              "totalUnderOdds": "-115",
+              "awayTeamMLOdds": "-120",
+              "homeTeamMLOdds": "even",
+              "totalOver": "48.5",
+              "impliedTotals": {
+                "awayTotal": "25.25",
+                "homeTotal": "23.25"
+              }
+            }
+          },
+          {
+            "sportsBook": "fanduel",
+            "odds": {
+              "totalUnder": "48.5",
+              "awayTeamSpread": "-1.5",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "+1.5",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-102",
+              "totalUnderOdds": "-120",
+              "awayTeamMLOdds": "-120",
+              "homeTeamMLOdds": "+102",
+              "totalOver": "48.5",
+              "impliedTotals": {
+                "awayTotal": "25.0",
+                "homeTotal": "23.5"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "gameID": "20250907_TEN@DEN",
+        "awayTeam": "TEN",
+        "gameDate": "20250907",
+        "homeTeam": "DEN",
+        "last_updated_e_time": "1754949986.6092901",
+        "teamIDAway": "31",
+        "teamIDHome": "10",
+        "playerProps": [
+          {
+            "propBets": {
+              "firsttd": "650",
+              "anytd": "135"
+            },
+            "playerID": "4241985"
+          },
+          {
+            "propBets": {
+              "firsttd": "650",
+              "anytd": "125",
+              "recyds": "60.5"
+            },
+            "playerID": "3128429"
+          },
+          {
+            "propBets": {
+              "firsttd": "750",
+              "anytd": "150"
+            },
+            "playerID": "4568490"
+          },
+          {
+            "propBets": {
+              "firsttd": "800",
+              "anytd": "140"
+            },
+            "playerID": "3916148"
+          },
+          {
+            "propBets": {
+              "firsttd": "1000",
+              "anytd": "225",
+              "recyds": "36.5"
+            },
+            "playerID": "3051876"
+          },
+          {
+            "propBets": {
+              "firsttd": "1000",
+              "anytd": "215"
+            },
+            "playerID": "4686472"
+          },
+          {
+            "propBets": {
+              "firsttd": "1200",
+              "anytd": "270"
+            },
+            "playerID": "4600981"
+          },
+          {
+            "propBets": {
+              "firsttd": "1300",
+              "anytd": "290"
+            },
+            "playerID": "4431280"
+          },
+          {
+            "propBets": {
+              "firsttd": "1300",
+              "anytd": "230",
+              "recyds": "48.5"
+            },
+            "playerID": "3925357"
+          },
+          {
+            "propBets": {
+              "comp": "21.5",
+              "intsthrown": "0.5",
+              "rushyds": "19.5",
+              "firsttd": "1400",
+              "anytd": "320",
+              "passatt": "31.5",
+              "passtd": "1.5",
+              "longrush": "10.5",
+              "passyds": "219.5"
+            },
+            "playerID": "4426338"
+          },
+          {
+            "propBets": {
+              "firsttd": "1400",
+              "passyds": "188.5",
+              "anytd": "300"
+            },
+            "playerID": "4688380"
+          },
+          {
+            "propBets": {
+              "firsttd": "1600",
+              "anytd": "340"
+            },
+            "playerID": "4722893"
+          },
+          {
+            "propBets": {
+              "firsttd": "2000",
+              "anytd": "390"
+            },
+            "playerID": "4428557"
+          },
+          {
+            "propBets": {
+              "firsttd": "2200",
+              "anytd": "450"
+            },
+            "playerID": "4883647"
+          },
+          {
+            "propBets": {
+              "firsttd": "2200",
+              "anytd": "475"
+            },
+            "playerID": "4360635"
+          },
+          {
+            "propBets": {
+              "firsttd": "2500",
+              "anytd": "500"
+            },
+            "playerID": "4569682"
+          },
+          {
+            "propBets": {
+              "firsttd": "2800",
+              "anytd": "475",
+              "recyds": "20.5"
+            },
+            "playerID": "2577327"
+          },
+          {
+            "propBets": {
+              "firsttd": "3000",
+              "anytd": "700"
+            },
+            "playerID": "4429121"
+          },
+          {
+            "propBets": {
+              "firsttd": "3000",
+              "anytd": "650"
+            },
+            "playerID": "3122168"
+          },
+          {
+            "propBets": {
+              "firsttd": "3500",
+              "anytd": "800"
+            },
+            "playerID": "4367567"
+          },
+          {
+            "propBets": {
+              "firsttd": "3500",
+              "anytd": "900"
+            },
+            "playerID": "3911853"
+          },
+          {
+            "propBets": {
+              "firsttd": "4000",
+              "anytd": "800"
+            },
+            "playerID": "3930066"
+          },
+          {
+            "propBets": {
+              "firsttd": "4000",
+              "anytd": "950"
+            },
+            "playerID": "4360231"
+          },
+          {
+            "propBets": {
+              "firsttd": "4500",
+              "anytd": "1100"
+            },
+            "playerID": "4383440"
+          },
+          {
+            "propBets": {
+              "firsttd": "5000",
+              "anytd": "1100"
+            },
+            "playerID": "4431268"
+          },
+          {
+            "propBets": {
+              "firsttd": "5000",
+              "anytd": "1500"
+            },
+            "playerID": "4360086"
+          },
+          {
+            "propBets": {
+              "firsttd": "5500",
+              "anytd": "1000"
+            },
+            "playerID": "4362748"
+          },
+          {
+            "propBets": {
+              "firsttd": "5500",
+              "anytd": "1600"
+            },
+            "playerID": "2515270"
+          },
+          {
+            "propBets": {
+              "firsttd": "6000",
+              "anytd": "1200"
+            },
+            "playerID": "4686728"
+          },
+          {
+            "propBets": {
+              "firsttd": "9000",
+              "anytd": "3000"
+            },
+            "playerID": "3916204"
+          },
+          {
+            "propBets": {
+              "firsttd": "11000",
+              "anytd": "3500"
+            },
+            "playerID": "4427575"
+          },
+          {
+            "propBets": {
+              "firsttd": "11000",
+              "anytd": "1900"
+            },
+            "playerID": "4431353"
+          },
+          {
+            "propBets": {
+              "firsttd": "15000",
+              "anytd": "3500"
+            },
+            "playerID": "4360978"
+          },
+          {
+            "propBets": {
+              "kickpts": "5.5",
+              "xpm": "1.5",
+              "fgm": "1.5"
+            },
+            "playerID": "3124084"
+          },
+          {
+            "propBets": {
+              "kickpts": "7.5",
+              "xpm": "1.5",
+              "fgm": "2.5"
+            },
+            "playerID": "2985659"
+          }
+        ],
+        "sportsBooks": [
+          {
+            "sportsBook": "ballybet",
+            "odds": {
+              "totalUnder": "42",
+              "awayTeamSpread": "+7.5",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "-7.5",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "+310",
+              "homeTeamMLOdds": "-400",
+              "totalOver": "42",
+              "impliedTotals": {
+                "awayTotal": "17.25",
+                "homeTotal": "24.75"
+              }
+            }
+          },
+          {
+            "sportsBook": "bet365",
+            "odds": {
+              "totalUnder": "41.5",
+              "awayTeamSpread": "+7.5",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "-7.5",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "+300",
+              "homeTeamMLOdds": "-380",
+              "totalOver": "41.5",
+              "impliedTotals": {
+                "awayTotal": "17.0",
+                "homeTotal": "24.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "betmgm",
+            "odds": {
+              "totalUnder": "41.5",
+              "awayTeamSpread": "+7.5",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "-7.5",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "+300",
+              "homeTeamMLOdds": "-375",
+              "totalOver": "41.5",
+              "impliedTotals": {
+                "awayTotal": "17.0",
+                "homeTotal": "24.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "betrivers",
+            "odds": {
+              "totalUnder": "42",
+              "awayTeamSpread": "+7.5",
+              "awayTeamSpreadOdds": "-112",
+              "homeTeamSpread": "-7.5",
+              "homeTeamSpreadOdds": "-112",
+              "totalOverOdds": "-112",
+              "totalUnderOdds": "-112",
+              "awayTeamMLOdds": "+275",
+              "homeTeamMLOdds": "-400",
+              "totalOver": "42",
+              "impliedTotals": {
+                "awayTotal": "17.25",
+                "homeTotal": "24.75"
+              }
+            }
+          },
+          {
+            "sportsBook": "caesars_sportsbook",
+            "odds": {
+              "totalUnder": "41.5",
+              "awayTeamSpread": "+7.5",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "-7.5",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "+300",
+              "homeTeamMLOdds": "-385",
+              "totalOver": "41.5",
+              "impliedTotals": {
+                "awayTotal": "17.0",
+                "homeTotal": "24.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "draftkings",
+            "odds": {
+              "totalUnder": "41.5",
+              "awayTeamSpread": "+7.5",
+              "awayTeamSpreadOdds": "-105",
+              "homeTeamSpread": "-7.5",
+              "homeTeamSpreadOdds": "-115",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "+300",
+              "homeTeamMLOdds": "-380",
+              "totalOver": "41.5",
+              "impliedTotals": {
+                "awayTotal": "17.0",
+                "homeTotal": "24.5"
+              }
+            }
+          },
+          {
+            "sportsBook": "espnbet",
+            "odds": {
+              "totalUnder": "41.5",
+              "awayTeamSpread": "+8",
+              "awayTeamSpreadOdds": "-110",
+              "homeTeamSpread": "-8",
+              "homeTeamSpreadOdds": "-110",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "+320",
+              "homeTeamMLOdds": "-425",
+              "totalOver": "41.5",
+              "impliedTotals": {
+                "awayTotal": "16.75",
+                "homeTotal": "24.75"
+              }
+            }
+          },
+          {
+            "sportsBook": "fanduel",
+            "odds": {
+              "totalUnder": "41.5",
+              "awayTeamSpread": "+7.5",
+              "awayTeamSpreadOdds": "-112",
+              "homeTeamSpread": "-7.5",
+              "homeTeamSpreadOdds": "-108",
+              "totalOverOdds": "-110",
+              "totalUnderOdds": "-110",
+              "awayTeamMLOdds": "+310",
+              "homeTeamMLOdds": "-390",
+              "totalOver": "41.5",
+              "impliedTotals": {
+                "awayTotal": "17.0",
+                "homeTotal": "24.5"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
