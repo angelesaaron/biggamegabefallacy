@@ -6,7 +6,6 @@ import {
   Card,
   CardContent,
   Typography,
-  Grid,
   LinearProgress,
   Chip,
 } from '@mui/material';
@@ -211,43 +210,43 @@ export default function OverviewTab() {
 
           {dataReadiness ? (
             <>
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={6} md={2.4}>
+              <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+                <Box sx={{ flex: '1 1 calc(50% - 8px)', minWidth: '200px' }}>
                   <DataIndicator
                     label="Schedule"
                     available={dataReadiness.schedule_complete}
                     count={dataReadiness.games_count}
                   />
-                </Grid>
-                <Grid item xs={12} sm={6} md={2.4}>
+                </Box>
+                <Box sx={{ flex: '1 1 calc(50% - 8px)', minWidth: '200px' }}>
                   <DataIndicator
                     label="Prior Week Logs"
                     available={dataReadiness.game_logs_available}
                     count={dataReadiness.game_logs_count}
                   />
-                </Grid>
-                <Grid item xs={12} sm={6} md={2.4}>
+                </Box>
+                <Box sx={{ flex: '1 1 calc(50% - 8px)', minWidth: '200px' }}>
                   <DataIndicator
                     label="Predictions"
                     available={dataReadiness.predictions_available}
                     count={dataReadiness.predictions_count}
                   />
-                </Grid>
-                <Grid item xs={12} sm={6} md={2.4}>
+                </Box>
+                <Box sx={{ flex: '1 1 calc(50% - 8px)', minWidth: '200px' }}>
                   <DataIndicator
                     label="DraftKings"
                     available={dataReadiness.draftkings_odds_available}
                     count={dataReadiness.draftkings_odds_count}
                   />
-                </Grid>
-                <Grid item xs={12} sm={6} md={2.4}>
+                </Box>
+                <Box sx={{ flex: '1 1 calc(50% - 8px)', minWidth: '200px' }}>
                   <DataIndicator
                     label="FanDuel"
                     available={dataReadiness.fanduel_odds_available}
                     count={dataReadiness.fanduel_odds_count}
                   />
-                </Grid>
-              </Grid>
+                </Box>
+              </Box>
 
               {dataReadiness.last_updated && (
                 <Typography variant="caption" sx={{ color: '#6b7280', mt: 2, display: 'block' }}>
@@ -316,32 +315,32 @@ export default function OverviewTab() {
                   <Typography variant="body2" sx={{ color: '#9ca3af', mb: 1.5 }}>
                     Metrics
                   </Typography>
-                  <Grid container spacing={2} sx={{ fontSize: '0.875rem' }}>
+                  <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', fontSize: '0.875rem' }}>
                     {latestBatch.games_processed && (
-                      <Grid item xs={6}>
+                      <Box sx={{ flex: '1 1 calc(50% - 8px)' }}>
                         <Typography component="span" sx={{ color: '#9ca3af' }}>Games: </Typography>
                         <Typography component="span" sx={{ color: 'white' }}>{latestBatch.games_processed}</Typography>
-                      </Grid>
+                      </Box>
                     )}
                     {latestBatch.game_logs_added && (
-                      <Grid item xs={6}>
+                      <Box sx={{ flex: '1 1 calc(50% - 8px)' }}>
                         <Typography component="span" sx={{ color: '#9ca3af' }}>Logs Added: </Typography>
                         <Typography component="span" sx={{ color: 'white' }}>{latestBatch.game_logs_added}</Typography>
-                      </Grid>
+                      </Box>
                     )}
                     {latestBatch.predictions_generated && (
-                      <Grid item xs={6}>
+                      <Box sx={{ flex: '1 1 calc(50% - 8px)' }}>
                         <Typography component="span" sx={{ color: '#9ca3af' }}>Predictions: </Typography>
                         <Typography component="span" sx={{ color: 'white' }}>{latestBatch.predictions_generated}</Typography>
-                      </Grid>
+                      </Box>
                     )}
                     {latestBatch.odds_synced && (
-                      <Grid item xs={6}>
+                      <Box sx={{ flex: '1 1 calc(50% - 8px)' }}>
                         <Typography component="span" sx={{ color: '#9ca3af' }}>Odds: </Typography>
                         <Typography component="span" sx={{ color: 'white' }}>{latestBatch.odds_synced}</Typography>
-                      </Grid>
+                      </Box>
                     )}
-                  </Grid>
+                  </Box>
                 </Box>
               )}
 
