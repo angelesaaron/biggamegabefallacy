@@ -421,8 +421,8 @@ export default function ActionsTab() {
                 loading={loading}
                 variant="secondary"
               />
-            </Grid2>
-          </Grid2>
+            </Box>
+          </Box>
         </CardContent>
       </Card>
 
@@ -581,8 +581,8 @@ export default function ActionsTab() {
                 loading={loading}
                 variant="secondary"
               />
-            </Grid2>
-          </Grid2>
+            </Box>
+          </Box>
         </CardContent>
       </Card>
 
