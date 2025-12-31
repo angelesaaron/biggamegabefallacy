@@ -316,6 +316,41 @@ class Tank01Client:
         box_score = await self._get("getNFLBoxScore", params=params)
         return box_score
 
+    async def get_game_logs_from_box_score(
+        self,
+        game_id: str,
+        season_year: int,
+        week: int
+    ) -> List[Dict[str, Any]]:
+        """
+        Fetch box score and extract all player game logs.
+
+        This is the optimized alternative to calling get_games_for_player()
+        for each individual player. One box score call gets stats for all
+        players in that game.
+
+        Args:
+            game_id: Game ID in format "YYYYMMDD_AWAY@HOME"
+            season_year: Season year (e.g., 2025)
+            week: Week number (1-18)
+
+        Returns:
+            List of normalized game log dicts for all players with receiving stats
+
+        Example:
+            # Instead of 538 API calls (one per player):
+            for player in players:
+                logs = await client.get_games_for_player(player.id)
+
+            # Make 16 API calls (one per game):
+            for game in games:
+                logs = await client.get_game_logs_from_box_score(
+                    game.game_id, 2025, 17
+                )
+        """
+        box_score = await self.get_box_score(game_id, play_by_play=False)
+        return parse_game_logs_from_box_score(box_score, game_id, season_year, week)
+
 
 # ============================================================================
 # HELPER FUNCTIONS
@@ -405,3 +440,101 @@ def extract_date_from_game_id(game_id: str) -> str:
         Date string "YYYYMMDD"
     """
     return game_id.split('_')[0]
+
+
+def parse_game_logs_from_box_score(
+    box_score: Dict[str, Any],
+    game_id: str,
+    season_year: int,
+    week: int
+) -> List[Dict[str, Any]]:
+    """
+    Extract all player game logs from a box score response.
+
+    This replaces individual per-player API calls by extracting stats
+    for all players from a single box score endpoint.
+
+    Args:
+        box_score: Response from get_box_score() API call
+        game_id: Game ID (format "YYYYMMDD_AWAY@HOME")
+        season_year: Season year (e.g., 2025)
+        week: Week number (1-18)
+
+    Returns:
+        List of normalized game log dicts, one per player with receiving stats
+
+    Example box_score structure:
+        {
+          "playerStats": {
+            "4685": {
+              "playerID": "4685",
+              "team": "SF",
+              "teamID": "26",
+              "Receiving": {
+                "recTD": "1",
+                "targets": "11",
+                "receptions": "11",
+                "recYds": "90",
+                "longRec": "28",
+                "recAvg": "8.2"
+              }
+            }
+          }
+        }
+
+    Edge Cases:
+        - Players without "Receiving" key are skipped (didn't get targets)
+        - Players with Receiving but all zeros are included (played but no production)
+        - Only returns players with receiving stats (WR/TE focus)
+    """
+    game_logs = []
+
+    player_stats = box_score.get("playerStats", {})
+
+    for player_id, stats in player_stats.items():
+        # Skip if no receiving stats
+        receiving = stats.get("Receiving")
+        if not receiving:
+            continue
+
+        # Extract team info
+        team = stats.get("team", "")
+        team_id = stats.get("teamID", "")
+
+        # Parse receiving stats - handle both string and numeric values
+        try:
+            receptions = int(receiving.get("receptions", 0) or 0)
+            rec_yards = int(receiving.get("recYds", 0) or 0)
+            rec_tds = int(receiving.get("recTD", 0) or 0)
+            targets = int(receiving.get("targets", 0) or 0)
+
+            # Optional stats
+            long_rec = receiving.get("longRec")
+            long_reception = int(long_rec) if long_rec and str(long_rec).strip() else None
+
+            rec_avg = receiving.get("recAvg")
+            yards_per_reception = float(rec_avg) if rec_avg and str(rec_avg).strip() else None
+
+        except (ValueError, TypeError) as e:
+            logger.warning(f"Failed to parse receiving stats for player {player_id}: {e}")
+            continue
+
+        # Build normalized game log
+        game_log = {
+            "player_id": player_id,
+            "game_id": game_id,
+            "season_year": season_year,
+            "week": week,
+            "team": team,
+            "team_id": team_id,
+            "receptions": receptions,
+            "receiving_yards": rec_yards,
+            "receiving_touchdowns": rec_tds,
+            "targets": targets,
+            "long_reception": long_reception,
+            "yards_per_reception": yards_per_reception,
+        }
+
+        game_logs.append(game_log)
+
+    return game_logs

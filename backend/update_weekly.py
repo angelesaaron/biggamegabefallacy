@@ -135,9 +135,117 @@ async def update_schedule(db, client, current_season, current_week):
     return games_added
 
 
+async def update_game_logs_from_box_scores(db, client, current_season, current_week):
+    """
+    Fetch game logs using box score endpoint (OPTIMIZED).
+
+    Instead of making 538 API calls (one per player), this makes ~16 API calls
+    (one per game) and extracts all player stats from each box score.
+
+    Reduction: 538 calls → 16 calls (97% reduction)
+    """
+    print("\n🏈 Updating Game Logs (Box Score Method)...")
+    completed_week = current_week - 1
+    print(f"   Fetching box scores for week {completed_week} (last completed week)")
+
+    # Get all games for completed week
+    result = await db.execute(
+        select(Schedule)
+        .where(Schedule.season_year == current_season, Schedule.week == completed_week)
+    )
+    games = result.scalars().all()
+
+    if not games:
+        print(f"   No games found for Week {completed_week}")
+        return 0
+
+    print(f"   Found {len(games)} games to process")
+
+    # Get all valid player IDs to validate foreign keys
+    player_result = await db.execute(select(Player.player_id))
+    valid_player_ids = {row[0] for row in player_result.all()}
+
+    new_logs = 0
+    skipped_players = set()
+    games_processed = 0
+
+    for i, game in enumerate(games, 1):
+        try:
+            print(f"   [{i}/{len(games)}] {game.game_id}...", end=" ", flush=True)
+
+            # Fetch box score and extract all player game logs
+            game_logs = await client.get_game_logs_from_box_score(
+                game_id=game.game_id,
+                season_year=current_season,
+                week=completed_week
+            )
+
+            if not game_logs:
+                print("No stats")
+                continue
+
+            logs_added = 0
+
+            for log in game_logs:
+                player_id = log["player_id"]
+
+                # Skip if player not in our database (avoid foreign key errors)
+                if player_id not in valid_player_ids:
+                    skipped_players.add(player_id)
+                    continue
+
+                # Check if this log already exists
+                existing_result = await db.execute(
+                    select(GameLog).where(
+                        GameLog.player_id == player_id,
+                        GameLog.game_id == game.game_id
+                    )
+                )
+                existing = existing_result.scalar_one_or_none()
+
+                if not existing:
+                    # Add new game log
+                    game_log = GameLog(
+                        player_id=log["player_id"],
+                        game_id=log["game_id"],
+                        season_year=log["season_year"],
+                        week=log["week"],
+                        team=log["team"],
+                        team_id=log["team_id"],
+                        receptions=log["receptions"],
+                        receiving_yards=log["receiving_yards"],
+                        receiving_touchdowns=log["receiving_touchdowns"],
+                        targets=log["targets"],
+                        long_reception=log["long_reception"],
+                        yards_per_reception=log["yards_per_reception"]
+                    )
+                    db.add(game_log)
+                    logs_added += 1
+
+            if logs_added > 0:
+                await db.commit()
+                new_logs += logs_added
+                print(f"✅ {logs_added} logs")
+            else:
+                print("Already synced")
+
+            games_processed += 1
+
+        except Exception as e:
+            print(f"❌ Error: {str(e)}")
+            await db.rollback()
+            continue
+
+    if skipped_players:
+        print(f"   ⚠️  Skipped {len(skipped_players)} players not in database (run roster sync to add them)")
+
+    print(f"   ✅ Complete: {games_processed} games processed, {new_logs} new game logs added")
+    return new_logs
+
+
 async def update_game_logs(db, client, current_season, current_week):
-    """Fetch game logs for recently completed games"""
-    print("\n🏈 Updating Game Logs...")
+    """Fetch game logs for recently completed games (PER-PLAYER METHOD - LEGACY)"""
+    print("\n🏈 Updating Game Logs (Per-Player Method - DEPRECATED)...")
     print(f"   Fetching logs for week {current_week - 1} (last completed week)")
 
     # Get all active WR/TE players
@@ -356,7 +464,21 @@ async def sync_odds_for_next_week(db, client, current_season, current_week):
 
 
 async def main():
-    """Run weekly update"""
+    """Run weekly update with configurable batch modes"""
+    import argparse
+
+    parser = argparse.ArgumentParser(description='Weekly NFL data update')
+    parser.add_argument(
+        '--mode',
+        choices=['full', 'odds_only', 'ingest_only', 'schedule_only'],
+        default='full',
+        help='Batch execution mode'
+    )
+    parser.add_argument('--week', type=int, help='Override week (required for odds_only)')
+    parser.add_argument('--year', type=int, help='Override year (required for odds_only)')
+    parser.add_argument('--season-type', choices=['reg', 'post'], help='Season type override')
+    args = parser.parse_args()
+
     print("="*60)
     print("Weekly Data Update")
     print("="*60)
@@ -364,27 +486,73 @@ async def main():
     print(f"Current time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print()
 
-    # Use automatic week detection
-    current_season, current_week = get_current_nfl_week()
+    # Mode validation
+    if args.mode == 'odds_only' and (not args.week or not args.year):
+        print("❌ ERROR: --mode odds_only requires --week and --year")
+        print()
+        print("Usage: python update_weekly.py --mode odds_only --week 17 --year 2025")
+        sys.exit(1)
 
-    print(f"Season: {current_season}")
-    print(f"Week: {current_week} (auto-detected)")
+    # Check for box score optimization flag
+    use_box_scores = os.environ.get('USE_BOX_SCORES', 'true').lower() == 'true'
+
+    # Detect or use provided week/year
+    if args.week and args.year:
+        current_season = args.year
+        current_week = args.week
+        season_type = args.season_type or 'reg'
+        print(f"Using provided: {current_season} Week {current_week} ({season_type.upper()})")
+    else:
+        current_season, current_week, season_type = get_current_nfl_week()
+        print(f"Auto-detected: {current_season} Week {current_week} ({season_type.upper()})")
+
+    print(f"Batch Mode: {args.mode.upper()}")
     print()
+
+    # Mode descriptions
+    mode_descriptions = {
+        'full': [
+            f"1. Update schedule for current/next week",
+            f"2. Fetch box scores for Week {current_week - 1} (completed)" if use_box_scores else f"2. Fetch game logs for Week {current_week - 1} (completed)",
+            f"3. Fetch odds for Week {current_week} (upcoming)",
+            f"4. Then run: python generate_predictions.py (separate step)"
+        ],
+        'odds_only': [
+            f"1. Fetch odds for Week {current_week} ONLY",
+            f"2. Skip schedule and game logs",
+            f"3. Safe to run mid-week to refresh odds",
+            f"4. Does NOT regenerate predictions"
+        ],
+        'ingest_only': [
+            f"1. Update schedule",
+            f"2. Fetch box scores for Week {current_week - 1}" if use_box_scores else f"2. Fetch game logs for Week {current_week - 1}",
+            f"3. Skip odds sync",
+            f"4. Use for data corrections"
+        ],
+        'schedule_only': [
+            f"1. Update schedule ONLY",
+            f"2. Skip box scores and odds",
+            f"3. Use for schedule fixes"
+        ]
+    }
+
     print("This will:")
-    print(f"  1. Update schedule for weeks {current_week} and {current_week + 1}")
-    print(f"  2. Fetch new game logs for Week {current_week - 1} (just completed)")
-    print(f"  3. Fetch sportsbook odds for Week {current_week} (upcoming)")
-    print(f"  4. API calls: ~2 for schedule + ~538 for game logs + ~16 for odds = ~556 calls")
+    for step in mode_descriptions[args.mode]:
+        print(f"  {step}")
     print()
 
-    # Skip confirmation in CI/CD environments
-    if not os.environ.get('CI'):
+    if use_box_scores and args.mode in ['full', 'ingest_only']:
+        print("Game Log Method: BOX SCORES (Optimized - 97% fewer API calls)")
+    print()
+
+    # Skip confirmation in CI/CD environments or when running odds_only
+    if not os.environ.get('CI') and args.mode != 'odds_only':
         response = input("Continue? (yes/no): ")
         if response.lower() not in ['yes', 'y']:
             print("\nCancelled.")
             return
         print()
-    else:
+    elif os.environ.get('CI'):
         print("Running in CI/CD mode - auto-confirming...")
         print()
 
@@ -392,27 +560,52 @@ async def main():
 
     try:
         async with AsyncSessionLocal() as db:
-            # Update schedule
-            await update_schedule(db, client, current_season, current_week)
+            # Execute based on mode
 
-            # Update game logs
-            await update_game_logs(db, client, current_season, current_week)
+            # SCHEDULE SYNC
+            if args.mode in ['full', 'ingest_only', 'schedule_only']:
+                await update_schedule(db, client, current_season, current_week)
 
-            # Sync odds for next week
-            print("\n📊 Syncing Odds for Next Week...")
-            await sync_odds_for_next_week(db, client, current_season, current_week)
+            # GAME LOGS SYNC
+            if args.mode in ['full', 'ingest_only']:
+                if season_type == 'reg':
+                    # Update game logs - choose method based on flag
+                    if use_box_scores:
+                        await update_game_logs_from_box_scores(db, client, current_season, current_week)
+                    else:
+                        await update_game_logs(db, client, current_season, current_week)
+                else:
+                    print("\n⚠️  Skipping game logs (playoffs - not supported for predictions)")
+
+            # ODDS SYNC
+            if args.mode in ['full', 'odds_only']:
+                print(f"\n📊 Syncing Odds for Week {current_week}...")
+                await sync_odds_for_next_week(db, client, current_season, current_week)
 
         print()
         print("="*60)
-        print("✅ Weekly Update Complete!")
+        print(f"✅ Batch Complete ({args.mode.upper()})")
         print("="*60)
-        print()
-        print("Next steps:")
-        print(f"  1. Run: python generate_predictions.py")
-        print(f"     (Will generate Week {current_week} predictions)")
-        print(f"     - Uses Weeks 1-{current_week-1} historical game logs")
-        print(f"     - Uses Week {current_week} sportsbook odds")
-        print()
+
+        # Next steps guidance
+        if args.mode == 'full' and season_type == 'reg':
+            print()
+            print("Next steps:")
+            print(f"  python generate_predictions.py --week {current_week} --year {current_season}")
+            print(f"  (Will generate predictions ONLY for new players)")
+            print()
+        elif args.mode == 'full' and season_type == 'post':
+            print()
+            print("⚠️  Playoffs detected - predictions not supported")
+            print("   Schedule and odds have been synced")
+            print()
+        elif args.mode == 'odds_only':
+            print()
+            print("✅ Odds refreshed successfully")
+            print(f"   Predictions remain unchanged (immutable)")
+            print()
+        else:
+            print()
 
     except Exception as e:
         print()

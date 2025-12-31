@@ -35,11 +35,12 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           TANK01_API_KEY: ${{ secrets.TANK01_API_KEY }}
           NFL_SEASON_YEAR: 2025
+          CI: true
         run: |
           echo "Starting weekly update..."
           python update_weekly.py
 
-          echo "Generating predictions..."
+          echo "Generating predictions (immutable mode - new players only)..."
           python generate_predictions.py
 
           echo "Weekly update complete!"

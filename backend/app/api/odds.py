@@ -155,7 +155,7 @@ async def refresh_odds(
     Runs in background and returns immediately.
     """
     if week is None or year is None:
-        year, week = get_current_nfl_week()
+        year, week, _ = get_current_nfl_week()
 
     # Start background task
     background_tasks.add_task(sync_odds_for_week_task, year, week)
@@ -174,7 +174,7 @@ async def get_current_odds(
     db: AsyncSession = Depends(get_db)
 ):
     """Get current week sportsbook odds"""
-    year, week = get_current_nfl_week()
+    year, week, _ = get_current_nfl_week()
 
     result = await db.execute(
         select(SportsbookOdds)
@@ -211,7 +211,7 @@ async def get_odds_comparison(
 ):
     """Get model vs sportsbook odds comparison for a player"""
     if week is None or year is None:
-        year, week = get_current_nfl_week()
+        year, week, _ = get_current_nfl_week()
 
     # Get sportsbook odds for this player
     result = await db.execute(

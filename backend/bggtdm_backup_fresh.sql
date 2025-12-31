@@ -1,0 +1,5524 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 11.2
+-- Dumped by pg_dump version 11.2
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'SQL_ASCII';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Data for Name: players; Type: TABLE DATA; Schema: public; Owner: aaronangeles
+--
+
+COPY public.players (player_id, full_name, first_name, last_name, team_id, team_name, "position", height, weight, age, experience_years, active_status, headshot_url, created_at, updated_at, jersey_number) FROM stdin;
+4428811	Xavier Weaver	\N	\N	1	ARI	WR	6'1"	185	25	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4428811.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3914151	Josiah Deguara	\N	\N	1	ARI	TE	6'2"	240	28	5	t	https://a.espncdn.com/i/headshots/nfl/players/full/3914151.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4361307	Trey McBride	\N	\N	1	ARI	TE	6'4"	246	26	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4361307.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4432708	Marvin Harrison Jr.	\N	\N	1	ARI	WR	6'3"	220	23	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4432708.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4426844	Elijah Higgins	\N	\N	1	ARI	TE	6'3"	245	25	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4426844.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4692835	Jalen Brooks	\N	\N	1	ARI	WR	6'2"	205	25	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4692835.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4360761	Michael Wilson	\N	\N	1	ARI	WR	6'2"	213	25	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4360761.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3917960	Steven Sims	\N	\N	1	ARI	WR	5'10"	190	28	5	t	https://a.espncdn.com/i/headshots/nfl/players/full/3917960.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+2971281	Pharaoh Brown	\N	\N	1	ARI	TE	6'5"	246	31	8	t	https://a.espncdn.com/i/headshots/nfl/players/full/2971281.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4034948	Feleipe Franks	\N	\N	2	ATL	TE	6'6"	241	28	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4034948.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3871102	David Sills V	\N	\N	2	ATL	WR	6'3"	211	29	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/3871102.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4374187	Deven Thompkins	\N	\N	2	ATL	WR	5'8"	155	26	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4374187.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4035020	Charlie Woerner	\N	\N	2	ATL	TE	6'5"	250	28	6	t	https://a.espncdn.com/i/headshots/nfl/players/full/4035020.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4360248	Kyle Pitts Sr.	\N	\N	2	ATL	TE	6'6"	250	25	5	t	https://a.espncdn.com/i/headshots/nfl/players/full/4360248.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4363551	Dylan Drummond	\N	\N	2	ATL	WR	6'0"	190	25	1	t	https://a.espncdn.com/i/headshots/nfl/players/full/4363551.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4428796	Casey Washington	\N	\N	2	ATL	WR	6'0"	205	24	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4428796.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4689334	Malik Heath	\N	\N	2	ATL	WR	6'2"	213	25	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4689334.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4426502	Drake London	\N	\N	2	ATL	WR	6'4"	215	24	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4426502.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4040655	Darnell Mooney	\N	\N	2	ATL	WR	5'11"	180	28	6	t	https://a.espncdn.com/i/headshots/nfl/players/full/4040655.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4374045	Teagan Quitoriano	\N	\N	2	ATL	TE	6'6"	259	25	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4374045.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3116365	Mark Andrews	\N	\N	3	BAL	TE	6'5"	250	30	8	t	https://a.espncdn.com/i/headshots/nfl/players/full/3116365.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4241424	Tylan Wallace	\N	\N	3	BAL	WR	5'11"	200	26	5	t	https://a.espncdn.com/i/headshots/nfl/players/full/4241424.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4690143	LaJohntay Wester	\N	\N	3	BAL	WR	5'9"	170	23	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4690143.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4696882	Devontez Walker	\N	\N	3	BAL	WR	6'1"	198	24	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4696882.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4360939	Rashod Bateman	\N	\N	3	BAL	WR	6'1"	193	26	5	t	https://a.espncdn.com/i/headshots/nfl/players/full/4360939.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4241263	Charlie Kolar	\N	\N	3	BAL	TE	6'6"	265	26	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4241263.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+15795	DeAndre Hopkins	\N	\N	3	BAL	WR	6'1"	210	33	13	t	https://a.espncdn.com/i/headshots/nfl/players/full/15795.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4361050	Isaiah Likely	\N	\N	3	BAL	TE	6'4"	245	25	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4361050.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4429615	Zay Flowers	\N	\N	3	BAL	WR	5'9"	183	25	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4429615.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4635008	Keon Coleman	\N	\N	4	BUF	WR	6'4"	215	22	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4635008.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3930086	Dawson Knox	\N	\N	4	BUF	TE	6'4"	254	29	7	t	https://a.espncdn.com/i/headshots/nfl/players/full/3930086.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4242433	Joshua Palmer	\N	\N	4	BUF	WR	6'1"	210	26	5	t	https://a.espncdn.com/i/headshots/nfl/players/full/4242433.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4241476	Tyrell Shavers	\N	\N	4	BUF	WR	6'4"	211	26	1	t	https://a.espncdn.com/i/headshots/nfl/players/full/4241476.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4243537	Gabe Davis	\N	\N	4	BUF	WR	6'2"	225	26	6	t	https://a.espncdn.com/i/headshots/nfl/players/full/4243537.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4688552	Keleki Latu	\N	\N	4	BUF	TE	6'7"	244	23	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4688552.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4573699	Jackson Hawes	\N	\N	4	BUF	TE	6'4"	253	25	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4573699.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+16731	Brandin Cooks	\N	\N	4	BUF	WR	5'10"	189	32	12	t	https://a.espncdn.com/i/headshots/nfl/players/full/16731.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4385690	Dalton Kincaid	\N	\N	4	BUF	TE	6'4"	240	26	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4385690.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4373678	Khalil Shakir	\N	\N	4	BUF	WR	6'0"	190	25	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4373678.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4683243	Mitchell Evans	\N	\N	5	CAR	TE	6'5"	258	22	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4683243.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3135321	Hunter Renfrow	\N	\N	5	CAR	WR	5'10"	185	30	6	t	https://a.espncdn.com/i/headshots/nfl/players/full/3135321.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4685472	Tetairoa McMillan	\N	\N	5	CAR	WR	6'5"	212	22	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4685472.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4431588	Ja'Tavion Sanders	\N	\N	5	CAR	TE	6'4"	252	22	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4431588.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4360763	Brycen Tremayne	\N	\N	5	CAR	WR	6'4"	212	26	1	t	https://a.espncdn.com/i/headshots/nfl/players/full/4360763.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4708486	Jimmy Horn Jr.	\N	\N	5	CAR	WR	5'8"	174	23	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4708486.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4361988	James Mitchell	\N	\N	5	CAR	TE	6'4"	249	26	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4361988.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4695883	Jalen Coker	\N	\N	5	CAR	WR	6'3"	213	24	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4695883.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4430034	Xavier Legette	\N	\N	5	CAR	WR	6'3"	227	24	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4430034.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4372780	Tommy Tremble	\N	\N	5	CAR	TE	6'4"	250	25	5	t	https://a.espncdn.com/i/headshots/nfl/players/full/4372780.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3052897	Durham Smythe	\N	\N	6	CHI	TE	6'5"	248	30	8	t	https://a.espncdn.com/i/headshots/nfl/players/full/3052897.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4685183	JP Richardson	\N	\N	6	CHI	WR	5'11"	192	23	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4685183.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4685278	Luther Burden III	\N	\N	6	CHI	WR	6'0"	210	22	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4685278.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+5160110	Jahdae Walker	\N	\N	6	CHI	WR	6'3"	206	23	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/5160110.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4039050	Devin Duvernay	\N	\N	6	CHI	WR	5'11"	202	28	6	t	https://a.espncdn.com/i/headshots/nfl/players/full/4039050.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4258595	Cole Kmet	\N	\N	6	CHI	TE	6'6"	257	26	6	t	https://a.espncdn.com/i/headshots/nfl/players/full/4258595.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4431299	Rome Odunze	\N	\N	6	CHI	WR	6'3"	214	23	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4431299.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4723086	Colston Loveland	\N	\N	6	CHI	TE	6'6"	241	21	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4723086.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3915416	DJ Moore	\N	\N	6	CHI	WR	6'0"	213	28	8	t	https://a.espncdn.com/i/headshots/nfl/players/full/3915416.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3917914	Olamide Zaccheaus	\N	\N	6	CHI	WR	5'8"	199	28	7	t	https://a.espncdn.com/i/headshots/nfl/players/full/3917914.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4036131	Noah Fant	\N	\N	7	CIN	TE	6'4"	249	28	7	t	https://a.espncdn.com/i/headshots/nfl/players/full/4036131.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3116164	Mike Gesicki	\N	\N	7	CIN	TE	6'6"	245	30	8	t	https://a.espncdn.com/i/headshots/nfl/players/full/3116164.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3050481	Tanner Hudson	\N	\N	7	CIN	TE	6'5"	241	31	6	t	https://a.espncdn.com/i/headshots/nfl/players/full/3050481.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4257188	Charlie Jones	\N	\N	7	CIN	WR	6'0"	190	27	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4257188.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4368003	Andrei Iosivas	\N	\N	7	CIN	WR	6'3"	210	26	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4368003.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4570738	Ke'Shawn Williams	\N	\N	7	CIN	WR	5'9"	189	24	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4570738.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4239993	Tee Higgins	\N	\N	7	CIN	WR	6'4"	220	26	6	t	https://a.espncdn.com/i/headshots/nfl/players/full/4239993.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3127310	Drew Sample	\N	\N	7	CIN	TE	6'5"	260	29	7	t	https://a.espncdn.com/i/headshots/nfl/players/full/3127310.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4690070	Mitchell Tinsley	\N	\N	7	CIN	WR	6'1"	205	26	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4690070.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4362628	Ja'Marr Chase	\N	\N	7	CIN	WR	6'0"	205	25	5	t	https://a.espncdn.com/i/headshots/nfl/players/full/4362628.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4808839	Isaiah Bond	\N	\N	8	CLE	WR	5'11"	180	21	R	t	https://a.espncdn.com/i/headshots/college-football/players/full/4808839.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4362603	Brenden Bates	\N	\N	8	CLE	TE	6'5"	255	26	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4362603.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4241463	Jerry Jeudy	\N	\N	8	CLE	WR	6'1"	195	26	6	t	https://a.espncdn.com/i/headshots/nfl/players/full/4241463.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4877203	Gage Larvadain	\N	\N	8	CLE	WR	5'8"	171	22	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4877203.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4362018	Blake Whiteheart	\N	\N	8	CLE	TE	6'4"	250	25	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4362018.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3123076	David Njoku	\N	\N	8	CLE	TE	6'4"	246	29	9	t	https://a.espncdn.com/i/headshots/nfl/players/full/3123076.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+5083076	Harold Fannin Jr.	\N	\N	8	CLE	TE	6'4"	241	21	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/5083076.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4428678	Jamari Thrash	\N	\N	8	CLE	WR	6'0"	190	25	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4428678.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4613104	Malachi Corley	\N	\N	8	CLE	WR	5'11"	215	23	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4613104.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4369863	Cedric Tillman	\N	\N	8	CLE	WR	6'3"	215	25	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4369863.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4241389	CeeDee Lamb	\N	\N	9	DAL	WR	6'2"	200	26	6	t	https://a.espncdn.com/i/headshots/nfl/players/full/4241389.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4426354	George Pickens	\N	\N	9	DAL	WR	6'3"	200	24	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4426354.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4372096	Luke Schoonmaker	\N	\N	9	DAL	TE	6'5"	250	27	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4372096.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4242355	Jake Ferguson	\N	\N	9	DAL	TE	6'5"	244	26	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4242355.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4426485	Jonathan Mingo	\N	\N	9	DAL	WR	6'2"	220	24	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4426485.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+5083754	Ryan Flournoy	\N	\N	9	DAL	WR	6'1"	200	26	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/5083754.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3676833	KaVontae Turpin	\N	\N	9	DAL	WR	5'9"	153	29	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/3676833.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4249417	Jalen Tolbert	\N	\N	9	DAL	WR	6'1"	195	26	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4249417.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4360967	Brevyn Spann-Ford	\N	\N	9	DAL	TE	6'7"	270	26	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4360967.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3128429	Courtland Sutton	\N	\N	10	DEN	WR	6'4"	216	30	8	t	https://a.espncdn.com/i/headshots/nfl/players/full/3128429.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4600981	Pat Bryant	\N	\N	10	DEN	WR	6'2"	204	23	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4600981.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4686472	Marvin Mims Jr.	\N	\N	10	DEN	WR	5'11"	182	23	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4686472.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+9614	Marcedes Lewis	\N	\N	10	DEN	TE	6'6"	265	41	20	t	https://a.espncdn.com/i/headshots/nfl/players/full/9614.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4039057	Lil'Jordan Humphrey	\N	\N	10	DEN	WR	6'4"	225	27	6	t	https://a.espncdn.com/i/headshots/nfl/players/full/4039057.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4383440	Nate Adkins	\N	\N	10	DEN	TE	6'3"	252	26	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4383440.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4431280	Troy Franklin	\N	\N	10	DEN	WR	6'3"	180	22	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4431280.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3051876	Evan Engram	\N	\N	10	DEN	TE	6'3"	240	31	9	t	https://a.espncdn.com/i/headshots/nfl/players/full/3051876.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3911853	Adam Trautman	\N	\N	10	DEN	TE	6'5"	253	28	6	t	https://a.espncdn.com/i/headshots/nfl/players/full/3911853.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4596439	Dominic Lovett	\N	\N	11	DET	WR	5'10"	185	23	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4596439.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+2973405	Kalif Raymond	\N	\N	11	DET	WR	5'8"	180	31	9	t	https://a.espncdn.com/i/headshots/nfl/players/full/2973405.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4374302	Amon-Ra St. Brown	\N	\N	11	DET	WR	6'0"	202	26	5	t	https://a.espncdn.com/i/headshots/nfl/players/full/4374302.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4608362	Shane Zylstra	\N	\N	11	DET	TE	6'4"	244	29	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4608362.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3049698	Anthony Firkser	\N	\N	11	DET	TE	6'2"	245	30	7	t	https://a.espncdn.com/i/headshots/nfl/players/full/3049698.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+5123663	Isaac TeSlaa	\N	\N	11	DET	WR	6'4"	214	23	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/5123663.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3126997	Tom Kennedy	\N	\N	11	DET	WR	5'10"	195	29	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/3126997.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4426388	Jameson Williams	\N	\N	11	DET	WR	6'1"	182	24	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4426388.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4361432	Romeo Doubs	\N	\N	12	GB	WR	6'2"	204	25	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4361432.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4362249	Jayden Reed	\N	\N	12	GB	WR	5'11"	187	25	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4362249.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4429466	Drake Dabney	\N	\N	12	GB	TE	6'5"	246	23	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4429466.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4428850	Dontayvion Wicks	\N	\N	12	GB	WR	6'1"	206	24	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4428850.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4701936	Matthew Golden	\N	\N	12	GB	WR	5'11"	191	22	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4701936.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4360086	Josh Whyle	\N	\N	12	GB	TE	6'7"	248	26	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4360086.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4431487	Savion Williams	\N	\N	12	GB	WR	6'4"	222	24	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4431487.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4248528	Christian Watson	\N	\N	12	GB	WR	6'4"	208	26	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4248528.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4428085	Luke Musgrave	\N	\N	12	GB	TE	6'6"	253	25	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4428085.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3117256	Dalton Schultz	\N	\N	13	HOU	TE	6'5"	242	29	8	t	https://a.espncdn.com/i/headshots/nfl/players/full/3117256.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4586312	Jaylin Noel	\N	\N	13	HOU	WR	5'11"	201	23	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4586312.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4258173	Nico Collins	\N	\N	13	HOU	WR	6'4"	222	26	5	t	https://a.espncdn.com/i/headshots/nfl/players/full/4258173.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3895856	Christian Kirk	\N	\N	13	HOU	WR	5'11"	200	29	8	t	https://a.espncdn.com/i/headshots/nfl/players/full/3895856.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4426496	Cade Stover	\N	\N	13	HOU	TE	6'4"	251	25	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4426496.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3123075	Braxton Berrios	\N	\N	13	HOU	WR	5'9"	185	30	8	t	https://a.espncdn.com/i/headshots/nfl/players/full/3123075.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4686422	Xavier Hutchinson	\N	\N	13	HOU	WR	6'3"	210	25	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4686422.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4877706	Jayden Higgins	\N	\N	13	HOU	WR	6'4"	215	23	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4877706.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4366031	Tank Dell	\N	\N	13	HOU	WR	5'10"	165	26	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4366031.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4040774	Harrison Bryant	\N	\N	13	HOU	TE	6'5"	243	27	6	t	https://a.espncdn.com/i/headshots/nfl/players/full/4040774.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4362523	Will Mallory	\N	\N	14	IND	TE	6'4"	239	26	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4362523.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4688813	Josh Downs	\N	\N	14	IND	WR	5'9"	171	24	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4688813.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4035687	Michael Pittman Jr.	\N	\N	14	IND	WR	6'4"	223	28	6	t	https://a.espncdn.com/i/headshots/nfl/players/full/4035687.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4360078	Alec Pierce	\N	\N	14	IND	WR	6'3"	211	25	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4360078.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3051889	Laquon Treadwell	\N	\N	14	IND	WR	6'2"	215	30	9	t	https://a.espncdn.com/i/headshots/nfl/players/full/3051889.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+2998565	Mo Alie-Cox	\N	\N	14	IND	TE	6'5"	267	32	8	t	https://a.espncdn.com/i/headshots/nfl/players/full/2998565.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4061956	Ashton Dulin	\N	\N	14	IND	WR	6'2"	215	28	7	t	https://a.espncdn.com/i/headshots/nfl/players/full/4061956.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4431459	Tyler Warren	\N	\N	14	IND	TE	6'6"	256	23	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4431459.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3134353	Tim Patrick	\N	\N	15	JAX	WR	6'5"	210	32	8	t	https://a.espncdn.com/i/headshots/nfl/players/full/3134353.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3052096	Johnny Mundt	\N	\N	15	JAX	TE	6'4"	243	31	8	t	https://a.espncdn.com/i/headshots/nfl/players/full/3052096.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4430539	Brenton Strange	\N	\N	15	JAX	TE	6'4"	253	25	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4430539.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4361577	Dyami Brown	\N	\N	15	JAX	WR	6'0"	195	26	5	t	https://a.espncdn.com/i/headshots/nfl/players/full/4361577.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3916433	Jakobi Meyers	\N	\N	15	JAX	WR	6'2"	200	29	7	t	https://a.espncdn.com/i/headshots/nfl/players/full/3916433.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4432620	Parker Washington	\N	\N	15	JAX	WR	5'10"	204	23	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4432620.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4239944	Hunter Long	\N	\N	15	JAX	TE	6'5"	243	27	5	t	https://a.espncdn.com/i/headshots/nfl/players/full/4239944.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4432773	Brian Thomas Jr.	\N	\N	15	JAX	WR	6'2"	209	23	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4432773.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4244049	Quintin Morris	\N	\N	15	JAX	TE	6'2"	243	26	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4244049.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3120348	JuJu Smith-Schuster	\N	\N	16	KC	WR	6'1"	215	29	9	t	https://a.espncdn.com/i/headshots/nfl/players/full/3120348.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+5082630	Jalen Royals	\N	\N	16	KC	WR	6'0"	195	22	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/5082630.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+2975674	Robert Tonyan	\N	\N	16	KC	TE	6'5"	240	31	7	t	https://a.espncdn.com/i/headshots/nfl/players/full/2975674.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4683062	Xavier Worthy	\N	\N	16	KC	WR	5'11"	165	22	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4683062.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4240472	Noah Gray	\N	\N	16	KC	TE	6'3"	240	26	5	t	https://a.espncdn.com/i/headshots/nfl/players/full/4240472.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+15847	Travis Kelce	\N	\N	16	KC	TE	6'5"	250	36	13	t	https://a.espncdn.com/i/headshots/nfl/players/full/15847.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4430723	Jared Wiley	\N	\N	16	KC	TE	6'6"	249	25	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4430723.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4241372	Hollywood Brown	\N	\N	16	KC	WR	5'9"	180	28	7	t	https://a.espncdn.com/i/headshots/nfl/players/full/4241372.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4595342	Oronde Gadsden	\N	\N	18	LAC	TE	6'5"	236	22	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4595342.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3915486	Tyler Conklin	\N	\N	18	LAC	TE	6'3"	248	30	8	t	https://a.espncdn.com/i/headshots/nfl/players/full/3915486.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4429025	Quentin Johnston	\N	\N	18	LAC	WR	6'2"	208	24	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4429025.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3127292	Will Dissly	\N	\N	18	LAC	TE	6'4"	265	29	8	t	https://a.espncdn.com/i/headshots/nfl/players/full/3127292.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4612826	Ladd McConkey	\N	\N	18	LAC	WR	6'0"	185	24	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4612826.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4686612	Tre' Harris	\N	\N	18	LAC	WR	6'3"	210	23	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4686612.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4362477	Derius Davis	\N	\N	18	LAC	WR	5'8"	165	25	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4362477.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+15818	Keenan Allen	\N	\N	18	LAC	WR	6'2"	211	33	13	t	https://a.espncdn.com/i/headshots/nfl/players/full/15818.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4430870	KeAndre Lambert-Smith	\N	\N	18	LAC	WR	6'1"	182	23	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4430870.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4426515	Puka Nacua	\N	\N	19	LAR	WR	6'2"	212	24	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4426515.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4242557	Colby Parkinson	\N	\N	19	LAR	TE	6'7"	265	26	6	t	https://a.espncdn.com/i/headshots/nfl/players/full/4242557.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4426553	Davis Allen	\N	\N	19	LAR	TE	6'6"	251	24	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4426553.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4569382	Jordan Whittington	\N	\N	19	LAR	WR	6'1"	202	25	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4569382.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4360797	Tutu Atwell	\N	\N	19	LAR	WR	5'9"	165	26	5	t	https://a.espncdn.com/i/headshots/nfl/players/full/4360797.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+16800	Davante Adams	\N	\N	19	LAR	WR	6'1"	215	33	12	t	https://a.espncdn.com/i/headshots/nfl/players/full/16800.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4710855	Konata Mumpfield	\N	\N	19	LAR	WR	6'1"	185	23	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4710855.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4386544	Xavier Smith	\N	\N	19	LAR	WR	5'9"	176	28	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4386544.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4570037	Terrance Ferguson	\N	\N	19	LAR	TE	6'5"	255	22	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4570037.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+2576399	Nick Vannett	\N	\N	19	LAR	TE	6'5"	266	32	10	t	https://a.espncdn.com/i/headshots/nfl/players/full/2576399.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3919510	Alex Bachman	\N	\N	17	LV	WR	6'0"	190	29	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/3919510.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+2579604	Phillip Dorsett II	\N	\N	17	LV	WR	5'10"	185	32	9	t	https://a.espncdn.com/i/headshots/nfl/players/full/2579604.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4428718	Tre Tucker	\N	\N	17	LV	WR	5'8"	182	24	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4428718.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4361332	Shedrick Jackson	\N	\N	17	LV	WR	6'1"	198	26	1	t	https://a.espncdn.com/i/headshots/nfl/players/full/4361332.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4429086	Michael Mayer	\N	\N	17	LV	TE	6'4"	256	24	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4429086.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4603186	Jack Bech	\N	\N	17	LV	WR	6'1"	214	23	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4603186.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4432775	Dont'e Thornton Jr.	\N	\N	17	LV	WR	6'5"	205	23	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4432775.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+5155825	Carter Runyon	\N	\N	17	LV	TE	6'4"	243	24	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/5155825.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4045305	Ian Thomas	\N	\N	17	LV	TE	6'3"	253	29	8	t	https://a.espncdn.com/i/headshots/nfl/players/full/4045305.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+2577327	Tyler Lockett	\N	\N	17	LV	WR	5'10"	182	33	11	t	https://a.espncdn.com/i/headshots/nfl/players/full/2577327.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4036335	Cedrick Wilson Jr.	\N	\N	20	MIA	WR	6'2"	197	30	8	t	https://a.espncdn.com/i/headshots/nfl/players/full/4036335.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4365395	Julian Hill	\N	\N	20	MIA	TE	6'4"	251	25	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4365395.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+2576925	Darren Waller	\N	\N	20	MIA	TE	6'6"	238	33	8	t	https://a.espncdn.com/i/headshots/nfl/players/full/2576925.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4372016	Jaylen Waddle	\N	\N	20	MIA	WR	5'10"	185	27	5	t	https://a.espncdn.com/i/headshots/nfl/players/full/4372016.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4426535	Theo Wease Jr.	\N	\N	20	MIA	WR	6'2"	210	24	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4426535.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3929785	Nick Westbrook-Ikhine	\N	\N	20	MIA	WR	6'2"	211	28	6	t	https://a.espncdn.com/i/headshots/nfl/players/full/3929785.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4367209	Greg Dulcich	\N	\N	20	MIA	TE	6'4"	245	25	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4367209.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4569603	Malik Washington	\N	\N	20	MIA	WR	5'8"	195	24	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4569603.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4567506	Tahj Washington	\N	\N	20	MIA	WR	5'10"	174	24	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4567506.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4036133	T.J. Hockenson	\N	\N	21	MIN	TE	6'5"	248	28	7	t	https://a.espncdn.com/i/headshots/nfl/players/full/4036133.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4262921	Justin Jefferson	\N	\N	21	MIN	WR	6'1"	195	26	6	t	https://a.espncdn.com/i/headshots/nfl/players/full/4262921.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4565185	Tai Felton	\N	\N	21	MIN	WR	6'1"	183	22	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4565185.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4430656	Myles Price	\N	\N	21	MIN	WR	5'9"	183	24	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4430656.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4429205	Jordan Addison	\N	\N	21	MIN	WR	5'11"	175	23	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4429205.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4433959	Ben Yurosek	\N	\N	21	MIN	TE	6'4"	245	23	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4433959.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4382466	Jalen Nailor	\N	\N	21	MIN	WR	5'11"	190	26	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4382466.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3921690	Josh Oliver	\N	\N	21	MIN	TE	6'5"	259	28	7	t	https://a.espncdn.com/i/headshots/nfl/players/full/3921690.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4373030	Ben Sims	\N	\N	21	MIN	TE	6'5"	250	25	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4373030.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4695193	Efton Chism III	\N	\N	22	NE	WR	5'10"	198	24	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4695193.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4429022	Kayshon Boutte	\N	\N	22	NE	WR	5'11"	197	23	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4429022.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4613202	Kyle Williams	\N	\N	22	NE	WR	5'11"	190	23	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4613202.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3046439	Hunter Henry	\N	\N	22	NE	TE	6'5"	249	31	10	t	https://a.espncdn.com/i/headshots/nfl/players/full/3046439.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4596545	CJ Dippre	\N	\N	22	NE	TE	6'5"	256	23	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4596545.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4427095	DeMario Douglas	\N	\N	22	NE	WR	5'8"	192	25	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4427095.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3043275	Austin Hooper	\N	\N	22	NE	TE	6'4"	254	31	10	t	https://a.espncdn.com/i/headshots/nfl/players/full/3043275.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4361100	Jack Westover	\N	\N	22	NE	TE	6'2"	245	26	1	t	https://a.espncdn.com/i/headshots/nfl/players/full/4361100.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+2976212	Stefon Diggs	\N	\N	22	NE	WR	6'0"	191	32	11	t	https://a.espncdn.com/i/headshots/nfl/players/full/2976212.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3929645	Juwan Johnson	\N	\N	23	NO	TE	6'4"	231	29	6	t	https://a.espncdn.com/i/headshots/nfl/players/full/3929645.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3127306	Dante Pettis	\N	\N	23	NO	WR	6'1"	195	30	7	t	https://a.espncdn.com/i/headshots/nfl/players/full/3127306.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4372758	Kevin Austin Jr.	\N	\N	23	NO	WR	6'2"	200	25	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4372758.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4573697	Mason Tipton	\N	\N	23	NO	WR	5'11"	187	25	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4573697.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4361370	Chris Olave	\N	\N	23	NO	WR	6'0"	187	25	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4361370.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4034862	Jack Stoll	\N	\N	23	NO	TE	6'4"	247	27	5	t	https://a.espncdn.com/i/headshots/nfl/players/full/4034862.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4432731	Moliki Matavao	\N	\N	23	NO	TE	6'6"	263	22	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4432731.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4372063	Ronnie Bell	\N	\N	23	NO	WR	6'0"	192	25	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4372063.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4429148	Theo Johnson	\N	\N	24	NYG	TE	6'6"	264	24	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4429148.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4570296	Dalen Cambre	\N	\N	24	NYG	WR	6'0"	192	24	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4570296.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4424106	Gunner Olszewski	\N	\N	24	NYG	WR	6'0"	190	29	7	t	https://a.espncdn.com/i/headshots/nfl/players/full/4424106.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4692590	Jalin Hyatt	\N	\N	24	NYG	WR	6'0"	185	24	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4692590.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4569587	Wan'Dale Robinson	\N	\N	24	NYG	WR	5'8"	185	24	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4569587.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4746079	Zach Davidson	\N	\N	24	NYG	TE	6'7"	245	27	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4746079.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4361516	Daniel Bellinger	\N	\N	24	NYG	TE	6'6"	255	25	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4361516.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+2531358	Chris Manhertz	\N	\N	24	NYG	TE	6'6"	235	33	10	t	https://a.espncdn.com/i/headshots/nfl/players/full/2531358.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3916945	Darius Slayton	\N	\N	24	NYG	WR	6'1"	198	28	7	t	https://a.espncdn.com/i/headshots/nfl/players/full/3916945.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4369466	Ryan Miller	\N	\N	24	NYG	WR	6'2"	221	25	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4369466.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4242540	Isaiah Hodgins	\N	\N	24	NYG	WR	6'3"	200	27	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4242540.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4569371	Isaiah Williams	\N	\N	25	NYJ	WR	5'10"	185	24	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4569371.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4613050	Quentin Skinner	\N	\N	25	NYJ	WR	6'5"	195	24	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4613050.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4429105	Arian Smith	\N	\N	25	NYJ	WR	6'0"	179	24	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4429105.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3929636	Irvin Charles	\N	\N	25	NYJ	WR	6'4"	219	28	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/3929636.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4808766	Mason Taylor	\N	\N	25	NYJ	TE	6'5"	251	21	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4808766.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4597500	Adonai Mitchell	\N	\N	25	NYJ	WR	6'2"	205	23	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4597500.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4567096	John Metchie III	\N	\N	25	NYJ	WR	5'11"	187	25	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4567096.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4361372	Jeremy Ruckert	\N	\N	25	NYJ	TE	6'5"	250	25	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4361372.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4250764	Stone Smartt	\N	\N	25	NYJ	TE	6'4"	226	27	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4250764.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4241410	Jelani Woods	\N	\N	25	NYJ	TE	6'7"	253	27	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4241410.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+2310331	Tyler Johnson	\N	\N	25	NYJ	WR	6'1"	208	27	5	t	https://a.espncdn.com/i/headshots/nfl/players/full/2310331.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4039160	Kylen Granson	\N	\N	27	PHI	TE	6'3"	242	27	5	t	https://a.espncdn.com/i/headshots/nfl/players/full/4039160.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4715355	Darius Cooper	\N	\N	27	PHI	WR	5'11"	210	24	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4715355.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4241478	DeVonta Smith	\N	\N	27	PHI	WR	6'0"	170	27	5	t	https://a.espncdn.com/i/headshots/nfl/players/full/4241478.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4361409	Jahan Dotson	\N	\N	27	PHI	WR	5'11"	184	25	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4361409.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3926231	Britain Covey	\N	\N	27	PHI	WR	5'8"	173	28	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/3926231.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3121023	Dallas Goedert	\N	\N	27	PHI	TE	6'5"	256	30	8	t	https://a.espncdn.com/i/headshots/nfl/players/full/3121023.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4372026	Cameron Latu	\N	\N	27	PHI	TE	6'5"	244	25	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4372026.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4047646	A.J. Brown	\N	\N	27	PHI	WR	6'1"	226	28	7	t	https://a.espncdn.com/i/headshots/nfl/players/full/4047646.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4241374	Grant Calcaterra	\N	\N	27	PHI	TE	6'4"	240	27	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4241374.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3914397	Scotty Miller	\N	\N	26	PIT	WR	5'9"	174	28	7	t	https://a.espncdn.com/i/headshots/nfl/players/full/3914397.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4035656	Ben Skowronek	\N	\N	26	PIT	WR	6'3"	224	28	5	t	https://a.espncdn.com/i/headshots/nfl/players/full/4035656.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4361411	Pat Freiermuth	\N	\N	26	PIT	TE	6'5"	258	27	5	t	https://a.espncdn.com/i/headshots/nfl/players/full/4361411.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4431492	Roman Wilson	\N	\N	26	PIT	WR	5'10"	186	24	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4431492.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3051738	Marquez Valdes-Scantling	\N	\N	26	PIT	WR	6'4"	206	31	8	t	https://a.espncdn.com/i/headshots/nfl/players/full/3051738.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4047650	DK Metcalf	\N	\N	26	PIT	WR	6'4"	229	28	7	t	https://a.espncdn.com/i/headshots/nfl/players/full/4047650.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4241961	Connor Heyward	\N	\N	26	PIT	TE	6'0"	230	26	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4241961.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4430802	Darnell Washington	\N	\N	26	PIT	TE	6'7"	264	24	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4430802.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4243389	Calvin Austin III	\N	\N	26	PIT	WR	5'9"	162	26	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4243389.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3054212	Jonnu Smith	\N	\N	26	PIT	TE	6'3"	248	30	9	t	https://a.espncdn.com/i/headshots/nfl/players/full/3054212.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+16460	Adam Thielen	\N	\N	26	PIT	WR	6'2"	195	35	12	t	https://a.espncdn.com/i/headshots/nfl/players/full/16460.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4259147	Jake Tonges	\N	\N	28	SF	TE	6'4"	240	26	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4259147.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3886598	Jauan Jennings	\N	\N	28	SF	WR	6'3"	212	28	5	t	https://a.espncdn.com/i/headshots/nfl/players/full/3886598.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4431466	Jordan Watkins	\N	\N	28	SF	WR	5'11"	196	23	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4431466.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3043116	Demarcus Robinson	\N	\N	28	SF	WR	6'1"	202	31	10	t	https://a.espncdn.com/i/headshots/nfl/players/full/3043116.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4360438	Brandon Aiyuk	\N	\N	28	SF	WR	6'0"	200	27	6	t	https://a.espncdn.com/i/headshots/nfl/players/full/4360438.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3045523	Kendrick Bourne	\N	\N	28	SF	WR	6'1"	205	30	9	t	https://a.espncdn.com/i/headshots/nfl/players/full/3045523.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4430191	Skyy Moore	\N	\N	28	SF	WR	5'10"	195	25	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4430191.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4360290	Brayden Willis	\N	\N	28	SF	TE	6'4"	240	26	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4360290.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3040151	George Kittle	\N	\N	28	SF	TE	6'4"	250	32	9	t	https://a.espncdn.com/i/headshots/nfl/players/full/3040151.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4428209	Ricky Pearsall	\N	\N	28	SF	WR	6'1"	189	25	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4428209.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4040612	Luke Farrell	\N	\N	28	SF	TE	6'5"	250	28	5	t	https://a.espncdn.com/i/headshots/nfl/players/full/4040612.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4241983	Cody White	\N	\N	29	SEA	WR	6'3"	227	27	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4241983.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4401805	Dareke Young	\N	\N	29	SEA	WR	6'2"	224	26	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4401805.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+2975863	Eric Saubert	\N	\N	29	SEA	TE	6'5"	253	31	8	t	https://a.espncdn.com/i/headshots/nfl/players/full/2975863.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4569547	Nick Kallerup	\N	\N	29	SEA	TE	6'5"	266	24	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4569547.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4032473	Rashid Shaheed	\N	\N	29	SEA	WR	6'0"	180	27	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4032473.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4576297	AJ Barner	\N	\N	29	SEA	TE	6'6"	251	23	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4576297.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+2977187	Cooper Kupp	\N	\N	29	SEA	WR	6'1"	205	32	9	t	https://a.espncdn.com/i/headshots/nfl/players/full/2977187.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4430878	Jaxon Smith-Njigba	\N	\N	29	SEA	WR	6'0"	197	23	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4430878.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4360405	Jake Bobo	\N	\N	29	SEA	WR	6'4"	207	27	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4360405.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4361112	Devin Culp	\N	\N	30	TB	TE	6'4"	237	25	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4361112.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3116165	Chris Godwin Jr.	\N	\N	30	TB	WR	6'1"	209	29	9	t	https://a.espncdn.com/i/headshots/nfl/players/full/3116165.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4567750	Emeka Egbuka	\N	\N	30	TB	WR	6'1"	205	23	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4567750.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4608810	Tez Johnson	\N	\N	30	TB	WR	5'10"	165	23	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4608810.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+5097554	Kameron Johnson	\N	\N	30	TB	WR	5'10"	170	23	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/5097554.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+2976592	Sterling Shepard	\N	\N	30	TB	WR	5'10"	194	32	10	t	https://a.espncdn.com/i/headshots/nfl/players/full/2976592.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4243331	Cade Otton	\N	\N	30	TB	TE	6'5"	247	26	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4243331.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4372505	Payne Durham	\N	\N	30	TB	TE	6'5"	255	25	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4372505.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+16737	Mike Evans	\N	\N	30	TB	WR	6'5"	231	32	12	t	https://a.espncdn.com/i/headshots/nfl/players/full/16737.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4430834	Jalen McMillan	\N	\N	30	TB	WR	6'1"	192	24	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4430834.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4360978	David Martin-Robinson	\N	\N	31	TEN	TE	6'3"	247	26	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4360978.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4360635	Chig Okonkwo	\N	\N	31	TEN	TE	6'3"	238	26	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4360635.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4686728	Gunnar Helm	\N	\N	31	TEN	TE	6'5"	241	23	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4686728.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3916204	James Proche II	\N	\N	31	TEN	WR	5'11"	193	29	7	t	https://a.espncdn.com/i/headshots/nfl/players/full/3916204.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4431268	Chimere Dike	\N	\N	31	TEN	WR	6'1"	196	23	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4431268.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3930066	Van Jefferson	\N	\N	31	TEN	WR	6'1"	200	29	6	t	https://a.espncdn.com/i/headshots/nfl/players/full/3930066.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4883647	Elic Ayomanor	\N	\N	31	TEN	WR	6'2"	206	22	R	t	https://a.espncdn.com/i/headshots/nfl/players/full/4883647.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4057082	Mason Kinsey	\N	\N	31	TEN	WR	5'11"	200	27	3	t	https://a.espncdn.com/i/headshots/nfl/players/full/4057082.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3126486	Deebo Samuel	\N	\N	32	WSH	WR	6'0"	215	29	7	t	https://a.espncdn.com/i/headshots/nfl/players/full/3126486.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4567156	Treylon Burks	\N	\N	32	WSH	WR	6'2"	225	25	4	t	https://a.espncdn.com/i/headshots/nfl/players/full/4567156.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4690923	Ben Sinnott	\N	\N	32	WSH	TE	6'4"	245	23	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4690923.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4361088	Colson Yankoff	\N	\N	32	WSH	TE	6'4"	225	25	2	t	https://a.espncdn.com/i/headshots/nfl/players/full/4361088.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+2576581	Chris Moore	\N	\N	32	WSH	WR	6'1"	200	32	9	t	https://a.espncdn.com/i/headshots/nfl/players/full/2576581.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+4048228	John Bates	\N	\N	32	WSH	TE	6'6"	256	28	5	t	https://a.espncdn.com/i/headshots/nfl/players/full/4048228.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+3121422	Terry McLaurin	\N	\N	32	WSH	WR	6'0"	210	30	7	t	https://a.espncdn.com/i/headshots/nfl/players/full/3121422.png	2025-12-29 13:29:17.020191-05	2025-12-29 13:29:17.020191-05	\N
+\.
+
+
+--
+-- Data for Name: game_logs; Type: TABLE DATA; Schema: public; Owner: aaronangeles
+--
+
+COPY public.game_logs (id, player_id, game_id, season_year, week, team, team_id, receptions, receiving_yards, receiving_touchdowns, targets, long_reception, yards_per_reception, created_at, updated_at) FROM stdin;
+1	4428811	20251228_ARI@CIN	2025	17	ARI	1	2	24	0	3	23	12.00	2025-12-29 15:00:40.365397-05	2025-12-29 15:00:40.365397-05
+2	4428811	20251221_ATL@ARI	2025	16	ARI	1	2	19	0	2	13	9.50	2025-12-29 15:00:40.365397-05	2025-12-29 15:00:40.365397-05
+3	4428811	20251130_ARI@TB	2025	13	ARI	1	0	0	0	1	0	0.00	2025-12-29 15:00:40.365397-05	2025-12-29 15:00:40.365397-05
+4	4428811	20251123_JAX@ARI	2025	12	ARI	1	1	9	0	3	9	9.00	2025-12-29 15:00:40.365397-05	2025-12-29 15:00:40.365397-05
+5	4428811	20251116_SF@ARI	2025	11	ARI	1	2	15	0	3	9	7.50	2025-12-29 15:00:40.365397-05	2025-12-29 15:00:40.365397-05
+6	4428811	20251103_ARI@DAL	2025	9	ARI	1	0	0	0	0	\N	\N	2025-12-29 15:00:40.365397-05	2025-12-29 15:00:40.365397-05
+7	4428811	20251019_GB@ARI	2025	7	ARI	1	0	0	0	0	\N	\N	2025-12-29 15:00:40.365397-05	2025-12-29 15:00:40.365397-05
+8	4428811	20250925_SEA@ARI	2025	4	ARI	1	0	0	0	1	0	0.00	2025-12-29 15:00:40.365397-05	2025-12-29 15:00:40.365397-05
+9	4428811	20250907_ARI@NO	2025	1	ARI	1	0	0	0	0	\N	\N	2025-12-29 15:00:40.365397-05	2025-12-29 15:00:40.365397-05
+10	4428811	20250105_SF@ARI	2024	18	ARI	1	0	0	0	1	0	0.00	2025-12-29 15:00:40.365397-05	2025-12-29 15:00:40.365397-05
+11	4428811	20241013_ARI@GB	2024	6	ARI	1	0	0	0	1	0	0.00	2025-12-29 15:00:40.365397-05	2025-12-29 15:00:40.365397-05
+12	3914151	20251228_ARI@CIN	2025	17	ARI	1	0	0	0	0	\N	\N	2025-12-29 15:00:41.093666-05	2025-12-29 15:00:41.093666-05
+13	3914151	20251221_ATL@ARI	2025	16	ARI	1	0	0	0	1	0	0.00	2025-12-29 15:00:41.093666-05	2025-12-29 15:00:41.093666-05
+14	3914151	20251214_ARI@HOU	2025	15	ARI	1	0	0	0	0	\N	\N	2025-12-29 15:00:41.093666-05	2025-12-29 15:00:41.093666-05
+15	3914151	20251207_LAR@ARI	2025	14	ARI	1	0	0	0	1	0	0.00	2025-12-29 15:00:41.093666-05	2025-12-29 15:00:41.093666-05
+16	3914151	20251130_ARI@TB	2025	13	ARI	1	0	0	0	0	\N	\N	2025-12-29 15:00:41.093666-05	2025-12-29 15:00:41.093666-05
+17	3914151	20251123_JAX@ARI	2025	12	ARI	1	1	6	0	1	6	6.00	2025-12-29 15:00:41.093666-05	2025-12-29 15:00:41.093666-05
+18	3914151	20251116_SF@ARI	2025	11	ARI	1	0	0	0	0	\N	\N	2025-12-29 15:00:41.093666-05	2025-12-29 15:00:41.093666-05
+19	3914151	20251109_ARI@SEA	2025	10	ARI	1	0	0	0	0	\N	\N	2025-12-29 15:00:41.093666-05	2025-12-29 15:00:41.093666-05
+20	3914151	20251103_ARI@DAL	2025	9	ARI	1	0	0	0	0	\N	\N	2025-12-29 15:00:41.093666-05	2025-12-29 15:00:41.093666-05
+21	3914151	20251019_GB@ARI	2025	7	ARI	1	0	0	0	0	\N	\N	2025-12-29 15:00:41.093666-05	2025-12-29 15:00:41.093666-05
+22	3914151	20250914_CAR@ARI	2025	2	ARI	1	0	0	0	0	\N	\N	2025-12-29 15:00:41.093666-05	2025-12-29 15:00:41.093666-05
+23	3914151	20250105_JAX@IND	2024	18	JAX	15	0	0	0	0	\N	\N	2025-12-29 15:00:41.093666-05	2025-12-29 15:00:41.093666-05
+24	3914151	20241229_TEN@JAX	2024	17	JAX	15	0	0	0	0	\N	\N	2025-12-29 15:00:41.093666-05	2025-12-29 15:00:41.093666-05
+25	3914151	20241222_JAX@LV	2024	16	JAX	15	1	4	0	1	4	4.00	2025-12-29 15:00:41.093666-05	2025-12-29 15:00:41.093666-05
+26	3914151	20241215_NYJ@JAX	2024	15	JAX	15	0	0	0	0	\N	\N	2025-12-29 15:00:41.093666-05	2025-12-29 15:00:41.093666-05
+27	3914151	20241208_JAX@TEN	2024	14	JAX	15	0	0	0	0	\N	\N	2025-12-29 15:00:41.093666-05	2025-12-29 15:00:41.093666-05
+28	3914151	20241201_HOU@JAX	2024	13	JAX	15	0	0	0	0	\N	\N	2025-12-29 15:00:41.093666-05	2025-12-29 15:00:41.093666-05
+29	3914151	20241117_JAX@DET	2024	11	JAX	15	0	0	0	0	\N	\N	2025-12-29 15:00:41.093666-05	2025-12-29 15:00:41.093666-05
+30	3914151	20241110_MIN@JAX	2024	10	JAX	15	0	0	0	0	\N	\N	2025-12-29 15:00:41.093666-05	2025-12-29 15:00:41.093666-05
+31	3914151	20241103_JAX@PHI	2024	9	JAX	15	0	0	0	0	\N	\N	2025-12-29 15:00:41.093666-05	2025-12-29 15:00:41.093666-05
+32	3914151	20241027_GB@JAX	2024	8	JAX	15	0	0	0	0	\N	\N	2025-12-29 15:00:41.093666-05	2025-12-29 15:00:41.093666-05
+33	3914151	20241020_NE@JAX	2024	7	JAX	15	0	0	0	0	\N	\N	2025-12-29 15:00:41.093666-05	2025-12-29 15:00:41.093666-05
+34	3914151	20241013_JAX@CHI	2024	6	JAX	15	0	0	0	0	\N	\N	2025-12-29 15:00:41.093666-05	2025-12-29 15:00:41.093666-05
+35	3914151	20241006_IND@JAX	2024	5	JAX	15	1	2	0	1	2	2.00	2025-12-29 15:00:41.093666-05	2025-12-29 15:00:41.093666-05
+36	3914151	20240929_JAX@HOU	2024	4	JAX	15	0	0	0	0	\N	\N	2025-12-29 15:00:41.093666-05	2025-12-29 15:00:41.093666-05
+37	3914151	20240923_JAX@BUF	2024	3	JAX	15	1	8	0	1	8	8.00	2025-12-29 15:00:41.093666-05	2025-12-29 15:00:41.093666-05
+38	4361307	20251228_ARI@CIN	2025	17	ARI	1	10	76	1	13	18	7.60	2025-12-29 15:00:41.317983-05	2025-12-29 15:00:41.317983-05
+39	4361307	20251221_ATL@ARI	2025	16	ARI	1	4	27	0	8	10	6.80	2025-12-29 15:00:41.317983-05	2025-12-29 15:00:41.317983-05
+40	4361307	20251214_ARI@HOU	2025	15	ARI	1	12	134	2	13	21	11.20	2025-12-29 15:00:41.317983-05	2025-12-29 15:00:41.317983-05
+41	4361307	20251207_LAR@ARI	2025	14	ARI	1	5	58	0	9	27	11.60	2025-12-29 15:00:41.317983-05	2025-12-29 15:00:41.317983-05
+42	4361307	20251130_ARI@TB	2025	13	ARI	1	8	82	1	9	20	10.30	2025-12-29 15:00:41.317983-05	2025-12-29 15:00:41.317983-05
+43	4361307	20251123_JAX@ARI	2025	12	ARI	1	9	79	0	10	14	8.80	2025-12-29 15:00:41.317983-05	2025-12-29 15:00:41.317983-05
+44	4361307	20251116_SF@ARI	2025	11	ARI	1	10	115	1	11	28	11.50	2025-12-29 15:00:41.317983-05	2025-12-29 15:00:41.317983-05
+45	4361307	20251109_ARI@SEA	2025	10	ARI	1	9	127	1	13	24	14.10	2025-12-29 15:00:41.317983-05	2025-12-29 15:00:41.317983-05
+46	4361307	20251103_ARI@DAL	2025	9	ARI	1	5	55	1	9	19	11.00	2025-12-29 15:00:41.317983-05	2025-12-29 15:00:41.317983-05
+47	4361307	20251019_GB@ARI	2025	7	ARI	1	10	74	2	13	15	7.40	2025-12-29 15:00:41.317983-05	2025-12-29 15:00:41.317983-05
+48	4361307	20251012_ARI@IND	2025	6	ARI	1	8	72	1	11	26	9.00	2025-12-29 15:00:41.317983-05	2025-12-29 15:00:41.317983-05
+49	4361307	20251005_TEN@ARI	2025	5	ARI	1	5	41	0	7	12	8.20	2025-12-29 15:00:41.317983-05	2025-12-29 15:00:41.317983-05
+50	4361307	20250925_SEA@ARI	2025	4	ARI	1	7	52	0	11	17	7.40	2025-12-29 15:00:41.317983-05	2025-12-29 15:00:41.317983-05
+51	4361307	20250921_ARI@SF	2025	3	ARI	1	5	43	1	8	17	8.60	2025-12-29 15:00:41.317983-05	2025-12-29 15:00:41.317983-05
+52	4361307	20250914_CAR@ARI	2025	2	ARI	1	6	78	0	7	31	13.00	2025-12-29 15:00:41.317983-05	2025-12-29 15:00:41.317983-05
+53	4361307	20250907_ARI@NO	2025	1	ARI	1	6	61	0	9	25	10.20	2025-12-29 15:00:41.317983-05	2025-12-29 15:00:41.317983-05
+54	4361307	20250105_SF@ARI	2024	18	ARI	1	7	65	1	11	28	9.30	2025-12-29 15:00:41.317983-05	2025-12-29 15:00:41.317983-05
+55	4361307	20241228_ARI@LAR	2024	17	ARI	1	12	123	1	16	34	10.30	2025-12-29 15:00:41.317983-05	2025-12-29 15:00:41.317983-05
+56	4361307	20241222_ARI@CAR	2024	16	ARI	1	3	20	0	4	11	6.70	2025-12-29 15:00:41.317983-05	2025-12-29 15:00:41.317983-05
+57	4361307	20241215_NE@ARI	2024	15	ARI	1	9	87	0	10	29	9.70	2025-12-29 15:00:41.317983-05	2025-12-29 15:00:41.317983-05
+58	4361307	20241208_SEA@ARI	2024	14	ARI	1	7	70	0	14	14	10.00	2025-12-29 15:00:41.317983-05	2025-12-29 15:00:41.317983-05
+59	4361307	20241201_ARI@MIN	2024	13	ARI	1	12	96	0	12	14	8.00	2025-12-29 15:00:41.317983-05	2025-12-29 15:00:41.317983-05
+60	4361307	20241124_ARI@SEA	2024	12	ARI	1	12	133	0	15	20	11.10	2025-12-29 15:00:41.317983-05	2025-12-29 15:00:41.317983-05
+61	4361307	20241110_NYJ@ARI	2024	10	ARI	1	4	71	0	5	23	17.80	2025-12-29 15:00:41.317983-05	2025-12-29 15:00:41.317983-05
+62	4361307	20241103_CHI@ARI	2024	9	ARI	1	3	35	0	4	15	11.70	2025-12-29 15:00:41.317983-05	2025-12-29 15:00:41.317983-05
+63	4361307	20241027_ARI@MIA	2024	8	ARI	1	9	124	0	11	37	13.80	2025-12-29 15:00:41.317983-05	2025-12-29 15:00:41.317983-05
+64	4361307	20241021_LAC@ARI	2024	7	ARI	1	5	51	0	7	14	10.20	2025-12-29 15:00:41.317983-05	2025-12-29 15:00:41.317983-05
+65	4361307	20241013_ARI@GB	2024	6	ARI	1	8	96	0	8	27	12.00	2025-12-29 15:00:41.317983-05	2025-12-29 15:00:41.317983-05
+66	4361307	20241006_ARI@SF	2024	5	ARI	1	6	53	0	9	22	8.80	2025-12-29 15:00:41.317983-05	2025-12-29 15:00:41.317983-05
+67	4361307	20240922_DET@ARI	2024	3	ARI	1	3	25	0	6	9	8.30	2025-12-29 15:00:41.317983-05	2025-12-29 15:00:41.317983-05
+68	4361307	20240915_LAR@ARI	2024	2	ARI	1	6	67	0	6	21	11.20	2025-12-29 15:00:41.317983-05	2025-12-29 15:00:41.317983-05
+69	4361307	20240908_ARI@BUF	2024	1	ARI	1	5	30	0	9	8	6.00	2025-12-29 15:00:41.317983-05	2025-12-29 15:00:41.317983-05
+70	4432708	20251228_ARI@CIN	2025	17	ARI	1	0	0	0	1	0	0.00	2025-12-29 15:00:41.589625-05	2025-12-29 15:00:41.589625-05
+71	4432708	20251221_ATL@ARI	2025	16	ARI	1	1	14	0	3	14	14.00	2025-12-29 15:00:41.589625-05	2025-12-29 15:00:41.589625-05
+72	4432708	20251130_ARI@TB	2025	13	ARI	1	6	69	0	7	21	11.50	2025-12-29 15:00:41.589625-05	2025-12-29 15:00:41.589625-05
+73	4432708	20251109_ARI@SEA	2025	10	ARI	1	3	33	1	12	14	11.00	2025-12-29 15:00:41.589625-05	2025-12-29 15:00:41.589625-05
+74	4432708	20251103_ARI@DAL	2025	9	ARI	1	7	96	1	10	20	13.70	2025-12-29 15:00:41.589625-05	2025-12-29 15:00:41.589625-05
+75	4432708	20251019_GB@ARI	2025	7	ARI	1	2	58	0	6	35	29.00	2025-12-29 15:00:41.589625-05	2025-12-29 15:00:41.589625-05
+76	4432708	20251012_ARI@IND	2025	6	ARI	1	2	32	0	2	21	16.00	2025-12-29 15:00:41.589625-05	2025-12-29 15:00:41.589625-05
+77	4432708	20251005_TEN@ARI	2025	5	ARI	1	4	98	0	5	43	24.50	2025-12-29 15:00:41.589625-05	2025-12-29 15:00:41.589625-05
+78	4432708	20250925_SEA@ARI	2025	4	ARI	1	6	66	1	10	18	11.00	2025-12-29 15:00:41.589625-05	2025-12-29 15:00:41.589625-05
+79	4432708	20250921_ARI@SF	2025	3	ARI	1	3	44	0	6	32	14.70	2025-12-29 15:00:41.589625-05	2025-12-29 15:00:41.589625-05
+80	4432708	20250914_CAR@ARI	2025	2	ARI	1	2	27	0	5	15	13.50	2025-12-29 15:00:41.589625-05	2025-12-29 15:00:41.589625-05
+81	4432708	20250907_ARI@NO	2025	1	ARI	1	5	71	1	6	45	14.20	2025-12-29 15:00:41.589625-05	2025-12-29 15:00:41.589625-05
+82	4432708	20250105_SF@ARI	2024	18	ARI	1	5	63	1	6	20	12.60	2025-12-29 15:00:41.589625-05	2025-12-29 15:00:41.589625-05
+83	4432708	20241228_ARI@LAR	2024	17	ARI	1	6	96	0	10	24	16.00	2025-12-29 15:00:41.589625-05	2025-12-29 15:00:41.589625-05
+84	4432708	20241222_ARI@CAR	2024	16	ARI	1	4	39	0	8	12	9.80	2025-12-29 15:00:41.589625-05	2025-12-29 15:00:41.589625-05
+85	4432708	20241215_NE@ARI	2024	15	ARI	1	2	32	0	6	23	16.00	2025-12-29 15:00:41.589625-05	2025-12-29 15:00:41.589625-05
+86	4432708	20241208_SEA@ARI	2024	14	ARI	1	4	49	0	8	15	12.30	2025-12-29 15:00:41.589625-05	2025-12-29 15:00:41.589625-05
+87	4432708	20241201_ARI@MIN	2024	13	ARI	1	5	60	1	12	16	12.00	2025-12-29 15:00:41.589625-05	2025-12-29 15:00:41.589625-05
+88	4432708	20241124_ARI@SEA	2024	12	ARI	1	3	47	0	6	22	15.70	2025-12-29 15:00:41.589625-05	2025-12-29 15:00:41.589625-05
+89	4432708	20241110_NYJ@ARI	2024	10	ARI	1	5	54	1	5	18	10.80	2025-12-29 15:00:41.589625-05	2025-12-29 15:00:41.589625-05
+90	4432708	20241103_CHI@ARI	2024	9	ARI	1	2	34	0	5	21	17.00	2025-12-29 15:00:41.589625-05	2025-12-29 15:00:41.589625-05
+91	4432708	20241027_ARI@MIA	2024	8	ARI	1	6	111	1	7	25	18.50	2025-12-29 15:00:41.589625-05	2025-12-29 15:00:41.589625-05
+92	4432708	20241021_LAC@ARI	2024	7	ARI	1	3	21	0	6	10	7.00	2025-12-29 15:00:41.589625-05	2025-12-29 15:00:41.589625-05
+93	4432708	20241013_ARI@GB	2024	6	ARI	1	0	0	0	2	0	0.00	2025-12-29 15:00:41.589625-05	2025-12-29 15:00:41.589625-05
+94	4432708	20241006_ARI@SF	2024	5	ARI	1	2	36	0	7	22	18.00	2025-12-29 15:00:41.589625-05	2025-12-29 15:00:41.589625-05
+95	4432708	20240929_WSH@ARI	2024	4	ARI	1	5	45	1	6	19	9.00	2025-12-29 15:00:41.589625-05	2025-12-29 15:00:41.589625-05
+96	4432708	20240922_DET@ARI	2024	3	ARI	1	5	64	1	11	17	12.80	2025-12-29 15:00:41.589625-05	2025-12-29 15:00:41.589625-05
+97	4432708	20240915_LAR@ARI	2024	2	ARI	1	4	130	2	8	60	32.50	2025-12-29 15:00:41.589625-05	2025-12-29 15:00:41.589625-05
+98	4432708	20240908_ARI@BUF	2024	1	ARI	1	1	4	0	3	4	4.00	2025-12-29 15:00:41.589625-05	2025-12-29 15:00:41.589625-05
+99	4426844	20251228_ARI@CIN	2025	17	ARI	1	0	0	0	1	0	0.00	2025-12-29 15:00:41.852398-05	2025-12-29 15:00:41.852398-05
+100	4426844	20251221_ATL@ARI	2025	16	ARI	1	7	91	0	8	25	13.00	2025-12-29 15:00:41.852398-05	2025-12-29 15:00:41.852398-05
+101	4426844	20251214_ARI@HOU	2025	15	ARI	1	1	3	0	2	3	3.00	2025-12-29 15:00:41.852398-05	2025-12-29 15:00:41.852398-05
+102	4426844	20251207_LAR@ARI	2025	14	ARI	1	1	0	0	1	0	0.00	2025-12-29 15:00:41.852398-05	2025-12-29 15:00:41.852398-05
+103	4426844	20251130_ARI@TB	2025	13	ARI	1	2	17	0	2	9	8.50	2025-12-29 15:00:41.852398-05	2025-12-29 15:00:41.852398-05
+104	4426844	20251123_JAX@ARI	2025	12	ARI	1	0	0	0	0	\N	\N	2025-12-29 15:00:41.852398-05	2025-12-29 15:00:41.852398-05
+105	4426844	20251116_SF@ARI	2025	11	ARI	1	2	11	0	3	6	5.50	2025-12-29 15:00:41.852398-05	2025-12-29 15:00:41.852398-05
+106	4426844	20251109_ARI@SEA	2025	10	ARI	1	2	19	0	3	12	9.50	2025-12-29 15:00:41.852398-05	2025-12-29 15:00:41.852398-05
+107	4426844	20251103_ARI@DAL	2025	9	ARI	1	3	30	0	3	16	10.00	2025-12-29 15:00:41.852398-05	2025-12-29 15:00:41.852398-05
+108	4426844	20251019_GB@ARI	2025	7	ARI	1	1	3	0	1	3	3.00	2025-12-29 15:00:41.852398-05	2025-12-29 15:00:41.852398-05
+109	4426844	20251012_ARI@IND	2025	6	ARI	1	2	34	0	2	24	17.00	2025-12-29 15:00:41.852398-05	2025-12-29 15:00:41.852398-05
+110	4426844	20251005_TEN@ARI	2025	5	ARI	1	2	10	0	2	7	5.00	2025-12-29 15:00:41.852398-05	2025-12-29 15:00:41.852398-05
+111	4426844	20250925_SEA@ARI	2025	4	ARI	1	0	0	0	0	\N	\N	2025-12-29 15:00:41.852398-05	2025-12-29 15:00:41.852398-05
+112	4426844	20250921_ARI@SF	2025	3	ARI	1	1	7	0	1	7	7.00	2025-12-29 15:00:41.852398-05	2025-12-29 15:00:41.852398-05
+113	4426844	20250914_CAR@ARI	2025	2	ARI	1	2	45	0	3	27	22.50	2025-12-29 15:00:41.852398-05	2025-12-29 15:00:41.852398-05
+114	4426844	20250907_ARI@NO	2025	1	ARI	1	1	3	0	2	3	3.00	2025-12-29 15:00:41.852398-05	2025-12-29 15:00:41.852398-05
+115	4426844	20250105_SF@ARI	2024	18	ARI	1	0	0	0	0	\N	\N	2025-12-29 15:00:41.852398-05	2025-12-29 15:00:41.852398-05
+116	4426844	20241228_ARI@LAR	2024	17	ARI	1	2	23	0	3	15	11.50	2025-12-29 15:00:41.852398-05	2025-12-29 15:00:41.852398-05
+117	4426844	20241222_ARI@CAR	2024	16	ARI	1	0	0	0	1	0	0.00	2025-12-29 15:00:41.852398-05	2025-12-29 15:00:41.852398-05
+118	4426844	20241215_NE@ARI	2024	15	ARI	1	1	5	0	1	5	5.00	2025-12-29 15:00:41.852398-05	2025-12-29 15:00:41.852398-05
+119	4426844	20241208_SEA@ARI	2024	14	ARI	1	0	0	0	0	\N	\N	2025-12-29 15:00:41.852398-05	2025-12-29 15:00:41.852398-05
+120	4426844	20241201_ARI@MIN	2024	13	ARI	1	2	23	0	2	19	11.50	2025-12-29 15:00:41.852398-05	2025-12-29 15:00:41.852398-05
+121	4426844	20241124_ARI@SEA	2024	12	ARI	1	1	5	0	2	5	5.00	2025-12-29 15:00:41.852398-05	2025-12-29 15:00:41.852398-05
+122	4426844	20241110_NYJ@ARI	2024	10	ARI	1	2	13	0	2	11	6.50	2025-12-29 15:00:41.852398-05	2025-12-29 15:00:41.852398-05
+123	4426844	20241103_CHI@ARI	2024	9	ARI	1	2	34	0	2	23	17.00	2025-12-29 15:00:41.852398-05	2025-12-29 15:00:41.852398-05
+124	4426844	20241027_ARI@MIA	2024	8	ARI	1	2	13	0	2	7	6.50	2025-12-29 15:00:41.852398-05	2025-12-29 15:00:41.852398-05
+125	4426844	20241021_LAC@ARI	2024	7	ARI	1	1	1	0	1	1	1.00	2025-12-29 15:00:41.852398-05	2025-12-29 15:00:41.852398-05
+126	4426844	20241013_ARI@GB	2024	6	ARI	1	1	4	0	1	4	4.00	2025-12-29 15:00:41.852398-05	2025-12-29 15:00:41.852398-05
+127	4426844	20241006_ARI@SF	2024	5	ARI	1	1	2	1	1	2	2.00	2025-12-29 15:00:41.852398-05	2025-12-29 15:00:41.852398-05
+128	4426844	20240929_WSH@ARI	2024	4	ARI	1	2	12	0	3	9	6.00	2025-12-29 15:00:41.852398-05	2025-12-29 15:00:41.852398-05
+129	4426844	20240922_DET@ARI	2024	3	ARI	1	1	11	0	1	11	11.00	2025-12-29 15:00:41.852398-05	2025-12-29 15:00:41.852398-05
+130	4426844	20240915_LAR@ARI	2024	2	ARI	1	1	18	1	1	18	18.00	2025-12-29 15:00:41.852398-05	2025-12-29 15:00:41.852398-05
+131	4426844	20240908_ARI@BUF	2024	1	ARI	1	2	12	0	2	7	6.00	2025-12-29 15:00:41.852398-05	2025-12-29 15:00:41.852398-05
+132	4692835	20251228_ARI@CIN	2025	17	ARI	1	0	0	0	0	\N	\N	2025-12-29 15:00:42.114891-05	2025-12-29 15:00:42.114891-05
+133	4692835	20251221_ATL@ARI	2025	16	ARI	1	0	0	0	0	\N	\N	2025-12-29 15:00:42.114891-05	2025-12-29 15:00:42.114891-05
+134	4692835	20251214_ARI@HOU	2025	15	ARI	1	1	19	0	3	19	19.00	2025-12-29 15:00:42.114891-05	2025-12-29 15:00:42.114891-05
+135	4692835	20251207_LAR@ARI	2025	14	ARI	1	2	32	0	3	20	16.00	2025-12-29 15:00:42.114891-05	2025-12-29 15:00:42.114891-05
+136	4692835	20251005_DAL@NYJ	2025	5	DAL	9	0	0	0	0	\N	\N	2025-12-29 15:00:42.114891-05	2025-12-29 15:00:42.114891-05
+137	4692835	20250105_WSH@DAL	2024	18	DAL	9	0	0	0	0	\N	\N	2025-12-29 15:00:42.114891-05	2025-12-29 15:00:42.114891-05
+138	4692835	20241229_DAL@PHI	2024	17	DAL	9	1	12	0	1	12	12.00	2025-12-29 15:00:42.114891-05	2025-12-29 15:00:42.114891-05
+139	4692835	20241215_DAL@CAR	2024	15	DAL	9	1	17	1	1	17	17.00	2025-12-29 15:00:42.114891-05	2025-12-29 15:00:42.114891-05
+140	4692835	20241128_NYG@DAL	2024	13	DAL	9	1	0	0	1	0	0.00	2025-12-29 15:00:42.114891-05	2025-12-29 15:00:42.114891-05
+141	4692835	20241124_DAL@WSH	2024	12	DAL	9	1	41	0	3	41	41.00	2025-12-29 15:00:42.114891-05	2025-12-29 15:00:42.114891-05
+142	4692835	20241110_PHI@DAL	2024	10	DAL	9	1	4	0	4	4	4.00	2025-12-29 15:00:42.114891-05	2025-12-29 15:00:42.114891-05
+143	4692835	20241103_DAL@ATL	2024	9	DAL	9	2	26	0	5	16	13.00	2025-12-29 15:00:42.114891-05	2025-12-29 15:00:42.114891-05
+144	4692835	20241027_DAL@SF	2024	8	DAL	9	0	0	0	1	0	0.00	2025-12-29 15:00:42.114891-05	2025-12-29 15:00:42.114891-05
+145	4692835	20241013_DET@DAL	2024	6	DAL	9	1	15	0	6	15	15.00	2025-12-29 15:00:42.114891-05	2025-12-29 15:00:42.114891-05
+146	4692835	20241006_DAL@PIT	2024	5	DAL	9	1	10	0	1	10	10.00	2025-12-29 15:00:42.114891-05	2025-12-29 15:00:42.114891-05
+147	4692835	20240926_DAL@NYG	2024	4	DAL	9	0	0	0	0	\N	\N	2025-12-29 15:00:42.114891-05	2025-12-29 15:00:42.114891-05
+148	4692835	20240922_BAL@DAL	2024	3	DAL	9	1	24	0	3	24	24.00	2025-12-29 15:00:42.114891-05	2025-12-29 15:00:42.114891-05
+149	4692835	20240915_NO@DAL	2024	2	DAL	9	1	10	0	3	10	10.00	2025-12-29 15:00:42.114891-05	2025-12-29 15:00:42.114891-05
+150	4692835	20240908_DAL@CLE	2024	1	DAL	9	1	18	0	1	18	18.00	2025-12-29 15:00:42.114891-05	2025-12-29 15:00:42.114891-05
+151	4360761	20251228_ARI@CIN	2025	17	ARI	1	5	89	1	10	38	17.80	2025-12-29 15:00:42.473624-05	2025-12-29 15:00:42.473624-05
+152	4360761	20251221_ATL@ARI	2025	16	ARI	1	2	52	1	3	32	26.00	2025-12-29 15:00:42.473624-05	2025-12-29 15:00:42.473624-05
+153	4360761	20251214_ARI@HOU	2025	15	ARI	1	5	54	1	11	17	10.80	2025-12-29 15:00:42.473624-05	2025-12-29 15:00:42.473624-05
+154	4360761	20251207_LAR@ARI	2025	14	ARI	1	11	142	2	16	25	12.90	2025-12-29 15:00:42.473624-05	2025-12-29 15:00:42.473624-05
+155	4360761	20251130_ARI@TB	2025	13	ARI	1	3	36	0	7	16	12.00	2025-12-29 15:00:42.473624-05	2025-12-29 15:00:42.473624-05
+156	4360761	20251123_JAX@ARI	2025	12	ARI	1	10	118	0	15	31	11.80	2025-12-29 15:00:42.473624-05	2025-12-29 15:00:42.473624-05
+157	4360761	20251116_SF@ARI	2025	11	ARI	1	15	185	0	18	34	12.30	2025-12-29 15:00:42.473624-05	2025-12-29 15:00:42.473624-05
+158	4360761	20251109_ARI@SEA	2025	10	ARI	1	4	34	0	7	15	8.50	2025-12-29 15:00:42.473624-05	2025-12-29 15:00:42.473624-05
+159	4360761	20251103_ARI@DAL	2025	9	ARI	1	3	61	0	4	50	20.30	2025-12-29 15:00:42.473624-05	2025-12-29 15:00:42.473624-05
+160	4360761	20251019_GB@ARI	2025	7	ARI	1	3	40	0	4	18	13.30	2025-12-29 15:00:42.473624-05	2025-12-29 15:00:42.473624-05
+161	4360761	20251012_ARI@IND	2025	6	ARI	1	4	44	0	5	30	11.00	2025-12-29 15:00:42.473624-05	2025-12-29 15:00:42.473624-05
+162	4360761	20251005_TEN@ARI	2025	5	ARI	1	2	16	0	4	10	8.00	2025-12-29 15:00:42.473624-05	2025-12-29 15:00:42.473624-05
+163	4360761	20250925_SEA@ARI	2025	4	ARI	1	3	15	0	6	6	5.00	2025-12-29 15:00:42.473624-05	2025-12-29 15:00:42.473624-05
+164	4360761	20250921_ARI@SF	2025	3	ARI	1	1	5	0	2	5	5.00	2025-12-29 15:00:42.473624-05	2025-12-29 15:00:42.473624-05
+165	4360761	20250914_CAR@ARI	2025	2	ARI	1	1	11	1	2	11	11.00	2025-12-29 15:00:42.473624-05	2025-12-29 15:00:42.473624-05
+166	4360761	20250907_ARI@NO	2025	1	ARI	1	1	5	0	4	5	5.00	2025-12-29 15:00:42.473624-05	2025-12-29 15:00:42.473624-05
+167	4360761	20241228_ARI@LAR	2024	17	ARI	1	4	22	0	6	9	5.50	2025-12-29 15:00:42.473624-05	2025-12-29 15:00:42.473624-05
+168	4360761	20241222_ARI@CAR	2024	16	ARI	1	2	44	0	5	38	22.00	2025-12-29 15:00:42.473624-05	2025-12-29 15:00:42.473624-05
+169	4360761	20241215_NE@ARI	2024	15	ARI	1	2	9	0	2	5	4.50	2025-12-29 15:00:42.473624-05	2025-12-29 15:00:42.473624-05
+170	4360761	20241208_SEA@ARI	2024	14	ARI	1	2	57	1	3	41	28.50	2025-12-29 15:00:42.473624-05	2025-12-29 15:00:42.473624-05
+171	4360761	20241201_ARI@MIN	2024	13	ARI	1	5	55	0	7	22	11.00	2025-12-29 15:00:42.473624-05	2025-12-29 15:00:42.473624-05
+172	4360761	20241124_ARI@SEA	2024	12	ARI	1	2	54	0	4	30	27.00	2025-12-29 15:00:42.473624-05	2025-12-29 15:00:42.473624-05
+173	4360761	20241110_NYJ@ARI	2024	10	ARI	1	3	24	0	4	11	8.00	2025-12-29 15:00:42.473624-05	2025-12-29 15:00:42.473624-05
+174	4360761	20241103_CHI@ARI	2024	9	ARI	1	0	0	0	1	0	0.00	2025-12-29 15:00:42.473624-05	2025-12-29 15:00:42.473624-05
+175	4360761	20241027_ARI@MIA	2024	8	ARI	1	5	31	1	6	12	6.20	2025-12-29 15:00:42.473624-05	2025-12-29 15:00:42.473624-05
+176	4360761	20241021_LAC@ARI	2024	7	ARI	1	1	15	0	3	15	15.00	2025-12-29 15:00:42.473624-05	2025-12-29 15:00:42.473624-05
+177	4360761	20241013_ARI@GB	2024	6	ARI	1	2	21	1	4	18	10.50	2025-12-29 15:00:42.473624-05	2025-12-29 15:00:42.473624-05
+178	4360761	20241006_ARI@SF	2024	5	ARI	1	5	78	0	6	34	15.60	2025-12-29 15:00:42.473624-05	2025-12-29 15:00:42.473624-05
+179	4360761	20240929_WSH@ARI	2024	4	ARI	1	3	38	0	7	22	12.70	2025-12-29 15:00:42.473624-05	2025-12-29 15:00:42.473624-05
+180	4360761	20240922_DET@ARI	2024	3	ARI	1	8	64	0	9	28	8.00	2025-12-29 15:00:42.473624-05	2025-12-29 15:00:42.473624-05
+181	4360761	20240915_LAR@ARI	2024	2	ARI	1	2	31	0	2	23	15.50	2025-12-29 15:00:42.473624-05	2025-12-29 15:00:42.473624-05
+182	4360761	20240908_ARI@BUF	2024	1	ARI	1	1	5	1	2	5	5.00	2025-12-29 15:00:42.473624-05	2025-12-29 15:00:42.473624-05
+183	3917960	20251228_ARI@CIN	2025	17	ARI	1	0	0	0	0	\N	\N	2025-12-29 15:00:42.786261-05	2025-12-29 15:00:42.786261-05
+184	3917960	20251221_ATL@ARI	2025	16	ARI	1	0	0	0	1	0	0.00	2025-12-29 15:00:42.786261-05	2025-12-29 15:00:42.786261-05
+185	3917960	20250104_CLE@BAL	2024	18	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:42.786261-05	2025-12-29 15:00:42.786261-05
+186	3917960	20241225_BAL@HOU	2024	17	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:42.786261-05	2025-12-29 15:00:42.786261-05
+187	3917960	20241110_DET@HOU	2024	10	HOU	13	0	0	0	0	\N	\N	2025-12-29 15:00:42.786261-05	2025-12-29 15:00:42.786261-05
+188	3917960	20241031_HOU@NYJ	2024	9	HOU	13	0	0	0	0	\N	\N	2025-12-29 15:00:42.786261-05	2025-12-29 15:00:42.786261-05
+189	3917960	20241013_HOU@NE	2024	6	HOU	13	0	0	0	0	\N	\N	2025-12-29 15:00:42.786261-05	2025-12-29 15:00:42.786261-05
+190	3917960	20240929_JAX@HOU	2024	4	HOU	13	0	0	0	0	\N	\N	2025-12-29 15:00:42.786261-05	2025-12-29 15:00:42.786261-05
+191	3917960	20240922_HOU@MIN	2024	3	HOU	13	0	0	0	0	\N	\N	2025-12-29 15:00:42.786261-05	2025-12-29 15:00:42.786261-05
+192	3917960	20240915_CHI@HOU	2024	2	HOU	13	0	0	0	0	\N	\N	2025-12-29 15:00:42.786261-05	2025-12-29 15:00:42.786261-05
+193	3917960	20240908_HOU@IND	2024	1	HOU	13	0	0	0	0	\N	\N	2025-12-29 15:00:42.786261-05	2025-12-29 15:00:42.786261-05
+194	2971281	20251221_ATL@ARI	2025	16	ARI	1	0	0	0	0	\N	\N	2025-12-29 15:00:43.080752-05	2025-12-29 15:00:43.080752-05
+195	2971281	20251214_ARI@HOU	2025	15	ARI	1	2	1	0	2	1	0.50	2025-12-29 15:00:43.080752-05	2025-12-29 15:00:43.080752-05
+196	2971281	20251207_LAR@ARI	2025	14	ARI	1	0	0	0	0	\N	\N	2025-12-29 15:00:43.080752-05	2025-12-29 15:00:43.080752-05
+197	2971281	20251130_ARI@TB	2025	13	ARI	1	0	0	0	0	\N	\N	2025-12-29 15:00:43.080752-05	2025-12-29 15:00:43.080752-05
+198	2971281	20251123_JAX@ARI	2025	12	ARI	1	0	0	0	0	\N	\N	2025-12-29 15:00:43.080752-05	2025-12-29 15:00:43.080752-05
+199	2971281	20251116_SF@ARI	2025	11	ARI	1	0	0	0	0	\N	\N	2025-12-29 15:00:43.080752-05	2025-12-29 15:00:43.080752-05
+200	2971281	20250105_SEA@LAR	2024	18	SEA	29	0	0	0	0	\N	\N	2025-12-29 15:00:43.080752-05	2025-12-29 15:00:43.080752-05
+201	2971281	20241226_SEA@CHI	2024	17	SEA	29	1	4	0	1	4	4.00	2025-12-29 15:00:43.080752-05	2025-12-29 15:00:43.080752-05
+202	2971281	20241222_MIN@SEA	2024	16	SEA	29	1	17	0	1	17	17.00	2025-12-29 15:00:43.080752-05	2025-12-29 15:00:43.080752-05
+203	2971281	20241215_GB@SEA	2024	15	SEA	29	0	0	0	0	\N	\N	2025-12-29 15:00:43.080752-05	2025-12-29 15:00:43.080752-05
+204	2971281	20241208_SEA@ARI	2024	14	SEA	29	1	6	0	2	6	6.00	2025-12-29 15:00:43.080752-05	2025-12-29 15:00:43.080752-05
+205	2971281	20241201_SEA@NYJ	2024	13	SEA	29	0	0	0	1	0	0.00	2025-12-29 15:00:43.080752-05	2025-12-29 15:00:43.080752-05
+206	2971281	20241124_ARI@SEA	2024	12	SEA	29	2	19	0	2	13	9.50	2025-12-29 15:00:43.080752-05	2025-12-29 15:00:43.080752-05
+207	2971281	20241117_SEA@SF	2024	11	SEA	29	0	0	0	0	\N	\N	2025-12-29 15:00:43.080752-05	2025-12-29 15:00:43.080752-05
+208	2971281	20241103_LAR@SEA	2024	9	SEA	29	0	0	0	0	\N	\N	2025-12-29 15:00:43.080752-05	2025-12-29 15:00:43.080752-05
+209	2971281	20241027_BUF@SEA	2024	8	SEA	29	0	0	0	0	\N	\N	2025-12-29 15:00:43.080752-05	2025-12-29 15:00:43.080752-05
+210	2971281	20241020_SEA@ATL	2024	7	SEA	29	0	0	0	0	\N	\N	2025-12-29 15:00:43.080752-05	2025-12-29 15:00:43.080752-05
+211	2971281	20241010_SF@SEA	2024	6	SEA	29	0	0	0	0	\N	\N	2025-12-29 15:00:43.080752-05	2025-12-29 15:00:43.080752-05
+212	2971281	20241006_NYG@SEA	2024	5	SEA	29	1	7	0	1	7	7.00	2025-12-29 15:00:43.080752-05	2025-12-29 15:00:43.080752-05
+213	2971281	20240930_SEA@DET	2024	4	SEA	29	1	3	0	2	3	3.00	2025-12-29 15:00:43.080752-05	2025-12-29 15:00:43.080752-05
+214	2971281	20240922_MIA@SEA	2024	3	SEA	29	1	9	0	2	9	9.00	2025-12-29 15:00:43.080752-05	2025-12-29 15:00:43.080752-05
+215	4034948	20251221_ATL@ARI	2025	16	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:43.297888-05	2025-12-29 15:00:43.297888-05
+216	4034948	20251211_ATL@TB	2025	15	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:43.297888-05	2025-12-29 15:00:43.297888-05
+217	4034948	20251207_SEA@ATL	2025	14	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:43.297888-05	2025-12-29 15:00:43.297888-05
+218	4034948	20251130_ATL@NYJ	2025	13	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:43.297888-05	2025-12-29 15:00:43.297888-05
+219	4034948	20251123_ATL@NO	2025	12	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:43.297888-05	2025-12-29 15:00:43.297888-05
+220	4034948	20251116_CAR@ATL	2025	11	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:43.297888-05	2025-12-29 15:00:43.297888-05
+221	4034948	20251109_ATL@IND	2025	10	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:43.297888-05	2025-12-29 15:00:43.297888-05
+222	4034948	20251102_ATL@NE	2025	9	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:43.297888-05	2025-12-29 15:00:43.297888-05
+223	4034948	20251026_MIA@ATL	2025	8	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:43.297888-05	2025-12-29 15:00:43.297888-05
+224	4034948	20251019_ATL@SF	2025	7	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:43.297888-05	2025-12-29 15:00:43.297888-05
+225	4034948	20251013_BUF@ATL	2025	6	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:43.297888-05	2025-12-29 15:00:43.297888-05
+226	4034948	20250928_WSH@ATL	2025	4	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:43.297888-05	2025-12-29 15:00:43.297888-05
+227	4034948	20250921_ATL@CAR	2025	3	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:43.297888-05	2025-12-29 15:00:43.297888-05
+228	4034948	20250914_ATL@MIN	2025	2	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:43.297888-05	2025-12-29 15:00:43.297888-05
+229	4034948	20250907_TB@ATL	2025	1	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:43.297888-05	2025-12-29 15:00:43.297888-05
+230	4034948	20250105_CAR@ATL	2024	18	CAR	5	1	12	0	1	12	12.00	2025-12-29 15:00:43.297888-05	2025-12-29 15:00:43.297888-05
+231	4034948	20241229_CAR@TB	2024	17	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:43.297888-05	2025-12-29 15:00:43.297888-05
+232	4034948	20241222_ARI@CAR	2024	16	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:43.297888-05	2025-12-29 15:00:43.297888-05
+233	4034948	20241215_DAL@CAR	2024	15	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:43.297888-05	2025-12-29 15:00:43.297888-05
+234	4034948	20241208_CAR@PHI	2024	14	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:43.297888-05	2025-12-29 15:00:43.297888-05
+235	4034948	20241201_TB@CAR	2024	13	CAR	5	0	0	0	1	0	0.00	2025-12-29 15:00:43.297888-05	2025-12-29 15:00:43.297888-05
+236	4034948	20241124_KC@CAR	2024	12	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:43.297888-05	2025-12-29 15:00:43.297888-05
+237	4034948	20241110_NYG@CAR	2024	10	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:43.297888-05	2025-12-29 15:00:43.297888-05
+238	4034948	20241027_CAR@DEN	2024	8	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:43.297888-05	2025-12-29 15:00:43.297888-05
+239	4034948	20241020_CAR@WSH	2024	7	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:43.297888-05	2025-12-29 15:00:43.297888-05
+240	4034948	20241013_ATL@CAR	2024	6	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:43.297888-05	2025-12-29 15:00:43.297888-05
+241	4034948	20241006_CAR@CHI	2024	5	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:43.297888-05	2025-12-29 15:00:43.297888-05
+242	4034948	20240929_CIN@CAR	2024	4	CAR	5	0	0	0	1	0	0.00	2025-12-29 15:00:43.297888-05	2025-12-29 15:00:43.297888-05
+243	4034948	20240922_CAR@LV	2024	3	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:43.297888-05	2025-12-29 15:00:43.297888-05
+244	4034948	20240915_LAC@CAR	2024	2	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:43.297888-05	2025-12-29 15:00:43.297888-05
+245	4034948	20240908_CAR@NO	2024	1	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:43.297888-05	2025-12-29 15:00:43.297888-05
+246	3871102	20251221_ATL@ARI	2025	16	ATL	2	0	0	0	1	0	0.00	2025-12-29 15:00:43.678785-05	2025-12-29 15:00:43.678785-05
+247	3871102	20251211_ATL@TB	2025	15	ATL	2	6	78	0	10	21	13.00	2025-12-29 15:00:43.678785-05	2025-12-29 15:00:43.678785-05
+248	3871102	20251207_SEA@ATL	2025	14	ATL	2	0	0	0	4	0	0.00	2025-12-29 15:00:43.678785-05	2025-12-29 15:00:43.678785-05
+249	3871102	20251130_ATL@NYJ	2025	13	ATL	2	2	15	1	4	9	7.50	2025-12-29 15:00:43.678785-05	2025-12-29 15:00:43.678785-05
+250	3871102	20251123_ATL@NO	2025	12	ATL	2	2	16	1	3	9	8.00	2025-12-29 15:00:43.678785-05	2025-12-29 15:00:43.678785-05
+251	3871102	20251116_CAR@ATL	2025	11	ATL	2	1	11	0	2	11	11.00	2025-12-29 15:00:43.678785-05	2025-12-29 15:00:43.678785-05
+252	3871102	20251109_ATL@IND	2025	10	ATL	2	0	0	0	1	0	0.00	2025-12-29 15:00:43.678785-05	2025-12-29 15:00:43.678785-05
+253	3871102	20251102_ATL@NE	2025	9	ATL	2	0	0	0	1	0	0.00	2025-12-29 15:00:43.678785-05	2025-12-29 15:00:43.678785-05
+254	3871102	20251026_MIA@ATL	2025	8	ATL	2	2	14	0	3	12	7.00	2025-12-29 15:00:43.678785-05	2025-12-29 15:00:43.678785-05
+255	3871102	20251019_ATL@SF	2025	7	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:43.678785-05	2025-12-29 15:00:43.678785-05
+256	3871102	20251013_BUF@ATL	2025	6	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:43.678785-05	2025-12-29 15:00:43.678785-05
+257	3871102	20250928_WSH@ATL	2025	4	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:43.678785-05	2025-12-29 15:00:43.678785-05
+258	3871102	20250921_ATL@CAR	2025	3	ATL	2	1	9	0	2	9	9.00	2025-12-29 15:00:43.678785-05	2025-12-29 15:00:43.678785-05
+259	3871102	20250914_ATL@MIN	2025	2	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:43.678785-05	2025-12-29 15:00:43.678785-05
+260	3871102	20250907_TB@ATL	2025	1	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:43.678785-05	2025-12-29 15:00:43.678785-05
+261	4374187	20251221_ATL@ARI	2025	16	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:44.31031-05	2025-12-29 15:00:44.31031-05
+262	4374187	20251211_ATL@TB	2025	15	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:44.31031-05	2025-12-29 15:00:44.31031-05
+263	4374187	20251207_SEA@ATL	2025	14	ATL	2	1	4	0	1	4	4.00	2025-12-29 15:00:44.31031-05	2025-12-29 15:00:44.31031-05
+264	4374187	20251130_ATL@NYJ	2025	13	ATL	2	2	23	0	2	19	11.50	2025-12-29 15:00:44.31031-05	2025-12-29 15:00:44.31031-05
+265	4374187	20251013_BUF@ATL	2025	6	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:44.31031-05	2025-12-29 15:00:44.31031-05
+266	4374187	20241222_ARI@CAR	2024	16	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:44.31031-05	2025-12-29 15:00:44.31031-05
+267	4374187	20241215_DAL@CAR	2024	15	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:44.31031-05	2025-12-29 15:00:44.31031-05
+268	4374187	20241208_CAR@PHI	2024	14	CAR	5	1	7	0	1	7	7.00	2025-12-29 15:00:44.31031-05	2025-12-29 15:00:44.31031-05
+269	4374187	20241201_TB@CAR	2024	13	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:44.31031-05	2025-12-29 15:00:44.31031-05
+270	4374187	20241124_KC@CAR	2024	12	CAR	5	3	13	0	3	12	4.30	2025-12-29 15:00:44.31031-05	2025-12-29 15:00:44.31031-05
+271	4374187	20241110_NYG@CAR	2024	10	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:44.31031-05	2025-12-29 15:00:44.31031-05
+272	4374187	20241103_NO@CAR	2024	9	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:44.31031-05	2025-12-29 15:00:44.31031-05
+273	4035020	20251221_ATL@ARI	2025	16	ATL	2	1	3	0	1	3	3.00	2025-12-29 15:00:44.619903-05	2025-12-29 15:00:44.619903-05
+274	4035020	20251211_ATL@TB	2025	15	ATL	2	2	12	0	2	8	6.00	2025-12-29 15:00:44.619903-05	2025-12-29 15:00:44.619903-05
+275	4035020	20251207_SEA@ATL	2025	14	ATL	2	0	0	0	1	0	0.00	2025-12-29 15:00:44.619903-05	2025-12-29 15:00:44.619903-05
+276	4035020	20251130_ATL@NYJ	2025	13	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:44.619903-05	2025-12-29 15:00:44.619903-05
+277	4035020	20251123_ATL@NO	2025	12	ATL	2	3	24	0	3	18	8.00	2025-12-29 15:00:44.619903-05	2025-12-29 15:00:44.619903-05
+278	4035020	20251116_CAR@ATL	2025	11	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:44.619903-05	2025-12-29 15:00:44.619903-05
+279	4035020	20251109_ATL@IND	2025	10	ATL	2	1	14	0	1	14	14.00	2025-12-29 15:00:44.619903-05	2025-12-29 15:00:44.619903-05
+280	4035020	20251102_ATL@NE	2025	9	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:44.619903-05	2025-12-29 15:00:44.619903-05
+281	4035020	20251026_MIA@ATL	2025	8	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:44.619903-05	2025-12-29 15:00:44.619903-05
+282	4035020	20251019_ATL@SF	2025	7	ATL	2	0	0	0	1	0	0.00	2025-12-29 15:00:44.619903-05	2025-12-29 15:00:44.619903-05
+283	4035020	20251013_BUF@ATL	2025	6	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:44.619903-05	2025-12-29 15:00:44.619903-05
+284	4035020	20250928_WSH@ATL	2025	4	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:44.619903-05	2025-12-29 15:00:44.619903-05
+285	4035020	20250921_ATL@CAR	2025	3	ATL	2	1	-5	0	1	-5	-5.00	2025-12-29 15:00:44.619903-05	2025-12-29 15:00:44.619903-05
+286	4035020	20250914_ATL@MIN	2025	2	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:44.619903-05	2025-12-29 15:00:44.619903-05
+287	4035020	20250907_TB@ATL	2025	1	ATL	2	0	0	0	1	0	0.00	2025-12-29 15:00:44.619903-05	2025-12-29 15:00:44.619903-05
+288	4035020	20250105_CAR@ATL	2024	18	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:44.619903-05	2025-12-29 15:00:44.619903-05
+289	4035020	20241229_ATL@WSH	2024	17	ATL	2	1	6	0	1	6	6.00	2025-12-29 15:00:44.619903-05	2025-12-29 15:00:44.619903-05
+290	4035020	20241222_NYG@ATL	2024	16	ATL	2	0	0	0	2	0	0.00	2025-12-29 15:00:44.619903-05	2025-12-29 15:00:44.619903-05
+291	4035020	20241216_ATL@LV	2024	15	ATL	2	2	7	0	3	5	3.50	2025-12-29 15:00:44.619903-05	2025-12-29 15:00:44.619903-05
+292	4035020	20241208_ATL@MIN	2024	14	ATL	2	1	11	0	1	11	11.00	2025-12-29 15:00:44.619903-05	2025-12-29 15:00:44.619903-05
+293	4035020	20241201_LAC@ATL	2024	13	ATL	2	1	5	0	1	5	5.00	2025-12-29 15:00:44.619903-05	2025-12-29 15:00:44.619903-05
+294	4035020	20241110_ATL@NO	2024	10	ATL	2	0	0	0	1	0	0.00	2025-12-29 15:00:44.619903-05	2025-12-29 15:00:44.619903-05
+295	4035020	20241103_DAL@ATL	2024	9	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:44.619903-05	2025-12-29 15:00:44.619903-05
+296	4035020	20241027_ATL@TB	2024	8	ATL	2	1	13	0	1	13	13.00	2025-12-29 15:00:44.619903-05	2025-12-29 15:00:44.619903-05
+297	4035020	20241020_SEA@ATL	2024	7	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:44.619903-05	2025-12-29 15:00:44.619903-05
+298	4035020	20241013_ATL@CAR	2024	6	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:44.619903-05	2025-12-29 15:00:44.619903-05
+299	4035020	20241003_TB@ATL	2024	5	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:44.619903-05	2025-12-29 15:00:44.619903-05
+300	4035020	20240929_NO@ATL	2024	4	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:44.619903-05	2025-12-29 15:00:44.619903-05
+301	4035020	20240922_KC@ATL	2024	3	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:44.619903-05	2025-12-29 15:00:44.619903-05
+302	4035020	20240916_ATL@PHI	2024	2	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:44.619903-05	2025-12-29 15:00:44.619903-05
+303	4035020	20240908_PIT@ATL	2024	1	ATL	2	1	4	0	2	4	4.00	2025-12-29 15:00:44.619903-05	2025-12-29 15:00:44.619903-05
+304	4360248	20251221_ATL@ARI	2025	16	ATL	2	7	57	1	9	12	8.10	2025-12-29 15:00:44.935237-05	2025-12-29 15:00:44.935237-05
+305	4360248	20251211_ATL@TB	2025	15	ATL	2	11	166	3	12	36	15.10	2025-12-29 15:00:44.935237-05	2025-12-29 15:00:44.935237-05
+306	4360248	20251207_SEA@ATL	2025	14	ATL	2	6	90	0	10	30	15.00	2025-12-29 15:00:44.935237-05	2025-12-29 15:00:44.935237-05
+307	4360248	20251130_ATL@NYJ	2025	13	ATL	2	7	82	0	8	24	11.70	2025-12-29 15:00:44.935237-05	2025-12-29 15:00:44.935237-05
+308	4360248	20251123_ATL@NO	2025	12	ATL	2	2	25	0	5	23	12.50	2025-12-29 15:00:44.935237-05	2025-12-29 15:00:44.935237-05
+309	4360248	20251116_CAR@ATL	2025	11	ATL	2	2	14	0	3	7	7.00	2025-12-29 15:00:44.935237-05	2025-12-29 15:00:44.935237-05
+310	4360248	20251109_ATL@IND	2025	10	ATL	2	2	38	0	5	25	19.00	2025-12-29 15:00:44.935237-05	2025-12-29 15:00:44.935237-05
+311	4360248	20251102_ATL@NE	2025	9	ATL	2	4	38	0	7	22	9.50	2025-12-29 15:00:44.935237-05	2025-12-29 15:00:44.935237-05
+312	4360248	20251026_MIA@ATL	2025	8	ATL	2	9	59	0	9	24	6.60	2025-12-29 15:00:44.935237-05	2025-12-29 15:00:44.935237-05
+313	4360248	20251019_ATL@SF	2025	7	ATL	2	7	62	0	10	19	8.90	2025-12-29 15:00:44.935237-05	2025-12-29 15:00:44.935237-05
+314	4360248	20251013_BUF@ATL	2025	6	ATL	2	3	18	0	4	10	6.00	2025-12-29 15:00:44.935237-05	2025-12-29 15:00:44.935237-05
+315	4360248	20250928_WSH@ATL	2025	4	ATL	2	5	70	1	5	26	14.00	2025-12-29 15:00:44.935237-05	2025-12-29 15:00:44.935237-05
+316	4360248	20250921_ATL@CAR	2025	3	ATL	2	4	39	0	6	17	9.80	2025-12-29 15:00:44.935237-05	2025-12-29 15:00:44.935237-05
+317	4360248	20250914_ATL@MIN	2025	2	ATL	2	4	37	0	5	14	9.30	2025-12-29 15:00:44.935237-05	2025-12-29 15:00:44.935237-05
+318	4360248	20250907_TB@ATL	2025	1	ATL	2	7	59	0	8	14	8.40	2025-12-29 15:00:44.935237-05	2025-12-29 15:00:44.935237-05
+319	4360248	20250105_CAR@ATL	2024	18	ATL	2	2	15	0	3	9	7.50	2025-12-29 15:00:44.935237-05	2025-12-29 15:00:44.935237-05
+320	4360248	20241229_ATL@WSH	2024	17	ATL	2	4	44	1	5	23	11.00	2025-12-29 15:00:44.935237-05	2025-12-29 15:00:44.935237-05
+321	4360248	20241222_NYG@ATL	2024	16	ATL	2	1	7	0	2	7	7.00	2025-12-29 15:00:44.935237-05	2025-12-29 15:00:44.935237-05
+322	4360248	20241216_ATL@LV	2024	15	ATL	2	4	28	0	4	11	7.00	2025-12-29 15:00:44.935237-05	2025-12-29 15:00:44.935237-05
+323	4360248	20241208_ATL@MIN	2024	14	ATL	2	1	14	0	6	14	14.00	2025-12-29 15:00:44.935237-05	2025-12-29 15:00:44.935237-05
+324	4360248	20241201_LAC@ATL	2024	13	ATL	2	0	0	0	2	0	0.00	2025-12-29 15:00:44.935237-05	2025-12-29 15:00:44.935237-05
+325	4360248	20241117_ATL@DEN	2024	11	ATL	2	1	9	0	3	9	9.00	2025-12-29 15:00:44.935237-05	2025-12-29 15:00:44.935237-05
+326	4360248	20241110_ATL@NO	2024	10	ATL	2	4	55	0	6	23	13.80	2025-12-29 15:00:44.935237-05	2025-12-29 15:00:44.935237-05
+327	4360248	20241103_DAL@ATL	2024	9	ATL	2	1	11	0	1	11	11.00	2025-12-29 15:00:44.935237-05	2025-12-29 15:00:44.935237-05
+328	4360248	20241027_ATL@TB	2024	8	ATL	2	4	91	2	5	49	22.80	2025-12-29 15:00:44.935237-05	2025-12-29 15:00:44.935237-05
+329	4360248	20241020_SEA@ATL	2024	7	ATL	2	7	65	0	9	13	9.30	2025-12-29 15:00:44.935237-05	2025-12-29 15:00:44.935237-05
+330	4360248	20241013_ATL@CAR	2024	6	ATL	2	3	70	0	5	52	23.30	2025-12-29 15:00:44.935237-05	2025-12-29 15:00:44.935237-05
+331	4360248	20241003_TB@ATL	2024	5	ATL	2	7	88	0	8	32	12.60	2025-12-29 15:00:44.935237-05	2025-12-29 15:00:44.935237-05
+332	4360248	20240929_NO@ATL	2024	4	ATL	2	0	0	0	3	0	0.00	2025-12-29 15:00:44.935237-05	2025-12-29 15:00:44.935237-05
+333	4360248	20240922_KC@ATL	2024	3	ATL	2	2	59	0	5	50	29.50	2025-12-29 15:00:44.935237-05	2025-12-29 15:00:44.935237-05
+334	4360248	20240916_ATL@PHI	2024	2	ATL	2	3	20	0	4	11	6.70	2025-12-29 15:00:44.935237-05	2025-12-29 15:00:44.935237-05
+335	4360248	20240908_PIT@ATL	2024	1	ATL	2	3	26	1	3	12	8.70	2025-12-29 15:00:44.935237-05	2025-12-29 15:00:44.935237-05
+336	4363551	20251221_ATL@ARI	2025	16	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:45.233098-05	2025-12-29 15:00:45.233098-05
+337	4363551	20251211_ATL@TB	2025	15	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:45.233098-05	2025-12-29 15:00:45.233098-05
+338	4363551	20251207_SEA@ATL	2025	14	ATL	2	3	21	0	5	15	7.00	2025-12-29 15:00:45.233098-05	2025-12-29 15:00:45.233098-05
+339	4363551	20251130_ATL@NYJ	2025	13	ATL	2	1	3	0	3	3	3.00	2025-12-29 15:00:45.233098-05	2025-12-29 15:00:45.233098-05
+340	4363551	20251123_ATL@NO	2025	12	ATL	2	3	18	0	3	9	6.00	2025-12-29 15:00:45.233098-05	2025-12-29 15:00:45.233098-05
+341	4363551	20251102_ATL@NE	2025	9	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:45.233098-05	2025-12-29 15:00:45.233098-05
+342	4363551	20251026_MIA@ATL	2025	8	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:45.233098-05	2025-12-29 15:00:45.233098-05
+343	4428796	20251116_CAR@ATL	2025	11	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:45.539532-05	2025-12-29 15:00:45.539532-05
+344	4428796	20251109_ATL@IND	2025	10	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:45.539532-05	2025-12-29 15:00:45.539532-05
+345	4428796	20251026_MIA@ATL	2025	8	ATL	2	1	25	0	1	25	25.00	2025-12-29 15:00:45.539532-05	2025-12-29 15:00:45.539532-05
+346	4428796	20251019_ATL@SF	2025	7	ATL	2	1	17	0	2	17	17.00	2025-12-29 15:00:45.539532-05	2025-12-29 15:00:45.539532-05
+347	4428796	20251013_BUF@ATL	2025	6	ATL	2	0	0	0	2	0	0.00	2025-12-29 15:00:45.539532-05	2025-12-29 15:00:45.539532-05
+348	4428796	20250928_WSH@ATL	2025	4	ATL	2	1	19	0	3	19	19.00	2025-12-29 15:00:45.539532-05	2025-12-29 15:00:45.539532-05
+349	4428796	20250907_TB@ATL	2025	1	ATL	2	3	33	0	6	19	11.00	2025-12-29 15:00:45.539532-05	2025-12-29 15:00:45.539532-05
+350	4428796	20241201_LAC@ATL	2024	13	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:45.539532-05	2025-12-29 15:00:45.539532-05
+351	4428796	20241117_ATL@DEN	2024	11	ATL	2	0	0	0	1	0	0.00	2025-12-29 15:00:45.539532-05	2025-12-29 15:00:45.539532-05
+352	4428796	20241110_ATL@NO	2024	10	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:45.539532-05	2025-12-29 15:00:45.539532-05
+353	4428796	20241103_DAL@ATL	2024	9	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:45.539532-05	2025-12-29 15:00:45.539532-05
+354	4428796	20241027_ATL@TB	2024	8	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:45.539532-05	2025-12-29 15:00:45.539532-05
+355	4428796	20241020_SEA@ATL	2024	7	ATL	2	1	14	0	1	14	14.00	2025-12-29 15:00:45.539532-05	2025-12-29 15:00:45.539532-05
+356	4428796	20241003_TB@ATL	2024	5	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:45.539532-05	2025-12-29 15:00:45.539532-05
+357	4428796	20240922_KC@ATL	2024	3	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:45.539532-05	2025-12-29 15:00:45.539532-05
+358	4689334	20251127_GB@DET	2025	13	GB	12	0	0	0	1	0	0.00	2025-12-29 15:00:45.847414-05	2025-12-29 15:00:45.847414-05
+359	4689334	20251123_MIN@GB	2025	12	GB	12	0	0	0	0	\N	\N	2025-12-29 15:00:45.847414-05	2025-12-29 15:00:45.847414-05
+360	4689334	20251110_PHI@GB	2025	10	GB	12	0	0	0	0	\N	\N	2025-12-29 15:00:45.847414-05	2025-12-29 15:00:45.847414-05
+361	4689334	20251102_CAR@GB	2025	9	GB	12	1	11	0	1	11	11.00	2025-12-29 15:00:45.847414-05	2025-12-29 15:00:45.847414-05
+362	4689334	20251026_GB@PIT	2025	8	GB	12	3	29	0	3	13	9.70	2025-12-29 15:00:45.847414-05	2025-12-29 15:00:45.847414-05
+363	4689334	20251019_GB@ARI	2025	7	GB	12	0	0	0	0	\N	\N	2025-12-29 15:00:45.847414-05	2025-12-29 15:00:45.847414-05
+364	4689334	20251012_CIN@GB	2025	6	GB	12	0	0	0	0	\N	\N	2025-12-29 15:00:45.847414-05	2025-12-29 15:00:45.847414-05
+365	4689334	20250928_GB@DAL	2025	4	GB	12	1	9	0	1	9	9.00	2025-12-29 15:00:45.847414-05	2025-12-29 15:00:45.847414-05
+366	4689334	20250921_GB@CLE	2025	3	GB	12	0	0	0	0	\N	\N	2025-12-29 15:00:45.847414-05	2025-12-29 15:00:45.847414-05
+367	4689334	20250911_WSH@GB	2025	2	GB	12	1	37	0	1	37	37.00	2025-12-29 15:00:45.847414-05	2025-12-29 15:00:45.847414-05
+368	4689334	20250907_DET@GB	2025	1	GB	12	0	0	0	0	\N	\N	2025-12-29 15:00:45.847414-05	2025-12-29 15:00:45.847414-05
+369	4689334	20250105_CHI@GB	2024	18	GB	12	3	53	0	5	41	17.70	2025-12-29 15:00:45.847414-05	2025-12-29 15:00:45.847414-05
+370	4689334	20241229_GB@MIN	2024	17	GB	12	1	3	1	1	3	3.00	2025-12-29 15:00:45.847414-05	2025-12-29 15:00:45.847414-05
+371	4689334	20241205_GB@DET	2024	14	GB	12	0	0	0	0	\N	\N	2025-12-29 15:00:45.847414-05	2025-12-29 15:00:45.847414-05
+372	4689334	20241128_MIA@GB	2024	13	GB	12	0	0	0	0	\N	\N	2025-12-29 15:00:45.847414-05	2025-12-29 15:00:45.847414-05
+373	4689334	20241124_SF@GB	2024	12	GB	12	2	15	1	2	12	7.50	2025-12-29 15:00:45.847414-05	2025-12-29 15:00:45.847414-05
+374	4689334	20241117_GB@CHI	2024	11	GB	12	0	0	0	0	\N	\N	2025-12-29 15:00:45.847414-05	2025-12-29 15:00:45.847414-05
+375	4689334	20241027_GB@JAX	2024	8	GB	12	0	0	0	0	\N	\N	2025-12-29 15:00:45.847414-05	2025-12-29 15:00:45.847414-05
+376	4689334	20241020_HOU@GB	2024	7	GB	12	0	0	0	0	\N	\N	2025-12-29 15:00:45.847414-05	2025-12-29 15:00:45.847414-05
+377	4689334	20241013_ARI@GB	2024	6	GB	12	0	0	0	0	\N	\N	2025-12-29 15:00:45.847414-05	2025-12-29 15:00:45.847414-05
+378	4689334	20241006_GB@LAR	2024	5	GB	12	2	14	0	3	7	7.00	2025-12-29 15:00:45.847414-05	2025-12-29 15:00:45.847414-05
+379	4689334	20240929_MIN@GB	2024	4	GB	12	2	12	0	2	9	6.00	2025-12-29 15:00:45.847414-05	2025-12-29 15:00:45.847414-05
+380	4689334	20240922_GB@TEN	2024	3	GB	12	0	0	0	0	\N	\N	2025-12-29 15:00:45.847414-05	2025-12-29 15:00:45.847414-05
+381	4689334	20240915_IND@GB	2024	2	GB	12	0	0	0	0	\N	\N	2025-12-29 15:00:45.847414-05	2025-12-29 15:00:45.847414-05
+382	4426502	20251221_ATL@ARI	2025	16	ATL	2	3	27	0	8	12	9.00	2025-12-29 15:00:46.093527-05	2025-12-29 15:00:46.093527-05
+383	4426502	20251116_CAR@ATL	2025	11	ATL	2	7	119	0	9	41	17.00	2025-12-29 15:00:46.093527-05	2025-12-29 15:00:46.093527-05
+384	4426502	20251109_ATL@IND	2025	10	ATL	2	6	104	1	8	30	17.30	2025-12-29 15:00:46.093527-05	2025-12-29 15:00:46.093527-05
+385	4426502	20251102_ATL@NE	2025	9	ATL	2	9	118	3	14	40	13.10	2025-12-29 15:00:46.093527-05	2025-12-29 15:00:46.093527-05
+386	4426502	20251019_ATL@SF	2025	7	ATL	2	4	42	0	10	19	10.50	2025-12-29 15:00:46.093527-05	2025-12-29 15:00:46.093527-05
+387	4426502	20251013_BUF@ATL	2025	6	ATL	2	10	158	1	16	39	15.80	2025-12-29 15:00:46.093527-05	2025-12-29 15:00:46.093527-05
+388	4426502	20250928_WSH@ATL	2025	4	ATL	2	8	110	1	10	43	13.80	2025-12-29 15:00:46.093527-05	2025-12-29 15:00:46.093527-05
+389	4426502	20250921_ATL@CAR	2025	3	ATL	2	5	55	0	8	18	11.00	2025-12-29 15:00:46.093527-05	2025-12-29 15:00:46.093527-05
+390	4426502	20250914_ATL@MIN	2025	2	ATL	2	3	49	0	4	21	16.30	2025-12-29 15:00:46.093527-05	2025-12-29 15:00:46.093527-05
+391	4426502	20250907_TB@ATL	2025	1	ATL	2	8	55	0	15	12	6.90	2025-12-29 15:00:46.093527-05	2025-12-29 15:00:46.093527-05
+392	4426502	20250105_CAR@ATL	2024	18	ATL	2	10	187	2	18	39	18.70	2025-12-29 15:00:46.093527-05	2025-12-29 15:00:46.093527-05
+393	4426502	20241229_ATL@WSH	2024	17	ATL	2	7	106	0	13	31	15.10	2025-12-29 15:00:46.093527-05	2025-12-29 15:00:46.093527-05
+394	4426502	20241222_NYG@ATL	2024	16	ATL	2	5	59	0	8	19	11.80	2025-12-29 15:00:46.093527-05	2025-12-29 15:00:46.093527-05
+395	4426502	20241216_ATL@LV	2024	15	ATL	2	3	53	1	3	30	17.70	2025-12-29 15:00:46.093527-05	2025-12-29 15:00:46.093527-05
+396	4426502	20241208_ATL@MIN	2024	14	ATL	2	5	70	0	10	20	14.00	2025-12-29 15:00:46.093527-05	2025-12-29 15:00:46.093527-05
+397	4426502	20241201_LAC@ATL	2024	13	ATL	2	9	86	0	16	17	9.60	2025-12-29 15:00:46.093527-05	2025-12-29 15:00:46.093527-05
+398	4426502	20241117_ATL@DEN	2024	11	ATL	2	3	61	0	7	26	20.30	2025-12-29 15:00:46.093527-05	2025-12-29 15:00:46.093527-05
+399	4426502	20241110_ATL@NO	2024	10	ATL	2	8	97	0	13	20	12.10	2025-12-29 15:00:46.093527-05	2025-12-29 15:00:46.093527-05
+400	4426502	20241103_DAL@ATL	2024	9	ATL	2	2	27	1	2	18	13.50	2025-12-29 15:00:46.093527-05	2025-12-29 15:00:46.093527-05
+401	4426502	20241027_ATL@TB	2024	8	ATL	2	4	34	0	6	13	8.50	2025-12-29 15:00:46.093527-05	2025-12-29 15:00:46.093527-05
+402	4426502	20241020_SEA@ATL	2024	7	ATL	2	6	63	1	8	17	10.50	2025-12-29 15:00:46.093527-05	2025-12-29 15:00:46.093527-05
+403	4426502	20241013_ATL@CAR	2024	6	ATL	2	6	74	1	10	24	12.30	2025-12-29 15:00:46.093527-05	2025-12-29 15:00:46.093527-05
+404	4426502	20241003_TB@ATL	2024	5	ATL	2	12	154	1	13	31	12.80	2025-12-29 15:00:46.093527-05	2025-12-29 15:00:46.093527-05
+405	4426502	20240929_NO@ATL	2024	4	ATL	2	6	64	0	12	16	10.70	2025-12-29 15:00:46.093527-05	2025-12-29 15:00:46.093527-05
+406	4426502	20240922_KC@ATL	2024	3	ATL	2	6	67	1	9	14	11.20	2025-12-29 15:00:46.093527-05	2025-12-29 15:00:46.093527-05
+407	4426502	20240916_ATL@PHI	2024	2	ATL	2	6	54	1	7	19	9.00	2025-12-29 15:00:46.093527-05	2025-12-29 15:00:46.093527-05
+408	4426502	20240908_PIT@ATL	2024	1	ATL	2	2	15	0	3	8	7.50	2025-12-29 15:00:46.093527-05	2025-12-29 15:00:46.093527-05
+409	4040655	20251221_ATL@ARI	2025	16	ATL	2	2	24	0	2	17	12.00	2025-12-29 15:00:46.821064-05	2025-12-29 15:00:46.821064-05
+410	4040655	20251211_ATL@TB	2025	15	ATL	2	3	35	0	6	16	11.70	2025-12-29 15:00:46.821064-05	2025-12-29 15:00:46.821064-05
+411	4040655	20251207_SEA@ATL	2025	14	ATL	2	1	6	0	4	6	6.00	2025-12-29 15:00:46.821064-05	2025-12-29 15:00:46.821064-05
+412	4040655	20251130_ATL@NYJ	2025	13	ATL	2	2	25	0	5	16	12.50	2025-12-29 15:00:46.821064-05	2025-12-29 15:00:46.821064-05
+413	4040655	20251123_ATL@NO	2025	12	ATL	2	3	74	1	3	49	24.70	2025-12-29 15:00:46.821064-05	2025-12-29 15:00:46.821064-05
+414	4040655	20251116_CAR@ATL	2025	11	ATL	2	3	34	0	7	20	11.30	2025-12-29 15:00:46.821064-05	2025-12-29 15:00:46.821064-05
+415	4040655	20251109_ATL@IND	2025	10	ATL	2	1	17	0	8	17	17.00	2025-12-29 15:00:46.821064-05	2025-12-29 15:00:46.821064-05
+416	4040655	20251102_ATL@NE	2025	9	ATL	2	1	15	0	2	15	15.00	2025-12-29 15:00:46.821064-05	2025-12-29 15:00:46.821064-05
+417	4040655	20251026_MIA@ATL	2025	8	ATL	2	1	11	0	4	11	11.00	2025-12-29 15:00:46.821064-05	2025-12-29 15:00:46.821064-05
+418	4040655	20251019_ATL@SF	2025	7	ATL	2	3	68	0	5	38	22.70	2025-12-29 15:00:46.821064-05	2025-12-29 15:00:46.821064-05
+419	4040655	20250928_WSH@ATL	2025	4	ATL	2	1	15	0	1	15	15.00	2025-12-29 15:00:46.821064-05	2025-12-29 15:00:46.821064-05
+420	4040655	20250921_ATL@CAR	2025	3	ATL	2	4	44	0	11	21	11.00	2025-12-29 15:00:46.821064-05	2025-12-29 15:00:46.821064-05
+421	4040655	20250914_ATL@MIN	2025	2	ATL	2	2	20	0	4	11	10.00	2025-12-29 15:00:46.821064-05	2025-12-29 15:00:46.821064-05
+422	4040655	20241229_ATL@WSH	2024	17	ATL	2	2	37	0	5	25	18.50	2025-12-29 15:00:46.821064-05	2025-12-29 15:00:46.821064-05
+423	4040655	20241222_NYG@ATL	2024	16	ATL	2	5	82	0	6	22	16.40	2025-12-29 15:00:46.821064-05	2025-12-29 15:00:46.821064-05
+424	4040655	20241216_ATL@LV	2024	15	ATL	2	0	0	0	1	0	0.00	2025-12-29 15:00:46.821064-05	2025-12-29 15:00:46.821064-05
+425	4040655	20241208_ATL@MIN	2024	14	ATL	2	6	142	0	7	49	23.70	2025-12-29 15:00:46.821064-05	2025-12-29 15:00:46.821064-05
+426	4040655	20241201_LAC@ATL	2024	13	ATL	2	3	20	0	6	11	6.70	2025-12-29 15:00:46.821064-05	2025-12-29 15:00:46.821064-05
+427	4040655	20241117_ATL@DEN	2024	11	ATL	2	2	27	0	4	19	13.50	2025-12-29 15:00:46.821064-05	2025-12-29 15:00:46.821064-05
+428	4040655	20241110_ATL@NO	2024	10	ATL	2	5	96	0	9	33	19.20	2025-12-29 15:00:46.821064-05	2025-12-29 15:00:46.821064-05
+429	4040655	20241103_DAL@ATL	2024	9	ATL	2	5	88	1	9	36	17.60	2025-12-29 15:00:46.821064-05	2025-12-29 15:00:46.821064-05
+430	4040655	20241027_ATL@TB	2024	8	ATL	2	4	86	1	6	30	21.50	2025-12-29 15:00:46.821064-05	2025-12-29 15:00:46.821064-05
+431	4040655	20241020_SEA@ATL	2024	7	ATL	2	5	46	0	8	20	9.20	2025-12-29 15:00:46.821064-05	2025-12-29 15:00:46.821064-05
+432	4040655	20241013_ATL@CAR	2024	6	ATL	2	3	38	0	5	19	12.70	2025-12-29 15:00:46.821064-05	2025-12-29 15:00:46.821064-05
+433	4040655	20241003_TB@ATL	2024	5	ATL	2	9	105	2	16	24	11.70	2025-12-29 15:00:46.821064-05	2025-12-29 15:00:46.821064-05
+434	4040655	20240929_NO@ATL	2024	4	ATL	2	3	56	0	6	36	18.70	2025-12-29 15:00:46.821064-05	2025-12-29 15:00:46.821064-05
+435	4040655	20240922_KC@ATL	2024	3	ATL	2	8	66	0	8	26	8.30	2025-12-29 15:00:46.821064-05	2025-12-29 15:00:46.821064-05
+436	4040655	20240916_ATL@PHI	2024	2	ATL	2	3	88	1	7	41	29.30	2025-12-29 15:00:46.821064-05	2025-12-29 15:00:46.821064-05
+437	4040655	20240908_PIT@ATL	2024	1	ATL	2	1	15	0	3	15	15.00	2025-12-29 15:00:46.821064-05	2025-12-29 15:00:46.821064-05
+438	4374045	20251221_ATL@ARI	2025	16	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:47.073097-05	2025-12-29 15:00:47.073097-05
+439	4374045	20251211_ATL@TB	2025	15	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:47.073097-05	2025-12-29 15:00:47.073097-05
+440	4374045	20251207_SEA@ATL	2025	14	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:47.073097-05	2025-12-29 15:00:47.073097-05
+441	4374045	20251130_ATL@NYJ	2025	13	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:47.073097-05	2025-12-29 15:00:47.073097-05
+442	4374045	20251123_ATL@NO	2025	12	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:47.073097-05	2025-12-29 15:00:47.073097-05
+443	4374045	20251116_CAR@ATL	2025	11	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:47.073097-05	2025-12-29 15:00:47.073097-05
+444	4374045	20251109_ATL@IND	2025	10	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:47.073097-05	2025-12-29 15:00:47.073097-05
+445	4374045	20251102_ATL@NE	2025	9	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:47.073097-05	2025-12-29 15:00:47.073097-05
+446	4374045	20251026_MIA@ATL	2025	8	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:47.073097-05	2025-12-29 15:00:47.073097-05
+447	4374045	20251019_ATL@SF	2025	7	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:47.073097-05	2025-12-29 15:00:47.073097-05
+448	4374045	20251013_BUF@ATL	2025	6	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:47.073097-05	2025-12-29 15:00:47.073097-05
+449	4374045	20250928_WSH@ATL	2025	4	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:47.073097-05	2025-12-29 15:00:47.073097-05
+450	4374045	20250921_ATL@CAR	2025	3	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:47.073097-05	2025-12-29 15:00:47.073097-05
+451	4374045	20250914_ATL@MIN	2025	2	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:47.073097-05	2025-12-29 15:00:47.073097-05
+452	4374045	20250907_TB@ATL	2025	1	ATL	2	0	0	0	0	\N	\N	2025-12-29 15:00:47.073097-05	2025-12-29 15:00:47.073097-05
+453	4374045	20241124_TEN@HOU	2024	12	HOU	13	0	0	0	0	\N	\N	2025-12-29 15:00:47.073097-05	2025-12-29 15:00:47.073097-05
+454	4374045	20241118_HOU@DAL	2024	11	HOU	13	0	0	0	0	\N	\N	2025-12-29 15:00:47.073097-05	2025-12-29 15:00:47.073097-05
+455	4374045	20241110_DET@HOU	2024	10	HOU	13	0	0	0	0	\N	\N	2025-12-29 15:00:47.073097-05	2025-12-29 15:00:47.073097-05
+456	4374045	20241031_HOU@NYJ	2024	9	HOU	13	0	0	0	0	\N	\N	2025-12-29 15:00:47.073097-05	2025-12-29 15:00:47.073097-05
+457	4374045	20241027_IND@HOU	2024	8	HOU	13	0	0	0	0	\N	\N	2025-12-29 15:00:47.073097-05	2025-12-29 15:00:47.073097-05
+458	4374045	20241020_HOU@GB	2024	7	HOU	13	0	0	0	0	\N	\N	2025-12-29 15:00:47.073097-05	2025-12-29 15:00:47.073097-05
+459	4374045	20241013_HOU@NE	2024	6	HOU	13	0	0	0	0	\N	\N	2025-12-29 15:00:47.073097-05	2025-12-29 15:00:47.073097-05
+460	3116365	20251227_BAL@GB	2025	17	BAL	3	4	28	0	4	9	7.00	2025-12-29 15:00:47.382194-05	2025-12-29 15:00:47.382194-05
+461	3116365	20251221_NE@BAL	2025	16	BAL	3	2	21	0	3	18	10.50	2025-12-29 15:00:47.382194-05	2025-12-29 15:00:47.382194-05
+462	3116365	20251214_BAL@CIN	2025	15	BAL	3	2	18	0	3	14	9.00	2025-12-29 15:00:47.382194-05	2025-12-29 15:00:47.382194-05
+463	3116365	20251207_PIT@BAL	2025	14	BAL	3	1	9	0	5	9	9.00	2025-12-29 15:00:47.382194-05	2025-12-29 15:00:47.382194-05
+464	3116365	20251127_CIN@BAL	2025	13	BAL	3	4	47	0	6	19	11.80	2025-12-29 15:00:47.382194-05	2025-12-29 15:00:47.382194-05
+465	3116365	20251123_NYJ@BAL	2025	12	BAL	3	1	9	0	3	9	9.00	2025-12-29 15:00:47.382194-05	2025-12-29 15:00:47.382194-05
+466	3116365	20251116_BAL@CLE	2025	11	BAL	3	3	32	0	5	11	10.70	2025-12-29 15:00:47.382194-05	2025-12-29 15:00:47.382194-05
+467	3116365	20251109_BAL@MIN	2025	10	BAL	3	3	14	1	5	6	4.70	2025-12-29 15:00:47.382194-05	2025-12-29 15:00:47.382194-05
+468	3116365	20251030_BAL@MIA	2025	9	BAL	3	2	22	2	3	20	11.00	2025-12-29 15:00:47.382194-05	2025-12-29 15:00:47.382194-05
+469	3116365	20251026_CHI@BAL	2025	8	BAL	3	3	34	0	3	24	11.30	2025-12-29 15:00:47.382194-05	2025-12-29 15:00:47.382194-05
+470	3116365	20251012_LAR@BAL	2025	6	BAL	3	4	24	0	6	9	6.00	2025-12-29 15:00:47.382194-05	2025-12-29 15:00:47.382194-05
+471	3116365	20251005_HOU@BAL	2025	5	BAL	3	2	22	0	3	12	11.00	2025-12-29 15:00:47.382194-05	2025-12-29 15:00:47.382194-05
+472	3116365	20250928_BAL@KC	2025	4	BAL	3	7	30	0	8	7	4.30	2025-12-29 15:00:47.382194-05	2025-12-29 15:00:47.382194-05
+473	3116365	20250922_DET@BAL	2025	3	BAL	3	6	91	2	6	27	15.20	2025-12-29 15:00:47.382194-05	2025-12-29 15:00:47.382194-05
+474	3116365	20250914_CLE@BAL	2025	2	BAL	3	1	2	0	3	2	2.00	2025-12-29 15:00:47.382194-05	2025-12-29 15:00:47.382194-05
+475	3116365	20250907_BAL@BUF	2025	1	BAL	3	1	5	0	1	5	5.00	2025-12-29 15:00:47.382194-05	2025-12-29 15:00:47.382194-05
+476	3116365	20250104_CLE@BAL	2024	18	BAL	3	4	54	1	8	30	13.50	2025-12-29 15:00:47.382194-05	2025-12-29 15:00:47.382194-05
+477	3116365	20241225_BAL@HOU	2024	17	BAL	3	2	68	1	2	67	34.00	2025-12-29 15:00:47.382194-05	2025-12-29 15:00:47.382194-05
+478	3116365	20241221_PIT@BAL	2024	16	BAL	3	4	37	1	6	16	9.30	2025-12-29 15:00:47.382194-05	2025-12-29 15:00:47.382194-05
+479	3116365	20241215_BAL@NYG	2024	15	BAL	3	2	24	1	2	13	12.00	2025-12-29 15:00:47.382194-05	2025-12-29 15:00:47.382194-05
+480	3116365	20241201_PHI@BAL	2024	13	BAL	3	6	67	1	7	23	11.20	2025-12-29 15:00:47.382194-05	2025-12-29 15:00:47.382194-05
+481	3116365	20241125_BAL@LAC	2024	12	BAL	3	5	44	1	5	16	8.80	2025-12-29 15:00:47.382194-05	2025-12-29 15:00:47.382194-05
+482	3116365	20241117_BAL@PIT	2024	11	BAL	3	2	22	0	3	14	11.00	2025-12-29 15:00:47.382194-05	2025-12-29 15:00:47.382194-05
+483	3116365	20241107_CIN@BAL	2024	10	BAL	3	6	68	1	7	18	11.30	2025-12-29 15:00:47.382194-05	2025-12-29 15:00:47.382194-05
+484	3116365	20241103_DEN@BAL	2024	9	BAL	3	2	26	0	2	16	13.00	2025-12-29 15:00:47.382194-05	2025-12-29 15:00:47.382194-05
+485	3116365	20241027_BAL@CLE	2024	8	BAL	3	5	36	1	5	11	7.20	2025-12-29 15:00:47.382194-05	2025-12-29 15:00:47.382194-05
+486	3116365	20241021_BAL@TB	2024	7	BAL	3	4	41	2	4	20	10.30	2025-12-29 15:00:47.382194-05	2025-12-29 15:00:47.382194-05
+487	3116365	20241013_WSH@BAL	2024	6	BAL	3	3	66	1	4	38	22.00	2025-12-29 15:00:47.382194-05	2025-12-29 15:00:47.382194-05
+488	3116365	20241006_BAL@CIN	2024	5	BAL	3	4	55	0	5	27	13.80	2025-12-29 15:00:47.382194-05	2025-12-29 15:00:47.382194-05
+489	3116365	20240929_BUF@BAL	2024	4	BAL	3	0	0	0	1	0	0.00	2025-12-29 15:00:47.382194-05	2025-12-29 15:00:47.382194-05
+490	3116365	20240922_BAL@DAL	2024	3	BAL	3	0	0	0	1	0	0.00	2025-12-29 15:00:47.382194-05	2025-12-29 15:00:47.382194-05
+491	3116365	20240915_LV@BAL	2024	2	BAL	3	4	51	0	5	16	12.80	2025-12-29 15:00:47.382194-05	2025-12-29 15:00:47.382194-05
+492	3116365	20240905_BAL@KC	2024	1	BAL	3	2	14	0	2	11	7.00	2025-12-29 15:00:47.382194-05	2025-12-29 15:00:47.382194-05
+493	4241424	20251214_BAL@CIN	2025	15	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:47.691929-05	2025-12-29 15:00:47.691929-05
+494	4241424	20251207_PIT@BAL	2025	14	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:47.691929-05	2025-12-29 15:00:47.691929-05
+495	4241424	20251123_NYJ@BAL	2025	12	BAL	3	0	0	0	1	0	0.00	2025-12-29 15:00:47.691929-05	2025-12-29 15:00:47.691929-05
+496	4241424	20251116_BAL@CLE	2025	11	BAL	3	0	0	0	1	0	0.00	2025-12-29 15:00:47.691929-05	2025-12-29 15:00:47.691929-05
+497	4241424	20251109_BAL@MIN	2025	10	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:47.691929-05	2025-12-29 15:00:47.691929-05
+498	4241424	20251030_BAL@MIA	2025	9	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:47.691929-05	2025-12-29 15:00:47.691929-05
+499	4241424	20251026_CHI@BAL	2025	8	BAL	3	1	6	0	1	6	6.00	2025-12-29 15:00:47.691929-05	2025-12-29 15:00:47.691929-05
+500	4241424	20251012_LAR@BAL	2025	6	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:47.691929-05	2025-12-29 15:00:47.691929-05
+501	4241424	20251005_HOU@BAL	2025	5	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:47.691929-05	2025-12-29 15:00:47.691929-05
+502	4241424	20250928_BAL@KC	2025	4	BAL	3	1	14	0	2	14	14.00	2025-12-29 15:00:47.691929-05	2025-12-29 15:00:47.691929-05
+503	4241424	20250922_DET@BAL	2025	3	BAL	3	0	0	0	1	0	0.00	2025-12-29 15:00:47.691929-05	2025-12-29 15:00:47.691929-05
+504	4241424	20250914_CLE@BAL	2025	2	BAL	3	2	25	1	2	15	12.50	2025-12-29 15:00:47.691929-05	2025-12-29 15:00:47.691929-05
+505	4241424	20250907_BAL@BUF	2025	1	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:47.691929-05	2025-12-29 15:00:47.691929-05
+506	4241424	20250104_CLE@BAL	2024	18	BAL	3	0	0	0	1	0	0.00	2025-12-29 15:00:47.691929-05	2025-12-29 15:00:47.691929-05
+507	4241424	20241225_BAL@HOU	2024	17	BAL	3	1	2	0	1	2	2.00	2025-12-29 15:00:47.691929-05	2025-12-29 15:00:47.691929-05
+508	4241424	20241221_PIT@BAL	2024	16	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:47.691929-05	2025-12-29 15:00:47.691929-05
+509	4241424	20241215_BAL@NYG	2024	15	BAL	3	1	8	0	1	8	8.00	2025-12-29 15:00:47.691929-05	2025-12-29 15:00:47.691929-05
+510	4241424	20241201_PHI@BAL	2024	13	BAL	3	2	14	0	2	12	7.00	2025-12-29 15:00:47.691929-05	2025-12-29 15:00:47.691929-05
+511	4241424	20241125_BAL@LAC	2024	12	BAL	3	1	15	0	1	15	15.00	2025-12-29 15:00:47.691929-05	2025-12-29 15:00:47.691929-05
+512	4241424	20241117_BAL@PIT	2024	11	BAL	3	1	8	0	1	8	8.00	2025-12-29 15:00:47.691929-05	2025-12-29 15:00:47.691929-05
+513	4241424	20241107_CIN@BAL	2024	10	BAL	3	3	115	1	3	84	38.30	2025-12-29 15:00:47.691929-05	2025-12-29 15:00:47.691929-05
+514	4241424	20241103_DEN@BAL	2024	9	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:47.691929-05	2025-12-29 15:00:47.691929-05
+515	4241424	20241027_BAL@CLE	2024	8	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:47.691929-05	2025-12-29 15:00:47.691929-05
+516	4241424	20241021_BAL@TB	2024	7	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:47.691929-05	2025-12-29 15:00:47.691929-05
+517	4241424	20241013_WSH@BAL	2024	6	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:47.691929-05	2025-12-29 15:00:47.691929-05
+518	4241424	20241006_BAL@CIN	2024	5	BAL	3	2	31	0	2	19	15.50	2025-12-29 15:00:47.691929-05	2025-12-29 15:00:47.691929-05
+519	4241424	20240929_BUF@BAL	2024	4	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:47.691929-05	2025-12-29 15:00:47.691929-05
+520	4241424	20240922_BAL@DAL	2024	3	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:47.691929-05	2025-12-29 15:00:47.691929-05
+521	4241424	20240915_LV@BAL	2024	2	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:47.691929-05	2025-12-29 15:00:47.691929-05
+522	4241424	20240905_BAL@KC	2024	1	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:47.691929-05	2025-12-29 15:00:47.691929-05
+523	4690143	20251227_BAL@GB	2025	17	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:47.997802-05	2025-12-29 15:00:47.997802-05
+524	4690143	20251221_NE@BAL	2025	16	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:47.997802-05	2025-12-29 15:00:47.997802-05
+525	4690143	20251214_BAL@CIN	2025	15	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:47.997802-05	2025-12-29 15:00:47.997802-05
+526	4690143	20251207_PIT@BAL	2025	14	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:47.997802-05	2025-12-29 15:00:47.997802-05
+527	4690143	20251127_CIN@BAL	2025	13	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:47.997802-05	2025-12-29 15:00:47.997802-05
+528	4690143	20251123_NYJ@BAL	2025	12	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:47.997802-05	2025-12-29 15:00:47.997802-05
+529	4690143	20251116_BAL@CLE	2025	11	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:47.997802-05	2025-12-29 15:00:47.997802-05
+530	4690143	20251109_BAL@MIN	2025	10	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:47.997802-05	2025-12-29 15:00:47.997802-05
+531	4690143	20251030_BAL@MIA	2025	9	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:47.997802-05	2025-12-29 15:00:47.997802-05
+532	4690143	20251026_CHI@BAL	2025	8	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:47.997802-05	2025-12-29 15:00:47.997802-05
+533	4690143	20251012_LAR@BAL	2025	6	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:47.997802-05	2025-12-29 15:00:47.997802-05
+534	4690143	20251005_HOU@BAL	2025	5	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:47.997802-05	2025-12-29 15:00:47.997802-05
+535	4690143	20250928_BAL@KC	2025	4	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:47.997802-05	2025-12-29 15:00:47.997802-05
+536	4690143	20250922_DET@BAL	2025	3	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:47.997802-05	2025-12-29 15:00:47.997802-05
+537	4690143	20250914_CLE@BAL	2025	2	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:47.997802-05	2025-12-29 15:00:47.997802-05
+538	4690143	20250907_BAL@BUF	2025	1	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:47.997802-05	2025-12-29 15:00:47.997802-05
+539	4696882	20251227_BAL@GB	2025	17	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:48.302294-05	2025-12-29 15:00:48.302294-05
+540	4696882	20251221_NE@BAL	2025	16	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:48.302294-05	2025-12-29 15:00:48.302294-05
+541	4696882	20251214_BAL@CIN	2025	15	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:48.302294-05	2025-12-29 15:00:48.302294-05
+542	4696882	20251127_CIN@BAL	2025	13	BAL	3	0	0	0	2	0	0.00	2025-12-29 15:00:48.302294-05	2025-12-29 15:00:48.302294-05
+543	4696882	20251123_NYJ@BAL	2025	12	BAL	3	1	30	0	1	30	30.00	2025-12-29 15:00:48.302294-05	2025-12-29 15:00:48.302294-05
+544	4696882	20251116_BAL@CLE	2025	11	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:48.302294-05	2025-12-29 15:00:48.302294-05
+545	4696882	20251005_HOU@BAL	2025	5	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:48.302294-05	2025-12-29 15:00:48.302294-05
+546	4696882	20250928_BAL@KC	2025	4	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:48.302294-05	2025-12-29 15:00:48.302294-05
+547	4696882	20250922_DET@BAL	2025	3	BAL	3	1	34	0	1	34	34.00	2025-12-29 15:00:48.302294-05	2025-12-29 15:00:48.302294-05
+548	4696882	20250914_CLE@BAL	2025	2	BAL	3	2	26	2	2	24	13.00	2025-12-29 15:00:48.302294-05	2025-12-29 15:00:48.302294-05
+549	4696882	20250907_BAL@BUF	2025	1	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:48.302294-05	2025-12-29 15:00:48.302294-05
+550	4696882	20250104_CLE@BAL	2024	18	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:48.302294-05	2025-12-29 15:00:48.302294-05
+551	4696882	20241225_BAL@HOU	2024	17	BAL	3	0	0	0	2	0	0.00	2025-12-29 15:00:48.302294-05	2025-12-29 15:00:48.302294-05
+552	4696882	20241221_PIT@BAL	2024	16	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:48.302294-05	2025-12-29 15:00:48.302294-05
+553	4696882	20241215_BAL@NYG	2024	15	BAL	3	1	21	1	1	21	21.00	2025-12-29 15:00:48.302294-05	2025-12-29 15:00:48.302294-05
+554	4696882	20241125_BAL@LAC	2024	12	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:48.302294-05	2025-12-29 15:00:48.302294-05
+555	4696882	20241107_CIN@BAL	2024	10	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:48.302294-05	2025-12-29 15:00:48.302294-05
+556	4696882	20241103_DEN@BAL	2024	9	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:48.302294-05	2025-12-29 15:00:48.302294-05
+557	4696882	20241027_BAL@CLE	2024	8	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:48.302294-05	2025-12-29 15:00:48.302294-05
+558	4696882	20241021_BAL@TB	2024	7	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:48.302294-05	2025-12-29 15:00:48.302294-05
+559	4360939	20251227_BAL@GB	2025	17	BAL	3	1	7	0	1	7	7.00	2025-12-29 15:00:48.614992-05	2025-12-29 15:00:48.614992-05
+560	4360939	20251221_NE@BAL	2025	16	BAL	3	0	0	0	2	0	0.00	2025-12-29 15:00:48.614992-05	2025-12-29 15:00:48.614992-05
+561	4360939	20251207_PIT@BAL	2025	14	BAL	3	2	23	0	3	18	11.50	2025-12-29 15:00:48.614992-05	2025-12-29 15:00:48.614992-05
+562	4360939	20251127_CIN@BAL	2025	13	BAL	3	0	0	0	1	0	0.00	2025-12-29 15:00:48.614992-05	2025-12-29 15:00:48.614992-05
+563	4360939	20251109_BAL@MIN	2025	10	BAL	3	1	10	0	2	10	10.00	2025-12-29 15:00:48.614992-05	2025-12-29 15:00:48.614992-05
+564	4360939	20251030_BAL@MIA	2025	9	BAL	3	2	13	1	4	9	6.50	2025-12-29 15:00:48.614992-05	2025-12-29 15:00:48.614992-05
+565	4360939	20251026_CHI@BAL	2025	8	BAL	3	2	51	0	4	36	25.50	2025-12-29 15:00:48.614992-05	2025-12-29 15:00:48.614992-05
+566	4360939	20251012_LAR@BAL	2025	6	BAL	3	1	8	0	1	8	8.00	2025-12-29 15:00:48.614992-05	2025-12-29 15:00:48.614992-05
+567	4360939	20251005_HOU@BAL	2025	5	BAL	3	0	0	0	3	0	0.00	2025-12-29 15:00:48.614992-05	2025-12-29 15:00:48.614992-05
+568	4360939	20250928_BAL@KC	2025	4	BAL	3	1	24	0	2	24	24.00	2025-12-29 15:00:48.614992-05	2025-12-29 15:00:48.614992-05
+569	4360939	20250922_DET@BAL	2025	3	BAL	3	5	63	1	7	20	12.60	2025-12-29 15:00:48.614992-05	2025-12-29 15:00:48.614992-05
+570	4360939	20250914_CLE@BAL	2025	2	BAL	3	2	15	0	4	10	7.50	2025-12-29 15:00:48.614992-05	2025-12-29 15:00:48.614992-05
+571	4360939	20250907_BAL@BUF	2025	1	BAL	3	2	10	0	4	5	5.00	2025-12-29 15:00:48.614992-05	2025-12-29 15:00:48.614992-05
+572	4360939	20250104_CLE@BAL	2024	18	BAL	3	5	76	1	8	24	15.20	2025-12-29 15:00:48.614992-05	2025-12-29 15:00:48.614992-05
+573	4360939	20241225_BAL@HOU	2024	17	BAL	3	1	12	0	1	12	12.00	2025-12-29 15:00:48.614992-05	2025-12-29 15:00:48.614992-05
+574	4360939	20241221_PIT@BAL	2024	16	BAL	3	1	14	1	3	14	14.00	2025-12-29 15:00:48.614992-05	2025-12-29 15:00:48.614992-05
+575	4360939	20241215_BAL@NYG	2024	15	BAL	3	3	80	2	5	49	26.70	2025-12-29 15:00:48.614992-05	2025-12-29 15:00:48.614992-05
+576	4360939	20241201_PHI@BAL	2024	13	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:48.614992-05	2025-12-29 15:00:48.614992-05
+577	4360939	20241125_BAL@LAC	2024	12	BAL	3	2	43	1	3	40	21.50	2025-12-29 15:00:48.614992-05	2025-12-29 15:00:48.614992-05
+578	4360939	20241117_BAL@PIT	2024	11	BAL	3	2	30	0	5	19	15.00	2025-12-29 15:00:48.614992-05	2025-12-29 15:00:48.614992-05
+579	4360939	20241107_CIN@BAL	2024	10	BAL	3	6	54	1	8	15	9.00	2025-12-29 15:00:48.614992-05	2025-12-29 15:00:48.614992-05
+580	4360939	20241103_DEN@BAL	2024	9	BAL	3	3	25	0	4	15	8.30	2025-12-29 15:00:48.614992-05	2025-12-29 15:00:48.614992-05
+581	4360939	20241027_BAL@CLE	2024	8	BAL	3	1	28	0	5	28	28.00	2025-12-29 15:00:48.614992-05	2025-12-29 15:00:48.614992-05
+582	4360939	20241021_BAL@TB	2024	7	BAL	3	4	121	1	4	59	30.30	2025-12-29 15:00:48.614992-05	2025-12-29 15:00:48.614992-05
+583	4360939	20241013_WSH@BAL	2024	6	BAL	3	4	71	0	4	23	17.80	2025-12-29 15:00:48.614992-05	2025-12-29 15:00:48.614992-05
+584	4360939	20241006_BAL@CIN	2024	5	BAL	3	4	58	1	8	18	14.50	2025-12-29 15:00:48.614992-05	2025-12-29 15:00:48.614992-05
+585	4360939	20240929_BUF@BAL	2024	4	BAL	3	1	23	0	1	23	23.00	2025-12-29 15:00:48.614992-05	2025-12-29 15:00:48.614992-05
+586	4360939	20240922_BAL@DAL	2024	3	BAL	3	3	28	1	4	13	9.30	2025-12-29 15:00:48.614992-05	2025-12-29 15:00:48.614992-05
+587	4360939	20240915_LV@BAL	2024	2	BAL	3	3	40	0	4	18	13.30	2025-12-29 15:00:48.614992-05	2025-12-29 15:00:48.614992-05
+588	4360939	20240905_BAL@KC	2024	1	BAL	3	2	53	0	5	38	26.50	2025-12-29 15:00:48.614992-05	2025-12-29 15:00:48.614992-05
+589	4241263	20251227_BAL@GB	2025	17	BAL	3	0	0	0	1	0	0.00	2025-12-29 15:00:49.173599-05	2025-12-29 15:00:49.173599-05
+590	4241263	20251221_NE@BAL	2025	16	BAL	3	1	18	0	1	18	18.00	2025-12-29 15:00:49.173599-05	2025-12-29 15:00:49.173599-05
+591	4241263	20251214_BAL@CIN	2025	15	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:49.173599-05	2025-12-29 15:00:49.173599-05
+592	4241263	20251207_PIT@BAL	2025	14	BAL	3	1	19	0	1	19	19.00	2025-12-29 15:00:49.173599-05	2025-12-29 15:00:49.173599-05
+593	4241263	20251127_CIN@BAL	2025	13	BAL	3	1	17	0	1	17	17.00	2025-12-29 15:00:49.173599-05	2025-12-29 15:00:49.173599-05
+594	4241263	20251123_NYJ@BAL	2025	12	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:49.173599-05	2025-12-29 15:00:49.173599-05
+595	4241263	20251116_BAL@CLE	2025	11	BAL	3	0	0	0	1	0	0.00	2025-12-29 15:00:49.173599-05	2025-12-29 15:00:49.173599-05
+596	4241263	20251109_BAL@MIN	2025	10	BAL	3	1	23	0	2	23	23.00	2025-12-29 15:00:49.173599-05	2025-12-29 15:00:49.173599-05
+597	4241263	20251030_BAL@MIA	2025	9	BAL	3	2	23	1	2	20	11.50	2025-12-29 15:00:49.173599-05	2025-12-29 15:00:49.173599-05
+598	4241263	20251026_CHI@BAL	2025	8	BAL	3	1	10	1	1	10	10.00	2025-12-29 15:00:49.173599-05	2025-12-29 15:00:49.173599-05
+599	4241263	20251012_LAR@BAL	2025	6	BAL	3	0	0	0	1	0	0.00	2025-12-29 15:00:49.173599-05	2025-12-29 15:00:49.173599-05
+600	4241263	20251005_HOU@BAL	2025	5	BAL	3	1	10	0	1	10	10.00	2025-12-29 15:00:49.173599-05	2025-12-29 15:00:49.173599-05
+601	4241263	20250928_BAL@KC	2025	4	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:49.173599-05	2025-12-29 15:00:49.173599-05
+602	4241263	20250922_DET@BAL	2025	3	BAL	3	2	22	0	3	15	11.00	2025-12-29 15:00:49.173599-05	2025-12-29 15:00:49.173599-05
+603	4241263	20250914_CLE@BAL	2025	2	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:49.173599-05	2025-12-29 15:00:49.173599-05
+604	4241263	20250907_BAL@BUF	2025	1	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:49.173599-05	2025-12-29 15:00:49.173599-05
+605	4241263	20250104_CLE@BAL	2024	18	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:49.173599-05	2025-12-29 15:00:49.173599-05
+606	4241263	20241125_BAL@LAC	2024	12	BAL	3	1	6	0	1	6	6.00	2025-12-29 15:00:49.173599-05	2025-12-29 15:00:49.173599-05
+607	4241263	20241117_BAL@PIT	2024	11	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:49.173599-05	2025-12-29 15:00:49.173599-05
+608	4241263	20241107_CIN@BAL	2024	10	BAL	3	1	4	0	1	4	4.00	2025-12-29 15:00:49.173599-05	2025-12-29 15:00:49.173599-05
+609	4241263	20241103_DEN@BAL	2024	9	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:49.173599-05	2025-12-29 15:00:49.173599-05
+610	4241263	20241027_BAL@CLE	2024	8	BAL	3	1	9	0	2	9	9.00	2025-12-29 15:00:49.173599-05	2025-12-29 15:00:49.173599-05
+611	4241263	20241021_BAL@TB	2024	7	BAL	3	1	14	0	1	14	14.00	2025-12-29 15:00:49.173599-05	2025-12-29 15:00:49.173599-05
+612	4241263	20241013_WSH@BAL	2024	6	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:49.173599-05	2025-12-29 15:00:49.173599-05
+613	4241263	20241006_BAL@CIN	2024	5	BAL	3	3	64	1	4	55	21.30	2025-12-29 15:00:49.173599-05	2025-12-29 15:00:49.173599-05
+614	4241263	20240929_BUF@BAL	2024	4	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:49.173599-05	2025-12-29 15:00:49.173599-05
+615	4241263	20240922_BAL@DAL	2024	3	BAL	3	1	30	0	1	30	30.00	2025-12-29 15:00:49.173599-05	2025-12-29 15:00:49.173599-05
+616	4241263	20240915_LV@BAL	2024	2	BAL	3	1	4	0	1	4	4.00	2025-12-29 15:00:49.173599-05	2025-12-29 15:00:49.173599-05
+617	4241263	20240905_BAL@KC	2024	1	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:49.173599-05	2025-12-29 15:00:49.173599-05
+618	15795	20251227_BAL@GB	2025	17	BAL	3	0	0	0	1	0	0.00	2025-12-29 15:00:49.424151-05	2025-12-29 15:00:49.424151-05
+619	15795	20251221_NE@BAL	2025	16	BAL	3	4	41	0	5	16	10.30	2025-12-29 15:00:49.424151-05	2025-12-29 15:00:49.424151-05
+620	15795	20251214_BAL@CIN	2025	15	BAL	3	1	32	0	1	32	32.00	2025-12-29 15:00:49.424151-05	2025-12-29 15:00:49.424151-05
+621	15795	20251207_PIT@BAL	2025	14	BAL	3	0	0	0	1	0	0.00	2025-12-29 15:00:49.424151-05	2025-12-29 15:00:49.424151-05
+622	15795	20251127_CIN@BAL	2025	13	BAL	3	2	25	0	3	15	12.50	2025-12-29 15:00:49.424151-05	2025-12-29 15:00:49.424151-05
+623	15795	20251123_NYJ@BAL	2025	12	BAL	3	2	13	0	3	9	6.50	2025-12-29 15:00:49.424151-05	2025-12-29 15:00:49.424151-05
+624	15795	20251116_BAL@CLE	2025	11	BAL	3	1	11	0	4	11	11.00	2025-12-29 15:00:49.424151-05	2025-12-29 15:00:49.424151-05
+625	15795	20251109_BAL@MIN	2025	10	BAL	3	2	16	0	4	9	8.00	2025-12-29 15:00:49.424151-05	2025-12-29 15:00:49.424151-05
+626	15795	20251030_BAL@MIA	2025	9	BAL	3	0	0	0	1	0	0.00	2025-12-29 15:00:49.424151-05	2025-12-29 15:00:49.424151-05
+627	15795	20251026_CHI@BAL	2025	8	BAL	3	1	14	0	1	14	14.00	2025-12-29 15:00:49.424151-05	2025-12-29 15:00:49.424151-05
+628	15795	20251012_LAR@BAL	2025	6	BAL	3	2	20	0	4	11	10.00	2025-12-29 15:00:49.424151-05	2025-12-29 15:00:49.424151-05
+629	15795	20251005_HOU@BAL	2025	5	BAL	3	2	46	0	2	29	23.00	2025-12-29 15:00:49.424151-05	2025-12-29 15:00:49.424151-05
+630	15795	20250928_BAL@KC	2025	4	BAL	3	0	0	0	1	0	0.00	2025-12-29 15:00:49.424151-05	2025-12-29 15:00:49.424151-05
+631	15795	20250922_DET@BAL	2025	3	BAL	3	1	13	0	2	13	13.00	2025-12-29 15:00:49.424151-05	2025-12-29 15:00:49.424151-05
+632	15795	20250914_CLE@BAL	2025	2	BAL	3	2	64	1	2	41	32.00	2025-12-29 15:00:49.424151-05	2025-12-29 15:00:49.424151-05
+633	15795	20250907_BAL@BUF	2025	1	BAL	3	2	35	1	2	29	17.50	2025-12-29 15:00:49.424151-05	2025-12-29 15:00:49.424151-05
+634	15795	20241225_KC@PIT	2024	17	KC	16	2	7	0	4	4	3.50	2025-12-29 15:00:49.424151-05	2025-12-29 15:00:49.424151-05
+635	15795	20241221_HOU@KC	2024	16	KC	16	4	37	0	4	15	9.30	2025-12-29 15:00:49.424151-05	2025-12-29 15:00:49.424151-05
+636	15795	20241215_KC@CLE	2024	15	KC	16	5	36	0	6	12	7.20	2025-12-29 15:00:49.424151-05	2025-12-29 15:00:49.424151-05
+637	15795	20241208_LAC@KC	2024	14	KC	16	4	32	1	9	10	8.00	2025-12-29 15:00:49.424151-05	2025-12-29 15:00:49.424151-05
+638	15795	20241129_LV@KC	2024	13	KC	16	4	90	0	9	34	22.50	2025-12-29 15:00:49.424151-05	2025-12-29 15:00:49.424151-05
+639	15795	20241124_KC@CAR	2024	12	KC	16	5	35	1	6	12	7.00	2025-12-29 15:00:49.424151-05	2025-12-29 15:00:49.424151-05
+640	15795	20241117_KC@BUF	2024	11	KC	16	3	29	0	4	13	9.70	2025-12-29 15:00:49.424151-05	2025-12-29 15:00:49.424151-05
+641	15795	20241110_DEN@KC	2024	10	KC	16	4	56	0	5	31	14.00	2025-12-29 15:00:49.424151-05	2025-12-29 15:00:49.424151-05
+642	15795	20241104_TB@KC	2024	9	KC	16	8	86	2	9	35	10.80	2025-12-29 15:00:49.424151-05	2025-12-29 15:00:49.424151-05
+643	15795	20241027_KC@LV	2024	8	KC	16	2	29	0	3	16	14.50	2025-12-29 15:00:49.424151-05	2025-12-29 15:00:49.424151-05
+644	15795	20241020_TEN@BUF	2024	7	TEN	31	1	-2	0	1	6	-2.00	2025-12-29 15:00:49.424151-05	2025-12-29 15:00:49.424151-05
+645	15795	20241013_IND@TEN	2024	6	TEN	31	4	54	0	6	23	13.50	2025-12-29 15:00:49.424151-05	2025-12-29 15:00:49.424151-05
+646	15795	20240930_TEN@MIA	2024	4	TEN	31	2	31	0	4	16	15.50	2025-12-29 15:00:49.424151-05	2025-12-29 15:00:49.424151-05
+647	15795	20240922_GB@TEN	2024	3	TEN	31	6	73	1	7	20	12.20	2025-12-29 15:00:49.424151-05	2025-12-29 15:00:49.424151-05
+648	15795	20240915_NYJ@TEN	2024	2	TEN	31	1	9	0	2	9	9.00	2025-12-29 15:00:49.424151-05	2025-12-29 15:00:49.424151-05
+649	15795	20240908_TEN@CHI	2024	1	TEN	31	1	8	0	1	8	8.00	2025-12-29 15:00:49.424151-05	2025-12-29 15:00:49.424151-05
+650	4361050	20251227_BAL@GB	2025	17	BAL	3	3	27	0	3	11	9.00	2025-12-29 15:00:49.843741-05	2025-12-29 15:00:49.843741-05
+651	4361050	20251221_NE@BAL	2025	16	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:49.843741-05	2025-12-29 15:00:49.843741-05
+652	4361050	20251214_BAL@CIN	2025	15	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:49.843741-05	2025-12-29 15:00:49.843741-05
+653	4361050	20251207_PIT@BAL	2025	14	BAL	3	4	25	1	6	8	6.30	2025-12-29 15:00:49.843741-05	2025-12-29 15:00:49.843741-05
+654	4361050	20251127_CIN@BAL	2025	13	BAL	3	5	95	0	6	43	19.00	2025-12-29 15:00:49.843741-05	2025-12-29 15:00:49.843741-05
+655	4361050	20251123_NYJ@BAL	2025	12	BAL	3	1	10	0	3	10	10.00	2025-12-29 15:00:49.843741-05	2025-12-29 15:00:49.843741-05
+656	4361050	20251116_BAL@CLE	2025	11	BAL	3	2	15	0	3	10	7.50	2025-12-29 15:00:49.843741-05	2025-12-29 15:00:49.843741-05
+657	4361050	20251109_BAL@MIN	2025	10	BAL	3	2	17	0	5	11	8.50	2025-12-29 15:00:49.843741-05	2025-12-29 15:00:49.843741-05
+658	4361050	20251030_BAL@MIA	2025	9	BAL	3	3	60	0	4	35	20.00	2025-12-29 15:00:49.843741-05	2025-12-29 15:00:49.843741-05
+659	4361050	20251026_CHI@BAL	2025	8	BAL	3	2	8	0	2	5	4.00	2025-12-29 15:00:49.843741-05	2025-12-29 15:00:49.843741-05
+660	4361050	20251012_LAR@BAL	2025	6	BAL	3	2	6	0	2	5	3.00	2025-12-29 15:00:49.843741-05	2025-12-29 15:00:49.843741-05
+661	4361050	20251005_HOU@BAL	2025	5	BAL	3	1	12	0	1	12	12.00	2025-12-29 15:00:49.843741-05	2025-12-29 15:00:49.843741-05
+662	4361050	20250928_BAL@KC	2025	4	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:49.843741-05	2025-12-29 15:00:49.843741-05
+663	4361050	20250104_CLE@BAL	2024	18	BAL	3	3	38	0	5	19	12.70	2025-12-29 15:00:49.843741-05	2025-12-29 15:00:49.843741-05
+664	4361050	20241225_BAL@HOU	2024	17	BAL	3	1	9	1	1	9	9.00	2025-12-29 15:00:49.843741-05	2025-12-29 15:00:49.843741-05
+665	4361050	20241221_PIT@BAL	2024	16	BAL	3	3	29	1	3	19	9.70	2025-12-29 15:00:49.843741-05	2025-12-29 15:00:49.843741-05
+666	4361050	20241215_BAL@NYG	2024	15	BAL	3	2	17	0	2	11	8.50	2025-12-29 15:00:49.843741-05	2025-12-29 15:00:49.843741-05
+667	4361050	20241201_PHI@BAL	2024	13	BAL	3	5	38	1	8	11	7.60	2025-12-29 15:00:49.843741-05	2025-12-29 15:00:49.843741-05
+668	4361050	20241125_BAL@LAC	2024	12	BAL	3	0	0	0	0	\N	\N	2025-12-29 15:00:49.843741-05	2025-12-29 15:00:49.843741-05
+669	4361050	20241117_BAL@PIT	2024	11	BAL	3	4	75	0	5	42	18.80	2025-12-29 15:00:49.843741-05	2025-12-29 15:00:49.843741-05
+670	4361050	20241103_DEN@BAL	2024	9	BAL	3	0	0	0	1	0	0.00	2025-12-29 15:00:49.843741-05	2025-12-29 15:00:49.843741-05
+671	4361050	20241027_BAL@CLE	2024	8	BAL	3	4	47	0	4	25	11.80	2025-12-29 15:00:49.843741-05	2025-12-29 15:00:49.843741-05
+672	4361050	20241021_BAL@TB	2024	7	BAL	3	2	17	0	4	10	8.50	2025-12-29 15:00:49.843741-05	2025-12-29 15:00:49.843741-05
+673	4361050	20241013_WSH@BAL	2024	6	BAL	3	2	27	0	4	18	13.50	2025-12-29 15:00:49.843741-05	2025-12-29 15:00:49.843741-05
+674	4361050	20241006_BAL@CIN	2024	5	BAL	3	3	13	2	3	6	4.30	2025-12-29 15:00:49.843741-05	2025-12-29 15:00:49.843741-05
+675	4361050	20240929_BUF@BAL	2024	4	BAL	3	1	26	0	2	26	26.00	2025-12-29 15:00:49.843741-05	2025-12-29 15:00:49.843741-05
+676	4361050	20240922_BAL@DAL	2024	3	BAL	3	1	4	0	1	4	4.00	2025-12-29 15:00:49.843741-05	2025-12-29 15:00:49.843741-05
+677	4361050	20240915_LV@BAL	2024	2	BAL	3	2	26	0	3	15	13.00	2025-12-29 15:00:49.843741-05	2025-12-29 15:00:49.843741-05
+678	4361050	20240905_BAL@KC	2024	1	BAL	3	9	111	1	12	49	12.30	2025-12-29 15:00:49.843741-05	2025-12-29 15:00:49.843741-05
+679	4429615	20251227_BAL@GB	2025	17	BAL	3	4	30	1	5	13	7.50	2025-12-29 15:00:50.152429-05	2025-12-29 15:00:50.152429-05
+680	4429615	20251221_NE@BAL	2025	16	BAL	3	7	84	0	7	19	12.00	2025-12-29 15:00:50.152429-05	2025-12-29 15:00:50.152429-05
+681	4429615	20251214_BAL@CIN	2025	15	BAL	3	3	68	1	5	28	22.70	2025-12-29 15:00:50.152429-05	2025-12-29 15:00:50.152429-05
+682	4429615	20251207_PIT@BAL	2025	14	BAL	3	8	124	0	11	35	15.50	2025-12-29 15:00:50.152429-05	2025-12-29 15:00:50.152429-05
+683	4429615	20251127_CIN@BAL	2025	13	BAL	3	2	6	0	7	5	3.00	2025-12-29 15:00:50.152429-05	2025-12-29 15:00:50.152429-05
+684	4429615	20251123_NYJ@BAL	2025	12	BAL	3	5	58	0	6	20	11.60	2025-12-29 15:00:50.152429-05	2025-12-29 15:00:50.152429-05
+685	4429615	20251116_BAL@CLE	2025	11	BAL	3	3	78	0	5	45	26.00	2025-12-29 15:00:50.152429-05	2025-12-29 15:00:50.152429-05
+686	4429615	20251109_BAL@MIN	2025	10	BAL	3	4	75	0	6	27	18.80	2025-12-29 15:00:50.152429-05	2025-12-29 15:00:50.152429-05
+687	4429615	20251030_BAL@MIA	2025	9	BAL	3	5	64	0	5	39	12.80	2025-12-29 15:00:50.152429-05	2025-12-29 15:00:50.152429-05
+688	4429615	20251026_CHI@BAL	2025	8	BAL	3	7	63	0	9	20	9.00	2025-12-29 15:00:50.152429-05	2025-12-29 15:00:50.152429-05
+689	4429615	20251012_LAR@BAL	2025	6	BAL	3	6	46	0	10	18	7.70	2025-12-29 15:00:50.152429-05	2025-12-29 15:00:50.152429-05
+690	4429615	20251005_HOU@BAL	2025	5	BAL	3	5	72	0	5	56	14.40	2025-12-29 15:00:50.152429-05	2025-12-29 15:00:50.152429-05
+691	4429615	20250928_BAL@KC	2025	4	BAL	3	7	74	0	8	21	10.60	2025-12-29 15:00:50.152429-05	2025-12-29 15:00:50.152429-05
+692	4429615	20250922_DET@BAL	2025	3	BAL	3	2	13	0	3	7	6.50	2025-12-29 15:00:50.152429-05	2025-12-29 15:00:50.152429-05
+693	4429615	20250914_CLE@BAL	2025	2	BAL	3	7	75	0	11	19	10.70	2025-12-29 15:00:50.152429-05	2025-12-29 15:00:50.152429-05
+694	4429615	20250907_BAL@BUF	2025	1	BAL	3	7	143	1	9	39	20.40	2025-12-29 15:00:50.152429-05	2025-12-29 15:00:50.152429-05
+695	4429615	20250104_CLE@BAL	2024	18	BAL	3	1	12	0	2	12	12.00	2025-12-29 15:00:50.152429-05	2025-12-29 15:00:50.152429-05
+696	4429615	20241225_BAL@HOU	2024	17	BAL	3	2	31	0	5	27	15.50	2025-12-29 15:00:50.152429-05	2025-12-29 15:00:50.152429-05
+697	4429615	20241221_PIT@BAL	2024	16	BAL	3	5	100	0	8	49	20.00	2025-12-29 15:00:50.152429-05	2025-12-29 15:00:50.152429-05
+698	4429615	20241215_BAL@NYG	2024	15	BAL	3	6	53	0	7	15	8.80	2025-12-29 15:00:50.152429-05	2025-12-29 15:00:50.152429-05
+699	4429615	20241201_PHI@BAL	2024	13	BAL	3	3	74	0	7	40	24.70	2025-12-29 15:00:50.152429-05	2025-12-29 15:00:50.152429-05
+700	4429615	20241125_BAL@LAC	2024	12	BAL	3	5	62	0	8	25	12.40	2025-12-29 15:00:50.152429-05	2025-12-29 15:00:50.152429-05
+701	4429615	20241117_BAL@PIT	2024	11	BAL	3	2	39	1	6	23	19.50	2025-12-29 15:00:50.152429-05	2025-12-29 15:00:50.152429-05
+702	4429615	20241107_CIN@BAL	2024	10	BAL	3	4	34	0	6	19	8.50	2025-12-29 15:00:50.152429-05	2025-12-29 15:00:50.152429-05
+703	4429615	20241103_DEN@BAL	2024	9	BAL	3	5	127	2	6	53	25.40	2025-12-29 15:00:50.152429-05	2025-12-29 15:00:50.152429-05
+704	4429615	20241027_BAL@CLE	2024	8	BAL	3	7	115	0	12	29	16.40	2025-12-29 15:00:50.152429-05	2025-12-29 15:00:50.152429-05
+705	4429615	20241021_BAL@TB	2024	7	BAL	3	1	11	0	1	11	11.00	2025-12-29 15:00:50.152429-05	2025-12-29 15:00:50.152429-05
+706	4429615	20241013_WSH@BAL	2024	6	BAL	3	9	132	0	9	44	14.70	2025-12-29 15:00:50.152429-05	2025-12-29 15:00:50.152429-05
+707	4429615	20241006_BAL@CIN	2024	5	BAL	3	7	111	0	12	26	15.90	2025-12-29 15:00:50.152429-05	2025-12-29 15:00:50.152429-05
+708	4429615	20240929_BUF@BAL	2024	4	BAL	3	1	10	0	2	10	10.00	2025-12-29 15:00:50.152429-05	2025-12-29 15:00:50.152429-05
+709	4429615	20240922_BAL@DAL	2024	3	BAL	3	3	20	0	4	9	6.70	2025-12-29 15:00:50.152429-05	2025-12-29 15:00:50.152429-05
+710	4429615	20240915_LV@BAL	2024	2	BAL	3	7	91	1	11	21	13.00	2025-12-29 15:00:50.152429-05	2025-12-29 15:00:50.152429-05
+711	4429615	20240905_BAL@KC	2024	1	BAL	3	6	37	0	10	19	6.20	2025-12-29 15:00:50.152429-05	2025-12-29 15:00:50.152429-05
+712	4635008	20251214_BUF@NE	2025	15	BUF	4	0	0	0	0	\N	\N	2025-12-29 15:00:50.393953-05	2025-12-29 15:00:50.393953-05
+713	4635008	20251207_CIN@BUF	2025	14	BUF	4	2	16	0	3	8	8.00	2025-12-29 15:00:50.393953-05	2025-12-29 15:00:50.393953-05
+714	4635008	20251130_BUF@PIT	2025	13	BUF	4	2	9	1	3	8	4.50	2025-12-29 15:00:50.393953-05	2025-12-29 15:00:50.393953-05
+715	4635008	20251109_BUF@MIA	2025	10	BUF	4	3	46	1	8	35	15.30	2025-12-29 15:00:50.393953-05	2025-12-29 15:00:50.393953-05
+716	4635008	20251102_KC@BUF	2025	9	BUF	4	2	17	0	2	11	8.50	2025-12-29 15:00:50.393953-05	2025-12-29 15:00:50.393953-05
+717	4635008	20251026_BUF@CAR	2025	8	BUF	4	3	30	0	4	14	10.00	2025-12-29 15:00:50.393953-05	2025-12-29 15:00:50.393953-05
+718	4635008	20251013_BUF@ATL	2025	6	BUF	4	3	11	0	6	7	3.70	2025-12-29 15:00:50.393953-05	2025-12-29 15:00:50.393953-05
+719	4635008	20251005_NE@BUF	2025	5	BUF	4	4	23	1	7	13	5.80	2025-12-29 15:00:50.393953-05	2025-12-29 15:00:50.393953-05
+720	4635008	20250928_NO@BUF	2025	4	BUF	4	3	45	0	4	20	15.00	2025-12-29 15:00:50.393953-05	2025-12-29 15:00:50.393953-05
+721	4635008	20250918_MIA@BUF	2025	3	BUF	4	3	20	0	4	8	6.70	2025-12-29 15:00:50.393953-05	2025-12-29 15:00:50.393953-05
+722	4635008	20250914_BUF@NYJ	2025	2	BUF	4	3	26	0	3	12	8.70	2025-12-29 15:00:50.393953-05	2025-12-29 15:00:50.393953-05
+723	4635008	20250907_BAL@BUF	2025	1	BUF	4	8	112	1	11	25	14.00	2025-12-29 15:00:50.393953-05	2025-12-29 15:00:50.393953-05
+724	4635008	20250105_BUF@NE	2024	18	BUF	4	2	31	0	10	20	15.50	2025-12-29 15:00:50.393953-05	2025-12-29 15:00:50.393953-05
+725	4635008	20241229_NYJ@BUF	2024	17	BUF	4	3	27	1	7	14	9.00	2025-12-29 15:00:50.393953-05	2025-12-29 15:00:50.393953-05
+726	4635008	20241222_NE@BUF	2024	16	BUF	4	1	17	0	2	17	17.00	2025-12-29 15:00:50.393953-05	2025-12-29 15:00:50.393953-05
+727	4635008	20241215_BUF@DET	2024	15	BUF	4	1	64	0	2	64	64.00	2025-12-29 15:00:50.393953-05	2025-12-29 15:00:50.393953-05
+728	4635008	20241103_MIA@BUF	2024	9	BUF	4	1	21	0	2	21	21.00	2025-12-29 15:00:50.393953-05	2025-12-29 15:00:50.393953-05
+729	4635008	20241027_BUF@SEA	2024	8	BUF	4	5	70	1	7	25	14.00	2025-12-29 15:00:50.393953-05	2025-12-29 15:00:50.393953-05
+730	4635008	20241020_TEN@BUF	2024	7	BUF	4	4	125	0	7	57	31.30	2025-12-29 15:00:50.393953-05	2025-12-29 15:00:50.393953-05
+731	4635008	20241014_BUF@NYJ	2024	6	BUF	4	3	26	0	4	11	8.70	2025-12-29 15:00:50.393953-05	2025-12-29 15:00:50.393953-05
+732	4635008	20241006_BUF@HOU	2024	5	BUF	4	1	49	1	5	49	49.00	2025-12-29 15:00:50.393953-05	2025-12-29 15:00:50.393953-05
+733	4635008	20240929_BUF@BAL	2024	4	BUF	4	3	51	0	4	24	17.00	2025-12-29 15:00:50.393953-05	2025-12-29 15:00:50.393953-05
+734	4635008	20240923_JAX@BUF	2024	3	BUF	4	1	24	1	1	24	24.00	2025-12-29 15:00:50.393953-05	2025-12-29 15:00:50.393953-05
+735	4635008	20240912_BUF@MIA	2024	2	BUF	4	0	0	0	1	0	0.00	2025-12-29 15:00:50.393953-05	2025-12-29 15:00:50.393953-05
+736	4635008	20240908_ARI@BUF	2024	1	BUF	4	4	51	0	5	28	12.80	2025-12-29 15:00:50.393953-05	2025-12-29 15:00:50.393953-05
+737	3930086	20251228_PHI@BUF	2025	17	BUF	4	5	30	0	5	15	6.00	2025-12-29 15:00:50.761154-05	2025-12-29 15:00:50.761154-05
+738	3930086	20251221_BUF@CLE	2025	16	BUF	4	1	10	0	2	10	10.00	2025-12-29 15:00:50.761154-05	2025-12-29 15:00:50.761154-05
+739	3930086	20251214_BUF@NE	2025	15	BUF	4	3	37	2	4	19	12.30	2025-12-29 15:00:50.761154-05	2025-12-29 15:00:50.761154-05
+740	3930086	20251207_CIN@BUF	2025	14	BUF	4	6	93	0	7	32	15.50	2025-12-29 15:00:50.761154-05	2025-12-29 15:00:50.761154-05
+741	3930086	20251130_BUF@PIT	2025	13	BUF	4	3	28	0	4	16	9.30	2025-12-29 15:00:50.761154-05	2025-12-29 15:00:50.761154-05
+742	3930086	20251120_BUF@HOU	2025	12	BUF	4	3	17	0	4	9	5.70	2025-12-29 15:00:50.761154-05	2025-12-29 15:00:50.761154-05
+743	3930086	20251116_TB@BUF	2025	11	BUF	4	1	23	0	3	23	23.00	2025-12-29 15:00:50.761154-05	2025-12-29 15:00:50.761154-05
+744	3930086	20251109_BUF@MIA	2025	10	BUF	4	3	37	0	4	20	12.30	2025-12-29 15:00:50.761154-05	2025-12-29 15:00:50.761154-05
+745	3930086	20251102_KC@BUF	2025	9	BUF	4	1	30	0	1	30	30.00	2025-12-29 15:00:50.761154-05	2025-12-29 15:00:50.761154-05
+746	3930086	20251026_BUF@CAR	2025	8	BUF	4	1	15	0	1	15	15.00	2025-12-29 15:00:50.761154-05	2025-12-29 15:00:50.761154-05
+747	3930086	20251013_BUF@ATL	2025	6	BUF	4	1	19	1	2	19	19.00	2025-12-29 15:00:50.761154-05	2025-12-29 15:00:50.761154-05
+748	3930086	20251005_NE@BUF	2025	5	BUF	4	2	15	0	2	8	7.50	2025-12-29 15:00:50.761154-05	2025-12-29 15:00:50.761154-05
+749	3930086	20250928_NO@BUF	2025	4	BUF	4	0	0	0	1	0	0.00	2025-12-29 15:00:50.761154-05	2025-12-29 15:00:50.761154-05
+750	3930086	20250918_MIA@BUF	2025	3	BUF	4	0	0	0	0	\N	\N	2025-12-29 15:00:50.761154-05	2025-12-29 15:00:50.761154-05
+751	3930086	20250914_BUF@NYJ	2025	2	BUF	4	2	19	0	5	12	9.50	2025-12-29 15:00:50.761154-05	2025-12-29 15:00:50.761154-05
+752	3930086	20250907_BAL@BUF	2025	1	BUF	4	2	20	0	2	12	10.00	2025-12-29 15:00:50.761154-05	2025-12-29 15:00:50.761154-05
+753	3930086	20241229_NYJ@BUF	2024	17	BUF	4	1	4	0	3	4	4.00	2025-12-29 15:00:50.761154-05	2025-12-29 15:00:50.761154-05
+754	3930086	20241222_NE@BUF	2024	16	BUF	4	2	22	0	2	13	11.00	2025-12-29 15:00:50.761154-05	2025-12-29 15:00:50.761154-05
+755	3930086	20241215_BUF@DET	2024	15	BUF	4	2	42	0	3	23	21.00	2025-12-29 15:00:50.761154-05	2025-12-29 15:00:50.761154-05
+756	3930086	20241208_BUF@LAR	2024	14	BUF	4	1	5	0	1	5	5.00	2025-12-29 15:00:50.761154-05	2025-12-29 15:00:50.761154-05
+757	3930086	20241201_SF@BUF	2024	13	BUF	4	2	56	0	2	39	28.00	2025-12-29 15:00:50.761154-05	2025-12-29 15:00:50.761154-05
+758	3930086	20241117_KC@BUF	2024	11	BUF	4	4	40	0	6	24	10.00	2025-12-29 15:00:50.761154-05	2025-12-29 15:00:50.761154-05
+759	3930086	20241110_BUF@IND	2024	10	BUF	4	2	40	0	3	34	20.00	2025-12-29 15:00:50.761154-05	2025-12-29 15:00:50.761154-05
+760	3930086	20241103_MIA@BUF	2024	9	BUF	4	1	5	0	2	5	5.00	2025-12-29 15:00:50.761154-05	2025-12-29 15:00:50.761154-05
+761	3930086	20241027_BUF@SEA	2024	8	BUF	4	2	50	0	2	27	25.00	2025-12-29 15:00:50.761154-05	2025-12-29 15:00:50.761154-05
+762	3930086	20241020_TEN@BUF	2024	7	BUF	4	1	5	0	3	5	5.00	2025-12-29 15:00:50.761154-05	2025-12-29 15:00:50.761154-05
+763	3930086	20241014_BUF@NYJ	2024	6	BUF	4	1	12	1	1	12	12.00	2025-12-29 15:00:50.761154-05	2025-12-29 15:00:50.761154-05
+764	3930086	20241006_BUF@HOU	2024	5	BUF	4	0	0	0	0	\N	\N	2025-12-29 15:00:50.761154-05	2025-12-29 15:00:50.761154-05
+765	3930086	20240929_BUF@BAL	2024	4	BUF	4	1	0	0	1	0	0.00	2025-12-29 15:00:50.761154-05	2025-12-29 15:00:50.761154-05
+766	3930086	20240923_JAX@BUF	2024	3	BUF	4	1	7	0	2	7	7.00	2025-12-29 15:00:50.761154-05	2025-12-29 15:00:50.761154-05
+767	3930086	20240912_BUF@MIA	2024	2	BUF	4	0	0	0	0	\N	\N	2025-12-29 15:00:50.761154-05	2025-12-29 15:00:50.761154-05
+768	3930086	20240908_ARI@BUF	2024	1	BUF	4	1	23	0	2	23	23.00	2025-12-29 15:00:50.761154-05	2025-12-29 15:00:50.761154-05
+769	4242433	20251228_PHI@BUF	2025	17	BUF	4	1	12	0	2	12	12.00	2025-12-29 15:00:50.995086-05	2025-12-29 15:00:50.995086-05
+770	4242433	20251221_BUF@CLE	2025	16	BUF	4	1	2	0	1	2	2.00	2025-12-29 15:00:50.995086-05	2025-12-29 15:00:50.995086-05
+771	4242433	20251214_BUF@NE	2025	15	BUF	4	1	16	0	2	16	16.00	2025-12-29 15:00:50.995086-05	2025-12-29 15:00:50.995086-05
+772	4242433	20251120_BUF@HOU	2025	12	BUF	4	2	21	0	4	11	10.50	2025-12-29 15:00:50.995086-05	2025-12-29 15:00:50.995086-05
+773	4242433	20251116_TB@BUF	2025	11	BUF	4	2	17	0	5	13	8.50	2025-12-29 15:00:50.995086-05	2025-12-29 15:00:50.995086-05
+774	4242433	20251013_BUF@ATL	2025	6	BUF	4	2	60	0	2	45	30.00	2025-12-29 15:00:50.995086-05	2025-12-29 15:00:50.995086-05
+775	4242433	20251005_NE@BUF	2025	5	BUF	4	2	36	0	2	23	18.00	2025-12-29 15:00:50.995086-05	2025-12-29 15:00:50.995086-05
+776	4242433	20250928_NO@BUF	2025	4	BUF	4	2	25	0	3	14	12.50	2025-12-29 15:00:50.995086-05	2025-12-29 15:00:50.995086-05
+777	4242433	20250918_MIA@BUF	2025	3	BUF	4	1	5	0	1	5	5.00	2025-12-29 15:00:50.995086-05	2025-12-29 15:00:50.995086-05
+778	4242433	20250914_BUF@NYJ	2025	2	BUF	4	2	47	0	3	32	23.50	2025-12-29 15:00:50.995086-05	2025-12-29 15:00:50.995086-05
+779	4242433	20250907_BAL@BUF	2025	1	BUF	4	5	61	0	9	32	12.20	2025-12-29 15:00:50.995086-05	2025-12-29 15:00:50.995086-05
+780	4242433	20241228_LAC@NE	2024	17	LAC	18	4	41	0	6	19	10.30	2025-12-29 15:00:50.995086-05	2025-12-29 15:00:50.995086-05
+781	4242433	20241219_DEN@LAC	2024	16	LAC	18	3	41	0	6	24	13.70	2025-12-29 15:00:50.995086-05	2025-12-29 15:00:50.995086-05
+782	4242433	20241215_TB@LAC	2024	15	LAC	18	2	10	0	3	5	5.00	2025-12-29 15:00:50.995086-05	2025-12-29 15:00:50.995086-05
+783	4242433	20241208_LAC@KC	2024	14	LAC	18	6	78	0	9	38	13.00	2025-12-29 15:00:50.995086-05	2025-12-29 15:00:50.995086-05
+784	4242433	20241201_LAC@ATL	2024	13	LAC	18	1	11	0	1	11	11.00	2025-12-29 15:00:50.995086-05	2025-12-29 15:00:50.995086-05
+785	4242433	20241125_BAL@LAC	2024	12	LAC	18	3	38	0	8	17	12.70	2025-12-29 15:00:50.995086-05	2025-12-29 15:00:50.995086-05
+786	4242433	20241117_CIN@LAC	2024	11	LAC	18	2	23	0	4	12	11.50	2025-12-29 15:00:50.995086-05	2025-12-29 15:00:50.995086-05
+787	4242433	20241110_TEN@LAC	2024	10	LAC	18	1	36	0	2	36	36.00	2025-12-29 15:00:50.995086-05	2025-12-29 15:00:50.995086-05
+788	4242433	20241103_LAC@CLE	2024	9	LAC	18	2	63	1	4	28	31.50	2025-12-29 15:00:50.995086-05	2025-12-29 15:00:50.995086-05
+789	4242433	20241027_NO@LAC	2024	8	LAC	18	2	72	0	4	45	36.00	2025-12-29 15:00:50.995086-05	2025-12-29 15:00:50.995086-05
+790	4242433	20241021_LAC@ARI	2024	7	LAC	18	4	63	0	5	24	15.80	2025-12-29 15:00:50.995086-05	2025-12-29 15:00:50.995086-05
+791	4242433	20241013_LAC@DEN	2024	6	LAC	18	2	38	0	3	24	19.00	2025-12-29 15:00:50.995086-05	2025-12-29 15:00:50.995086-05
+792	4242433	20240929_KC@LAC	2024	4	LAC	18	3	36	0	4	26	12.00	2025-12-29 15:00:50.995086-05	2025-12-29 15:00:50.995086-05
+793	4242433	20240915_LAC@CAR	2024	2	LAC	18	2	19	0	2	11	9.50	2025-12-29 15:00:50.995086-05	2025-12-29 15:00:50.995086-05
+794	4242433	20240908_LV@LAC	2024	1	LAC	18	2	15	0	4	11	7.50	2025-12-29 15:00:50.995086-05	2025-12-29 15:00:50.995086-05
+795	4241476	20251228_PHI@BUF	2025	17	BUF	4	2	36	0	3	32	18.00	2025-12-29 15:00:51.296478-05	2025-12-29 15:00:51.296478-05
+796	4241476	20251221_BUF@CLE	2025	16	BUF	4	1	21	0	2	21	21.00	2025-12-29 15:00:51.296478-05	2025-12-29 15:00:51.296478-05
+797	4241476	20251214_BUF@NE	2025	15	BUF	4	0	0	0	0	\N	\N	2025-12-29 15:00:51.296478-05	2025-12-29 15:00:51.296478-05
+798	4241476	20251207_CIN@BUF	2025	14	BUF	4	1	16	0	1	16	16.00	2025-12-29 15:00:51.296478-05	2025-12-29 15:00:51.296478-05
+799	4241476	20251130_BUF@PIT	2025	13	BUF	4	0	0	0	0	\N	\N	2025-12-29 15:00:51.296478-05	2025-12-29 15:00:51.296478-05
+800	4241476	20251120_BUF@HOU	2025	12	BUF	4	0	0	0	0	\N	\N	2025-12-29 15:00:51.296478-05	2025-12-29 15:00:51.296478-05
+801	4241476	20251116_TB@BUF	2025	11	BUF	4	4	90	1	5	43	22.50	2025-12-29 15:00:51.296478-05	2025-12-29 15:00:51.296478-05
+802	4241476	20251109_BUF@MIA	2025	10	BUF	4	1	24	0	1	24	24.00	2025-12-29 15:00:51.296478-05	2025-12-29 15:00:51.296478-05
+803	4241476	20251102_KC@BUF	2025	9	BUF	4	1	7	0	1	7	7.00	2025-12-29 15:00:51.296478-05	2025-12-29 15:00:51.296478-05
+804	4241476	20251026_BUF@CAR	2025	8	BUF	4	0	0	0	0	\N	\N	2025-12-29 15:00:51.296478-05	2025-12-29 15:00:51.296478-05
+805	4241476	20251013_BUF@ATL	2025	6	BUF	4	3	27	0	5	10	9.00	2025-12-29 15:00:51.296478-05	2025-12-29 15:00:51.296478-05
+806	4241476	20251005_NE@BUF	2025	5	BUF	4	0	0	0	1	0	0.00	2025-12-29 15:00:51.296478-05	2025-12-29 15:00:51.296478-05
+807	4241476	20250928_NO@BUF	2025	4	BUF	4	0	0	0	0	\N	\N	2025-12-29 15:00:51.296478-05	2025-12-29 15:00:51.296478-05
+808	4241476	20250918_MIA@BUF	2025	3	BUF	4	2	24	0	2	17	12.00	2025-12-29 15:00:51.296478-05	2025-12-29 15:00:51.296478-05
+809	4241476	20250914_BUF@NYJ	2025	2	BUF	4	0	0	0	2	0	0.00	2025-12-29 15:00:51.296478-05	2025-12-29 15:00:51.296478-05
+810	4241476	20250907_BAL@BUF	2025	1	BUF	4	0	0	0	0	\N	\N	2025-12-29 15:00:51.296478-05	2025-12-29 15:00:51.296478-05
+811	4241476	20241229_NYJ@BUF	2024	17	BUF	4	1	69	1	1	69	69.00	2025-12-29 15:00:51.296478-05	2025-12-29 15:00:51.296478-05
+812	4241476	20241110_BUF@IND	2024	10	BUF	4	0	0	0	1	0	0.00	2025-12-29 15:00:51.296478-05	2025-12-29 15:00:51.296478-05
+813	4241476	20241006_BUF@HOU	2024	5	BUF	4	0	0	0	0	\N	\N	2025-12-29 15:00:51.296478-05	2025-12-29 15:00:51.296478-05
+814	4243537	20251228_PHI@BUF	2025	17	BUF	4	0	0	0	1	0	0.00	2025-12-29 15:00:51.52489-05	2025-12-29 15:00:51.52489-05
+815	4243537	20251207_CIN@BUF	2025	14	BUF	4	2	21	0	2	17	10.50	2025-12-29 15:00:51.52489-05	2025-12-29 15:00:51.52489-05
+816	4243537	20251130_BUF@PIT	2025	13	BUF	4	1	5	0	2	5	5.00	2025-12-29 15:00:51.52489-05	2025-12-29 15:00:51.52489-05
+817	4243537	20251120_BUF@HOU	2025	12	BUF	4	1	22	0	2	22	22.00	2025-12-29 15:00:51.52489-05	2025-12-29 15:00:51.52489-05
+818	4243537	20251116_TB@BUF	2025	11	BUF	4	3	40	0	4	22	13.30	2025-12-29 15:00:51.52489-05	2025-12-29 15:00:51.52489-05
+819	4243537	20241117_JAX@DET	2024	11	JAX	15	1	3	0	3	3	3.00	2025-12-29 15:00:51.52489-05	2025-12-29 15:00:51.52489-05
+820	4243537	20241110_MIN@JAX	2024	10	JAX	15	1	19	0	4	19	19.00	2025-12-29 15:00:51.52489-05	2025-12-29 15:00:51.52489-05
+821	4243537	20241027_GB@JAX	2024	8	JAX	15	0	0	0	0	\N	\N	2025-12-29 15:00:51.52489-05	2025-12-29 15:00:51.52489-05
+822	4243537	20241020_NE@JAX	2024	7	JAX	15	1	13	0	2	13	13.00	2025-12-29 15:00:51.52489-05	2025-12-29 15:00:51.52489-05
+823	4243537	20241013_JAX@CHI	2024	6	JAX	15	5	45	2	8	21	9.00	2025-12-29 15:00:51.52489-05	2025-12-29 15:00:51.52489-05
+824	4243537	20241006_IND@JAX	2024	5	JAX	15	3	38	0	4	21	12.70	2025-12-29 15:00:51.52489-05	2025-12-29 15:00:51.52489-05
+825	4243537	20240929_JAX@HOU	2024	4	JAX	15	1	-2	0	5	5	-2.00	2025-12-29 15:00:51.52489-05	2025-12-29 15:00:51.52489-05
+826	4243537	20240923_JAX@BUF	2024	3	JAX	15	2	18	0	6	13	9.00	2025-12-29 15:00:51.52489-05	2025-12-29 15:00:51.52489-05
+827	4243537	20240915_CLE@JAX	2024	2	JAX	15	3	43	0	7	22	14.30	2025-12-29 15:00:51.52489-05	2025-12-29 15:00:51.52489-05
+828	4243537	20240908_JAX@MIA	2024	1	JAX	15	3	62	0	3	22	20.70	2025-12-29 15:00:51.52489-05	2025-12-29 15:00:51.52489-05
+829	4688552	20251228_PHI@BUF	2025	17	BUF	4	0	0	0	0	\N	\N	2025-12-29 15:00:51.848256-05	2025-12-29 15:00:51.848256-05
+830	4688552	20251130_BUF@PIT	2025	13	BUF	4	0	0	0	0	\N	\N	2025-12-29 15:00:51.848256-05	2025-12-29 15:00:51.848256-05
+831	4688552	20251120_BUF@HOU	2025	12	BUF	4	0	0	0	0	\N	\N	2025-12-29 15:00:51.848256-05	2025-12-29 15:00:51.848256-05
+832	4688552	20251116_TB@BUF	2025	11	BUF	4	1	4	0	1	4	4.00	2025-12-29 15:00:51.848256-05	2025-12-29 15:00:51.848256-05
+833	4573699	20251228_PHI@BUF	2025	17	BUF	4	0	0	0	0	\N	\N	2025-12-29 15:00:52.020664-05	2025-12-29 15:00:52.020664-05
+834	4573699	20251221_BUF@CLE	2025	16	BUF	4	2	26	0	2	18	13.00	2025-12-29 15:00:52.020664-05	2025-12-29 15:00:52.020664-05
+835	4573699	20251214_BUF@NE	2025	15	BUF	4	1	9	0	1	9	9.00	2025-12-29 15:00:52.020664-05	2025-12-29 15:00:52.020664-05
+836	4573699	20251207_CIN@BUF	2025	14	BUF	4	1	3	1	1	3	3.00	2025-12-29 15:00:52.020664-05	2025-12-29 15:00:52.020664-05
+837	4573699	20251130_BUF@PIT	2025	13	BUF	4	1	10	0	1	10	10.00	2025-12-29 15:00:52.020664-05	2025-12-29 15:00:52.020664-05
+838	4573699	20251120_BUF@HOU	2025	12	BUF	4	2	26	0	2	18	13.00	2025-12-29 15:00:52.020664-05	2025-12-29 15:00:52.020664-05
+839	4573699	20251116_TB@BUF	2025	11	BUF	4	0	0	0	0	\N	\N	2025-12-29 15:00:52.020664-05	2025-12-29 15:00:52.020664-05
+840	4573699	20251109_BUF@MIA	2025	10	BUF	4	1	26	1	2	26	26.00	2025-12-29 15:00:52.020664-05	2025-12-29 15:00:52.020664-05
+841	4573699	20251102_KC@BUF	2025	9	BUF	4	1	18	0	2	18	18.00	2025-12-29 15:00:52.020664-05	2025-12-29 15:00:52.020664-05
+842	4573699	20251026_BUF@CAR	2025	8	BUF	4	2	15	0	3	12	7.50	2025-12-29 15:00:52.020664-05	2025-12-29 15:00:52.020664-05
+843	4573699	20251013_BUF@ATL	2025	6	BUF	4	0	0	0	0	\N	\N	2025-12-29 15:00:52.020664-05	2025-12-29 15:00:52.020664-05
+844	4573699	20251005_NE@BUF	2025	5	BUF	4	0	0	0	0	\N	\N	2025-12-29 15:00:52.020664-05	2025-12-29 15:00:52.020664-05
+845	4573699	20250928_NO@BUF	2025	4	BUF	4	1	15	0	1	15	15.00	2025-12-29 15:00:52.020664-05	2025-12-29 15:00:52.020664-05
+846	4573699	20250918_MIA@BUF	2025	3	BUF	4	1	5	1	1	5	5.00	2025-12-29 15:00:52.020664-05	2025-12-29 15:00:52.020664-05
+847	4573699	20250914_BUF@NYJ	2025	2	BUF	4	1	5	0	1	5	5.00	2025-12-29 15:00:52.020664-05	2025-12-29 15:00:52.020664-05
+848	4573699	20250907_BAL@BUF	2025	1	BUF	4	1	29	0	1	29	29.00	2025-12-29 15:00:52.020664-05	2025-12-29 15:00:52.020664-05
+849	16731	20251228_PHI@BUF	2025	17	BUF	4	4	101	0	6	50	25.30	2025-12-29 15:00:52.296594-05	2025-12-29 15:00:52.296594-05
+850	16731	20251221_BUF@CLE	2025	16	BUF	4	0	0	0	1	0	0.00	2025-12-29 15:00:52.296594-05	2025-12-29 15:00:52.296594-05
+851	16731	20251214_BUF@NE	2025	15	BUF	4	0	0	0	3	0	0.00	2025-12-29 15:00:52.296594-05	2025-12-29 15:00:52.296594-05
+852	16731	20251207_CIN@BUF	2025	14	BUF	4	0	0	0	0	\N	\N	2025-12-29 15:00:52.296594-05	2025-12-29 15:00:52.296594-05
+853	16731	20251130_BUF@PIT	2025	13	BUF	4	1	13	0	1	13	13.00	2025-12-29 15:00:52.296594-05	2025-12-29 15:00:52.296594-05
+854	16731	20251109_NO@CAR	2025	10	NO	23	0	0	0	0	\N	\N	2025-12-29 15:00:52.296594-05	2025-12-29 15:00:52.296594-05
+855	16731	20251102_NO@LAR	2025	9	NO	23	2	16	0	3	10	8.00	2025-12-29 15:00:52.296594-05	2025-12-29 15:00:52.296594-05
+856	16731	20251026_TB@NO	2025	8	NO	23	3	22	0	4	11	7.30	2025-12-29 15:00:52.296594-05	2025-12-29 15:00:52.296594-05
+857	16731	20251019_NO@CHI	2025	7	NO	23	1	3	0	1	3	3.00	2025-12-29 15:00:52.296594-05	2025-12-29 15:00:52.296594-05
+858	16731	20251012_NE@NO	2025	6	NO	23	1	21	0	1	21	21.00	2025-12-29 15:00:52.296594-05	2025-12-29 15:00:52.296594-05
+859	16731	20251005_NYG@NO	2025	5	NO	23	1	5	0	1	5	5.00	2025-12-29 15:00:52.296594-05	2025-12-29 15:00:52.296594-05
+860	16731	20250928_NO@BUF	2025	4	NO	23	3	22	0	4	9	7.30	2025-12-29 15:00:52.296594-05	2025-12-29 15:00:52.296594-05
+861	16731	20250921_NO@SEA	2025	3	NO	23	3	24	0	5	12	8.00	2025-12-29 15:00:52.296594-05	2025-12-29 15:00:52.296594-05
+862	16731	20250914_SF@NO	2025	2	NO	23	2	26	0	2	20	13.00	2025-12-29 15:00:52.296594-05	2025-12-29 15:00:52.296594-05
+863	16731	20250907_ARI@NO	2025	1	NO	23	3	26	0	4	12	8.70	2025-12-29 15:00:52.296594-05	2025-12-29 15:00:52.296594-05
+864	16731	20250105_WSH@DAL	2024	18	DAL	9	3	15	0	9	8	5.00	2025-12-29 15:00:52.296594-05	2025-12-29 15:00:52.296594-05
+865	16731	20241229_DAL@PHI	2024	17	DAL	9	4	52	0	8	22	13.00	2025-12-29 15:00:52.296594-05	2025-12-29 15:00:52.296594-05
+866	16731	20241222_TB@DAL	2024	16	DAL	9	3	48	0	3	29	16.00	2025-12-29 15:00:52.296594-05	2025-12-29 15:00:52.296594-05
+867	16731	20241215_DAL@CAR	2024	15	DAL	9	3	34	0	5	18	11.30	2025-12-29 15:00:52.296594-05	2025-12-29 15:00:52.296594-05
+868	16731	20241209_CIN@DAL	2024	14	DAL	9	1	3	1	3	3	3.00	2025-12-29 15:00:52.296594-05	2025-12-29 15:00:52.296594-05
+869	16731	20241128_NYG@DAL	2024	13	DAL	9	3	16	1	7	11	5.30	2025-12-29 15:00:52.296594-05	2025-12-29 15:00:52.296594-05
+870	16731	20240926_DAL@NYG	2024	4	DAL	9	1	16	0	4	16	16.00	2025-12-29 15:00:52.296594-05	2025-12-29 15:00:52.296594-05
+871	16731	20240922_BAL@DAL	2024	3	DAL	9	2	16	0	6	9	8.00	2025-12-29 15:00:52.296594-05	2025-12-29 15:00:52.296594-05
+872	16731	20240915_NO@DAL	2024	2	DAL	9	2	19	0	2	11	9.50	2025-12-29 15:00:52.296594-05	2025-12-29 15:00:52.296594-05
+873	16731	20240908_DAL@CLE	2024	1	DAL	9	4	40	1	7	21	10.00	2025-12-29 15:00:52.296594-05	2025-12-29 15:00:52.296594-05
+874	4385690	20251221_BUF@CLE	2025	16	BUF	4	0	0	0	1	0	0.00	2025-12-29 15:00:52.576206-05	2025-12-29 15:00:52.576206-05
+875	4385690	20251214_BUF@NE	2025	15	BUF	4	3	34	0	4	24	11.30	2025-12-29 15:00:52.576206-05	2025-12-29 15:00:52.576206-05
+876	4385690	20251207_CIN@BUF	2025	14	BUF	4	4	41	1	5	20	10.30	2025-12-29 15:00:52.576206-05	2025-12-29 15:00:52.576206-05
+877	4385690	20251109_BUF@MIA	2025	10	BUF	4	2	37	0	3	20	18.50	2025-12-29 15:00:52.576206-05	2025-12-29 15:00:52.576206-05
+878	4385690	20251102_KC@BUF	2025	9	BUF	4	6	101	1	6	47	16.80	2025-12-29 15:00:52.576206-05	2025-12-29 15:00:52.576206-05
+879	4385690	20251026_BUF@CAR	2025	8	BUF	4	1	23	0	3	23	23.00	2025-12-29 15:00:52.576206-05	2025-12-29 15:00:52.576206-05
+880	4385690	20251005_NE@BUF	2025	5	BUF	4	6	108	0	6	23	18.00	2025-12-29 15:00:52.576206-05	2025-12-29 15:00:52.576206-05
+881	4385690	20250928_NO@BUF	2025	4	BUF	4	1	28	1	2	28	28.00	2025-12-29 15:00:52.576206-05	2025-12-29 15:00:52.576206-05
+882	4385690	20250918_MIA@BUF	2025	3	BUF	4	5	66	1	6	20	13.20	2025-12-29 15:00:52.576206-05	2025-12-29 15:00:52.576206-05
+883	4385690	20250914_BUF@NYJ	2025	2	BUF	4	4	37	0	6	18	9.30	2025-12-29 15:00:52.576206-05	2025-12-29 15:00:52.576206-05
+884	4385690	20250907_BAL@BUF	2025	1	BUF	4	4	48	1	4	22	12.00	2025-12-29 15:00:52.576206-05	2025-12-29 15:00:52.576206-05
+885	4385690	20241229_NYJ@BUF	2024	17	BUF	4	2	24	0	2	13	12.00	2025-12-29 15:00:52.576206-05	2025-12-29 15:00:52.576206-05
+886	4385690	20241222_NE@BUF	2024	16	BUF	4	4	15	0	7	7	3.80	2025-12-29 15:00:52.576206-05	2025-12-29 15:00:52.576206-05
+887	4385690	20241215_BUF@DET	2024	15	BUF	4	4	53	0	7	29	13.30	2025-12-29 15:00:52.576206-05	2025-12-29 15:00:52.576206-05
+888	4385690	20241110_BUF@IND	2024	10	BUF	4	2	24	0	5	12	12.00	2025-12-29 15:00:52.576206-05	2025-12-29 15:00:52.576206-05
+889	4385690	20241103_MIA@BUF	2024	9	BUF	4	4	32	0	10	15	8.00	2025-12-29 15:00:52.576206-05	2025-12-29 15:00:52.576206-05
+890	4385690	20241027_BUF@SEA	2024	8	BUF	4	4	31	1	7	12	7.80	2025-12-29 15:00:52.576206-05	2025-12-29 15:00:52.576206-05
+891	4385690	20241020_TEN@BUF	2024	7	BUF	4	3	52	0	6	25	17.30	2025-12-29 15:00:52.576206-05	2025-12-29 15:00:52.576206-05
+892	4385690	20241014_BUF@NYJ	2024	6	BUF	4	6	51	0	7	15	8.50	2025-12-29 15:00:52.576206-05	2025-12-29 15:00:52.576206-05
+893	4385690	20241006_BUF@HOU	2024	5	BUF	4	2	34	0	6	26	17.00	2025-12-29 15:00:52.576206-05	2025-12-29 15:00:52.576206-05
+894	4385690	20240929_BUF@BAL	2024	4	BUF	4	5	47	0	7	25	9.40	2025-12-29 15:00:52.576206-05	2025-12-29 15:00:52.576206-05
+895	4385690	20240923_JAX@BUF	2024	3	BUF	4	3	41	1	5	28	13.70	2025-12-29 15:00:52.576206-05	2025-12-29 15:00:52.576206-05
+896	4385690	20240912_BUF@MIA	2024	2	BUF	4	4	33	0	4	9	8.30	2025-12-29 15:00:52.576206-05	2025-12-29 15:00:52.576206-05
+897	4385690	20240908_ARI@BUF	2024	1	BUF	4	1	11	0	2	11	11.00	2025-12-29 15:00:52.576206-05	2025-12-29 15:00:52.576206-05
+898	4373678	20251228_PHI@BUF	2025	17	BUF	4	6	35	0	7	13	5.80	2025-12-29 15:00:52.914523-05	2025-12-29 15:00:52.914523-05
+899	4373678	20251221_BUF@CLE	2025	16	BUF	4	4	34	0	5	18	8.50	2025-12-29 15:00:52.914523-05	2025-12-29 15:00:52.914523-05
+900	4373678	20251214_BUF@NE	2025	15	BUF	4	5	65	0	5	37	13.00	2025-12-29 15:00:52.914523-05	2025-12-29 15:00:52.914523-05
+901	4373678	20251207_CIN@BUF	2025	14	BUF	4	2	16	1	3	11	8.00	2025-12-29 15:00:52.914523-05	2025-12-29 15:00:52.914523-05
+902	4373678	20251130_BUF@PIT	2025	13	BUF	4	1	5	0	4	5	5.00	2025-12-29 15:00:52.914523-05	2025-12-29 15:00:52.914523-05
+903	4373678	20251120_BUF@HOU	2025	12	BUF	4	8	110	0	10	44	13.80	2025-12-29 15:00:52.914523-05	2025-12-29 15:00:52.914523-05
+904	4373678	20251116_TB@BUF	2025	11	BUF	4	1	-3	0	3	-3	-3.00	2025-12-29 15:00:52.914523-05	2025-12-29 15:00:52.914523-05
+905	4373678	20251109_BUF@MIA	2025	10	BUF	4	7	58	0	9	24	8.30	2025-12-29 15:00:52.914523-05	2025-12-29 15:00:52.914523-05
+906	4373678	20251102_KC@BUF	2025	9	BUF	4	7	43	0	8	20	6.10	2025-12-29 15:00:52.914523-05	2025-12-29 15:00:52.914523-05
+907	4373678	20251026_BUF@CAR	2025	8	BUF	4	6	88	1	7	54	14.70	2025-12-29 15:00:52.914523-05	2025-12-29 15:00:52.914523-05
+908	4373678	20251013_BUF@ATL	2025	6	BUF	4	3	33	0	5	15	11.00	2025-12-29 15:00:52.914523-05	2025-12-29 15:00:52.914523-05
+909	4373678	20251005_NE@BUF	2025	5	BUF	4	6	45	0	9	18	7.50	2025-12-29 15:00:52.914523-05	2025-12-29 15:00:52.914523-05
+910	4373678	20250928_NO@BUF	2025	4	BUF	4	5	69	1	5	43	13.80	2025-12-29 15:00:52.914523-05	2025-12-29 15:00:52.914523-05
+911	4373678	20250918_MIA@BUF	2025	3	BUF	4	4	45	1	4	15	11.30	2025-12-29 15:00:52.914523-05	2025-12-29 15:00:52.914523-05
+912	4373678	20250914_BUF@NYJ	2025	2	BUF	4	1	12	0	2	12	12.00	2025-12-29 15:00:52.914523-05	2025-12-29 15:00:52.914523-05
+913	4373678	20250907_BAL@BUF	2025	1	BUF	4	6	64	0	9	26	10.70	2025-12-29 15:00:52.914523-05	2025-12-29 15:00:52.914523-05
+914	4373678	20241229_NYJ@BUF	2024	17	BUF	4	3	25	0	6	12	8.30	2025-12-29 15:00:52.914523-05	2025-12-29 15:00:52.914523-05
+915	4373678	20241222_NE@BUF	2024	16	BUF	4	2	22	0	6	12	11.00	2025-12-29 15:00:52.914523-05	2025-12-29 15:00:52.914523-05
+916	4373678	20241215_BUF@DET	2024	15	BUF	4	6	39	1	7	10	6.50	2025-12-29 15:00:52.914523-05	2025-12-29 15:00:52.914523-05
+917	4373678	20241208_BUF@LAR	2024	14	BUF	4	5	106	1	8	51	21.20	2025-12-29 15:00:52.914523-05	2025-12-29 15:00:52.914523-05
+918	4373678	20241201_SF@BUF	2024	13	BUF	4	4	30	0	7	18	7.50	2025-12-29 15:00:52.914523-05	2025-12-29 15:00:52.914523-05
+919	4373678	20241117_KC@BUF	2024	11	BUF	4	8	70	0	12	22	8.80	2025-12-29 15:00:52.914523-05	2025-12-29 15:00:52.914523-05
+920	4373678	20241110_BUF@IND	2024	10	BUF	4	6	58	0	9	30	9.70	2025-12-29 15:00:52.914523-05	2025-12-29 15:00:52.914523-05
+921	4373678	20241103_MIA@BUF	2024	9	BUF	4	6	50	0	7	14	8.30	2025-12-29 15:00:52.914523-05	2025-12-29 15:00:52.914523-05
+922	4373678	20241027_BUF@SEA	2024	8	BUF	4	9	107	0	10	35	11.90	2025-12-29 15:00:52.914523-05	2025-12-29 15:00:52.914523-05
+923	4373678	20241020_TEN@BUF	2024	7	BUF	4	7	65	0	7	20	9.30	2025-12-29 15:00:52.914523-05	2025-12-29 15:00:52.914523-05
+924	4373678	20241014_BUF@NYJ	2024	6	BUF	4	2	19	0	2	10	9.50	2025-12-29 15:00:52.914523-05	2025-12-29 15:00:52.914523-05
+925	4373678	20240929_BUF@BAL	2024	4	BUF	4	4	62	0	5	52	15.50	2025-12-29 15:00:52.914523-05	2025-12-29 15:00:52.914523-05
+926	4373678	20240923_JAX@BUF	2024	3	BUF	4	6	72	1	6	27	12.00	2025-12-29 15:00:52.914523-05	2025-12-29 15:00:52.914523-05
+927	4373678	20240912_BUF@MIA	2024	2	BUF	4	5	54	0	5	21	10.80	2025-12-29 15:00:52.914523-05	2025-12-29 15:00:52.914523-05
+928	4373678	20240908_ARI@BUF	2024	1	BUF	4	3	42	1	3	19	14.00	2025-12-29 15:00:52.914523-05	2025-12-29 15:00:52.914523-05
+929	4683243	20251228_SEA@CAR	2025	17	CAR	5	1	5	0	2	5	5.00	2025-12-29 15:00:53.222084-05	2025-12-29 15:00:53.222084-05
+930	4683243	20251221_TB@CAR	2025	16	CAR	5	3	23	0	3	10	7.70	2025-12-29 15:00:53.222084-05	2025-12-29 15:00:53.222084-05
+931	4683243	20251214_CAR@NO	2025	15	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:53.222084-05	2025-12-29 15:00:53.222084-05
+932	4683243	20251130_LAR@CAR	2025	13	CAR	5	3	20	0	3	7	6.70	2025-12-29 15:00:53.222084-05	2025-12-29 15:00:53.222084-05
+933	4683243	20251124_CAR@SF	2025	12	CAR	5	0	0	0	1	0	0.00	2025-12-29 15:00:53.222084-05	2025-12-29 15:00:53.222084-05
+934	4683243	20251116_CAR@ATL	2025	11	CAR	5	2	28	0	2	25	14.00	2025-12-29 15:00:53.222084-05	2025-12-29 15:00:53.222084-05
+935	4683243	20251109_NO@CAR	2025	10	CAR	5	0	0	0	1	0	0.00	2025-12-29 15:00:53.222084-05	2025-12-29 15:00:53.222084-05
+936	4683243	20251102_CAR@GB	2025	9	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:53.222084-05	2025-12-29 15:00:53.222084-05
+937	4683243	20251026_BUF@CAR	2025	8	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:53.222084-05	2025-12-29 15:00:53.222084-05
+938	4683243	20251019_CAR@NYJ	2025	7	CAR	5	2	24	0	3	13	12.00	2025-12-29 15:00:53.222084-05	2025-12-29 15:00:53.222084-05
+939	4683243	20251012_DAL@CAR	2025	6	CAR	5	1	21	0	1	21	21.00	2025-12-29 15:00:53.222084-05	2025-12-29 15:00:53.222084-05
+940	4683243	20251005_MIA@CAR	2025	5	CAR	5	1	4	1	1	4	4.00	2025-12-29 15:00:53.222084-05	2025-12-29 15:00:53.222084-05
+941	4683243	20250928_CAR@NE	2025	4	CAR	5	3	23	1	4	16	7.70	2025-12-29 15:00:53.222084-05	2025-12-29 15:00:53.222084-05
+942	4683243	20250921_ATL@CAR	2025	3	CAR	5	1	9	0	1	9	9.00	2025-12-29 15:00:53.222084-05	2025-12-29 15:00:53.222084-05
+943	4683243	20250914_CAR@ARI	2025	2	CAR	5	1	9	0	1	9	9.00	2025-12-29 15:00:53.222084-05	2025-12-29 15:00:53.222084-05
+944	4683243	20250907_CAR@JAX	2025	1	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:53.222084-05	2025-12-29 15:00:53.222084-05
+945	3135321	20251012_DAL@CAR	2025	6	CAR	5	1	7	0	2	7	7.00	2025-12-29 15:00:53.472016-05	2025-12-29 15:00:53.472016-05
+946	3135321	20251005_MIA@CAR	2025	5	CAR	5	1	7	0	3	7	7.00	2025-12-29 15:00:53.472016-05	2025-12-29 15:00:53.472016-05
+947	3135321	20250928_CAR@NE	2025	4	CAR	5	2	10	0	2	5	5.00	2025-12-29 15:00:53.472016-05	2025-12-29 15:00:53.472016-05
+948	3135321	20250921_ATL@CAR	2025	3	CAR	5	2	6	0	4	5	3.00	2025-12-29 15:00:53.472016-05	2025-12-29 15:00:53.472016-05
+949	3135321	20250914_CAR@ARI	2025	2	CAR	5	7	48	2	9	15	6.90	2025-12-29 15:00:53.472016-05	2025-12-29 15:00:53.472016-05
+950	3135321	20250907_CAR@JAX	2025	1	CAR	5	2	11	0	6	6	5.50	2025-12-29 15:00:53.472016-05	2025-12-29 15:00:53.472016-05
+951	4685472	20251228_SEA@CAR	2025	17	CAR	5	1	5	0	4	5	5.00	2025-12-29 15:00:53.636256-05	2025-12-29 15:00:53.636256-05
+952	4685472	20251221_TB@CAR	2025	16	CAR	5	6	73	1	10	22	12.20	2025-12-29 15:00:53.636256-05	2025-12-29 15:00:53.636256-05
+953	4685472	20251214_CAR@NO	2025	15	CAR	5	2	25	0	4	21	12.50	2025-12-29 15:00:53.636256-05	2025-12-29 15:00:53.636256-05
+954	4685472	20251130_LAR@CAR	2025	13	CAR	5	1	43	1	2	43	43.00	2025-12-29 15:00:53.636256-05	2025-12-29 15:00:53.636256-05
+955	4685472	20251124_CAR@SF	2025	12	CAR	5	2	35	1	7	29	17.50	2025-12-29 15:00:53.636256-05	2025-12-29 15:00:53.636256-05
+956	4685472	20251116_CAR@ATL	2025	11	CAR	5	8	130	2	12	39	16.30	2025-12-29 15:00:53.636256-05	2025-12-29 15:00:53.636256-05
+957	4685472	20251109_NO@CAR	2025	10	CAR	5	5	60	0	8	26	12.00	2025-12-29 15:00:53.636256-05	2025-12-29 15:00:53.636256-05
+958	4685472	20251102_CAR@GB	2025	9	CAR	5	4	46	0	6	16	11.50	2025-12-29 15:00:53.636256-05	2025-12-29 15:00:53.636256-05
+959	4685472	20251026_BUF@CAR	2025	8	CAR	5	7	99	0	10	19	14.10	2025-12-29 15:00:53.636256-05	2025-12-29 15:00:53.636256-05
+960	4685472	20251019_CAR@NYJ	2025	7	CAR	5	3	33	0	5	11	11.00	2025-12-29 15:00:53.636256-05	2025-12-29 15:00:53.636256-05
+961	4685472	20251012_DAL@CAR	2025	6	CAR	5	3	29	2	5	19	9.70	2025-12-29 15:00:53.636256-05	2025-12-29 15:00:53.636256-05
+962	4685472	20251005_MIA@CAR	2025	5	CAR	5	6	73	0	8	29	12.20	2025-12-29 15:00:53.636256-05	2025-12-29 15:00:53.636256-05
+963	4685472	20250928_CAR@NE	2025	4	CAR	5	4	62	0	8	22	15.50	2025-12-29 15:00:53.636256-05	2025-12-29 15:00:53.636256-05
+964	4685472	20250921_ATL@CAR	2025	3	CAR	5	3	48	0	8	23	16.00	2025-12-29 15:00:53.636256-05	2025-12-29 15:00:53.636256-05
+965	4685472	20250914_CAR@ARI	2025	2	CAR	5	6	100	0	10	40	16.70	2025-12-29 15:00:53.636256-05	2025-12-29 15:00:53.636256-05
+966	4685472	20250907_CAR@JAX	2025	1	CAR	5	5	68	0	9	21	13.60	2025-12-29 15:00:53.636256-05	2025-12-29 15:00:53.636256-05
+967	4431588	20251228_SEA@CAR	2025	17	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:53.829698-05	2025-12-29 15:00:53.829698-05
+968	4431588	20251221_TB@CAR	2025	16	CAR	5	2	9	1	2	6	4.50	2025-12-29 15:00:53.829698-05	2025-12-29 15:00:53.829698-05
+969	4431588	20251214_CAR@NO	2025	15	CAR	5	2	5	0	2	6	2.50	2025-12-29 15:00:53.829698-05	2025-12-29 15:00:53.829698-05
+970	4431588	20251130_LAR@CAR	2025	13	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:53.829698-05	2025-12-29 15:00:53.829698-05
+971	4431588	20251124_CAR@SF	2025	12	CAR	5	1	6	0	1	6	6.00	2025-12-29 15:00:53.829698-05	2025-12-29 15:00:53.829698-05
+972	4431588	20251116_CAR@ATL	2025	11	CAR	5	4	22	0	4	10	5.50	2025-12-29 15:00:53.829698-05	2025-12-29 15:00:53.829698-05
+973	4431588	20251109_NO@CAR	2025	10	CAR	5	5	32	0	5	13	6.40	2025-12-29 15:00:53.829698-05	2025-12-29 15:00:53.829698-05
+974	4431588	20251102_CAR@GB	2025	9	CAR	5	1	5	0	1	5	5.00	2025-12-29 15:00:53.829698-05	2025-12-29 15:00:53.829698-05
+975	4431588	20251026_BUF@CAR	2025	8	CAR	5	3	19	0	3	9	6.30	2025-12-29 15:00:53.829698-05	2025-12-29 15:00:53.829698-05
+976	4431588	20251019_CAR@NYJ	2025	7	CAR	5	0	0	0	2	0	0.00	2025-12-29 15:00:53.829698-05	2025-12-29 15:00:53.829698-05
+977	4431588	20250921_ATL@CAR	2025	3	CAR	5	2	11	0	2	7	5.50	2025-12-29 15:00:53.829698-05	2025-12-29 15:00:53.829698-05
+978	4431588	20250914_CAR@ARI	2025	2	CAR	5	7	54	0	9	12	7.70	2025-12-29 15:00:53.829698-05	2025-12-29 15:00:53.829698-05
+979	4431588	20250907_CAR@JAX	2025	1	CAR	5	2	27	0	3	18	13.50	2025-12-29 15:00:53.829698-05	2025-12-29 15:00:53.829698-05
+980	4431588	20250105_CAR@ATL	2024	18	CAR	5	3	35	0	5	28	11.70	2025-12-29 15:00:53.829698-05	2025-12-29 15:00:53.829698-05
+981	4431588	20241229_CAR@TB	2024	17	CAR	5	1	5	0	1	5	5.00	2025-12-29 15:00:53.829698-05	2025-12-29 15:00:53.829698-05
+982	4431588	20241222_ARI@CAR	2024	16	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:53.829698-05	2025-12-29 15:00:53.829698-05
+983	4431588	20241215_DAL@CAR	2024	15	CAR	5	0	0	0	1	0	0.00	2025-12-29 15:00:53.829698-05	2025-12-29 15:00:53.829698-05
+984	4431588	20241208_CAR@PHI	2024	14	CAR	5	0	0	0	1	0	0.00	2025-12-29 15:00:53.829698-05	2025-12-29 15:00:53.829698-05
+985	4431588	20241124_KC@CAR	2024	12	CAR	5	3	49	0	3	28	16.30	2025-12-29 15:00:53.829698-05	2025-12-29 15:00:53.829698-05
+986	4431588	20241110_NYG@CAR	2024	10	CAR	5	2	8	1	2	5	4.00	2025-12-29 15:00:53.829698-05	2025-12-29 15:00:53.829698-05
+987	4431588	20241103_NO@CAR	2024	9	CAR	5	4	87	0	5	46	21.80	2025-12-29 15:00:53.829698-05	2025-12-29 15:00:53.829698-05
+988	4431588	20241027_CAR@DEN	2024	8	CAR	5	1	7	0	1	7	7.00	2025-12-29 15:00:53.829698-05	2025-12-29 15:00:53.829698-05
+989	4431588	20241020_CAR@WSH	2024	7	CAR	5	6	61	0	6	29	10.20	2025-12-29 15:00:53.829698-05	2025-12-29 15:00:53.829698-05
+990	4431588	20241013_ATL@CAR	2024	6	CAR	5	5	49	0	7	21	9.80	2025-12-29 15:00:53.829698-05	2025-12-29 15:00:53.829698-05
+991	4431588	20241006_CAR@CHI	2024	5	CAR	5	3	13	0	5	10	4.30	2025-12-29 15:00:53.829698-05	2025-12-29 15:00:53.829698-05
+992	4431588	20240929_CIN@CAR	2024	4	CAR	5	2	16	0	2	11	8.00	2025-12-29 15:00:53.829698-05	2025-12-29 15:00:53.829698-05
+993	4431588	20240922_CAR@LV	2024	3	CAR	5	0	0	0	1	0	0.00	2025-12-29 15:00:53.829698-05	2025-12-29 15:00:53.829698-05
+994	4431588	20240915_LAC@CAR	2024	2	CAR	5	2	8	0	2	6	4.00	2025-12-29 15:00:53.829698-05	2025-12-29 15:00:53.829698-05
+995	4431588	20240908_CAR@NO	2024	1	CAR	5	1	4	0	1	4	4.00	2025-12-29 15:00:53.829698-05	2025-12-29 15:00:53.829698-05
+996	4360763	20251228_SEA@CAR	2025	17	CAR	5	0	0	0	1	0	0.00	2025-12-29 15:00:54.044637-05	2025-12-29 15:00:54.044637-05
+997	4360763	20251221_TB@CAR	2025	16	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:54.044637-05	2025-12-29 15:00:54.044637-05
+998	4360763	20251214_CAR@NO	2025	15	CAR	5	0	0	0	1	0	0.00	2025-12-29 15:00:54.044637-05	2025-12-29 15:00:54.044637-05
+999	4360763	20251130_LAR@CAR	2025	13	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:54.044637-05	2025-12-29 15:00:54.044637-05
+1000	4360763	20251124_CAR@SF	2025	12	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:54.044637-05	2025-12-29 15:00:54.044637-05
+1001	4360763	20251116_CAR@ATL	2025	11	CAR	5	2	17	0	2	11	8.50	2025-12-29 15:00:54.044637-05	2025-12-29 15:00:54.044637-05
+1002	4360763	20251102_CAR@GB	2025	9	CAR	5	1	8	0	1	8	8.00	2025-12-29 15:00:54.044637-05	2025-12-29 15:00:54.044637-05
+1003	4360763	20251026_BUF@CAR	2025	8	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:54.044637-05	2025-12-29 15:00:54.044637-05
+1004	4360763	20251019_CAR@NYJ	2025	7	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:54.044637-05	2025-12-29 15:00:54.044637-05
+1005	4360763	20251012_DAL@CAR	2025	6	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:54.044637-05	2025-12-29 15:00:54.044637-05
+1006	4360763	20251005_MIA@CAR	2025	5	CAR	5	1	9	0	1	9	9.00	2025-12-29 15:00:54.044637-05	2025-12-29 15:00:54.044637-05
+1007	4360763	20250928_CAR@NE	2025	4	CAR	5	3	36	0	4	24	12.00	2025-12-29 15:00:54.044637-05	2025-12-29 15:00:54.044637-05
+1008	4360763	20250921_ATL@CAR	2025	3	CAR	5	2	15	0	2	8	7.50	2025-12-29 15:00:54.044637-05	2025-12-29 15:00:54.044637-05
+1009	4360763	20250914_CAR@ARI	2025	2	CAR	5	3	48	0	5	26	16.00	2025-12-29 15:00:54.044637-05	2025-12-29 15:00:54.044637-05
+1010	4360763	20250907_CAR@JAX	2025	1	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:54.044637-05	2025-12-29 15:00:54.044637-05
+1011	4360763	20241229_ATL@WSH	2024	17	WSH	32	0	0	0	0	\N	\N	2025-12-29 15:00:54.044637-05	2025-12-29 15:00:54.044637-05
+1012	4360763	20241006_CLE@WSH	2024	5	WSH	32	1	-2	0	1	-2	-2.00	2025-12-29 15:00:54.044637-05	2025-12-29 15:00:54.044637-05
+1013	4708486	20251228_SEA@CAR	2025	17	CAR	5	2	9	0	2	7	4.50	2025-12-29 15:00:54.248527-05	2025-12-29 15:00:54.248527-05
+1014	4708486	20251221_TB@CAR	2025	16	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:54.248527-05	2025-12-29 15:00:54.248527-05
+1015	4708486	20251214_CAR@NO	2025	15	CAR	5	1	7	0	1	7	7.00	2025-12-29 15:00:54.248527-05	2025-12-29 15:00:54.248527-05
+1016	4708486	20251130_LAR@CAR	2025	13	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:54.248527-05	2025-12-29 15:00:54.248527-05
+1017	4708486	20251124_CAR@SF	2025	12	CAR	5	1	11	0	1	11	11.00	2025-12-29 15:00:54.248527-05	2025-12-29 15:00:54.248527-05
+1018	4708486	20251116_CAR@ATL	2025	11	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:54.248527-05	2025-12-29 15:00:54.248527-05
+1019	4708486	20251109_NO@CAR	2025	10	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:54.248527-05	2025-12-29 15:00:54.248527-05
+1020	4708486	20251102_CAR@GB	2025	9	CAR	5	1	1	0	2	1	1.00	2025-12-29 15:00:54.248527-05	2025-12-29 15:00:54.248527-05
+1021	4708486	20251026_BUF@CAR	2025	8	CAR	5	0	0	0	1	0	0.00	2025-12-29 15:00:54.248527-05	2025-12-29 15:00:54.248527-05
+1022	4708486	20251019_CAR@NYJ	2025	7	CAR	5	1	8	0	2	8	8.00	2025-12-29 15:00:54.248527-05	2025-12-29 15:00:54.248527-05
+1023	4708486	20251012_DAL@CAR	2025	6	CAR	5	2	36	0	2	34	18.00	2025-12-29 15:00:54.248527-05	2025-12-29 15:00:54.248527-05
+1024	4708486	20251005_MIA@CAR	2025	5	CAR	5	2	21	0	3	17	10.50	2025-12-29 15:00:54.248527-05	2025-12-29 15:00:54.248527-05
+1025	4361988	20251130_LAR@CAR	2025	13	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:54.541171-05	2025-12-29 15:00:54.541171-05
+1026	4361988	20251012_DAL@CAR	2025	6	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:54.541171-05	2025-12-29 15:00:54.541171-05
+1027	4361988	20251005_MIA@CAR	2025	5	CAR	5	1	11	0	1	11	11.00	2025-12-29 15:00:54.541171-05	2025-12-29 15:00:54.541171-05
+1028	4361988	20250928_CAR@NE	2025	4	CAR	5	2	17	0	2	9	8.50	2025-12-29 15:00:54.541171-05	2025-12-29 15:00:54.541171-05
+1029	4361988	20241117_JAX@DET	2024	11	DET	11	0	0	0	0	\N	\N	2025-12-29 15:00:54.541171-05	2025-12-29 15:00:54.541171-05
+1030	4695883	20251228_SEA@CAR	2025	17	CAR	5	2	16	0	2	8	8.00	2025-12-29 15:00:54.754613-05	2025-12-29 15:00:54.754613-05
+1031	4695883	20251221_TB@CAR	2025	16	CAR	5	3	47	0	5	34	15.70	2025-12-29 15:00:54.754613-05	2025-12-29 15:00:54.754613-05
+1032	4695883	20251214_CAR@NO	2025	15	CAR	5	4	60	1	4	32	15.00	2025-12-29 15:00:54.754613-05	2025-12-29 15:00:54.754613-05
+1033	4695883	20251130_LAR@CAR	2025	13	CAR	5	4	74	1	6	33	18.50	2025-12-29 15:00:54.754613-05	2025-12-29 15:00:54.754613-05
+1034	4695883	20251124_CAR@SF	2025	12	CAR	5	3	32	0	4	18	10.70	2025-12-29 15:00:54.754613-05	2025-12-29 15:00:54.754613-05
+1035	4695883	20251116_CAR@ATL	2025	11	CAR	5	4	52	0	4	21	13.00	2025-12-29 15:00:54.754613-05	2025-12-29 15:00:54.754613-05
+1036	4695883	20251109_NO@CAR	2025	10	CAR	5	3	21	0	4	10	7.00	2025-12-29 15:00:54.754613-05	2025-12-29 15:00:54.754613-05
+1037	4695883	20251102_CAR@GB	2025	9	CAR	5	1	9	0	1	9	9.00	2025-12-29 15:00:54.754613-05	2025-12-29 15:00:54.754613-05
+1038	4695883	20251026_BUF@CAR	2025	8	CAR	5	3	36	0	4	22	12.00	2025-12-29 15:00:54.754613-05	2025-12-29 15:00:54.754613-05
+1039	4695883	20251019_CAR@NYJ	2025	7	CAR	5	0	0	0	2	0	0.00	2025-12-29 15:00:54.754613-05	2025-12-29 15:00:54.754613-05
+1040	4695883	20250105_CAR@ATL	2024	18	CAR	5	7	62	0	7	14	8.90	2025-12-29 15:00:54.754613-05	2025-12-29 15:00:54.754613-05
+1041	4695883	20241229_CAR@TB	2024	17	CAR	5	2	35	0	2	20	17.50	2025-12-29 15:00:54.754613-05	2025-12-29 15:00:54.754613-05
+1042	4695883	20241222_ARI@CAR	2024	16	CAR	5	2	8	0	5	4	4.00	2025-12-29 15:00:54.754613-05	2025-12-29 15:00:54.754613-05
+1043	4695883	20241215_DAL@CAR	2024	15	CAR	5	4	110	1	6	83	27.50	2025-12-29 15:00:54.754613-05	2025-12-29 15:00:54.754613-05
+1044	4695883	20241110_NYG@CAR	2024	10	CAR	5	3	41	0	8	24	13.70	2025-12-29 15:00:54.754613-05	2025-12-29 15:00:54.754613-05
+1045	4695883	20241103_NO@CAR	2024	9	CAR	5	2	36	0	3	18	18.00	2025-12-29 15:00:54.754613-05	2025-12-29 15:00:54.754613-05
+1046	4695883	20241027_CAR@DEN	2024	8	CAR	5	4	78	1	6	29	19.50	2025-12-29 15:00:54.754613-05	2025-12-29 15:00:54.754613-05
+1047	4695883	20241020_CAR@WSH	2024	7	CAR	5	1	10	0	1	10	10.00	2025-12-29 15:00:54.754613-05	2025-12-29 15:00:54.754613-05
+1048	4695883	20241013_ATL@CAR	2024	6	CAR	5	3	30	0	3	15	10.00	2025-12-29 15:00:54.754613-05	2025-12-29 15:00:54.754613-05
+1049	4695883	20241006_CAR@CHI	2024	5	CAR	5	4	68	0	4	31	17.00	2025-12-29 15:00:54.754613-05	2025-12-29 15:00:54.754613-05
+1050	4695883	20240929_CIN@CAR	2024	4	CAR	5	0	0	0	1	0	0.00	2025-12-29 15:00:54.754613-05	2025-12-29 15:00:54.754613-05
+1051	4430034	20251228_SEA@CAR	2025	17	CAR	5	1	3	0	1	3	3.00	2025-12-29 15:00:55.066209-05	2025-12-29 15:00:55.066209-05
+1052	4430034	20251221_TB@CAR	2025	16	CAR	5	1	12	0	3	12	12.00	2025-12-29 15:00:55.066209-05	2025-12-29 15:00:55.066209-05
+1053	4430034	20251214_CAR@NO	2025	15	CAR	5	2	39	0	3	34	19.50	2025-12-29 15:00:55.066209-05	2025-12-29 15:00:55.066209-05
+1054	4430034	20251130_LAR@CAR	2025	13	CAR	5	1	1	0	2	1	1.00	2025-12-29 15:00:55.066209-05	2025-12-29 15:00:55.066209-05
+1055	4430034	20251124_CAR@SF	2025	12	CAR	5	3	22	0	5	14	7.30	2025-12-29 15:00:55.066209-05	2025-12-29 15:00:55.066209-05
+1056	4430034	20251116_CAR@ATL	2025	11	CAR	5	4	83	1	8	36	20.80	2025-12-29 15:00:55.066209-05	2025-12-29 15:00:55.066209-05
+1057	4430034	20251109_NO@CAR	2025	10	CAR	5	0	0	0	1	0	0.00	2025-12-29 15:00:55.066209-05	2025-12-29 15:00:55.066209-05
+1058	4430034	20251102_CAR@GB	2025	9	CAR	5	1	22	0	3	22	22.00	2025-12-29 15:00:55.066209-05	2025-12-29 15:00:55.066209-05
+1059	4430034	20251026_BUF@CAR	2025	8	CAR	5	2	17	0	3	11	8.50	2025-12-29 15:00:55.066209-05	2025-12-29 15:00:55.066209-05
+1060	4430034	20251019_CAR@NYJ	2025	7	CAR	5	9	92	1	11	33	10.20	2025-12-29 15:00:55.066209-05	2025-12-29 15:00:55.066209-05
+1061	4430034	20251012_DAL@CAR	2025	6	CAR	5	2	11	0	2	15	5.50	2025-12-29 15:00:55.066209-05	2025-12-29 15:00:55.066209-05
+1062	4430034	20251005_MIA@CAR	2025	5	CAR	5	2	31	1	3	24	15.50	2025-12-29 15:00:55.066209-05	2025-12-29 15:00:55.066209-05
+1063	4430034	20250914_CAR@ARI	2025	2	CAR	5	1	-2	0	8	-2	-2.00	2025-12-29 15:00:55.066209-05	2025-12-29 15:00:55.066209-05
+1064	4430034	20250907_CAR@JAX	2025	1	CAR	5	3	10	0	7	9	3.30	2025-12-29 15:00:55.066209-05	2025-12-29 15:00:55.066209-05
+1065	4430034	20250105_CAR@ATL	2024	18	CAR	5	3	30	0	5	15	10.00	2025-12-29 15:00:55.066209-05	2025-12-29 15:00:55.066209-05
+1066	4430034	20241229_CAR@TB	2024	17	CAR	5	5	28	0	9	10	5.60	2025-12-29 15:00:55.066209-05	2025-12-29 15:00:55.066209-05
+1067	4430034	20241215_DAL@CAR	2024	15	CAR	5	2	7	0	3	5	3.50	2025-12-29 15:00:55.066209-05	2025-12-29 15:00:55.066209-05
+1068	4430034	20241208_CAR@PHI	2024	14	CAR	5	2	39	0	8	31	19.50	2025-12-29 15:00:55.066209-05	2025-12-29 15:00:55.066209-05
+1069	4430034	20241201_TB@CAR	2024	13	CAR	5	4	53	0	8	21	13.30	2025-12-29 15:00:55.066209-05	2025-12-29 15:00:55.066209-05
+1070	4430034	20241124_KC@CAR	2024	12	CAR	5	4	56	0	6	34	14.00	2025-12-29 15:00:55.066209-05	2025-12-29 15:00:55.066209-05
+1071	4430034	20241110_NYG@CAR	2024	10	CAR	5	3	40	0	4	23	13.30	2025-12-29 15:00:55.066209-05	2025-12-29 15:00:55.066209-05
+1072	4430034	20241103_NO@CAR	2024	9	CAR	5	4	33	1	6	26	8.30	2025-12-29 15:00:55.066209-05	2025-12-29 15:00:55.066209-05
+1073	4430034	20241027_CAR@DEN	2024	8	CAR	5	4	34	1	7	23	8.50	2025-12-29 15:00:55.066209-05	2025-12-29 15:00:55.066209-05
+1074	4430034	20241020_CAR@WSH	2024	7	CAR	5	2	3	0	3	6	1.50	2025-12-29 15:00:55.066209-05	2025-12-29 15:00:55.066209-05
+1075	4430034	20241013_ATL@CAR	2024	6	CAR	5	3	23	1	4	13	7.70	2025-12-29 15:00:55.066209-05	2025-12-29 15:00:55.066209-05
+1076	4430034	20241006_CAR@CHI	2024	5	CAR	5	1	8	0	1	8	8.00	2025-12-29 15:00:55.066209-05	2025-12-29 15:00:55.066209-05
+1077	4430034	20240929_CIN@CAR	2024	4	CAR	5	6	66	1	10	17	11.00	2025-12-29 15:00:55.066209-05	2025-12-29 15:00:55.066209-05
+1078	4430034	20240922_CAR@LV	2024	3	CAR	5	2	42	0	3	35	21.00	2025-12-29 15:00:55.066209-05	2025-12-29 15:00:55.066209-05
+1079	4430034	20240915_LAC@CAR	2024	2	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:55.066209-05	2025-12-29 15:00:55.066209-05
+1080	4430034	20240908_CAR@NO	2024	1	CAR	5	4	35	0	7	18	8.80	2025-12-29 15:00:55.066209-05	2025-12-29 15:00:55.066209-05
+1081	4372780	20251228_SEA@CAR	2025	17	CAR	5	1	6	0	1	6	6.00	2025-12-29 15:00:55.365345-05	2025-12-29 15:00:55.365345-05
+1082	4372780	20251221_TB@CAR	2025	16	CAR	5	1	6	0	1	6	6.00	2025-12-29 15:00:55.365345-05	2025-12-29 15:00:55.365345-05
+1083	4372780	20251214_CAR@NO	2025	15	CAR	5	2	13	0	4	8	6.50	2025-12-29 15:00:55.365345-05	2025-12-29 15:00:55.365345-05
+1084	4372780	20251130_LAR@CAR	2025	13	CAR	5	1	2	0	2	2	2.00	2025-12-29 15:00:55.365345-05	2025-12-29 15:00:55.365345-05
+1085	4372780	20251124_CAR@SF	2025	12	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:55.365345-05	2025-12-29 15:00:55.365345-05
+1086	4372780	20251116_CAR@ATL	2025	11	CAR	5	1	54	0	2	54	54.00	2025-12-29 15:00:55.365345-05	2025-12-29 15:00:55.365345-05
+1087	4372780	20251109_NO@CAR	2025	10	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:55.365345-05	2025-12-29 15:00:55.365345-05
+1088	4372780	20251102_CAR@GB	2025	9	CAR	5	0	0	0	1	0	0.00	2025-12-29 15:00:55.365345-05	2025-12-29 15:00:55.365345-05
+1089	4372780	20251026_BUF@CAR	2025	8	CAR	5	1	4	0	1	4	4.00	2025-12-29 15:00:55.365345-05	2025-12-29 15:00:55.365345-05
+1090	4372780	20251019_CAR@NYJ	2025	7	CAR	5	1	0	0	1	0	0.00	2025-12-29 15:00:55.365345-05	2025-12-29 15:00:55.365345-05
+1091	4372780	20251012_DAL@CAR	2025	6	CAR	5	4	39	0	4	16	9.80	2025-12-29 15:00:55.365345-05	2025-12-29 15:00:55.365345-05
+1092	4372780	20251005_MIA@CAR	2025	5	CAR	5	1	7	0	2	7	7.00	2025-12-29 15:00:55.365345-05	2025-12-29 15:00:55.365345-05
+1093	4372780	20250928_CAR@NE	2025	4	CAR	5	5	42	1	8	15	8.40	2025-12-29 15:00:55.365345-05	2025-12-29 15:00:55.365345-05
+1094	4372780	20250921_ATL@CAR	2025	3	CAR	5	2	16	0	2	12	8.00	2025-12-29 15:00:55.365345-05	2025-12-29 15:00:55.365345-05
+1095	4372780	20250914_CAR@ARI	2025	2	CAR	5	3	20	0	3	9	6.70	2025-12-29 15:00:55.365345-05	2025-12-29 15:00:55.365345-05
+1096	4372780	20250907_CAR@JAX	2025	1	CAR	5	1	2	0	1	2	2.00	2025-12-29 15:00:55.365345-05	2025-12-29 15:00:55.365345-05
+1097	4372780	20250105_CAR@ATL	2024	18	CAR	5	2	30	1	3	18	15.00	2025-12-29 15:00:55.365345-05	2025-12-29 15:00:55.365345-05
+1098	4372780	20241229_CAR@TB	2024	17	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:55.365345-05	2025-12-29 15:00:55.365345-05
+1099	4372780	20241222_ARI@CAR	2024	16	CAR	5	3	32	0	3	15	10.70	2025-12-29 15:00:55.365345-05	2025-12-29 15:00:55.365345-05
+1100	4372780	20241215_DAL@CAR	2024	15	CAR	5	2	15	0	2	8	7.50	2025-12-29 15:00:55.365345-05	2025-12-29 15:00:55.365345-05
+1101	4372780	20241208_CAR@PHI	2024	14	CAR	5	1	3	1	2	3	3.00	2025-12-29 15:00:55.365345-05	2025-12-29 15:00:55.365345-05
+1102	4372780	20241201_TB@CAR	2024	13	CAR	5	5	77	0	8	38	15.40	2025-12-29 15:00:55.365345-05	2025-12-29 15:00:55.365345-05
+1103	4372780	20241124_KC@CAR	2024	12	CAR	5	1	5	0	2	5	5.00	2025-12-29 15:00:55.365345-05	2025-12-29 15:00:55.365345-05
+1104	4372780	20241027_CAR@DEN	2024	8	CAR	5	2	13	0	3	8	6.50	2025-12-29 15:00:55.365345-05	2025-12-29 15:00:55.365345-05
+1105	4372780	20241006_CAR@CHI	2024	5	CAR	5	1	7	0	2	7	7.00	2025-12-29 15:00:55.365345-05	2025-12-29 15:00:55.365345-05
+1106	4372780	20240929_CIN@CAR	2024	4	CAR	5	0	0	0	0	\N	\N	2025-12-29 15:00:55.365345-05	2025-12-29 15:00:55.365345-05
+1107	4372780	20240922_CAR@LV	2024	3	CAR	5	3	29	0	3	20	9.70	2025-12-29 15:00:55.365345-05	2025-12-29 15:00:55.365345-05
+1108	4372780	20240915_LAC@CAR	2024	2	CAR	5	3	23	0	4	12	7.70	2025-12-29 15:00:55.365345-05	2025-12-29 15:00:55.365345-05
+1109	3052897	20251228_CHI@SF	2025	17	CHI	6	1	11	0	1	11	11.00	2025-12-29 15:00:55.585365-05	2025-12-29 15:00:55.585365-05
+1110	3052897	20251220_GB@CHI	2025	16	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:55.585365-05	2025-12-29 15:00:55.585365-05
+1111	3052897	20251214_CLE@CHI	2025	15	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:55.585365-05	2025-12-29 15:00:55.585365-05
+1112	3052897	20251207_CHI@GB	2025	14	CHI	6	1	2	0	1	2	2.00	2025-12-29 15:00:55.585365-05	2025-12-29 15:00:55.585365-05
+1113	3052897	20251128_CHI@PHI	2025	13	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:55.585365-05	2025-12-29 15:00:55.585365-05
+1114	3052897	20251123_PIT@CHI	2025	12	CHI	6	1	4	0	1	4	4.00	2025-12-29 15:00:55.585365-05	2025-12-29 15:00:55.585365-05
+1115	3052897	20251116_CHI@MIN	2025	11	CHI	6	1	8	0	3	8	8.00	2025-12-29 15:00:55.585365-05	2025-12-29 15:00:55.585365-05
+1116	3052897	20251109_NYG@CHI	2025	10	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:55.585365-05	2025-12-29 15:00:55.585365-05
+1117	3052897	20251102_CHI@CIN	2025	9	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:55.585365-05	2025-12-29 15:00:55.585365-05
+1118	3052897	20251026_CHI@BAL	2025	8	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:55.585365-05	2025-12-29 15:00:55.585365-05
+1119	3052897	20251019_NO@CHI	2025	7	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:55.585365-05	2025-12-29 15:00:55.585365-05
+1120	3052897	20251013_CHI@WSH	2025	6	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:55.585365-05	2025-12-29 15:00:55.585365-05
+1121	3052897	20250928_CHI@LV	2025	4	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:55.585365-05	2025-12-29 15:00:55.585365-05
+1122	3052897	20250921_DAL@CHI	2025	3	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:55.585365-05	2025-12-29 15:00:55.585365-05
+1123	3052897	20250914_CHI@DET	2025	2	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:55.585365-05	2025-12-29 15:00:55.585365-05
+1124	3052897	20250908_MIN@CHI	2025	1	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:55.585365-05	2025-12-29 15:00:55.585365-05
+1125	3052897	20250105_MIA@NYJ	2024	18	MIA	20	0	0	0	1	0	0.00	2025-12-29 15:00:55.585365-05	2025-12-29 15:00:55.585365-05
+1126	3052897	20241229_MIA@CLE	2024	17	MIA	20	0	0	0	0	\N	\N	2025-12-29 15:00:55.585365-05	2025-12-29 15:00:55.585365-05
+1127	3052897	20241222_SF@MIA	2024	16	MIA	20	1	5	0	2	5	5.00	2025-12-29 15:00:55.585365-05	2025-12-29 15:00:55.585365-05
+1128	3052897	20241215_MIA@HOU	2024	15	MIA	20	1	8	0	1	8	8.00	2025-12-29 15:00:55.585365-05	2025-12-29 15:00:55.585365-05
+1129	3052897	20241208_NYJ@MIA	2024	14	MIA	20	0	0	0	1	0	0.00	2025-12-29 15:00:55.585365-05	2025-12-29 15:00:55.585365-05
+1130	3052897	20241128_MIA@GB	2024	13	MIA	20	1	8	0	1	8	8.00	2025-12-29 15:00:55.585365-05	2025-12-29 15:00:55.585365-05
+1131	3052897	20241124_NE@MIA	2024	12	MIA	20	1	8	0	1	8	8.00	2025-12-29 15:00:55.585365-05	2025-12-29 15:00:55.585365-05
+1132	3052897	20241117_LV@MIA	2024	11	MIA	20	1	3	0	1	3	3.00	2025-12-29 15:00:55.585365-05	2025-12-29 15:00:55.585365-05
+1133	3052897	20241111_MIA@LAR	2024	10	MIA	20	1	6	0	1	6	6.00	2025-12-29 15:00:55.585365-05	2025-12-29 15:00:55.585365-05
+1134	3052897	20241103_MIA@BUF	2024	9	MIA	20	1	4	0	1	4	4.00	2025-12-29 15:00:55.585365-05	2025-12-29 15:00:55.585365-05
+1135	3052897	20241027_ARI@MIA	2024	8	MIA	20	0	0	0	0	\N	\N	2025-12-29 15:00:55.585365-05	2025-12-29 15:00:55.585365-05
+1136	3052897	20241020_MIA@IND	2024	7	MIA	20	0	0	0	0	\N	\N	2025-12-29 15:00:55.585365-05	2025-12-29 15:00:55.585365-05
+1137	3052897	20241006_MIA@NE	2024	5	MIA	20	0	0	0	1	0	0.00	2025-12-29 15:00:55.585365-05	2025-12-29 15:00:55.585365-05
+1138	3052897	20240930_TEN@MIA	2024	4	MIA	20	0	0	0	0	\N	\N	2025-12-29 15:00:55.585365-05	2025-12-29 15:00:55.585365-05
+1139	3052897	20240922_MIA@SEA	2024	3	MIA	20	1	3	0	2	3	3.00	2025-12-29 15:00:55.585365-05	2025-12-29 15:00:55.585365-05
+1140	3052897	20240912_BUF@MIA	2024	2	MIA	20	1	8	0	1	8	8.00	2025-12-29 15:00:55.585365-05	2025-12-29 15:00:55.585365-05
+1141	3052897	20240908_JAX@MIA	2024	1	MIA	20	0	0	0	3	0	0.00	2025-12-29 15:00:55.585365-05	2025-12-29 15:00:55.585365-05
+1142	4685183	20251228_CHI@SF	2025	17	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:55.821976-05	2025-12-29 15:00:55.821976-05
+1143	4685278	20251228_CHI@SF	2025	17	CHI	6	8	138	1	9	35	17.30	2025-12-29 15:00:56.030153-05	2025-12-29 15:00:56.030153-05
+1144	4685278	20251214_CLE@CHI	2025	15	CHI	6	6	84	0	7	40	14.00	2025-12-29 15:00:56.030153-05	2025-12-29 15:00:56.030153-05
+1145	4685278	20251207_CHI@GB	2025	14	CHI	6	4	67	0	6	27	16.80	2025-12-29 15:00:56.030153-05	2025-12-29 15:00:56.030153-05
+1146	4685278	20251128_CHI@PHI	2025	13	CHI	6	4	33	0	6	11	8.30	2025-12-29 15:00:56.030153-05	2025-12-29 15:00:56.030153-05
+1147	4685278	20251123_PIT@CHI	2025	12	CHI	6	3	46	0	5	19	15.30	2025-12-29 15:00:56.030153-05	2025-12-29 15:00:56.030153-05
+1148	4685278	20251116_CHI@MIN	2025	11	CHI	6	3	27	0	5	16	9.00	2025-12-29 15:00:56.030153-05	2025-12-29 15:00:56.030153-05
+1149	4685278	20251109_NYG@CHI	2025	10	CHI	6	3	51	0	3	27	17.00	2025-12-29 15:00:56.030153-05	2025-12-29 15:00:56.030153-05
+1150	4685278	20251026_CHI@BAL	2025	8	CHI	6	1	-1	0	1	-1	-1.00	2025-12-29 15:00:56.030153-05	2025-12-29 15:00:56.030153-05
+1151	4685278	20251019_NO@CHI	2025	7	CHI	6	1	22	0	2	22	22.00	2025-12-29 15:00:56.030153-05	2025-12-29 15:00:56.030153-05
+1152	4685278	20251013_CHI@WSH	2025	6	CHI	6	4	51	0	4	37	12.80	2025-12-29 15:00:56.030153-05	2025-12-29 15:00:56.030153-05
+1153	4685278	20250928_CHI@LV	2025	4	CHI	6	2	-4	0	2	0	-2.00	2025-12-29 15:00:56.030153-05	2025-12-29 15:00:56.030153-05
+1154	4685278	20250921_DAL@CHI	2025	3	CHI	6	3	101	1	3	65	33.70	2025-12-29 15:00:56.030153-05	2025-12-29 15:00:56.030153-05
+1155	4685278	20250914_CHI@DET	2025	2	CHI	6	1	5	0	2	5	5.00	2025-12-29 15:00:56.030153-05	2025-12-29 15:00:56.030153-05
+1156	4685278	20250908_MIN@CHI	2025	1	CHI	6	1	-3	0	1	-3	-3.00	2025-12-29 15:00:56.030153-05	2025-12-29 15:00:56.030153-05
+1157	5160110	20251228_CHI@SF	2025	17	CHI	6	2	30	0	4	19	15.00	2025-12-29 15:00:56.265845-05	2025-12-29 15:00:56.265845-05
+1158	5160110	20251220_GB@CHI	2025	16	CHI	6	2	21	1	3	15	10.50	2025-12-29 15:00:56.265845-05	2025-12-29 15:00:56.265845-05
+1159	5160110	20251207_CHI@GB	2025	14	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:56.265845-05	2025-12-29 15:00:56.265845-05
+1160	5160110	20251102_CHI@CIN	2025	9	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:56.265845-05	2025-12-29 15:00:56.265845-05
+1161	5160110	20251026_CHI@BAL	2025	8	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:56.265845-05	2025-12-29 15:00:56.265845-05
+1162	5160110	20250928_CHI@LV	2025	4	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:56.265845-05	2025-12-29 15:00:56.265845-05
+1163	5160110	20250921_DAL@CHI	2025	3	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:56.265845-05	2025-12-29 15:00:56.265845-05
+1164	5160110	20250908_MIN@CHI	2025	1	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:56.265845-05	2025-12-29 15:00:56.265845-05
+1165	4039050	20251228_CHI@SF	2025	17	CHI	6	0	0	0	1	0	0.00	2025-12-29 15:00:56.55459-05	2025-12-29 15:00:56.55459-05
+1166	4039050	20251220_GB@CHI	2025	16	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:56.55459-05	2025-12-29 15:00:56.55459-05
+1167	4039050	20251214_CLE@CHI	2025	15	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:56.55459-05	2025-12-29 15:00:56.55459-05
+1168	4039050	20251207_CHI@GB	2025	14	CHI	6	1	24	0	1	24	24.00	2025-12-29 15:00:56.55459-05	2025-12-29 15:00:56.55459-05
+1169	4039050	20251128_CHI@PHI	2025	13	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:56.55459-05	2025-12-29 15:00:56.55459-05
+1170	4039050	20251123_PIT@CHI	2025	12	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:56.55459-05	2025-12-29 15:00:56.55459-05
+1171	4039050	20251116_CHI@MIN	2025	11	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:56.55459-05	2025-12-29 15:00:56.55459-05
+1172	4039050	20251109_NYG@CHI	2025	10	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:56.55459-05	2025-12-29 15:00:56.55459-05
+1173	4039050	20251102_CHI@CIN	2025	9	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:56.55459-05	2025-12-29 15:00:56.55459-05
+1174	4039050	20251026_CHI@BAL	2025	8	CHI	6	1	2	0	3	2	2.00	2025-12-29 15:00:56.55459-05	2025-12-29 15:00:56.55459-05
+1175	4039050	20251019_NO@CHI	2025	7	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:56.55459-05	2025-12-29 15:00:56.55459-05
+1176	4039050	20251013_CHI@WSH	2025	6	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:56.55459-05	2025-12-29 15:00:56.55459-05
+1177	4039050	20250928_CHI@LV	2025	4	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:56.55459-05	2025-12-29 15:00:56.55459-05
+1178	4039050	20250921_DAL@CHI	2025	3	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:56.55459-05	2025-12-29 15:00:56.55459-05
+1179	4039050	20250914_CHI@DET	2025	2	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:56.55459-05	2025-12-29 15:00:56.55459-05
+1180	4039050	20250908_MIN@CHI	2025	1	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:56.55459-05	2025-12-29 15:00:56.55459-05
+1181	4039050	20250105_JAX@IND	2024	18	JAX	15	0	0	0	0	\N	\N	2025-12-29 15:00:56.55459-05	2025-12-29 15:00:56.55459-05
+1182	4039050	20241229_TEN@JAX	2024	17	JAX	15	1	4	0	1	4	4.00	2025-12-29 15:00:56.55459-05	2025-12-29 15:00:56.55459-05
+1183	4039050	20241222_JAX@LV	2024	16	JAX	15	1	3	0	1	3	3.00	2025-12-29 15:00:56.55459-05	2025-12-29 15:00:56.55459-05
+1184	4039050	20241215_NYJ@JAX	2024	15	JAX	15	3	42	0	4	28	14.00	2025-12-29 15:00:56.55459-05	2025-12-29 15:00:56.55459-05
+1185	4039050	20241208_JAX@TEN	2024	14	JAX	15	3	8	0	3	5	2.70	2025-12-29 15:00:56.55459-05	2025-12-29 15:00:56.55459-05
+1186	4039050	20241201_HOU@JAX	2024	13	JAX	15	2	23	0	4	18	11.50	2025-12-29 15:00:56.55459-05	2025-12-29 15:00:56.55459-05
+1187	4039050	20241117_JAX@DET	2024	11	JAX	15	0	0	0	2	0	0.00	2025-12-29 15:00:56.55459-05	2025-12-29 15:00:56.55459-05
+1188	4039050	20241110_MIN@JAX	2024	10	JAX	15	0	0	0	0	\N	\N	2025-12-29 15:00:56.55459-05	2025-12-29 15:00:56.55459-05
+1189	4039050	20241006_IND@JAX	2024	5	JAX	15	0	0	0	0	\N	\N	2025-12-29 15:00:56.55459-05	2025-12-29 15:00:56.55459-05
+1190	4039050	20240929_JAX@HOU	2024	4	JAX	15	0	0	0	0	\N	\N	2025-12-29 15:00:56.55459-05	2025-12-29 15:00:56.55459-05
+1191	4039050	20240923_JAX@BUF	2024	3	JAX	15	1	-1	0	1	-1	-1.00	2025-12-29 15:00:56.55459-05	2025-12-29 15:00:56.55459-05
+1192	4039050	20240915_CLE@JAX	2024	2	JAX	15	0	0	0	0	\N	\N	2025-12-29 15:00:56.55459-05	2025-12-29 15:00:56.55459-05
+1193	4039050	20240908_JAX@MIA	2024	1	JAX	15	0	0	0	0	\N	\N	2025-12-29 15:00:56.55459-05	2025-12-29 15:00:56.55459-05
+1194	4258595	20251228_CHI@SF	2025	17	CHI	6	2	16	0	3	9	8.00	2025-12-29 15:00:56.909384-05	2025-12-29 15:00:56.909384-05
+1195	4258595	20251220_GB@CHI	2025	16	CHI	6	2	14	0	3	11	7.00	2025-12-29 15:00:56.909384-05	2025-12-29 15:00:56.909384-05
+1196	4258595	20251214_CLE@CHI	2025	15	CHI	6	2	28	0	4	17	14.00	2025-12-29 15:00:56.909384-05	2025-12-29 15:00:56.909384-05
+1197	4258595	20251207_CHI@GB	2025	14	CHI	6	2	42	0	3	26	21.00	2025-12-29 15:00:56.909384-05	2025-12-29 15:00:56.909384-05
+1198	4258595	20251128_CHI@PHI	2025	13	CHI	6	3	36	1	3	28	12.00	2025-12-29 15:00:56.909384-05	2025-12-29 15:00:56.909384-05
+1199	4258595	20251123_PIT@CHI	2025	12	CHI	6	1	3	0	1	3	3.00	2025-12-29 15:00:56.909384-05	2025-12-29 15:00:56.909384-05
+1200	4258595	20251116_CHI@MIN	2025	11	CHI	6	5	45	0	5	14	9.00	2025-12-29 15:00:56.909384-05	2025-12-29 15:00:56.909384-05
+1201	4258595	20251109_NYG@CHI	2025	10	CHI	6	1	5	0	2	5	5.00	2025-12-29 15:00:56.909384-05	2025-12-29 15:00:56.909384-05
+1202	4258595	20251102_CHI@CIN	2025	9	CHI	6	1	10	0	2	10	10.00	2025-12-29 15:00:56.909384-05	2025-12-29 15:00:56.909384-05
+1203	4258595	20251019_NO@CHI	2025	7	CHI	6	1	16	0	1	16	16.00	2025-12-29 15:00:56.909384-05	2025-12-29 15:00:56.909384-05
+1204	4258595	20251013_CHI@WSH	2025	6	CHI	6	1	0	0	2	0	0.00	2025-12-29 15:00:56.909384-05	2025-12-29 15:00:56.909384-05
+1205	4258595	20250928_CHI@LV	2025	4	CHI	6	3	46	0	9	29	15.30	2025-12-29 15:00:56.909384-05	2025-12-29 15:00:56.909384-05
+1206	4258595	20250921_DAL@CHI	2025	3	CHI	6	1	10	1	1	10	10.00	2025-12-29 15:00:56.909384-05	2025-12-29 15:00:56.909384-05
+1207	4258595	20250914_CHI@DET	2025	2	CHI	6	2	29	0	2	22	14.50	2025-12-29 15:00:56.909384-05	2025-12-29 15:00:56.909384-05
+1208	4258595	20250908_MIN@CHI	2025	1	CHI	6	1	31	0	4	31	31.00	2025-12-29 15:00:56.909384-05	2025-12-29 15:00:56.909384-05
+1209	4258595	20250105_CHI@GB	2024	18	CHI	6	2	3	0	2	7	1.50	2025-12-29 15:00:56.909384-05	2025-12-29 15:00:56.909384-05
+1210	4258595	20241226_SEA@CHI	2024	17	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:56.909384-05	2025-12-29 15:00:56.909384-05
+1211	4258595	20241222_DET@CHI	2024	16	CHI	6	2	9	1	2	8	4.50	2025-12-29 15:00:56.909384-05	2025-12-29 15:00:56.909384-05
+1212	4258595	20241216_CHI@MIN	2024	15	CHI	6	1	14	0	1	14	14.00	2025-12-29 15:00:56.909384-05	2025-12-29 15:00:56.909384-05
+1213	4258595	20241208_CHI@SF	2024	14	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:56.909384-05	2025-12-29 15:00:56.909384-05
+1214	4258595	20241128_CHI@DET	2024	13	CHI	6	3	26	0	3	14	8.70	2025-12-29 15:00:56.909384-05	2025-12-29 15:00:56.909384-05
+1215	4258595	20241124_MIN@CHI	2024	12	CHI	6	7	64	0	10	20	9.10	2025-12-29 15:00:56.909384-05	2025-12-29 15:00:56.909384-05
+1216	4258595	20241117_GB@CHI	2024	11	CHI	6	3	42	0	3	25	14.00	2025-12-29 15:00:56.909384-05	2025-12-29 15:00:56.909384-05
+1217	4258595	20241110_NE@CHI	2024	10	CHI	6	2	13	0	4	7	6.50	2025-12-29 15:00:56.909384-05	2025-12-29 15:00:56.909384-05
+1218	4258595	20241103_CHI@ARI	2024	9	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:56.909384-05	2025-12-29 15:00:56.909384-05
+1219	4258595	20241027_CHI@WSH	2024	8	CHI	6	1	14	0	1	14	14.00	2025-12-29 15:00:56.909384-05	2025-12-29 15:00:56.909384-05
+1220	4258595	20241013_JAX@CHI	2024	6	CHI	6	5	70	2	5	31	14.00	2025-12-29 15:00:56.909384-05	2025-12-29 15:00:56.909384-05
+1221	4258595	20241006_CAR@CHI	2024	5	CHI	6	3	57	0	4	26	19.00	2025-12-29 15:00:56.909384-05	2025-12-29 15:00:56.909384-05
+1222	4258595	20240929_LAR@CHI	2024	4	CHI	6	3	34	0	3	22	11.30	2025-12-29 15:00:56.909384-05	2025-12-29 15:00:56.909384-05
+1223	4258595	20240922_CHI@IND	2024	3	CHI	6	10	97	1	11	19	9.70	2025-12-29 15:00:56.909384-05	2025-12-29 15:00:56.909384-05
+1224	4258595	20240915_CHI@HOU	2024	2	CHI	6	4	27	0	5	12	6.80	2025-12-29 15:00:56.909384-05	2025-12-29 15:00:56.909384-05
+1225	4258595	20240908_TEN@CHI	2024	1	CHI	6	1	4	0	1	4	4.00	2025-12-29 15:00:56.909384-05	2025-12-29 15:00:56.909384-05
+1226	4431299	20251128_CHI@PHI	2025	13	CHI	6	2	8	0	6	5	4.00	2025-12-29 15:00:57.219799-05	2025-12-29 15:00:57.219799-05
+1227	4431299	20251123_PIT@CHI	2025	12	CHI	6	3	53	0	9	22	17.70	2025-12-29 15:00:57.219799-05	2025-12-29 15:00:57.219799-05
+1228	4431299	20251116_CHI@MIN	2025	11	CHI	6	2	41	0	6	24	20.50	2025-12-29 15:00:57.219799-05	2025-12-29 15:00:57.219799-05
+1229	4431299	20251109_NYG@CHI	2025	10	CHI	6	6	86	1	10	27	14.30	2025-12-29 15:00:57.219799-05	2025-12-29 15:00:57.219799-05
+1230	4431299	20251102_CHI@CIN	2025	9	CHI	6	0	0	0	3	0	0.00	2025-12-29 15:00:57.219799-05	2025-12-29 15:00:57.219799-05
+1231	4431299	20251026_CHI@BAL	2025	8	CHI	6	7	114	0	10	27	16.30	2025-12-29 15:00:57.219799-05	2025-12-29 15:00:57.219799-05
+1232	4431299	20251019_NO@CHI	2025	7	CHI	6	2	31	0	6	20	15.50	2025-12-29 15:00:57.219799-05	2025-12-29 15:00:57.219799-05
+1233	4431299	20251013_CHI@WSH	2025	6	CHI	6	2	32	0	5	21	16.00	2025-12-29 15:00:57.219799-05	2025-12-29 15:00:57.219799-05
+1234	4431299	20250928_CHI@LV	2025	4	CHI	6	4	69	1	8	27	17.30	2025-12-29 15:00:57.219799-05	2025-12-29 15:00:57.219799-05
+1235	4431299	20250921_DAL@CHI	2025	3	CHI	6	3	62	1	7	35	20.70	2025-12-29 15:00:57.219799-05	2025-12-29 15:00:57.219799-05
+1236	4431299	20250914_CHI@DET	2025	2	CHI	6	7	128	2	11	37	18.30	2025-12-29 15:00:57.219799-05	2025-12-29 15:00:57.219799-05
+1237	4431299	20250908_MIN@CHI	2025	1	CHI	6	6	37	1	9	17	6.20	2025-12-29 15:00:57.219799-05	2025-12-29 15:00:57.219799-05
+1238	4431299	20250105_CHI@GB	2024	18	CHI	6	2	18	0	2	15	9.00	2025-12-29 15:00:57.219799-05	2025-12-29 15:00:57.219799-05
+1239	4431299	20241226_SEA@CHI	2024	17	CHI	6	1	15	0	4	15	15.00	2025-12-29 15:00:57.219799-05	2025-12-29 15:00:57.219799-05
+1240	4431299	20241222_DET@CHI	2024	16	CHI	6	4	77	0	7	30	19.30	2025-12-29 15:00:57.219799-05	2025-12-29 15:00:57.219799-05
+1241	4431299	20241216_CHI@MIN	2024	15	CHI	6	2	39	0	7	29	19.50	2025-12-29 15:00:57.219799-05	2025-12-29 15:00:57.219799-05
+1242	4431299	20241208_CHI@SF	2024	14	CHI	6	4	42	2	5	17	10.50	2025-12-29 15:00:57.219799-05	2025-12-29 15:00:57.219799-05
+1243	4431299	20241128_CHI@DET	2024	13	CHI	6	2	25	0	6	19	12.50	2025-12-29 15:00:57.219799-05	2025-12-29 15:00:57.219799-05
+1244	4431299	20241124_MIN@CHI	2024	12	CHI	6	5	39	0	10	14	7.80	2025-12-29 15:00:57.219799-05	2025-12-29 15:00:57.219799-05
+1245	4431299	20241117_GB@CHI	2024	11	CHI	6	6	65	0	10	21	10.80	2025-12-29 15:00:57.219799-05	2025-12-29 15:00:57.219799-05
+1246	4431299	20241110_NE@CHI	2024	10	CHI	6	3	23	0	6	11	7.70	2025-12-29 15:00:57.219799-05	2025-12-29 15:00:57.219799-05
+1247	4431299	20241103_CHI@ARI	2024	9	CHI	6	5	104	0	7	44	20.80	2025-12-29 15:00:57.219799-05	2025-12-29 15:00:57.219799-05
+1248	4431299	20241027_CHI@WSH	2024	8	CHI	6	3	41	0	6	16	13.70	2025-12-29 15:00:57.219799-05	2025-12-29 15:00:57.219799-05
+1249	4431299	20241013_JAX@CHI	2024	6	CHI	6	2	40	0	2	28	20.00	2025-12-29 15:00:57.219799-05	2025-12-29 15:00:57.219799-05
+1250	4431299	20241006_CAR@CHI	2024	5	CHI	6	5	40	0	6	11	8.00	2025-12-29 15:00:57.219799-05	2025-12-29 15:00:57.219799-05
+1251	4431299	20240929_LAR@CHI	2024	4	CHI	6	1	10	0	3	10	10.00	2025-12-29 15:00:57.219799-05	2025-12-29 15:00:57.219799-05
+1252	4431299	20240922_CHI@IND	2024	3	CHI	6	6	112	1	11	47	18.70	2025-12-29 15:00:57.219799-05	2025-12-29 15:00:57.219799-05
+1253	4431299	20240915_CHI@HOU	2024	2	CHI	6	2	33	0	5	27	16.50	2025-12-29 15:00:57.219799-05	2025-12-29 15:00:57.219799-05
+1254	4431299	20240908_TEN@CHI	2024	1	CHI	6	1	11	0	4	11	11.00	2025-12-29 15:00:57.219799-05	2025-12-29 15:00:57.219799-05
+1255	4723086	20251228_CHI@SF	2025	17	CHI	6	6	94	1	10	36	15.70	2025-12-29 15:00:57.445067-05	2025-12-29 15:00:57.445067-05
+1256	4723086	20251220_GB@CHI	2025	16	CHI	6	3	30	0	5	14	10.00	2025-12-29 15:00:57.445067-05	2025-12-29 15:00:57.445067-05
+1257	4723086	20251214_CLE@CHI	2025	15	CHI	6	4	63	0	5	24	15.80	2025-12-29 15:00:57.445067-05	2025-12-29 15:00:57.445067-05
+1258	4723086	20251207_CHI@GB	2025	14	CHI	6	4	29	1	5	11	7.30	2025-12-29 15:00:57.445067-05	2025-12-29 15:00:57.445067-05
+1259	4723086	20251128_CHI@PHI	2025	13	CHI	6	3	28	0	6	13	9.30	2025-12-29 15:00:57.445067-05	2025-12-29 15:00:57.445067-05
+1260	4723086	20251123_PIT@CHI	2025	12	CHI	6	4	49	1	5	17	12.30	2025-12-29 15:00:57.445067-05	2025-12-29 15:00:57.445067-05
+1261	4723086	20251116_CHI@MIN	2025	11	CHI	6	3	40	0	4	24	13.30	2025-12-29 15:00:57.445067-05	2025-12-29 15:00:57.445067-05
+1262	4723086	20251109_NYG@CHI	2025	10	CHI	6	4	55	0	4	20	13.80	2025-12-29 15:00:57.445067-05	2025-12-29 15:00:57.445067-05
+1263	4723086	20251102_CHI@CIN	2025	9	CHI	6	6	118	2	7	58	19.70	2025-12-29 15:00:57.445067-05	2025-12-29 15:00:57.445067-05
+1264	4723086	20251026_CHI@BAL	2025	8	CHI	6	3	38	0	5	18	12.70	2025-12-29 15:00:57.445067-05	2025-12-29 15:00:57.445067-05
+1265	4723086	20251019_NO@CHI	2025	7	CHI	6	3	24	0	4	9	8.00	2025-12-29 15:00:57.445067-05	2025-12-29 15:00:57.445067-05
+1266	4723086	20251013_CHI@WSH	2025	6	CHI	6	2	11	0	3	6	5.50	2025-12-29 15:00:57.445067-05	2025-12-29 15:00:57.445067-05
+1267	4723086	20250921_DAL@CHI	2025	3	CHI	6	1	31	0	3	31	31.00	2025-12-29 15:00:57.445067-05	2025-12-29 15:00:57.445067-05
+1268	4723086	20250914_CHI@DET	2025	2	CHI	6	0	0	0	1	0	0.00	2025-12-29 15:00:57.445067-05	2025-12-29 15:00:57.445067-05
+1269	4723086	20250908_MIN@CHI	2025	1	CHI	6	2	12	0	2	8	6.00	2025-12-29 15:00:57.445067-05	2025-12-29 15:00:57.445067-05
+1270	3915416	20251228_CHI@SF	2025	17	CHI	6	1	7	0	4	7	7.00	2025-12-29 15:00:57.834193-05	2025-12-29 15:00:57.834193-05
+1271	3915416	20251220_GB@CHI	2025	16	CHI	6	5	97	1	7	46	19.40	2025-12-29 15:00:57.834193-05	2025-12-29 15:00:57.834193-05
+1272	3915416	20251214_CLE@CHI	2025	15	CHI	6	4	69	2	5	25	17.30	2025-12-29 15:00:57.834193-05	2025-12-29 15:00:57.834193-05
+1273	3915416	20251207_CHI@GB	2025	14	CHI	6	1	-4	0	3	-4	-4.00	2025-12-29 15:00:57.834193-05	2025-12-29 15:00:57.834193-05
+1274	3915416	20251128_CHI@PHI	2025	13	CHI	6	2	17	0	5	11	8.50	2025-12-29 15:00:57.834193-05	2025-12-29 15:00:57.834193-05
+1275	3915416	20251123_PIT@CHI	2025	12	CHI	6	5	64	2	7	25	12.80	2025-12-29 15:00:57.834193-05	2025-12-29 15:00:57.834193-05
+1276	3915416	20251116_CHI@MIN	2025	11	CHI	6	1	18	0	3	18	18.00	2025-12-29 15:00:57.834193-05	2025-12-29 15:00:57.834193-05
+1277	3915416	20251109_NYG@CHI	2025	10	CHI	6	0	0	0	4	0	0.00	2025-12-29 15:00:57.834193-05	2025-12-29 15:00:57.834193-05
+1278	3915416	20251102_CHI@CIN	2025	9	CHI	6	4	72	0	6	23	18.00	2025-12-29 15:00:57.834193-05	2025-12-29 15:00:57.834193-05
+1279	3915416	20251026_CHI@BAL	2025	8	CHI	6	4	73	0	7	42	18.30	2025-12-29 15:00:57.834193-05	2025-12-29 15:00:57.834193-05
+1280	3915416	20251019_NO@CHI	2025	7	CHI	6	3	43	0	5	26	14.30	2025-12-29 15:00:57.834193-05	2025-12-29 15:00:57.834193-05
+1281	3915416	20251013_CHI@WSH	2025	6	CHI	6	3	42	0	5	17	14.00	2025-12-29 15:00:57.834193-05	2025-12-29 15:00:57.834193-05
+1282	3915416	20250928_CHI@LV	2025	4	CHI	6	4	38	0	5	17	9.50	2025-12-29 15:00:57.834193-05	2025-12-29 15:00:57.834193-05
+1283	3915416	20250921_DAL@CHI	2025	3	CHI	6	4	21	1	5	12	5.30	2025-12-29 15:00:57.834193-05	2025-12-29 15:00:57.834193-05
+1284	3915416	20250914_CHI@DET	2025	2	CHI	6	5	46	0	6	18	9.20	2025-12-29 15:00:57.834193-05	2025-12-29 15:00:57.834193-05
+1285	3915416	20250908_MIN@CHI	2025	1	CHI	6	3	68	0	5	30	22.70	2025-12-29 15:00:57.834193-05	2025-12-29 15:00:57.834193-05
+1286	3915416	20250105_CHI@GB	2024	18	CHI	6	9	86	1	10	32	9.60	2025-12-29 15:00:57.834193-05	2025-12-29 15:00:57.834193-05
+1287	3915416	20241226_SEA@CHI	2024	17	CHI	6	6	54	0	8	18	9.00	2025-12-29 15:00:57.834193-05	2025-12-29 15:00:57.834193-05
+1288	3915416	20241222_DET@CHI	2024	16	CHI	6	7	68	0	10	25	9.70	2025-12-29 15:00:57.834193-05	2025-12-29 15:00:57.834193-05
+1289	3915416	20241216_CHI@MIN	2024	15	CHI	6	8	46	0	8	14	5.80	2025-12-29 15:00:57.834193-05	2025-12-29 15:00:57.834193-05
+1290	3915416	20241208_CHI@SF	2024	14	CHI	6	6	49	0	8	14	8.20	2025-12-29 15:00:57.834193-05	2025-12-29 15:00:57.834193-05
+1291	3915416	20241128_CHI@DET	2024	13	CHI	6	8	97	1	16	31	12.10	2025-12-29 15:00:57.834193-05	2025-12-29 15:00:57.834193-05
+1292	3915416	20241124_MIN@CHI	2024	12	CHI	6	7	106	1	7	37	15.10	2025-12-29 15:00:57.834193-05	2025-12-29 15:00:57.834193-05
+1293	3915416	20241117_GB@CHI	2024	11	CHI	6	7	62	0	7	16	8.90	2025-12-29 15:00:57.834193-05	2025-12-29 15:00:57.834193-05
+1294	3915416	20241110_NE@CHI	2024	10	CHI	6	3	24	0	6	18	8.00	2025-12-29 15:00:57.834193-05	2025-12-29 15:00:57.834193-05
+1295	3915416	20241103_CHI@ARI	2024	9	CHI	6	4	33	0	9	16	8.30	2025-12-29 15:00:57.834193-05	2025-12-29 15:00:57.834193-05
+1296	3915416	20241027_CHI@WSH	2024	8	CHI	6	2	27	0	4	27	13.50	2025-12-29 15:00:57.834193-05	2025-12-29 15:00:57.834193-05
+1297	3915416	20241013_JAX@CHI	2024	6	CHI	6	4	20	0	5	9	5.00	2025-12-29 15:00:57.834193-05	2025-12-29 15:00:57.834193-05
+1298	3915416	20241006_CAR@CHI	2024	5	CHI	6	5	105	2	8	34	21.00	2025-12-29 15:00:57.834193-05	2025-12-29 15:00:57.834193-05
+1299	3915416	20240929_LAR@CHI	2024	4	CHI	6	3	22	1	6	9	7.30	2025-12-29 15:00:57.834193-05	2025-12-29 15:00:57.834193-05
+1300	3915416	20240922_CHI@IND	2024	3	CHI	6	8	78	0	10	44	9.80	2025-12-29 15:00:57.834193-05	2025-12-29 15:00:57.834193-05
+1301	3915416	20240915_CHI@HOU	2024	2	CHI	6	6	53	0	10	19	8.80	2025-12-29 15:00:57.834193-05	2025-12-29 15:00:57.834193-05
+1302	3915416	20240908_TEN@CHI	2024	1	CHI	6	5	36	0	8	13	7.20	2025-12-29 15:00:57.834193-05	2025-12-29 15:00:57.834193-05
+1303	3917914	20251220_GB@CHI	2025	16	CHI	6	2	33	0	5	27	16.50	2025-12-29 15:00:58.134889-05	2025-12-29 15:00:58.134889-05
+1304	3917914	20251214_CLE@CHI	2025	15	CHI	6	0	0	0	3	0	0.00	2025-12-29 15:00:58.134889-05	2025-12-29 15:00:58.134889-05
+1305	3917914	20251207_CHI@GB	2025	14	CHI	6	2	7	1	3	6	3.50	2025-12-29 15:00:58.134889-05	2025-12-29 15:00:58.134889-05
+1306	3917914	20251128_CHI@PHI	2025	13	CHI	6	2	19	0	3	10	9.50	2025-12-29 15:00:58.134889-05	2025-12-29 15:00:58.134889-05
+1307	3917914	20251123_PIT@CHI	2025	12	CHI	6	1	6	0	1	6	6.00	2025-12-29 15:00:58.134889-05	2025-12-29 15:00:58.134889-05
+1308	3917914	20251116_CHI@MIN	2025	11	CHI	6	0	0	0	0	\N	\N	2025-12-29 15:00:58.134889-05	2025-12-29 15:00:58.134889-05
+1309	3917914	20251109_NYG@CHI	2025	10	CHI	6	1	5	0	4	5	5.00	2025-12-29 15:00:58.134889-05	2025-12-29 15:00:58.134889-05
+1310	3917914	20251102_CHI@CIN	2025	9	CHI	6	6	58	1	8	15	9.70	2025-12-29 15:00:58.134889-05	2025-12-29 15:00:58.134889-05
+1311	3917914	20251026_CHI@BAL	2025	8	CHI	6	7	33	0	7	6	4.70	2025-12-29 15:00:58.134889-05	2025-12-29 15:00:58.134889-05
+1312	3917914	20251019_NO@CHI	2025	7	CHI	6	2	9	0	3	6	4.50	2025-12-29 15:00:58.134889-05	2025-12-29 15:00:58.134889-05
+1313	3917914	20251013_CHI@WSH	2025	6	CHI	6	2	24	0	6	14	12.00	2025-12-29 15:00:58.134889-05	2025-12-29 15:00:58.134889-05
+1314	3917914	20250928_CHI@LV	2025	4	CHI	6	5	41	0	6	13	8.20	2025-12-29 15:00:58.134889-05	2025-12-29 15:00:58.134889-05
+1315	3917914	20250921_DAL@CHI	2025	3	CHI	6	3	24	0	4	11	8.00	2025-12-29 15:00:58.134889-05	2025-12-29 15:00:58.134889-05
+1316	3917914	20250914_CHI@DET	2025	2	CHI	6	2	12	0	5	6	6.00	2025-12-29 15:00:58.134889-05	2025-12-29 15:00:58.134889-05
+1317	3917914	20250908_MIN@CHI	2025	1	CHI	6	4	42	0	7	16	10.50	2025-12-29 15:00:58.134889-05	2025-12-29 15:00:58.134889-05
+1318	3917914	20250105_WSH@DAL	2024	18	WSH	32	2	51	0	5	29	25.50	2025-12-29 15:00:58.134889-05	2025-12-29 15:00:58.134889-05
+1319	3917914	20241229_ATL@WSH	2024	17	WSH	32	8	85	1	9	16	10.60	2025-12-29 15:00:58.134889-05	2025-12-29 15:00:58.134889-05
+1320	3917914	20241222_PHI@WSH	2024	16	WSH	32	5	70	2	8	49	14.00	2025-12-29 15:00:58.134889-05	2025-12-29 15:00:58.134889-05
+1321	3917914	20241215_WSH@NO	2024	15	WSH	32	3	36	0	4	14	12.00	2025-12-29 15:00:58.134889-05	2025-12-29 15:00:58.134889-05
+1322	3917914	20241201_TEN@WSH	2024	13	WSH	32	3	14	0	3	7	4.70	2025-12-29 15:00:58.134889-05	2025-12-29 15:00:58.134889-05
+1323	3917914	20241124_DAL@WSH	2024	12	WSH	32	1	8	0	1	8	8.00	2025-12-29 15:00:58.134889-05	2025-12-29 15:00:58.134889-05
+1324	3917914	20241114_WSH@PHI	2024	11	WSH	32	1	10	0	2	10	10.00	2025-12-29 15:00:58.134889-05	2025-12-29 15:00:58.134889-05
+1325	3917914	20241110_PIT@WSH	2024	10	WSH	32	1	8	0	3	8	8.00	2025-12-29 15:00:58.134889-05	2025-12-29 15:00:58.134889-05
+1326	3917914	20241103_WSH@NYG	2024	9	WSH	32	2	48	0	2	42	24.00	2025-12-29 15:00:58.134889-05	2025-12-29 15:00:58.134889-05
+1327	3917914	20241027_CHI@WSH	2024	8	WSH	32	0	0	0	0	\N	\N	2025-12-29 15:00:58.134889-05	2025-12-29 15:00:58.134889-05
+1328	3917914	20241020_CAR@WSH	2024	7	WSH	32	4	25	0	6	12	6.30	2025-12-29 15:00:58.134889-05	2025-12-29 15:00:58.134889-05
+1329	3917914	20241013_WSH@BAL	2024	6	WSH	32	4	27	0	6	11	6.80	2025-12-29 15:00:58.134889-05	2025-12-29 15:00:58.134889-05
+1330	3917914	20241006_CLE@WSH	2024	5	WSH	32	1	10	0	3	10	10.00	2025-12-29 15:00:58.134889-05	2025-12-29 15:00:58.134889-05
+1331	3917914	20240929_WSH@ARI	2024	4	WSH	32	6	85	0	6	27	14.20	2025-12-29 15:00:58.134889-05	2025-12-29 15:00:58.134889-05
+1332	3917914	20240923_WSH@CIN	2024	3	WSH	32	0	0	0	0	\N	\N	2025-12-29 15:00:58.134889-05	2025-12-29 15:00:58.134889-05
+1333	3917914	20240915_NYG@WSH	2024	2	WSH	32	3	14	0	3	8	4.70	2025-12-29 15:00:58.134889-05	2025-12-29 15:00:58.134889-05
+1334	3917914	20240908_WSH@TB	2024	1	WSH	32	1	15	0	3	15	15.00	2025-12-29 15:00:58.134889-05	2025-12-29 15:00:58.134889-05
+1335	4036131	20251228_ARI@CIN	2025	17	CIN	7	0	0	0	1	0	0.00	2025-12-29 15:00:58.392849-05	2025-12-29 15:00:58.392849-05
+1336	4036131	20251214_BAL@CIN	2025	15	CIN	7	0	0	0	0	\N	\N	2025-12-29 15:00:58.392849-05	2025-12-29 15:00:58.392849-05
+1337	4036131	20251207_CIN@BUF	2025	14	CIN	7	1	15	0	2	15	15.00	2025-12-29 15:00:58.392849-05	2025-12-29 15:00:58.392849-05
+1338	4036131	20251127_CIN@BAL	2025	13	CIN	7	1	3	0	2	3	3.00	2025-12-29 15:00:58.392849-05	2025-12-29 15:00:58.392849-05
+1339	4036131	20251123_NE@CIN	2025	12	CIN	7	1	9	0	1	9	9.00	2025-12-29 15:00:58.392849-05	2025-12-29 15:00:58.392849-05
+1340	4036131	20251116_CIN@PIT	2025	11	CIN	7	5	36	0	6	15	7.20	2025-12-29 15:00:58.392849-05	2025-12-29 15:00:58.392849-05
+1341	4036131	20251102_CHI@CIN	2025	9	CIN	7	2	28	1	3	23	14.00	2025-12-29 15:00:58.392849-05	2025-12-29 15:00:58.392849-05
+1342	4036131	20251026_NYJ@CIN	2025	8	CIN	7	3	41	0	3	16	13.70	2025-12-29 15:00:58.392849-05	2025-12-29 15:00:58.392849-05
+1343	4036131	20251016_PIT@CIN	2025	7	CIN	7	4	44	1	4	25	11.00	2025-12-29 15:00:58.392849-05	2025-12-29 15:00:58.392849-05
+1344	4036131	20251012_CIN@GB	2025	6	CIN	7	4	27	0	4	9	6.80	2025-12-29 15:00:58.392849-05	2025-12-29 15:00:58.392849-05
+1345	4036131	20251005_DET@CIN	2025	5	CIN	7	0	0	0	0	\N	\N	2025-12-29 15:00:58.392849-05	2025-12-29 15:00:58.392849-05
+1346	4036131	20250921_CIN@MIN	2025	3	CIN	7	5	26	0	5	10	5.20	2025-12-29 15:00:58.392849-05	2025-12-29 15:00:58.392849-05
+1347	4036131	20250914_JAX@CIN	2025	2	CIN	7	3	28	0	4	25	9.30	2025-12-29 15:00:58.392849-05	2025-12-29 15:00:58.392849-05
+1348	4036131	20250907_CIN@CLE	2025	1	CIN	7	4	26	1	5	12	6.50	2025-12-29 15:00:58.392849-05	2025-12-29 15:00:58.392849-05
+1349	4036131	20250105_SEA@LAR	2024	18	SEA	29	5	63	1	6	32	12.60	2025-12-29 15:00:58.392849-05	2025-12-29 15:00:58.392849-05
+1350	4036131	20241226_SEA@CHI	2024	17	SEA	29	4	43	0	5	15	10.80	2025-12-29 15:00:58.392849-05	2025-12-29 15:00:58.392849-05
+1351	4036131	20241222_MIN@SEA	2024	16	SEA	29	3	50	0	6	18	16.70	2025-12-29 15:00:58.392849-05	2025-12-29 15:00:58.392849-05
+1352	4036131	20241215_GB@SEA	2024	15	SEA	29	3	15	0	7	5	5.00	2025-12-29 15:00:58.392849-05	2025-12-29 15:00:58.392849-05
+1353	4036131	20241208_SEA@ARI	2024	14	SEA	29	3	18	0	4	7	6.00	2025-12-29 15:00:58.392849-05	2025-12-29 15:00:58.392849-05
+1354	4036131	20241201_SEA@NYJ	2024	13	SEA	29	3	26	0	4	11	8.70	2025-12-29 15:00:58.392849-05	2025-12-29 15:00:58.392849-05
+1355	4036131	20241027_BUF@SEA	2024	8	SEA	29	3	22	0	4	14	7.30	2025-12-29 15:00:58.392849-05	2025-12-29 15:00:58.392849-05
+1356	4036131	20241020_SEA@ATL	2024	7	SEA	29	4	65	0	4	28	16.30	2025-12-29 15:00:58.392849-05	2025-12-29 15:00:58.392849-05
+1357	4036131	20241010_SF@SEA	2024	6	SEA	29	6	63	0	6	12	10.50	2025-12-29 15:00:58.392849-05	2025-12-29 15:00:58.392849-05
+1358	4036131	20241006_NYG@SEA	2024	5	SEA	29	3	24	0	3	12	8.00	2025-12-29 15:00:58.392849-05	2025-12-29 15:00:58.392849-05
+1359	4036131	20240930_SEA@DET	2024	4	SEA	29	2	26	0	2	16	13.00	2025-12-29 15:00:58.392849-05	2025-12-29 15:00:58.392849-05
+1360	4036131	20240922_MIA@SEA	2024	3	SEA	29	6	60	0	6	16	10.00	2025-12-29 15:00:58.392849-05	2025-12-29 15:00:58.392849-05
+1361	4036131	20240915_SEA@NE	2024	2	SEA	29	1	14	0	3	14	14.00	2025-12-29 15:00:58.392849-05	2025-12-29 15:00:58.392849-05
+1362	4036131	20240908_DEN@SEA	2024	1	SEA	29	2	11	0	4	9	5.50	2025-12-29 15:00:58.392849-05	2025-12-29 15:00:58.392849-05
+1363	3116164	20251228_ARI@CIN	2025	17	CIN	7	2	47	0	2	32	23.50	2025-12-29 15:00:58.640654-05	2025-12-29 15:00:58.640654-05
+1364	3116164	20251221_CIN@MIA	2025	16	CIN	7	3	35	1	4	17	11.70	2025-12-29 15:00:58.640654-05	2025-12-29 15:00:58.640654-05
+1365	3116164	20251214_BAL@CIN	2025	15	CIN	7	1	11	0	2	11	11.00	2025-12-29 15:00:58.640654-05	2025-12-29 15:00:58.640654-05
+1366	3116164	20251207_CIN@BUF	2025	14	CIN	7	6	86	1	6	37	14.30	2025-12-29 15:00:58.640654-05	2025-12-29 15:00:58.640654-05
+1367	3116164	20251127_CIN@BAL	2025	13	CIN	7	2	19	0	4	11	9.50	2025-12-29 15:00:58.640654-05	2025-12-29 15:00:58.640654-05
+1368	3116164	20251123_NE@CIN	2025	12	CIN	7	4	35	0	6	13	8.80	2025-12-29 15:00:58.640654-05	2025-12-29 15:00:58.640654-05
+1369	3116164	20251012_CIN@GB	2025	6	CIN	7	0	0	0	0	\N	\N	2025-12-29 15:00:58.640654-05	2025-12-29 15:00:58.640654-05
+1370	3116164	20251005_DET@CIN	2025	5	CIN	7	2	15	0	5	15	7.50	2025-12-29 15:00:58.640654-05	2025-12-29 15:00:58.640654-05
+1371	3116164	20250929_CIN@DEN	2025	4	CIN	7	1	8	0	1	8	8.00	2025-12-29 15:00:58.640654-05	2025-12-29 15:00:58.640654-05
+1372	3116164	20250921_CIN@MIN	2025	3	CIN	7	1	6	0	3	6	6.00	2025-12-29 15:00:58.640654-05	2025-12-29 15:00:58.640654-05
+1373	3116164	20250914_JAX@CIN	2025	2	CIN	7	3	18	0	4	10	6.00	2025-12-29 15:00:58.640654-05	2025-12-29 15:00:58.640654-05
+1374	3116164	20250907_CIN@CLE	2025	1	CIN	7	1	14	0	3	14	14.00	2025-12-29 15:00:58.640654-05	2025-12-29 15:00:58.640654-05
+1375	3116164	20250104_CIN@PIT	2024	18	CIN	7	8	68	0	10	16	8.50	2025-12-29 15:00:58.640654-05	2025-12-29 15:00:58.640654-05
+1376	3116164	20241228_DEN@CIN	2024	17	CIN	7	10	86	0	12	12	8.60	2025-12-29 15:00:58.640654-05	2025-12-29 15:00:58.640654-05
+1377	3116164	20241222_CLE@CIN	2024	16	CIN	7	2	14	0	2	9	7.00	2025-12-29 15:00:58.640654-05	2025-12-29 15:00:58.640654-05
+1378	3116164	20241215_CIN@TEN	2024	15	CIN	7	3	37	0	4	17	12.30	2025-12-29 15:00:58.640654-05	2025-12-29 15:00:58.640654-05
+1379	3116164	20241209_CIN@DAL	2024	14	CIN	7	3	24	0	3	13	8.00	2025-12-29 15:00:58.640654-05	2025-12-29 15:00:58.640654-05
+1380	3116164	20241201_PIT@CIN	2024	13	CIN	7	5	53	0	5	20	10.60	2025-12-29 15:00:58.640654-05	2025-12-29 15:00:58.640654-05
+1381	3116164	20241117_CIN@LAC	2024	11	CIN	7	0	0	0	2	0	0.00	2025-12-29 15:00:58.640654-05	2025-12-29 15:00:58.640654-05
+1382	3116164	20241107_CIN@BAL	2024	10	CIN	7	4	30	0	9	13	7.50	2025-12-29 15:00:58.640654-05	2025-12-29 15:00:58.640654-05
+1383	3116164	20241103_LV@CIN	2024	9	CIN	7	5	100	2	6	47	20.00	2025-12-29 15:00:58.640654-05	2025-12-29 15:00:58.640654-05
+1384	3116164	20241027_PHI@CIN	2024	8	CIN	7	7	73	0	8	24	10.40	2025-12-29 15:00:58.640654-05	2025-12-29 15:00:58.640654-05
+1385	3116164	20241020_CIN@CLE	2024	7	CIN	7	1	2	0	1	2	2.00	2025-12-29 15:00:58.640654-05	2025-12-29 15:00:58.640654-05
+1386	3116164	20241013_CIN@NYG	2024	6	CIN	7	0	0	0	0	\N	\N	2025-12-29 15:00:58.640654-05	2025-12-29 15:00:58.640654-05
+1387	3116164	20241006_BAL@CIN	2024	5	CIN	7	2	31	0	2	19	15.50	2025-12-29 15:00:58.640654-05	2025-12-29 15:00:58.640654-05
+1388	3116164	20240929_CIN@CAR	2024	4	CIN	7	1	-9	0	1	-9	-9.00	2025-12-29 15:00:58.640654-05	2025-12-29 15:00:58.640654-05
+1389	3116164	20240923_WSH@CIN	2024	3	CIN	7	4	47	0	5	17	11.80	2025-12-29 15:00:58.640654-05	2025-12-29 15:00:58.640654-05
+1390	3116164	20240915_CIN@KC	2024	2	CIN	7	7	91	0	9	37	13.00	2025-12-29 15:00:58.640654-05	2025-12-29 15:00:58.640654-05
+1391	3116164	20240908_NE@CIN	2024	1	CIN	7	3	18	0	4	7	6.00	2025-12-29 15:00:58.640654-05	2025-12-29 15:00:58.640654-05
+1392	3050481	20251228_ARI@CIN	2025	17	CIN	7	2	31	0	2	18	15.50	2025-12-29 15:00:58.970867-05	2025-12-29 15:00:58.970867-05
+1393	3050481	20251221_CIN@MIA	2025	16	CIN	7	1	4	0	1	4	4.00	2025-12-29 15:00:58.970867-05	2025-12-29 15:00:58.970867-05
+1394	3050481	20251214_BAL@CIN	2025	15	CIN	7	3	16	0	5	8	5.30	2025-12-29 15:00:58.970867-05	2025-12-29 15:00:58.970867-05
+1395	3050481	20251207_CIN@BUF	2025	14	CIN	7	1	11	0	1	11	11.00	2025-12-29 15:00:58.970867-05	2025-12-29 15:00:58.970867-05
+1396	3050481	20251127_CIN@BAL	2025	13	CIN	7	1	14	1	2	14	14.00	2025-12-29 15:00:58.970867-05	2025-12-29 15:00:58.970867-05
+1397	3050481	20251123_NE@CIN	2025	12	CIN	7	1	9	0	1	9	9.00	2025-12-29 15:00:58.970867-05	2025-12-29 15:00:58.970867-05
+1398	3050481	20251116_CIN@PIT	2025	11	CIN	7	3	22	0	3	9	7.30	2025-12-29 15:00:58.970867-05	2025-12-29 15:00:58.970867-05
+1399	3050481	20251102_CHI@CIN	2025	9	CIN	7	2	42	0	2	33	21.00	2025-12-29 15:00:58.970867-05	2025-12-29 15:00:58.970867-05
+1400	3050481	20251026_NYJ@CIN	2025	8	CIN	7	1	9	0	2	9	9.00	2025-12-29 15:00:58.970867-05	2025-12-29 15:00:58.970867-05
+1401	3050481	20251012_CIN@GB	2025	6	CIN	7	4	10	1	5	8	2.50	2025-12-29 15:00:58.970867-05	2025-12-29 15:00:58.970867-05
+1402	3050481	20251005_DET@CIN	2025	5	CIN	7	0	0	0	0	\N	\N	2025-12-29 15:00:58.970867-05	2025-12-29 15:00:58.970867-05
+1403	3050481	20250929_CIN@DEN	2025	4	CIN	7	0	0	0	0	\N	\N	2025-12-29 15:00:58.970867-05	2025-12-29 15:00:58.970867-05
+1404	3050481	20250914_JAX@CIN	2025	2	CIN	7	0	0	0	0	\N	\N	2025-12-29 15:00:58.970867-05	2025-12-29 15:00:58.970867-05
+1405	3050481	20250907_CIN@CLE	2025	1	CIN	7	0	0	0	0	\N	\N	2025-12-29 15:00:58.970867-05	2025-12-29 15:00:58.970867-05
+1406	3050481	20250104_CIN@PIT	2024	18	CIN	7	1	11	0	1	11	11.00	2025-12-29 15:00:58.970867-05	2025-12-29 15:00:58.970867-05
+1407	3050481	20241215_CIN@TEN	2024	15	CIN	7	1	9	0	1	9	9.00	2025-12-29 15:00:58.970867-05	2025-12-29 15:00:58.970867-05
+1408	3050481	20241209_CIN@DAL	2024	14	CIN	7	1	19	0	1	19	19.00	2025-12-29 15:00:58.970867-05	2025-12-29 15:00:58.970867-05
+1409	3050481	20241201_PIT@CIN	2024	13	CIN	7	4	28	0	4	10	7.00	2025-12-29 15:00:58.970867-05	2025-12-29 15:00:58.970867-05
+1410	3050481	20241117_CIN@LAC	2024	11	CIN	7	2	13	0	2	9	6.50	2025-12-29 15:00:58.970867-05	2025-12-29 15:00:58.970867-05
+1411	3050481	20241107_CIN@BAL	2024	10	CIN	7	6	42	1	7	10	7.00	2025-12-29 15:00:58.970867-05	2025-12-29 15:00:58.970867-05
+1412	3050481	20241103_LV@CIN	2024	9	CIN	7	2	14	0	3	11	7.00	2025-12-29 15:00:58.970867-05	2025-12-29 15:00:58.970867-05
+1413	3050481	20241027_PHI@CIN	2024	8	CIN	7	0	0	0	0	\N	\N	2025-12-29 15:00:58.970867-05	2025-12-29 15:00:58.970867-05
+1414	3050481	20241020_CIN@CLE	2024	7	CIN	7	0	0	0	1	0	0.00	2025-12-29 15:00:58.970867-05	2025-12-29 15:00:58.970867-05
+1415	3050481	20241013_CIN@NYG	2024	6	CIN	7	0	0	0	0	\N	\N	2025-12-29 15:00:58.970867-05	2025-12-29 15:00:58.970867-05
+1416	3050481	20240908_NE@CIN	2024	1	CIN	7	2	18	0	3	13	9.00	2025-12-29 15:00:58.970867-05	2025-12-29 15:00:58.970867-05
+\.
+
+
+--
+-- Data for Name: game_results; Type: TABLE DATA; Schema: public; Owner: aaronangeles
+--
+
+COPY public.game_results (id, player_id, season_year, week, receiving_touchdowns, receptions, receiving_yards, targets, game_date, opponent_team_id, created_at) FROM stdin;
+\.
+
+
+--
+-- Data for Name: job_runs; Type: TABLE DATA; Schema: public; Owner: aaronangeles
+--
+
+COPY public.job_runs (id, job_type, season_year, week, status, started_at, completed_at, error_message, job_metadata) FROM stdin;
+\.
+
+
+--
+-- Data for Name: predictions; Type: TABLE DATA; Schema: public; Owner: aaronangeles
+--
+
+COPY public.predictions (id, player_id, season_year, week, td_likelihood, model_odds, favor, created_at) FROM stdin;
+2	4428811	2025	1	0.1661	488.24	1	2025-12-29 18:50:57.375566-05
+3	4360761	2025	1	0.1661	488.24	1	2025-12-29 18:51:13.882254-05
+4	4692835	2025	1	0.1661	488.24	1	2025-12-29 18:51:31.272259-05
+5	3917960	2025	1	0.1661	488.24	1	2025-12-29 18:51:43.34018-05
+1	4432708	2025	1	0.1661	488.24	1	2025-12-29 19:03:23.398281-05
+6	3915416	2025	4	0.4100	143.90	1	2025-12-29 20:05:24.026422-05
+7	3116365	2025	4	0.0900	1011.11	1	2025-12-29 20:05:41.908501-05
+8	4429615	2025	4	0.2600	284.62	1	2025-12-29 20:05:43.852735-05
+9	4428811	2025	17	0.0900	1011.11	1	2025-12-29 21:07:22.824975-05
+10	3914151	2025	17	0.0100	9900.00	1	2025-12-29 21:07:22.857748-05
+11	4361307	2025	17	0.4100	143.90	1	2025-12-29 21:07:22.884503-05
+12	4432708	2025	17	0.2800	257.14	1	2025-12-29 21:07:22.914144-05
+13	4426844	2025	17	0.0300	3233.33	1	2025-12-29 21:07:22.940549-05
+14	4692835	2025	17	0.0500	1900.00	1	2025-12-29 21:07:22.975587-05
+15	4360761	2025	17	0.2800	257.14	1	2025-12-29 21:07:23.002791-05
+16	3917960	2025	17	0.0000	999.00	1	2025-12-29 21:07:23.030824-05
+17	2971281	2025	17	0.1500	566.67	1	2025-12-29 21:07:23.056426-05
+18	4034948	2025	17	0.0000	999.00	1	2025-12-29 21:07:23.083569-05
+19	3871102	2025	17	0.3500	185.71	1	2025-12-29 21:07:23.109927-05
+20	4374187	2025	17	0.0200	4900.00	1	2025-12-29 21:07:23.136972-05
+21	4035020	2025	17	0.2300	334.78	1	2025-12-29 21:07:23.163618-05
+22	4360248	2025	17	0.4500	122.22	1	2025-12-29 21:07:23.188789-05
+23	4363551	2025	17	0.0600	1566.67	1	2025-12-29 21:07:23.22436-05
+24	4428796	2025	17	0.0100	9900.00	1	2025-12-29 21:07:23.25027-05
+25	4689334	2025	17	0.0000	999.00	1	2025-12-29 21:07:23.276434-05
+26	4426502	2025	17	0.5000	-100.00	-1	2025-12-29 21:07:23.303521-05
+27	4040655	2025	17	0.4900	104.08	1	2025-12-29 21:07:23.333689-05
+28	4374045	2025	17	0.0000	999.00	1	2025-12-29 21:07:23.363703-05
+29	3116365	2025	17	0.1600	525.00	1	2025-12-29 21:07:23.389329-05
+30	4241424	2025	17	0.0000	999.00	1	2025-12-29 21:07:23.417292-05
+31	4690143	2025	17	0.0000	999.00	1	2025-12-29 21:07:23.44625-05
+32	4696882	2025	17	0.1000	900.00	1	2025-12-29 21:07:23.479517-05
+33	4360939	2025	17	0.1500	566.67	1	2025-12-29 21:07:23.506214-05
+34	4241263	2025	17	0.1100	809.09	1	2025-12-29 21:07:23.531399-05
+35	15795	2025	17	0.0500	1900.00	1	2025-12-29 21:07:23.557173-05
+36	4361050	2025	17	0.1200	733.33	1	2025-12-29 21:07:23.585943-05
+37	4429615	2025	17	0.2200	354.55	1	2025-12-29 21:07:23.614589-05
+38	4635008	2025	17	0.2900	244.83	1	2025-12-29 21:07:23.638809-05
+39	3930086	2025	17	0.1300	669.23	1	2025-12-29 21:07:23.664999-05
+40	4242433	2025	17	0.1600	525.00	1	2025-12-29 21:07:23.693692-05
+41	4241476	2025	17	0.0000	999.00	1	2025-12-29 21:07:23.721514-05
+42	4243537	2025	17	0.0300	3233.33	1	2025-12-29 21:07:23.747451-05
+43	4688552	2025	17	0.0400	2400.00	1	2025-12-29 21:07:23.772408-05
+44	4573699	2025	17	0.0700	1328.57	1	2025-12-29 21:07:23.797998-05
+45	16731	2025	17	0.0000	999.00	1	2025-12-29 21:07:23.823441-05
+46	4385690	2025	17	0.4000	150.00	1	2025-12-29 21:07:23.848194-05
+47	4373678	2025	17	0.3800	163.16	1	2025-12-29 21:07:23.874411-05
+48	4683243	2025	17	0.0600	1566.67	1	2025-12-29 21:07:23.89972-05
+49	3135321	2025	17	0.3800	163.16	1	2025-12-29 21:07:23.930104-05
+50	4685472	2025	17	0.5200	-108.33	-1	2025-12-29 21:07:23.957908-05
+51	4431588	2025	17	0.1200	733.33	1	2025-12-29 21:07:23.985176-05
+52	4360763	2025	17	0.0600	1566.67	1	2025-12-29 21:07:24.013326-05
+53	4708486	2025	17	0.0500	1900.00	1	2025-12-29 21:07:24.037952-05
+54	4361988	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.068716-05
+55	4695883	2025	17	0.2800	257.14	1	2025-12-29 21:07:24.093453-05
+56	4430034	2025	17	0.2400	316.67	1	2025-12-29 21:07:24.121747-05
+57	4372780	2025	17	0.0800	1150.00	1	2025-12-29 21:07:24.147357-05
+58	3052897	2025	17	0.0100	9900.00	1	2025-12-29 21:07:24.178669-05
+59	4685183	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.203977-05
+60	4685278	2025	17	0.2800	257.14	1	2025-12-29 21:07:24.230316-05
+61	5160110	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.255919-05
+62	4039050	2025	17	0.1300	669.23	1	2025-12-29 21:07:24.281401-05
+63	4258595	2025	17	0.1100	809.09	1	2025-12-29 21:07:24.314963-05
+64	4431299	2025	17	0.2700	270.37	1	2025-12-29 21:07:24.339835-05
+65	4723086	2025	17	0.2700	270.37	1	2025-12-29 21:07:24.370288-05
+66	3915416	2025	17	0.2400	316.67	1	2025-12-29 21:07:24.397847-05
+67	3917914	2025	17	0.1500	566.67	1	2025-12-29 21:07:24.442101-05
+68	4036131	2025	17	0.1100	809.09	1	2025-12-29 21:07:24.47329-05
+69	3116164	2025	17	0.1000	900.00	1	2025-12-29 21:07:24.497852-05
+70	3050481	2025	17	0.0700	1328.57	1	2025-12-29 21:07:24.527744-05
+71	4257188	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.538228-05
+72	4368003	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.550618-05
+73	4570738	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.564379-05
+74	4239993	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.574538-05
+75	3127310	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.584785-05
+76	4690070	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.596157-05
+77	4362628	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.612249-05
+78	4808839	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.622221-05
+79	4362603	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.632625-05
+80	4241463	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.707668-05
+81	4877203	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.720591-05
+82	4362018	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.731176-05
+83	3123076	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.741187-05
+84	5083076	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.754407-05
+85	4428678	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.76779-05
+86	4613104	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.783055-05
+87	4369863	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.793281-05
+88	4241389	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.808775-05
+89	4426354	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.819988-05
+90	4372096	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.832205-05
+91	4242355	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.842081-05
+92	4426485	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.854057-05
+93	5083754	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.865044-05
+94	3676833	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.874991-05
+95	4249417	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.888777-05
+96	4360967	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.902995-05
+97	3128429	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.914445-05
+98	4600981	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.924378-05
+99	4686472	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.935297-05
+100	9614	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.948061-05
+101	4039057	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.963429-05
+102	4383440	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.975058-05
+103	4431280	2025	17	0.0000	999.00	1	2025-12-29 21:07:24.987117-05
+104	3051876	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.002291-05
+105	3911853	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.018549-05
+106	4596439	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.030826-05
+107	2973405	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.042502-05
+108	4374302	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.057986-05
+109	4608362	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.077617-05
+110	3049698	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.088588-05
+111	5123663	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.103515-05
+112	3126997	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.117792-05
+113	4426388	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.134339-05
+114	4361432	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.149347-05
+115	4362249	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.164192-05
+116	4429466	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.181004-05
+117	4428850	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.197817-05
+118	4701936	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.214844-05
+119	4360086	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.239264-05
+120	4431487	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.263895-05
+121	4248528	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.281173-05
+122	4428085	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.295808-05
+123	3117256	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.311737-05
+124	4586312	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.323979-05
+125	4258173	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.336191-05
+126	3895856	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.349753-05
+127	4426496	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.366549-05
+128	3123075	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.387884-05
+129	4686422	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.402336-05
+130	4877706	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.41654-05
+131	4366031	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.429532-05
+132	4040774	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.440871-05
+133	4362523	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.456449-05
+134	4688813	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.46869-05
+135	4035687	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.481554-05
+136	4360078	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.498674-05
+137	3051889	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.511968-05
+138	2998565	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.525845-05
+139	4061956	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.536901-05
+140	4431459	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.555474-05
+141	3134353	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.5676-05
+142	3052096	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.579002-05
+143	4430539	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.58971-05
+144	4361577	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.608679-05
+145	3916433	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.621518-05
+146	4432620	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.631921-05
+147	4239944	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.642697-05
+148	4432773	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.655937-05
+149	4244049	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.667449-05
+150	3120348	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.678844-05
+151	5082630	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.688883-05
+152	2975674	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.700299-05
+153	4683062	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.714095-05
+154	4240472	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.730068-05
+155	15847	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.740932-05
+156	4430723	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.752836-05
+157	4241372	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.765143-05
+158	4595342	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.775398-05
+159	3915486	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.791798-05
+160	4429025	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.80437-05
+161	3127292	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.88106-05
+162	4612826	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.892269-05
+163	4686612	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.912426-05
+164	4362477	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.923474-05
+165	15818	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.937187-05
+166	4430870	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.954413-05
+167	4426515	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.972493-05
+168	4242557	2025	17	0.0000	999.00	1	2025-12-29 21:07:25.985561-05
+169	4426553	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.000221-05
+170	4569382	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.019182-05
+171	4360797	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.032535-05
+172	16800	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.044883-05
+173	4710855	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.065713-05
+174	4386544	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.076045-05
+175	4570037	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.099761-05
+176	2576399	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.122408-05
+177	3919510	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.135803-05
+178	2579604	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.157608-05
+179	4428718	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.173045-05
+180	4361332	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.185342-05
+181	4429086	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.199717-05
+182	4603186	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.216472-05
+183	4432775	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.230268-05
+184	5155825	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.240709-05
+185	4045305	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.26178-05
+186	2577327	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.274209-05
+187	4036335	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.286609-05
+188	4365395	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.301053-05
+189	2576925	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.323634-05
+190	4372016	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.338632-05
+191	4426535	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.350924-05
+192	3929785	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.368473-05
+193	4367209	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.381978-05
+194	4569603	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.394117-05
+195	4567506	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.412492-05
+196	4036133	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.423627-05
+197	4262921	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.438416-05
+198	4565185	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.45818-05
+199	4430656	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.47454-05
+200	4429205	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.487815-05
+201	4433959	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.504966-05
+202	4382466	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.519174-05
+203	3921690	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.531782-05
+204	4373030	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.54431-05
+205	4695193	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.570109-05
+206	4429022	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.587877-05
+207	4613202	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.606315-05
+208	3046439	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.621535-05
+209	4596545	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.638985-05
+210	4427095	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.653766-05
+211	3043275	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.671718-05
+212	4361100	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.691102-05
+213	2976212	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.71484-05
+214	3929645	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.730727-05
+215	3127306	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.743731-05
+216	4372758	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.764639-05
+217	4573697	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.776092-05
+218	4361370	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.788677-05
+219	4034862	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.805763-05
+220	4432731	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.821343-05
+221	4372063	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.835073-05
+222	4429148	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.849016-05
+223	4570296	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.864116-05
+224	4424106	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.875678-05
+225	4692590	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.88805-05
+226	4569587	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.902169-05
+227	4746079	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.918949-05
+228	4361516	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.936693-05
+229	2531358	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.953341-05
+230	3916945	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.968621-05
+231	4369466	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.982272-05
+232	4242540	2025	17	0.0000	999.00	1	2025-12-29 21:07:26.996576-05
+233	4569371	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.012945-05
+234	4613050	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.024773-05
+235	4429105	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.039539-05
+236	3929636	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.057711-05
+237	4808766	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.072858-05
+238	4597500	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.083895-05
+239	4567096	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.097476-05
+240	4361372	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.113582-05
+241	4250764	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.125064-05
+242	4241410	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.138323-05
+243	2310331	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.153051-05
+244	4039160	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.170127-05
+245	4715355	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.184844-05
+246	4241478	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.198826-05
+247	4361409	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.214691-05
+248	3926231	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.229819-05
+249	3121023	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.243567-05
+250	4372026	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.258901-05
+251	4047646	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.271877-05
+252	4241374	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.28714-05
+253	3914397	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.302862-05
+254	4035656	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.316338-05
+255	4361411	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.328709-05
+256	4431492	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.340643-05
+257	3051738	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.35775-05
+258	4047650	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.371446-05
+259	4241961	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.391019-05
+260	4430802	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.407153-05
+261	4243389	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.420601-05
+262	3054212	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.432287-05
+263	16460	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.445239-05
+264	4259147	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.461519-05
+265	3886598	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.472827-05
+266	4431466	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.48352-05
+267	3043116	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.496039-05
+268	4360438	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.512043-05
+269	3045523	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.53073-05
+270	4430191	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.54254-05
+271	4360290	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.55727-05
+272	3040151	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.570626-05
+273	4428209	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.581749-05
+274	4040612	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.593777-05
+275	4241983	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.608069-05
+276	4401805	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.622719-05
+277	2975863	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.634895-05
+278	4569547	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.649247-05
+279	4032473	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.666117-05
+280	4576297	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.678178-05
+281	2977187	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.689378-05
+282	4430878	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.704948-05
+283	4360405	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.71838-05
+284	4361112	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.730067-05
+285	3116165	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.741043-05
+286	4567750	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.756909-05
+287	4608810	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.775697-05
+288	5097554	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.788533-05
+289	2976592	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.802924-05
+290	4243331	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.81642-05
+291	4372505	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.829956-05
+292	16737	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.841178-05
+293	4430834	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.85694-05
+294	4360978	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.870329-05
+295	4360635	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.884775-05
+296	4686728	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.89969-05
+297	3916204	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.913887-05
+298	4431268	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.924041-05
+299	3930066	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.936848-05
+300	4883647	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.951465-05
+301	4057082	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.964034-05
+302	3126486	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.97539-05
+303	4567156	2025	17	0.0000	999.00	1	2025-12-29 21:07:27.987936-05
+304	4690923	2025	17	0.0000	999.00	1	2025-12-29 21:07:28.00486-05
+305	4361088	2025	17	0.0000	999.00	1	2025-12-29 21:07:28.020068-05
+306	2576581	2025	17	0.0000	999.00	1	2025-12-29 21:07:28.031396-05
+307	4048228	2025	17	0.0000	999.00	1	2025-12-29 21:07:28.042625-05
+308	3121422	2025	17	0.0000	999.00	1	2025-12-29 21:07:28.057869-05
+309	15795	2025	1	0.1661	488.24	1	2025-12-29 20:23:13.580406-05
+310	15795	2025	2	0.0000	999.00	1	2025-12-29 20:23:13.580406-05
+311	15795	2025	3	0.1500	566.67	1	2025-12-29 20:23:13.580406-05
+312	15795	2025	4	0.3500	185.71	1	2025-12-29 20:23:13.580406-05
+313	15795	2025	5	0.2200	354.55	1	2025-12-29 20:23:13.580406-05
+314	15795	2025	6	0.0800	1150.00	1	2025-12-29 20:23:13.580406-05
+315	15795	2025	7	0.1600	525.00	1	2025-12-29 20:23:13.580406-05
+316	15795	2025	8	0.1600	525.00	1	2025-12-29 20:23:13.580406-05
+317	15795	2025	9	0.0600	1566.67	1	2025-12-29 20:23:13.580406-05
+318	15795	2025	10	0.0400	2400.00	1	2025-12-29 20:23:13.580406-05
+319	15795	2025	11	0.1400	614.29	1	2025-12-29 20:23:13.580406-05
+320	15795	2025	12	0.0600	1566.67	1	2025-12-29 20:23:13.580406-05
+321	15795	2025	13	0.1100	809.09	1	2025-12-29 20:23:13.580406-05
+322	15795	2025	14	0.0500	1900.00	1	2025-12-29 20:23:13.580406-05
+323	15795	2025	15	0.0300	3233.33	1	2025-12-29 20:23:13.580406-05
+324	15795	2025	16	0.0300	3233.33	1	2025-12-29 20:23:13.580406-05
+325	16731	2025	1	0.1661	488.24	1	2025-12-29 20:23:13.967275-05
+326	16731	2025	2	0.0000	999.00	1	2025-12-29 20:23:13.967275-05
+327	16731	2025	3	0.0800	1150.00	1	2025-12-29 20:23:13.967275-05
+328	16731	2025	4	0.2900	244.83	1	2025-12-29 20:23:13.967275-05
+329	16731	2025	5	0.0600	1566.67	1	2025-12-29 20:23:13.967275-05
+330	16731	2025	6	0.1300	669.23	1	2025-12-29 20:23:13.967275-05
+331	16731	2025	7	0.0800	1150.00	1	2025-12-29 20:23:13.967275-05
+332	16731	2025	8	0.0900	1011.11	1	2025-12-29 20:23:13.967275-05
+333	16731	2025	9	0.0400	2400.00	1	2025-12-29 20:23:13.967275-05
+334	16731	2025	10	0.0600	1566.67	1	2025-12-29 20:23:13.967275-05
+335	16731	2025	11	0.0700	1328.57	1	2025-12-29 20:23:13.967275-05
+336	16731	2025	12	0.0700	1328.57	1	2025-12-29 20:23:13.967275-05
+337	16731	2025	13	0.0700	1328.57	1	2025-12-29 20:23:13.967275-05
+338	16731	2025	14	0.0200	4900.00	1	2025-12-29 20:23:13.967275-05
+339	16731	2025	15	0.0800	1150.00	1	2025-12-29 20:23:13.967275-05
+340	16731	2025	16	0.0100	9900.00	1	2025-12-29 20:23:13.967275-05
+341	2971281	2025	1	0.1661	488.24	1	2025-12-29 20:23:14.338425-05
+342	2971281	2025	12	0.0000	999.00	1	2025-12-29 20:23:14.338425-05
+343	2971281	2025	13	0.0888	1011.11	1	2025-12-29 20:23:14.338425-05
+344	2971281	2025	14	0.0000	999.00	1	2025-12-29 20:23:14.338425-05
+345	2971281	2025	15	0.0934	1011.11	1	2025-12-29 20:23:14.338425-05
+346	2971281	2025	16	0.0000	999.00	1	2025-12-29 20:23:14.338425-05
+347	3050481	2025	1	0.1661	488.24	1	2025-12-29 20:23:14.487156-05
+348	3050481	2025	2	0.0000	999.00	1	2025-12-29 20:23:14.487156-05
+349	3050481	2025	3	0.0292	3233.33	1	2025-12-29 20:23:14.487156-05
+350	3050481	2025	4	0.0000	999.00	1	2025-12-29 20:23:14.487156-05
+351	3050481	2025	5	0.0540	1900.00	1	2025-12-29 20:23:14.487156-05
+352	3050481	2025	6	0.0505	1900.00	1	2025-12-29 20:23:14.487156-05
+353	3050481	2025	7	0.0000	999.00	1	2025-12-29 20:23:14.487156-05
+354	3050481	2025	8	0.0000	999.00	1	2025-12-29 20:23:14.487156-05
+355	3050481	2025	9	0.1600	525.00	1	2025-12-29 20:23:14.487156-05
+356	3050481	2025	10	0.2000	400.00	1	2025-12-29 20:23:14.487156-05
+357	3050481	2025	11	0.1800	455.56	1	2025-12-29 20:23:14.487156-05
+358	3050481	2025	12	0.2900	244.83	1	2025-12-29 20:23:14.487156-05
+359	3050481	2025	13	0.1600	525.00	1	2025-12-29 20:23:14.487156-05
+360	3050481	2025	14	0.1800	455.56	1	2025-12-29 20:23:14.487156-05
+361	3050481	2025	15	0.1200	733.33	1	2025-12-29 20:23:14.487156-05
+362	3050481	2025	16	0.1200	733.33	1	2025-12-29 20:23:14.487156-05
+363	3052897	2025	1	0.1661	488.24	1	2025-12-29 20:23:14.836037-05
+364	3052897	2025	2	0.0000	999.00	1	2025-12-29 20:23:14.836037-05
+365	3052897	2025	3	0.0292	3233.33	1	2025-12-29 20:23:14.836037-05
+366	3052897	2025	4	0.0000	999.00	1	2025-12-29 20:23:14.836037-05
+367	3052897	2025	5	0.0540	1900.00	1	2025-12-29 20:23:14.836037-05
+368	3052897	2025	6	0.0505	1900.00	1	2025-12-29 20:23:14.836037-05
+369	3052897	2025	7	0.0000	999.00	1	2025-12-29 20:23:14.836037-05
+370	3052897	2025	8	0.0000	999.00	1	2025-12-29 20:23:14.836037-05
+371	3052897	2025	9	0.0000	999.00	1	2025-12-29 20:23:14.836037-05
+372	3052897	2025	10	0.0749	1328.57	1	2025-12-29 20:23:14.836037-05
+373	3052897	2025	11	0.0000	999.00	1	2025-12-29 20:23:14.836037-05
+374	3052897	2025	12	0.0000	999.00	1	2025-12-29 20:23:14.836037-05
+375	3052897	2025	13	0.0900	1011.11	1	2025-12-29 20:23:14.836037-05
+376	3052897	2025	14	0.1900	426.32	1	2025-12-29 20:23:14.836037-05
+377	3052897	2025	15	0.1200	733.33	1	2025-12-29 20:23:14.836037-05
+378	3052897	2025	16	0.1400	614.29	1	2025-12-29 20:23:14.836037-05
+379	3116164	2025	1	0.1661	488.24	1	2025-12-29 20:23:15.200475-05
+380	3116164	2025	2	0.0000	999.00	1	2025-12-29 20:23:15.200475-05
+381	3116164	2025	3	0.2200	354.55	1	2025-12-29 20:23:15.200475-05
+382	3116164	2025	4	0.0500	1900.00	1	2025-12-29 20:23:15.200475-05
+383	3116164	2025	5	0.0800	1150.00	1	2025-12-29 20:23:15.200475-05
+384	3116164	2025	6	0.0300	3233.33	1	2025-12-29 20:23:15.200475-05
+385	3116164	2025	7	0.0500	1900.00	1	2025-12-29 20:23:15.200475-05
+386	3116164	2025	8	0.0500	1900.00	1	2025-12-29 20:23:15.200475-05
+387	3116164	2025	9	0.0500	1900.00	1	2025-12-29 20:23:15.200475-05
+388	3116164	2025	10	0.0600	1566.67	1	2025-12-29 20:23:15.200475-05
+389	3116164	2025	11	0.0500	1900.00	1	2025-12-29 20:23:15.200475-05
+390	3116164	2025	12	0.0700	1328.57	1	2025-12-29 20:23:15.200475-05
+391	3116164	2025	13	0.0300	3233.33	1	2025-12-29 20:23:15.200475-05
+392	3116164	2025	14	0.0500	1900.00	1	2025-12-29 20:23:15.200475-05
+393	3116164	2025	15	0.0200	4900.00	1	2025-12-29 20:23:15.200475-05
+394	3116164	2025	16	0.1800	455.56	1	2025-12-29 20:23:15.200475-05
+395	3116365	2025	1	0.1661	488.24	1	2025-12-29 20:23:15.562147-05
+396	3116365	2025	2	0.0000	999.00	1	2025-12-29 20:23:15.562147-05
+397	3116365	2025	3	0.0000	999.00	1	2025-12-29 20:23:15.562147-05
+398	3116365	2025	5	0.1200	733.33	1	2025-12-29 20:23:15.562147-05
+399	3116365	2025	6	0.4900	104.08	1	2025-12-29 20:23:15.562147-05
+400	3116365	2025	7	0.4000	150.00	1	2025-12-29 20:23:15.562147-05
+401	3116365	2025	8	0.4000	150.00	1	2025-12-29 20:23:15.562147-05
+402	3116365	2025	9	0.3500	185.71	1	2025-12-29 20:23:15.562147-05
+403	3116365	2025	10	0.2600	284.62	1	2025-12-29 20:23:15.562147-05
+404	3116365	2025	11	0.2400	316.67	1	2025-12-29 20:23:15.562147-05
+405	3116365	2025	12	0.2700	270.37	1	2025-12-29 20:23:15.562147-05
+406	3116365	2025	13	0.3400	194.12	1	2025-12-29 20:23:15.562147-05
+407	3116365	2025	14	0.1900	426.32	1	2025-12-29 20:23:15.562147-05
+408	3116365	2025	15	0.2200	354.55	1	2025-12-29 20:23:15.562147-05
+409	3116365	2025	16	0.1600	525.00	1	2025-12-29 20:23:15.562147-05
+410	3135321	2025	1	0.1661	488.24	1	2025-12-29 20:23:15.917367-05
+411	3135321	2025	2	0.0000	999.00	1	2025-12-29 20:23:15.917367-05
+412	3135321	2025	3	0.2700	270.37	1	2025-12-29 20:23:15.917367-05
+413	3135321	2025	4	0.1400	614.29	1	2025-12-29 20:23:15.917367-05
+414	3135321	2025	5	0.2500	300.00	1	2025-12-29 20:23:15.917367-05
+415	3135321	2025	6	0.2500	300.00	1	2025-12-29 20:23:15.917367-05
+416	3871102	2025	1	0.1661	488.24	1	2025-12-29 20:23:16.050843-05
+417	3871102	2025	2	0.0000	999.00	1	2025-12-29 20:23:16.050843-05
+418	3871102	2025	3	0.0292	3233.33	1	2025-12-29 20:23:16.050843-05
+419	3871102	2025	4	0.0000	999.00	1	2025-12-29 20:23:16.050843-05
+420	3871102	2025	5	0.1900	426.32	1	2025-12-29 20:23:16.050843-05
+421	3871102	2025	6	0.2500	300.00	1	2025-12-29 20:23:16.050843-05
+422	3871102	2025	7	0.0800	1150.00	1	2025-12-29 20:23:16.050843-05
+423	3871102	2025	8	0.1000	900.00	1	2025-12-29 20:23:16.050843-05
+424	3871102	2025	9	0.0100	9900.00	1	2025-12-29 20:23:16.050843-05
+425	3871102	2025	10	0.0400	2400.00	1	2025-12-29 20:23:16.050843-05
+426	3871102	2025	11	0.0400	2400.00	1	2025-12-29 20:23:16.050843-05
+427	3871102	2025	12	0.0800	1150.00	1	2025-12-29 20:23:16.050843-05
+428	3871102	2025	13	0.2500	300.00	1	2025-12-29 20:23:16.050843-05
+429	3871102	2025	14	0.1000	900.00	1	2025-12-29 20:23:16.050843-05
+430	3871102	2025	15	0.2400	316.67	1	2025-12-29 20:23:16.050843-05
+431	3871102	2025	16	0.4000	150.00	1	2025-12-29 20:23:16.050843-05
+432	3914151	2025	1	0.1661	488.24	1	2025-12-29 20:23:16.405607-05
+433	3914151	2025	3	0.0292	3233.33	1	2025-12-29 20:23:16.405607-05
+434	3914151	2025	4	0.0000	999.00	1	2025-12-29 20:23:16.405607-05
+435	3914151	2025	5	0.0540	1900.00	1	2025-12-29 20:23:16.405607-05
+436	3914151	2025	6	0.0505	1900.00	1	2025-12-29 20:23:16.405607-05
+437	3914151	2025	7	0.0000	999.00	1	2025-12-29 20:23:16.405607-05
+438	3914151	2025	8	0.0000	999.00	1	2025-12-29 20:23:16.405607-05
+439	3914151	2025	9	0.0000	999.00	1	2025-12-29 20:23:16.405607-05
+440	3914151	2025	10	0.0749	1328.57	1	2025-12-29 20:23:16.405607-05
+441	3914151	2025	11	0.0000	999.00	1	2025-12-29 20:23:16.405607-05
+442	3914151	2025	12	0.0000	999.00	1	2025-12-29 20:23:16.405607-05
+443	3914151	2025	13	0.0888	1011.11	1	2025-12-29 20:23:16.405607-05
+444	3914151	2025	14	0.0100	9900.00	1	2025-12-29 20:23:16.405607-05
+445	3914151	2025	15	0.0000	999.00	1	2025-12-29 20:23:16.405607-05
+446	3914151	2025	16	0.0100	9900.00	1	2025-12-29 20:23:16.405607-05
+447	3915416	2025	1	0.1661	488.24	1	2025-12-29 20:23:16.747877-05
+448	3915416	2025	2	0.0000	999.00	1	2025-12-29 20:23:16.747877-05
+449	3915416	2025	3	0.1600	525.00	1	2025-12-29 20:23:16.747877-05
+450	3915416	2025	5	0.1900	426.32	1	2025-12-29 20:23:16.747877-05
+451	3915416	2025	6	0.1900	426.32	1	2025-12-29 20:23:16.747877-05
+452	3915416	2025	7	0.1800	455.56	1	2025-12-29 20:23:16.747877-05
+453	3915416	2025	8	0.2100	376.19	1	2025-12-29 20:23:16.747877-05
+454	3915416	2025	9	0.1700	488.24	1	2025-12-29 20:23:16.747877-05
+455	3915416	2025	10	0.2900	244.83	1	2025-12-29 20:23:16.747877-05
+456	3915416	2025	11	0.2300	334.78	1	2025-12-29 20:23:16.747877-05
+457	3915416	2025	12	0.2300	334.78	1	2025-12-29 20:23:16.747877-05
+458	3915416	2025	13	0.2200	354.55	1	2025-12-29 20:23:16.747877-05
+459	3915416	2025	14	0.2100	376.19	1	2025-12-29 20:23:16.747877-05
+460	3915416	2025	15	0.2000	400.00	1	2025-12-29 20:23:16.747877-05
+461	3915416	2025	16	0.1600	525.00	1	2025-12-29 20:23:16.747877-05
+462	3917914	2025	1	0.1661	488.24	1	2025-12-29 20:23:17.130307-05
+463	3917914	2025	2	0.0000	999.00	1	2025-12-29 20:23:17.130307-05
+464	3917914	2025	3	0.0900	1011.11	1	2025-12-29 20:23:17.130307-05
+465	3917914	2025	4	0.1700	488.24	1	2025-12-29 20:23:17.130307-05
+466	3917914	2025	5	0.2800	257.14	1	2025-12-29 20:23:17.130307-05
+467	3917914	2025	6	0.3000	233.33	1	2025-12-29 20:23:17.130307-05
+468	3917914	2025	7	0.2800	257.14	1	2025-12-29 20:23:17.130307-05
+469	3917914	2025	8	0.2600	284.62	1	2025-12-29 20:23:17.130307-05
+470	3917914	2025	9	0.0700	1328.57	1	2025-12-29 20:23:17.130307-05
+471	3917914	2025	10	0.2000	400.00	1	2025-12-29 20:23:17.130307-05
+472	3917914	2025	11	0.3500	185.71	1	2025-12-29 20:23:17.130307-05
+473	3917914	2025	12	0.2200	354.55	1	2025-12-29 20:23:17.130307-05
+474	3917914	2025	13	0.2600	284.62	1	2025-12-29 20:23:17.130307-05
+475	3917914	2025	14	0.2900	244.83	1	2025-12-29 20:23:17.130307-05
+476	3917914	2025	15	0.3100	222.58	1	2025-12-29 20:23:17.130307-05
+477	3917914	2025	16	0.1800	455.56	1	2025-12-29 20:23:17.130307-05
+478	3930086	2025	1	0.1661	488.24	1	2025-12-29 20:23:17.480056-05
+479	3930086	2025	2	0.0000	999.00	1	2025-12-29 20:23:17.480056-05
+480	3930086	2025	3	0.0700	1328.57	1	2025-12-29 20:23:17.480056-05
+481	3930086	2025	4	0.0600	1566.67	1	2025-12-29 20:23:17.480056-05
+482	3930086	2025	5	0.0100	9900.00	1	2025-12-29 20:23:17.480056-05
+483	3930086	2025	6	0.0200	4900.00	1	2025-12-29 20:23:17.480056-05
+484	3930086	2025	7	0.0200	4900.00	1	2025-12-29 20:23:17.480056-05
+485	3930086	2025	8	0.0500	1900.00	1	2025-12-29 20:23:17.480056-05
+486	3930086	2025	9	0.1500	566.67	1	2025-12-29 20:23:17.480056-05
+487	3930086	2025	10	0.1100	809.09	1	2025-12-29 20:23:17.480056-05
+488	3930086	2025	11	0.1100	809.09	1	2025-12-29 20:23:17.480056-05
+489	3930086	2025	12	0.0600	1566.67	1	2025-12-29 20:23:17.480056-05
+490	3930086	2025	13	0.0600	1566.67	1	2025-12-29 20:23:17.480056-05
+491	3930086	2025	14	0.1000	900.00	1	2025-12-29 20:23:17.480056-05
+492	3930086	2025	15	0.0700	1328.57	1	2025-12-29 20:23:17.480056-05
+493	3930086	2025	16	0.1200	733.33	1	2025-12-29 20:23:17.480056-05
+494	4034948	2025	1	0.1661	488.24	1	2025-12-29 20:23:17.889145-05
+495	4034948	2025	2	0.0000	999.00	1	2025-12-29 20:23:17.889145-05
+496	4034948	2025	3	0.0292	3233.33	1	2025-12-29 20:23:17.889145-05
+497	4034948	2025	4	0.0000	999.00	1	2025-12-29 20:23:17.889145-05
+498	4034948	2025	5	0.0540	1900.00	1	2025-12-29 20:23:17.889145-05
+499	4034948	2025	6	0.0505	1900.00	1	2025-12-29 20:23:17.889145-05
+500	4034948	2025	7	0.0000	999.00	1	2025-12-29 20:23:17.889145-05
+501	4034948	2025	8	0.0000	999.00	1	2025-12-29 20:23:17.889145-05
+502	4034948	2025	9	0.0000	999.00	1	2025-12-29 20:23:17.889145-05
+503	4034948	2025	10	0.0749	1328.57	1	2025-12-29 20:23:17.889145-05
+504	4034948	2025	11	0.0000	999.00	1	2025-12-29 20:23:17.889145-05
+505	4034948	2025	12	0.0000	999.00	1	2025-12-29 20:23:17.889145-05
+506	4034948	2025	13	0.0888	1011.11	1	2025-12-29 20:23:17.889145-05
+507	4034948	2025	14	0.0000	999.00	1	2025-12-29 20:23:17.889145-05
+508	4034948	2025	15	0.0934	1011.11	1	2025-12-29 20:23:17.889145-05
+509	4034948	2025	16	0.0000	999.00	1	2025-12-29 20:23:17.889145-05
+510	4035020	2025	1	0.1661	488.24	1	2025-12-29 20:23:18.30076-05
+511	4035020	2025	2	0.0000	999.00	1	2025-12-29 20:23:18.30076-05
+512	4035020	2025	3	0.0000	999.00	1	2025-12-29 20:23:18.30076-05
+513	4035020	2025	4	0.0408	2400.00	1	2025-12-29 20:23:18.30076-05
+514	4035020	2025	5	0.0000	999.00	1	2025-12-29 20:23:18.30076-05
+515	4035020	2025	6	0.0000	999.00	1	2025-12-29 20:23:18.30076-05
+516	4035020	2025	7	0.0000	999.00	1	2025-12-29 20:23:18.30076-05
+517	4035020	2025	8	0.0100	9900.00	1	2025-12-29 20:23:18.30076-05
+518	4035020	2025	9	0.0200	4900.00	1	2025-12-29 20:23:18.30076-05
+519	4035020	2025	10	0.0600	1566.67	1	2025-12-29 20:23:18.30076-05
+520	4035020	2025	11	0.0400	2400.00	1	2025-12-29 20:23:18.30076-05
+521	4035020	2025	12	0.0200	4900.00	1	2025-12-29 20:23:18.30076-05
+522	4035020	2025	13	0.0200	4900.00	1	2025-12-29 20:23:18.30076-05
+523	4035020	2025	14	0.1000	900.00	1	2025-12-29 20:23:18.30076-05
+524	4035020	2025	15	0.1200	733.33	1	2025-12-29 20:23:18.30076-05
+525	4035020	2025	16	0.1800	455.56	1	2025-12-29 20:23:18.30076-05
+526	4036131	2025	1	0.1661	488.24	1	2025-12-29 20:23:18.663279-05
+527	4036131	2025	2	0.0000	999.00	1	2025-12-29 20:23:18.663279-05
+528	4036131	2025	3	0.1300	669.23	1	2025-12-29 20:23:18.663279-05
+529	4036131	2025	4	0.3000	233.33	1	2025-12-29 20:23:18.663279-05
+530	4036131	2025	5	0.2900	244.83	1	2025-12-29 20:23:18.663279-05
+531	4036131	2025	6	0.3300	203.03	1	2025-12-29 20:23:18.663279-05
+532	4036131	2025	7	0.1200	733.33	1	2025-12-29 20:23:18.663279-05
+533	4036131	2025	8	0.2600	284.62	1	2025-12-29 20:23:18.663279-05
+534	4036131	2025	9	0.2100	376.19	1	2025-12-29 20:23:18.663279-05
+535	4036131	2025	10	0.2900	244.83	1	2025-12-29 20:23:18.663279-05
+536	4036131	2025	11	0.2700	270.37	1	2025-12-29 20:23:18.663279-05
+537	4036131	2025	12	0.2000	400.00	1	2025-12-29 20:23:18.663279-05
+538	4036131	2025	13	0.3700	170.27	1	2025-12-29 20:23:18.663279-05
+539	4036131	2025	14	0.1500	566.67	1	2025-12-29 20:23:18.663279-05
+540	4036131	2025	15	0.1100	809.09	1	2025-12-29 20:23:18.663279-05
+541	4036131	2025	16	0.1300	669.23	1	2025-12-29 20:23:18.663279-05
+542	4039050	2025	1	0.1661	488.24	1	2025-12-29 20:23:19.049833-05
+543	4039050	2025	2	0.0000	999.00	1	2025-12-29 20:23:19.049833-05
+544	4039050	2025	3	0.0292	3233.33	1	2025-12-29 20:23:19.049833-05
+545	4039050	2025	4	0.0000	999.00	1	2025-12-29 20:23:19.049833-05
+546	4039050	2025	5	0.0540	1900.00	1	2025-12-29 20:23:19.049833-05
+547	4039050	2025	6	0.0505	1900.00	1	2025-12-29 20:23:19.049833-05
+548	4039050	2025	7	0.0000	999.00	1	2025-12-29 20:23:19.049833-05
+549	4039050	2025	8	0.0000	999.00	1	2025-12-29 20:23:19.049833-05
+550	4039050	2025	9	0.0000	999.00	1	2025-12-29 20:23:19.049833-05
+551	4039050	2025	10	0.0500	1900.00	1	2025-12-29 20:23:19.049833-05
+552	4039050	2025	11	0.0300	3233.33	1	2025-12-29 20:23:19.049833-05
+553	4039050	2025	12	0.0100	9900.00	1	2025-12-29 20:23:19.049833-05
+554	4039050	2025	13	0.0036	999.00	1	2025-12-29 20:23:19.049833-05
+555	4039050	2025	14	0.0000	999.00	1	2025-12-29 20:23:19.049833-05
+556	4039050	2025	15	0.0000	999.00	1	2025-12-29 20:23:19.049833-05
+557	4039050	2025	16	0.0500	1900.00	1	2025-12-29 20:23:19.049833-05
+558	4040655	2025	1	0.1661	488.24	1	2025-12-29 20:23:19.40613-05
+559	4040655	2025	3	0.0292	3233.33	1	2025-12-29 20:23:19.40613-05
+560	4040655	2025	4	0.1000	900.00	1	2025-12-29 20:23:19.40613-05
+561	4040655	2025	5	0.2300	334.78	1	2025-12-29 20:23:19.40613-05
+562	4040655	2025	6	0.2700	270.37	1	2025-12-29 20:23:19.40613-05
+563	4040655	2025	7	0.2700	270.37	1	2025-12-29 20:23:19.40613-05
+564	4040655	2025	8	0.1800	455.56	1	2025-12-29 20:23:19.40613-05
+565	4040655	2025	9	0.1500	566.67	1	2025-12-29 20:23:19.40613-05
+566	4040655	2025	10	0.2900	244.83	1	2025-12-29 20:23:19.40613-05
+567	4040655	2025	11	0.2500	300.00	1	2025-12-29 20:23:19.40613-05
+568	4040655	2025	12	0.3400	194.12	1	2025-12-29 20:23:19.40613-05
+569	4040655	2025	13	0.3900	156.41	1	2025-12-29 20:23:19.40613-05
+570	4040655	2025	14	0.2900	244.83	1	2025-12-29 20:23:19.40613-05
+571	4040655	2025	15	0.2200	354.55	1	2025-12-29 20:23:19.40613-05
+572	4040655	2025	16	0.3200	212.50	1	2025-12-29 20:23:19.40613-05
+573	4241263	2025	1	0.1661	488.24	1	2025-12-29 20:23:19.722285-05
+574	4241263	2025	2	0.0000	999.00	1	2025-12-29 20:23:19.722285-05
+575	4241263	2025	3	0.0292	3233.33	1	2025-12-29 20:23:19.722285-05
+576	4241263	2025	4	0.0000	999.00	1	2025-12-29 20:23:19.722285-05
+577	4241263	2025	5	0.0100	9900.00	1	2025-12-29 20:23:19.722285-05
+578	4241263	2025	6	0.0000	999.00	1	2025-12-29 20:23:19.722285-05
+579	4241263	2025	7	0.0100	9900.00	1	2025-12-29 20:23:19.722285-05
+580	4241263	2025	8	0.0200	4900.00	1	2025-12-29 20:23:19.722285-05
+581	4241263	2025	9	0.0000	999.00	1	2025-12-29 20:23:19.722285-05
+582	4241263	2025	10	0.0100	9900.00	1	2025-12-29 20:23:19.722285-05
+583	4241263	2025	11	0.2000	400.00	1	2025-12-29 20:23:19.722285-05
+584	4241263	2025	12	0.2200	354.55	1	2025-12-29 20:23:19.722285-05
+585	4241263	2025	13	0.1500	566.67	1	2025-12-29 20:23:19.722285-05
+586	4241263	2025	14	0.0500	1900.00	1	2025-12-29 20:23:19.722285-05
+587	4241263	2025	15	0.0400	2400.00	1	2025-12-29 20:23:19.722285-05
+588	4241263	2025	16	0.1400	614.29	1	2025-12-29 20:23:19.722285-05
+589	4241424	2025	1	0.1661	488.24	1	2025-12-29 20:23:20.090785-05
+590	4241424	2025	2	0.0000	999.00	1	2025-12-29 20:23:20.090785-05
+591	4241424	2025	3	0.0292	3233.33	1	2025-12-29 20:23:20.090785-05
+592	4241424	2025	4	0.1100	809.09	1	2025-12-29 20:23:20.090785-05
+593	4241424	2025	5	0.0700	1328.57	1	2025-12-29 20:23:20.090785-05
+594	4241424	2025	6	0.2500	300.00	1	2025-12-29 20:23:20.090785-05
+595	4241424	2025	7	0.0800	1150.00	1	2025-12-29 20:23:20.090785-05
+596	4241424	2025	8	0.0700	1328.57	1	2025-12-29 20:23:20.090785-05
+597	4241424	2025	9	0.0100	9900.00	1	2025-12-29 20:23:20.090785-05
+598	4241424	2025	10	0.0200	4900.00	1	2025-12-29 20:23:20.090785-05
+599	4241424	2025	11	0.0000	999.00	1	2025-12-29 20:23:20.090785-05
+600	4241424	2025	12	0.0000	999.00	1	2025-12-29 20:23:20.090785-05
+601	4241424	2025	13	0.0000	999.00	1	2025-12-29 20:23:20.090785-05
+602	4241424	2025	14	0.0000	999.00	1	2025-12-29 20:23:20.090785-05
+603	4241424	2025	15	0.0100	9900.00	1	2025-12-29 20:23:20.090785-05
+604	4241476	2025	1	0.1661	488.24	1	2025-12-29 20:23:20.440779-05
+605	4241476	2025	2	0.0000	999.00	1	2025-12-29 20:23:20.440779-05
+606	4241476	2025	3	0.0292	3233.33	1	2025-12-29 20:23:20.440779-05
+607	4241476	2025	4	0.0000	999.00	1	2025-12-29 20:23:20.440779-05
+608	4241476	2025	5	0.0100	9900.00	1	2025-12-29 20:23:20.440779-05
+609	4241476	2025	6	0.0300	3233.33	1	2025-12-29 20:23:20.440779-05
+610	4241476	2025	7	0.0300	3233.33	1	2025-12-29 20:23:20.440779-05
+611	4241476	2025	8	0.0600	1566.67	1	2025-12-29 20:23:20.440779-05
+612	4241476	2025	9	0.0600	1566.67	1	2025-12-29 20:23:20.440779-05
+613	4241476	2025	10	0.0500	1900.00	1	2025-12-29 20:23:20.440779-05
+614	4241476	2025	11	0.0800	1150.00	1	2025-12-29 20:23:20.440779-05
+615	4241476	2025	12	0.0500	1900.00	1	2025-12-29 20:23:20.440779-05
+616	4241476	2025	13	0.1700	488.24	1	2025-12-29 20:23:20.440779-05
+617	4241476	2025	14	0.0800	1150.00	1	2025-12-29 20:23:20.440779-05
+618	4241476	2025	15	0.0200	4900.00	1	2025-12-29 20:23:20.440779-05
+619	4241476	2025	16	0.0800	1150.00	1	2025-12-29 20:23:20.440779-05
+620	4242433	2025	1	0.1661	488.24	1	2025-12-29 20:23:20.808224-05
+621	4242433	2025	2	0.0000	999.00	1	2025-12-29 20:23:20.808224-05
+622	4242433	2025	3	0.6500	-185.71	-1	2025-12-29 20:23:20.808224-05
+623	4242433	2025	4	0.1500	566.67	1	2025-12-29 20:23:20.808224-05
+624	4242433	2025	5	0.1400	614.29	1	2025-12-29 20:23:20.808224-05
+625	4242433	2025	6	0.1600	525.00	1	2025-12-29 20:23:20.808224-05
+626	4242433	2025	7	0.1200	733.33	1	2025-12-29 20:23:20.808224-05
+627	4242433	2025	8	0.1100	809.09	1	2025-12-29 20:23:20.808224-05
+628	4242433	2025	9	0.1000	900.00	1	2025-12-29 20:23:20.808224-05
+629	4242433	2025	10	0.1000	900.00	1	2025-12-29 20:23:20.808224-05
+630	4242433	2025	11	0.1100	809.09	1	2025-12-29 20:23:20.808224-05
+631	4242433	2025	12	0.2800	257.14	1	2025-12-29 20:23:20.808224-05
+632	4242433	2025	13	0.2000	400.00	1	2025-12-29 20:23:20.808224-05
+633	4242433	2025	14	0.2200	354.55	1	2025-12-29 20:23:20.808224-05
+634	4242433	2025	15	0.2200	354.55	1	2025-12-29 20:23:20.808224-05
+635	4242433	2025	16	0.1600	525.00	1	2025-12-29 20:23:20.808224-05
+636	4243537	2025	1	0.1661	488.24	1	2025-12-29 20:23:21.165321-05
+637	4243537	2025	12	0.0000	999.00	1	2025-12-29 20:23:21.165321-05
+638	4243537	2025	13	0.1700	488.24	1	2025-12-29 20:23:21.165321-05
+639	4243537	2025	14	0.1700	488.24	1	2025-12-29 20:23:21.165321-05
+640	4243537	2025	15	0.0500	1900.00	1	2025-12-29 20:23:21.165321-05
+641	4243537	2025	16	0.0400	2400.00	1	2025-12-29 20:23:21.165321-05
+642	4258595	2025	1	0.1661	488.24	1	2025-12-29 20:23:21.30323-05
+643	4258595	2025	2	0.0000	999.00	1	2025-12-29 20:23:21.30323-05
+644	4258595	2025	3	0.1400	614.29	1	2025-12-29 20:23:21.30323-05
+645	4258595	2025	4	0.0500	1900.00	1	2025-12-29 20:23:21.30323-05
+646	4258595	2025	5	0.0100	9900.00	1	2025-12-29 20:23:21.30323-05
+647	4258595	2025	6	0.0100	9900.00	1	2025-12-29 20:23:21.30323-05
+648	4258595	2025	7	0.1600	525.00	1	2025-12-29 20:23:21.30323-05
+649	4258595	2025	8	0.1100	809.09	1	2025-12-29 20:23:21.30323-05
+650	4258595	2025	9	0.1400	614.29	1	2025-12-29 20:23:21.30323-05
+651	4258595	2025	10	0.0300	3233.33	1	2025-12-29 20:23:21.30323-05
+652	4258595	2025	11	0.0700	1328.57	1	2025-12-29 20:23:21.30323-05
+653	4258595	2025	12	0.0600	1566.67	1	2025-12-29 20:23:21.30323-05
+654	4258595	2025	13	0.0600	1566.67	1	2025-12-29 20:23:21.30323-05
+655	4258595	2025	14	0.0100	9900.00	1	2025-12-29 20:23:21.30323-05
+656	4258595	2025	15	0.0700	1328.57	1	2025-12-29 20:23:21.30323-05
+657	4258595	2025	16	0.1200	733.33	1	2025-12-29 20:23:21.30323-05
+658	4360248	2025	1	0.1661	488.24	1	2025-12-29 20:23:21.649388-05
+659	4360248	2025	2	0.0000	999.00	1	2025-12-29 20:23:21.649388-05
+660	4360248	2025	3	0.5000	-100.00	-1	2025-12-29 20:23:21.649388-05
+661	4360248	2025	4	0.1900	426.32	1	2025-12-29 20:23:21.649388-05
+662	4360248	2025	5	0.0700	1328.57	1	2025-12-29 20:23:21.649388-05
+663	4360248	2025	6	0.1000	900.00	1	2025-12-29 20:23:21.649388-05
+664	4360248	2025	7	0.2900	244.83	1	2025-12-29 20:23:21.649388-05
+665	4360248	2025	8	0.1900	426.32	1	2025-12-29 20:23:21.649388-05
+666	4360248	2025	9	0.2100	376.19	1	2025-12-29 20:23:21.649388-05
+667	4360248	2025	10	0.2200	354.55	1	2025-12-29 20:23:21.649388-05
+668	4360248	2025	11	0.3600	177.78	1	2025-12-29 20:23:21.649388-05
+669	4360248	2025	12	0.2400	316.67	1	2025-12-29 20:23:21.649388-05
+670	4360248	2025	13	0.2000	400.00	1	2025-12-29 20:23:21.649388-05
+671	4360248	2025	14	0.4500	122.22	1	2025-12-29 20:23:21.649388-05
+672	4360248	2025	15	0.3300	203.03	1	2025-12-29 20:23:21.649388-05
+673	4360248	2025	16	0.2700	270.37	1	2025-12-29 20:23:21.649388-05
+674	4360761	2025	2	0.0000	999.00	1	2025-12-29 20:23:22.119259-05
+675	4360761	2025	3	0.1500	566.67	1	2025-12-29 20:23:22.119259-05
+676	4360761	2025	4	0.0900	1011.11	1	2025-12-29 20:23:22.119259-05
+677	4360761	2025	5	0.1400	614.29	1	2025-12-29 20:23:22.119259-05
+678	4360761	2025	6	0.2600	284.62	1	2025-12-29 20:23:22.119259-05
+679	4360761	2025	7	0.2700	270.37	1	2025-12-29 20:23:22.119259-05
+680	4360761	2025	8	0.2300	334.78	1	2025-12-29 20:23:22.119259-05
+681	4360761	2025	9	0.2000	400.00	1	2025-12-29 20:23:22.119259-05
+682	4360761	2025	10	0.1100	809.09	1	2025-12-29 20:23:22.119259-05
+683	4360761	2025	11	0.1500	566.67	1	2025-12-29 20:23:22.119259-05
+684	4360761	2025	12	0.1300	669.23	1	2025-12-29 20:23:22.119259-05
+685	4360761	2025	13	0.2600	284.62	1	2025-12-29 20:23:22.119259-05
+686	4360761	2025	14	0.3200	212.50	1	2025-12-29 20:23:22.119259-05
+687	4360761	2025	15	0.4400	127.27	1	2025-12-29 20:23:22.119259-05
+688	4360761	2025	16	0.3100	222.58	1	2025-12-29 20:23:22.119259-05
+689	4360763	2025	1	0.1661	488.24	1	2025-12-29 20:23:22.551875-05
+690	4360763	2025	2	0.0000	999.00	1	2025-12-29 20:23:22.551875-05
+691	4360763	2025	3	0.0292	3233.33	1	2025-12-29 20:23:22.551875-05
+692	4360763	2025	4	0.0000	999.00	1	2025-12-29 20:23:22.551875-05
+693	4360763	2025	5	0.0500	1900.00	1	2025-12-29 20:23:22.551875-05
+694	4360763	2025	6	0.0500	1900.00	1	2025-12-29 20:23:22.551875-05
+695	4360763	2025	7	0.1000	900.00	1	2025-12-29 20:23:22.551875-05
+696	4360763	2025	8	0.0300	3233.33	1	2025-12-29 20:23:22.551875-05
+697	4360763	2025	9	0.0600	1566.67	1	2025-12-29 20:23:22.551875-05
+698	4360763	2025	10	0.1800	455.56	1	2025-12-29 20:23:22.551875-05
+699	4360763	2025	11	0.1200	733.33	1	2025-12-29 20:23:22.551875-05
+700	4360763	2025	12	0.0400	2400.00	1	2025-12-29 20:23:22.551875-05
+701	4360763	2025	13	0.1000	900.00	1	2025-12-29 20:23:22.551875-05
+702	4360763	2025	14	0.0000	999.00	1	2025-12-29 20:23:22.551875-05
+703	4360763	2025	15	0.0000	999.00	1	2025-12-29 20:23:22.551875-05
+704	4360763	2025	16	0.0200	4900.00	1	2025-12-29 20:23:22.551875-05
+705	4360939	2025	1	0.1661	488.24	1	2025-12-29 20:23:22.923562-05
+706	4360939	2025	2	0.0000	999.00	1	2025-12-29 20:23:22.923562-05
+707	4360939	2025	3	0.2400	316.67	1	2025-12-29 20:23:22.923562-05
+708	4360939	2025	4	0.1700	488.24	1	2025-12-29 20:23:22.923562-05
+709	4360939	2025	5	0.3300	203.03	1	2025-12-29 20:23:22.923562-05
+710	4360939	2025	6	0.2500	300.00	1	2025-12-29 20:23:22.923562-05
+711	4360939	2025	7	0.0900	1011.11	1	2025-12-29 20:23:22.923562-05
+712	4360939	2025	8	0.0700	1328.57	1	2025-12-29 20:23:22.923562-05
+713	4360939	2025	9	0.2200	354.55	1	2025-12-29 20:23:22.923562-05
+714	4360939	2025	10	0.0800	1150.00	1	2025-12-29 20:23:22.923562-05
+715	4360939	2025	11	0.1100	809.09	1	2025-12-29 20:23:22.923562-05
+716	4360939	2025	12	0.1000	900.00	1	2025-12-29 20:23:22.923562-05
+717	4360939	2025	13	0.1000	900.00	1	2025-12-29 20:23:22.923562-05
+718	4360939	2025	14	0.1300	669.23	1	2025-12-29 20:23:22.923562-05
+719	4360939	2025	15	0.0600	1566.67	1	2025-12-29 20:23:22.923562-05
+720	4360939	2025	16	0.0700	1328.57	1	2025-12-29 20:23:22.923562-05
+721	4361050	2025	1	0.1661	488.24	1	2025-12-29 20:23:23.385626-05
+722	4361050	2025	5	0.0540	1900.00	1	2025-12-29 20:23:23.385626-05
+723	4361050	2025	6	0.0505	1900.00	1	2025-12-29 20:23:23.385626-05
+724	4361050	2025	7	0.0200	4900.00	1	2025-12-29 20:23:23.385626-05
+725	4361050	2025	8	0.0300	3233.33	1	2025-12-29 20:23:23.385626-05
+726	4361050	2025	9	0.0600	1566.67	1	2025-12-29 20:23:23.385626-05
+727	4361050	2025	10	0.0400	2400.00	1	2025-12-29 20:23:23.385626-05
+728	4361050	2025	11	0.1300	669.23	1	2025-12-29 20:23:23.385626-05
+729	4361050	2025	12	0.0100	9900.00	1	2025-12-29 20:23:23.385626-05
+730	4361050	2025	13	0.2000	400.00	1	2025-12-29 20:23:23.385626-05
+731	4361050	2025	14	0.0900	1011.11	1	2025-12-29 20:23:23.385626-05
+732	4361050	2025	15	0.1200	733.33	1	2025-12-29 20:23:23.385626-05
+733	4361050	2025	16	0.0700	1328.57	1	2025-12-29 20:23:23.385626-05
+734	4361307	2025	1	0.1661	488.24	1	2025-12-29 20:23:23.783564-05
+735	4361307	2025	2	0.0000	999.00	1	2025-12-29 20:23:23.783564-05
+736	4361307	2025	3	0.5400	-117.39	-1	2025-12-29 20:23:23.783564-05
+737	4361307	2025	4	0.5400	-117.39	-1	2025-12-29 20:23:23.783564-05
+738	4361307	2025	5	0.3300	203.03	1	2025-12-29 20:23:23.783564-05
+739	4361307	2025	6	0.4800	108.33	1	2025-12-29 20:23:23.783564-05
+740	4361307	2025	7	0.2400	316.67	1	2025-12-29 20:23:23.783564-05
+741	4361307	2025	8	0.5700	-132.56	-1	2025-12-29 20:23:23.783564-05
+742	4361307	2025	9	0.5500	-122.22	-1	2025-12-29 20:23:23.783564-05
+743	4361307	2025	10	0.4600	117.39	1	2025-12-29 20:23:23.783564-05
+744	4361307	2025	11	0.4700	112.77	1	2025-12-29 20:23:23.783564-05
+745	4361307	2025	12	0.4500	122.22	1	2025-12-29 20:23:23.783564-05
+746	4361307	2025	13	0.4500	122.22	1	2025-12-29 20:23:23.783564-05
+747	4361307	2025	14	0.3000	233.33	1	2025-12-29 20:23:23.783564-05
+748	4361307	2025	15	0.2100	376.19	1	2025-12-29 20:23:23.783564-05
+749	4361307	2025	16	0.2400	316.67	1	2025-12-29 20:23:23.783564-05
+750	4361988	2025	1	0.1661	488.24	1	2025-12-29 20:23:24.219266-05
+751	4361988	2025	5	0.0540	1900.00	1	2025-12-29 20:23:24.219266-05
+752	4361988	2025	6	0.0200	4900.00	1	2025-12-29 20:23:24.219266-05
+753	4361988	2025	7	0.0400	2400.00	1	2025-12-29 20:23:24.219266-05
+754	4361988	2025	8	0.0500	1900.00	1	2025-12-29 20:23:24.219266-05
+755	4361988	2025	9	0.0500	1900.00	1	2025-12-29 20:23:24.219266-05
+756	4361988	2025	10	0.0500	1900.00	1	2025-12-29 20:23:24.219266-05
+757	4361988	2025	11	0.0400	2400.00	1	2025-12-29 20:23:24.219266-05
+758	4361988	2025	12	0.0300	3233.33	1	2025-12-29 20:23:24.219266-05
+759	4361988	2025	13	0.0300	3233.33	1	2025-12-29 20:23:24.219266-05
+760	4363551	2025	1	0.1661	488.24	1	2025-12-29 20:23:24.504037-05
+761	4363551	2025	9	0.0000	999.00	1	2025-12-29 20:23:24.504037-05
+762	4363551	2025	10	0.0749	1328.57	1	2025-12-29 20:23:24.504037-05
+763	4363551	2025	11	0.0000	999.00	1	2025-12-29 20:23:24.504037-05
+764	4363551	2025	12	0.0000	999.00	1	2025-12-29 20:23:24.504037-05
+765	4363551	2025	13	0.0888	1011.11	1	2025-12-29 20:23:24.504037-05
+766	4363551	2025	14	0.0100	9900.00	1	2025-12-29 20:23:24.504037-05
+767	4363551	2025	15	0.0600	1566.67	1	2025-12-29 20:23:24.504037-05
+768	4363551	2025	16	0.1300	669.23	1	2025-12-29 20:23:24.504037-05
+769	4372780	2025	1	0.1661	488.24	1	2025-12-29 20:23:24.767623-05
+770	4372780	2025	2	0.0000	999.00	1	2025-12-29 20:23:24.767623-05
+771	4372780	2025	3	0.0200	4900.00	1	2025-12-29 20:23:24.767623-05
+772	4372780	2025	4	0.1800	455.56	1	2025-12-29 20:23:24.767623-05
+773	4372780	2025	5	0.1300	669.23	1	2025-12-29 20:23:24.767623-05
+774	4372780	2025	6	0.1400	614.29	1	2025-12-29 20:23:24.767623-05
+775	4372780	2025	7	0.1600	525.00	1	2025-12-29 20:23:24.767623-05
+776	4372780	2025	8	0.2100	376.19	1	2025-12-29 20:23:24.767623-05
+777	4372780	2025	9	0.0800	1150.00	1	2025-12-29 20:23:24.767623-05
+778	4372780	2025	10	0.1000	900.00	1	2025-12-29 20:23:24.767623-05
+779	4372780	2025	11	0.0300	3233.33	1	2025-12-29 20:23:24.767623-05
+780	4372780	2025	12	0.0300	3233.33	1	2025-12-29 20:23:24.767623-05
+781	4372780	2025	13	0.0900	1011.11	1	2025-12-29 20:23:24.767623-05
+782	4372780	2025	14	0.0300	3233.33	1	2025-12-29 20:23:24.767623-05
+783	4372780	2025	15	0.0300	3233.33	1	2025-12-29 20:23:24.767623-05
+784	4372780	2025	16	0.1000	900.00	1	2025-12-29 20:23:24.767623-05
+785	4373678	2025	1	0.1661	488.24	1	2025-12-29 20:23:25.308921-05
+786	4373678	2025	2	0.0000	999.00	1	2025-12-29 20:23:25.308921-05
+787	4373678	2025	3	0.7000	-233.33	-1	2025-12-29 20:23:25.308921-05
+788	4373678	2025	4	0.0900	1011.11	1	2025-12-29 20:23:25.308921-05
+789	4373678	2025	5	0.2900	244.83	1	2025-12-29 20:23:25.308921-05
+790	4373678	2025	6	0.4700	112.77	1	2025-12-29 20:23:25.308921-05
+791	4373678	2025	7	0.3500	185.71	1	2025-12-29 20:23:25.308921-05
+792	4373678	2025	8	0.3100	222.58	1	2025-12-29 20:23:25.308921-05
+793	4373678	2025	9	0.1400	614.29	1	2025-12-29 20:23:25.308921-05
+794	4373678	2025	10	0.3400	194.12	1	2025-12-29 20:23:25.308921-05
+795	4373678	2025	11	0.2800	257.14	1	2025-12-29 20:23:25.308921-05
+796	4373678	2025	12	0.3000	233.33	1	2025-12-29 20:23:25.308921-05
+797	4373678	2025	13	0.1200	733.33	1	2025-12-29 20:23:25.308921-05
+798	4373678	2025	14	0.5200	-108.33	-1	2025-12-29 20:23:25.308921-05
+799	4373678	2025	15	0.1600	525.00	1	2025-12-29 20:23:25.308921-05
+800	4373678	2025	16	0.1500	566.67	1	2025-12-29 20:23:25.308921-05
+801	4374045	2025	1	0.1661	488.24	1	2025-12-29 20:23:25.799743-05
+802	4374045	2025	2	0.0000	999.00	1	2025-12-29 20:23:25.799743-05
+803	4374045	2025	3	0.0292	3233.33	1	2025-12-29 20:23:25.799743-05
+804	4374045	2025	4	0.0000	999.00	1	2025-12-29 20:23:25.799743-05
+805	4374045	2025	5	0.0540	1900.00	1	2025-12-29 20:23:25.799743-05
+806	4374045	2025	6	0.0505	1900.00	1	2025-12-29 20:23:25.799743-05
+807	4374045	2025	7	0.0000	999.00	1	2025-12-29 20:23:25.799743-05
+808	4374045	2025	8	0.0000	999.00	1	2025-12-29 20:23:25.799743-05
+809	4374045	2025	9	0.0000	999.00	1	2025-12-29 20:23:25.799743-05
+810	4374045	2025	10	0.0749	1328.57	1	2025-12-29 20:23:25.799743-05
+811	4374045	2025	11	0.0000	999.00	1	2025-12-29 20:23:25.799743-05
+812	4374045	2025	12	0.0000	999.00	1	2025-12-29 20:23:25.799743-05
+813	4374045	2025	13	0.0888	1011.11	1	2025-12-29 20:23:25.799743-05
+814	4374045	2025	14	0.0000	999.00	1	2025-12-29 20:23:25.799743-05
+815	4374045	2025	15	0.0934	1011.11	1	2025-12-29 20:23:25.799743-05
+816	4374045	2025	16	0.0000	999.00	1	2025-12-29 20:23:25.799743-05
+817	4374187	2025	1	0.1661	488.24	1	2025-12-29 20:23:26.161046-05
+818	4374187	2025	7	0.0000	999.00	1	2025-12-29 20:23:26.161046-05
+819	4374187	2025	8	0.0000	999.00	1	2025-12-29 20:23:26.161046-05
+820	4374187	2025	9	0.0000	999.00	1	2025-12-29 20:23:26.161046-05
+821	4374187	2025	10	0.0749	1328.57	1	2025-12-29 20:23:26.161046-05
+822	4374187	2025	11	0.0000	999.00	1	2025-12-29 20:23:26.161046-05
+823	4374187	2025	12	0.0000	999.00	1	2025-12-29 20:23:26.161046-05
+824	4374187	2025	13	0.0888	1011.11	1	2025-12-29 20:23:26.161046-05
+825	4374187	2025	14	0.0000	999.00	1	2025-12-29 20:23:26.161046-05
+826	4374187	2025	15	0.2000	400.00	1	2025-12-29 20:23:26.161046-05
+827	4374187	2025	16	0.0100	9900.00	1	2025-12-29 20:23:26.161046-05
+828	4385690	2025	1	0.1661	488.24	1	2025-12-29 20:23:26.36933-05
+829	4385690	2025	2	0.0000	999.00	1	2025-12-29 20:23:26.36933-05
+830	4385690	2025	3	0.6900	-222.58	-1	2025-12-29 20:23:26.36933-05
+831	4385690	2025	4	0.3900	156.41	1	2025-12-29 20:23:26.36933-05
+832	4385690	2025	5	0.4200	138.10	1	2025-12-29 20:23:26.36933-05
+833	4385690	2025	6	0.3900	156.41	1	2025-12-29 20:23:26.36933-05
+834	4385690	2025	7	0.3800	163.16	1	2025-12-29 20:23:26.36933-05
+835	4385690	2025	8	0.3800	163.16	1	2025-12-29 20:23:26.36933-05
+836	4385690	2025	9	0.5000	-100.00	-1	2025-12-29 20:23:26.36933-05
+837	4385690	2025	10	0.2600	284.62	1	2025-12-29 20:23:26.36933-05
+838	4385690	2025	11	0.4300	132.56	1	2025-12-29 20:23:26.36933-05
+839	4385690	2025	12	0.4300	132.56	1	2025-12-29 20:23:26.36933-05
+840	4385690	2025	13	0.4200	138.10	1	2025-12-29 20:23:26.36933-05
+841	4385690	2025	14	0.4100	143.90	1	2025-12-29 20:23:26.36933-05
+842	4385690	2025	15	0.2200	354.55	1	2025-12-29 20:23:26.36933-05
+843	4385690	2025	16	0.3300	203.03	1	2025-12-29 20:23:26.36933-05
+844	4426502	2025	1	0.1661	488.24	1	2025-12-29 20:23:26.683059-05
+845	4426502	2025	2	0.0000	999.00	1	2025-12-29 20:23:26.683059-05
+846	4426502	2025	3	0.5400	-117.39	-1	2025-12-29 20:23:26.683059-05
+847	4426502	2025	4	0.1500	566.67	1	2025-12-29 20:23:26.683059-05
+848	4426502	2025	5	0.1700	488.24	1	2025-12-29 20:23:26.683059-05
+849	4426502	2025	6	0.1400	614.29	1	2025-12-29 20:23:26.683059-05
+850	4426502	2025	7	0.4200	138.10	1	2025-12-29 20:23:26.683059-05
+851	4426502	2025	8	0.3500	185.71	1	2025-12-29 20:23:26.683059-05
+852	4426502	2025	9	0.3500	185.71	1	2025-12-29 20:23:26.683059-05
+853	4426502	2025	10	0.3400	194.12	1	2025-12-29 20:23:26.683059-05
+854	4426502	2025	11	0.5100	-104.08	-1	2025-12-29 20:23:26.683059-05
+855	4426502	2025	12	0.3300	203.03	1	2025-12-29 20:23:26.683059-05
+856	4426502	2025	13	0.3700	170.27	1	2025-12-29 20:23:26.683059-05
+857	4426502	2025	14	0.3600	177.78	1	2025-12-29 20:23:26.683059-05
+858	4426502	2025	15	0.3300	203.03	1	2025-12-29 20:23:26.683059-05
+859	4426502	2025	16	0.3500	185.71	1	2025-12-29 20:23:26.683059-05
+860	4426844	2025	1	0.1661	488.24	1	2025-12-29 20:23:27.00228-05
+861	4426844	2025	2	0.0000	999.00	1	2025-12-29 20:23:27.00228-05
+862	4426844	2025	3	0.1400	614.29	1	2025-12-29 20:23:27.00228-05
+863	4426844	2025	4	0.0000	999.00	1	2025-12-29 20:23:27.00228-05
+864	4426844	2025	5	0.0400	2400.00	1	2025-12-29 20:23:27.00228-05
+865	4426844	2025	6	0.0100	9900.00	1	2025-12-29 20:23:27.00228-05
+866	4426844	2025	7	0.0200	4900.00	1	2025-12-29 20:23:27.00228-05
+867	4426844	2025	8	0.4400	127.27	1	2025-12-29 20:23:27.00228-05
+868	4426844	2025	9	0.4300	132.56	1	2025-12-29 20:23:27.00228-05
+869	4426844	2025	10	0.0700	1328.57	1	2025-12-29 20:23:27.00228-05
+870	4426844	2025	11	0.1700	488.24	1	2025-12-29 20:23:27.00228-05
+871	4426844	2025	12	0.0500	1900.00	1	2025-12-29 20:23:27.00228-05
+872	4426844	2025	13	0.0700	1328.57	1	2025-12-29 20:23:27.00228-05
+873	4426844	2025	14	0.0000	999.00	1	2025-12-29 20:23:27.00228-05
+874	4426844	2025	15	0.0600	1566.67	1	2025-12-29 20:23:27.00228-05
+875	4426844	2025	16	0.0100	9900.00	1	2025-12-29 20:23:27.00228-05
+876	4428796	2025	1	0.1661	488.24	1	2025-12-29 20:23:27.336937-05
+877	4428796	2025	2	0.0000	999.00	1	2025-12-29 20:23:27.336937-05
+878	4428796	2025	3	0.0292	3233.33	1	2025-12-29 20:23:27.336937-05
+879	4428796	2025	4	0.0000	999.00	1	2025-12-29 20:23:27.336937-05
+880	4428796	2025	5	0.4700	112.77	1	2025-12-29 20:23:27.336937-05
+881	4428796	2025	6	0.5000	-100.00	-1	2025-12-29 20:23:27.336937-05
+882	4428796	2025	7	0.1900	426.32	1	2025-12-29 20:23:27.336937-05
+883	4428796	2025	8	0.0400	2400.00	1	2025-12-29 20:23:27.336937-05
+884	4428796	2025	9	0.2500	300.00	1	2025-12-29 20:23:27.336937-05
+885	4428796	2025	10	0.2500	300.00	1	2025-12-29 20:23:27.336937-05
+886	4428796	2025	11	0.1000	900.00	1	2025-12-29 20:23:27.336937-05
+887	4428811	2025	2	0.0000	999.00	1	2025-12-29 20:23:27.549466-05
+888	4428811	2025	3	0.0292	3233.33	1	2025-12-29 20:23:27.549466-05
+889	4428811	2025	4	0.0000	999.00	1	2025-12-29 20:23:27.549466-05
+890	4428811	2025	5	0.0540	1900.00	1	2025-12-29 20:23:27.549466-05
+891	4428811	2025	6	0.0505	1900.00	1	2025-12-29 20:23:27.549466-05
+892	4428811	2025	7	0.0000	999.00	1	2025-12-29 20:23:27.549466-05
+893	4428811	2025	8	0.0134	9900.00	1	2025-12-29 20:23:27.549466-05
+894	4428811	2025	9	0.0134	9900.00	1	2025-12-29 20:23:27.549466-05
+895	4428811	2025	10	0.0008	999.00	1	2025-12-29 20:23:27.549466-05
+896	4428811	2025	11	0.0000	999.00	1	2025-12-29 20:23:27.549466-05
+897	4428811	2025	12	0.0000	999.00	1	2025-12-29 20:23:27.549466-05
+898	4428811	2025	13	0.0600	1566.67	1	2025-12-29 20:23:27.549466-05
+899	4428811	2025	14	0.0500	1900.00	1	2025-12-29 20:23:27.549466-05
+900	4428811	2025	15	0.0400	2400.00	1	2025-12-29 20:23:27.549466-05
+901	4428811	2025	16	0.0200	4900.00	1	2025-12-29 20:23:27.549466-05
+902	4429615	2025	1	0.1661	488.24	1	2025-12-29 20:23:27.892561-05
+903	4429615	2025	2	0.0000	999.00	1	2025-12-29 20:23:27.892561-05
+904	4429615	2025	3	0.1300	669.23	1	2025-12-29 20:23:27.892561-05
+905	4429615	2025	5	0.4000	150.00	1	2025-12-29 20:23:27.892561-05
+906	4429615	2025	6	0.4600	117.39	1	2025-12-29 20:23:27.892561-05
+907	4429615	2025	7	0.2500	300.00	1	2025-12-29 20:23:27.892561-05
+908	4429615	2025	8	0.2700	270.37	1	2025-12-29 20:23:27.892561-05
+909	4429615	2025	9	0.2600	284.62	1	2025-12-29 20:23:27.892561-05
+910	4429615	2025	10	0.3600	177.78	1	2025-12-29 20:23:27.892561-05
+911	4429615	2025	11	0.3200	212.50	1	2025-12-29 20:23:27.892561-05
+912	4429615	2025	12	0.2200	354.55	1	2025-12-29 20:23:27.892561-05
+913	4429615	2025	13	0.3400	194.12	1	2025-12-29 20:23:27.892561-05
+914	4429615	2025	14	0.2900	244.83	1	2025-12-29 20:23:27.892561-05
+915	4429615	2025	15	0.2100	376.19	1	2025-12-29 20:23:27.892561-05
+916	4429615	2025	16	0.3200	212.50	1	2025-12-29 20:23:27.892561-05
+917	4430034	2025	1	0.1661	488.24	1	2025-12-29 20:23:28.261858-05
+918	4430034	2025	2	0.0000	999.00	1	2025-12-29 20:23:28.261858-05
+919	4430034	2025	3	0.2000	400.00	1	2025-12-29 20:23:28.261858-05
+920	4430034	2025	4	0.2000	400.00	1	2025-12-29 20:23:28.261858-05
+921	4430034	2025	5	0.1800	455.56	1	2025-12-29 20:23:28.261858-05
+922	4430034	2025	6	0.3800	163.16	1	2025-12-29 20:23:28.261858-05
+923	4430034	2025	7	0.2800	257.14	1	2025-12-29 20:23:28.261858-05
+924	4430034	2025	8	0.3900	156.41	1	2025-12-29 20:23:28.261858-05
+925	4430034	2025	9	0.3300	203.03	1	2025-12-29 20:23:28.261858-05
+926	4430034	2025	10	0.2900	244.83	1	2025-12-29 20:23:28.261858-05
+927	4430034	2025	11	0.2700	270.37	1	2025-12-29 20:23:28.261858-05
+928	4430034	2025	12	0.2600	284.62	1	2025-12-29 20:23:28.261858-05
+929	4430034	2025	13	0.2900	244.83	1	2025-12-29 20:23:28.261858-05
+930	4430034	2025	14	0.2200	354.55	1	2025-12-29 20:23:28.261858-05
+931	4430034	2025	15	0.2300	334.78	1	2025-12-29 20:23:28.261858-05
+932	4430034	2025	16	0.2000	400.00	1	2025-12-29 20:23:28.261858-05
+933	4431299	2025	1	0.1661	488.24	1	2025-12-29 20:23:28.638169-05
+934	4431299	2025	2	0.0000	999.00	1	2025-12-29 20:23:28.638169-05
+935	4431299	2025	3	0.1800	455.56	1	2025-12-29 20:23:28.638169-05
+936	4431299	2025	4	0.2100	376.19	1	2025-12-29 20:23:28.638169-05
+937	4431299	2025	5	0.1600	525.00	1	2025-12-29 20:23:28.638169-05
+938	4431299	2025	6	0.1500	566.67	1	2025-12-29 20:23:28.638169-05
+939	4431299	2025	7	0.2900	244.83	1	2025-12-29 20:23:28.638169-05
+940	4431299	2025	8	0.3100	222.58	1	2025-12-29 20:23:28.638169-05
+941	4431299	2025	9	0.4500	122.22	1	2025-12-29 20:23:28.638169-05
+942	4431299	2025	10	0.3300	203.03	1	2025-12-29 20:23:28.638169-05
+943	4431299	2025	11	0.2100	376.19	1	2025-12-29 20:23:28.638169-05
+944	4431299	2025	12	0.4900	104.08	1	2025-12-29 20:23:28.638169-05
+945	4431299	2025	13	0.2900	244.83	1	2025-12-29 20:23:28.638169-05
+946	4431588	2025	1	0.1661	488.24	1	2025-12-29 20:23:28.912047-05
+947	4431588	2025	2	0.0000	999.00	1	2025-12-29 20:23:28.912047-05
+948	4431588	2025	3	0.0500	1900.00	1	2025-12-29 20:23:28.912047-05
+949	4431588	2025	4	0.3200	212.50	1	2025-12-29 20:23:28.912047-05
+950	4431588	2025	5	0.3400	194.12	1	2025-12-29 20:23:28.912047-05
+951	4431588	2025	6	0.3300	203.03	1	2025-12-29 20:23:28.912047-05
+952	4431588	2025	7	0.3400	194.12	1	2025-12-29 20:23:28.912047-05
+953	4431588	2025	8	0.1500	566.67	1	2025-12-29 20:23:28.912047-05
+954	4431588	2025	9	0.1900	426.32	1	2025-12-29 20:23:28.912047-05
+955	4431588	2025	10	0.1800	455.56	1	2025-12-29 20:23:28.912047-05
+956	4431588	2025	11	0.0300	3233.33	1	2025-12-29 20:23:28.912047-05
+957	4431588	2025	12	0.2000	400.00	1	2025-12-29 20:23:28.912047-05
+958	4431588	2025	13	0.0600	1566.67	1	2025-12-29 20:23:28.912047-05
+959	4431588	2025	14	0.0700	1328.57	1	2025-12-29 20:23:28.912047-05
+960	4431588	2025	15	0.0600	1566.67	1	2025-12-29 20:23:28.912047-05
+961	4431588	2025	16	0.0800	1150.00	1	2025-12-29 20:23:28.912047-05
+962	4432708	2025	2	0.0000	999.00	1	2025-12-29 20:23:29.300469-05
+963	4432708	2025	3	0.2500	300.00	1	2025-12-29 20:23:29.300469-05
+964	4432708	2025	4	0.4000	150.00	1	2025-12-29 20:23:29.300469-05
+965	4432708	2025	5	0.3100	222.58	1	2025-12-29 20:23:29.300469-05
+966	4432708	2025	6	0.3100	222.58	1	2025-12-29 20:23:29.300469-05
+967	4432708	2025	7	0.3600	177.78	1	2025-12-29 20:23:29.300469-05
+968	4432708	2025	8	0.1800	455.56	1	2025-12-29 20:23:29.300469-05
+969	4432708	2025	9	0.2000	400.00	1	2025-12-29 20:23:29.300469-05
+970	4432708	2025	10	0.2500	300.00	1	2025-12-29 20:23:29.300469-05
+971	4432708	2025	11	0.4800	108.33	1	2025-12-29 20:23:29.300469-05
+972	4432708	2025	12	0.4900	104.08	1	2025-12-29 20:23:29.300469-05
+973	4432708	2025	13	0.4800	108.33	1	2025-12-29 20:23:29.300469-05
+974	4432708	2025	14	0.3100	222.58	1	2025-12-29 20:23:29.300469-05
+975	4432708	2025	15	0.2800	257.14	1	2025-12-29 20:23:29.300469-05
+976	4432708	2025	16	0.2800	257.14	1	2025-12-29 20:23:29.300469-05
+977	4573699	2025	1	0.1661	488.24	1	2025-12-29 20:23:29.675634-05
+978	4573699	2025	2	0.0000	999.00	1	2025-12-29 20:23:29.675634-05
+979	4573699	2025	3	0.1200	733.33	1	2025-12-29 20:23:29.675634-05
+980	4573699	2025	4	0.0900	1011.11	1	2025-12-29 20:23:29.675634-05
+981	4573699	2025	5	0.1200	733.33	1	2025-12-29 20:23:29.675634-05
+982	4573699	2025	6	0.2200	354.55	1	2025-12-29 20:23:29.675634-05
+983	4573699	2025	7	0.0300	3233.33	1	2025-12-29 20:23:29.675634-05
+984	4573699	2025	8	0.0300	3233.33	1	2025-12-29 20:23:29.675634-05
+985	4573699	2025	9	0.0300	3233.33	1	2025-12-29 20:23:29.675634-05
+986	4573699	2025	10	0.1400	614.29	1	2025-12-29 20:23:29.675634-05
+987	4573699	2025	11	0.1900	426.32	1	2025-12-29 20:23:29.675634-05
+988	4573699	2025	12	0.0600	1566.67	1	2025-12-29 20:23:29.675634-05
+989	4573699	2025	13	0.0200	4900.00	1	2025-12-29 20:23:29.675634-05
+990	4573699	2025	14	0.0700	1328.57	1	2025-12-29 20:23:29.675634-05
+991	4573699	2025	15	0.1500	566.67	1	2025-12-29 20:23:29.675634-05
+992	4573699	2025	16	0.0900	1011.11	1	2025-12-29 20:23:29.675634-05
+993	4635008	2025	1	0.1661	488.24	1	2025-12-29 20:23:30.121855-05
+994	4635008	2025	2	0.0000	999.00	1	2025-12-29 20:23:30.121855-05
+995	4635008	2025	3	0.2700	270.37	1	2025-12-29 20:23:30.121855-05
+996	4635008	2025	4	0.2100	376.19	1	2025-12-29 20:23:30.121855-05
+997	4635008	2025	5	0.1200	733.33	1	2025-12-29 20:23:30.121855-05
+998	4635008	2025	6	0.2500	300.00	1	2025-12-29 20:23:30.121855-05
+999	4635008	2025	7	0.1500	566.67	1	2025-12-29 20:23:30.121855-05
+1000	4635008	2025	8	0.1400	614.29	1	2025-12-29 20:23:30.121855-05
+1001	4635008	2025	9	0.1400	614.29	1	2025-12-29 20:23:30.121855-05
+1002	4635008	2025	10	0.1300	669.23	1	2025-12-29 20:23:30.121855-05
+1003	4635008	2025	11	0.1900	426.32	1	2025-12-29 20:23:30.121855-05
+1004	4635008	2025	12	0.1900	426.32	1	2025-12-29 20:23:30.121855-05
+1005	4635008	2025	13	0.1900	426.32	1	2025-12-29 20:23:30.121855-05
+1006	4635008	2025	14	0.1100	809.09	1	2025-12-29 20:23:30.121855-05
+1007	4635008	2025	15	0.1000	900.00	1	2025-12-29 20:23:30.121855-05
+1008	4683243	2025	1	0.1661	488.24	1	2025-12-29 20:23:30.61856-05
+1009	4683243	2025	2	0.0000	999.00	1	2025-12-29 20:23:30.61856-05
+1010	4683243	2025	3	0.0292	3233.33	1	2025-12-29 20:23:30.61856-05
+1011	4683243	2025	4	0.0600	1566.67	1	2025-12-29 20:23:30.61856-05
+1012	4683243	2025	5	0.0500	1900.00	1	2025-12-29 20:23:30.61856-05
+1013	4683243	2025	6	0.0400	2400.00	1	2025-12-29 20:23:30.61856-05
+1014	4683243	2025	7	0.2600	284.62	1	2025-12-29 20:23:30.61856-05
+1015	4683243	2025	8	0.2400	316.67	1	2025-12-29 20:23:30.61856-05
+1016	4683243	2025	9	0.1000	900.00	1	2025-12-29 20:23:30.61856-05
+1017	4683243	2025	10	0.0500	1900.00	1	2025-12-29 20:23:30.61856-05
+1018	4683243	2025	11	0.0800	1150.00	1	2025-12-29 20:23:30.61856-05
+1019	4683243	2025	12	0.0600	1566.67	1	2025-12-29 20:23:30.61856-05
+1020	4683243	2025	13	0.0500	1900.00	1	2025-12-29 20:23:30.61856-05
+1021	4683243	2025	14	0.0800	1150.00	1	2025-12-29 20:23:30.61856-05
+1022	4683243	2025	15	0.0700	1328.57	1	2025-12-29 20:23:30.61856-05
+1023	4683243	2025	16	0.1000	900.00	1	2025-12-29 20:23:30.61856-05
+1024	4685183	2025	1	0.1661	488.24	1	2025-12-29 20:23:30.966262-05
+1025	4685278	2025	1	0.1661	488.24	1	2025-12-29 20:23:30.981782-05
+1026	4685278	2025	2	0.0000	999.00	1	2025-12-29 20:23:30.981782-05
+1027	4685278	2025	3	0.0000	999.00	1	2025-12-29 20:23:30.981782-05
+1028	4685278	2025	4	0.1100	809.09	1	2025-12-29 20:23:30.981782-05
+1029	4685278	2025	5	0.0800	1150.00	1	2025-12-29 20:23:30.981782-05
+1030	4685278	2025	6	0.0800	1150.00	1	2025-12-29 20:23:30.981782-05
+1031	4685278	2025	7	0.1200	733.33	1	2025-12-29 20:23:30.981782-05
+1032	4685278	2025	8	0.1000	900.00	1	2025-12-29 20:23:30.981782-05
+1033	4685278	2025	9	0.0900	1011.11	1	2025-12-29 20:23:30.981782-05
+1034	4685278	2025	10	0.0900	1011.11	1	2025-12-29 20:23:30.981782-05
+1035	4685278	2025	11	0.1500	566.67	1	2025-12-29 20:23:30.981782-05
+1036	4685278	2025	12	0.0300	3233.33	1	2025-12-29 20:23:30.981782-05
+1037	4685278	2025	13	0.0700	1328.57	1	2025-12-29 20:23:30.981782-05
+1038	4685278	2025	14	0.0700	1328.57	1	2025-12-29 20:23:30.981782-05
+1039	4685278	2025	15	0.1400	614.29	1	2025-12-29 20:23:30.981782-05
+1040	4685278	2025	16	0.2900	244.83	1	2025-12-29 20:23:30.981782-05
+1041	4685472	2025	1	0.1661	488.24	1	2025-12-29 20:23:31.376885-05
+1042	4685472	2025	2	0.0000	999.00	1	2025-12-29 20:23:31.376885-05
+1043	4685472	2025	3	0.5400	-117.39	-1	2025-12-29 20:23:31.376885-05
+1044	4685472	2025	4	0.1700	488.24	1	2025-12-29 20:23:31.376885-05
+1045	4685472	2025	5	0.3900	156.41	1	2025-12-29 20:23:31.376885-05
+1046	4685472	2025	6	0.4500	122.22	1	2025-12-29 20:23:31.376885-05
+1047	4685472	2025	7	0.6300	-170.27	-1	2025-12-29 20:23:31.376885-05
+1048	4685472	2025	8	0.4300	132.56	1	2025-12-29 20:23:31.376885-05
+1049	4685472	2025	9	0.3700	170.27	1	2025-12-29 20:23:31.376885-05
+1050	4685472	2025	10	0.4200	138.10	1	2025-12-29 20:23:31.376885-05
+1051	4685472	2025	11	0.2500	300.00	1	2025-12-29 20:23:31.376885-05
+1052	4685472	2025	12	0.1100	809.09	1	2025-12-29 20:23:31.376885-05
+1053	4685472	2025	13	0.2000	400.00	1	2025-12-29 20:23:31.376885-05
+1054	4685472	2025	14	0.2900	244.83	1	2025-12-29 20:23:31.376885-05
+1055	4685472	2025	15	0.2600	284.62	1	2025-12-29 20:23:31.376885-05
+1056	4685472	2025	16	0.2900	244.83	1	2025-12-29 20:23:31.376885-05
+1057	4688552	2025	1	0.1661	488.24	1	2025-12-29 20:23:31.763691-05
+1058	4688552	2025	12	0.0000	999.00	1	2025-12-29 20:23:31.763691-05
+1059	4688552	2025	13	0.0200	4900.00	1	2025-12-29 20:23:31.763691-05
+1060	4688552	2025	14	0.0200	4900.00	1	2025-12-29 20:23:31.763691-05
+1061	4688552	2025	15	0.0200	4900.00	1	2025-12-29 20:23:31.763691-05
+1062	4688552	2025	16	0.0400	2400.00	1	2025-12-29 20:23:31.763691-05
+1063	4689334	2025	1	0.1661	488.24	1	2025-12-29 20:23:31.915505-05
+1064	4689334	2025	2	0.0000	999.00	1	2025-12-29 20:23:31.915505-05
+1065	4689334	2025	3	0.0292	3233.33	1	2025-12-29 20:23:31.915505-05
+1066	4689334	2025	4	0.0400	2400.00	1	2025-12-29 20:23:31.915505-05
+1067	4689334	2025	5	0.0300	3233.33	1	2025-12-29 20:23:31.915505-05
+1068	4689334	2025	6	0.0300	3233.33	1	2025-12-29 20:23:31.915505-05
+1069	4689334	2025	7	0.1200	733.33	1	2025-12-29 20:23:31.915505-05
+1070	4689334	2025	8	0.0500	1900.00	1	2025-12-29 20:23:31.915505-05
+1071	4689334	2025	9	0.0200	4900.00	1	2025-12-29 20:23:31.915505-05
+1072	4689334	2025	10	0.0700	1328.57	1	2025-12-29 20:23:31.915505-05
+1073	4689334	2025	11	0.0700	1328.57	1	2025-12-29 20:23:31.915505-05
+1074	4689334	2025	12	0.0800	1150.00	1	2025-12-29 20:23:31.915505-05
+1075	4689334	2025	13	0.0500	1900.00	1	2025-12-29 20:23:31.915505-05
+1076	4690143	2025	1	0.1661	488.24	1	2025-12-29 20:23:32.205837-05
+1077	4690143	2025	2	0.0000	999.00	1	2025-12-29 20:23:32.205837-05
+1078	4690143	2025	3	0.0292	3233.33	1	2025-12-29 20:23:32.205837-05
+1079	4690143	2025	4	0.0000	999.00	1	2025-12-29 20:23:32.205837-05
+1080	4690143	2025	5	0.0540	1900.00	1	2025-12-29 20:23:32.205837-05
+1081	4690143	2025	6	0.0505	1900.00	1	2025-12-29 20:23:32.205837-05
+1082	4690143	2025	7	0.0000	999.00	1	2025-12-29 20:23:32.205837-05
+1083	4690143	2025	8	0.0000	999.00	1	2025-12-29 20:23:32.205837-05
+1084	4690143	2025	9	0.0000	999.00	1	2025-12-29 20:23:32.205837-05
+1085	4690143	2025	10	0.0749	1328.57	1	2025-12-29 20:23:32.205837-05
+1086	4690143	2025	11	0.0000	999.00	1	2025-12-29 20:23:32.205837-05
+1087	4690143	2025	12	0.0000	999.00	1	2025-12-29 20:23:32.205837-05
+1088	4690143	2025	13	0.0888	1011.11	1	2025-12-29 20:23:32.205837-05
+1089	4690143	2025	14	0.0000	999.00	1	2025-12-29 20:23:32.205837-05
+1090	4690143	2025	15	0.0934	1011.11	1	2025-12-29 20:23:32.205837-05
+1091	4690143	2025	16	0.0000	999.00	1	2025-12-29 20:23:32.205837-05
+1092	4692835	2025	6	0.0505	1900.00	1	2025-12-29 20:23:32.585594-05
+1093	4692835	2025	7	0.0000	999.00	1	2025-12-29 20:23:32.585594-05
+1094	4692835	2025	8	0.0000	999.00	1	2025-12-29 20:23:32.585594-05
+1095	4692835	2025	9	0.0000	999.00	1	2025-12-29 20:23:32.585594-05
+1096	4692835	2025	10	0.0749	1328.57	1	2025-12-29 20:23:32.585594-05
+1097	4692835	2025	11	0.0000	999.00	1	2025-12-29 20:23:32.585594-05
+1098	4692835	2025	12	0.0000	999.00	1	2025-12-29 20:23:32.585594-05
+1099	4692835	2025	13	0.0888	1011.11	1	2025-12-29 20:23:32.585594-05
+1100	4692835	2025	14	0.0000	999.00	1	2025-12-29 20:23:32.585594-05
+1101	4692835	2025	15	0.0934	1011.11	1	2025-12-29 20:23:32.585594-05
+1102	4692835	2025	16	0.1300	669.23	1	2025-12-29 20:23:32.585594-05
+1103	4695883	2025	1	0.1661	488.24	1	2025-12-29 20:23:32.866443-05
+1104	4695883	2025	8	0.0000	999.00	1	2025-12-29 20:23:32.866443-05
+1105	4695883	2025	9	0.5633	-127.27	-1	2025-12-29 20:23:32.866443-05
+1106	4695883	2025	10	0.0400	2400.00	1	2025-12-29 20:23:32.866443-05
+1107	4695883	2025	11	0.0700	1328.57	1	2025-12-29 20:23:32.866443-05
+1108	4695883	2025	12	0.0800	1150.00	1	2025-12-29 20:23:32.866443-05
+1109	4695883	2025	13	0.1500	566.67	1	2025-12-29 20:23:32.866443-05
+1110	4695883	2025	14	0.1500	566.67	1	2025-12-29 20:23:32.866443-05
+1111	4695883	2025	15	0.1700	488.24	1	2025-12-29 20:23:32.866443-05
+1112	4695883	2025	16	0.2300	334.78	1	2025-12-29 20:23:32.866443-05
+1113	4696882	2025	1	0.1661	488.24	1	2025-12-29 20:23:33.112729-05
+1114	4696882	2025	2	0.0000	999.00	1	2025-12-29 20:23:33.112729-05
+1115	4696882	2025	3	0.0292	3233.33	1	2025-12-29 20:23:33.112729-05
+1116	4696882	2025	4	0.1200	733.33	1	2025-12-29 20:23:33.112729-05
+1117	4696882	2025	5	0.2100	376.19	1	2025-12-29 20:23:33.112729-05
+1118	4696882	2025	6	0.1000	900.00	1	2025-12-29 20:23:33.112729-05
+1119	4696882	2025	7	0.0900	1011.11	1	2025-12-29 20:23:33.112729-05
+1120	4696882	2025	8	0.0800	1150.00	1	2025-12-29 20:23:33.112729-05
+1121	4696882	2025	9	0.0800	1150.00	1	2025-12-29 20:23:33.112729-05
+1122	4696882	2025	10	0.0800	1150.00	1	2025-12-29 20:23:33.112729-05
+1123	4696882	2025	11	0.0800	1150.00	1	2025-12-29 20:23:33.112729-05
+1124	4696882	2025	12	0.0000	999.00	1	2025-12-29 20:23:33.112729-05
+1125	4696882	2025	13	0.0800	1150.00	1	2025-12-29 20:23:33.112729-05
+1126	4696882	2025	14	0.1300	669.23	1	2025-12-29 20:23:33.112729-05
+1127	4696882	2025	15	0.1300	669.23	1	2025-12-29 20:23:33.112729-05
+1128	4696882	2025	16	0.0300	3233.33	1	2025-12-29 20:23:33.112729-05
+1129	4708486	2025	1	0.1661	488.24	1	2025-12-29 20:23:33.496731-05
+1130	4708486	2025	6	0.0505	1900.00	1	2025-12-29 20:23:33.496731-05
+1131	4708486	2025	7	0.1000	900.00	1	2025-12-29 20:23:33.496731-05
+1132	4708486	2025	8	0.0800	1150.00	1	2025-12-29 20:23:33.496731-05
+1133	4708486	2025	9	0.0400	2400.00	1	2025-12-29 20:23:33.496731-05
+1134	4708486	2025	10	0.0200	4900.00	1	2025-12-29 20:23:33.496731-05
+1135	4708486	2025	11	0.0800	1150.00	1	2025-12-29 20:23:33.496731-05
+1136	4708486	2025	12	0.0300	3233.33	1	2025-12-29 20:23:33.496731-05
+1137	4708486	2025	13	0.0300	3233.33	1	2025-12-29 20:23:33.496731-05
+1138	4708486	2025	14	0.1300	669.23	1	2025-12-29 20:23:33.496731-05
+1139	4708486	2025	15	0.1500	566.67	1	2025-12-29 20:23:33.496731-05
+1140	4708486	2025	16	0.0000	999.00	1	2025-12-29 20:23:33.496731-05
+1141	4723086	2025	1	0.1661	488.24	1	2025-12-29 20:23:33.789717-05
+1142	4723086	2025	2	0.0000	999.00	1	2025-12-29 20:23:33.789717-05
+1143	4723086	2025	3	0.2700	270.37	1	2025-12-29 20:23:33.789717-05
+1144	4723086	2025	4	0.0000	999.00	1	2025-12-29 20:23:33.789717-05
+1145	4723086	2025	5	0.0100	9900.00	1	2025-12-29 20:23:33.789717-05
+1146	4723086	2025	6	0.0000	999.00	1	2025-12-29 20:23:33.789717-05
+1147	4723086	2025	7	0.1200	733.33	1	2025-12-29 20:23:33.789717-05
+1148	4723086	2025	8	0.0400	2400.00	1	2025-12-29 20:23:33.789717-05
+1149	4723086	2025	9	0.0400	2400.00	1	2025-12-29 20:23:33.789717-05
+1150	4723086	2025	10	0.1000	900.00	1	2025-12-29 20:23:33.789717-05
+1151	4723086	2025	11	0.2100	376.19	1	2025-12-29 20:23:33.789717-05
+1152	4723086	2025	12	0.3000	233.33	1	2025-12-29 20:23:33.789717-05
+1153	4723086	2025	13	0.2700	270.37	1	2025-12-29 20:23:33.789717-05
+1154	4723086	2025	14	0.3000	233.33	1	2025-12-29 20:23:33.789717-05
+1155	4723086	2025	15	0.1900	426.32	1	2025-12-29 20:23:33.789717-05
+1156	4723086	2025	16	0.3000	233.33	1	2025-12-29 20:23:33.789717-05
+1157	5160110	2025	1	0.1661	488.24	1	2025-12-29 20:23:34.153369-05
+1158	5160110	2025	2	0.0000	999.00	1	2025-12-29 20:23:34.153369-05
+1159	5160110	2025	3	0.0292	3233.33	1	2025-12-29 20:23:34.153369-05
+1160	5160110	2025	4	0.0000	999.00	1	2025-12-29 20:23:34.153369-05
+1161	5160110	2025	5	0.0540	1900.00	1	2025-12-29 20:23:34.153369-05
+1162	5160110	2025	6	0.0505	1900.00	1	2025-12-29 20:23:34.153369-05
+1163	5160110	2025	7	0.0000	999.00	1	2025-12-29 20:23:34.153369-05
+1164	5160110	2025	8	0.0000	999.00	1	2025-12-29 20:23:34.153369-05
+1165	5160110	2025	9	0.0000	999.00	1	2025-12-29 20:23:34.153369-05
+1166	5160110	2025	10	0.0749	1328.57	1	2025-12-29 20:23:34.153369-05
+1167	5160110	2025	11	0.0000	999.00	1	2025-12-29 20:23:34.153369-05
+1168	5160110	2025	12	0.0000	999.00	1	2025-12-29 20:23:34.153369-05
+1169	5160110	2025	13	0.0888	1011.11	1	2025-12-29 20:23:34.153369-05
+1170	5160110	2025	14	0.0000	999.00	1	2025-12-29 20:23:34.153369-05
+1171	5160110	2025	15	0.0934	1011.11	1	2025-12-29 20:23:34.153369-05
+1172	5160110	2025	16	0.0000	999.00	1	2025-12-29 20:23:34.153369-05
+\.
+
+
+--
+-- Data for Name: schedule; Type: TABLE DATA; Schema: public; Owner: aaronangeles
+--
+
+COPY public.schedule (id, game_id, season_year, week, season_type, home_team, away_team, home_team_id, away_team_id, game_date, game_status, neutral_site, created_at, updated_at) FROM stdin;
+1	20240905_BAL@KC	2024	1	Regular Season	KC	BAL	16	3	20240905	Final	f	2025-12-29 14:19:31.015981-05	2025-12-29 14:19:31.015981-05
+2	20240906_GB@PHI	2024	1	Regular Season	PHI	GB	27	12	20240906	Final	t	2025-12-29 14:19:31.015981-05	2025-12-29 14:19:31.015981-05
+3	20240908_ARI@BUF	2024	1	Regular Season	BUF	ARI	4	1	20240908	Final	f	2025-12-29 14:19:31.015981-05	2025-12-29 14:19:31.015981-05
+4	20240908_CAR@NO	2024	1	Regular Season	NO	CAR	23	5	20240908	Final	f	2025-12-29 14:19:31.015981-05	2025-12-29 14:19:31.015981-05
+5	20240908_DAL@CLE	2024	1	Regular Season	CLE	DAL	8	9	20240908	Final	f	2025-12-29 14:19:31.015981-05	2025-12-29 14:19:31.015981-05
+6	20240908_DEN@SEA	2024	1	Regular Season	SEA	DEN	29	10	20240908	Final	f	2025-12-29 14:19:31.015981-05	2025-12-29 14:19:31.015981-05
+7	20240908_HOU@IND	2024	1	Regular Season	IND	HOU	14	13	20240908	Final	f	2025-12-29 14:19:31.015981-05	2025-12-29 14:19:31.015981-05
+8	20240908_JAX@MIA	2024	1	Regular Season	MIA	JAX	20	15	20240908	Final	f	2025-12-29 14:19:31.015981-05	2025-12-29 14:19:31.015981-05
+9	20240908_LAR@DET	2024	1	Regular Season	DET	LAR	11	19	20240908	Final/OT	f	2025-12-29 14:19:31.015981-05	2025-12-29 14:19:31.015981-05
+10	20240908_LV@LAC	2024	1	Regular Season	LAC	LV	18	17	20240908	Final	f	2025-12-29 14:19:31.015981-05	2025-12-29 14:19:31.015981-05
+11	20240908_MIN@NYG	2024	1	Regular Season	NYG	MIN	24	21	20240908	Final	f	2025-12-29 14:19:31.015981-05	2025-12-29 14:19:31.015981-05
+12	20240908_NE@CIN	2024	1	Regular Season	CIN	NE	7	22	20240908	Final	f	2025-12-29 14:19:31.015981-05	2025-12-29 14:19:31.015981-05
+13	20240908_PIT@ATL	2024	1	Regular Season	ATL	PIT	2	26	20240908	Final	f	2025-12-29 14:19:31.015981-05	2025-12-29 14:19:31.015981-05
+14	20240908_TEN@CHI	2024	1	Regular Season	CHI	TEN	6	31	20240908	Final	f	2025-12-29 14:19:31.015981-05	2025-12-29 14:19:31.015981-05
+15	20240908_WSH@TB	2024	1	Regular Season	TB	WSH	30	32	20240908	Final	f	2025-12-29 14:19:31.015981-05	2025-12-29 14:19:31.015981-05
+16	20240909_NYJ@SF	2024	1	Regular Season	SF	NYJ	28	25	20240909	Final	f	2025-12-29 14:19:31.015981-05	2025-12-29 14:19:31.015981-05
+17	20240912_BUF@MIA	2024	2	Regular Season	MIA	BUF	20	4	20240912	Final	f	2025-12-29 14:19:31.285263-05	2025-12-29 14:19:31.285263-05
+18	20240915_CHI@HOU	2024	2	Regular Season	HOU	CHI	13	6	20240915	Final	f	2025-12-29 14:19:31.285263-05	2025-12-29 14:19:31.285263-05
+19	20240915_CIN@KC	2024	2	Regular Season	KC	CIN	16	7	20240915	Final	f	2025-12-29 14:19:31.285263-05	2025-12-29 14:19:31.285263-05
+20	20240915_CLE@JAX	2024	2	Regular Season	JAX	CLE	15	8	20240915	Final	f	2025-12-29 14:19:31.285263-05	2025-12-29 14:19:31.285263-05
+21	20240915_IND@GB	2024	2	Regular Season	GB	IND	12	14	20240915	Final	f	2025-12-29 14:19:31.285263-05	2025-12-29 14:19:31.285263-05
+22	20240915_LAC@CAR	2024	2	Regular Season	CAR	LAC	5	18	20240915	Final	f	2025-12-29 14:19:31.285263-05	2025-12-29 14:19:31.285263-05
+23	20240915_LAR@ARI	2024	2	Regular Season	ARI	LAR	1	19	20240915	Final	f	2025-12-29 14:19:31.285263-05	2025-12-29 14:19:31.285263-05
+24	20240915_LV@BAL	2024	2	Regular Season	BAL	LV	3	17	20240915	Final	f	2025-12-29 14:19:31.285263-05	2025-12-29 14:19:31.285263-05
+25	20240915_NO@DAL	2024	2	Regular Season	DAL	NO	9	23	20240915	Final	f	2025-12-29 14:19:31.285263-05	2025-12-29 14:19:31.285263-05
+26	20240915_NYG@WSH	2024	2	Regular Season	WSH	NYG	32	24	20240915	Final	f	2025-12-29 14:19:31.285263-05	2025-12-29 14:19:31.285263-05
+27	20240915_NYJ@TEN	2024	2	Regular Season	TEN	NYJ	31	25	20240915	Final	f	2025-12-29 14:19:31.285263-05	2025-12-29 14:19:31.285263-05
+28	20240915_PIT@DEN	2024	2	Regular Season	DEN	PIT	10	26	20240915	Final	f	2025-12-29 14:19:31.285263-05	2025-12-29 14:19:31.285263-05
+29	20240915_SEA@NE	2024	2	Regular Season	NE	SEA	22	29	20240915	Final/OT	f	2025-12-29 14:19:31.285263-05	2025-12-29 14:19:31.285263-05
+30	20240915_SF@MIN	2024	2	Regular Season	MIN	SF	21	28	20240915	Final	f	2025-12-29 14:19:31.285263-05	2025-12-29 14:19:31.285263-05
+31	20240915_TB@DET	2024	2	Regular Season	DET	TB	11	30	20240915	Final	f	2025-12-29 14:19:31.285263-05	2025-12-29 14:19:31.285263-05
+32	20240916_ATL@PHI	2024	2	Regular Season	PHI	ATL	27	2	20240916	Final	f	2025-12-29 14:19:31.285263-05	2025-12-29 14:19:31.285263-05
+33	20240919_NE@NYJ	2024	3	Regular Season	NYJ	NE	25	22	20240919	Final	f	2025-12-29 14:19:31.683804-05	2025-12-29 14:19:31.683804-05
+34	20240922_BAL@DAL	2024	3	Regular Season	DAL	BAL	9	3	20240922	Final	f	2025-12-29 14:19:31.683804-05	2025-12-29 14:19:31.683804-05
+35	20240922_CAR@LV	2024	3	Regular Season	LV	CAR	17	5	20240922	Final	f	2025-12-29 14:19:31.683804-05	2025-12-29 14:19:31.683804-05
+36	20240922_CHI@IND	2024	3	Regular Season	IND	CHI	14	6	20240922	Final	f	2025-12-29 14:19:31.683804-05	2025-12-29 14:19:31.683804-05
+37	20240922_DEN@TB	2024	3	Regular Season	TB	DEN	30	10	20240922	Final	f	2025-12-29 14:19:31.683804-05	2025-12-29 14:19:31.683804-05
+38	20240922_DET@ARI	2024	3	Regular Season	ARI	DET	1	11	20240922	Final	f	2025-12-29 14:19:31.683804-05	2025-12-29 14:19:31.683804-05
+39	20240922_GB@TEN	2024	3	Regular Season	TEN	GB	31	12	20240922	Final	f	2025-12-29 14:19:31.683804-05	2025-12-29 14:19:31.683804-05
+40	20240922_HOU@MIN	2024	3	Regular Season	MIN	HOU	21	13	20240922	Final	f	2025-12-29 14:19:31.683804-05	2025-12-29 14:19:31.683804-05
+41	20240922_KC@ATL	2024	3	Regular Season	ATL	KC	2	16	20240922	Final	f	2025-12-29 14:19:31.683804-05	2025-12-29 14:19:31.683804-05
+42	20240922_LAC@PIT	2024	3	Regular Season	PIT	LAC	26	18	20240922	Final	f	2025-12-29 14:19:31.683804-05	2025-12-29 14:19:31.683804-05
+43	20240922_MIA@SEA	2024	3	Regular Season	SEA	MIA	29	20	20240922	Final	f	2025-12-29 14:19:31.683804-05	2025-12-29 14:19:31.683804-05
+44	20240922_NYG@CLE	2024	3	Regular Season	CLE	NYG	8	24	20240922	Final	f	2025-12-29 14:19:31.683804-05	2025-12-29 14:19:31.683804-05
+45	20240922_PHI@NO	2024	3	Regular Season	NO	PHI	23	27	20240922	Final	f	2025-12-29 14:19:31.683804-05	2025-12-29 14:19:31.683804-05
+46	20240922_SF@LAR	2024	3	Regular Season	LAR	SF	19	28	20240922	Final	f	2025-12-29 14:19:31.683804-05	2025-12-29 14:19:31.683804-05
+47	20240923_JAX@BUF	2024	3	Regular Season	BUF	JAX	4	15	20240923	Final	f	2025-12-29 14:19:31.683804-05	2025-12-29 14:19:31.683804-05
+48	20240923_WSH@CIN	2024	3	Regular Season	CIN	WSH	7	32	20240923	Final	f	2025-12-29 14:19:31.683804-05	2025-12-29 14:19:31.683804-05
+49	20240926_DAL@NYG	2024	4	Regular Season	NYG	DAL	24	9	20240926	Final	f	2025-12-29 14:19:31.984097-05	2025-12-29 14:19:31.984097-05
+50	20240929_BUF@BAL	2024	4	Regular Season	BAL	BUF	3	4	20240929	Final	f	2025-12-29 14:19:31.984097-05	2025-12-29 14:19:31.984097-05
+51	20240929_CIN@CAR	2024	4	Regular Season	CAR	CIN	5	7	20240929	Final	f	2025-12-29 14:19:31.984097-05	2025-12-29 14:19:31.984097-05
+52	20240929_CLE@LV	2024	4	Regular Season	LV	CLE	17	8	20240929	Final	f	2025-12-29 14:19:31.984097-05	2025-12-29 14:19:31.984097-05
+53	20240929_DEN@NYJ	2024	4	Regular Season	NYJ	DEN	25	10	20240929	Final	f	2025-12-29 14:19:31.984097-05	2025-12-29 14:19:31.984097-05
+54	20240929_JAX@HOU	2024	4	Regular Season	HOU	JAX	13	15	20240929	Final	f	2025-12-29 14:19:31.984097-05	2025-12-29 14:19:31.984097-05
+55	20240929_KC@LAC	2024	4	Regular Season	LAC	KC	18	16	20240929	Final	f	2025-12-29 14:19:31.984097-05	2025-12-29 14:19:31.984097-05
+56	20240929_LAR@CHI	2024	4	Regular Season	CHI	LAR	6	19	20240929	Final	f	2025-12-29 14:19:31.984097-05	2025-12-29 14:19:31.984097-05
+57	20240929_MIN@GB	2024	4	Regular Season	GB	MIN	12	21	20240929	Final	f	2025-12-29 14:19:31.984097-05	2025-12-29 14:19:31.984097-05
+58	20240929_NE@SF	2024	4	Regular Season	SF	NE	28	22	20240929	Final	f	2025-12-29 14:19:31.984097-05	2025-12-29 14:19:31.984097-05
+59	20240929_NO@ATL	2024	4	Regular Season	ATL	NO	2	23	20240929	Final	f	2025-12-29 14:19:31.984097-05	2025-12-29 14:19:31.984097-05
+60	20240929_PHI@TB	2024	4	Regular Season	TB	PHI	30	27	20240929	Final	f	2025-12-29 14:19:31.984097-05	2025-12-29 14:19:31.984097-05
+61	20240929_PIT@IND	2024	4	Regular Season	IND	PIT	14	26	20240929	Final	f	2025-12-29 14:19:31.984097-05	2025-12-29 14:19:31.984097-05
+62	20240929_WSH@ARI	2024	4	Regular Season	ARI	WSH	1	32	20240929	Final	f	2025-12-29 14:19:31.984097-05	2025-12-29 14:19:31.984097-05
+63	20240930_SEA@DET	2024	4	Regular Season	DET	SEA	11	29	20240930	Final	f	2025-12-29 14:19:31.984097-05	2025-12-29 14:19:31.984097-05
+64	20240930_TEN@MIA	2024	4	Regular Season	MIA	TEN	20	31	20240930	Final	f	2025-12-29 14:19:31.984097-05	2025-12-29 14:19:31.984097-05
+65	20241003_TB@ATL	2024	5	Regular Season	ATL	TB	2	30	20241003	Final/OT	f	2025-12-29 14:19:32.156694-05	2025-12-29 14:19:32.156694-05
+66	20241006_ARI@SF	2024	5	Regular Season	SF	ARI	28	1	20241006	Final	f	2025-12-29 14:19:32.156694-05	2025-12-29 14:19:32.156694-05
+67	20241006_BAL@CIN	2024	5	Regular Season	CIN	BAL	7	3	20241006	Final/OT	f	2025-12-29 14:19:32.156694-05	2025-12-29 14:19:32.156694-05
+68	20241006_BUF@HOU	2024	5	Regular Season	HOU	BUF	13	4	20241006	Final	f	2025-12-29 14:19:32.156694-05	2025-12-29 14:19:32.156694-05
+69	20241006_CAR@CHI	2024	5	Regular Season	CHI	CAR	6	5	20241006	Final	f	2025-12-29 14:19:32.156694-05	2025-12-29 14:19:32.156694-05
+70	20241006_CLE@WSH	2024	5	Regular Season	WSH	CLE	32	8	20241006	Final	f	2025-12-29 14:19:32.156694-05	2025-12-29 14:19:32.156694-05
+71	20241006_DAL@PIT	2024	5	Regular Season	PIT	DAL	26	9	20241006	Final	f	2025-12-29 14:19:32.156694-05	2025-12-29 14:19:32.156694-05
+72	20241006_GB@LAR	2024	5	Regular Season	LAR	GB	19	12	20241006	Final	f	2025-12-29 14:19:32.156694-05	2025-12-29 14:19:32.156694-05
+73	20241006_IND@JAX	2024	5	Regular Season	JAX	IND	15	14	20241006	Final	f	2025-12-29 14:19:32.156694-05	2025-12-29 14:19:32.156694-05
+74	20241006_LV@DEN	2024	5	Regular Season	DEN	LV	10	17	20241006	Final	f	2025-12-29 14:19:32.156694-05	2025-12-29 14:19:32.156694-05
+75	20241006_MIA@NE	2024	5	Regular Season	NE	MIA	22	20	20241006	Final	f	2025-12-29 14:19:32.156694-05	2025-12-29 14:19:32.156694-05
+76	20241006_NYG@SEA	2024	5	Regular Season	SEA	NYG	29	24	20241006	Final	f	2025-12-29 14:19:32.156694-05	2025-12-29 14:19:32.156694-05
+77	20241006_NYJ@MIN	2024	5	Regular Season	MIN	NYJ	21	25	20241006	Final	t	2025-12-29 14:19:32.156694-05	2025-12-29 14:19:32.156694-05
+78	20241007_NO@KC	2024	5	Regular Season	KC	NO	16	23	20241007	Final	f	2025-12-29 14:19:32.156694-05	2025-12-29 14:19:32.156694-05
+79	20241010_SF@SEA	2024	6	Regular Season	SEA	SF	29	28	20241010	Final	f	2025-12-29 14:19:32.402148-05	2025-12-29 14:19:32.402148-05
+80	20241013_ARI@GB	2024	6	Regular Season	GB	ARI	12	1	20241013	Final	f	2025-12-29 14:19:32.402148-05	2025-12-29 14:19:32.402148-05
+81	20241013_ATL@CAR	2024	6	Regular Season	CAR	ATL	5	2	20241013	Final	f	2025-12-29 14:19:32.402148-05	2025-12-29 14:19:32.402148-05
+82	20241013_CIN@NYG	2024	6	Regular Season	NYG	CIN	24	7	20241013	Final	f	2025-12-29 14:19:32.402148-05	2025-12-29 14:19:32.402148-05
+83	20241013_CLE@PHI	2024	6	Regular Season	PHI	CLE	27	8	20241013	Final	f	2025-12-29 14:19:32.402148-05	2025-12-29 14:19:32.402148-05
+84	20241013_DET@DAL	2024	6	Regular Season	DAL	DET	9	11	20241013	Final	f	2025-12-29 14:19:32.402148-05	2025-12-29 14:19:32.402148-05
+85	20241013_HOU@NE	2024	6	Regular Season	NE	HOU	22	13	20241013	Final	f	2025-12-29 14:19:32.402148-05	2025-12-29 14:19:32.402148-05
+86	20241013_IND@TEN	2024	6	Regular Season	TEN	IND	31	14	20241013	Final	f	2025-12-29 14:19:32.402148-05	2025-12-29 14:19:32.402148-05
+87	20241013_JAX@CHI	2024	6	Regular Season	CHI	JAX	6	15	20241013	Final	t	2025-12-29 14:19:32.402148-05	2025-12-29 14:19:32.402148-05
+88	20241013_LAC@DEN	2024	6	Regular Season	DEN	LAC	10	18	20241013	Final	f	2025-12-29 14:19:32.402148-05	2025-12-29 14:19:32.402148-05
+89	20241013_PIT@LV	2024	6	Regular Season	LV	PIT	17	26	20241013	Final	f	2025-12-29 14:19:32.402148-05	2025-12-29 14:19:32.402148-05
+90	20241013_TB@NO	2024	6	Regular Season	NO	TB	23	30	20241013	Final	f	2025-12-29 14:19:32.402148-05	2025-12-29 14:19:32.402148-05
+91	20241013_WSH@BAL	2024	6	Regular Season	BAL	WSH	3	32	20241013	Final	f	2025-12-29 14:19:32.402148-05	2025-12-29 14:19:32.402148-05
+92	20241014_BUF@NYJ	2024	6	Regular Season	NYJ	BUF	25	4	20241014	Final	f	2025-12-29 14:19:32.402148-05	2025-12-29 14:19:32.402148-05
+93	20241017_DEN@NO	2024	7	Regular Season	NO	DEN	23	10	20241017	Final	f	2025-12-29 14:19:32.706967-05	2025-12-29 14:19:32.706967-05
+94	20241020_CAR@WSH	2024	7	Regular Season	WSH	CAR	32	5	20241020	Final	f	2025-12-29 14:19:32.706967-05	2025-12-29 14:19:32.706967-05
+95	20241020_CIN@CLE	2024	7	Regular Season	CLE	CIN	8	7	20241020	Final	f	2025-12-29 14:19:32.706967-05	2025-12-29 14:19:32.706967-05
+96	20241020_DET@MIN	2024	7	Regular Season	MIN	DET	21	11	20241020	Final	f	2025-12-29 14:19:32.706967-05	2025-12-29 14:19:32.706967-05
+97	20241020_HOU@GB	2024	7	Regular Season	GB	HOU	12	13	20241020	Final	f	2025-12-29 14:19:32.706967-05	2025-12-29 14:19:32.706967-05
+98	20241020_KC@SF	2024	7	Regular Season	SF	KC	28	16	20241020	Final	f	2025-12-29 14:19:32.706967-05	2025-12-29 14:19:32.706967-05
+99	20241020_LV@LAR	2024	7	Regular Season	LAR	LV	19	17	20241020	Final	f	2025-12-29 14:19:32.706967-05	2025-12-29 14:19:32.706967-05
+100	20241020_MIA@IND	2024	7	Regular Season	IND	MIA	14	20	20241020	Final	f	2025-12-29 14:19:32.706967-05	2025-12-29 14:19:32.706967-05
+101	20241020_NE@JAX	2024	7	Regular Season	JAX	NE	15	22	20241020	Final	t	2025-12-29 14:19:32.706967-05	2025-12-29 14:19:32.706967-05
+102	20241020_NYJ@PIT	2024	7	Regular Season	PIT	NYJ	26	25	20241020	Final	f	2025-12-29 14:19:32.706967-05	2025-12-29 14:19:32.706967-05
+103	20241020_PHI@NYG	2024	7	Regular Season	NYG	PHI	24	27	20241020	Final	f	2025-12-29 14:19:32.706967-05	2025-12-29 14:19:32.706967-05
+104	20241020_SEA@ATL	2024	7	Regular Season	ATL	SEA	2	29	20241020	Final	f	2025-12-29 14:19:32.706967-05	2025-12-29 14:19:32.706967-05
+105	20241020_TEN@BUF	2024	7	Regular Season	BUF	TEN	4	31	20241020	Final	f	2025-12-29 14:19:32.706967-05	2025-12-29 14:19:32.706967-05
+106	20241021_BAL@TB	2024	7	Regular Season	TB	BAL	30	3	20241021	Final	f	2025-12-29 14:19:32.706967-05	2025-12-29 14:19:32.706967-05
+107	20241021_LAC@ARI	2024	7	Regular Season	ARI	LAC	1	18	20241021	Final	f	2025-12-29 14:19:32.706967-05	2025-12-29 14:19:32.706967-05
+108	20241024_MIN@LAR	2024	8	Regular Season	LAR	MIN	19	21	20241024	Final	f	2025-12-29 14:19:32.910432-05	2025-12-29 14:19:32.910432-05
+109	20241027_ARI@MIA	2024	8	Regular Season	MIA	ARI	20	1	20241027	Final	f	2025-12-29 14:19:32.910432-05	2025-12-29 14:19:32.910432-05
+110	20241027_ATL@TB	2024	8	Regular Season	TB	ATL	30	2	20241027	Final	f	2025-12-29 14:19:32.910432-05	2025-12-29 14:19:32.910432-05
+111	20241027_BAL@CLE	2024	8	Regular Season	CLE	BAL	8	3	20241027	Final	f	2025-12-29 14:19:32.910432-05	2025-12-29 14:19:32.910432-05
+112	20241027_BUF@SEA	2024	8	Regular Season	SEA	BUF	29	4	20241027	Final	f	2025-12-29 14:19:32.910432-05	2025-12-29 14:19:32.910432-05
+113	20241027_CAR@DEN	2024	8	Regular Season	DEN	CAR	10	5	20241027	Final	f	2025-12-29 14:19:32.910432-05	2025-12-29 14:19:32.910432-05
+114	20241027_CHI@WSH	2024	8	Regular Season	WSH	CHI	32	6	20241027	Final	f	2025-12-29 14:19:32.910432-05	2025-12-29 14:19:32.910432-05
+115	20241027_DAL@SF	2024	8	Regular Season	SF	DAL	28	9	20241027	Final	f	2025-12-29 14:19:32.910432-05	2025-12-29 14:19:32.910432-05
+116	20241027_GB@JAX	2024	8	Regular Season	JAX	GB	15	12	20241027	Final	f	2025-12-29 14:19:32.910432-05	2025-12-29 14:19:32.910432-05
+117	20241027_IND@HOU	2024	8	Regular Season	HOU	IND	13	14	20241027	Final	f	2025-12-29 14:19:32.910432-05	2025-12-29 14:19:32.910432-05
+118	20241027_KC@LV	2024	8	Regular Season	LV	KC	17	16	20241027	Final	f	2025-12-29 14:19:32.910432-05	2025-12-29 14:19:32.910432-05
+119	20241027_NO@LAC	2024	8	Regular Season	LAC	NO	18	23	20241027	Final	f	2025-12-29 14:19:32.910432-05	2025-12-29 14:19:32.910432-05
+120	20241027_NYJ@NE	2024	8	Regular Season	NE	NYJ	22	25	20241027	Final	f	2025-12-29 14:19:32.910432-05	2025-12-29 14:19:32.910432-05
+121	20241027_PHI@CIN	2024	8	Regular Season	CIN	PHI	7	27	20241027	Final	f	2025-12-29 14:19:32.910432-05	2025-12-29 14:19:32.910432-05
+122	20241027_TEN@DET	2024	8	Regular Season	DET	TEN	11	31	20241027	Final	f	2025-12-29 14:19:32.910432-05	2025-12-29 14:19:32.910432-05
+123	20241028_NYG@PIT	2024	8	Regular Season	PIT	NYG	26	24	20241028	Final	f	2025-12-29 14:19:32.910432-05	2025-12-29 14:19:32.910432-05
+124	20241031_HOU@NYJ	2024	9	Regular Season	NYJ	HOU	25	13	20241031	Final	f	2025-12-29 14:19:33.111041-05	2025-12-29 14:19:33.111041-05
+125	20241103_CHI@ARI	2024	9	Regular Season	ARI	CHI	1	6	20241103	Final	f	2025-12-29 14:19:33.111041-05	2025-12-29 14:19:33.111041-05
+126	20241103_DAL@ATL	2024	9	Regular Season	ATL	DAL	2	9	20241103	Final	f	2025-12-29 14:19:33.111041-05	2025-12-29 14:19:33.111041-05
+127	20241103_DEN@BAL	2024	9	Regular Season	BAL	DEN	3	10	20241103	Final	f	2025-12-29 14:19:33.111041-05	2025-12-29 14:19:33.111041-05
+128	20241103_DET@GB	2024	9	Regular Season	GB	DET	12	11	20241103	Final	f	2025-12-29 14:19:33.111041-05	2025-12-29 14:19:33.111041-05
+129	20241103_IND@MIN	2024	9	Regular Season	MIN	IND	21	14	20241103	Final	f	2025-12-29 14:19:33.111041-05	2025-12-29 14:19:33.111041-05
+130	20241103_JAX@PHI	2024	9	Regular Season	PHI	JAX	27	15	20241103	Final	f	2025-12-29 14:19:33.111041-05	2025-12-29 14:19:33.111041-05
+131	20241103_LAC@CLE	2024	9	Regular Season	CLE	LAC	8	18	20241103	Final	f	2025-12-29 14:19:33.111041-05	2025-12-29 14:19:33.111041-05
+132	20241103_LAR@SEA	2024	9	Regular Season	SEA	LAR	29	19	20241103	Final/OT	f	2025-12-29 14:19:33.111041-05	2025-12-29 14:19:33.111041-05
+133	20241103_LV@CIN	2024	9	Regular Season	CIN	LV	7	17	20241103	Final	f	2025-12-29 14:19:33.111041-05	2025-12-29 14:19:33.111041-05
+134	20241103_MIA@BUF	2024	9	Regular Season	BUF	MIA	4	20	20241103	Final	f	2025-12-29 14:19:33.111041-05	2025-12-29 14:19:33.111041-05
+135	20241103_NE@TEN	2024	9	Regular Season	TEN	NE	31	22	20241103	Final/OT	f	2025-12-29 14:19:33.111041-05	2025-12-29 14:19:33.111041-05
+136	20241103_NO@CAR	2024	9	Regular Season	CAR	NO	5	23	20241103	Final	f	2025-12-29 14:19:33.111041-05	2025-12-29 14:19:33.111041-05
+137	20241103_WSH@NYG	2024	9	Regular Season	NYG	WSH	24	32	20241103	Final	f	2025-12-29 14:19:33.111041-05	2025-12-29 14:19:33.111041-05
+138	20241104_TB@KC	2024	9	Regular Season	KC	TB	16	30	20241104	Final/OT	f	2025-12-29 14:19:33.111041-05	2025-12-29 14:19:33.111041-05
+139	20241107_CIN@BAL	2024	10	Regular Season	BAL	CIN	3	7	20241107	Final	f	2025-12-29 14:19:33.296456-05	2025-12-29 14:19:33.296456-05
+140	20241110_ATL@NO	2024	10	Regular Season	NO	ATL	23	2	20241110	Final	f	2025-12-29 14:19:33.296456-05	2025-12-29 14:19:33.296456-05
+141	20241110_BUF@IND	2024	10	Regular Season	IND	BUF	14	4	20241110	Final	f	2025-12-29 14:19:33.296456-05	2025-12-29 14:19:33.296456-05
+142	20241110_DEN@KC	2024	10	Regular Season	KC	DEN	16	10	20241110	Final	f	2025-12-29 14:19:33.296456-05	2025-12-29 14:19:33.296456-05
+143	20241110_DET@HOU	2024	10	Regular Season	HOU	DET	13	11	20241110	Final	f	2025-12-29 14:19:33.296456-05	2025-12-29 14:19:33.296456-05
+144	20241110_MIN@JAX	2024	10	Regular Season	JAX	MIN	15	21	20241110	Final	f	2025-12-29 14:19:33.296456-05	2025-12-29 14:19:33.296456-05
+145	20241110_NE@CHI	2024	10	Regular Season	CHI	NE	6	22	20241110	Final	f	2025-12-29 14:19:33.296456-05	2025-12-29 14:19:33.296456-05
+146	20241110_NYG@CAR	2024	10	Regular Season	CAR	NYG	5	24	20241110	Final/OT	t	2025-12-29 14:19:33.296456-05	2025-12-29 14:19:33.296456-05
+147	20241110_NYJ@ARI	2024	10	Regular Season	ARI	NYJ	1	25	20241110	Final	f	2025-12-29 14:19:33.296456-05	2025-12-29 14:19:33.296456-05
+148	20241110_PHI@DAL	2024	10	Regular Season	DAL	PHI	9	27	20241110	Final	f	2025-12-29 14:19:33.296456-05	2025-12-29 14:19:33.296456-05
+149	20241110_PIT@WSH	2024	10	Regular Season	WSH	PIT	32	26	20241110	Final	f	2025-12-29 14:19:33.296456-05	2025-12-29 14:19:33.296456-05
+150	20241110_SF@TB	2024	10	Regular Season	TB	SF	30	28	20241110	Final	f	2025-12-29 14:19:33.296456-05	2025-12-29 14:19:33.296456-05
+151	20241110_TEN@LAC	2024	10	Regular Season	LAC	TEN	18	31	20241110	Final	f	2025-12-29 14:19:33.296456-05	2025-12-29 14:19:33.296456-05
+152	20241111_MIA@LAR	2024	10	Regular Season	LAR	MIA	19	20	20241111	Final	f	2025-12-29 14:19:33.296456-05	2025-12-29 14:19:33.296456-05
+153	20241114_WSH@PHI	2024	11	Regular Season	PHI	WSH	27	32	20241114	Final	f	2025-12-29 14:19:33.629146-05	2025-12-29 14:19:33.629146-05
+154	20241117_ATL@DEN	2024	11	Regular Season	DEN	ATL	10	2	20241117	Final	f	2025-12-29 14:19:33.629146-05	2025-12-29 14:19:33.629146-05
+155	20241117_BAL@PIT	2024	11	Regular Season	PIT	BAL	26	3	20241117	Final	f	2025-12-29 14:19:33.629146-05	2025-12-29 14:19:33.629146-05
+156	20241117_CIN@LAC	2024	11	Regular Season	LAC	CIN	18	7	20241117	Final	f	2025-12-29 14:19:33.629146-05	2025-12-29 14:19:33.629146-05
+157	20241117_CLE@NO	2024	11	Regular Season	NO	CLE	23	8	20241117	Final	f	2025-12-29 14:19:33.629146-05	2025-12-29 14:19:33.629146-05
+158	20241117_GB@CHI	2024	11	Regular Season	CHI	GB	6	12	20241117	Final	f	2025-12-29 14:19:33.629146-05	2025-12-29 14:19:33.629146-05
+159	20241117_IND@NYJ	2024	11	Regular Season	NYJ	IND	25	14	20241117	Final	f	2025-12-29 14:19:33.629146-05	2025-12-29 14:19:33.629146-05
+160	20241117_JAX@DET	2024	11	Regular Season	DET	JAX	11	15	20241117	Final	f	2025-12-29 14:19:33.629146-05	2025-12-29 14:19:33.629146-05
+161	20241117_KC@BUF	2024	11	Regular Season	BUF	KC	4	16	20241117	Final	f	2025-12-29 14:19:33.629146-05	2025-12-29 14:19:33.629146-05
+162	20241117_LAR@NE	2024	11	Regular Season	NE	LAR	22	19	20241117	Final	f	2025-12-29 14:19:33.629146-05	2025-12-29 14:19:33.629146-05
+163	20241117_LV@MIA	2024	11	Regular Season	MIA	LV	20	17	20241117	Final	f	2025-12-29 14:19:33.629146-05	2025-12-29 14:19:33.629146-05
+164	20241117_MIN@TEN	2024	11	Regular Season	TEN	MIN	31	21	20241117	Final	f	2025-12-29 14:19:33.629146-05	2025-12-29 14:19:33.629146-05
+165	20241117_SEA@SF	2024	11	Regular Season	SF	SEA	28	29	20241117	Final	f	2025-12-29 14:19:33.629146-05	2025-12-29 14:19:33.629146-05
+166	20241118_HOU@DAL	2024	11	Regular Season	DAL	HOU	9	13	20241118	Final	f	2025-12-29 14:19:33.629146-05	2025-12-29 14:19:33.629146-05
+167	20241121_PIT@CLE	2024	12	Regular Season	CLE	PIT	8	26	20241121	Final	f	2025-12-29 14:19:33.938557-05	2025-12-29 14:19:33.938557-05
+168	20241124_ARI@SEA	2024	12	Regular Season	SEA	ARI	29	1	20241124	Final	f	2025-12-29 14:19:33.938557-05	2025-12-29 14:19:33.938557-05
+169	20241124_DAL@WSH	2024	12	Regular Season	WSH	DAL	32	9	20241124	Final	f	2025-12-29 14:19:33.938557-05	2025-12-29 14:19:33.938557-05
+170	20241124_DEN@LV	2024	12	Regular Season	LV	DEN	17	10	20241124	Final	f	2025-12-29 14:19:33.938557-05	2025-12-29 14:19:33.938557-05
+171	20241124_DET@IND	2024	12	Regular Season	IND	DET	14	11	20241124	Final	f	2025-12-29 14:19:33.938557-05	2025-12-29 14:19:33.938557-05
+172	20241124_KC@CAR	2024	12	Regular Season	CAR	KC	5	16	20241124	Final	f	2025-12-29 14:19:33.938557-05	2025-12-29 14:19:33.938557-05
+173	20241124_MIN@CHI	2024	12	Regular Season	CHI	MIN	6	21	20241124	Final/OT	f	2025-12-29 14:19:33.938557-05	2025-12-29 14:19:33.938557-05
+174	20241124_NE@MIA	2024	12	Regular Season	MIA	NE	20	22	20241124	Final	f	2025-12-29 14:19:33.938557-05	2025-12-29 14:19:33.938557-05
+175	20241124_PHI@LAR	2024	12	Regular Season	LAR	PHI	19	27	20241124	Final	f	2025-12-29 14:19:33.938557-05	2025-12-29 14:19:33.938557-05
+176	20241124_SF@GB	2024	12	Regular Season	GB	SF	12	28	20241124	Final	f	2025-12-29 14:19:33.938557-05	2025-12-29 14:19:33.938557-05
+177	20241124_TB@NYG	2024	12	Regular Season	NYG	TB	24	30	20241124	Final	f	2025-12-29 14:19:33.938557-05	2025-12-29 14:19:33.938557-05
+178	20241124_TEN@HOU	2024	12	Regular Season	HOU	TEN	13	31	20241124	Final	f	2025-12-29 14:19:33.938557-05	2025-12-29 14:19:33.938557-05
+179	20241125_BAL@LAC	2024	12	Regular Season	LAC	BAL	18	3	20241125	Final	f	2025-12-29 14:19:33.938557-05	2025-12-29 14:19:33.938557-05
+180	20241128_CHI@DET	2024	13	Regular Season	DET	CHI	11	6	20241128	Final	f	2025-12-29 14:19:34.113043-05	2025-12-29 14:19:34.113043-05
+181	20241128_MIA@GB	2024	13	Regular Season	GB	MIA	12	20	20241128	Final	f	2025-12-29 14:19:34.113043-05	2025-12-29 14:19:34.113043-05
+182	20241128_NYG@DAL	2024	13	Regular Season	DAL	NYG	9	24	20241128	Final	f	2025-12-29 14:19:34.113043-05	2025-12-29 14:19:34.113043-05
+183	20241129_LV@KC	2024	13	Regular Season	KC	LV	16	17	20241129	Final	f	2025-12-29 14:19:34.113043-05	2025-12-29 14:19:34.113043-05
+184	20241201_ARI@MIN	2024	13	Regular Season	MIN	ARI	21	1	20241201	Final	f	2025-12-29 14:19:34.113043-05	2025-12-29 14:19:34.113043-05
+185	20241201_HOU@JAX	2024	13	Regular Season	JAX	HOU	15	13	20241201	Final	f	2025-12-29 14:19:34.113043-05	2025-12-29 14:19:34.113043-05
+186	20241201_IND@NE	2024	13	Regular Season	NE	IND	22	14	20241201	Final	f	2025-12-29 14:19:34.113043-05	2025-12-29 14:19:34.113043-05
+187	20241201_LAC@ATL	2024	13	Regular Season	ATL	LAC	2	18	20241201	Final	f	2025-12-29 14:19:34.113043-05	2025-12-29 14:19:34.113043-05
+188	20241201_LAR@NO	2024	13	Regular Season	NO	LAR	23	19	20241201	Final	f	2025-12-29 14:19:34.113043-05	2025-12-29 14:19:34.113043-05
+189	20241201_PHI@BAL	2024	13	Regular Season	BAL	PHI	3	27	20241201	Final	f	2025-12-29 14:19:34.113043-05	2025-12-29 14:19:34.113043-05
+190	20241201_PIT@CIN	2024	13	Regular Season	CIN	PIT	7	26	20241201	Final	f	2025-12-29 14:19:34.113043-05	2025-12-29 14:19:34.113043-05
+191	20241201_SEA@NYJ	2024	13	Regular Season	NYJ	SEA	25	29	20241201	Final	f	2025-12-29 14:19:34.113043-05	2025-12-29 14:19:34.113043-05
+192	20241201_SF@BUF	2024	13	Regular Season	BUF	SF	4	28	20241201	Final	f	2025-12-29 14:19:34.113043-05	2025-12-29 14:19:34.113043-05
+193	20241201_TB@CAR	2024	13	Regular Season	CAR	TB	5	30	20241201	Final/OT	f	2025-12-29 14:19:34.113043-05	2025-12-29 14:19:34.113043-05
+194	20241201_TEN@WSH	2024	13	Regular Season	WSH	TEN	32	31	20241201	Final	f	2025-12-29 14:19:34.113043-05	2025-12-29 14:19:34.113043-05
+195	20241202_CLE@DEN	2024	13	Regular Season	DEN	CLE	10	8	20241202	Final	f	2025-12-29 14:19:34.113043-05	2025-12-29 14:19:34.113043-05
+196	20241205_GB@DET	2024	14	Regular Season	DET	GB	11	12	20241205	Final	f	2025-12-29 14:19:34.492007-05	2025-12-29 14:19:34.492007-05
+197	20241208_ATL@MIN	2024	14	Regular Season	MIN	ATL	21	2	20241208	Final	f	2025-12-29 14:19:34.492007-05	2025-12-29 14:19:34.492007-05
+198	20241208_BUF@LAR	2024	14	Regular Season	LAR	BUF	19	4	20241208	Final	f	2025-12-29 14:19:34.492007-05	2025-12-29 14:19:34.492007-05
+199	20241208_CAR@PHI	2024	14	Regular Season	PHI	CAR	27	5	20241208	Final	f	2025-12-29 14:19:34.492007-05	2025-12-29 14:19:34.492007-05
+200	20241208_CHI@SF	2024	14	Regular Season	SF	CHI	28	6	20241208	Final	f	2025-12-29 14:19:34.492007-05	2025-12-29 14:19:34.492007-05
+201	20241208_CLE@PIT	2024	14	Regular Season	PIT	CLE	26	8	20241208	Final	f	2025-12-29 14:19:34.492007-05	2025-12-29 14:19:34.492007-05
+202	20241208_JAX@TEN	2024	14	Regular Season	TEN	JAX	31	15	20241208	Final	f	2025-12-29 14:19:34.492007-05	2025-12-29 14:19:34.492007-05
+203	20241208_LAC@KC	2024	14	Regular Season	KC	LAC	16	18	20241208	Final	f	2025-12-29 14:19:34.492007-05	2025-12-29 14:19:34.492007-05
+204	20241208_LV@TB	2024	14	Regular Season	TB	LV	30	17	20241208	Final	f	2025-12-29 14:19:34.492007-05	2025-12-29 14:19:34.492007-05
+205	20241208_NO@NYG	2024	14	Regular Season	NYG	NO	24	23	20241208	Final	f	2025-12-29 14:19:34.492007-05	2025-12-29 14:19:34.492007-05
+206	20241208_NYJ@MIA	2024	14	Regular Season	MIA	NYJ	20	25	20241208	Final/OT	f	2025-12-29 14:19:34.492007-05	2025-12-29 14:19:34.492007-05
+207	20241208_SEA@ARI	2024	14	Regular Season	ARI	SEA	1	29	20241208	Final	f	2025-12-29 14:19:34.492007-05	2025-12-29 14:19:34.492007-05
+208	20241209_CIN@DAL	2024	14	Regular Season	DAL	CIN	9	7	20241209	Final	f	2025-12-29 14:19:34.492007-05	2025-12-29 14:19:34.492007-05
+209	20241212_LAR@SF	2024	15	Regular Season	SF	LAR	28	19	20241212	Final	f	2025-12-29 14:19:34.859506-05	2025-12-29 14:19:34.859506-05
+210	20241215_BAL@NYG	2024	15	Regular Season	NYG	BAL	24	3	20241215	Final	f	2025-12-29 14:19:34.859506-05	2025-12-29 14:19:34.859506-05
+211	20241215_BUF@DET	2024	15	Regular Season	DET	BUF	11	4	20241215	Final	f	2025-12-29 14:19:34.859506-05	2025-12-29 14:19:34.859506-05
+212	20241215_CIN@TEN	2024	15	Regular Season	TEN	CIN	31	7	20241215	Final	f	2025-12-29 14:19:34.859506-05	2025-12-29 14:19:34.859506-05
+213	20241215_DAL@CAR	2024	15	Regular Season	CAR	DAL	5	9	20241215	Final	f	2025-12-29 14:19:34.859506-05	2025-12-29 14:19:34.859506-05
+214	20241215_GB@SEA	2024	15	Regular Season	SEA	GB	29	12	20241215	Final	f	2025-12-29 14:19:34.859506-05	2025-12-29 14:19:34.859506-05
+215	20241215_IND@DEN	2024	15	Regular Season	DEN	IND	10	14	20241215	Final	f	2025-12-29 14:19:34.859506-05	2025-12-29 14:19:34.859506-05
+216	20241215_KC@CLE	2024	15	Regular Season	CLE	KC	8	16	20241215	Final	f	2025-12-29 14:19:34.859506-05	2025-12-29 14:19:34.859506-05
+217	20241215_MIA@HOU	2024	15	Regular Season	HOU	MIA	13	20	20241215	Final	f	2025-12-29 14:19:34.859506-05	2025-12-29 14:19:34.859506-05
+218	20241215_NE@ARI	2024	15	Regular Season	ARI	NE	1	22	20241215	Final	f	2025-12-29 14:19:34.859506-05	2025-12-29 14:19:34.859506-05
+219	20241215_NYJ@JAX	2024	15	Regular Season	JAX	NYJ	15	25	20241215	Final	f	2025-12-29 14:19:34.859506-05	2025-12-29 14:19:34.859506-05
+220	20241215_PIT@PHI	2024	15	Regular Season	PHI	PIT	27	26	20241215	Final	f	2025-12-29 14:19:34.859506-05	2025-12-29 14:19:34.859506-05
+221	20241215_TB@LAC	2024	15	Regular Season	LAC	TB	18	30	20241215	Final	f	2025-12-29 14:19:34.859506-05	2025-12-29 14:19:34.859506-05
+222	20241215_WSH@NO	2024	15	Regular Season	NO	WSH	23	32	20241215	Final	f	2025-12-29 14:19:34.859506-05	2025-12-29 14:19:34.859506-05
+223	20241216_ATL@LV	2024	15	Regular Season	LV	ATL	17	2	20241216	Final	f	2025-12-29 14:19:34.859506-05	2025-12-29 14:19:34.859506-05
+224	20241216_CHI@MIN	2024	15	Regular Season	MIN	CHI	21	6	20241216	Final	f	2025-12-29 14:19:34.859506-05	2025-12-29 14:19:34.859506-05
+225	20241219_DEN@LAC	2024	16	Regular Season	LAC	DEN	18	10	20241219	Final	f	2025-12-29 14:19:35.056596-05	2025-12-29 14:19:35.056596-05
+226	20241221_HOU@KC	2024	16	Regular Season	KC	HOU	16	13	20241221	Final	f	2025-12-29 14:19:35.056596-05	2025-12-29 14:19:35.056596-05
+227	20241221_PIT@BAL	2024	16	Regular Season	BAL	PIT	3	26	20241221	Final	f	2025-12-29 14:19:35.056596-05	2025-12-29 14:19:35.056596-05
+228	20241222_ARI@CAR	2024	16	Regular Season	CAR	ARI	5	1	20241222	Final/OT	f	2025-12-29 14:19:35.056596-05	2025-12-29 14:19:35.056596-05
+229	20241222_CLE@CIN	2024	16	Regular Season	CIN	CLE	7	8	20241222	Final	f	2025-12-29 14:19:35.056596-05	2025-12-29 14:19:35.056596-05
+230	20241222_DET@CHI	2024	16	Regular Season	CHI	DET	6	11	20241222	Final	f	2025-12-29 14:19:35.056596-05	2025-12-29 14:19:35.056596-05
+231	20241222_JAX@LV	2024	16	Regular Season	LV	JAX	17	15	20241222	Final	f	2025-12-29 14:19:35.056596-05	2025-12-29 14:19:35.056596-05
+232	20241222_LAR@NYJ	2024	16	Regular Season	NYJ	LAR	25	19	20241222	Final	f	2025-12-29 14:19:35.056596-05	2025-12-29 14:19:35.056596-05
+233	20241222_MIN@SEA	2024	16	Regular Season	SEA	MIN	29	21	20241222	Final	f	2025-12-29 14:19:35.056596-05	2025-12-29 14:19:35.056596-05
+234	20241222_NE@BUF	2024	16	Regular Season	BUF	NE	4	22	20241222	Final	f	2025-12-29 14:19:35.056596-05	2025-12-29 14:19:35.056596-05
+235	20241222_NYG@ATL	2024	16	Regular Season	ATL	NYG	2	24	20241222	Final	f	2025-12-29 14:19:35.056596-05	2025-12-29 14:19:35.056596-05
+236	20241222_PHI@WSH	2024	16	Regular Season	WSH	PHI	32	27	20241222	Final	f	2025-12-29 14:19:35.056596-05	2025-12-29 14:19:35.056596-05
+237	20241222_SF@MIA	2024	16	Regular Season	MIA	SF	20	28	20241222	Final	f	2025-12-29 14:19:35.056596-05	2025-12-29 14:19:35.056596-05
+238	20241222_TB@DAL	2024	16	Regular Season	DAL	TB	9	30	20241222	Final	f	2025-12-29 14:19:35.056596-05	2025-12-29 14:19:35.056596-05
+239	20241222_TEN@IND	2024	16	Regular Season	IND	TEN	14	31	20241222	Final	f	2025-12-29 14:19:35.056596-05	2025-12-29 14:19:35.056596-05
+240	20241223_NO@GB	2024	16	Regular Season	GB	NO	12	23	20241223	Final	f	2025-12-29 14:19:35.056596-05	2025-12-29 14:19:35.056596-05
+241	20241225_BAL@HOU	2024	17	Regular Season	HOU	BAL	13	3	20241225	Final	f	2025-12-29 14:19:35.290019-05	2025-12-29 14:19:35.290019-05
+242	20241225_KC@PIT	2024	17	Regular Season	PIT	KC	26	16	20241225	Final	f	2025-12-29 14:19:35.290019-05	2025-12-29 14:19:35.290019-05
+243	20241226_SEA@CHI	2024	17	Regular Season	CHI	SEA	6	29	20241226	Final	f	2025-12-29 14:19:35.290019-05	2025-12-29 14:19:35.290019-05
+244	20241228_ARI@LAR	2024	17	Regular Season	LAR	ARI	19	1	20241228	Final	f	2025-12-29 14:19:35.290019-05	2025-12-29 14:19:35.290019-05
+245	20241228_DEN@CIN	2024	17	Regular Season	CIN	DEN	7	10	20241228	Final/OT	f	2025-12-29 14:19:35.290019-05	2025-12-29 14:19:35.290019-05
+246	20241228_LAC@NE	2024	17	Regular Season	NE	LAC	22	18	20241228	Final	f	2025-12-29 14:19:35.290019-05	2025-12-29 14:19:35.290019-05
+247	20241229_ATL@WSH	2024	17	Regular Season	WSH	ATL	32	2	20241229	Final/OT	f	2025-12-29 14:19:35.290019-05	2025-12-29 14:19:35.290019-05
+248	20241229_CAR@TB	2024	17	Regular Season	TB	CAR	30	5	20241229	Final	f	2025-12-29 14:19:35.290019-05	2025-12-29 14:19:35.290019-05
+249	20241229_DAL@PHI	2024	17	Regular Season	PHI	DAL	27	9	20241229	Final	f	2025-12-29 14:19:35.290019-05	2025-12-29 14:19:35.290019-05
+250	20241229_GB@MIN	2024	17	Regular Season	MIN	GB	21	12	20241229	Final	f	2025-12-29 14:19:35.290019-05	2025-12-29 14:19:35.290019-05
+251	20241229_IND@NYG	2024	17	Regular Season	NYG	IND	24	14	20241229	Final	f	2025-12-29 14:19:35.290019-05	2025-12-29 14:19:35.290019-05
+252	20241229_LV@NO	2024	17	Regular Season	NO	LV	23	17	20241229	Final	f	2025-12-29 14:19:35.290019-05	2025-12-29 14:19:35.290019-05
+253	20241229_MIA@CLE	2024	17	Regular Season	CLE	MIA	8	20	20241229	Final	f	2025-12-29 14:19:35.290019-05	2025-12-29 14:19:35.290019-05
+254	20241229_NYJ@BUF	2024	17	Regular Season	BUF	NYJ	4	25	20241229	Final	f	2025-12-29 14:19:35.290019-05	2025-12-29 14:19:35.290019-05
+255	20241229_TEN@JAX	2024	17	Regular Season	JAX	TEN	15	31	20241229	Final	f	2025-12-29 14:19:35.290019-05	2025-12-29 14:19:35.290019-05
+256	20241230_DET@SF	2024	17	Regular Season	SF	DET	28	11	20241230	Final	f	2025-12-29 14:19:35.290019-05	2025-12-29 14:19:35.290019-05
+257	20250104_CIN@PIT	2024	18	Regular Season	PIT	CIN	26	7	20250104	Final	f	2025-12-29 14:19:35.780768-05	2025-12-29 14:19:35.780768-05
+258	20250104_CLE@BAL	2024	18	Regular Season	BAL	CLE	3	8	20250104	Final	f	2025-12-29 14:19:35.780768-05	2025-12-29 14:19:35.780768-05
+259	20250105_BUF@NE	2024	18	Regular Season	NE	BUF	22	4	20250105	Final	f	2025-12-29 14:19:35.780768-05	2025-12-29 14:19:35.780768-05
+260	20250105_CAR@ATL	2024	18	Regular Season	ATL	CAR	2	5	20250105	Final/OT	f	2025-12-29 14:19:35.780768-05	2025-12-29 14:19:35.780768-05
+261	20250105_CHI@GB	2024	18	Regular Season	GB	CHI	12	6	20250105	Final	f	2025-12-29 14:19:35.780768-05	2025-12-29 14:19:35.780768-05
+262	20250105_HOU@TEN	2024	18	Regular Season	TEN	HOU	31	13	20250105	Final	f	2025-12-29 14:19:35.780768-05	2025-12-29 14:19:35.780768-05
+263	20250105_JAX@IND	2024	18	Regular Season	IND	JAX	14	15	20250105	Final/OT	f	2025-12-29 14:19:35.780768-05	2025-12-29 14:19:35.780768-05
+264	20250105_KC@DEN	2024	18	Regular Season	DEN	KC	10	16	20250105	Final	f	2025-12-29 14:19:35.780768-05	2025-12-29 14:19:35.780768-05
+265	20250105_LAC@LV	2024	18	Regular Season	LV	LAC	17	18	20250105	Final	f	2025-12-29 14:19:35.780768-05	2025-12-29 14:19:35.780768-05
+266	20250105_MIA@NYJ	2024	18	Regular Season	NYJ	MIA	25	20	20250105	Final	f	2025-12-29 14:19:35.780768-05	2025-12-29 14:19:35.780768-05
+267	20250105_MIN@DET	2024	18	Regular Season	DET	MIN	11	21	20250105	Final	f	2025-12-29 14:19:35.780768-05	2025-12-29 14:19:35.780768-05
+268	20250105_NO@TB	2024	18	Regular Season	TB	NO	30	23	20250105	Final	f	2025-12-29 14:19:35.780768-05	2025-12-29 14:19:35.780768-05
+269	20250105_NYG@PHI	2024	18	Regular Season	PHI	NYG	27	24	20250105	Final	f	2025-12-29 14:19:35.780768-05	2025-12-29 14:19:35.780768-05
+270	20250105_SEA@LAR	2024	18	Regular Season	LAR	SEA	19	29	20250105	Final	f	2025-12-29 14:19:35.780768-05	2025-12-29 14:19:35.780768-05
+271	20250105_SF@ARI	2024	18	Regular Season	ARI	SF	1	28	20250105	Final	f	2025-12-29 14:19:35.780768-05	2025-12-29 14:19:35.780768-05
+272	20250105_WSH@DAL	2024	18	Regular Season	DAL	WSH	9	32	20250105	Final	f	2025-12-29 14:19:35.780768-05	2025-12-29 14:19:35.780768-05
+273	20250904_DAL@PHI	2025	1	Regular Season	PHI	DAL	27	9	20250904	Final	f	2025-12-29 14:19:36.035202-05	2025-12-29 14:19:36.035202-05
+274	20250905_KC@LAC	2025	1	Regular Season	LAC	KC	18	16	20250905	Final	t	2025-12-29 14:19:36.035202-05	2025-12-29 14:19:36.035202-05
+275	20250907_ARI@NO	2025	1	Regular Season	NO	ARI	23	1	20250907	Final	f	2025-12-29 14:19:36.035202-05	2025-12-29 14:19:36.035202-05
+276	20250907_BAL@BUF	2025	1	Regular Season	BUF	BAL	4	3	20250907	Final	f	2025-12-29 14:19:36.035202-05	2025-12-29 14:19:36.035202-05
+277	20250907_CAR@JAX	2025	1	Regular Season	JAX	CAR	15	5	20250907	Final	f	2025-12-29 14:19:36.035202-05	2025-12-29 14:19:36.035202-05
+278	20250907_CIN@CLE	2025	1	Regular Season	CLE	CIN	8	7	20250907	Final	f	2025-12-29 14:19:36.035202-05	2025-12-29 14:19:36.035202-05
+279	20250907_DET@GB	2025	1	Regular Season	GB	DET	12	11	20250907	Final	f	2025-12-29 14:19:36.035202-05	2025-12-29 14:19:36.035202-05
+280	20250907_HOU@LAR	2025	1	Regular Season	LAR	HOU	19	13	20250907	Final	f	2025-12-29 14:19:36.035202-05	2025-12-29 14:19:36.035202-05
+281	20250907_LV@NE	2025	1	Regular Season	NE	LV	22	17	20250907	Final	f	2025-12-29 14:19:36.035202-05	2025-12-29 14:19:36.035202-05
+282	20250907_MIA@IND	2025	1	Regular Season	IND	MIA	14	20	20250907	Final	f	2025-12-29 14:19:36.035202-05	2025-12-29 14:19:36.035202-05
+283	20250907_NYG@WSH	2025	1	Regular Season	WSH	NYG	32	24	20250907	Final	f	2025-12-29 14:19:36.035202-05	2025-12-29 14:19:36.035202-05
+284	20250907_PIT@NYJ	2025	1	Regular Season	NYJ	PIT	25	26	20250907	Final	f	2025-12-29 14:19:36.035202-05	2025-12-29 14:19:36.035202-05
+285	20250907_SF@SEA	2025	1	Regular Season	SEA	SF	29	28	20250907	Final	f	2025-12-29 14:19:36.035202-05	2025-12-29 14:19:36.035202-05
+286	20250907_TB@ATL	2025	1	Regular Season	ATL	TB	2	30	20250907	Final	f	2025-12-29 14:19:36.035202-05	2025-12-29 14:19:36.035202-05
+287	20250907_TEN@DEN	2025	1	Regular Season	DEN	TEN	10	31	20250907	Final	f	2025-12-29 14:19:36.035202-05	2025-12-29 14:19:36.035202-05
+288	20250908_MIN@CHI	2025	1	Regular Season	CHI	MIN	6	21	20250908	Final	f	2025-12-29 14:19:36.035202-05	2025-12-29 14:19:36.035202-05
+289	20250911_WSH@GB	2025	2	Regular Season	GB	WSH	12	32	20250911	Final	f	2025-12-29 14:19:36.311693-05	2025-12-29 14:19:36.311693-05
+290	20250914_ATL@MIN	2025	2	Regular Season	MIN	ATL	21	2	20250914	Final	f	2025-12-29 14:19:36.311693-05	2025-12-29 14:19:36.311693-05
+291	20250914_BUF@NYJ	2025	2	Regular Season	NYJ	BUF	25	4	20250914	Final	f	2025-12-29 14:19:36.311693-05	2025-12-29 14:19:36.311693-05
+292	20250914_CAR@ARI	2025	2	Regular Season	ARI	CAR	1	5	20250914	Final	f	2025-12-29 14:19:36.311693-05	2025-12-29 14:19:36.311693-05
+293	20250914_CHI@DET	2025	2	Regular Season	DET	CHI	11	6	20250914	Final	f	2025-12-29 14:19:36.311693-05	2025-12-29 14:19:36.311693-05
+294	20250914_CLE@BAL	2025	2	Regular Season	BAL	CLE	3	8	20250914	Final	f	2025-12-29 14:19:36.311693-05	2025-12-29 14:19:36.311693-05
+295	20250914_DEN@IND	2025	2	Regular Season	IND	DEN	14	10	20250914	Final	f	2025-12-29 14:19:36.311693-05	2025-12-29 14:19:36.311693-05
+296	20250914_JAX@CIN	2025	2	Regular Season	CIN	JAX	7	15	20250914	Final	f	2025-12-29 14:19:36.311693-05	2025-12-29 14:19:36.311693-05
+297	20250914_LAR@TEN	2025	2	Regular Season	TEN	LAR	31	19	20250914	Final	f	2025-12-29 14:19:36.311693-05	2025-12-29 14:19:36.311693-05
+298	20250914_NE@MIA	2025	2	Regular Season	MIA	NE	20	22	20250914	Final	f	2025-12-29 14:19:36.311693-05	2025-12-29 14:19:36.311693-05
+299	20250914_NYG@DAL	2025	2	Regular Season	DAL	NYG	9	24	20250914	Final/OT	f	2025-12-29 14:19:36.311693-05	2025-12-29 14:19:36.311693-05
+300	20250914_PHI@KC	2025	2	Regular Season	KC	PHI	16	27	20250914	Final	f	2025-12-29 14:19:36.311693-05	2025-12-29 14:19:36.311693-05
+301	20250914_SEA@PIT	2025	2	Regular Season	PIT	SEA	26	29	20250914	Final	f	2025-12-29 14:19:36.311693-05	2025-12-29 14:19:36.311693-05
+302	20250914_SF@NO	2025	2	Regular Season	NO	SF	23	28	20250914	Final	f	2025-12-29 14:19:36.311693-05	2025-12-29 14:19:36.311693-05
+303	20250915_LAC@LV	2025	2	Regular Season	LV	LAC	17	18	20250915	Final	f	2025-12-29 14:19:36.311693-05	2025-12-29 14:19:36.311693-05
+304	20250915_TB@HOU	2025	2	Regular Season	HOU	TB	13	30	20250915	Final	f	2025-12-29 14:19:36.311693-05	2025-12-29 14:19:36.311693-05
+305	20250918_MIA@BUF	2025	3	Regular Season	BUF	MIA	4	20	20250918	Final	f	2025-12-29 14:19:36.703913-05	2025-12-29 14:19:36.703913-05
+306	20250921_ARI@SF	2025	3	Regular Season	SF	ARI	28	1	20250921	Final	f	2025-12-29 14:19:36.703913-05	2025-12-29 14:19:36.703913-05
+307	20250921_ATL@CAR	2025	3	Regular Season	CAR	ATL	5	2	20250921	Final	f	2025-12-29 14:19:36.703913-05	2025-12-29 14:19:36.703913-05
+308	20250921_CIN@MIN	2025	3	Regular Season	MIN	CIN	21	7	20250921	Final	f	2025-12-29 14:19:36.703913-05	2025-12-29 14:19:36.703913-05
+309	20250921_DAL@CHI	2025	3	Regular Season	CHI	DAL	6	9	20250921	Final	f	2025-12-29 14:19:36.703913-05	2025-12-29 14:19:36.703913-05
+310	20250921_DEN@LAC	2025	3	Regular Season	LAC	DEN	18	10	20250921	Final	f	2025-12-29 14:19:36.703913-05	2025-12-29 14:19:36.703913-05
+311	20250921_GB@CLE	2025	3	Regular Season	CLE	GB	8	12	20250921	Final	f	2025-12-29 14:19:36.703913-05	2025-12-29 14:19:36.703913-05
+312	20250921_HOU@JAX	2025	3	Regular Season	JAX	HOU	15	13	20250921	Final	f	2025-12-29 14:19:36.703913-05	2025-12-29 14:19:36.703913-05
+313	20250921_IND@TEN	2025	3	Regular Season	TEN	IND	31	14	20250921	Final	f	2025-12-29 14:19:36.703913-05	2025-12-29 14:19:36.703913-05
+314	20250921_KC@NYG	2025	3	Regular Season	NYG	KC	24	16	20250921	Final	f	2025-12-29 14:19:36.703913-05	2025-12-29 14:19:36.703913-05
+315	20250921_LAR@PHI	2025	3	Regular Season	PHI	LAR	27	19	20250921	Final	f	2025-12-29 14:19:36.703913-05	2025-12-29 14:19:36.703913-05
+316	20250921_LV@WSH	2025	3	Regular Season	WSH	LV	32	17	20250921	Final	f	2025-12-29 14:19:36.703913-05	2025-12-29 14:19:36.703913-05
+317	20250921_NO@SEA	2025	3	Regular Season	SEA	NO	29	23	20250921	Final	f	2025-12-29 14:19:36.703913-05	2025-12-29 14:19:36.703913-05
+318	20250921_NYJ@TB	2025	3	Regular Season	TB	NYJ	30	25	20250921	Final	f	2025-12-29 14:19:36.703913-05	2025-12-29 14:19:36.703913-05
+319	20250921_PIT@NE	2025	3	Regular Season	NE	PIT	22	26	20250921	Final	f	2025-12-29 14:19:36.703913-05	2025-12-29 14:19:36.703913-05
+320	20250922_DET@BAL	2025	3	Regular Season	BAL	DET	3	11	20250922	Final	f	2025-12-29 14:19:36.703913-05	2025-12-29 14:19:36.703913-05
+321	20250925_SEA@ARI	2025	4	Regular Season	ARI	SEA	1	29	20250925	Final	f	2025-12-29 14:19:36.997062-05	2025-12-29 14:19:36.997062-05
+322	20250928_BAL@KC	2025	4	Regular Season	KC	BAL	16	3	20250928	Final	f	2025-12-29 14:19:36.997062-05	2025-12-29 14:19:36.997062-05
+323	20250928_CAR@NE	2025	4	Regular Season	NE	CAR	22	5	20250928	Final	f	2025-12-29 14:19:36.997062-05	2025-12-29 14:19:36.997062-05
+324	20250928_CHI@LV	2025	4	Regular Season	LV	CHI	17	6	20250928	Final	f	2025-12-29 14:19:36.997062-05	2025-12-29 14:19:36.997062-05
+325	20250928_CLE@DET	2025	4	Regular Season	DET	CLE	11	8	20250928	Final	f	2025-12-29 14:19:36.997062-05	2025-12-29 14:19:36.997062-05
+326	20250928_GB@DAL	2025	4	Regular Season	DAL	GB	9	12	20250928	Final/OT	f	2025-12-29 14:19:36.997062-05	2025-12-29 14:19:36.997062-05
+327	20250928_IND@LAR	2025	4	Regular Season	LAR	IND	19	14	20250928	Final	f	2025-12-29 14:19:36.997062-05	2025-12-29 14:19:36.997062-05
+328	20250928_JAX@SF	2025	4	Regular Season	SF	JAX	28	15	20250928	Final	f	2025-12-29 14:19:36.997062-05	2025-12-29 14:19:36.997062-05
+329	20250928_LAC@NYG	2025	4	Regular Season	NYG	LAC	24	18	20250928	Final	f	2025-12-29 14:19:36.997062-05	2025-12-29 14:19:36.997062-05
+330	20250928_MIN@PIT	2025	4	Regular Season	PIT	MIN	26	21	20250928	Final	t	2025-12-29 14:19:36.997062-05	2025-12-29 14:19:36.997062-05
+331	20250928_NO@BUF	2025	4	Regular Season	BUF	NO	4	23	20250928	Final	f	2025-12-29 14:19:36.997062-05	2025-12-29 14:19:36.997062-05
+332	20250928_PHI@TB	2025	4	Regular Season	TB	PHI	30	27	20250928	Final	f	2025-12-29 14:19:36.997062-05	2025-12-29 14:19:36.997062-05
+333	20250928_TEN@HOU	2025	4	Regular Season	HOU	TEN	13	31	20250928	Final	f	2025-12-29 14:19:36.997062-05	2025-12-29 14:19:36.997062-05
+334	20250928_WSH@ATL	2025	4	Regular Season	ATL	WSH	2	32	20250928	Final	f	2025-12-29 14:19:36.997062-05	2025-12-29 14:19:36.997062-05
+335	20250929_CIN@DEN	2025	4	Regular Season	DEN	CIN	10	7	20250929	Final	f	2025-12-29 14:19:36.997062-05	2025-12-29 14:19:36.997062-05
+336	20250929_NYJ@MIA	2025	4	Regular Season	MIA	NYJ	20	25	20250929	Final	f	2025-12-29 14:19:36.997062-05	2025-12-29 14:19:36.997062-05
+337	20251002_SF@LAR	2025	5	Regular Season	LAR	SF	19	28	20251002	Final/OT	f	2025-12-29 14:19:37.173247-05	2025-12-29 14:19:37.173247-05
+338	20251005_DAL@NYJ	2025	5	Regular Season	NYJ	DAL	25	9	20251005	Final	f	2025-12-29 14:19:37.173247-05	2025-12-29 14:19:37.173247-05
+339	20251005_DEN@PHI	2025	5	Regular Season	PHI	DEN	27	10	20251005	Final	f	2025-12-29 14:19:37.173247-05	2025-12-29 14:19:37.173247-05
+340	20251005_DET@CIN	2025	5	Regular Season	CIN	DET	7	11	20251005	Final	f	2025-12-29 14:19:37.173247-05	2025-12-29 14:19:37.173247-05
+341	20251005_HOU@BAL	2025	5	Regular Season	BAL	HOU	3	13	20251005	Final	f	2025-12-29 14:19:37.173247-05	2025-12-29 14:19:37.173247-05
+342	20251005_LV@IND	2025	5	Regular Season	IND	LV	14	17	20251005	Final	f	2025-12-29 14:19:37.173247-05	2025-12-29 14:19:37.173247-05
+343	20251005_MIA@CAR	2025	5	Regular Season	CAR	MIA	5	20	20251005	Final	f	2025-12-29 14:19:37.173247-05	2025-12-29 14:19:37.173247-05
+344	20251005_MIN@CLE	2025	5	Regular Season	CLE	MIN	8	21	20251005	Final	t	2025-12-29 14:19:37.173247-05	2025-12-29 14:19:37.173247-05
+345	20251005_NE@BUF	2025	5	Regular Season	BUF	NE	4	22	20251005	Final	f	2025-12-29 14:19:37.173247-05	2025-12-29 14:19:37.173247-05
+346	20251005_NYG@NO	2025	5	Regular Season	NO	NYG	23	24	20251005	Final	f	2025-12-29 14:19:37.173247-05	2025-12-29 14:19:37.173247-05
+347	20251005_TB@SEA	2025	5	Regular Season	SEA	TB	29	30	20251005	Final	f	2025-12-29 14:19:37.173247-05	2025-12-29 14:19:37.173247-05
+348	20251005_TEN@ARI	2025	5	Regular Season	ARI	TEN	1	31	20251005	Final	f	2025-12-29 14:19:37.173247-05	2025-12-29 14:19:37.173247-05
+349	20251005_WSH@LAC	2025	5	Regular Season	LAC	WSH	18	32	20251005	Final	f	2025-12-29 14:19:37.173247-05	2025-12-29 14:19:37.173247-05
+350	20251006_KC@JAX	2025	5	Regular Season	JAX	KC	15	16	20251006	Final	f	2025-12-29 14:19:37.173247-05	2025-12-29 14:19:37.173247-05
+351	20251009_PHI@NYG	2025	6	Regular Season	NYG	PHI	24	27	20251009	Final	f	2025-12-29 14:19:37.626006-05	2025-12-29 14:19:37.626006-05
+352	20251012_ARI@IND	2025	6	Regular Season	IND	ARI	14	1	20251012	Final	f	2025-12-29 14:19:37.626006-05	2025-12-29 14:19:37.626006-05
+353	20251012_CIN@GB	2025	6	Regular Season	GB	CIN	12	7	20251012	Final	f	2025-12-29 14:19:37.626006-05	2025-12-29 14:19:37.626006-05
+354	20251012_CLE@PIT	2025	6	Regular Season	PIT	CLE	26	8	20251012	Final	f	2025-12-29 14:19:37.626006-05	2025-12-29 14:19:37.626006-05
+355	20251012_DAL@CAR	2025	6	Regular Season	CAR	DAL	5	9	20251012	Final	f	2025-12-29 14:19:37.626006-05	2025-12-29 14:19:37.626006-05
+356	20251012_DEN@NYJ	2025	6	Regular Season	NYJ	DEN	25	10	20251012	Final	t	2025-12-29 14:19:37.626006-05	2025-12-29 14:19:37.626006-05
+357	20251012_DET@KC	2025	6	Regular Season	KC	DET	16	11	20251012	Final	f	2025-12-29 14:19:37.626006-05	2025-12-29 14:19:37.626006-05
+358	20251012_LAC@MIA	2025	6	Regular Season	MIA	LAC	20	18	20251012	Final	f	2025-12-29 14:19:37.626006-05	2025-12-29 14:19:37.626006-05
+359	20251012_LAR@BAL	2025	6	Regular Season	BAL	LAR	3	19	20251012	Final	f	2025-12-29 14:19:37.626006-05	2025-12-29 14:19:37.626006-05
+360	20251012_NE@NO	2025	6	Regular Season	NO	NE	23	22	20251012	Final	f	2025-12-29 14:19:37.626006-05	2025-12-29 14:19:37.626006-05
+361	20251012_SEA@JAX	2025	6	Regular Season	JAX	SEA	15	29	20251012	Final	f	2025-12-29 14:19:37.626006-05	2025-12-29 14:19:37.626006-05
+362	20251012_SF@TB	2025	6	Regular Season	TB	SF	30	28	20251012	Final	f	2025-12-29 14:19:37.626006-05	2025-12-29 14:19:37.626006-05
+363	20251012_TEN@LV	2025	6	Regular Season	LV	TEN	17	31	20251012	Final	f	2025-12-29 14:19:37.626006-05	2025-12-29 14:19:37.626006-05
+364	20251013_BUF@ATL	2025	6	Regular Season	ATL	BUF	2	4	20251013	Final	f	2025-12-29 14:19:37.626006-05	2025-12-29 14:19:37.626006-05
+365	20251013_CHI@WSH	2025	6	Regular Season	WSH	CHI	32	6	20251013	Final	f	2025-12-29 14:19:37.626006-05	2025-12-29 14:19:37.626006-05
+366	20251016_PIT@CIN	2025	7	Regular Season	CIN	PIT	7	26	20251016	Final	f	2025-12-29 14:19:37.932205-05	2025-12-29 14:19:37.932205-05
+367	20251019_ATL@SF	2025	7	Regular Season	SF	ATL	28	2	20251019	Final	f	2025-12-29 14:19:37.932205-05	2025-12-29 14:19:37.932205-05
+368	20251019_CAR@NYJ	2025	7	Regular Season	NYJ	CAR	25	5	20251019	Final	f	2025-12-29 14:19:37.932205-05	2025-12-29 14:19:37.932205-05
+369	20251019_GB@ARI	2025	7	Regular Season	ARI	GB	1	12	20251019	Final	f	2025-12-29 14:19:37.932205-05	2025-12-29 14:19:37.932205-05
+370	20251019_IND@LAC	2025	7	Regular Season	LAC	IND	18	14	20251019	Final	f	2025-12-29 14:19:37.932205-05	2025-12-29 14:19:37.932205-05
+371	20251019_LAR@JAX	2025	7	Regular Season	JAX	LAR	15	19	20251019	Final	t	2025-12-29 14:19:37.932205-05	2025-12-29 14:19:37.932205-05
+372	20251019_LV@KC	2025	7	Regular Season	KC	LV	16	17	20251019	Final	f	2025-12-29 14:19:37.932205-05	2025-12-29 14:19:37.932205-05
+373	20251019_MIA@CLE	2025	7	Regular Season	CLE	MIA	8	20	20251019	Final	f	2025-12-29 14:19:37.932205-05	2025-12-29 14:19:37.932205-05
+374	20251019_NE@TEN	2025	7	Regular Season	TEN	NE	31	22	20251019	Final	f	2025-12-29 14:19:37.932205-05	2025-12-29 14:19:37.932205-05
+375	20251019_NO@CHI	2025	7	Regular Season	CHI	NO	6	23	20251019	Final	f	2025-12-29 14:19:37.932205-05	2025-12-29 14:19:37.932205-05
+376	20251019_NYG@DEN	2025	7	Regular Season	DEN	NYG	10	24	20251019	Final	f	2025-12-29 14:19:37.932205-05	2025-12-29 14:19:37.932205-05
+377	20251019_PHI@MIN	2025	7	Regular Season	MIN	PHI	21	27	20251019	Final	f	2025-12-29 14:19:37.932205-05	2025-12-29 14:19:37.932205-05
+378	20251019_WSH@DAL	2025	7	Regular Season	DAL	WSH	9	32	20251019	Final	f	2025-12-29 14:19:37.932205-05	2025-12-29 14:19:37.932205-05
+379	20251020_HOU@SEA	2025	7	Regular Season	SEA	HOU	29	13	20251020	Final	f	2025-12-29 14:19:37.932205-05	2025-12-29 14:19:37.932205-05
+380	20251020_TB@DET	2025	7	Regular Season	DET	TB	11	30	20251020	Final	f	2025-12-29 14:19:37.932205-05	2025-12-29 14:19:37.932205-05
+381	20251023_MIN@LAC	2025	8	Regular Season	LAC	MIN	18	21	20251023	Final	f	2025-12-29 14:19:38.098691-05	2025-12-29 14:19:38.098691-05
+382	20251026_BUF@CAR	2025	8	Regular Season	CAR	BUF	5	4	20251026	Final	f	2025-12-29 14:19:38.098691-05	2025-12-29 14:19:38.098691-05
+383	20251026_CHI@BAL	2025	8	Regular Season	BAL	CHI	3	6	20251026	Final	f	2025-12-29 14:19:38.098691-05	2025-12-29 14:19:38.098691-05
+384	20251026_CLE@NE	2025	8	Regular Season	NE	CLE	22	8	20251026	Final	f	2025-12-29 14:19:38.098691-05	2025-12-29 14:19:38.098691-05
+385	20251026_DAL@DEN	2025	8	Regular Season	DEN	DAL	10	9	20251026	Final	f	2025-12-29 14:19:38.098691-05	2025-12-29 14:19:38.098691-05
+386	20251026_GB@PIT	2025	8	Regular Season	PIT	GB	26	12	20251026	Final	f	2025-12-29 14:19:38.098691-05	2025-12-29 14:19:38.098691-05
+387	20251026_MIA@ATL	2025	8	Regular Season	ATL	MIA	2	20	20251026	Final	f	2025-12-29 14:19:38.098691-05	2025-12-29 14:19:38.098691-05
+388	20251026_NYG@PHI	2025	8	Regular Season	PHI	NYG	27	24	20251026	Final	f	2025-12-29 14:19:38.098691-05	2025-12-29 14:19:38.098691-05
+389	20251026_NYJ@CIN	2025	8	Regular Season	CIN	NYJ	7	25	20251026	Final	f	2025-12-29 14:19:38.098691-05	2025-12-29 14:19:38.098691-05
+390	20251026_SF@HOU	2025	8	Regular Season	HOU	SF	13	28	20251026	Final	f	2025-12-29 14:19:38.098691-05	2025-12-29 14:19:38.098691-05
+391	20251026_TB@NO	2025	8	Regular Season	NO	TB	23	30	20251026	Final	f	2025-12-29 14:19:38.098691-05	2025-12-29 14:19:38.098691-05
+392	20251026_TEN@IND	2025	8	Regular Season	IND	TEN	14	31	20251026	Final	f	2025-12-29 14:19:38.098691-05	2025-12-29 14:19:38.098691-05
+393	20251027_WSH@KC	2025	8	Regular Season	KC	WSH	16	32	20251027	Final	f	2025-12-29 14:19:38.098691-05	2025-12-29 14:19:38.098691-05
+394	20251030_BAL@MIA	2025	9	Regular Season	MIA	BAL	20	3	20251030	Final	f	2025-12-29 14:19:38.301089-05	2025-12-29 14:19:38.301089-05
+395	20251102_ATL@NE	2025	9	Regular Season	NE	ATL	22	2	20251102	Final	f	2025-12-29 14:19:38.301089-05	2025-12-29 14:19:38.301089-05
+396	20251102_CAR@GB	2025	9	Regular Season	GB	CAR	12	5	20251102	Final	f	2025-12-29 14:19:38.301089-05	2025-12-29 14:19:38.301089-05
+397	20251102_CHI@CIN	2025	9	Regular Season	CIN	CHI	7	6	20251102	Final	f	2025-12-29 14:19:38.301089-05	2025-12-29 14:19:38.301089-05
+398	20251102_DEN@HOU	2025	9	Regular Season	HOU	DEN	13	10	20251102	Final	f	2025-12-29 14:19:38.301089-05	2025-12-29 14:19:38.301089-05
+399	20251102_IND@PIT	2025	9	Regular Season	PIT	IND	26	14	20251102	Final	f	2025-12-29 14:19:38.301089-05	2025-12-29 14:19:38.301089-05
+400	20251102_JAX@LV	2025	9	Regular Season	LV	JAX	17	15	20251102	Final/OT	f	2025-12-29 14:19:38.301089-05	2025-12-29 14:19:38.301089-05
+401	20251102_KC@BUF	2025	9	Regular Season	BUF	KC	4	16	20251102	Final	f	2025-12-29 14:19:38.301089-05	2025-12-29 14:19:38.301089-05
+402	20251102_LAC@TEN	2025	9	Regular Season	TEN	LAC	31	18	20251102	Final	f	2025-12-29 14:19:38.301089-05	2025-12-29 14:19:38.301089-05
+403	20251102_MIN@DET	2025	9	Regular Season	DET	MIN	11	21	20251102	Final	f	2025-12-29 14:19:38.301089-05	2025-12-29 14:19:38.301089-05
+404	20251102_NO@LAR	2025	9	Regular Season	LAR	NO	19	23	20251102	Final	f	2025-12-29 14:19:38.301089-05	2025-12-29 14:19:38.301089-05
+405	20251102_SEA@WSH	2025	9	Regular Season	WSH	SEA	32	29	20251102	Final	f	2025-12-29 14:19:38.301089-05	2025-12-29 14:19:38.301089-05
+406	20251102_SF@NYG	2025	9	Regular Season	NYG	SF	24	28	20251102	Final	f	2025-12-29 14:19:38.301089-05	2025-12-29 14:19:38.301089-05
+407	20251103_ARI@DAL	2025	9	Regular Season	DAL	ARI	9	1	20251103	Final	f	2025-12-29 14:19:38.301089-05	2025-12-29 14:19:38.301089-05
+408	20251106_LV@DEN	2025	10	Regular Season	DEN	LV	10	17	20251106	Final	f	2025-12-29 14:19:38.547324-05	2025-12-29 14:19:38.547324-05
+409	20251109_ARI@SEA	2025	10	Regular Season	SEA	ARI	29	1	20251109	Final	f	2025-12-29 14:19:38.547324-05	2025-12-29 14:19:38.547324-05
+410	20251109_ATL@IND	2025	10	Regular Season	IND	ATL	14	2	20251109	Final/OT	t	2025-12-29 14:19:38.547324-05	2025-12-29 14:19:38.547324-05
+411	20251109_BAL@MIN	2025	10	Regular Season	MIN	BAL	21	3	20251109	Final	f	2025-12-29 14:19:38.547324-05	2025-12-29 14:19:38.547324-05
+412	20251109_BUF@MIA	2025	10	Regular Season	MIA	BUF	20	4	20251109	Final	f	2025-12-29 14:19:38.547324-05	2025-12-29 14:19:38.547324-05
+413	20251109_CLE@NYJ	2025	10	Regular Season	NYJ	CLE	25	8	20251109	Final	f	2025-12-29 14:19:38.547324-05	2025-12-29 14:19:38.547324-05
+414	20251109_DET@WSH	2025	10	Regular Season	WSH	DET	32	11	20251109	Final	f	2025-12-29 14:19:38.547324-05	2025-12-29 14:19:38.547324-05
+415	20251109_JAX@HOU	2025	10	Regular Season	HOU	JAX	13	15	20251109	Final	f	2025-12-29 14:19:38.547324-05	2025-12-29 14:19:38.547324-05
+416	20251109_LAR@SF	2025	10	Regular Season	SF	LAR	28	19	20251109	Final	f	2025-12-29 14:19:38.547324-05	2025-12-29 14:19:38.547324-05
+417	20251109_NE@TB	2025	10	Regular Season	TB	NE	30	22	20251109	Final	f	2025-12-29 14:19:38.547324-05	2025-12-29 14:19:38.547324-05
+418	20251109_NO@CAR	2025	10	Regular Season	CAR	NO	5	23	20251109	Final	f	2025-12-29 14:19:38.547324-05	2025-12-29 14:19:38.547324-05
+419	20251109_NYG@CHI	2025	10	Regular Season	CHI	NYG	6	24	20251109	Final	f	2025-12-29 14:19:38.547324-05	2025-12-29 14:19:38.547324-05
+420	20251109_PIT@LAC	2025	10	Regular Season	LAC	PIT	18	26	20251109	Final	f	2025-12-29 14:19:38.547324-05	2025-12-29 14:19:38.547324-05
+421	20251110_PHI@GB	2025	10	Regular Season	GB	PHI	12	27	20251110	Final	f	2025-12-29 14:19:38.547324-05	2025-12-29 14:19:38.547324-05
+422	20251113_NYJ@NE	2025	11	Regular Season	NE	NYJ	22	25	20251113	Final	f	2025-12-29 14:19:38.851053-05	2025-12-29 14:19:38.851053-05
+423	20251116_BAL@CLE	2025	11	Regular Season	CLE	BAL	8	3	20251116	Final	f	2025-12-29 14:19:38.851053-05	2025-12-29 14:19:38.851053-05
+424	20251116_CAR@ATL	2025	11	Regular Season	ATL	CAR	2	5	20251116	Final/OT	f	2025-12-29 14:19:38.851053-05	2025-12-29 14:19:38.851053-05
+425	20251116_CHI@MIN	2025	11	Regular Season	MIN	CHI	21	6	20251116	Final	f	2025-12-29 14:19:38.851053-05	2025-12-29 14:19:38.851053-05
+426	20251116_CIN@PIT	2025	11	Regular Season	PIT	CIN	26	7	20251116	Final	f	2025-12-29 14:19:38.851053-05	2025-12-29 14:19:38.851053-05
+427	20251116_DET@PHI	2025	11	Regular Season	PHI	DET	27	11	20251116	Final	f	2025-12-29 14:19:38.851053-05	2025-12-29 14:19:38.851053-05
+428	20251116_GB@NYG	2025	11	Regular Season	NYG	GB	24	12	20251116	Final	f	2025-12-29 14:19:38.851053-05	2025-12-29 14:19:38.851053-05
+429	20251116_HOU@TEN	2025	11	Regular Season	TEN	HOU	31	13	20251116	Final	f	2025-12-29 14:19:38.851053-05	2025-12-29 14:19:38.851053-05
+430	20251116_KC@DEN	2025	11	Regular Season	DEN	KC	10	16	20251116	Final	f	2025-12-29 14:19:38.851053-05	2025-12-29 14:19:38.851053-05
+431	20251116_LAC@JAX	2025	11	Regular Season	JAX	LAC	15	18	20251116	Final	f	2025-12-29 14:19:38.851053-05	2025-12-29 14:19:38.851053-05
+432	20251116_SEA@LAR	2025	11	Regular Season	LAR	SEA	19	29	20251116	Final	f	2025-12-29 14:19:38.851053-05	2025-12-29 14:19:38.851053-05
+433	20251116_SF@ARI	2025	11	Regular Season	ARI	SF	1	28	20251116	Final	f	2025-12-29 14:19:38.851053-05	2025-12-29 14:19:38.851053-05
+434	20251116_TB@BUF	2025	11	Regular Season	BUF	TB	4	30	20251116	Final	f	2025-12-29 14:19:38.851053-05	2025-12-29 14:19:38.851053-05
+435	20251116_WSH@MIA	2025	11	Regular Season	MIA	WSH	20	32	20251116	Final/OT	t	2025-12-29 14:19:38.851053-05	2025-12-29 14:19:38.851053-05
+436	20251117_DAL@LV	2025	11	Regular Season	LV	DAL	17	9	20251117	Final	f	2025-12-29 14:19:38.851053-05	2025-12-29 14:19:38.851053-05
+437	20251120_BUF@HOU	2025	12	Regular Season	HOU	BUF	13	4	20251120	Final	f	2025-12-29 14:19:39.031476-05	2025-12-29 14:19:39.031476-05
+438	20251123_ATL@NO	2025	12	Regular Season	NO	ATL	23	2	20251123	Final	f	2025-12-29 14:19:39.031476-05	2025-12-29 14:19:39.031476-05
+439	20251123_CLE@LV	2025	12	Regular Season	LV	CLE	17	8	20251123	Final	f	2025-12-29 14:19:39.031476-05	2025-12-29 14:19:39.031476-05
+440	20251123_IND@KC	2025	12	Regular Season	KC	IND	16	14	20251123	Final/OT	f	2025-12-29 14:19:39.031476-05	2025-12-29 14:19:39.031476-05
+441	20251123_JAX@ARI	2025	12	Regular Season	ARI	JAX	1	15	20251123	Final/OT	f	2025-12-29 14:19:39.031476-05	2025-12-29 14:19:39.031476-05
+442	20251123_MIN@GB	2025	12	Regular Season	GB	MIN	12	21	20251123	Final	f	2025-12-29 14:19:39.031476-05	2025-12-29 14:19:39.031476-05
+443	20251123_NE@CIN	2025	12	Regular Season	CIN	NE	7	22	20251123	Final	f	2025-12-29 14:19:39.031476-05	2025-12-29 14:19:39.031476-05
+444	20251123_NYG@DET	2025	12	Regular Season	DET	NYG	11	24	20251123	Final/OT	f	2025-12-29 14:19:39.031476-05	2025-12-29 14:19:39.031476-05
+445	20251123_NYJ@BAL	2025	12	Regular Season	BAL	NYJ	3	25	20251123	Final	f	2025-12-29 14:19:39.031476-05	2025-12-29 14:19:39.031476-05
+446	20251123_PHI@DAL	2025	12	Regular Season	DAL	PHI	9	27	20251123	Final	f	2025-12-29 14:19:39.031476-05	2025-12-29 14:19:39.031476-05
+447	20251123_PIT@CHI	2025	12	Regular Season	CHI	PIT	6	26	20251123	Final	f	2025-12-29 14:19:39.031476-05	2025-12-29 14:19:39.031476-05
+448	20251123_SEA@TEN	2025	12	Regular Season	TEN	SEA	31	29	20251123	Final	f	2025-12-29 14:19:39.031476-05	2025-12-29 14:19:39.031476-05
+449	20251123_TB@LAR	2025	12	Regular Season	LAR	TB	19	30	20251123	Final	f	2025-12-29 14:19:39.031476-05	2025-12-29 14:19:39.031476-05
+450	20251124_CAR@SF	2025	12	Regular Season	SF	CAR	28	5	20251124	Final	f	2025-12-29 14:19:39.031476-05	2025-12-29 14:19:39.031476-05
+451	20251127_CIN@BAL	2025	13	Regular Season	BAL	CIN	3	7	20251127	Final	f	2025-12-29 14:19:39.466223-05	2025-12-29 14:19:39.466223-05
+452	20251127_GB@DET	2025	13	Regular Season	DET	GB	11	12	20251127	Final	f	2025-12-29 14:19:39.466223-05	2025-12-29 14:19:39.466223-05
+453	20251127_KC@DAL	2025	13	Regular Season	DAL	KC	9	16	20251127	Final	f	2025-12-29 14:19:39.466223-05	2025-12-29 14:19:39.466223-05
+454	20251128_CHI@PHI	2025	13	Regular Season	PHI	CHI	27	6	20251128	Final	f	2025-12-29 14:19:39.466223-05	2025-12-29 14:19:39.466223-05
+455	20251130_ARI@TB	2025	13	Regular Season	TB	ARI	30	1	20251130	Final	f	2025-12-29 14:19:39.466223-05	2025-12-29 14:19:39.466223-05
+456	20251130_ATL@NYJ	2025	13	Regular Season	NYJ	ATL	25	2	20251130	Final	f	2025-12-29 14:19:39.466223-05	2025-12-29 14:19:39.466223-05
+457	20251130_BUF@PIT	2025	13	Regular Season	PIT	BUF	26	4	20251130	Final	f	2025-12-29 14:19:39.466223-05	2025-12-29 14:19:39.466223-05
+458	20251130_DEN@WSH	2025	13	Regular Season	WSH	DEN	32	10	20251130	Final/OT	f	2025-12-29 14:19:39.466223-05	2025-12-29 14:19:39.466223-05
+459	20251130_HOU@IND	2025	13	Regular Season	IND	HOU	14	13	20251130	Final	f	2025-12-29 14:19:39.466223-05	2025-12-29 14:19:39.466223-05
+460	20251130_JAX@TEN	2025	13	Regular Season	TEN	JAX	31	15	20251130	Final	f	2025-12-29 14:19:39.466223-05	2025-12-29 14:19:39.466223-05
+461	20251130_LAR@CAR	2025	13	Regular Season	CAR	LAR	5	19	20251130	Final	f	2025-12-29 14:19:39.466223-05	2025-12-29 14:19:39.466223-05
+462	20251130_LV@LAC	2025	13	Regular Season	LAC	LV	18	17	20251130	Final	f	2025-12-29 14:19:39.466223-05	2025-12-29 14:19:39.466223-05
+463	20251130_MIN@SEA	2025	13	Regular Season	SEA	MIN	29	21	20251130	Final	f	2025-12-29 14:19:39.466223-05	2025-12-29 14:19:39.466223-05
+464	20251130_NO@MIA	2025	13	Regular Season	MIA	NO	20	23	20251130	Final	f	2025-12-29 14:19:39.466223-05	2025-12-29 14:19:39.466223-05
+465	20251130_SF@CLE	2025	13	Regular Season	CLE	SF	8	28	20251130	Final	f	2025-12-29 14:19:39.466223-05	2025-12-29 14:19:39.466223-05
+466	20251201_NYG@NE	2025	13	Regular Season	NE	NYG	22	24	20251201	Final	f	2025-12-29 14:19:39.466223-05	2025-12-29 14:19:39.466223-05
+467	20251204_DAL@DET	2025	14	Regular Season	DET	DAL	11	9	20251204	Final	f	2025-12-29 14:19:39.777054-05	2025-12-29 14:19:39.777054-05
+468	20251207_CHI@GB	2025	14	Regular Season	GB	CHI	12	6	20251207	Final	f	2025-12-29 14:19:39.777054-05	2025-12-29 14:19:39.777054-05
+469	20251207_CIN@BUF	2025	14	Regular Season	BUF	CIN	4	7	20251207	Final	f	2025-12-29 14:19:39.777054-05	2025-12-29 14:19:39.777054-05
+470	20251207_DEN@LV	2025	14	Regular Season	LV	DEN	17	10	20251207	Final	f	2025-12-29 14:19:39.777054-05	2025-12-29 14:19:39.777054-05
+471	20251207_HOU@KC	2025	14	Regular Season	KC	HOU	16	13	20251207	Final	f	2025-12-29 14:19:39.777054-05	2025-12-29 14:19:39.777054-05
+472	20251207_IND@JAX	2025	14	Regular Season	JAX	IND	15	14	20251207	Final	f	2025-12-29 14:19:39.777054-05	2025-12-29 14:19:39.777054-05
+473	20251207_LAR@ARI	2025	14	Regular Season	ARI	LAR	1	19	20251207	Final	f	2025-12-29 14:19:39.777054-05	2025-12-29 14:19:39.777054-05
+474	20251207_MIA@NYJ	2025	14	Regular Season	NYJ	MIA	25	20	20251207	Final	f	2025-12-29 14:19:39.777054-05	2025-12-29 14:19:39.777054-05
+475	20251207_NO@TB	2025	14	Regular Season	TB	NO	30	23	20251207	Final	f	2025-12-29 14:19:39.777054-05	2025-12-29 14:19:39.777054-05
+476	20251207_PIT@BAL	2025	14	Regular Season	BAL	PIT	3	26	20251207	Final	f	2025-12-29 14:19:39.777054-05	2025-12-29 14:19:39.777054-05
+477	20251207_SEA@ATL	2025	14	Regular Season	ATL	SEA	2	29	20251207	Final	f	2025-12-29 14:19:39.777054-05	2025-12-29 14:19:39.777054-05
+478	20251207_TEN@CLE	2025	14	Regular Season	CLE	TEN	8	31	20251207	Final	f	2025-12-29 14:19:39.777054-05	2025-12-29 14:19:39.777054-05
+479	20251207_WSH@MIN	2025	14	Regular Season	MIN	WSH	21	32	20251207	Final	f	2025-12-29 14:19:39.777054-05	2025-12-29 14:19:39.777054-05
+480	20251208_PHI@LAC	2025	14	Regular Season	LAC	PHI	18	27	20251208	Final/OT	f	2025-12-29 14:19:39.777054-05	2025-12-29 14:19:39.777054-05
+481	20251211_ATL@TB	2025	15	Regular Season	TB	ATL	30	2	20251211	Final	f	2025-12-29 14:19:40.009231-05	2025-12-29 14:19:40.009231-05
+482	20251214_ARI@HOU	2025	15	Regular Season	HOU	ARI	13	1	20251214	Final	f	2025-12-29 14:19:40.009231-05	2025-12-29 14:19:40.009231-05
+483	20251214_BAL@CIN	2025	15	Regular Season	CIN	BAL	7	3	20251214	Final	f	2025-12-29 14:19:40.009231-05	2025-12-29 14:19:40.009231-05
+484	20251214_BUF@NE	2025	15	Regular Season	NE	BUF	22	4	20251214	Final	f	2025-12-29 14:19:40.009231-05	2025-12-29 14:19:40.009231-05
+485	20251214_CAR@NO	2025	15	Regular Season	NO	CAR	23	5	20251214	Final	f	2025-12-29 14:19:40.009231-05	2025-12-29 14:19:40.009231-05
+486	20251214_CLE@CHI	2025	15	Regular Season	CHI	CLE	6	8	20251214	Final	f	2025-12-29 14:19:40.009231-05	2025-12-29 14:19:40.009231-05
+487	20251214_DET@LAR	2025	15	Regular Season	LAR	DET	19	11	20251214	Final	f	2025-12-29 14:19:40.009231-05	2025-12-29 14:19:40.009231-05
+488	20251214_GB@DEN	2025	15	Regular Season	DEN	GB	10	12	20251214	Final	f	2025-12-29 14:19:40.009231-05	2025-12-29 14:19:40.009231-05
+489	20251214_IND@SEA	2025	15	Regular Season	SEA	IND	29	14	20251214	Final	f	2025-12-29 14:19:40.009231-05	2025-12-29 14:19:40.009231-05
+490	20251214_LAC@KC	2025	15	Regular Season	KC	LAC	16	18	20251214	Final	f	2025-12-29 14:19:40.009231-05	2025-12-29 14:19:40.009231-05
+491	20251214_LV@PHI	2025	15	Regular Season	PHI	LV	27	17	20251214	Final	f	2025-12-29 14:19:40.009231-05	2025-12-29 14:19:40.009231-05
+492	20251214_MIN@DAL	2025	15	Regular Season	DAL	MIN	9	21	20251214	Final	f	2025-12-29 14:19:40.009231-05	2025-12-29 14:19:40.009231-05
+493	20251214_NYJ@JAX	2025	15	Regular Season	JAX	NYJ	15	25	20251214	Final	f	2025-12-29 14:19:40.009231-05	2025-12-29 14:19:40.009231-05
+494	20251214_TEN@SF	2025	15	Regular Season	SF	TEN	28	31	20251214	Final	f	2025-12-29 14:19:40.009231-05	2025-12-29 14:19:40.009231-05
+495	20251214_WSH@NYG	2025	15	Regular Season	NYG	WSH	24	32	20251214	Final	f	2025-12-29 14:19:40.009231-05	2025-12-29 14:19:40.009231-05
+496	20251215_MIA@PIT	2025	15	Regular Season	PIT	MIA	26	20	20251215	Final	f	2025-12-29 14:19:40.009231-05	2025-12-29 14:19:40.009231-05
+497	20251218_LAR@SEA	2025	16	Regular Season	SEA	LAR	29	19	20251218	Final/OT	f	2025-12-29 14:19:40.195662-05	2025-12-29 14:19:40.195662-05
+498	20251220_GB@CHI	2025	16	Regular Season	CHI	GB	6	12	20251220	Final/OT	f	2025-12-29 14:19:40.195662-05	2025-12-29 14:19:40.195662-05
+499	20251220_PHI@WSH	2025	16	Regular Season	WSH	PHI	32	27	20251220	Final	f	2025-12-29 14:19:40.195662-05	2025-12-29 14:19:40.195662-05
+500	20251221_ATL@ARI	2025	16	Regular Season	ARI	ATL	1	2	20251221	Final	f	2025-12-29 14:19:40.195662-05	2025-12-29 14:19:40.195662-05
+501	20251221_BUF@CLE	2025	16	Regular Season	CLE	BUF	8	4	20251221	Final	f	2025-12-29 14:19:40.195662-05	2025-12-29 14:19:40.195662-05
+502	20251221_CIN@MIA	2025	16	Regular Season	MIA	CIN	20	7	20251221	Final	f	2025-12-29 14:19:40.195662-05	2025-12-29 14:19:40.195662-05
+503	20251221_JAX@DEN	2025	16	Regular Season	DEN	JAX	10	15	20251221	Final	f	2025-12-29 14:19:40.195662-05	2025-12-29 14:19:40.195662-05
+504	20251221_KC@TEN	2025	16	Regular Season	TEN	KC	31	16	20251221	Final	f	2025-12-29 14:19:40.195662-05	2025-12-29 14:19:40.195662-05
+505	20251221_LAC@DAL	2025	16	Regular Season	DAL	LAC	9	18	20251221	Final	f	2025-12-29 14:19:40.195662-05	2025-12-29 14:19:40.195662-05
+506	20251221_LV@HOU	2025	16	Regular Season	HOU	LV	13	17	20251221	Final	f	2025-12-29 14:19:40.195662-05	2025-12-29 14:19:40.195662-05
+507	20251221_MIN@NYG	2025	16	Regular Season	NYG	MIN	24	21	20251221	Final	f	2025-12-29 14:19:40.195662-05	2025-12-29 14:19:40.195662-05
+508	20251221_NE@BAL	2025	16	Regular Season	BAL	NE	3	22	20251221	Final	f	2025-12-29 14:19:40.195662-05	2025-12-29 14:19:40.195662-05
+509	20251221_NYJ@NO	2025	16	Regular Season	NO	NYJ	23	25	20251221	Final	f	2025-12-29 14:19:40.195662-05	2025-12-29 14:19:40.195662-05
+510	20251221_PIT@DET	2025	16	Regular Season	DET	PIT	11	26	20251221	Final	f	2025-12-29 14:19:40.195662-05	2025-12-29 14:19:40.195662-05
+511	20251221_TB@CAR	2025	16	Regular Season	CAR	TB	5	30	20251221	Final	f	2025-12-29 14:19:40.195662-05	2025-12-29 14:19:40.195662-05
+512	20251222_SF@IND	2025	16	Regular Season	IND	SF	14	28	20251222	Final	f	2025-12-29 14:19:40.195662-05	2025-12-29 14:19:40.195662-05
+513	20251225_DAL@WSH	2025	17	Regular Season	WSH	DAL	32	9	20251225	Final	f	2025-12-29 14:19:40.366658-05	2025-12-29 14:19:40.366658-05
+514	20251225_DEN@KC	2025	17	Regular Season	KC	DEN	16	10	20251225	Final	f	2025-12-29 14:19:40.366658-05	2025-12-29 14:19:40.366658-05
+515	20251225_DET@MIN	2025	17	Regular Season	MIN	DET	21	11	20251225	Final	f	2025-12-29 14:19:40.366658-05	2025-12-29 14:19:40.366658-05
+516	20251227_BAL@GB	2025	17	Regular Season	GB	BAL	12	3	20251227	Final	f	2025-12-29 14:19:40.366658-05	2025-12-29 14:19:40.366658-05
+517	20251227_HOU@LAC	2025	17	Regular Season	LAC	HOU	18	13	20251227	Final	f	2025-12-29 14:19:40.366658-05	2025-12-29 14:19:40.366658-05
+518	20251228_ARI@CIN	2025	17	Regular Season	CIN	ARI	7	1	20251228	Final	f	2025-12-29 14:19:40.366658-05	2025-12-29 14:19:40.366658-05
+519	20251228_CHI@SF	2025	17	Regular Season	SF	CHI	28	6	20251228	Final	f	2025-12-29 14:19:40.366658-05	2025-12-29 14:19:40.366658-05
+520	20251228_JAX@IND	2025	17	Regular Season	IND	JAX	14	15	20251228	Final	f	2025-12-29 14:19:40.366658-05	2025-12-29 14:19:40.366658-05
+521	20251228_NE@NYJ	2025	17	Regular Season	NYJ	NE	25	22	20251228	Final	f	2025-12-29 14:19:40.366658-05	2025-12-29 14:19:40.366658-05
+522	20251228_NO@TEN	2025	17	Regular Season	TEN	NO	31	23	20251228	Final	f	2025-12-29 14:19:40.366658-05	2025-12-29 14:19:40.366658-05
+523	20251228_NYG@LV	2025	17	Regular Season	LV	NYG	17	24	20251228	Final	f	2025-12-29 14:19:40.366658-05	2025-12-29 14:19:40.366658-05
+524	20251228_PHI@BUF	2025	17	Regular Season	BUF	PHI	4	27	20251228	Final	f	2025-12-29 14:19:40.366658-05	2025-12-29 14:19:40.366658-05
+525	20251228_PIT@CLE	2025	17	Regular Season	CLE	PIT	8	26	20251228	Final	f	2025-12-29 14:19:40.366658-05	2025-12-29 14:19:40.366658-05
+526	20251228_SEA@CAR	2025	17	Regular Season	CAR	SEA	5	29	20251228	Final	f	2025-12-29 14:19:40.366658-05	2025-12-29 14:19:40.366658-05
+527	20251228_TB@MIA	2025	17	Regular Season	MIA	TB	20	30	20251228	Final	f	2025-12-29 14:19:40.366658-05	2025-12-29 14:19:40.366658-05
+528	20251229_LAR@ATL	2025	17	Regular Season	ATL	LAR	2	19	20251229	Scheduled	f	2025-12-29 14:19:40.366658-05	2025-12-29 14:19:40.366658-05
+529	20260103_CAR@TB	2025	18	Regular Season	TB	CAR	30	5	20260103	Scheduled	f	2025-12-29 14:19:40.696523-05	2025-12-29 14:19:40.696523-05
+530	20260103_SEA@SF	2025	18	Regular Season	SF	SEA	28	29	20260103	Scheduled	f	2025-12-29 14:19:40.696523-05	2025-12-29 14:19:40.696523-05
+531	20260104_ARI@LAR	2025	18	Regular Season	LAR	ARI	19	1	20260104	Scheduled	f	2025-12-29 14:19:40.696523-05	2025-12-29 14:19:40.696523-05
+532	20260104_BAL@PIT	2025	18	Regular Season	PIT	BAL	26	3	20260104	Scheduled	f	2025-12-29 14:19:40.696523-05	2025-12-29 14:19:40.696523-05
+533	20260104_CLE@CIN	2025	18	Regular Season	CIN	CLE	7	8	20260104	Scheduled	f	2025-12-29 14:19:40.696523-05	2025-12-29 14:19:40.696523-05
+534	20260104_DAL@NYG	2025	18	Regular Season	NYG	DAL	24	9	20260104	Scheduled	f	2025-12-29 14:19:40.696523-05	2025-12-29 14:19:40.696523-05
+535	20260104_DET@CHI	2025	18	Regular Season	CHI	DET	6	11	20260104	Scheduled	f	2025-12-29 14:19:40.696523-05	2025-12-29 14:19:40.696523-05
+536	20260104_GB@MIN	2025	18	Regular Season	MIN	GB	21	12	20260104	Scheduled	f	2025-12-29 14:19:40.696523-05	2025-12-29 14:19:40.696523-05
+537	20260104_IND@HOU	2025	18	Regular Season	HOU	IND	13	14	20260104	Scheduled	f	2025-12-29 14:19:40.696523-05	2025-12-29 14:19:40.696523-05
+538	20260104_KC@LV	2025	18	Regular Season	LV	KC	17	16	20260104	Scheduled	f	2025-12-29 14:19:40.696523-05	2025-12-29 14:19:40.696523-05
+539	20260104_LAC@DEN	2025	18	Regular Season	DEN	LAC	10	18	20260104	Scheduled	f	2025-12-29 14:19:40.696523-05	2025-12-29 14:19:40.696523-05
+540	20260104_MIA@NE	2025	18	Regular Season	NE	MIA	22	20	20260104	Scheduled	f	2025-12-29 14:19:40.696523-05	2025-12-29 14:19:40.696523-05
+541	20260104_NO@ATL	2025	18	Regular Season	ATL	NO	2	23	20260104	Scheduled	f	2025-12-29 14:19:40.696523-05	2025-12-29 14:19:40.696523-05
+542	20260104_NYJ@BUF	2025	18	Regular Season	BUF	NYJ	4	25	20260104	Scheduled	f	2025-12-29 14:19:40.696523-05	2025-12-29 14:19:40.696523-05
+543	20260104_TEN@JAX	2025	18	Regular Season	JAX	TEN	15	31	20260104	Scheduled	f	2025-12-29 14:19:40.696523-05	2025-12-29 14:19:40.696523-05
+544	20260104_WSH@PHI	2025	18	Regular Season	PHI	WSH	27	32	20260104	Scheduled	f	2025-12-29 14:19:40.696523-05	2025-12-29 14:19:40.696523-05
+\.
+
+
+--
+-- Data for Name: sportsbook_odds; Type: TABLE DATA; Schema: public; Owner: aaronangeles
+--
+
+COPY public.sportsbook_odds (id, player_id, game_id, season_year, week, sportsbook, anytime_td_odds, fetched_at) FROM stdin;
+663	4374302	20251204_DAL@DET	2025	14	draftkings	125	2025-12-29 16:10:35.486178-05
+664	4374302	20251204_DAL@DET	2025	14	fanduel	125	2025-12-29 16:10:35.486178-05
+665	4241389	20251204_DAL@DET	2025	14	draftkings	115	2025-12-29 16:10:35.486178-05
+666	4241389	20251204_DAL@DET	2025	14	fanduel	115	2025-12-29 16:10:35.486178-05
+667	4426354	20251204_DAL@DET	2025	14	draftkings	125	2025-12-29 16:10:35.486178-05
+668	4426354	20251204_DAL@DET	2025	14	fanduel	125	2025-12-29 16:10:35.486178-05
+669	4426388	20251204_DAL@DET	2025	14	draftkings	140	2025-12-29 16:10:35.486178-05
+670	4426388	20251204_DAL@DET	2025	14	fanduel	140	2025-12-29 16:10:35.486178-05
+671	4242355	20251204_DAL@DET	2025	14	draftkings	155	2025-12-29 16:10:35.486178-05
+672	4242355	20251204_DAL@DET	2025	14	fanduel	155	2025-12-29 16:10:35.486178-05
+673	5123663	20251204_DAL@DET	2025	14	draftkings	410	2025-12-29 16:10:35.486178-05
+674	5123663	20251204_DAL@DET	2025	14	fanduel	410	2025-12-29 16:10:35.486178-05
+675	3126997	20251204_DAL@DET	2025	14	draftkings	575	2025-12-29 16:10:35.486178-05
+676	3126997	20251204_DAL@DET	2025	14	fanduel	575	2025-12-29 16:10:35.486178-05
+677	3676833	20251204_DAL@DET	2025	14	draftkings	600	2025-12-29 16:10:35.486178-05
+678	3676833	20251204_DAL@DET	2025	14	fanduel	600	2025-12-29 16:10:35.486178-05
+679	5083754	20251204_DAL@DET	2025	14	draftkings	600	2025-12-29 16:10:35.486178-05
+680	5083754	20251204_DAL@DET	2025	14	fanduel	600	2025-12-29 16:10:35.486178-05
+681	3049698	20251204_DAL@DET	2025	14	draftkings	700	2025-12-29 16:10:35.486178-05
+682	3049698	20251204_DAL@DET	2025	14	fanduel	700	2025-12-29 16:10:35.486178-05
+683	4372096	20251204_DAL@DET	2025	14	draftkings	1000	2025-12-29 16:10:35.486178-05
+684	4372096	20251204_DAL@DET	2025	14	fanduel	1000	2025-12-29 16:10:35.486178-05
+685	4360967	20251204_DAL@DET	2025	14	draftkings	1200	2025-12-29 16:10:35.486178-05
+686	4360967	20251204_DAL@DET	2025	14	fanduel	1200	2025-12-29 16:10:35.486178-05
+687	4596439	20251204_DAL@DET	2025	14	draftkings	1200	2025-12-29 16:10:35.486178-05
+688	4596439	20251204_DAL@DET	2025	14	fanduel	1200	2025-12-29 16:10:35.486178-05
+689	4426485	20251204_DAL@DET	2025	14	draftkings	1500	2025-12-29 16:10:35.486178-05
+690	4426485	20251204_DAL@DET	2025	14	fanduel	1500	2025-12-29 16:10:35.486178-05
+691	4248528	20251207_CHI@GB	2025	14	draftkings	175	2025-12-29 16:10:36.426288-05
+692	4248528	20251207_CHI@GB	2025	14	fanduel	175	2025-12-29 16:10:36.426288-05
+693	4361432	20251207_CHI@GB	2025	14	draftkings	175	2025-12-29 16:10:36.426288-05
+694	4361432	20251207_CHI@GB	2025	14	fanduel	175	2025-12-29 16:10:36.426288-05
+695	3915416	20251207_CHI@GB	2025	14	draftkings	265	2025-12-29 16:10:36.426288-05
+696	3915416	20251207_CHI@GB	2025	14	fanduel	265	2025-12-29 16:10:36.426288-05
+697	4428850	20251207_CHI@GB	2025	14	draftkings	320	2025-12-29 16:10:36.426288-05
+698	4428850	20251207_CHI@GB	2025	14	fanduel	320	2025-12-29 16:10:36.426288-05
+699	4685278	20251207_CHI@GB	2025	14	draftkings	310	2025-12-29 16:10:36.426288-05
+700	4685278	20251207_CHI@GB	2025	14	fanduel	310	2025-12-29 16:10:36.426288-05
+701	4362249	20251207_CHI@GB	2025	14	draftkings	330	2025-12-29 16:10:36.426288-05
+702	4362249	20251207_CHI@GB	2025	14	fanduel	330	2025-12-29 16:10:36.426288-05
+703	4723086	20251207_CHI@GB	2025	14	draftkings	340	2025-12-29 16:10:36.426288-05
+704	4723086	20251207_CHI@GB	2025	14	fanduel	340	2025-12-29 16:10:36.426288-05
+705	4701936	20251207_CHI@GB	2025	14	draftkings	600	2025-12-29 16:10:36.426288-05
+706	4701936	20251207_CHI@GB	2025	14	fanduel	600	2025-12-29 16:10:36.426288-05
+707	4428085	20251207_CHI@GB	2025	14	draftkings	650	2025-12-29 16:10:36.426288-05
+708	4428085	20251207_CHI@GB	2025	14	fanduel	650	2025-12-29 16:10:36.426288-05
+709	3917914	20251207_CHI@GB	2025	14	draftkings	500	2025-12-29 16:10:36.426288-05
+710	3917914	20251207_CHI@GB	2025	14	fanduel	500	2025-12-29 16:10:36.426288-05
+711	4258595	20251207_CHI@GB	2025	14	draftkings	550	2025-12-29 16:10:36.426288-05
+712	4258595	20251207_CHI@GB	2025	14	fanduel	550	2025-12-29 16:10:36.426288-05
+713	4360086	20251207_CHI@GB	2025	14	draftkings	850	2025-12-29 16:10:36.426288-05
+714	4360086	20251207_CHI@GB	2025	14	fanduel	850	2025-12-29 16:10:36.426288-05
+715	4039050	20251207_CHI@GB	2025	14	draftkings	2200	2025-12-29 16:10:36.426288-05
+716	4039050	20251207_CHI@GB	2025	14	fanduel	2200	2025-12-29 16:10:36.426288-05
+717	3052897	20251207_CHI@GB	2025	14	draftkings	2900	2025-12-29 16:10:36.426288-05
+718	3052897	20251207_CHI@GB	2025	14	fanduel	2900	2025-12-29 16:10:36.426288-05
+719	5160110	20251207_CHI@GB	2025	14	draftkings	3500	2025-12-29 16:10:36.426288-05
+720	5160110	20251207_CHI@GB	2025	14	fanduel	3500	2025-12-29 16:10:36.426288-05
+721	4362628	20251207_CIN@BUF	2025	14	draftkings	-135	2025-12-29 16:10:36.646874-05
+722	4362628	20251207_CIN@BUF	2025	14	fanduel	-135	2025-12-29 16:10:36.646874-05
+723	4239993	20251207_CIN@BUF	2025	14	draftkings	185	2025-12-29 16:10:36.646874-05
+724	4239993	20251207_CIN@BUF	2025	14	fanduel	185	2025-12-29 16:10:36.646874-05
+725	4385690	20251207_CIN@BUF	2025	14	draftkings	240	2025-12-29 16:10:36.646874-05
+726	4385690	20251207_CIN@BUF	2025	14	fanduel	240	2025-12-29 16:10:36.646874-05
+727	4373678	20251207_CIN@BUF	2025	14	draftkings	250	2025-12-29 16:10:36.646874-05
+728	4373678	20251207_CIN@BUF	2025	14	fanduel	250	2025-12-29 16:10:36.646874-05
+729	3930086	20251207_CIN@BUF	2025	14	draftkings	300	2025-12-29 16:10:36.646874-05
+730	3930086	20251207_CIN@BUF	2025	14	fanduel	300	2025-12-29 16:10:36.646874-05
+731	4635008	20251207_CIN@BUF	2025	14	draftkings	370	2025-12-29 16:10:36.646874-05
+732	4635008	20251207_CIN@BUF	2025	14	fanduel	370	2025-12-29 16:10:36.646874-05
+733	4243537	20251207_CIN@BUF	2025	14	draftkings	340	2025-12-29 16:10:36.646874-05
+734	4243537	20251207_CIN@BUF	2025	14	fanduel	340	2025-12-29 16:10:36.646874-05
+735	3116164	20251207_CIN@BUF	2025	14	draftkings	450	2025-12-29 16:10:36.646874-05
+736	3116164	20251207_CIN@BUF	2025	14	fanduel	450	2025-12-29 16:10:36.646874-05
+737	4241476	20251207_CIN@BUF	2025	14	draftkings	850	2025-12-29 16:10:36.646874-05
+738	4241476	20251207_CIN@BUF	2025	14	fanduel	850	2025-12-29 16:10:36.646874-05
+739	4368003	20251207_CIN@BUF	2025	14	draftkings	475	2025-12-29 16:10:36.646874-05
+740	4368003	20251207_CIN@BUF	2025	14	fanduel	475	2025-12-29 16:10:36.646874-05
+741	4573699	20251207_CIN@BUF	2025	14	draftkings	600	2025-12-29 16:10:36.646874-05
+742	4573699	20251207_CIN@BUF	2025	14	fanduel	600	2025-12-29 16:10:36.646874-05
+743	16731	20251207_CIN@BUF	2025	14	draftkings	800	2025-12-29 16:10:36.646874-05
+744	16731	20251207_CIN@BUF	2025	14	fanduel	800	2025-12-29 16:10:36.646874-05
+745	4036131	20251207_CIN@BUF	2025	14	draftkings	850	2025-12-29 16:10:36.646874-05
+746	4036131	20251207_CIN@BUF	2025	14	fanduel	850	2025-12-29 16:10:36.646874-05
+747	4690070	20251207_CIN@BUF	2025	14	draftkings	800	2025-12-29 16:10:36.646874-05
+748	4690070	20251207_CIN@BUF	2025	14	fanduel	800	2025-12-29 16:10:36.646874-05
+749	3050481	20251207_CIN@BUF	2025	14	draftkings	900	2025-12-29 16:10:36.646874-05
+750	3050481	20251207_CIN@BUF	2025	14	fanduel	900	2025-12-29 16:10:36.646874-05
+751	3127310	20251207_CIN@BUF	2025	14	draftkings	900	2025-12-29 16:10:36.646874-05
+752	3127310	20251207_CIN@BUF	2025	14	fanduel	900	2025-12-29 16:10:36.646874-05
+753	4257188	20251207_CIN@BUF	2025	14	draftkings	2200	2025-12-29 16:10:36.646874-05
+754	4257188	20251207_CIN@BUF	2025	14	fanduel	2200	2025-12-29 16:10:36.646874-05
+755	3128429	20251207_DEN@LV	2025	14	draftkings	170	2025-12-29 16:10:37.040881-05
+756	3128429	20251207_DEN@LV	2025	14	fanduel	170	2025-12-29 16:10:37.040881-05
+757	4431280	20251207_DEN@LV	2025	14	draftkings	200	2025-12-29 16:10:37.040881-05
+758	4431280	20251207_DEN@LV	2025	14	fanduel	200	2025-12-29 16:10:37.040881-05
+759	4600981	20251207_DEN@LV	2025	14	draftkings	370	2025-12-29 16:10:37.040881-05
+760	4600981	20251207_DEN@LV	2025	14	fanduel	370	2025-12-29 16:10:37.040881-05
+761	3051876	20251207_DEN@LV	2025	14	draftkings	400	2025-12-29 16:10:37.040881-05
+762	3051876	20251207_DEN@LV	2025	14	fanduel	400	2025-12-29 16:10:37.040881-05
+763	4428718	20251207_DEN@LV	2025	14	draftkings	390	2025-12-29 16:10:37.040881-05
+764	4428718	20251207_DEN@LV	2025	14	fanduel	390	2025-12-29 16:10:37.040881-05
+765	4603186	20251207_DEN@LV	2025	14	draftkings	425	2025-12-29 16:10:37.040881-05
+766	4603186	20251207_DEN@LV	2025	14	fanduel	425	2025-12-29 16:10:37.040881-05
+767	4686472	20251207_DEN@LV	2025	14	draftkings	700	2025-12-29 16:10:37.040881-05
+768	4686472	20251207_DEN@LV	2025	14	fanduel	700	2025-12-29 16:10:37.040881-05
+769	3911853	20251207_DEN@LV	2025	14	draftkings	800	2025-12-29 16:10:37.040881-05
+770	3911853	20251207_DEN@LV	2025	14	fanduel	800	2025-12-29 16:10:37.040881-05
+771	2577327	20251207_DEN@LV	2025	14	draftkings	750	2025-12-29 16:10:37.040881-05
+772	2577327	20251207_DEN@LV	2025	14	fanduel	750	2025-12-29 16:10:37.040881-05
+773	4045305	20251207_DEN@LV	2025	14	draftkings	950	2025-12-29 16:10:37.040881-05
+774	4045305	20251207_DEN@LV	2025	14	fanduel	950	2025-12-29 16:10:37.040881-05
+775	4039057	20251207_DEN@LV	2025	14	draftkings	1400	2025-12-29 16:10:37.040881-05
+776	4039057	20251207_DEN@LV	2025	14	fanduel	1400	2025-12-29 16:10:37.040881-05
+777	5155825	20251207_DEN@LV	2025	14	draftkings	2800	2025-12-29 16:10:37.040881-05
+778	5155825	20251207_DEN@LV	2025	14	fanduel	2800	2025-12-29 16:10:37.040881-05
+779	15847	20251207_HOU@KC	2025	14	draftkings	205	2025-12-29 16:10:37.344451-05
+780	15847	20251207_HOU@KC	2025	14	fanduel	205	2025-12-29 16:10:37.344451-05
+781	4258173	20251207_HOU@KC	2025	14	draftkings	170	2025-12-29 16:10:37.344451-05
+782	4258173	20251207_HOU@KC	2025	14	fanduel	170	2025-12-29 16:10:37.344451-05
+783	4683062	20251207_HOU@KC	2025	14	draftkings	275	2025-12-29 16:10:37.344451-05
+784	4683062	20251207_HOU@KC	2025	14	fanduel	275	2025-12-29 16:10:37.344451-05
+785	3117256	20251207_HOU@KC	2025	14	draftkings	330	2025-12-29 16:10:37.344451-05
+786	3117256	20251207_HOU@KC	2025	14	fanduel	330	2025-12-29 16:10:37.344451-05
+787	4877706	20251207_HOU@KC	2025	14	draftkings	440	2025-12-29 16:10:37.344451-05
+788	4877706	20251207_HOU@KC	2025	14	fanduel	440	2025-12-29 16:10:37.344451-05
+789	3895856	20251207_HOU@KC	2025	14	draftkings	525	2025-12-29 16:10:37.344451-05
+790	3895856	20251207_HOU@KC	2025	14	fanduel	525	2025-12-29 16:10:37.344451-05
+791	4686422	20251207_HOU@KC	2025	14	draftkings	1000	2025-12-29 16:10:37.344451-05
+792	4686422	20251207_HOU@KC	2025	14	fanduel	1000	2025-12-29 16:10:37.344451-05
+793	4241372	20251207_HOU@KC	2025	14	draftkings	800	2025-12-29 16:10:37.344451-05
+794	4241372	20251207_HOU@KC	2025	14	fanduel	800	2025-12-29 16:10:37.344451-05
+795	4240472	20251207_HOU@KC	2025	14	draftkings	950	2025-12-29 16:10:37.344451-05
+796	4240472	20251207_HOU@KC	2025	14	fanduel	950	2025-12-29 16:10:37.344451-05
+797	4586312	20251207_HOU@KC	2025	14	draftkings	900	2025-12-29 16:10:37.344451-05
+798	4586312	20251207_HOU@KC	2025	14	fanduel	900	2025-12-29 16:10:37.344451-05
+799	3120348	20251207_HOU@KC	2025	14	draftkings	1300	2025-12-29 16:10:37.344451-05
+800	3120348	20251207_HOU@KC	2025	14	fanduel	1300	2025-12-29 16:10:37.344451-05
+801	4426496	20251207_HOU@KC	2025	14	draftkings	1100	2025-12-29 16:10:37.344451-05
+802	4426496	20251207_HOU@KC	2025	14	fanduel	1100	2025-12-29 16:10:37.344451-05
+803	2975674	20251207_HOU@KC	2025	14	draftkings	2200	2025-12-29 16:10:37.344451-05
+804	2975674	20251207_HOU@KC	2025	14	fanduel	2200	2025-12-29 16:10:37.344451-05
+805	4430723	20251207_HOU@KC	2025	14	draftkings	2200	2025-12-29 16:10:37.344451-05
+806	4430723	20251207_HOU@KC	2025	14	fanduel	2200	2025-12-29 16:10:37.344451-05
+807	5082630	20251207_HOU@KC	2025	14	draftkings	2700	2025-12-29 16:10:37.344451-05
+808	5082630	20251207_HOU@KC	2025	14	fanduel	2700	2025-12-29 16:10:37.344451-05
+809	4431459	20251207_IND@JAX	2025	14	draftkings	170	2025-12-29 16:10:37.616397-05
+810	4431459	20251207_IND@JAX	2025	14	fanduel	170	2025-12-29 16:10:37.616397-05
+811	4035687	20251207_IND@JAX	2025	14	draftkings	200	2025-12-29 16:10:37.616397-05
+812	4035687	20251207_IND@JAX	2025	14	fanduel	200	2025-12-29 16:10:37.616397-05
+813	3916433	20251207_IND@JAX	2025	14	draftkings	200	2025-12-29 16:10:37.616397-05
+814	3916433	20251207_IND@JAX	2025	14	fanduel	200	2025-12-29 16:10:37.616397-05
+815	4360078	20251207_IND@JAX	2025	14	draftkings	215	2025-12-29 16:10:37.616397-05
+816	4360078	20251207_IND@JAX	2025	14	fanduel	215	2025-12-29 16:10:37.616397-05
+817	4432773	20251207_IND@JAX	2025	14	draftkings	240	2025-12-29 16:10:37.616397-05
+818	4432773	20251207_IND@JAX	2025	14	fanduel	240	2025-12-29 16:10:37.616397-05
+819	4430539	20251207_IND@JAX	2025	14	draftkings	340	2025-12-29 16:10:37.616397-05
+820	4430539	20251207_IND@JAX	2025	14	fanduel	340	2025-12-29 16:10:37.616397-05
+821	4688813	20251207_IND@JAX	2025	14	draftkings	360	2025-12-29 16:10:37.616397-05
+822	4688813	20251207_IND@JAX	2025	14	fanduel	360	2025-12-29 16:10:37.616397-05
+823	3134353	20251207_IND@JAX	2025	14	draftkings	425	2025-12-29 16:10:37.616397-05
+824	3134353	20251207_IND@JAX	2025	14	fanduel	425	2025-12-29 16:10:37.616397-05
+825	4361577	20251207_IND@JAX	2025	14	draftkings	900	2025-12-29 16:10:37.616397-05
+826	4361577	20251207_IND@JAX	2025	14	fanduel	900	2025-12-29 16:10:37.616397-05
+827	2998565	20251207_IND@JAX	2025	14	draftkings	1400	2025-12-29 16:10:37.616397-05
+828	2998565	20251207_IND@JAX	2025	14	fanduel	1400	2025-12-29 16:10:37.616397-05
+829	4239944	20251207_IND@JAX	2025	14	draftkings	1900	2025-12-29 16:10:37.616397-05
+830	4239944	20251207_IND@JAX	2025	14	fanduel	1900	2025-12-29 16:10:37.616397-05
+831	4244049	20251207_IND@JAX	2025	14	draftkings	1300	2025-12-29 16:10:37.616397-05
+832	4244049	20251207_IND@JAX	2025	14	fanduel	1300	2025-12-29 16:10:37.616397-05
+833	3051889	20251207_IND@JAX	2025	14	draftkings	3000	2025-12-29 16:10:37.616397-05
+834	3051889	20251207_IND@JAX	2025	14	fanduel	3000	2025-12-29 16:10:37.616397-05
+835	16800	20251207_LAR@ARI	2025	14	draftkings	-170	2025-12-29 16:10:37.960842-05
+836	16800	20251207_LAR@ARI	2025	14	fanduel	-170	2025-12-29 16:10:37.960842-05
+837	4426515	20251207_LAR@ARI	2025	14	draftkings	-121	2025-12-29 16:10:37.960842-05
+838	4426515	20251207_LAR@ARI	2025	14	fanduel	-121	2025-12-29 16:10:37.960842-05
+839	4361307	20251207_LAR@ARI	2025	14	draftkings	120	2025-12-29 16:10:37.960842-05
+840	4361307	20251207_LAR@ARI	2025	14	fanduel	120	2025-12-29 16:10:37.960842-05
+841	4242557	20251207_LAR@ARI	2025	14	draftkings	230	2025-12-29 16:10:37.960842-05
+842	4242557	20251207_LAR@ARI	2025	14	fanduel	230	2025-12-29 16:10:37.960842-05
+843	4360761	20251207_LAR@ARI	2025	14	draftkings	155	2025-12-29 16:10:37.960842-05
+844	4360761	20251207_LAR@ARI	2025	14	fanduel	155	2025-12-29 16:10:37.960842-05
+845	4386544	20251207_LAR@ARI	2025	14	draftkings	600	2025-12-29 16:10:37.960842-05
+846	4386544	20251207_LAR@ARI	2025	14	fanduel	600	2025-12-29 16:10:37.960842-05
+847	4426553	20251207_LAR@ARI	2025	14	draftkings	600	2025-12-29 16:10:37.960842-05
+848	4426553	20251207_LAR@ARI	2025	14	fanduel	600	2025-12-29 16:10:37.960842-05
+849	4710855	20251207_LAR@ARI	2025	14	draftkings	800	2025-12-29 16:10:37.960842-05
+850	4710855	20251207_LAR@ARI	2025	14	fanduel	800	2025-12-29 16:10:37.960842-05
+851	4569382	20251207_LAR@ARI	2025	14	draftkings	750	2025-12-29 16:10:37.960842-05
+852	4569382	20251207_LAR@ARI	2025	14	fanduel	750	2025-12-29 16:10:37.960842-05
+853	4426844	20251207_LAR@ARI	2025	14	draftkings	550	2025-12-29 16:10:37.960842-05
+854	4426844	20251207_LAR@ARI	2025	14	fanduel	550	2025-12-29 16:10:37.960842-05
+855	4570037	20251207_LAR@ARI	2025	14	draftkings	750	2025-12-29 16:10:37.960842-05
+856	4570037	20251207_LAR@ARI	2025	14	fanduel	750	2025-12-29 16:10:37.960842-05
+857	2576399	20251207_LAR@ARI	2025	14	draftkings	1300	2025-12-29 16:10:37.960842-05
+858	2576399	20251207_LAR@ARI	2025	14	fanduel	1300	2025-12-29 16:10:37.960842-05
+859	3914151	20251207_LAR@ARI	2025	14	draftkings	2000	2025-12-29 16:10:37.960842-05
+860	3914151	20251207_LAR@ARI	2025	14	fanduel	2000	2025-12-29 16:10:37.960842-05
+861	2971281	20251207_LAR@ARI	2025	14	draftkings	1800	2025-12-29 16:10:37.960842-05
+862	2971281	20251207_LAR@ARI	2025	14	fanduel	1800	2025-12-29 16:10:37.960842-05
+863	4372016	20251207_MIA@NYJ	2025	14	draftkings	185	2025-12-29 16:10:38.266651-05
+864	4372016	20251207_MIA@NYJ	2025	14	fanduel	185	2025-12-29 16:10:38.266651-05
+865	4597500	20251207_MIA@NYJ	2025	14	draftkings	220	2025-12-29 16:10:38.266651-05
+866	4597500	20251207_MIA@NYJ	2025	14	fanduel	220	2025-12-29 16:10:38.266651-05
+867	2576925	20251207_MIA@NYJ	2025	14	draftkings	235	2025-12-29 16:10:38.266651-05
+868	2576925	20251207_MIA@NYJ	2025	14	fanduel	235	2025-12-29 16:10:38.266651-05
+869	4808766	20251207_MIA@NYJ	2025	14	draftkings	310	2025-12-29 16:10:38.266651-05
+870	4808766	20251207_MIA@NYJ	2025	14	fanduel	310	2025-12-29 16:10:38.266651-05
+871	4567096	20251207_MIA@NYJ	2025	14	draftkings	340	2025-12-29 16:10:38.266651-05
+872	4567096	20251207_MIA@NYJ	2025	14	fanduel	340	2025-12-29 16:10:38.266651-05
+873	4569603	20251207_MIA@NYJ	2025	14	draftkings	380	2025-12-29 16:10:38.266651-05
+874	4569603	20251207_MIA@NYJ	2025	14	fanduel	380	2025-12-29 16:10:38.266651-05
+875	4367209	20251207_MIA@NYJ	2025	14	draftkings	650	2025-12-29 16:10:38.266651-05
+876	4367209	20251207_MIA@NYJ	2025	14	fanduel	650	2025-12-29 16:10:38.266651-05
+877	4361372	20251207_MIA@NYJ	2025	14	draftkings	800	2025-12-29 16:10:38.266651-05
+878	4361372	20251207_MIA@NYJ	2025	14	fanduel	800	2025-12-29 16:10:38.266651-05
+879	3929785	20251207_MIA@NYJ	2025	14	draftkings	1600	2025-12-29 16:10:38.266651-05
+880	3929785	20251207_MIA@NYJ	2025	14	fanduel	1600	2025-12-29 16:10:38.266651-05
+881	4569371	20251207_MIA@NYJ	2025	14	draftkings	800	2025-12-29 16:10:38.266651-05
+882	4569371	20251207_MIA@NYJ	2025	14	fanduel	800	2025-12-29 16:10:38.266651-05
+883	4365395	20251207_MIA@NYJ	2025	14	draftkings	1000	2025-12-29 16:10:38.266651-05
+884	4365395	20251207_MIA@NYJ	2025	14	fanduel	1000	2025-12-29 16:10:38.266651-05
+885	4429105	20251207_MIA@NYJ	2025	14	draftkings	1900	2025-12-29 16:10:38.266651-05
+886	4429105	20251207_MIA@NYJ	2025	14	fanduel	1900	2025-12-29 16:10:38.266651-05
+887	4036335	20251207_MIA@NYJ	2025	14	draftkings	1500	2025-12-29 16:10:38.266651-05
+888	4036335	20251207_MIA@NYJ	2025	14	fanduel	1500	2025-12-29 16:10:38.266651-05
+889	4250764	20251207_MIA@NYJ	2025	14	draftkings	2500	2025-12-29 16:10:38.266651-05
+890	4250764	20251207_MIA@NYJ	2025	14	fanduel	2500	2025-12-29 16:10:38.266651-05
+891	4567750	20251207_NO@TB	2025	14	draftkings	125	2025-12-29 16:10:38.577069-05
+892	4567750	20251207_NO@TB	2025	14	fanduel	125	2025-12-29 16:10:38.577069-05
+893	3116165	20251207_NO@TB	2025	14	draftkings	200	2025-12-29 16:10:38.577069-05
+894	3116165	20251207_NO@TB	2025	14	fanduel	200	2025-12-29 16:10:38.577069-05
+895	4361370	20251207_NO@TB	2025	14	draftkings	220	2025-12-29 16:10:38.577069-05
+896	4361370	20251207_NO@TB	2025	14	fanduel	220	2025-12-29 16:10:38.577069-05
+897	4243331	20251207_NO@TB	2025	14	draftkings	250	2025-12-29 16:10:38.577069-05
+898	4243331	20251207_NO@TB	2025	14	fanduel	250	2025-12-29 16:10:38.577069-05
+899	3929645	20251207_NO@TB	2025	14	draftkings	320	2025-12-29 16:10:38.577069-05
+900	3929645	20251207_NO@TB	2025	14	fanduel	320	2025-12-29 16:10:38.577069-05
+901	4608810	20251207_NO@TB	2025	14	draftkings	360	2025-12-29 16:10:38.577069-05
+902	4608810	20251207_NO@TB	2025	14	fanduel	360	2025-12-29 16:10:38.577069-05
+903	2976592	20251207_NO@TB	2025	14	draftkings	500	2025-12-29 16:10:38.577069-05
+904	2976592	20251207_NO@TB	2025	14	fanduel	500	2025-12-29 16:10:38.577069-05
+905	4573697	20251207_NO@TB	2025	14	draftkings	700	2025-12-29 16:10:38.577069-05
+906	4573697	20251207_NO@TB	2025	14	fanduel	700	2025-12-29 16:10:38.577069-05
+907	4372505	20251207_NO@TB	2025	14	draftkings	1400	2025-12-29 16:10:38.577069-05
+908	4372505	20251207_NO@TB	2025	14	fanduel	1400	2025-12-29 16:10:38.577069-05
+909	3127306	20251207_NO@TB	2025	14	draftkings	2800	2025-12-29 16:10:38.577069-05
+910	3127306	20251207_NO@TB	2025	14	fanduel	2800	2025-12-29 16:10:38.577069-05
+911	5097554	20251207_NO@TB	2025	14	draftkings	3300	2025-12-29 16:10:38.577069-05
+912	5097554	20251207_NO@TB	2025	14	fanduel	3300	2025-12-29 16:10:38.577069-05
+913	4369466	20251207_NO@TB	2025	14	draftkings	2200	2025-12-29 16:10:38.577069-05
+914	4369466	20251207_NO@TB	2025	14	fanduel	2200	2025-12-29 16:10:38.577069-05
+915	4361112	20251207_NO@TB	2025	14	draftkings	2400	2025-12-29 16:10:38.577069-05
+916	4361112	20251207_NO@TB	2025	14	fanduel	2400	2025-12-29 16:10:38.577069-05
+917	4034862	20251207_NO@TB	2025	14	draftkings	2700	2025-12-29 16:10:38.577069-05
+918	4034862	20251207_NO@TB	2025	14	fanduel	2700	2025-12-29 16:10:38.577069-05
+919	3116365	20251207_PIT@BAL	2025	14	draftkings	165	2025-12-29 16:10:38.818079-05
+920	3116365	20251207_PIT@BAL	2025	14	fanduel	165	2025-12-29 16:10:38.818079-05
+921	4429615	20251207_PIT@BAL	2025	14	draftkings	200	2025-12-29 16:10:38.818079-05
+922	4429615	20251207_PIT@BAL	2025	14	fanduel	200	2025-12-29 16:10:38.818079-05
+923	4047650	20251207_PIT@BAL	2025	14	draftkings	210	2025-12-29 16:10:38.818079-05
+924	4047650	20251207_PIT@BAL	2025	14	fanduel	210	2025-12-29 16:10:38.818079-05
+925	4361050	20251207_PIT@BAL	2025	14	draftkings	330	2025-12-29 16:10:38.818079-05
+926	4361050	20251207_PIT@BAL	2025	14	fanduel	330	2025-12-29 16:10:38.818079-05
+927	4360939	20251207_PIT@BAL	2025	14	draftkings	450	2025-12-29 16:10:38.818079-05
+928	4360939	20251207_PIT@BAL	2025	14	fanduel	450	2025-12-29 16:10:38.818079-05
+929	15795	20251207_PIT@BAL	2025	14	draftkings	540	2025-12-29 16:10:38.818079-05
+930	15795	20251207_PIT@BAL	2025	14	fanduel	540	2025-12-29 16:10:38.818079-05
+931	4430802	20251207_PIT@BAL	2025	14	draftkings	400	2025-12-29 16:10:38.818079-05
+932	4430802	20251207_PIT@BAL	2025	14	fanduel	400	2025-12-29 16:10:38.818079-05
+933	3054212	20251207_PIT@BAL	2025	14	draftkings	600	2025-12-29 16:10:38.818079-05
+934	3054212	20251207_PIT@BAL	2025	14	fanduel	600	2025-12-29 16:10:38.818079-05
+935	4361411	20251207_PIT@BAL	2025	14	draftkings	600	2025-12-29 16:10:38.818079-05
+936	4361411	20251207_PIT@BAL	2025	14	fanduel	600	2025-12-29 16:10:38.818079-05
+937	4243389	20251207_PIT@BAL	2025	14	draftkings	600	2025-12-29 16:10:38.818079-05
+938	4243389	20251207_PIT@BAL	2025	14	fanduel	600	2025-12-29 16:10:38.818079-05
+939	16460	20251207_PIT@BAL	2025	14	draftkings	700	2025-12-29 16:10:38.818079-05
+940	16460	20251207_PIT@BAL	2025	14	fanduel	700	2025-12-29 16:10:38.818079-05
+941	4690143	20251207_PIT@BAL	2025	14	draftkings	1300	2025-12-29 16:10:38.818079-05
+942	4690143	20251207_PIT@BAL	2025	14	fanduel	1300	2025-12-29 16:10:38.818079-05
+943	4241263	20251207_PIT@BAL	2025	14	draftkings	1300	2025-12-29 16:10:38.818079-05
+944	4241263	20251207_PIT@BAL	2025	14	fanduel	1300	2025-12-29 16:10:38.818079-05
+945	3914397	20251207_PIT@BAL	2025	14	draftkings	3500	2025-12-29 16:10:38.818079-05
+946	3914397	20251207_PIT@BAL	2025	14	fanduel	3500	2025-12-29 16:10:38.818079-05
+947	4241424	20251207_PIT@BAL	2025	14	draftkings	1200	2025-12-29 16:10:38.818079-05
+948	4241424	20251207_PIT@BAL	2025	14	fanduel	1200	2025-12-29 16:10:38.818079-05
+949	4035656	20251207_PIT@BAL	2025	14	draftkings	2000	2025-12-29 16:10:38.818079-05
+950	4035656	20251207_PIT@BAL	2025	14	fanduel	2000	2025-12-29 16:10:38.818079-05
+951	4241961	20251207_PIT@BAL	2025	14	draftkings	2000	2025-12-29 16:10:38.818079-05
+952	4241961	20251207_PIT@BAL	2025	14	fanduel	2000	2025-12-29 16:10:38.818079-05
+953	4430878	20251207_SEA@ATL	2025	14	draftkings	-105	2025-12-29 16:10:39.18654-05
+954	4430878	20251207_SEA@ATL	2025	14	fanduel	-105	2025-12-29 16:10:39.18654-05
+955	4576297	20251207_SEA@ATL	2025	14	draftkings	215	2025-12-29 16:10:39.18654-05
+956	4576297	20251207_SEA@ATL	2025	14	fanduel	215	2025-12-29 16:10:39.18654-05
+957	4360248	20251207_SEA@ATL	2025	14	draftkings	260	2025-12-29 16:10:39.18654-05
+958	4360248	20251207_SEA@ATL	2025	14	fanduel	260	2025-12-29 16:10:39.18654-05
+959	4032473	20251207_SEA@ATL	2025	14	draftkings	260	2025-12-29 16:10:39.18654-05
+960	4032473	20251207_SEA@ATL	2025	14	fanduel	260	2025-12-29 16:10:39.18654-05
+961	2977187	20251207_SEA@ATL	2025	14	draftkings	330	2025-12-29 16:10:39.18654-05
+962	2977187	20251207_SEA@ATL	2025	14	fanduel	330	2025-12-29 16:10:39.18654-05
+963	4040655	20251207_SEA@ATL	2025	14	draftkings	350	2025-12-29 16:10:39.18654-05
+964	4040655	20251207_SEA@ATL	2025	14	fanduel	350	2025-12-29 16:10:39.18654-05
+965	3871102	20251207_SEA@ATL	2025	14	draftkings	500	2025-12-29 16:10:39.18654-05
+966	3871102	20251207_SEA@ATL	2025	14	fanduel	500	2025-12-29 16:10:39.18654-05
+967	4363551	20251207_SEA@ATL	2025	14	draftkings	750	2025-12-29 16:10:39.18654-05
+968	4363551	20251207_SEA@ATL	2025	14	fanduel	750	2025-12-29 16:10:39.18654-05
+969	4241983	20251207_SEA@ATL	2025	14	draftkings	2500	2025-12-29 16:10:39.18654-05
+970	4241983	20251207_SEA@ATL	2025	14	fanduel	2500	2025-12-29 16:10:39.18654-05
+971	4035020	20251207_SEA@ATL	2025	14	draftkings	1300	2025-12-29 16:10:39.18654-05
+972	4035020	20251207_SEA@ATL	2025	14	fanduel	1300	2025-12-29 16:10:39.18654-05
+973	4360405	20251207_SEA@ATL	2025	14	draftkings	1600	2025-12-29 16:10:39.18654-05
+974	4360405	20251207_SEA@ATL	2025	14	fanduel	1600	2025-12-29 16:10:39.18654-05
+975	4374045	20251207_SEA@ATL	2025	14	draftkings	1600	2025-12-29 16:10:39.18654-05
+976	4374045	20251207_SEA@ATL	2025	14	fanduel	1600	2025-12-29 16:10:39.18654-05
+977	4569547	20251207_SEA@ATL	2025	14	draftkings	2500	2025-12-29 16:10:39.18654-05
+978	4569547	20251207_SEA@ATL	2025	14	fanduel	2500	2025-12-29 16:10:39.18654-05
+979	4374187	20251207_SEA@ATL	2025	14	draftkings	3000	2025-12-29 16:10:39.18654-05
+980	4374187	20251207_SEA@ATL	2025	14	fanduel	3000	2025-12-29 16:10:39.18654-05
+981	4034948	20251207_SEA@ATL	2025	14	draftkings	4500	2025-12-29 16:10:39.18654-05
+982	4034948	20251207_SEA@ATL	2025	14	fanduel	4500	2025-12-29 16:10:39.18654-05
+983	5083076	20251207_TEN@CLE	2025	14	draftkings	340	2025-12-29 16:10:39.494909-05
+984	5083076	20251207_TEN@CLE	2025	14	fanduel	340	2025-12-29 16:10:39.494909-05
+985	4241463	20251207_TEN@CLE	2025	14	draftkings	400	2025-12-29 16:10:39.494909-05
+986	4241463	20251207_TEN@CLE	2025	14	fanduel	400	2025-12-29 16:10:39.494909-05
+987	4431268	20251207_TEN@CLE	2025	14	draftkings	370	2025-12-29 16:10:39.494909-05
+988	4431268	20251207_TEN@CLE	2025	14	fanduel	370	2025-12-29 16:10:39.494909-05
+989	4883647	20251207_TEN@CLE	2025	14	draftkings	430	2025-12-29 16:10:39.494909-05
+990	4883647	20251207_TEN@CLE	2025	14	fanduel	430	2025-12-29 16:10:39.494909-05
+991	4369863	20251207_TEN@CLE	2025	14	draftkings	500	2025-12-29 16:10:39.494909-05
+992	4369863	20251207_TEN@CLE	2025	14	fanduel	500	2025-12-29 16:10:39.494909-05
+993	3123076	20251207_TEN@CLE	2025	14	draftkings	550	2025-12-29 16:10:39.494909-05
+994	3123076	20251207_TEN@CLE	2025	14	fanduel	550	2025-12-29 16:10:39.494909-05
+995	4686728	20251207_TEN@CLE	2025	14	draftkings	550	2025-12-29 16:10:39.494909-05
+996	4686728	20251207_TEN@CLE	2025	14	fanduel	550	2025-12-29 16:10:39.494909-05
+997	3930066	20251207_TEN@CLE	2025	14	draftkings	650	2025-12-29 16:10:39.494909-05
+998	3930066	20251207_TEN@CLE	2025	14	fanduel	650	2025-12-29 16:10:39.494909-05
+999	4360635	20251207_TEN@CLE	2025	14	draftkings	650	2025-12-29 16:10:39.494909-05
+1000	4360635	20251207_TEN@CLE	2025	14	fanduel	650	2025-12-29 16:10:39.494909-05
+1001	4808839	20251207_TEN@CLE	2025	14	draftkings	1000	2025-12-29 16:10:39.494909-05
+1002	4808839	20251207_TEN@CLE	2025	14	fanduel	1000	2025-12-29 16:10:39.494909-05
+1003	4613104	20251207_TEN@CLE	2025	14	draftkings	1300	2025-12-29 16:10:39.494909-05
+1004	4613104	20251207_TEN@CLE	2025	14	fanduel	1300	2025-12-29 16:10:39.494909-05
+1005	3916204	20251207_TEN@CLE	2025	14	draftkings	1800	2025-12-29 16:10:39.494909-05
+1006	3916204	20251207_TEN@CLE	2025	14	fanduel	1800	2025-12-29 16:10:39.494909-05
+1007	4877203	20251207_TEN@CLE	2025	14	draftkings	1150	2025-12-29 16:10:39.494909-05
+1008	4877203	20251207_TEN@CLE	2025	14	fanduel	1150	2025-12-29 16:10:39.494909-05
+1009	4362018	20251207_TEN@CLE	2025	14	draftkings	2200	2025-12-29 16:10:39.494909-05
+1010	4362018	20251207_TEN@CLE	2025	14	fanduel	2200	2025-12-29 16:10:39.494909-05
+1011	4057082	20251207_TEN@CLE	2025	14	draftkings	4500	2025-12-29 16:10:39.494909-05
+1012	4057082	20251207_TEN@CLE	2025	14	fanduel	4500	2025-12-29 16:10:39.494909-05
+1013	4360978	20251207_TEN@CLE	2025	14	draftkings	3500	2025-12-29 16:10:39.494909-05
+1014	4360978	20251207_TEN@CLE	2025	14	fanduel	3500	2025-12-29 16:10:39.494909-05
+1015	4262921	20251207_WSH@MIN	2025	14	draftkings	150	2025-12-29 16:10:39.71231-05
+1016	4262921	20251207_WSH@MIN	2025	14	fanduel	150	2025-12-29 16:10:39.71231-05
+1017	3121422	20251207_WSH@MIN	2025	14	draftkings	210	2025-12-29 16:10:39.71231-05
+1018	3121422	20251207_WSH@MIN	2025	14	fanduel	210	2025-12-29 16:10:39.71231-05
+1019	3126486	20251207_WSH@MIN	2025	14	draftkings	210	2025-12-29 16:10:39.71231-05
+1020	3126486	20251207_WSH@MIN	2025	14	fanduel	210	2025-12-29 16:10:39.71231-05
+1021	4429205	20251207_WSH@MIN	2025	14	draftkings	235	2025-12-29 16:10:39.71231-05
+1022	4429205	20251207_WSH@MIN	2025	14	fanduel	235	2025-12-29 16:10:39.71231-05
+1023	4036133	20251207_WSH@MIN	2025	14	draftkings	370	2025-12-29 16:10:39.71231-05
+1024	4036133	20251207_WSH@MIN	2025	14	fanduel	370	2025-12-29 16:10:39.71231-05
+1025	4382466	20251207_WSH@MIN	2025	14	draftkings	500	2025-12-29 16:10:39.71231-05
+1026	4382466	20251207_WSH@MIN	2025	14	fanduel	500	2025-12-29 16:10:39.71231-05
+1027	4567156	20251207_WSH@MIN	2025	14	draftkings	700	2025-12-29 16:10:39.71231-05
+1028	4567156	20251207_WSH@MIN	2025	14	fanduel	700	2025-12-29 16:10:39.71231-05
+1029	3921690	20251207_WSH@MIN	2025	14	draftkings	700	2025-12-29 16:10:39.71231-05
+1030	3921690	20251207_WSH@MIN	2025	14	fanduel	700	2025-12-29 16:10:39.71231-05
+1031	4048228	20251207_WSH@MIN	2025	14	draftkings	1300	2025-12-29 16:10:39.71231-05
+1032	4048228	20251207_WSH@MIN	2025	14	fanduel	1300	2025-12-29 16:10:39.71231-05
+1033	4690923	20251207_WSH@MIN	2025	14	draftkings	2500	2025-12-29 16:10:39.71231-05
+1034	4690923	20251207_WSH@MIN	2025	14	fanduel	2500	2025-12-29 16:10:39.71231-05
+1035	4430656	20251207_WSH@MIN	2025	14	draftkings	1900	2025-12-29 16:10:39.71231-05
+1036	4430656	20251207_WSH@MIN	2025	14	fanduel	1900	2025-12-29 16:10:39.71231-05
+1037	4565185	20251207_WSH@MIN	2025	14	draftkings	3000	2025-12-29 16:10:39.71231-05
+1038	4565185	20251207_WSH@MIN	2025	14	fanduel	3000	2025-12-29 16:10:39.71231-05
+1039	4373030	20251207_WSH@MIN	2025	14	draftkings	2800	2025-12-29 16:10:39.71231-05
+1040	4373030	20251207_WSH@MIN	2025	14	fanduel	2800	2025-12-29 16:10:39.71231-05
+1041	4361088	20251207_WSH@MIN	2025	14	draftkings	3500	2025-12-29 16:10:39.71231-05
+1042	4361088	20251207_WSH@MIN	2025	14	fanduel	3500	2025-12-29 16:10:39.71231-05
+1043	4047646	20251208_PHI@LAC	2025	14	draftkings	180	2025-12-29 16:10:39.960967-05
+1044	4047646	20251208_PHI@LAC	2025	14	fanduel	180	2025-12-29 16:10:39.960967-05
+1045	4612826	20251208_PHI@LAC	2025	14	draftkings	220	2025-12-29 16:10:39.960967-05
+1046	4612826	20251208_PHI@LAC	2025	14	fanduel	220	2025-12-29 16:10:39.960967-05
+1047	4429025	20251208_PHI@LAC	2025	14	draftkings	230	2025-12-29 16:10:39.960967-05
+1048	4429025	20251208_PHI@LAC	2025	14	fanduel	230	2025-12-29 16:10:39.960967-05
+1049	4595342	20251208_PHI@LAC	2025	14	draftkings	260	2025-12-29 16:10:39.960967-05
+1050	4595342	20251208_PHI@LAC	2025	14	fanduel	260	2025-12-29 16:10:39.960967-05
+1051	4241478	20251208_PHI@LAC	2025	14	draftkings	250	2025-12-29 16:10:39.960967-05
+1052	4241478	20251208_PHI@LAC	2025	14	fanduel	250	2025-12-29 16:10:39.960967-05
+1053	3121023	20251208_PHI@LAC	2025	14	draftkings	310	2025-12-29 16:10:39.960967-05
+1054	3121023	20251208_PHI@LAC	2025	14	fanduel	310	2025-12-29 16:10:39.960967-05
+1055	15818	20251208_PHI@LAC	2025	14	draftkings	310	2025-12-29 16:10:39.960967-05
+1056	15818	20251208_PHI@LAC	2025	14	fanduel	310	2025-12-29 16:10:39.960967-05
+1057	4686612	20251208_PHI@LAC	2025	14	draftkings	950	2025-12-29 16:10:39.960967-05
+1058	4686612	20251208_PHI@LAC	2025	14	fanduel	950	2025-12-29 16:10:39.960967-05
+1059	3127292	20251208_PHI@LAC	2025	14	draftkings	850	2025-12-29 16:10:39.960967-05
+1060	3127292	20251208_PHI@LAC	2025	14	fanduel	850	2025-12-29 16:10:39.960967-05
+1061	4361409	20251208_PHI@LAC	2025	14	draftkings	1000	2025-12-29 16:10:39.960967-05
+1062	4361409	20251208_PHI@LAC	2025	14	fanduel	1000	2025-12-29 16:10:39.960967-05
+1063	4715355	20251208_PHI@LAC	2025	14	draftkings	1900	2025-12-29 16:10:39.960967-05
+1064	4715355	20251208_PHI@LAC	2025	14	fanduel	1900	2025-12-29 16:10:39.960967-05
+1065	4241374	20251208_PHI@LAC	2025	14	draftkings	2000	2025-12-29 16:10:39.960967-05
+1066	4241374	20251208_PHI@LAC	2025	14	fanduel	2000	2025-12-29 16:10:39.960967-05
+1067	4362477	20251208_PHI@LAC	2025	14	draftkings	1900	2025-12-29 16:10:39.960967-05
+1068	4362477	20251208_PHI@LAC	2025	14	fanduel	1900	2025-12-29 16:10:39.960967-05
+1069	3926231	20251208_PHI@LAC	2025	14	draftkings	2200	2025-12-29 16:10:39.960967-05
+1070	3926231	20251208_PHI@LAC	2025	14	fanduel	2200	2025-12-29 16:10:39.960967-05
+1071	4039160	20251208_PHI@LAC	2025	14	draftkings	4000	2025-12-29 16:10:39.960967-05
+1072	4039160	20251208_PHI@LAC	2025	14	fanduel	4000	2025-12-29 16:10:39.960967-05
+1073	4372026	20251208_PHI@LAC	2025	14	draftkings	4000	2025-12-29 16:10:39.960967-05
+1074	4372026	20251208_PHI@LAC	2025	14	fanduel	4000	2025-12-29 16:10:39.960967-05
+1075	4567750	20251211_ATL@TB	2025	15	draftkings	175	2025-12-29 16:10:39.966795-05
+1076	4567750	20251211_ATL@TB	2025	15	fanduel	175	2025-12-29 16:10:39.966795-05
+1077	16737	20251211_ATL@TB	2025	15	draftkings	180	2025-12-29 16:10:39.966795-05
+1078	16737	20251211_ATL@TB	2025	15	fanduel	180	2025-12-29 16:10:39.966795-05
+1079	3116165	20251211_ATL@TB	2025	15	draftkings	210	2025-12-29 16:10:39.966795-05
+1080	3116165	20251211_ATL@TB	2025	15	fanduel	210	2025-12-29 16:10:39.966795-05
+1081	4360248	20251211_ATL@TB	2025	15	draftkings	225	2025-12-29 16:10:39.966795-05
+1082	4360248	20251211_ATL@TB	2025	15	fanduel	225	2025-12-29 16:10:39.966795-05
+1083	4040655	20251211_ATL@TB	2025	15	draftkings	310	2025-12-29 16:10:39.966795-05
+1084	4040655	20251211_ATL@TB	2025	15	fanduel	310	2025-12-29 16:10:39.966795-05
+1085	4430834	20251211_ATL@TB	2025	15	draftkings	350	2025-12-29 16:10:39.966795-05
+1086	4430834	20251211_ATL@TB	2025	15	fanduel	350	2025-12-29 16:10:39.966795-05
+1087	4372505	20251211_ATL@TB	2025	15	draftkings	425	2025-12-29 16:10:39.966795-05
+1088	4372505	20251211_ATL@TB	2025	15	fanduel	425	2025-12-29 16:10:39.966795-05
+1089	3871102	20251211_ATL@TB	2025	15	draftkings	550	2025-12-29 16:10:39.966795-05
+1090	3871102	20251211_ATL@TB	2025	15	fanduel	550	2025-12-29 16:10:39.966795-05
+1091	4363551	20251211_ATL@TB	2025	15	draftkings	550	2025-12-29 16:10:39.966795-05
+1092	4363551	20251211_ATL@TB	2025	15	fanduel	550	2025-12-29 16:10:39.966795-05
+1093	2976592	20251211_ATL@TB	2025	15	draftkings	1200	2025-12-29 16:10:39.966795-05
+1094	2976592	20251211_ATL@TB	2025	15	fanduel	1200	2025-12-29 16:10:39.966795-05
+1095	4608810	20251211_ATL@TB	2025	15	draftkings	1600	2025-12-29 16:10:39.966795-05
+1096	4608810	20251211_ATL@TB	2025	15	fanduel	1600	2025-12-29 16:10:39.966795-05
+1097	4361112	20251211_ATL@TB	2025	15	draftkings	1300	2025-12-29 16:10:39.966795-05
+1098	4361112	20251211_ATL@TB	2025	15	fanduel	1300	2025-12-29 16:10:39.966795-05
+1099	4035020	20251211_ATL@TB	2025	15	draftkings	2000	2025-12-29 16:10:39.966795-05
+1100	4035020	20251211_ATL@TB	2025	15	fanduel	2000	2025-12-29 16:10:39.966795-05
+1101	5097554	20251211_ATL@TB	2025	15	draftkings	2200	2025-12-29 16:10:39.966795-05
+1102	5097554	20251211_ATL@TB	2025	15	fanduel	2200	2025-12-29 16:10:39.966795-05
+1103	4374187	20251211_ATL@TB	2025	15	draftkings	2500	2025-12-29 16:10:39.966795-05
+1104	4374187	20251211_ATL@TB	2025	15	fanduel	2500	2025-12-29 16:10:39.966795-05
+1105	4034948	20251211_ATL@TB	2025	15	draftkings	5000	2025-12-29 16:10:39.966795-05
+1106	4034948	20251211_ATL@TB	2025	15	fanduel	5000	2025-12-29 16:10:39.966795-05
+1107	4374045	20251211_ATL@TB	2025	15	draftkings	3000	2025-12-29 16:10:39.966795-05
+1108	4374045	20251211_ATL@TB	2025	15	fanduel	3000	2025-12-29 16:10:39.966795-05
+1109	4258173	20251214_ARI@HOU	2025	15	draftkings	106	2025-12-29 16:10:40.670276-05
+1110	4258173	20251214_ARI@HOU	2025	15	fanduel	106	2025-12-29 16:10:40.670276-05
+1111	4361307	20251214_ARI@HOU	2025	15	draftkings	188	2025-12-29 16:10:40.670276-05
+1112	4361307	20251214_ARI@HOU	2025	15	fanduel	188	2025-12-29 16:10:40.670276-05
+1113	3117256	20251214_ARI@HOU	2025	15	draftkings	225	2025-12-29 16:10:40.670276-05
+1114	3117256	20251214_ARI@HOU	2025	15	fanduel	225	2025-12-29 16:10:40.670276-05
+1115	4360761	20251214_ARI@HOU	2025	15	draftkings	240	2025-12-29 16:10:40.670276-05
+1116	4360761	20251214_ARI@HOU	2025	15	fanduel	240	2025-12-29 16:10:40.670276-05
+1117	4877706	20251214_ARI@HOU	2025	15	draftkings	310	2025-12-29 16:10:40.670276-05
+1118	4877706	20251214_ARI@HOU	2025	15	fanduel	310	2025-12-29 16:10:40.670276-05
+1119	3895856	20251214_ARI@HOU	2025	15	draftkings	380	2025-12-29 16:10:40.670276-05
+1120	3895856	20251214_ARI@HOU	2025	15	fanduel	380	2025-12-29 16:10:40.670276-05
+1121	4586312	20251214_ARI@HOU	2025	15	draftkings	700	2025-12-29 16:10:40.670276-05
+1122	4586312	20251214_ARI@HOU	2025	15	fanduel	700	2025-12-29 16:10:40.670276-05
+1123	4686422	20251214_ARI@HOU	2025	15	draftkings	750	2025-12-29 16:10:40.670276-05
+1124	4686422	20251214_ARI@HOU	2025	15	fanduel	750	2025-12-29 16:10:40.670276-05
+1125	4426496	20251214_ARI@HOU	2025	15	draftkings	1200	2025-12-29 16:10:40.670276-05
+1126	4426496	20251214_ARI@HOU	2025	15	fanduel	1200	2025-12-29 16:10:40.670276-05
+1127	4040774	20251214_ARI@HOU	2025	15	draftkings	1600	2025-12-29 16:10:40.670276-05
+1128	4040774	20251214_ARI@HOU	2025	15	fanduel	1600	2025-12-29 16:10:40.670276-05
+1129	4426844	20251214_ARI@HOU	2025	15	draftkings	850	2025-12-29 16:10:40.670276-05
+1130	4426844	20251214_ARI@HOU	2025	15	fanduel	850	2025-12-29 16:10:40.670276-05
+1131	4692835	20251214_ARI@HOU	2025	15	draftkings	1150	2025-12-29 16:10:40.670276-05
+1132	4692835	20251214_ARI@HOU	2025	15	fanduel	1150	2025-12-29 16:10:40.670276-05
+1133	3914151	20251214_ARI@HOU	2025	15	draftkings	1700	2025-12-29 16:10:40.670276-05
+1134	3914151	20251214_ARI@HOU	2025	15	fanduel	1700	2025-12-29 16:10:40.670276-05
+1135	2971281	20251214_ARI@HOU	2025	15	draftkings	2200	2025-12-29 16:10:40.670276-05
+1136	2971281	20251214_ARI@HOU	2025	15	fanduel	2200	2025-12-29 16:10:40.670276-05
+1137	4362628	20251214_BAL@CIN	2025	15	draftkings	-160	2025-12-29 16:10:41.033297-05
+1138	4362628	20251214_BAL@CIN	2025	15	fanduel	-160	2025-12-29 16:10:41.033297-05
+1139	3116365	20251214_BAL@CIN	2025	15	draftkings	140	2025-12-29 16:10:41.033297-05
+1140	3116365	20251214_BAL@CIN	2025	15	fanduel	140	2025-12-29 16:10:41.033297-05
+1141	4429615	20251214_BAL@CIN	2025	15	draftkings	190	2025-12-29 16:10:41.033297-05
+1142	4429615	20251214_BAL@CIN	2025	15	fanduel	190	2025-12-29 16:10:41.033297-05
+1143	3116164	20251214_BAL@CIN	2025	15	draftkings	200	2025-12-29 16:10:41.033297-05
+1144	3116164	20251214_BAL@CIN	2025	15	fanduel	200	2025-12-29 16:10:41.033297-05
+1145	4361050	20251214_BAL@CIN	2025	15	draftkings	210	2025-12-29 16:10:41.033297-05
+1146	4361050	20251214_BAL@CIN	2025	15	fanduel	210	2025-12-29 16:10:41.033297-05
+1147	4368003	20251214_BAL@CIN	2025	15	draftkings	240	2025-12-29 16:10:41.033297-05
+1148	4368003	20251214_BAL@CIN	2025	15	fanduel	240	2025-12-29 16:10:41.033297-05
+1149	4690070	20251214_BAL@CIN	2025	15	draftkings	350	2025-12-29 16:10:41.033297-05
+1150	4690070	20251214_BAL@CIN	2025	15	fanduel	350	2025-12-29 16:10:41.033297-05
+1151	15795	20251214_BAL@CIN	2025	15	draftkings	370	2025-12-29 16:10:41.033297-05
+1152	15795	20251214_BAL@CIN	2025	15	fanduel	370	2025-12-29 16:10:41.033297-05
+1153	4036131	20251214_BAL@CIN	2025	15	draftkings	650	2025-12-29 16:10:41.033297-05
+1154	4036131	20251214_BAL@CIN	2025	15	fanduel	650	2025-12-29 16:10:41.033297-05
+1155	3050481	20251214_BAL@CIN	2025	15	draftkings	650	2025-12-29 16:10:41.033297-05
+1156	3050481	20251214_BAL@CIN	2025	15	fanduel	650	2025-12-29 16:10:41.033297-05
+1157	4241424	20251214_BAL@CIN	2025	15	draftkings	1400	2025-12-29 16:10:41.033297-05
+1158	4241424	20251214_BAL@CIN	2025	15	fanduel	1400	2025-12-29 16:10:41.033297-05
+1159	4690143	20251214_BAL@CIN	2025	15	draftkings	1200	2025-12-29 16:10:41.033297-05
+1160	4690143	20251214_BAL@CIN	2025	15	fanduel	1200	2025-12-29 16:10:41.033297-05
+1161	4241263	20251214_BAL@CIN	2025	15	draftkings	850	2025-12-29 16:10:41.033297-05
+1162	4241263	20251214_BAL@CIN	2025	15	fanduel	850	2025-12-29 16:10:41.033297-05
+1163	4696882	20251214_BAL@CIN	2025	15	draftkings	950	2025-12-29 16:10:41.033297-05
+1164	4696882	20251214_BAL@CIN	2025	15	fanduel	950	2025-12-29 16:10:41.033297-05
+1165	3127310	20251214_BAL@CIN	2025	15	draftkings	1000	2025-12-29 16:10:41.033297-05
+1166	3127310	20251214_BAL@CIN	2025	15	fanduel	1000	2025-12-29 16:10:41.033297-05
+1167	4257188	20251214_BAL@CIN	2025	15	draftkings	1400	2025-12-29 16:10:41.033297-05
+1168	4257188	20251214_BAL@CIN	2025	15	fanduel	1400	2025-12-29 16:10:41.033297-05
+1169	2976212	20251214_BUF@NE	2025	15	draftkings	155	2025-12-29 16:10:41.315008-05
+1170	2976212	20251214_BUF@NE	2025	15	fanduel	155	2025-12-29 16:10:41.315008-05
+1171	3046439	20251214_BUF@NE	2025	15	draftkings	205	2025-12-29 16:10:41.315008-05
+1172	3046439	20251214_BUF@NE	2025	15	fanduel	205	2025-12-29 16:10:41.315008-05
+1173	4385690	20251214_BUF@NE	2025	15	draftkings	260	2025-12-29 16:10:41.315008-05
+1174	4385690	20251214_BUF@NE	2025	15	fanduel	260	2025-12-29 16:10:41.315008-05
+1175	4429022	20251214_BUF@NE	2025	15	draftkings	290	2025-12-29 16:10:41.315008-05
+1176	4429022	20251214_BUF@NE	2025	15	fanduel	290	2025-12-29 16:10:41.315008-05
+1177	4373678	20251214_BUF@NE	2025	15	draftkings	275	2025-12-29 16:10:41.315008-05
+1178	4373678	20251214_BUF@NE	2025	15	fanduel	275	2025-12-29 16:10:41.315008-05
+1179	3930086	20251214_BUF@NE	2025	15	draftkings	350	2025-12-29 16:10:41.315008-05
+1180	3930086	20251214_BUF@NE	2025	15	fanduel	350	2025-12-29 16:10:41.315008-05
+1181	4635008	20251214_BUF@NE	2025	15	draftkings	440	2025-12-29 16:10:41.315008-05
+1182	4635008	20251214_BUF@NE	2025	15	fanduel	440	2025-12-29 16:10:41.315008-05
+1183	4242433	20251214_BUF@NE	2025	15	draftkings	550	2025-12-29 16:10:41.315008-05
+1184	4242433	20251214_BUF@NE	2025	15	fanduel	550	2025-12-29 16:10:41.315008-05
+1185	4241476	20251214_BUF@NE	2025	15	draftkings	750	2025-12-29 16:10:41.315008-05
+1186	4241476	20251214_BUF@NE	2025	15	fanduel	750	2025-12-29 16:10:41.315008-05
+1187	4427095	20251214_BUF@NE	2025	15	draftkings	600	2025-12-29 16:10:41.315008-05
+1188	4427095	20251214_BUF@NE	2025	15	fanduel	600	2025-12-29 16:10:41.315008-05
+1189	3043275	20251214_BUF@NE	2025	15	draftkings	700	2025-12-29 16:10:41.315008-05
+1190	3043275	20251214_BUF@NE	2025	15	fanduel	700	2025-12-29 16:10:41.315008-05
+1191	4613202	20251214_BUF@NE	2025	15	draftkings	950	2025-12-29 16:10:41.315008-05
+1192	4613202	20251214_BUF@NE	2025	15	fanduel	950	2025-12-29 16:10:41.315008-05
+1193	16731	20251214_BUF@NE	2025	15	draftkings	1200	2025-12-29 16:10:41.315008-05
+1194	16731	20251214_BUF@NE	2025	15	fanduel	1200	2025-12-29 16:10:41.315008-05
+1195	4573699	20251214_BUF@NE	2025	15	draftkings	1100	2025-12-29 16:10:41.315008-05
+1196	4573699	20251214_BUF@NE	2025	15	fanduel	1100	2025-12-29 16:10:41.315008-05
+1197	4361100	20251214_BUF@NE	2025	15	draftkings	2200	2025-12-29 16:10:41.315008-05
+1198	4361100	20251214_BUF@NE	2025	15	fanduel	2200	2025-12-29 16:10:41.315008-05
+1199	4685472	20251214_CAR@NO	2025	15	draftkings	165	2025-12-29 16:10:41.627459-05
+1200	4685472	20251214_CAR@NO	2025	15	fanduel	165	2025-12-29 16:10:41.627459-05
+1201	4361370	20251214_CAR@NO	2025	15	draftkings	180	2025-12-29 16:10:41.627459-05
+1202	4361370	20251214_CAR@NO	2025	15	fanduel	180	2025-12-29 16:10:41.627459-05
+1203	4695883	20251214_CAR@NO	2025	15	draftkings	230	2025-12-29 16:10:41.627459-05
+1204	4695883	20251214_CAR@NO	2025	15	fanduel	230	2025-12-29 16:10:41.627459-05
+1205	3929645	20251214_CAR@NO	2025	15	draftkings	330	2025-12-29 16:10:41.627459-05
+1206	3929645	20251214_CAR@NO	2025	15	fanduel	330	2025-12-29 16:10:41.627459-05
+1207	4430034	20251214_CAR@NO	2025	15	draftkings	350	2025-12-29 16:10:41.627459-05
+1208	4430034	20251214_CAR@NO	2025	15	fanduel	350	2025-12-29 16:10:41.627459-05
+1209	4431588	20251214_CAR@NO	2025	15	draftkings	450	2025-12-29 16:10:41.627459-05
+1210	4431588	20251214_CAR@NO	2025	15	fanduel	450	2025-12-29 16:10:41.627459-05
+1211	4372780	20251214_CAR@NO	2025	15	draftkings	950	2025-12-29 16:10:41.627459-05
+1212	4372780	20251214_CAR@NO	2025	15	fanduel	950	2025-12-29 16:10:41.627459-05
+1213	4573697	20251214_CAR@NO	2025	15	draftkings	650	2025-12-29 16:10:41.627459-05
+1214	4573697	20251214_CAR@NO	2025	15	fanduel	650	2025-12-29 16:10:41.627459-05
+1215	4683243	20251214_CAR@NO	2025	15	draftkings	1000	2025-12-29 16:10:41.627459-05
+1216	4683243	20251214_CAR@NO	2025	15	fanduel	1000	2025-12-29 16:10:41.627459-05
+1217	4708486	20251214_CAR@NO	2025	15	draftkings	1400	2025-12-29 16:10:41.627459-05
+1218	4708486	20251214_CAR@NO	2025	15	fanduel	1400	2025-12-29 16:10:41.627459-05
+1219	3135321	20251214_CAR@NO	2025	15	draftkings	1400	2025-12-29 16:10:41.627459-05
+1220	3135321	20251214_CAR@NO	2025	15	fanduel	1400	2025-12-29 16:10:41.627459-05
+1221	4361988	20251214_CAR@NO	2025	15	draftkings	1500	2025-12-29 16:10:41.627459-05
+1222	4361988	20251214_CAR@NO	2025	15	fanduel	1500	2025-12-29 16:10:41.627459-05
+1223	4360763	20251214_CAR@NO	2025	15	draftkings	1500	2025-12-29 16:10:41.627459-05
+1224	4360763	20251214_CAR@NO	2025	15	fanduel	1500	2025-12-29 16:10:41.627459-05
+1225	4034862	20251214_CAR@NO	2025	15	draftkings	2200	2025-12-29 16:10:41.627459-05
+1226	4034862	20251214_CAR@NO	2025	15	fanduel	2200	2025-12-29 16:10:41.627459-05
+1227	3127306	20251214_CAR@NO	2025	15	draftkings	2200	2025-12-29 16:10:41.627459-05
+1228	3127306	20251214_CAR@NO	2025	15	fanduel	2200	2025-12-29 16:10:41.627459-05
+1229	4431299	20251214_CLE@CHI	2025	15	draftkings	210	2025-12-29 16:10:41.922688-05
+1230	4431299	20251214_CLE@CHI	2025	15	fanduel	210	2025-12-29 16:10:41.922688-05
+1231	3915416	20251214_CLE@CHI	2025	15	draftkings	290	2025-12-29 16:10:41.922688-05
+1232	3915416	20251214_CLE@CHI	2025	15	fanduel	290	2025-12-29 16:10:41.922688-05
+1233	4723086	20251214_CLE@CHI	2025	15	draftkings	330	2025-12-29 16:10:41.922688-05
+1234	4723086	20251214_CLE@CHI	2025	15	fanduel	330	2025-12-29 16:10:41.922688-05
+1235	4685278	20251214_CLE@CHI	2025	15	draftkings	370	2025-12-29 16:10:41.922688-05
+1236	4685278	20251214_CLE@CHI	2025	15	fanduel	370	2025-12-29 16:10:41.922688-05
+1237	5083076	20251214_CLE@CHI	2025	15	draftkings	300	2025-12-29 16:10:41.922688-05
+1238	5083076	20251214_CLE@CHI	2025	15	fanduel	300	2025-12-29 16:10:41.922688-05
+1239	4241463	20251214_CLE@CHI	2025	15	draftkings	420	2025-12-29 16:10:41.922688-05
+1240	4241463	20251214_CLE@CHI	2025	15	fanduel	420	2025-12-29 16:10:41.922688-05
+1241	4258595	20251214_CLE@CHI	2025	15	draftkings	550	2025-12-29 16:10:41.922688-05
+1242	4258595	20251214_CLE@CHI	2025	15	fanduel	550	2025-12-29 16:10:41.922688-05
+1243	3917914	20251214_CLE@CHI	2025	15	draftkings	550	2025-12-29 16:10:41.922688-05
+1244	3917914	20251214_CLE@CHI	2025	15	fanduel	550	2025-12-29 16:10:41.922688-05
+1245	4808839	20251214_CLE@CHI	2025	15	draftkings	600	2025-12-29 16:10:41.922688-05
+1246	4808839	20251214_CLE@CHI	2025	15	fanduel	600	2025-12-29 16:10:41.922688-05
+1247	4369863	20251214_CLE@CHI	2025	15	draftkings	800	2025-12-29 16:10:41.922688-05
+1248	4369863	20251214_CLE@CHI	2025	15	fanduel	800	2025-12-29 16:10:41.922688-05
+1249	4877203	20251214_CLE@CHI	2025	15	draftkings	1300	2025-12-29 16:10:41.922688-05
+1250	4877203	20251214_CLE@CHI	2025	15	fanduel	1300	2025-12-29 16:10:41.922688-05
+1251	4362018	20251214_CLE@CHI	2025	15	draftkings	2000	2025-12-29 16:10:41.922688-05
+1252	4362018	20251214_CLE@CHI	2025	15	fanduel	2000	2025-12-29 16:10:41.922688-05
+1253	4362603	20251214_CLE@CHI	2025	15	draftkings	1700	2025-12-29 16:10:41.922688-05
+1254	4362603	20251214_CLE@CHI	2025	15	fanduel	1700	2025-12-29 16:10:41.922688-05
+1255	4613104	20251214_CLE@CHI	2025	15	draftkings	1600	2025-12-29 16:10:41.922688-05
+1256	4613104	20251214_CLE@CHI	2025	15	fanduel	1600	2025-12-29 16:10:41.922688-05
+1257	4039050	20251214_CLE@CHI	2025	15	draftkings	1700	2025-12-29 16:10:41.922688-05
+1258	4039050	20251214_CLE@CHI	2025	15	fanduel	1700	2025-12-29 16:10:41.922688-05
+1259	3052897	20251214_CLE@CHI	2025	15	draftkings	1900	2025-12-29 16:10:41.922688-05
+1260	3052897	20251214_CLE@CHI	2025	15	fanduel	1900	2025-12-29 16:10:41.922688-05
+1261	16800	20251214_DET@LAR	2025	15	draftkings	-175	2025-12-29 16:10:42.262495-05
+1262	16800	20251214_DET@LAR	2025	15	fanduel	-175	2025-12-29 16:10:42.262495-05
+1263	4426515	20251214_DET@LAR	2025	15	draftkings	-125	2025-12-29 16:10:42.262495-05
+1264	4426515	20251214_DET@LAR	2025	15	fanduel	-125	2025-12-29 16:10:42.262495-05
+1265	4374302	20251214_DET@LAR	2025	15	draftkings	120	2025-12-29 16:10:42.262495-05
+1266	4374302	20251214_DET@LAR	2025	15	fanduel	120	2025-12-29 16:10:42.262495-05
+1267	4426388	20251214_DET@LAR	2025	15	draftkings	195	2025-12-29 16:10:42.262495-05
+1268	4426388	20251214_DET@LAR	2025	15	fanduel	195	2025-12-29 16:10:42.262495-05
+1269	4242557	20251214_DET@LAR	2025	15	draftkings	240	2025-12-29 16:10:42.262495-05
+1270	4242557	20251214_DET@LAR	2025	15	fanduel	240	2025-12-29 16:10:42.262495-05
+1271	4360797	20251214_DET@LAR	2025	15	draftkings	430	2025-12-29 16:10:42.262495-05
+1272	4360797	20251214_DET@LAR	2025	15	fanduel	430	2025-12-29 16:10:42.262495-05
+1273	5123663	20251214_DET@LAR	2025	15	draftkings	440	2025-12-29 16:10:42.262495-05
+1274	5123663	20251214_DET@LAR	2025	15	fanduel	440	2025-12-29 16:10:42.262495-05
+1275	4570037	20251214_DET@LAR	2025	15	draftkings	650	2025-12-29 16:10:42.262495-05
+1276	4570037	20251214_DET@LAR	2025	15	fanduel	650	2025-12-29 16:10:42.262495-05
+1277	4386544	20251214_DET@LAR	2025	15	draftkings	550	2025-12-29 16:10:42.262495-05
+1278	4386544	20251214_DET@LAR	2025	15	fanduel	550	2025-12-29 16:10:42.262495-05
+1279	4426553	20251214_DET@LAR	2025	15	draftkings	500	2025-12-29 16:10:42.262495-05
+1280	4426553	20251214_DET@LAR	2025	15	fanduel	500	2025-12-29 16:10:42.262495-05
+1281	3049698	20251214_DET@LAR	2025	15	draftkings	600	2025-12-29 16:10:42.262495-05
+1282	3049698	20251214_DET@LAR	2025	15	fanduel	600	2025-12-29 16:10:42.262495-05
+1283	2973405	20251214_DET@LAR	2025	15	draftkings	700	2025-12-29 16:10:42.262495-05
+1284	2973405	20251214_DET@LAR	2025	15	fanduel	700	2025-12-29 16:10:42.262495-05
+1285	4608362	20251214_DET@LAR	2025	15	draftkings	850	2025-12-29 16:10:42.262495-05
+1286	4608362	20251214_DET@LAR	2025	15	fanduel	850	2025-12-29 16:10:42.262495-05
+1287	4710855	20251214_DET@LAR	2025	15	draftkings	1400	2025-12-29 16:10:42.262495-05
+1288	4710855	20251214_DET@LAR	2025	15	fanduel	1400	2025-12-29 16:10:42.262495-05
+1289	4569382	20251214_DET@LAR	2025	15	draftkings	1400	2025-12-29 16:10:42.262495-05
+1290	4569382	20251214_DET@LAR	2025	15	fanduel	1400	2025-12-29 16:10:42.262495-05
+1291	3126997	20251214_DET@LAR	2025	15	draftkings	2000	2025-12-29 16:10:42.262495-05
+1292	3126997	20251214_DET@LAR	2025	15	fanduel	2000	2025-12-29 16:10:42.262495-05
+1293	4596439	20251214_DET@LAR	2025	15	draftkings	4000	2025-12-29 16:10:42.262495-05
+1294	4596439	20251214_DET@LAR	2025	15	fanduel	4000	2025-12-29 16:10:42.262495-05
+1295	3128429	20251214_GB@DEN	2025	15	draftkings	205	2025-12-29 16:10:42.566458-05
+1296	3128429	20251214_GB@DEN	2025	15	fanduel	205	2025-12-29 16:10:42.566458-05
+1297	4361432	20251214_GB@DEN	2025	15	draftkings	230	2025-12-29 16:10:42.566458-05
+1298	4361432	20251214_GB@DEN	2025	15	fanduel	230	2025-12-29 16:10:42.566458-05
+1299	4431280	20251214_GB@DEN	2025	15	draftkings	230	2025-12-29 16:10:42.566458-05
+1300	4431280	20251214_GB@DEN	2025	15	fanduel	230	2025-12-29 16:10:42.566458-05
+1301	4248528	20251214_GB@DEN	2025	15	draftkings	240	2025-12-29 16:10:42.566458-05
+1302	4248528	20251214_GB@DEN	2025	15	fanduel	240	2025-12-29 16:10:42.566458-05
+1303	4362249	20251214_GB@DEN	2025	15	draftkings	320	2025-12-29 16:10:42.566458-05
+1304	4362249	20251214_GB@DEN	2025	15	fanduel	320	2025-12-29 16:10:42.566458-05
+1305	3051876	20251214_GB@DEN	2025	15	draftkings	430	2025-12-29 16:10:42.566458-05
+1306	3051876	20251214_GB@DEN	2025	15	fanduel	430	2025-12-29 16:10:42.566458-05
+1307	4686472	20251214_GB@DEN	2025	15	draftkings	410	2025-12-29 16:10:42.566458-05
+1308	4686472	20251214_GB@DEN	2025	15	fanduel	410	2025-12-29 16:10:42.566458-05
+1309	4039057	20251214_GB@DEN	2025	15	draftkings	700	2025-12-29 16:10:42.566458-05
+1310	4039057	20251214_GB@DEN	2025	15	fanduel	700	2025-12-29 16:10:42.566458-05
+1311	4428085	20251214_GB@DEN	2025	15	draftkings	850	2025-12-29 16:10:42.566458-05
+1312	4428085	20251214_GB@DEN	2025	15	fanduel	850	2025-12-29 16:10:42.566458-05
+1313	4428850	20251214_GB@DEN	2025	15	draftkings	650	2025-12-29 16:10:42.566458-05
+1314	4428850	20251214_GB@DEN	2025	15	fanduel	650	2025-12-29 16:10:42.566458-05
+1315	3911853	20251214_GB@DEN	2025	15	draftkings	800	2025-12-29 16:10:42.566458-05
+1316	3911853	20251214_GB@DEN	2025	15	fanduel	800	2025-12-29 16:10:42.566458-05
+1317	4701936	20251214_GB@DEN	2025	15	draftkings	850	2025-12-29 16:10:42.566458-05
+1318	4701936	20251214_GB@DEN	2025	15	fanduel	850	2025-12-29 16:10:42.566458-05
+1319	4383440	20251214_GB@DEN	2025	15	draftkings	1300	2025-12-29 16:10:42.566458-05
+1320	4383440	20251214_GB@DEN	2025	15	fanduel	1300	2025-12-29 16:10:42.566458-05
+1321	4360086	20251214_GB@DEN	2025	15	draftkings	1100	2025-12-29 16:10:42.566458-05
+1322	4360086	20251214_GB@DEN	2025	15	fanduel	1100	2025-12-29 16:10:42.566458-05
+1323	4431487	20251214_GB@DEN	2025	15	draftkings	1500	2025-12-29 16:10:42.566458-05
+1324	4431487	20251214_GB@DEN	2025	15	fanduel	1500	2025-12-29 16:10:42.566458-05
+1325	4430878	20251214_IND@SEA	2025	15	draftkings	-110	2025-12-29 16:10:42.769559-05
+1326	4430878	20251214_IND@SEA	2025	15	fanduel	-110	2025-12-29 16:10:42.769559-05
+1327	4576297	20251214_IND@SEA	2025	15	draftkings	195	2025-12-29 16:10:42.769559-05
+1328	4576297	20251214_IND@SEA	2025	15	fanduel	195	2025-12-29 16:10:42.769559-05
+1329	2977187	20251214_IND@SEA	2025	15	draftkings	320	2025-12-29 16:10:42.769559-05
+1330	2977187	20251214_IND@SEA	2025	15	fanduel	320	2025-12-29 16:10:42.769559-05
+1331	4032473	20251214_IND@SEA	2025	15	draftkings	290	2025-12-29 16:10:42.769559-05
+1332	4032473	20251214_IND@SEA	2025	15	fanduel	290	2025-12-29 16:10:42.769559-05
+1333	4431459	20251214_IND@SEA	2025	15	draftkings	370	2025-12-29 16:10:42.769559-05
+1334	4431459	20251214_IND@SEA	2025	15	fanduel	370	2025-12-29 16:10:42.769559-05
+1335	4360078	20251214_IND@SEA	2025	15	draftkings	460	2025-12-29 16:10:42.769559-05
+1336	4360078	20251214_IND@SEA	2025	15	fanduel	460	2025-12-29 16:10:42.769559-05
+1337	4035687	20251214_IND@SEA	2025	15	draftkings	460	2025-12-29 16:10:42.769559-05
+1338	4035687	20251214_IND@SEA	2025	15	fanduel	460	2025-12-29 16:10:42.769559-05
+1339	4688813	20251214_IND@SEA	2025	15	draftkings	750	2025-12-29 16:10:42.769559-05
+1340	4688813	20251214_IND@SEA	2025	15	fanduel	750	2025-12-29 16:10:42.769559-05
+1341	4360405	20251214_IND@SEA	2025	15	draftkings	1300	2025-12-29 16:10:42.769559-05
+1342	4360405	20251214_IND@SEA	2025	15	fanduel	1300	2025-12-29 16:10:42.769559-05
+1343	2975863	20251214_IND@SEA	2025	15	draftkings	1200	2025-12-29 16:10:42.769559-05
+1344	2975863	20251214_IND@SEA	2025	15	fanduel	1200	2025-12-29 16:10:42.769559-05
+1345	4241983	20251214_IND@SEA	2025	15	draftkings	1300	2025-12-29 16:10:42.769559-05
+1346	4241983	20251214_IND@SEA	2025	15	fanduel	1300	2025-12-29 16:10:42.769559-05
+1347	4569547	20251214_IND@SEA	2025	15	draftkings	2200	2025-12-29 16:10:42.769559-05
+1348	4569547	20251214_IND@SEA	2025	15	fanduel	2200	2025-12-29 16:10:42.769559-05
+1349	3051889	20251214_IND@SEA	2025	15	draftkings	4000	2025-12-29 16:10:42.769559-05
+1350	3051889	20251214_IND@SEA	2025	15	fanduel	4000	2025-12-29 16:10:42.769559-05
+1351	2998565	20251214_IND@SEA	2025	15	draftkings	2700	2025-12-29 16:10:42.769559-05
+1352	2998565	20251214_IND@SEA	2025	15	fanduel	2700	2025-12-29 16:10:42.769559-05
+1353	4362523	20251214_IND@SEA	2025	15	draftkings	3500	2025-12-29 16:10:42.769559-05
+1354	4362523	20251214_IND@SEA	2025	15	fanduel	3500	2025-12-29 16:10:42.769559-05
+1355	15847	20251214_LAC@KC	2025	15	draftkings	230	2025-12-29 16:10:42.978686-05
+1356	15847	20251214_LAC@KC	2025	15	fanduel	230	2025-12-29 16:10:42.978686-05
+1357	4612826	20251214_LAC@KC	2025	15	draftkings	255	2025-12-29 16:10:42.978686-05
+1358	4612826	20251214_LAC@KC	2025	15	fanduel	255	2025-12-29 16:10:42.978686-05
+1359	4683062	20251214_LAC@KC	2025	15	draftkings	330	2025-12-29 16:10:42.978686-05
+1360	4683062	20251214_LAC@KC	2025	15	fanduel	330	2025-12-29 16:10:42.978686-05
+1361	4595342	20251214_LAC@KC	2025	15	draftkings	320	2025-12-29 16:10:42.978686-05
+1362	4595342	20251214_LAC@KC	2025	15	fanduel	320	2025-12-29 16:10:42.978686-05
+1363	15818	20251214_LAC@KC	2025	15	draftkings	320	2025-12-29 16:10:42.978686-05
+1364	15818	20251214_LAC@KC	2025	15	fanduel	320	2025-12-29 16:10:42.978686-05
+1365	4686612	20251214_LAC@KC	2025	15	draftkings	450	2025-12-29 16:10:42.978686-05
+1366	4686612	20251214_LAC@KC	2025	15	fanduel	450	2025-12-29 16:10:42.978686-05
+1367	4240472	20251214_LAC@KC	2025	15	draftkings	850	2025-12-29 16:10:42.978686-05
+1368	4240472	20251214_LAC@KC	2025	15	fanduel	850	2025-12-29 16:10:42.978686-05
+1369	3120348	20251214_LAC@KC	2025	15	draftkings	850	2025-12-29 16:10:42.978686-05
+1370	3120348	20251214_LAC@KC	2025	15	fanduel	850	2025-12-29 16:10:42.978686-05
+1371	3127292	20251214_LAC@KC	2025	15	draftkings	1300	2025-12-29 16:10:42.978686-05
+1372	3127292	20251214_LAC@KC	2025	15	fanduel	1300	2025-12-29 16:10:42.978686-05
+1373	3915486	20251214_LAC@KC	2025	15	draftkings	2200	2025-12-29 16:10:42.978686-05
+1374	3915486	20251214_LAC@KC	2025	15	fanduel	2200	2025-12-29 16:10:42.978686-05
+1375	4430870	20251214_LAC@KC	2025	15	draftkings	1500	2025-12-29 16:10:42.978686-05
+1376	4430870	20251214_LAC@KC	2025	15	fanduel	1500	2025-12-29 16:10:42.978686-05
+1377	5082630	20251214_LAC@KC	2025	15	draftkings	3300	2025-12-29 16:10:42.978686-05
+1378	5082630	20251214_LAC@KC	2025	15	fanduel	3300	2025-12-29 16:10:42.978686-05
+1379	2975674	20251214_LAC@KC	2025	15	draftkings	3500	2025-12-29 16:10:42.978686-05
+1380	2975674	20251214_LAC@KC	2025	15	fanduel	3500	2025-12-29 16:10:42.978686-05
+1381	4047646	20251214_LV@PHI	2025	15	draftkings	150	2025-12-29 16:10:43.259591-05
+1382	4047646	20251214_LV@PHI	2025	15	fanduel	150	2025-12-29 16:10:43.259591-05
+1383	4241478	20251214_LV@PHI	2025	15	draftkings	215	2025-12-29 16:10:43.259591-05
+1384	4241478	20251214_LV@PHI	2025	15	fanduel	215	2025-12-29 16:10:43.259591-05
+1385	3121023	20251214_LV@PHI	2025	15	draftkings	280	2025-12-29 16:10:43.259591-05
+1386	3121023	20251214_LV@PHI	2025	15	fanduel	280	2025-12-29 16:10:43.259591-05
+1387	4428718	20251214_LV@PHI	2025	15	draftkings	475	2025-12-29 16:10:43.259591-05
+1388	4428718	20251214_LV@PHI	2025	15	fanduel	475	2025-12-29 16:10:43.259591-05
+1389	4361409	20251214_LV@PHI	2025	15	draftkings	850	2025-12-29 16:10:43.259591-05
+1390	4361409	20251214_LV@PHI	2025	15	fanduel	850	2025-12-29 16:10:43.259591-05
+1391	4603186	20251214_LV@PHI	2025	15	draftkings	850	2025-12-29 16:10:43.259591-05
+1392	4603186	20251214_LV@PHI	2025	15	fanduel	850	2025-12-29 16:10:43.259591-05
+1393	4429086	20251214_LV@PHI	2025	15	draftkings	850	2025-12-29 16:10:43.259591-05
+1394	4429086	20251214_LV@PHI	2025	15	fanduel	850	2025-12-29 16:10:43.259591-05
+1395	4715355	20251214_LV@PHI	2025	15	draftkings	1900	2025-12-29 16:10:43.259591-05
+1396	4715355	20251214_LV@PHI	2025	15	fanduel	1900	2025-12-29 16:10:43.259591-05
+1397	2577327	20251214_LV@PHI	2025	15	draftkings	1500	2025-12-29 16:10:43.259591-05
+1398	2577327	20251214_LV@PHI	2025	15	fanduel	1500	2025-12-29 16:10:43.259591-05
+1399	4241374	20251214_LV@PHI	2025	15	draftkings	1400	2025-12-29 16:10:43.259591-05
+1400	4241374	20251214_LV@PHI	2025	15	fanduel	1400	2025-12-29 16:10:43.259591-05
+1401	4039160	20251214_LV@PHI	2025	15	draftkings	2800	2025-12-29 16:10:43.259591-05
+1402	4039160	20251214_LV@PHI	2025	15	fanduel	2800	2025-12-29 16:10:43.259591-05
+1403	3926231	20251214_LV@PHI	2025	15	draftkings	2700	2025-12-29 16:10:43.259591-05
+1404	3926231	20251214_LV@PHI	2025	15	fanduel	2700	2025-12-29 16:10:43.259591-05
+1405	4432775	20251214_LV@PHI	2025	15	draftkings	2500	2025-12-29 16:10:43.259591-05
+1406	4432775	20251214_LV@PHI	2025	15	fanduel	2500	2025-12-29 16:10:43.259591-05
+1407	4372026	20251214_LV@PHI	2025	15	draftkings	2800	2025-12-29 16:10:43.259591-05
+1408	4372026	20251214_LV@PHI	2025	15	fanduel	2800	2025-12-29 16:10:43.259591-05
+1409	4361332	20251214_LV@PHI	2025	15	draftkings	4000	2025-12-29 16:10:43.259591-05
+1410	4361332	20251214_LV@PHI	2025	15	fanduel	4000	2025-12-29 16:10:43.259591-05
+1411	5155825	20251214_LV@PHI	2025	15	draftkings	3500	2025-12-29 16:10:43.259591-05
+1412	5155825	20251214_LV@PHI	2025	15	fanduel	3500	2025-12-29 16:10:43.259591-05
+1413	4242355	20251214_MIN@DAL	2025	15	draftkings	125	2025-12-29 16:10:43.636353-05
+1414	4242355	20251214_MIN@DAL	2025	15	fanduel	125	2025-12-29 16:10:43.636353-05
+1415	4241389	20251214_MIN@DAL	2025	15	draftkings	120	2025-12-29 16:10:43.636353-05
+1416	4241389	20251214_MIN@DAL	2025	15	fanduel	120	2025-12-29 16:10:43.636353-05
+1417	4426354	20251214_MIN@DAL	2025	15	draftkings	120	2025-12-29 16:10:43.636353-05
+1418	4426354	20251214_MIN@DAL	2025	15	fanduel	120	2025-12-29 16:10:43.636353-05
+1419	4262921	20251214_MIN@DAL	2025	15	draftkings	175	2025-12-29 16:10:43.636353-05
+1420	4262921	20251214_MIN@DAL	2025	15	fanduel	175	2025-12-29 16:10:43.636353-05
+1421	4429205	20251214_MIN@DAL	2025	15	draftkings	210	2025-12-29 16:10:43.636353-05
+1422	4429205	20251214_MIN@DAL	2025	15	fanduel	210	2025-12-29 16:10:43.636353-05
+1423	5083754	20251214_MIN@DAL	2025	15	draftkings	450	2025-12-29 16:10:43.636353-05
+1424	5083754	20251214_MIN@DAL	2025	15	fanduel	450	2025-12-29 16:10:43.636353-05
+1425	4036133	20251214_MIN@DAL	2025	15	draftkings	400	2025-12-29 16:10:43.636353-05
+1426	4036133	20251214_MIN@DAL	2025	15	fanduel	400	2025-12-29 16:10:43.636353-05
+1427	4382466	20251214_MIN@DAL	2025	15	draftkings	500	2025-12-29 16:10:43.636353-05
+1428	4382466	20251214_MIN@DAL	2025	15	fanduel	500	2025-12-29 16:10:43.636353-05
+1429	3676833	20251214_MIN@DAL	2025	15	draftkings	600	2025-12-29 16:10:43.636353-05
+1430	3676833	20251214_MIN@DAL	2025	15	fanduel	600	2025-12-29 16:10:43.636353-05
+1431	4372096	20251214_MIN@DAL	2025	15	draftkings	900	2025-12-29 16:10:43.636353-05
+1432	4372096	20251214_MIN@DAL	2025	15	fanduel	900	2025-12-29 16:10:43.636353-05
+1433	3921690	20251214_MIN@DAL	2025	15	draftkings	800	2025-12-29 16:10:43.636353-05
+1434	3921690	20251214_MIN@DAL	2025	15	fanduel	800	2025-12-29 16:10:43.636353-05
+1435	4360967	20251214_MIN@DAL	2025	15	draftkings	950	2025-12-29 16:10:43.636353-05
+1436	4360967	20251214_MIN@DAL	2025	15	fanduel	950	2025-12-29 16:10:43.636353-05
+1437	4565185	20251214_MIN@DAL	2025	15	draftkings	2700	2025-12-29 16:10:43.636353-05
+1438	4565185	20251214_MIN@DAL	2025	15	fanduel	2700	2025-12-29 16:10:43.636353-05
+1439	4426485	20251214_MIN@DAL	2025	15	draftkings	1700	2025-12-29 16:10:43.636353-05
+1440	4426485	20251214_MIN@DAL	2025	15	fanduel	1700	2025-12-29 16:10:43.636353-05
+1441	4373030	20251214_MIN@DAL	2025	15	draftkings	3300	2025-12-29 16:10:43.636353-05
+1442	4373030	20251214_MIN@DAL	2025	15	fanduel	3300	2025-12-29 16:10:43.636353-05
+1443	4433959	20251214_MIN@DAL	2025	15	draftkings	3000	2025-12-29 16:10:43.636353-05
+1444	4433959	20251214_MIN@DAL	2025	15	fanduel	3000	2025-12-29 16:10:43.636353-05
+1445	4430656	20251214_MIN@DAL	2025	15	draftkings	2200	2025-12-29 16:10:43.636353-05
+1446	4430656	20251214_MIN@DAL	2025	15	fanduel	2200	2025-12-29 16:10:43.636353-05
+1447	3916433	20251214_NYJ@JAX	2025	15	draftkings	165	2025-12-29 16:10:43.93833-05
+1448	3916433	20251214_NYJ@JAX	2025	15	fanduel	165	2025-12-29 16:10:43.93833-05
+1449	4432773	20251214_NYJ@JAX	2025	15	draftkings	210	2025-12-29 16:10:43.93833-05
+1450	4432773	20251214_NYJ@JAX	2025	15	fanduel	210	2025-12-29 16:10:43.93833-05
+1451	4430539	20251214_NYJ@JAX	2025	15	draftkings	250	2025-12-29 16:10:43.93833-05
+1452	4430539	20251214_NYJ@JAX	2025	15	fanduel	250	2025-12-29 16:10:43.93833-05
+1453	4432620	20251214_NYJ@JAX	2025	15	draftkings	290	2025-12-29 16:10:43.93833-05
+1454	4432620	20251214_NYJ@JAX	2025	15	fanduel	290	2025-12-29 16:10:43.93833-05
+1455	3134353	20251214_NYJ@JAX	2025	15	draftkings	500	2025-12-29 16:10:43.93833-05
+1456	3134353	20251214_NYJ@JAX	2025	15	fanduel	500	2025-12-29 16:10:43.93833-05
+1457	4597500	20251214_NYJ@JAX	2025	15	draftkings	390	2025-12-29 16:10:43.93833-05
+1458	4597500	20251214_NYJ@JAX	2025	15	fanduel	390	2025-12-29 16:10:43.93833-05
+1459	4567096	20251214_NYJ@JAX	2025	15	draftkings	500	2025-12-29 16:10:43.93833-05
+1460	4567096	20251214_NYJ@JAX	2025	15	fanduel	500	2025-12-29 16:10:43.93833-05
+1461	4361577	20251214_NYJ@JAX	2025	15	draftkings	1900	2025-12-29 16:10:43.93833-05
+1462	4361577	20251214_NYJ@JAX	2025	15	fanduel	1900	2025-12-29 16:10:43.93833-05
+1463	4361372	20251214_NYJ@JAX	2025	15	draftkings	600	2025-12-29 16:10:43.93833-05
+1464	4361372	20251214_NYJ@JAX	2025	15	fanduel	600	2025-12-29 16:10:43.93833-05
+1465	4569371	20251214_NYJ@JAX	2025	15	draftkings	650	2025-12-29 16:10:43.93833-05
+1466	4569371	20251214_NYJ@JAX	2025	15	fanduel	650	2025-12-29 16:10:43.93833-05
+1467	4244049	20251214_NYJ@JAX	2025	15	draftkings	2000	2025-12-29 16:10:43.93833-05
+1468	4244049	20251214_NYJ@JAX	2025	15	fanduel	2000	2025-12-29 16:10:43.93833-05
+1469	3052096	20251214_NYJ@JAX	2025	15	draftkings	1000	2025-12-29 16:10:43.93833-05
+1470	3052096	20251214_NYJ@JAX	2025	15	fanduel	1000	2025-12-29 16:10:43.93833-05
+1471	4241410	20251214_NYJ@JAX	2025	15	draftkings	1700	2025-12-29 16:10:43.93833-05
+1472	4241410	20251214_NYJ@JAX	2025	15	fanduel	1700	2025-12-29 16:10:43.93833-05
+1473	4250764	20251214_NYJ@JAX	2025	15	draftkings	1500	2025-12-29 16:10:43.93833-05
+1474	4250764	20251214_NYJ@JAX	2025	15	fanduel	1500	2025-12-29 16:10:43.93833-05
+1475	4429105	20251214_NYJ@JAX	2025	15	draftkings	2700	2025-12-29 16:10:43.93833-05
+1476	4429105	20251214_NYJ@JAX	2025	15	fanduel	2700	2025-12-29 16:10:43.93833-05
+1477	3040151	20251214_TEN@SF	2025	15	draftkings	115	2025-12-29 16:10:44.146483-05
+1478	3040151	20251214_TEN@SF	2025	15	fanduel	115	2025-12-29 16:10:44.146483-05
+1479	3886598	20251214_TEN@SF	2025	15	draftkings	170	2025-12-29 16:10:44.146483-05
+1480	3886598	20251214_TEN@SF	2025	15	fanduel	170	2025-12-29 16:10:44.146483-05
+1481	4428209	20251214_TEN@SF	2025	15	draftkings	285	2025-12-29 16:10:44.146483-05
+1482	4428209	20251214_TEN@SF	2025	15	fanduel	285	2025-12-29 16:10:44.146483-05
+1483	4431268	20251214_TEN@SF	2025	15	draftkings	360	2025-12-29 16:10:44.146483-05
+1484	4431268	20251214_TEN@SF	2025	15	fanduel	360	2025-12-29 16:10:44.146483-05
+1485	4360635	20251214_TEN@SF	2025	15	draftkings	350	2025-12-29 16:10:44.146483-05
+1486	4360635	20251214_TEN@SF	2025	15	fanduel	350	2025-12-29 16:10:44.146483-05
+1487	4883647	20251214_TEN@SF	2025	15	draftkings	330	2025-12-29 16:10:44.146483-05
+1488	4883647	20251214_TEN@SF	2025	15	fanduel	330	2025-12-29 16:10:44.146483-05
+1489	3043116	20251214_TEN@SF	2025	15	draftkings	500	2025-12-29 16:10:44.146483-05
+1490	3043116	20251214_TEN@SF	2025	15	fanduel	500	2025-12-29 16:10:44.146483-05
+1491	4686728	20251214_TEN@SF	2025	15	draftkings	500	2025-12-29 16:10:44.146483-05
+1492	4686728	20251214_TEN@SF	2025	15	fanduel	500	2025-12-29 16:10:44.146483-05
+1493	3045523	20251214_TEN@SF	2025	15	draftkings	1400	2025-12-29 16:10:44.146483-05
+1494	3045523	20251214_TEN@SF	2025	15	fanduel	1400	2025-12-29 16:10:44.146483-05
+1495	4040612	20251214_TEN@SF	2025	15	draftkings	700	2025-12-29 16:10:44.146483-05
+1496	4040612	20251214_TEN@SF	2025	15	fanduel	700	2025-12-29 16:10:44.146483-05
+1497	3930066	20251214_TEN@SF	2025	15	draftkings	600	2025-12-29 16:10:44.146483-05
+1498	3930066	20251214_TEN@SF	2025	15	fanduel	600	2025-12-29 16:10:44.146483-05
+1499	4431466	20251214_TEN@SF	2025	15	draftkings	1900	2025-12-29 16:10:44.146483-05
+1500	4431466	20251214_TEN@SF	2025	15	fanduel	1900	2025-12-29 16:10:44.146483-05
+1501	4259147	20251214_TEN@SF	2025	15	draftkings	1600	2025-12-29 16:10:44.146483-05
+1502	4259147	20251214_TEN@SF	2025	15	fanduel	1600	2025-12-29 16:10:44.146483-05
+1503	4430191	20251214_TEN@SF	2025	15	draftkings	1900	2025-12-29 16:10:44.146483-05
+1504	4430191	20251214_TEN@SF	2025	15	fanduel	1900	2025-12-29 16:10:44.146483-05
+1505	4057082	20251214_TEN@SF	2025	15	draftkings	2500	2025-12-29 16:10:44.146483-05
+1506	4057082	20251214_TEN@SF	2025	15	fanduel	2500	2025-12-29 16:10:44.146483-05
+1507	4360978	20251214_TEN@SF	2025	15	draftkings	4500	2025-12-29 16:10:44.146483-05
+1508	4360978	20251214_TEN@SF	2025	15	fanduel	4500	2025-12-29 16:10:44.146483-05
+1509	3916204	20251214_TEN@SF	2025	15	draftkings	2900	2025-12-29 16:10:44.146483-05
+1510	3916204	20251214_TEN@SF	2025	15	fanduel	2900	2025-12-29 16:10:44.146483-05
+1511	3121422	20251214_WSH@NYG	2025	15	draftkings	190	2025-12-29 16:10:44.411318-05
+1512	3121422	20251214_WSH@NYG	2025	15	fanduel	190	2025-12-29 16:10:44.411318-05
+1513	4569587	20251214_WSH@NYG	2025	15	draftkings	220	2025-12-29 16:10:44.411318-05
+1514	4569587	20251214_WSH@NYG	2025	15	fanduel	220	2025-12-29 16:10:44.411318-05
+1515	3126486	20251214_WSH@NYG	2025	15	draftkings	210	2025-12-29 16:10:44.411318-05
+1516	3126486	20251214_WSH@NYG	2025	15	fanduel	210	2025-12-29 16:10:44.411318-05
+1517	4429148	20251214_WSH@NYG	2025	15	draftkings	225	2025-12-29 16:10:44.411318-05
+1518	4429148	20251214_WSH@NYG	2025	15	fanduel	225	2025-12-29 16:10:44.411318-05
+1519	3916945	20251214_WSH@NYG	2025	15	draftkings	320	2025-12-29 16:10:44.411318-05
+1520	3916945	20251214_WSH@NYG	2025	15	fanduel	320	2025-12-29 16:10:44.411318-05
+1521	4567156	20251214_WSH@NYG	2025	15	draftkings	460	2025-12-29 16:10:44.411318-05
+1522	4567156	20251214_WSH@NYG	2025	15	fanduel	460	2025-12-29 16:10:44.411318-05
+1523	4242540	20251214_WSH@NYG	2025	15	draftkings	500	2025-12-29 16:10:44.411318-05
+1524	4242540	20251214_WSH@NYG	2025	15	fanduel	500	2025-12-29 16:10:44.411318-05
+1525	4690923	20251214_WSH@NYG	2025	15	draftkings	450	2025-12-29 16:10:44.411318-05
+1526	4690923	20251214_WSH@NYG	2025	15	fanduel	450	2025-12-29 16:10:44.411318-05
+1527	4361516	20251214_WSH@NYG	2025	15	draftkings	550	2025-12-29 16:10:44.411318-05
+1528	4361516	20251214_WSH@NYG	2025	15	fanduel	550	2025-12-29 16:10:44.411318-05
+1529	4048228	20251214_WSH@NYG	2025	15	draftkings	700	2025-12-29 16:10:44.411318-05
+1530	4048228	20251214_WSH@NYG	2025	15	fanduel	700	2025-12-29 16:10:44.411318-05
+1531	4361088	20251214_WSH@NYG	2025	15	draftkings	1000	2025-12-29 16:10:44.411318-05
+1532	4361088	20251214_WSH@NYG	2025	15	fanduel	1000	2025-12-29 16:10:44.411318-05
+1533	2531358	20251214_WSH@NYG	2025	15	draftkings	1500	2025-12-29 16:10:44.411318-05
+1534	2531358	20251214_WSH@NYG	2025	15	fanduel	1500	2025-12-29 16:10:44.411318-05
+1535	4692590	20251214_WSH@NYG	2025	15	draftkings	1900	2025-12-29 16:10:44.411318-05
+1536	4692590	20251214_WSH@NYG	2025	15	fanduel	1900	2025-12-29 16:10:44.411318-05
+1537	4047650	20251215_MIA@PIT	2025	15	draftkings	155	2025-12-29 16:10:44.636347-05
+1538	4047650	20251215_MIA@PIT	2025	15	fanduel	155	2025-12-29 16:10:44.636347-05
+1539	4372016	20251215_MIA@PIT	2025	15	draftkings	200	2025-12-29 16:10:44.636347-05
+1540	4372016	20251215_MIA@PIT	2025	15	fanduel	200	2025-12-29 16:10:44.636347-05
+1541	2576925	20251215_MIA@PIT	2025	15	draftkings	260	2025-12-29 16:10:44.636347-05
+1542	2576925	20251215_MIA@PIT	2025	15	fanduel	260	2025-12-29 16:10:44.636347-05
+1543	4361411	20251215_MIA@PIT	2025	15	draftkings	390	2025-12-29 16:10:44.636347-05
+1544	4361411	20251215_MIA@PIT	2025	15	fanduel	390	2025-12-29 16:10:44.636347-05
+1545	4430802	20251215_MIA@PIT	2025	15	draftkings	430	2025-12-29 16:10:44.636347-05
+1546	4430802	20251215_MIA@PIT	2025	15	fanduel	430	2025-12-29 16:10:44.636347-05
+1547	3054212	20251215_MIA@PIT	2025	15	draftkings	450	2025-12-29 16:10:44.636347-05
+1548	3054212	20251215_MIA@PIT	2025	15	fanduel	450	2025-12-29 16:10:44.636347-05
+1549	4569603	20251215_MIA@PIT	2025	15	draftkings	490	2025-12-29 16:10:44.636347-05
+1550	4569603	20251215_MIA@PIT	2025	15	fanduel	490	2025-12-29 16:10:44.636347-05
+1551	4243389	20251215_MIA@PIT	2025	15	draftkings	550	2025-12-29 16:10:44.636347-05
+1552	4243389	20251215_MIA@PIT	2025	15	fanduel	550	2025-12-29 16:10:44.636347-05
+1553	4367209	20251215_MIA@PIT	2025	15	draftkings	600	2025-12-29 16:10:44.636347-05
+1554	4367209	20251215_MIA@PIT	2025	15	fanduel	600	2025-12-29 16:10:44.636347-05
+1555	16460	20251215_MIA@PIT	2025	15	draftkings	900	2025-12-29 16:10:44.636347-05
+1556	16460	20251215_MIA@PIT	2025	15	fanduel	900	2025-12-29 16:10:44.636347-05
+1557	3051738	20251215_MIA@PIT	2025	15	draftkings	950	2025-12-29 16:10:44.636347-05
+1558	3051738	20251215_MIA@PIT	2025	15	fanduel	950	2025-12-29 16:10:44.636347-05
+1559	4365395	20251215_MIA@PIT	2025	15	draftkings	1000	2025-12-29 16:10:44.636347-05
+1560	4365395	20251215_MIA@PIT	2025	15	fanduel	1000	2025-12-29 16:10:44.636347-05
+1561	3929785	20251215_MIA@PIT	2025	15	draftkings	1800	2025-12-29 16:10:44.636347-05
+1562	3929785	20251215_MIA@PIT	2025	15	fanduel	1800	2025-12-29 16:10:44.636347-05
+1563	4035656	20251215_MIA@PIT	2025	15	draftkings	1900	2025-12-29 16:10:44.636347-05
+1564	4035656	20251215_MIA@PIT	2025	15	fanduel	1900	2025-12-29 16:10:44.636347-05
+1565	4241961	20251215_MIA@PIT	2025	15	draftkings	1900	2025-12-29 16:10:44.636347-05
+1566	4241961	20251215_MIA@PIT	2025	15	fanduel	1900	2025-12-29 16:10:44.636347-05
+1567	4036335	20251215_MIA@PIT	2025	15	draftkings	1600	2025-12-29 16:10:44.636347-05
+1568	4036335	20251215_MIA@PIT	2025	15	fanduel	1600	2025-12-29 16:10:44.636347-05
+1569	3914397	20251215_MIA@PIT	2025	15	draftkings	3000	2025-12-29 16:10:44.636347-05
+1570	3914397	20251215_MIA@PIT	2025	15	fanduel	3000	2025-12-29 16:10:44.636347-05
+1571	4426515	20251218_LAR@SEA	2025	16	draftkings	135	2025-12-29 16:10:44.643545-05
+1572	4426515	20251218_LAR@SEA	2025	16	fanduel	135	2025-12-29 16:10:44.643545-05
+1573	4430878	20251218_LAR@SEA	2025	16	draftkings	120	2025-12-29 16:10:44.643545-05
+1574	4430878	20251218_LAR@SEA	2025	16	fanduel	120	2025-12-29 16:10:44.643545-05
+1575	4242557	20251218_LAR@SEA	2025	16	draftkings	240	2025-12-29 16:10:44.643545-05
+1576	4242557	20251218_LAR@SEA	2025	16	fanduel	240	2025-12-29 16:10:44.643545-05
+1577	4576297	20251218_LAR@SEA	2025	16	draftkings	250	2025-12-29 16:10:44.643545-05
+1578	4576297	20251218_LAR@SEA	2025	16	fanduel	250	2025-12-29 16:10:44.643545-05
+1579	4032473	20251218_LAR@SEA	2025	16	draftkings	360	2025-12-29 16:10:44.643545-05
+1580	4032473	20251218_LAR@SEA	2025	16	fanduel	360	2025-12-29 16:10:44.643545-05
+1581	2977187	20251218_LAR@SEA	2025	16	draftkings	375	2025-12-29 16:10:44.643545-05
+1582	2977187	20251218_LAR@SEA	2025	16	fanduel	375	2025-12-29 16:10:44.643545-05
+1583	4570037	20251218_LAR@SEA	2025	16	draftkings	500	2025-12-29 16:10:44.643545-05
+1584	4570037	20251218_LAR@SEA	2025	16	fanduel	500	2025-12-29 16:10:44.643545-05
+1585	4710855	20251218_LAR@SEA	2025	16	draftkings	480	2025-12-29 16:10:44.643545-05
+1586	4710855	20251218_LAR@SEA	2025	16	fanduel	480	2025-12-29 16:10:44.643545-05
+1587	4426553	20251218_LAR@SEA	2025	16	draftkings	525	2025-12-29 16:10:44.643545-05
+1588	4426553	20251218_LAR@SEA	2025	16	fanduel	525	2025-12-29 16:10:44.643545-05
+1589	4360797	20251218_LAR@SEA	2025	16	draftkings	1000	2025-12-29 16:10:44.643545-05
+1590	4360797	20251218_LAR@SEA	2025	16	fanduel	1000	2025-12-29 16:10:44.643545-05
+1591	4386544	20251218_LAR@SEA	2025	16	draftkings	1600	2025-12-29 16:10:44.643545-05
+1592	4386544	20251218_LAR@SEA	2025	16	fanduel	1600	2025-12-29 16:10:44.643545-05
+1593	2975863	20251218_LAR@SEA	2025	16	draftkings	1600	2025-12-29 16:10:44.643545-05
+1594	2975863	20251218_LAR@SEA	2025	16	fanduel	1600	2025-12-29 16:10:44.643545-05
+1595	4569382	20251218_LAR@SEA	2025	16	draftkings	1200	2025-12-29 16:10:44.643545-05
+1596	4569382	20251218_LAR@SEA	2025	16	fanduel	1200	2025-12-29 16:10:44.643545-05
+1597	4569547	20251218_LAR@SEA	2025	16	draftkings	1700	2025-12-29 16:10:44.643545-05
+1598	4569547	20251218_LAR@SEA	2025	16	fanduel	1700	2025-12-29 16:10:44.643545-05
+1599	2576399	20251218_LAR@SEA	2025	16	draftkings	5000	2025-12-29 16:10:44.643545-05
+1600	2576399	20251218_LAR@SEA	2025	16	fanduel	5000	2025-12-29 16:10:44.643545-05
+1601	4241983	20251218_LAR@SEA	2025	16	draftkings	2500	2025-12-29 16:10:44.643545-05
+1602	4241983	20251218_LAR@SEA	2025	16	fanduel	2500	2025-12-29 16:10:44.643545-05
+1603	4401805	20251218_LAR@SEA	2025	16	draftkings	3300	2025-12-29 16:10:44.643545-05
+1604	4401805	20251218_LAR@SEA	2025	16	fanduel	3300	2025-12-29 16:10:44.643545-05
+1605	4248528	20251220_GB@CHI	2025	16	draftkings	200	2025-12-29 16:10:45.33472-05
+1606	4248528	20251220_GB@CHI	2025	16	fanduel	200	2025-12-29 16:10:45.33472-05
+1607	3915416	20251220_GB@CHI	2025	16	draftkings	170	2025-12-29 16:10:45.33472-05
+1608	3915416	20251220_GB@CHI	2025	16	fanduel	170	2025-12-29 16:10:45.33472-05
+1609	4723086	20251220_GB@CHI	2025	16	draftkings	210	2025-12-29 16:10:45.33472-05
+1610	4723086	20251220_GB@CHI	2025	16	fanduel	210	2025-12-29 16:10:45.33472-05
+1611	4362249	20251220_GB@CHI	2025	16	draftkings	220	2025-12-29 16:10:45.33472-05
+1612	4362249	20251220_GB@CHI	2025	16	fanduel	220	2025-12-29 16:10:45.33472-05
+1613	4361432	20251220_GB@CHI	2025	16	draftkings	210	2025-12-29 16:10:45.33472-05
+1614	4361432	20251220_GB@CHI	2025	16	fanduel	210	2025-12-29 16:10:45.33472-05
+1615	3917914	20251220_GB@CHI	2025	16	draftkings	330	2025-12-29 16:10:45.33472-05
+1616	3917914	20251220_GB@CHI	2025	16	fanduel	330	2025-12-29 16:10:45.33472-05
+1617	4258595	20251220_GB@CHI	2025	16	draftkings	340	2025-12-29 16:10:45.33472-05
+1618	4258595	20251220_GB@CHI	2025	16	fanduel	340	2025-12-29 16:10:45.33472-05
+1619	4428085	20251220_GB@CHI	2025	16	draftkings	650	2025-12-29 16:10:45.33472-05
+1620	4428085	20251220_GB@CHI	2025	16	fanduel	650	2025-12-29 16:10:45.33472-05
+1621	4701936	20251220_GB@CHI	2025	16	draftkings	575	2025-12-29 16:10:45.33472-05
+1622	4701936	20251220_GB@CHI	2025	16	fanduel	575	2025-12-29 16:10:45.33472-05
+1623	4039050	20251220_GB@CHI	2025	16	draftkings	750	2025-12-29 16:10:45.33472-05
+1624	4039050	20251220_GB@CHI	2025	16	fanduel	750	2025-12-29 16:10:45.33472-05
+1625	4428850	20251220_GB@CHI	2025	16	draftkings	700	2025-12-29 16:10:45.33472-05
+1626	4428850	20251220_GB@CHI	2025	16	fanduel	700	2025-12-29 16:10:45.33472-05
+1627	5160110	20251220_GB@CHI	2025	16	draftkings	1600	2025-12-29 16:10:45.33472-05
+1628	5160110	20251220_GB@CHI	2025	16	fanduel	1600	2025-12-29 16:10:45.33472-05
+1629	3052897	20251220_GB@CHI	2025	16	draftkings	2000	2025-12-29 16:10:45.33472-05
+1630	3052897	20251220_GB@CHI	2025	16	fanduel	2000	2025-12-29 16:10:45.33472-05
+1631	4431487	20251220_GB@CHI	2025	16	draftkings	2000	2025-12-29 16:10:45.33472-05
+1632	4431487	20251220_GB@CHI	2025	16	fanduel	2000	2025-12-29 16:10:45.33472-05
+1633	4047646	20251220_PHI@WSH	2025	16	draftkings	130	2025-12-29 16:10:45.638154-05
+1634	4047646	20251220_PHI@WSH	2025	16	fanduel	130	2025-12-29 16:10:45.638154-05
+1635	4241478	20251220_PHI@WSH	2025	16	draftkings	180	2025-12-29 16:10:45.638154-05
+1636	4241478	20251220_PHI@WSH	2025	16	fanduel	180	2025-12-29 16:10:45.638154-05
+1637	3121023	20251220_PHI@WSH	2025	16	draftkings	190	2025-12-29 16:10:45.638154-05
+1638	3121023	20251220_PHI@WSH	2025	16	fanduel	190	2025-12-29 16:10:45.638154-05
+1639	3121422	20251220_PHI@WSH	2025	16	draftkings	230	2025-12-29 16:10:45.638154-05
+1640	3121422	20251220_PHI@WSH	2025	16	fanduel	230	2025-12-29 16:10:45.638154-05
+1641	3126486	20251220_PHI@WSH	2025	16	draftkings	265	2025-12-29 16:10:45.638154-05
+1642	3126486	20251220_PHI@WSH	2025	16	fanduel	265	2025-12-29 16:10:45.638154-05
+1643	4567156	20251220_PHI@WSH	2025	16	draftkings	650	2025-12-29 16:10:45.638154-05
+1644	4567156	20251220_PHI@WSH	2025	16	fanduel	650	2025-12-29 16:10:45.638154-05
+1645	4361409	20251220_PHI@WSH	2025	16	draftkings	750	2025-12-29 16:10:45.638154-05
+1646	4361409	20251220_PHI@WSH	2025	16	fanduel	750	2025-12-29 16:10:45.638154-05
+1647	4690923	20251220_PHI@WSH	2025	16	draftkings	750	2025-12-29 16:10:45.638154-05
+1648	4690923	20251220_PHI@WSH	2025	16	fanduel	750	2025-12-29 16:10:45.638154-05
+1649	4048228	20251220_PHI@WSH	2025	16	draftkings	900	2025-12-29 16:10:45.638154-05
+1650	4048228	20251220_PHI@WSH	2025	16	fanduel	900	2025-12-29 16:10:45.638154-05
+1651	4241374	20251220_PHI@WSH	2025	16	draftkings	1900	2025-12-29 16:10:45.638154-05
+1652	4241374	20251220_PHI@WSH	2025	16	fanduel	1900	2025-12-29 16:10:45.638154-05
+1653	4715355	20251220_PHI@WSH	2025	16	draftkings	2000	2025-12-29 16:10:45.638154-05
+1654	4715355	20251220_PHI@WSH	2025	16	fanduel	2000	2025-12-29 16:10:45.638154-05
+1655	2576581	20251220_PHI@WSH	2025	16	draftkings	1300	2025-12-29 16:10:45.638154-05
+1656	2576581	20251220_PHI@WSH	2025	16	fanduel	1300	2025-12-29 16:10:45.638154-05
+1657	4039160	20251220_PHI@WSH	2025	16	draftkings	2700	2025-12-29 16:10:45.638154-05
+1658	4039160	20251220_PHI@WSH	2025	16	fanduel	2700	2025-12-29 16:10:45.638154-05
+1659	3926231	20251220_PHI@WSH	2025	16	draftkings	3300	2025-12-29 16:10:45.638154-05
+1660	3926231	20251220_PHI@WSH	2025	16	fanduel	3300	2025-12-29 16:10:45.638154-05
+1661	4426502	20251221_ATL@ARI	2025	16	draftkings	135	2025-12-29 16:10:45.953261-05
+1662	4426502	20251221_ATL@ARI	2025	16	fanduel	135	2025-12-29 16:10:45.953261-05
+1663	4361307	20251221_ATL@ARI	2025	16	draftkings	130	2025-12-29 16:10:45.953261-05
+1664	4361307	20251221_ATL@ARI	2025	16	fanduel	130	2025-12-29 16:10:45.953261-05
+1665	4360248	20251221_ATL@ARI	2025	16	draftkings	180	2025-12-29 16:10:45.953261-05
+1666	4360248	20251221_ATL@ARI	2025	16	fanduel	180	2025-12-29 16:10:45.953261-05
+1667	4360761	20251221_ATL@ARI	2025	16	draftkings	160	2025-12-29 16:10:45.953261-05
+1668	4360761	20251221_ATL@ARI	2025	16	fanduel	160	2025-12-29 16:10:45.953261-05
+1669	4432708	20251221_ATL@ARI	2025	16	draftkings	190	2025-12-29 16:10:45.953261-05
+1670	4432708	20251221_ATL@ARI	2025	16	fanduel	190	2025-12-29 16:10:45.953261-05
+1671	4040655	20251221_ATL@ARI	2025	16	draftkings	420	2025-12-29 16:10:45.953261-05
+1672	4040655	20251221_ATL@ARI	2025	16	fanduel	420	2025-12-29 16:10:45.953261-05
+1673	3871102	20251221_ATL@ARI	2025	16	draftkings	475	2025-12-29 16:10:45.953261-05
+1674	3871102	20251221_ATL@ARI	2025	16	fanduel	475	2025-12-29 16:10:45.953261-05
+1675	4692835	20251221_ATL@ARI	2025	16	draftkings	650	2025-12-29 16:10:45.953261-05
+1676	4692835	20251221_ATL@ARI	2025	16	fanduel	650	2025-12-29 16:10:45.953261-05
+1677	4426844	20251221_ATL@ARI	2025	16	draftkings	800	2025-12-29 16:10:45.953261-05
+1678	4426844	20251221_ATL@ARI	2025	16	fanduel	800	2025-12-29 16:10:45.953261-05
+1679	4428811	20251221_ATL@ARI	2025	16	draftkings	600	2025-12-29 16:10:45.953261-05
+1680	4428811	20251221_ATL@ARI	2025	16	fanduel	600	2025-12-29 16:10:45.953261-05
+1681	4363551	20251221_ATL@ARI	2025	16	draftkings	3000	2025-12-29 16:10:45.953261-05
+1682	4363551	20251221_ATL@ARI	2025	16	fanduel	3000	2025-12-29 16:10:45.953261-05
+1683	4035020	20251221_ATL@ARI	2025	16	draftkings	1200	2025-12-29 16:10:45.953261-05
+1684	4035020	20251221_ATL@ARI	2025	16	fanduel	1200	2025-12-29 16:10:45.953261-05
+1685	3914151	20251221_ATL@ARI	2025	16	draftkings	1400	2025-12-29 16:10:45.953261-05
+1686	3914151	20251221_ATL@ARI	2025	16	fanduel	1400	2025-12-29 16:10:45.953261-05
+1687	2971281	20251221_ATL@ARI	2025	16	draftkings	2250	2025-12-29 16:10:45.953261-05
+1688	2971281	20251221_ATL@ARI	2025	16	fanduel	2250	2025-12-29 16:10:45.953261-05
+1689	4689334	20251221_ATL@ARI	2025	16	draftkings	1500	2025-12-29 16:10:45.953261-05
+1690	4689334	20251221_ATL@ARI	2025	16	fanduel	1500	2025-12-29 16:10:45.953261-05
+1691	4374187	20251221_ATL@ARI	2025	16	draftkings	2800	2025-12-29 16:10:45.953261-05
+1692	4374187	20251221_ATL@ARI	2025	16	fanduel	2800	2025-12-29 16:10:45.953261-05
+1693	4374045	20251221_ATL@ARI	2025	16	draftkings	5000	2025-12-29 16:10:45.953261-05
+1694	4374045	20251221_ATL@ARI	2025	16	fanduel	5000	2025-12-29 16:10:45.953261-05
+1695	4428796	20251221_ATL@ARI	2025	16	draftkings	1400	2025-12-29 16:10:45.953261-05
+1696	4428796	20251221_ATL@ARI	2025	16	fanduel	1400	2025-12-29 16:10:45.953261-05
+1697	4034948	20251221_ATL@ARI	2025	16	draftkings	3000	2025-12-29 16:10:45.953261-05
+1698	4034948	20251221_ATL@ARI	2025	16	fanduel	3000	2025-12-29 16:10:45.953261-05
+1699	4385690	20251221_BUF@CLE	2025	16	draftkings	270	2025-12-29 16:10:46.156784-05
+1700	4385690	20251221_BUF@CLE	2025	16	fanduel	270	2025-12-29 16:10:46.156784-05
+1701	4373678	20251221_BUF@CLE	2025	16	draftkings	310	2025-12-29 16:10:46.156784-05
+1702	4373678	20251221_BUF@CLE	2025	16	fanduel	310	2025-12-29 16:10:46.156784-05
+1703	5083076	20251221_BUF@CLE	2025	16	draftkings	290	2025-12-29 16:10:46.156784-05
+1704	5083076	20251221_BUF@CLE	2025	16	fanduel	290	2025-12-29 16:10:46.156784-05
+1705	3930086	20251221_BUF@CLE	2025	16	draftkings	380	2025-12-29 16:10:46.156784-05
+1706	3930086	20251221_BUF@CLE	2025	16	fanduel	380	2025-12-29 16:10:46.156784-05
+1707	4242433	20251221_BUF@CLE	2025	16	draftkings	500	2025-12-29 16:10:46.156784-05
+1708	4242433	20251221_BUF@CLE	2025	16	fanduel	500	2025-12-29 16:10:46.156784-05
+1709	4635008	20251221_BUF@CLE	2025	16	draftkings	420	2025-12-29 16:10:46.156784-05
+1710	4635008	20251221_BUF@CLE	2025	16	fanduel	420	2025-12-29 16:10:46.156784-05
+1711	4243537	20251221_BUF@CLE	2025	16	draftkings	470	2025-12-29 16:10:46.156784-05
+1712	4243537	20251221_BUF@CLE	2025	16	fanduel	470	2025-12-29 16:10:46.156784-05
+1713	4241463	20251221_BUF@CLE	2025	16	draftkings	450	2025-12-29 16:10:46.156784-05
+1714	4241463	20251221_BUF@CLE	2025	16	fanduel	450	2025-12-29 16:10:46.156784-05
+1715	4808839	20251221_BUF@CLE	2025	16	draftkings	600	2025-12-29 16:10:46.156784-05
+1716	4808839	20251221_BUF@CLE	2025	16	fanduel	600	2025-12-29 16:10:46.156784-05
+1717	4241476	20251221_BUF@CLE	2025	16	draftkings	750	2025-12-29 16:10:46.156784-05
+1718	4241476	20251221_BUF@CLE	2025	16	fanduel	750	2025-12-29 16:10:46.156784-05
+1719	4573699	20251221_BUF@CLE	2025	16	draftkings	1200	2025-12-29 16:10:46.156784-05
+1720	4573699	20251221_BUF@CLE	2025	16	fanduel	1200	2025-12-29 16:10:46.156784-05
+1721	4369863	20251221_BUF@CLE	2025	16	draftkings	700	2025-12-29 16:10:46.156784-05
+1722	4369863	20251221_BUF@CLE	2025	16	fanduel	700	2025-12-29 16:10:46.156784-05
+1723	16731	20251221_BUF@CLE	2025	16	draftkings	1000	2025-12-29 16:10:46.156784-05
+1724	16731	20251221_BUF@CLE	2025	16	fanduel	1000	2025-12-29 16:10:46.156784-05
+1725	4613104	20251221_BUF@CLE	2025	16	draftkings	850	2025-12-29 16:10:46.156784-05
+1726	4613104	20251221_BUF@CLE	2025	16	fanduel	850	2025-12-29 16:10:46.156784-05
+1727	4428678	20251221_BUF@CLE	2025	16	draftkings	1000	2025-12-29 16:10:46.156784-05
+1728	4428678	20251221_BUF@CLE	2025	16	fanduel	1000	2025-12-29 16:10:46.156784-05
+1729	4877203	20251221_BUF@CLE	2025	16	draftkings	1000	2025-12-29 16:10:46.156784-05
+1730	4877203	20251221_BUF@CLE	2025	16	fanduel	1000	2025-12-29 16:10:46.156784-05
+1731	4362603	20251221_BUF@CLE	2025	16	draftkings	2200	2025-12-29 16:10:46.156784-05
+1732	4362603	20251221_BUF@CLE	2025	16	fanduel	2200	2025-12-29 16:10:46.156784-05
+1733	4362018	20251221_BUF@CLE	2025	16	draftkings	1700	2025-12-29 16:10:46.156784-05
+1734	4362018	20251221_BUF@CLE	2025	16	fanduel	1700	2025-12-29 16:10:46.156784-05
+1735	4362628	20251221_CIN@MIA	2025	16	draftkings	-150	2025-12-29 16:10:46.562602-05
+1736	4362628	20251221_CIN@MIA	2025	16	fanduel	-150	2025-12-29 16:10:46.562602-05
+1737	4239993	20251221_CIN@MIA	2025	16	draftkings	135	2025-12-29 16:10:46.562602-05
+1738	4239993	20251221_CIN@MIA	2025	16	fanduel	135	2025-12-29 16:10:46.562602-05
+1739	4372016	20251221_CIN@MIA	2025	16	draftkings	200	2025-12-29 16:10:46.562602-05
+1740	4372016	20251221_CIN@MIA	2025	16	fanduel	200	2025-12-29 16:10:46.562602-05
+1741	3116164	20251221_CIN@MIA	2025	16	draftkings	275	2025-12-29 16:10:46.562602-05
+1742	3116164	20251221_CIN@MIA	2025	16	fanduel	275	2025-12-29 16:10:46.562602-05
+1743	2576925	20251221_CIN@MIA	2025	16	draftkings	325	2025-12-29 16:10:46.562602-05
+1744	2576925	20251221_CIN@MIA	2025	16	fanduel	325	2025-12-29 16:10:46.562602-05
+1745	4368003	20251221_CIN@MIA	2025	16	draftkings	350	2025-12-29 16:10:46.562602-05
+1746	4368003	20251221_CIN@MIA	2025	16	fanduel	350	2025-12-29 16:10:46.562602-05
+1747	4569603	20251221_CIN@MIA	2025	16	draftkings	425	2025-12-29 16:10:46.562602-05
+1748	4569603	20251221_CIN@MIA	2025	16	fanduel	425	2025-12-29 16:10:46.562602-05
+1749	4690070	20251221_CIN@MIA	2025	16	draftkings	400	2025-12-29 16:10:46.562602-05
+1750	4690070	20251221_CIN@MIA	2025	16	fanduel	400	2025-12-29 16:10:46.562602-05
+1751	4367209	20251221_CIN@MIA	2025	16	draftkings	540	2025-12-29 16:10:46.562602-05
+1752	4367209	20251221_CIN@MIA	2025	16	fanduel	540	2025-12-29 16:10:46.562602-05
+1753	3050481	20251221_CIN@MIA	2025	16	draftkings	600	2025-12-29 16:10:46.562602-05
+1754	3050481	20251221_CIN@MIA	2025	16	fanduel	600	2025-12-29 16:10:46.562602-05
+1755	3127310	20251221_CIN@MIA	2025	16	draftkings	950	2025-12-29 16:10:46.562602-05
+1756	3127310	20251221_CIN@MIA	2025	16	fanduel	950	2025-12-29 16:10:46.562602-05
+1757	4570738	20251221_CIN@MIA	2025	16	draftkings	1400	2025-12-29 16:10:46.562602-05
+1758	4570738	20251221_CIN@MIA	2025	16	fanduel	1400	2025-12-29 16:10:46.562602-05
+1759	4365395	20251221_CIN@MIA	2025	16	draftkings	1000	2025-12-29 16:10:46.562602-05
+1760	4365395	20251221_CIN@MIA	2025	16	fanduel	1000	2025-12-29 16:10:46.562602-05
+1761	3929785	20251221_CIN@MIA	2025	16	draftkings	1800	2025-12-29 16:10:46.562602-05
+1762	3929785	20251221_CIN@MIA	2025	16	fanduel	1800	2025-12-29 16:10:46.562602-05
+1763	4567506	20251221_CIN@MIA	2025	16	draftkings	3000	2025-12-29 16:10:46.562602-05
+1764	4567506	20251221_CIN@MIA	2025	16	fanduel	3000	2025-12-29 16:10:46.562602-05
+1765	4036335	20251221_CIN@MIA	2025	16	draftkings	1700	2025-12-29 16:10:46.562602-05
+1766	4036335	20251221_CIN@MIA	2025	16	fanduel	1700	2025-12-29 16:10:46.562602-05
+1767	3128429	20251221_JAX@DEN	2025	16	draftkings	165	2025-12-29 16:10:46.755609-05
+1768	3128429	20251221_JAX@DEN	2025	16	fanduel	165	2025-12-29 16:10:46.755609-05
+1769	4432773	20251221_JAX@DEN	2025	16	draftkings	240	2025-12-29 16:10:46.755609-05
+1770	4432773	20251221_JAX@DEN	2025	16	fanduel	240	2025-12-29 16:10:46.755609-05
+1771	3916433	20251221_JAX@DEN	2025	16	draftkings	205	2025-12-29 16:10:46.755609-05
+1772	3916433	20251221_JAX@DEN	2025	16	fanduel	205	2025-12-29 16:10:46.755609-05
+1773	4431280	20251221_JAX@DEN	2025	16	draftkings	220	2025-12-29 16:10:46.755609-05
+1774	4431280	20251221_JAX@DEN	2025	16	fanduel	220	2025-12-29 16:10:46.755609-05
+1775	4430539	20251221_JAX@DEN	2025	16	draftkings	320	2025-12-29 16:10:46.755609-05
+1776	4430539	20251221_JAX@DEN	2025	16	fanduel	320	2025-12-29 16:10:46.755609-05
+1777	4600981	20251221_JAX@DEN	2025	16	draftkings	375	2025-12-29 16:10:46.755609-05
+1778	4600981	20251221_JAX@DEN	2025	16	fanduel	375	2025-12-29 16:10:46.755609-05
+1779	4686472	20251221_JAX@DEN	2025	16	draftkings	375	2025-12-29 16:10:46.755609-05
+1780	4686472	20251221_JAX@DEN	2025	16	fanduel	375	2025-12-29 16:10:46.755609-05
+1781	4432620	20251221_JAX@DEN	2025	16	draftkings	375	2025-12-29 16:10:46.755609-05
+1782	4432620	20251221_JAX@DEN	2025	16	fanduel	375	2025-12-29 16:10:46.755609-05
+1783	3051876	20251221_JAX@DEN	2025	16	draftkings	370	2025-12-29 16:10:46.755609-05
+1784	3051876	20251221_JAX@DEN	2025	16	fanduel	370	2025-12-29 16:10:46.755609-05
+1785	4039057	20251221_JAX@DEN	2025	16	draftkings	650	2025-12-29 16:10:46.755609-05
+1786	4039057	20251221_JAX@DEN	2025	16	fanduel	650	2025-12-29 16:10:46.755609-05
+1787	3134353	20251221_JAX@DEN	2025	16	draftkings	850	2025-12-29 16:10:46.755609-05
+1788	3134353	20251221_JAX@DEN	2025	16	fanduel	850	2025-12-29 16:10:46.755609-05
+1789	3911853	20251221_JAX@DEN	2025	16	draftkings	800	2025-12-29 16:10:46.755609-05
+1790	3911853	20251221_JAX@DEN	2025	16	fanduel	800	2025-12-29 16:10:46.755609-05
+1791	4244049	20251221_JAX@DEN	2025	16	draftkings	1200	2025-12-29 16:10:46.755609-05
+1792	4244049	20251221_JAX@DEN	2025	16	fanduel	1200	2025-12-29 16:10:46.755609-05
+1793	4383440	20251221_JAX@DEN	2025	16	draftkings	1600	2025-12-29 16:10:46.755609-05
+1794	4383440	20251221_JAX@DEN	2025	16	fanduel	1600	2025-12-29 16:10:46.755609-05
+1795	4361577	20251221_JAX@DEN	2025	16	draftkings	1750	2025-12-29 16:10:46.755609-05
+1796	4361577	20251221_JAX@DEN	2025	16	fanduel	1750	2025-12-29 16:10:46.755609-05
+1797	4239944	20251221_JAX@DEN	2025	16	draftkings	1700	2025-12-29 16:10:46.755609-05
+1798	4239944	20251221_JAX@DEN	2025	16	fanduel	1700	2025-12-29 16:10:46.755609-05
+1799	3052096	20251221_JAX@DEN	2025	16	draftkings	2250	2025-12-29 16:10:46.755609-05
+1800	3052096	20251221_JAX@DEN	2025	16	fanduel	2250	2025-12-29 16:10:46.755609-05
+1801	15847	20251221_KC@TEN	2025	16	draftkings	220	2025-12-29 16:10:46.970398-05
+1802	15847	20251221_KC@TEN	2025	16	fanduel	220	2025-12-29 16:10:46.970398-05
+1803	4683062	20251221_KC@TEN	2025	16	draftkings	210	2025-12-29 16:10:46.970398-05
+1804	4683062	20251221_KC@TEN	2025	16	fanduel	210	2025-12-29 16:10:46.970398-05
+1805	4241372	20251221_KC@TEN	2025	16	draftkings	390	2025-12-29 16:10:46.970398-05
+1806	4241372	20251221_KC@TEN	2025	16	fanduel	390	2025-12-29 16:10:46.970398-05
+1807	4431268	20251221_KC@TEN	2025	16	draftkings	330	2025-12-29 16:10:46.970398-05
+1808	4431268	20251221_KC@TEN	2025	16	fanduel	330	2025-12-29 16:10:46.970398-05
+1809	3930066	20251221_KC@TEN	2025	16	draftkings	420	2025-12-29 16:10:46.970398-05
+1810	3930066	20251221_KC@TEN	2025	16	fanduel	420	2025-12-29 16:10:46.970398-05
+1811	3120348	20251221_KC@TEN	2025	16	draftkings	500	2025-12-29 16:10:46.970398-05
+1812	3120348	20251221_KC@TEN	2025	16	fanduel	500	2025-12-29 16:10:46.970398-05
+1813	4883647	20251221_KC@TEN	2025	16	draftkings	500	2025-12-29 16:10:46.970398-05
+1814	4883647	20251221_KC@TEN	2025	16	fanduel	500	2025-12-29 16:10:46.970398-05
+1815	4360635	20251221_KC@TEN	2025	16	draftkings	440	2025-12-29 16:10:46.970398-05
+1816	4360635	20251221_KC@TEN	2025	16	fanduel	440	2025-12-29 16:10:46.970398-05
+1817	4686728	20251221_KC@TEN	2025	16	draftkings	475	2025-12-29 16:10:46.970398-05
+1818	4686728	20251221_KC@TEN	2025	16	fanduel	475	2025-12-29 16:10:46.970398-05
+1819	4240472	20251221_KC@TEN	2025	16	draftkings	700	2025-12-29 16:10:46.970398-05
+1820	4240472	20251221_KC@TEN	2025	16	fanduel	700	2025-12-29 16:10:46.970398-05
+1821	5082630	20251221_KC@TEN	2025	16	draftkings	1000	2025-12-29 16:10:46.970398-05
+1822	5082630	20251221_KC@TEN	2025	16	fanduel	1000	2025-12-29 16:10:46.970398-05
+1823	2975674	20251221_KC@TEN	2025	16	draftkings	2500	2025-12-29 16:10:46.970398-05
+1824	2975674	20251221_KC@TEN	2025	16	fanduel	2500	2025-12-29 16:10:46.970398-05
+1825	3916204	20251221_KC@TEN	2025	16	draftkings	2200	2025-12-29 16:10:46.970398-05
+1826	3916204	20251221_KC@TEN	2025	16	fanduel	2200	2025-12-29 16:10:46.970398-05
+1827	4057082	20251221_KC@TEN	2025	16	draftkings	3500	2025-12-29 16:10:46.970398-05
+1828	4057082	20251221_KC@TEN	2025	16	fanduel	3500	2025-12-29 16:10:46.970398-05
+1829	4430723	20251221_KC@TEN	2025	16	draftkings	2900	2025-12-29 16:10:46.970398-05
+1830	4430723	20251221_KC@TEN	2025	16	fanduel	2900	2025-12-29 16:10:46.970398-05
+1831	4360978	20251221_KC@TEN	2025	16	draftkings	3500	2025-12-29 16:10:46.970398-05
+1832	4360978	20251221_KC@TEN	2025	16	fanduel	3500	2025-12-29 16:10:46.970398-05
+1833	4241389	20251221_LAC@DAL	2025	16	draftkings	138	2025-12-29 16:10:47.482448-05
+1834	4241389	20251221_LAC@DAL	2025	16	fanduel	138	2025-12-29 16:10:47.482448-05
+1835	4426354	20251221_LAC@DAL	2025	16	draftkings	145	2025-12-29 16:10:47.482448-05
+1836	4426354	20251221_LAC@DAL	2025	16	fanduel	145	2025-12-29 16:10:47.482448-05
+1837	4612826	20251221_LAC@DAL	2025	16	draftkings	145	2025-12-29 16:10:47.482448-05
+1838	4612826	20251221_LAC@DAL	2025	16	fanduel	145	2025-12-29 16:10:47.482448-05
+1839	4242355	20251221_LAC@DAL	2025	16	draftkings	170	2025-12-29 16:10:47.482448-05
+1840	4242355	20251221_LAC@DAL	2025	16	fanduel	170	2025-12-29 16:10:47.482448-05
+1841	15818	20251221_LAC@DAL	2025	16	draftkings	220	2025-12-29 16:10:47.482448-05
+1842	15818	20251221_LAC@DAL	2025	16	fanduel	220	2025-12-29 16:10:47.482448-05
+1843	4595342	20251221_LAC@DAL	2025	16	draftkings	180	2025-12-29 16:10:47.482448-05
+1844	4595342	20251221_LAC@DAL	2025	16	fanduel	180	2025-12-29 16:10:47.482448-05
+1845	4429025	20251221_LAC@DAL	2025	16	draftkings	220	2025-12-29 16:10:47.482448-05
+1846	4429025	20251221_LAC@DAL	2025	16	fanduel	220	2025-12-29 16:10:47.482448-05
+1847	4686612	20251221_LAC@DAL	2025	16	draftkings	280	2025-12-29 16:10:47.482448-05
+1848	4686612	20251221_LAC@DAL	2025	16	fanduel	280	2025-12-29 16:10:47.482448-05
+1849	5083754	20251221_LAC@DAL	2025	16	draftkings	400	2025-12-29 16:10:47.482448-05
+1850	5083754	20251221_LAC@DAL	2025	16	fanduel	400	2025-12-29 16:10:47.482448-05
+1851	3676833	20251221_LAC@DAL	2025	16	draftkings	550	2025-12-29 16:10:47.482448-05
+1852	3676833	20251221_LAC@DAL	2025	16	fanduel	550	2025-12-29 16:10:47.482448-05
+1853	4430870	20251221_LAC@DAL	2025	16	draftkings	700	2025-12-29 16:10:47.482448-05
+1854	4430870	20251221_LAC@DAL	2025	16	fanduel	700	2025-12-29 16:10:47.482448-05
+1855	4372096	20251221_LAC@DAL	2025	16	draftkings	950	2025-12-29 16:10:47.482448-05
+1856	4372096	20251221_LAC@DAL	2025	16	fanduel	950	2025-12-29 16:10:47.482448-05
+1857	3915486	20251221_LAC@DAL	2025	16	draftkings	1150	2025-12-29 16:10:47.482448-05
+1858	3915486	20251221_LAC@DAL	2025	16	fanduel	1150	2025-12-29 16:10:47.482448-05
+1859	3127292	20251221_LAC@DAL	2025	16	draftkings	1100	2025-12-29 16:10:47.482448-05
+1860	3127292	20251221_LAC@DAL	2025	16	fanduel	1100	2025-12-29 16:10:47.482448-05
+1861	4360967	20251221_LAC@DAL	2025	16	draftkings	3000	2025-12-29 16:10:47.482448-05
+1862	4360967	20251221_LAC@DAL	2025	16	fanduel	3000	2025-12-29 16:10:47.482448-05
+1863	4249417	20251221_LAC@DAL	2025	16	draftkings	2500	2025-12-29 16:10:47.482448-05
+1864	4249417	20251221_LAC@DAL	2025	16	fanduel	2500	2025-12-29 16:10:47.482448-05
+1865	4426485	20251221_LAC@DAL	2025	16	draftkings	2500	2025-12-29 16:10:47.482448-05
+1866	4426485	20251221_LAC@DAL	2025	16	fanduel	2500	2025-12-29 16:10:47.482448-05
+1867	4258173	20251221_LV@HOU	2025	16	draftkings	100	2025-12-29 16:10:47.694425-05
+1868	4258173	20251221_LV@HOU	2025	16	fanduel	100	2025-12-29 16:10:47.694425-05
+1869	3117256	20251221_LV@HOU	2025	16	draftkings	220	2025-12-29 16:10:47.694425-05
+1870	3117256	20251221_LV@HOU	2025	16	fanduel	220	2025-12-29 16:10:47.694425-05
+1871	4877706	20251221_LV@HOU	2025	16	draftkings	295	2025-12-29 16:10:47.694425-05
+1872	4877706	20251221_LV@HOU	2025	16	fanduel	295	2025-12-29 16:10:47.694425-05
+1873	4686422	20251221_LV@HOU	2025	16	draftkings	600	2025-12-29 16:10:47.694425-05
+1874	4686422	20251221_LV@HOU	2025	16	fanduel	600	2025-12-29 16:10:47.694425-05
+1875	4428718	20251221_LV@HOU	2025	16	draftkings	600	2025-12-29 16:10:47.694425-05
+1876	4428718	20251221_LV@HOU	2025	16	fanduel	600	2025-12-29 16:10:47.694425-05
+1877	3895856	20251221_LV@HOU	2025	16	draftkings	500	2025-12-29 16:10:47.694425-05
+1878	3895856	20251221_LV@HOU	2025	16	fanduel	500	2025-12-29 16:10:47.694425-05
+1879	4603186	20251221_LV@HOU	2025	16	draftkings	900	2025-12-29 16:10:47.694425-05
+1880	4603186	20251221_LV@HOU	2025	16	fanduel	900	2025-12-29 16:10:47.694425-05
+1881	2577327	20251221_LV@HOU	2025	16	draftkings	500	2025-12-29 16:10:47.694425-05
+1882	2577327	20251221_LV@HOU	2025	16	fanduel	500	2025-12-29 16:10:47.694425-05
+1883	4040774	20251221_LV@HOU	2025	16	draftkings	1200	2025-12-29 16:10:47.694425-05
+1884	4040774	20251221_LV@HOU	2025	16	fanduel	1200	2025-12-29 16:10:47.694425-05
+1885	4426496	20251221_LV@HOU	2025	16	draftkings	700	2025-12-29 16:10:47.694425-05
+1886	4426496	20251221_LV@HOU	2025	16	fanduel	700	2025-12-29 16:10:47.694425-05
+1887	3123075	20251221_LV@HOU	2025	16	draftkings	1000	2025-12-29 16:10:47.694425-05
+1888	3123075	20251221_LV@HOU	2025	16	fanduel	1000	2025-12-29 16:10:47.694425-05
+1889	4586312	20251221_LV@HOU	2025	16	draftkings	1150	2025-12-29 16:10:47.694425-05
+1890	4586312	20251221_LV@HOU	2025	16	fanduel	1150	2025-12-29 16:10:47.694425-05
+1891	4429086	20251221_LV@HOU	2025	16	draftkings	850	2025-12-29 16:10:47.694425-05
+1892	4429086	20251221_LV@HOU	2025	16	fanduel	850	2025-12-29 16:10:47.694425-05
+1893	4045305	20251221_LV@HOU	2025	16	draftkings	2200	2025-12-29 16:10:47.694425-05
+1894	4045305	20251221_LV@HOU	2025	16	fanduel	2200	2025-12-29 16:10:47.694425-05
+1895	4432775	20251221_LV@HOU	2025	16	draftkings	1500	2025-12-29 16:10:47.694425-05
+1896	4432775	20251221_LV@HOU	2025	16	fanduel	1500	2025-12-29 16:10:47.694425-05
+1897	3919510	20251221_LV@HOU	2025	16	draftkings	3500	2025-12-29 16:10:47.694425-05
+1898	3919510	20251221_LV@HOU	2025	16	fanduel	3500	2025-12-29 16:10:47.694425-05
+1899	5155825	20251221_LV@HOU	2025	16	draftkings	5000	2025-12-29 16:10:47.694425-05
+1900	5155825	20251221_LV@HOU	2025	16	fanduel	5000	2025-12-29 16:10:47.694425-05
+1901	4262921	20251221_MIN@NYG	2025	16	draftkings	140	2025-12-29 16:10:47.955978-05
+1902	4262921	20251221_MIN@NYG	2025	16	fanduel	140	2025-12-29 16:10:47.955978-05
+1903	4429205	20251221_MIN@NYG	2025	16	draftkings	200	2025-12-29 16:10:47.955978-05
+1904	4429205	20251221_MIN@NYG	2025	16	fanduel	200	2025-12-29 16:10:47.955978-05
+1905	4569587	20251221_MIN@NYG	2025	16	draftkings	230	2025-12-29 16:10:47.955978-05
+1906	4569587	20251221_MIN@NYG	2025	16	fanduel	230	2025-12-29 16:10:47.955978-05
+1907	4429148	20251221_MIN@NYG	2025	16	draftkings	280	2025-12-29 16:10:47.955978-05
+1908	4429148	20251221_MIN@NYG	2025	16	fanduel	280	2025-12-29 16:10:47.955978-05
+1909	4036133	20251221_MIN@NYG	2025	16	draftkings	300	2025-12-29 16:10:47.955978-05
+1910	4036133	20251221_MIN@NYG	2025	16	fanduel	300	2025-12-29 16:10:47.955978-05
+1911	4382466	20251221_MIN@NYG	2025	16	draftkings	320	2025-12-29 16:10:47.955978-05
+1912	4382466	20251221_MIN@NYG	2025	16	fanduel	320	2025-12-29 16:10:47.955978-05
+1913	3916945	20251221_MIN@NYG	2025	16	draftkings	360	2025-12-29 16:10:47.955978-05
+1914	3916945	20251221_MIN@NYG	2025	16	fanduel	360	2025-12-29 16:10:47.955978-05
+1915	4242540	20251221_MIN@NYG	2025	16	draftkings	600	2025-12-29 16:10:47.955978-05
+1916	4242540	20251221_MIN@NYG	2025	16	fanduel	600	2025-12-29 16:10:47.955978-05
+1917	3921690	20251221_MIN@NYG	2025	16	draftkings	750	2025-12-29 16:10:47.955978-05
+1918	3921690	20251221_MIN@NYG	2025	16	fanduel	750	2025-12-29 16:10:47.955978-05
+1919	4361516	20251221_MIN@NYG	2025	16	draftkings	700	2025-12-29 16:10:47.955978-05
+1920	4361516	20251221_MIN@NYG	2025	16	fanduel	700	2025-12-29 16:10:47.955978-05
+1921	4692590	20251221_MIN@NYG	2025	16	draftkings	1800	2025-12-29 16:10:47.955978-05
+1922	4692590	20251221_MIN@NYG	2025	16	fanduel	1800	2025-12-29 16:10:47.955978-05
+1923	4430656	20251221_MIN@NYG	2025	16	draftkings	1800	2025-12-29 16:10:47.955978-05
+1924	4430656	20251221_MIN@NYG	2025	16	fanduel	1800	2025-12-29 16:10:47.955978-05
+1925	4369466	20251221_MIN@NYG	2025	16	draftkings	2200	2025-12-29 16:10:47.955978-05
+1926	4369466	20251221_MIN@NYG	2025	16	fanduel	2200	2025-12-29 16:10:47.955978-05
+1927	4424106	20251221_MIN@NYG	2025	16	draftkings	1900	2025-12-29 16:10:47.955978-05
+1928	4424106	20251221_MIN@NYG	2025	16	fanduel	1900	2025-12-29 16:10:47.955978-05
+1929	4565185	20251221_MIN@NYG	2025	16	draftkings	3000	2025-12-29 16:10:47.955978-05
+1930	4565185	20251221_MIN@NYG	2025	16	fanduel	3000	2025-12-29 16:10:47.955978-05
+1931	4373030	20251221_MIN@NYG	2025	16	draftkings	2200	2025-12-29 16:10:47.955978-05
+1932	4373030	20251221_MIN@NYG	2025	16	fanduel	2200	2025-12-29 16:10:47.955978-05
+1933	4433959	20251221_MIN@NYG	2025	16	draftkings	2500	2025-12-29 16:10:47.955978-05
+1934	4433959	20251221_MIN@NYG	2025	16	fanduel	2500	2025-12-29 16:10:47.955978-05
+1935	2531358	20251221_MIN@NYG	2025	16	draftkings	5000	2025-12-29 16:10:47.955978-05
+1936	2531358	20251221_MIN@NYG	2025	16	fanduel	5000	2025-12-29 16:10:47.955978-05
+1937	4570296	20251221_MIN@NYG	2025	16	draftkings	3500	2025-12-29 16:10:47.955978-05
+1938	4570296	20251221_MIN@NYG	2025	16	fanduel	3500	2025-12-29 16:10:47.955978-05
+1939	3116365	20251221_NE@BAL	2025	16	draftkings	155	2025-12-29 16:10:48.405614-05
+1940	3116365	20251221_NE@BAL	2025	16	fanduel	155	2025-12-29 16:10:48.405614-05
+1941	4429615	20251221_NE@BAL	2025	16	draftkings	195	2025-12-29 16:10:48.405614-05
+1942	4429615	20251221_NE@BAL	2025	16	fanduel	195	2025-12-29 16:10:48.405614-05
+1943	4361050	20251221_NE@BAL	2025	16	draftkings	260	2025-12-29 16:10:48.405614-05
+1944	4361050	20251221_NE@BAL	2025	16	fanduel	260	2025-12-29 16:10:48.405614-05
+1945	2976212	20251221_NE@BAL	2025	16	draftkings	230	2025-12-29 16:10:48.405614-05
+1946	2976212	20251221_NE@BAL	2025	16	fanduel	230	2025-12-29 16:10:48.405614-05
+1947	3046439	20251221_NE@BAL	2025	16	draftkings	210	2025-12-29 16:10:48.405614-05
+1948	3046439	20251221_NE@BAL	2025	16	fanduel	210	2025-12-29 16:10:48.405614-05
+1949	4429022	20251221_NE@BAL	2025	16	draftkings	310	2025-12-29 16:10:48.405614-05
+1950	4429022	20251221_NE@BAL	2025	16	fanduel	310	2025-12-29 16:10:48.405614-05
+1951	4360939	20251221_NE@BAL	2025	16	draftkings	360	2025-12-29 16:10:48.405614-05
+1952	4360939	20251221_NE@BAL	2025	16	fanduel	360	2025-12-29 16:10:48.405614-05
+1953	15795	20251221_NE@BAL	2025	16	draftkings	550	2025-12-29 16:10:48.405614-05
+1954	15795	20251221_NE@BAL	2025	16	fanduel	550	2025-12-29 16:10:48.405614-05
+1955	4427095	20251221_NE@BAL	2025	16	draftkings	700	2025-12-29 16:10:48.405614-05
+1956	4427095	20251221_NE@BAL	2025	16	fanduel	700	2025-12-29 16:10:48.405614-05
+1957	3043275	20251221_NE@BAL	2025	16	draftkings	900	2025-12-29 16:10:48.405614-05
+1958	3043275	20251221_NE@BAL	2025	16	fanduel	900	2025-12-29 16:10:48.405614-05
+1959	4241263	20251221_NE@BAL	2025	16	draftkings	850	2025-12-29 16:10:48.405614-05
+1960	4241263	20251221_NE@BAL	2025	16	fanduel	850	2025-12-29 16:10:48.405614-05
+1961	4696882	20251221_NE@BAL	2025	16	draftkings	1400	2025-12-29 16:10:48.405614-05
+1962	4696882	20251221_NE@BAL	2025	16	fanduel	1400	2025-12-29 16:10:48.405614-05
+1963	4613202	20251221_NE@BAL	2025	16	draftkings	1000	2025-12-29 16:10:48.405614-05
+1964	4613202	20251221_NE@BAL	2025	16	fanduel	1000	2025-12-29 16:10:48.405614-05
+1965	4695193	20251221_NE@BAL	2025	16	draftkings	2500	2025-12-29 16:10:48.405614-05
+1966	4695193	20251221_NE@BAL	2025	16	fanduel	2500	2025-12-29 16:10:48.405614-05
+1967	4596545	20251221_NE@BAL	2025	16	draftkings	1500	2025-12-29 16:10:48.405614-05
+1968	4596545	20251221_NE@BAL	2025	16	fanduel	1500	2025-12-29 16:10:48.405614-05
+1969	4241424	20251221_NE@BAL	2025	16	draftkings	2700	2025-12-29 16:10:48.405614-05
+1970	4241424	20251221_NE@BAL	2025	16	fanduel	2700	2025-12-29 16:10:48.405614-05
+1971	4690143	20251221_NE@BAL	2025	16	draftkings	2700	2025-12-29 16:10:48.405614-05
+1972	4690143	20251221_NE@BAL	2025	16	fanduel	2700	2025-12-29 16:10:48.405614-05
+1973	4361100	20251221_NE@BAL	2025	16	draftkings	5000	2025-12-29 16:10:48.405614-05
+1974	4361100	20251221_NE@BAL	2025	16	fanduel	5000	2025-12-29 16:10:48.405614-05
+1975	4361370	20251221_NYJ@NO	2025	16	draftkings	160	2025-12-29 16:10:48.651651-05
+1976	4361370	20251221_NYJ@NO	2025	16	fanduel	160	2025-12-29 16:10:48.651651-05
+1977	3929645	20251221_NYJ@NO	2025	16	draftkings	210	2025-12-29 16:10:48.651651-05
+1978	3929645	20251221_NYJ@NO	2025	16	fanduel	210	2025-12-29 16:10:48.651651-05
+1979	4573697	20251221_NYJ@NO	2025	16	draftkings	370	2025-12-29 16:10:48.651651-05
+1980	4573697	20251221_NYJ@NO	2025	16	fanduel	370	2025-12-29 16:10:48.651651-05
+1981	4597500	20251221_NYJ@NO	2025	16	draftkings	275	2025-12-29 16:10:48.651651-05
+1982	4597500	20251221_NYJ@NO	2025	16	fanduel	275	2025-12-29 16:10:48.651651-05
+1983	4372758	20251221_NYJ@NO	2025	16	draftkings	460	2025-12-29 16:10:48.651651-05
+1984	4372758	20251221_NYJ@NO	2025	16	fanduel	460	2025-12-29 16:10:48.651651-05
+1985	4567096	20251221_NYJ@NO	2025	16	draftkings	390	2025-12-29 16:10:48.651651-05
+1986	4567096	20251221_NYJ@NO	2025	16	fanduel	390	2025-12-29 16:10:48.651651-05
+1987	4569371	20251221_NYJ@NO	2025	16	draftkings	500	2025-12-29 16:10:48.651651-05
+1988	4569371	20251221_NYJ@NO	2025	16	fanduel	500	2025-12-29 16:10:48.651651-05
+1989	4361372	20251221_NYJ@NO	2025	16	draftkings	540	2025-12-29 16:10:48.651651-05
+1990	4361372	20251221_NYJ@NO	2025	16	fanduel	540	2025-12-29 16:10:48.651651-05
+1991	3127306	20251221_NYJ@NO	2025	16	draftkings	900	2025-12-29 16:10:48.651651-05
+1992	3127306	20251221_NYJ@NO	2025	16	fanduel	900	2025-12-29 16:10:48.651651-05
+1993	2310331	20251221_NYJ@NO	2025	16	draftkings	2500	2025-12-29 16:10:48.651651-05
+1994	2310331	20251221_NYJ@NO	2025	16	fanduel	2500	2025-12-29 16:10:48.651651-05
+1995	4250764	20251221_NYJ@NO	2025	16	draftkings	4000	2025-12-29 16:10:48.651651-05
+1996	4250764	20251221_NYJ@NO	2025	16	fanduel	4000	2025-12-29 16:10:48.651651-05
+1997	4241410	20251221_NYJ@NO	2025	16	draftkings	2200	2025-12-29 16:10:48.651651-05
+1998	4241410	20251221_NYJ@NO	2025	16	fanduel	2200	2025-12-29 16:10:48.651651-05
+1999	4034862	20251221_NYJ@NO	2025	16	draftkings	2250	2025-12-29 16:10:48.651651-05
+2000	4034862	20251221_NYJ@NO	2025	16	fanduel	2250	2025-12-29 16:10:48.651651-05
+2001	4429105	20251221_NYJ@NO	2025	16	draftkings	2500	2025-12-29 16:10:48.651651-05
+2002	4429105	20251221_NYJ@NO	2025	16	fanduel	2500	2025-12-29 16:10:48.651651-05
+2003	4374302	20251221_PIT@DET	2025	16	draftkings	-139	2025-12-29 16:10:48.949383-05
+2004	4374302	20251221_PIT@DET	2025	16	fanduel	-139	2025-12-29 16:10:48.949383-05
+2005	4426388	20251221_PIT@DET	2025	16	draftkings	120	2025-12-29 16:10:48.949383-05
+2006	4426388	20251221_PIT@DET	2025	16	fanduel	120	2025-12-29 16:10:48.949383-05
+2007	4047650	20251221_PIT@DET	2025	16	draftkings	145	2025-12-29 16:10:48.949383-05
+2008	4047650	20251221_PIT@DET	2025	16	fanduel	145	2025-12-29 16:10:48.949383-05
+2009	5123663	20251221_PIT@DET	2025	16	draftkings	370	2025-12-29 16:10:48.949383-05
+2010	5123663	20251221_PIT@DET	2025	16	fanduel	370	2025-12-29 16:10:48.949383-05
+2011	4361411	20251221_PIT@DET	2025	16	draftkings	430	2025-12-29 16:10:48.949383-05
+2012	4361411	20251221_PIT@DET	2025	16	fanduel	430	2025-12-29 16:10:48.949383-05
+2013	4430802	20251221_PIT@DET	2025	16	draftkings	550	2025-12-29 16:10:48.949383-05
+2014	4430802	20251221_PIT@DET	2025	16	fanduel	550	2025-12-29 16:10:48.949383-05
+2015	4608362	20251221_PIT@DET	2025	16	draftkings	475	2025-12-29 16:10:48.949383-05
+2016	4608362	20251221_PIT@DET	2025	16	fanduel	475	2025-12-29 16:10:48.949383-05
+2017	3049698	20251221_PIT@DET	2025	16	draftkings	750	2025-12-29 16:10:48.949383-05
+2018	3049698	20251221_PIT@DET	2025	16	fanduel	750	2025-12-29 16:10:48.949383-05
+2019	3054212	20251221_PIT@DET	2025	16	draftkings	450	2025-12-29 16:10:48.949383-05
+2020	3054212	20251221_PIT@DET	2025	16	fanduel	450	2025-12-29 16:10:48.949383-05
+2021	4243389	20251221_PIT@DET	2025	16	draftkings	600	2025-12-29 16:10:48.949383-05
+2022	4243389	20251221_PIT@DET	2025	16	fanduel	600	2025-12-29 16:10:48.949383-05
+2023	2973405	20251221_PIT@DET	2025	16	draftkings	650	2025-12-29 16:10:48.949383-05
+2024	2973405	20251221_PIT@DET	2025	16	fanduel	650	2025-12-29 16:10:48.949383-05
+2025	3051738	20251221_PIT@DET	2025	16	draftkings	700	2025-12-29 16:10:48.949383-05
+2026	3051738	20251221_PIT@DET	2025	16	fanduel	700	2025-12-29 16:10:48.949383-05
+2027	4241961	20251221_PIT@DET	2025	16	draftkings	700	2025-12-29 16:10:48.949383-05
+2028	4241961	20251221_PIT@DET	2025	16	fanduel	700	2025-12-29 16:10:48.949383-05
+2029	3126997	20251221_PIT@DET	2025	16	draftkings	2500	2025-12-29 16:10:48.949383-05
+2030	3126997	20251221_PIT@DET	2025	16	fanduel	2500	2025-12-29 16:10:48.949383-05
+2031	4431492	20251221_PIT@DET	2025	16	draftkings	1150	2025-12-29 16:10:48.949383-05
+2032	4431492	20251221_PIT@DET	2025	16	fanduel	1150	2025-12-29 16:10:48.949383-05
+2033	16460	20251221_PIT@DET	2025	16	draftkings	1100	2025-12-29 16:10:48.949383-05
+2034	16460	20251221_PIT@DET	2025	16	fanduel	1100	2025-12-29 16:10:48.949383-05
+2035	4596439	20251221_PIT@DET	2025	16	draftkings	5000	2025-12-29 16:10:48.949383-05
+2036	4596439	20251221_PIT@DET	2025	16	fanduel	5000	2025-12-29 16:10:48.949383-05
+2037	4035656	20251221_PIT@DET	2025	16	draftkings	2250	2025-12-29 16:10:48.949383-05
+2038	4035656	20251221_PIT@DET	2025	16	fanduel	2250	2025-12-29 16:10:48.949383-05
+2039	3914397	20251221_PIT@DET	2025	16	draftkings	2500	2025-12-29 16:10:48.949383-05
+2040	3914397	20251221_PIT@DET	2025	16	fanduel	2500	2025-12-29 16:10:48.949383-05
+2041	16737	20251221_TB@CAR	2025	16	draftkings	155	2025-12-29 16:10:49.326505-05
+2042	16737	20251221_TB@CAR	2025	16	fanduel	155	2025-12-29 16:10:49.326505-05
+2043	4685472	20251221_TB@CAR	2025	16	draftkings	170	2025-12-29 16:10:49.326505-05
+2044	4685472	20251221_TB@CAR	2025	16	fanduel	170	2025-12-29 16:10:49.326505-05
+2045	4567750	20251221_TB@CAR	2025	16	draftkings	220	2025-12-29 16:10:49.326505-05
+2046	4567750	20251221_TB@CAR	2025	16	fanduel	220	2025-12-29 16:10:49.326505-05
+2047	4695883	20251221_TB@CAR	2025	16	draftkings	260	2025-12-29 16:10:49.326505-05
+2048	4695883	20251221_TB@CAR	2025	16	fanduel	260	2025-12-29 16:10:49.326505-05
+2049	3116165	20251221_TB@CAR	2025	16	draftkings	300	2025-12-29 16:10:49.326505-05
+2050	3116165	20251221_TB@CAR	2025	16	fanduel	300	2025-12-29 16:10:49.326505-05
+2051	4430034	20251221_TB@CAR	2025	16	draftkings	310	2025-12-29 16:10:49.326505-05
+2052	4430034	20251221_TB@CAR	2025	16	fanduel	310	2025-12-29 16:10:49.326505-05
+2053	4430834	20251221_TB@CAR	2025	16	draftkings	425	2025-12-29 16:10:49.326505-05
+2054	4430834	20251221_TB@CAR	2025	16	fanduel	425	2025-12-29 16:10:49.326505-05
+2055	4243331	20251221_TB@CAR	2025	16	draftkings	340	2025-12-29 16:10:49.326505-05
+2056	4243331	20251221_TB@CAR	2025	16	fanduel	340	2025-12-29 16:10:49.326505-05
+2057	4431588	20251221_TB@CAR	2025	16	draftkings	600	2025-12-29 16:10:49.326505-05
+2058	4431588	20251221_TB@CAR	2025	16	fanduel	600	2025-12-29 16:10:49.326505-05
+2059	4372780	20251221_TB@CAR	2025	16	draftkings	850	2025-12-29 16:10:49.326505-05
+2060	4372780	20251221_TB@CAR	2025	16	fanduel	850	2025-12-29 16:10:49.326505-05
+2061	2976592	20251221_TB@CAR	2025	16	draftkings	900	2025-12-29 16:10:49.326505-05
+2062	2976592	20251221_TB@CAR	2025	16	fanduel	900	2025-12-29 16:10:49.326505-05
+2063	4361112	20251221_TB@CAR	2025	16	draftkings	5000	2025-12-29 16:10:49.326505-05
+2064	4361112	20251221_TB@CAR	2025	16	fanduel	5000	2025-12-29 16:10:49.326505-05
+2065	4372505	20251221_TB@CAR	2025	16	draftkings	1000	2025-12-29 16:10:49.326505-05
+2066	4372505	20251221_TB@CAR	2025	16	fanduel	1000	2025-12-29 16:10:49.326505-05
+2067	4708486	20251221_TB@CAR	2025	16	draftkings	1200	2025-12-29 16:10:49.326505-05
+2068	4708486	20251221_TB@CAR	2025	16	fanduel	1200	2025-12-29 16:10:49.326505-05
+2069	4683243	20251221_TB@CAR	2025	16	draftkings	1200	2025-12-29 16:10:49.326505-05
+2070	4683243	20251221_TB@CAR	2025	16	fanduel	1200	2025-12-29 16:10:49.326505-05
+2071	4608810	20251221_TB@CAR	2025	16	draftkings	2250	2025-12-29 16:10:49.326505-05
+2072	4608810	20251221_TB@CAR	2025	16	fanduel	2250	2025-12-29 16:10:49.326505-05
+2073	4360763	20251221_TB@CAR	2025	16	draftkings	1400	2025-12-29 16:10:49.326505-05
+2074	4360763	20251221_TB@CAR	2025	16	fanduel	1400	2025-12-29 16:10:49.326505-05
+2075	4361988	20251221_TB@CAR	2025	16	draftkings	1400	2025-12-29 16:10:49.326505-05
+2076	4361988	20251221_TB@CAR	2025	16	fanduel	1400	2025-12-29 16:10:49.326505-05
+2077	3135321	20251221_TB@CAR	2025	16	draftkings	1500	2025-12-29 16:10:49.326505-05
+2078	3135321	20251221_TB@CAR	2025	16	fanduel	1500	2025-12-29 16:10:49.326505-05
+2079	5097554	20251221_TB@CAR	2025	16	draftkings	2800	2025-12-29 16:10:49.326505-05
+2080	5097554	20251221_TB@CAR	2025	16	fanduel	2800	2025-12-29 16:10:49.326505-05
+2081	3040151	20251222_SF@IND	2025	16	draftkings	115	2025-12-29 16:10:49.634568-05
+2082	3040151	20251222_SF@IND	2025	16	fanduel	115	2025-12-29 16:10:49.634568-05
+2083	3886598	20251222_SF@IND	2025	16	draftkings	150	2025-12-29 16:10:49.634568-05
+2084	3886598	20251222_SF@IND	2025	16	fanduel	150	2025-12-29 16:10:49.634568-05
+2085	4431459	20251222_SF@IND	2025	16	draftkings	210	2025-12-29 16:10:49.634568-05
+2086	4431459	20251222_SF@IND	2025	16	fanduel	210	2025-12-29 16:10:49.634568-05
+2087	3045523	20251222_SF@IND	2025	16	draftkings	470	2025-12-29 16:10:49.634568-05
+2088	3045523	20251222_SF@IND	2025	16	fanduel	470	2025-12-29 16:10:49.634568-05
+2089	4688813	20251222_SF@IND	2025	16	draftkings	425	2025-12-29 16:10:49.634568-05
+2090	4688813	20251222_SF@IND	2025	16	fanduel	425	2025-12-29 16:10:49.634568-05
+2091	4035687	20251222_SF@IND	2025	16	draftkings	320	2025-12-29 16:10:49.634568-05
+2092	4035687	20251222_SF@IND	2025	16	fanduel	320	2025-12-29 16:10:49.634568-05
+2093	4360078	20251222_SF@IND	2025	16	draftkings	425	2025-12-29 16:10:49.634568-05
+2094	4360078	20251222_SF@IND	2025	16	fanduel	425	2025-12-29 16:10:49.634568-05
+2095	3043116	20251222_SF@IND	2025	16	draftkings	550	2025-12-29 16:10:49.634568-05
+2096	3043116	20251222_SF@IND	2025	16	fanduel	550	2025-12-29 16:10:49.634568-05
+2097	4040612	20251222_SF@IND	2025	16	draftkings	1050	2025-12-29 16:10:49.634568-05
+2098	4040612	20251222_SF@IND	2025	16	fanduel	1050	2025-12-29 16:10:49.634568-05
+2099	4430191	20251222_SF@IND	2025	16	draftkings	1300	2025-12-29 16:10:49.634568-05
+2100	4430191	20251222_SF@IND	2025	16	fanduel	1300	2025-12-29 16:10:49.634568-05
+2101	4259147	20251222_SF@IND	2025	16	draftkings	1750	2025-12-29 16:10:49.634568-05
+2102	4259147	20251222_SF@IND	2025	16	fanduel	1750	2025-12-29 16:10:49.634568-05
+2103	2998565	20251222_SF@IND	2025	16	draftkings	1800	2025-12-29 16:10:49.634568-05
+2104	2998565	20251222_SF@IND	2025	16	fanduel	1800	2025-12-29 16:10:49.634568-05
+2105	4431466	20251222_SF@IND	2025	16	draftkings	2250	2025-12-29 16:10:49.634568-05
+2106	4431466	20251222_SF@IND	2025	16	fanduel	2250	2025-12-29 16:10:49.634568-05
+2107	3051889	20251222_SF@IND	2025	16	draftkings	3000	2025-12-29 16:10:49.634568-05
+2108	3051889	20251222_SF@IND	2025	16	fanduel	3000	2025-12-29 16:10:49.634568-05
+2109	4241389	20251225_DAL@WSH	2025	17	draftkings	100	2025-12-30 16:40:36.866644-05
+2110	4241389	20251225_DAL@WSH	2025	17	fanduel	100	2025-12-30 16:40:36.866644-05
+2111	4426354	20251225_DAL@WSH	2025	17	draftkings	130	2025-12-30 16:40:36.866644-05
+2112	4426354	20251225_DAL@WSH	2025	17	fanduel	130	2025-12-30 16:40:36.866644-05
+2113	4242355	20251225_DAL@WSH	2025	17	draftkings	165	2025-12-30 16:40:36.866644-05
+2114	4242355	20251225_DAL@WSH	2025	17	fanduel	165	2025-12-30 16:40:36.866644-05
+2115	3121422	20251225_DAL@WSH	2025	17	draftkings	200	2025-12-30 16:40:36.866644-05
+2116	3121422	20251225_DAL@WSH	2025	17	fanduel	200	2025-12-30 16:40:36.866644-05
+2117	3126486	20251225_DAL@WSH	2025	17	draftkings	210	2025-12-30 16:40:36.866644-05
+2118	3126486	20251225_DAL@WSH	2025	17	fanduel	210	2025-12-30 16:40:36.866644-05
+2119	3676833	20251225_DAL@WSH	2025	17	draftkings	450	2025-12-30 16:40:36.866644-05
+2120	3676833	20251225_DAL@WSH	2025	17	fanduel	450	2025-12-30 16:40:36.866644-05
+2121	4567156	20251225_DAL@WSH	2025	17	draftkings	330	2025-12-30 16:40:36.866644-05
+2122	4567156	20251225_DAL@WSH	2025	17	fanduel	330	2025-12-30 16:40:36.866644-05
+2123	4249417	20251225_DAL@WSH	2025	17	draftkings	450	2025-12-30 16:40:36.866644-05
+2124	4249417	20251225_DAL@WSH	2025	17	fanduel	450	2025-12-30 16:40:36.866644-05
+2125	4426485	20251225_DAL@WSH	2025	17	draftkings	510	2025-12-30 16:40:36.866644-05
+2126	4426485	20251225_DAL@WSH	2025	17	fanduel	510	2025-12-30 16:40:36.866644-05
+2127	4372096	20251225_DAL@WSH	2025	17	draftkings	1000	2025-12-30 16:40:36.866644-05
+2128	4372096	20251225_DAL@WSH	2025	17	fanduel	1000	2025-12-30 16:40:36.866644-05
+2129	4690923	20251225_DAL@WSH	2025	17	draftkings	700	2025-12-30 16:40:36.866644-05
+2130	4690923	20251225_DAL@WSH	2025	17	fanduel	700	2025-12-30 16:40:36.866644-05
+2131	4360967	20251225_DAL@WSH	2025	17	draftkings	900	2025-12-30 16:40:36.866644-05
+2132	4360967	20251225_DAL@WSH	2025	17	fanduel	900	2025-12-30 16:40:36.866644-05
+2133	4048228	20251225_DAL@WSH	2025	17	draftkings	850	2025-12-30 16:40:36.866644-05
+2134	4048228	20251225_DAL@WSH	2025	17	fanduel	850	2025-12-30 16:40:36.866644-05
+2135	2576581	20251225_DAL@WSH	2025	17	draftkings	1300	2025-12-30 16:40:36.866644-05
+2136	2576581	20251225_DAL@WSH	2025	17	fanduel	1300	2025-12-30 16:40:36.866644-05
+2137	4361088	20251225_DAL@WSH	2025	17	draftkings	5000	2025-12-30 16:40:36.866644-05
+2138	4361088	20251225_DAL@WSH	2025	17	fanduel	5000	2025-12-30 16:40:36.866644-05
+2139	3128429	20251225_DEN@KC	2025	17	draftkings	138	2025-12-30 16:40:37.16745-05
+2140	3128429	20251225_DEN@KC	2025	17	fanduel	138	2025-12-30 16:40:37.16745-05
+2141	4431280	20251225_DEN@KC	2025	17	draftkings	210	2025-12-30 16:40:37.16745-05
+2142	4431280	20251225_DEN@KC	2025	17	fanduel	210	2025-12-30 16:40:37.16745-05
+2143	3051876	20251225_DEN@KC	2025	17	draftkings	375	2025-12-30 16:40:37.16745-05
+2144	3051876	20251225_DEN@KC	2025	17	fanduel	375	2025-12-30 16:40:37.16745-05
+2145	15847	20251225_DEN@KC	2025	17	draftkings	440	2025-12-30 16:40:37.16745-05
+2146	15847	20251225_DEN@KC	2025	17	fanduel	440	2025-12-30 16:40:37.16745-05
+2147	4686472	20251225_DEN@KC	2025	17	draftkings	600	2025-12-30 16:40:37.16745-05
+2148	4686472	20251225_DEN@KC	2025	17	fanduel	600	2025-12-30 16:40:37.16745-05
+2149	4039057	20251225_DEN@KC	2025	17	draftkings	490	2025-12-30 16:40:37.16745-05
+2150	4039057	20251225_DEN@KC	2025	17	fanduel	490	2025-12-30 16:40:37.16745-05
+2151	4683062	20251225_DEN@KC	2025	17	draftkings	600	2025-12-30 16:40:37.16745-05
+2152	4683062	20251225_DEN@KC	2025	17	fanduel	600	2025-12-30 16:40:37.16745-05
+2153	3911853	20251225_DEN@KC	2025	17	draftkings	700	2025-12-30 16:40:37.16745-05
+2154	3911853	20251225_DEN@KC	2025	17	fanduel	700	2025-12-30 16:40:37.16745-05
+2155	4241372	20251225_DEN@KC	2025	17	draftkings	900	2025-12-30 16:40:37.16745-05
+2156	4241372	20251225_DEN@KC	2025	17	fanduel	900	2025-12-30 16:40:37.16745-05
+2157	3120348	20251225_DEN@KC	2025	17	draftkings	1100	2025-12-30 16:40:37.16745-05
+2158	3120348	20251225_DEN@KC	2025	17	fanduel	1100	2025-12-30 16:40:37.16745-05
+2159	4240472	20251225_DEN@KC	2025	17	draftkings	1700	2025-12-30 16:40:37.16745-05
+2160	4240472	20251225_DEN@KC	2025	17	fanduel	1700	2025-12-30 16:40:37.16745-05
+2161	2975674	20251225_DEN@KC	2025	17	draftkings	5500	2025-12-30 16:40:37.16745-05
+2162	2975674	20251225_DEN@KC	2025	17	fanduel	5500	2025-12-30 16:40:37.16745-05
+2163	5082630	20251225_DEN@KC	2025	17	draftkings	3500	2025-12-30 16:40:37.16745-05
+2164	5082630	20251225_DEN@KC	2025	17	fanduel	3500	2025-12-30 16:40:37.16745-05
+2165	4430723	20251225_DEN@KC	2025	17	draftkings	5500	2025-12-30 16:40:37.16745-05
+2166	4430723	20251225_DEN@KC	2025	17	fanduel	5500	2025-12-30 16:40:37.16745-05
+2167	4374302	20251225_DET@MIN	2025	17	draftkings	100	2025-12-30 16:40:37.366844-05
+2168	4374302	20251225_DET@MIN	2025	17	fanduel	100	2025-12-30 16:40:37.366844-05
+2169	4426388	20251225_DET@MIN	2025	17	draftkings	185	2025-12-30 16:40:37.366844-05
+2170	4426388	20251225_DET@MIN	2025	17	fanduel	185	2025-12-30 16:40:37.366844-05
+2171	4262921	20251225_DET@MIN	2025	17	draftkings	170	2025-12-30 16:40:37.366844-05
+2172	4262921	20251225_DET@MIN	2025	17	fanduel	170	2025-12-30 16:40:37.366844-05
+2173	5123663	20251225_DET@MIN	2025	17	draftkings	300	2025-12-30 16:40:37.366844-05
+2174	5123663	20251225_DET@MIN	2025	17	fanduel	300	2025-12-30 16:40:37.366844-05
+2175	4429205	20251225_DET@MIN	2025	17	draftkings	280	2025-12-30 16:40:37.366844-05
+2176	4429205	20251225_DET@MIN	2025	17	fanduel	280	2025-12-30 16:40:37.366844-05
+2177	4382466	20251225_DET@MIN	2025	17	draftkings	475	2025-12-30 16:40:37.366844-05
+2178	4382466	20251225_DET@MIN	2025	17	fanduel	475	2025-12-30 16:40:37.366844-05
+2179	4608362	20251225_DET@MIN	2025	17	draftkings	450	2025-12-30 16:40:37.366844-05
+2180	4608362	20251225_DET@MIN	2025	17	fanduel	450	2025-12-30 16:40:37.366844-05
+2181	3921690	20251225_DET@MIN	2025	17	draftkings	425	2025-12-30 16:40:37.366844-05
+2182	3921690	20251225_DET@MIN	2025	17	fanduel	425	2025-12-30 16:40:37.366844-05
+2183	2973405	20251225_DET@MIN	2025	17	draftkings	800	2025-12-30 16:40:37.366844-05
+2184	2973405	20251225_DET@MIN	2025	17	fanduel	800	2025-12-30 16:40:37.366844-05
+2185	3049698	20251225_DET@MIN	2025	17	draftkings	750	2025-12-30 16:40:37.366844-05
+2186	3049698	20251225_DET@MIN	2025	17	fanduel	750	2025-12-30 16:40:37.366844-05
+2187	4373030	20251225_DET@MIN	2025	17	draftkings	1500	2025-12-30 16:40:37.366844-05
+2188	4373030	20251225_DET@MIN	2025	17	fanduel	1500	2025-12-30 16:40:37.366844-05
+2189	4433959	20251225_DET@MIN	2025	17	draftkings	1600	2025-12-30 16:40:37.366844-05
+2190	4433959	20251225_DET@MIN	2025	17	fanduel	1600	2025-12-30 16:40:37.366844-05
+2191	3126997	20251225_DET@MIN	2025	17	draftkings	2500	2025-12-30 16:40:37.366844-05
+2192	3126997	20251225_DET@MIN	2025	17	fanduel	2500	2025-12-30 16:40:37.366844-05
+2193	4565185	20251225_DET@MIN	2025	17	draftkings	3000	2025-12-30 16:40:37.366844-05
+2194	4565185	20251225_DET@MIN	2025	17	fanduel	3000	2025-12-30 16:40:37.366844-05
+2195	4430656	20251225_DET@MIN	2025	17	draftkings	2700	2025-12-30 16:40:37.366844-05
+2196	4430656	20251225_DET@MIN	2025	17	fanduel	2700	2025-12-30 16:40:37.366844-05
+2197	4429615	20251227_BAL@GB	2025	17	draftkings	260	2025-12-30 16:40:37.604191-05
+2198	4429615	20251227_BAL@GB	2025	17	fanduel	260	2025-12-30 16:40:37.604191-05
+2199	4248528	20251227_BAL@GB	2025	17	draftkings	280	2025-12-30 16:40:37.604191-05
+2200	4248528	20251227_BAL@GB	2025	17	fanduel	280	2025-12-30 16:40:37.604191-05
+2201	4362249	20251227_BAL@GB	2025	17	draftkings	360	2025-12-30 16:40:37.604191-05
+2202	4362249	20251227_BAL@GB	2025	17	fanduel	360	2025-12-30 16:40:37.604191-05
+2203	4361432	20251227_BAL@GB	2025	17	draftkings	300	2025-12-30 16:40:37.604191-05
+2204	4361432	20251227_BAL@GB	2025	17	fanduel	300	2025-12-30 16:40:37.604191-05
+2205	3116365	20251227_BAL@GB	2025	17	draftkings	350	2025-12-30 16:40:37.604191-05
+2206	3116365	20251227_BAL@GB	2025	17	fanduel	350	2025-12-30 16:40:37.604191-05
+2207	4428085	20251227_BAL@GB	2025	17	draftkings	650	2025-12-30 16:40:37.604191-05
+2208	4428085	20251227_BAL@GB	2025	17	fanduel	650	2025-12-30 16:40:37.604191-05
+2209	4360939	20251227_BAL@GB	2025	17	draftkings	700	2025-12-30 16:40:37.604191-05
+2210	4360939	20251227_BAL@GB	2025	17	fanduel	700	2025-12-30 16:40:37.604191-05
+2211	4361050	20251227_BAL@GB	2025	17	draftkings	750	2025-12-30 16:40:37.604191-05
+2212	4361050	20251227_BAL@GB	2025	17	fanduel	750	2025-12-30 16:40:37.604191-05
+2213	4701936	20251227_BAL@GB	2025	17	draftkings	1100	2025-12-30 16:40:37.604191-05
+2214	4701936	20251227_BAL@GB	2025	17	fanduel	1100	2025-12-30 16:40:37.604191-05
+2215	4428850	20251227_BAL@GB	2025	17	draftkings	1000	2025-12-30 16:40:37.604191-05
+2216	4428850	20251227_BAL@GB	2025	17	fanduel	1000	2025-12-30 16:40:37.604191-05
+2217	15795	20251227_BAL@GB	2025	17	draftkings	900	2025-12-30 16:40:37.604191-05
+2218	15795	20251227_BAL@GB	2025	17	fanduel	900	2025-12-30 16:40:37.604191-05
+2219	4360086	20251227_BAL@GB	2025	17	draftkings	1600	2025-12-30 16:40:37.604191-05
+2220	4360086	20251227_BAL@GB	2025	17	fanduel	1600	2025-12-30 16:40:37.604191-05
+2221	4241263	20251227_BAL@GB	2025	17	draftkings	1500	2025-12-30 16:40:37.604191-05
+2222	4241263	20251227_BAL@GB	2025	17	fanduel	1500	2025-12-30 16:40:37.604191-05
+2223	4696882	20251227_BAL@GB	2025	17	draftkings	4000	2025-12-30 16:40:37.604191-05
+2224	4696882	20251227_BAL@GB	2025	17	fanduel	4000	2025-12-30 16:40:37.604191-05
+2225	4690143	20251227_BAL@GB	2025	17	draftkings	2800	2025-12-30 16:40:37.604191-05
+2226	4690143	20251227_BAL@GB	2025	17	fanduel	2800	2025-12-30 16:40:37.604191-05
+2227	4258173	20251227_HOU@LAC	2025	17	draftkings	140	2025-12-30 16:40:37.79862-05
+2228	4258173	20251227_HOU@LAC	2025	17	fanduel	140	2025-12-30 16:40:37.79862-05
+2229	4612826	20251227_HOU@LAC	2025	17	draftkings	250	2025-12-30 16:40:37.79862-05
+2230	4612826	20251227_HOU@LAC	2025	17	fanduel	250	2025-12-30 16:40:37.79862-05
+2231	4429025	20251227_HOU@LAC	2025	17	draftkings	260	2025-12-30 16:40:37.79862-05
+2232	4429025	20251227_HOU@LAC	2025	17	fanduel	260	2025-12-30 16:40:37.79862-05
+2233	3117256	20251227_HOU@LAC	2025	17	draftkings	285	2025-12-30 16:40:37.79862-05
+2234	3117256	20251227_HOU@LAC	2025	17	fanduel	285	2025-12-30 16:40:37.79862-05
+2235	15818	20251227_HOU@LAC	2025	17	draftkings	300	2025-12-30 16:40:37.79862-05
+2236	15818	20251227_HOU@LAC	2025	17	fanduel	300	2025-12-30 16:40:37.79862-05
+2237	4595342	20251227_HOU@LAC	2025	17	draftkings	320	2025-12-30 16:40:37.79862-05
+2238	4595342	20251227_HOU@LAC	2025	17	fanduel	320	2025-12-30 16:40:37.79862-05
+2239	4686612	20251227_HOU@LAC	2025	17	draftkings	600	2025-12-30 16:40:37.79862-05
+2240	4686612	20251227_HOU@LAC	2025	17	fanduel	600	2025-12-30 16:40:37.79862-05
+2241	4877706	20251227_HOU@LAC	2025	17	draftkings	500	2025-12-30 16:40:37.79862-05
+2242	4877706	20251227_HOU@LAC	2025	17	fanduel	500	2025-12-30 16:40:37.79862-05
+2243	3895856	20251227_HOU@LAC	2025	17	draftkings	600	2025-12-30 16:40:37.79862-05
+2244	3895856	20251227_HOU@LAC	2025	17	fanduel	600	2025-12-30 16:40:37.79862-05
+2245	4686422	20251227_HOU@LAC	2025	17	draftkings	900	2025-12-30 16:40:37.79862-05
+2246	4686422	20251227_HOU@LAC	2025	17	fanduel	900	2025-12-30 16:40:37.79862-05
+2247	4426496	20251227_HOU@LAC	2025	17	draftkings	900	2025-12-30 16:40:37.79862-05
+2248	4426496	20251227_HOU@LAC	2025	17	fanduel	900	2025-12-30 16:40:37.79862-05
+2249	3127292	20251227_HOU@LAC	2025	17	draftkings	1300	2025-12-30 16:40:37.79862-05
+2250	3127292	20251227_HOU@LAC	2025	17	fanduel	1300	2025-12-30 16:40:37.79862-05
+2251	4586312	20251227_HOU@LAC	2025	17	draftkings	1200	2025-12-30 16:40:37.79862-05
+2252	4586312	20251227_HOU@LAC	2025	17	fanduel	1200	2025-12-30 16:40:37.79862-05
+2253	4430870	20251227_HOU@LAC	2025	17	draftkings	1400	2025-12-30 16:40:37.79862-05
+2254	4430870	20251227_HOU@LAC	2025	17	fanduel	1400	2025-12-30 16:40:37.79862-05
+2255	4040774	20251227_HOU@LAC	2025	17	draftkings	2500	2025-12-30 16:40:37.79862-05
+2256	4040774	20251227_HOU@LAC	2025	17	fanduel	2500	2025-12-30 16:40:37.79862-05
+2257	4362628	20251228_ARI@CIN	2025	17	draftkings	-165	2025-12-30 16:40:38.284569-05
+2258	4362628	20251228_ARI@CIN	2025	17	fanduel	-165	2025-12-30 16:40:38.284569-05
+2259	4239993	20251228_ARI@CIN	2025	17	draftkings	100	2025-12-30 16:40:38.284569-05
+2260	4239993	20251228_ARI@CIN	2025	17	fanduel	100	2025-12-30 16:40:38.284569-05
+2261	4361307	20251228_ARI@CIN	2025	17	draftkings	115	2025-12-30 16:40:38.284569-05
+2262	4361307	20251228_ARI@CIN	2025	17	fanduel	115	2025-12-30 16:40:38.284569-05
+2263	4360761	20251228_ARI@CIN	2025	17	draftkings	195	2025-12-30 16:40:38.284569-05
+2264	4360761	20251228_ARI@CIN	2025	17	fanduel	195	2025-12-30 16:40:38.284569-05
+2265	3116164	20251228_ARI@CIN	2025	17	draftkings	275	2025-12-30 16:40:38.284569-05
+2266	3116164	20251228_ARI@CIN	2025	17	fanduel	275	2025-12-30 16:40:38.284569-05
+2267	4432708	20251228_ARI@CIN	2025	17	draftkings	230	2025-12-30 16:40:38.284569-05
+2268	4432708	20251228_ARI@CIN	2025	17	fanduel	230	2025-12-30 16:40:38.284569-05
+2269	4426844	20251228_ARI@CIN	2025	17	draftkings	375	2025-12-30 16:40:38.284569-05
+2270	4426844	20251228_ARI@CIN	2025	17	fanduel	375	2025-12-30 16:40:38.284569-05
+2271	4368003	20251228_ARI@CIN	2025	17	draftkings	390	2025-12-30 16:40:38.284569-05
+2272	4368003	20251228_ARI@CIN	2025	17	fanduel	390	2025-12-30 16:40:38.284569-05
+2273	3127310	20251228_ARI@CIN	2025	17	draftkings	750	2025-12-30 16:40:38.284569-05
+2274	3127310	20251228_ARI@CIN	2025	17	fanduel	750	2025-12-30 16:40:38.284569-05
+2275	4036131	20251228_ARI@CIN	2025	17	draftkings	650	2025-12-30 16:40:38.284569-05
+2276	4036131	20251228_ARI@CIN	2025	17	fanduel	650	2025-12-30 16:40:38.284569-05
+2277	3050481	20251228_ARI@CIN	2025	17	draftkings	600	2025-12-30 16:40:38.284569-05
+2278	3050481	20251228_ARI@CIN	2025	17	fanduel	600	2025-12-30 16:40:38.284569-05
+2279	4690070	20251228_ARI@CIN	2025	17	draftkings	1200	2025-12-30 16:40:38.284569-05
+2280	4690070	20251228_ARI@CIN	2025	17	fanduel	1200	2025-12-30 16:40:38.284569-05
+2281	4428811	20251228_ARI@CIN	2025	17	draftkings	900	2025-12-30 16:40:38.284569-05
+2282	4428811	20251228_ARI@CIN	2025	17	fanduel	900	2025-12-30 16:40:38.284569-05
+2283	4692835	20251228_ARI@CIN	2025	17	draftkings	1500	2025-12-30 16:40:38.284569-05
+2284	4692835	20251228_ARI@CIN	2025	17	fanduel	1500	2025-12-30 16:40:38.284569-05
+2285	3914151	20251228_ARI@CIN	2025	17	draftkings	2000	2025-12-30 16:40:38.284569-05
+2286	3914151	20251228_ARI@CIN	2025	17	fanduel	2000	2025-12-30 16:40:38.284569-05
+2287	4570738	20251228_ARI@CIN	2025	17	draftkings	2200	2025-12-30 16:40:38.284569-05
+2288	4570738	20251228_ARI@CIN	2025	17	fanduel	2200	2025-12-30 16:40:38.284569-05
+2289	3886598	20251228_CHI@SF	2025	17	draftkings	110	2025-12-30 16:40:38.486949-05
+2290	3886598	20251228_CHI@SF	2025	17	fanduel	110	2025-12-30 16:40:38.486949-05
+2291	3915416	20251228_CHI@SF	2025	17	draftkings	175	2025-12-30 16:40:38.486949-05
+2292	3915416	20251228_CHI@SF	2025	17	fanduel	175	2025-12-30 16:40:38.486949-05
+2293	4723086	20251228_CHI@SF	2025	17	draftkings	200	2025-12-30 16:40:38.486949-05
+2294	4723086	20251228_CHI@SF	2025	17	fanduel	200	2025-12-30 16:40:38.486949-05
+2295	4428209	20251228_CHI@SF	2025	17	draftkings	190	2025-12-30 16:40:38.486949-05
+2296	4428209	20251228_CHI@SF	2025	17	fanduel	190	2025-12-30 16:40:38.486949-05
+2297	4685278	20251228_CHI@SF	2025	17	draftkings	200	2025-12-30 16:40:38.486949-05
+2298	4685278	20251228_CHI@SF	2025	17	fanduel	200	2025-12-30 16:40:38.486949-05
+2299	4259147	20251228_CHI@SF	2025	17	draftkings	250	2025-12-30 16:40:38.486949-05
+2300	4259147	20251228_CHI@SF	2025	17	fanduel	250	2025-12-30 16:40:38.486949-05
+2301	4258595	20251228_CHI@SF	2025	17	draftkings	325	2025-12-30 16:40:38.486949-05
+2302	4258595	20251228_CHI@SF	2025	17	fanduel	325	2025-12-30 16:40:38.486949-05
+2303	5160110	20251228_CHI@SF	2025	17	draftkings	550	2025-12-30 16:40:38.486949-05
+2304	5160110	20251228_CHI@SF	2025	17	fanduel	550	2025-12-30 16:40:38.486949-05
+2305	3045523	20251228_CHI@SF	2025	17	draftkings	550	2025-12-30 16:40:38.486949-05
+2306	3045523	20251228_CHI@SF	2025	17	fanduel	550	2025-12-30 16:40:38.486949-05
+2307	4040612	20251228_CHI@SF	2025	17	draftkings	600	2025-12-30 16:40:38.486949-05
+2308	4040612	20251228_CHI@SF	2025	17	fanduel	600	2025-12-30 16:40:38.486949-05
+2309	3043116	20251228_CHI@SF	2025	17	draftkings	600	2025-12-30 16:40:38.486949-05
+2310	3043116	20251228_CHI@SF	2025	17	fanduel	600	2025-12-30 16:40:38.486949-05
+2311	4039050	20251228_CHI@SF	2025	17	draftkings	1100	2025-12-30 16:40:38.486949-05
+2312	4039050	20251228_CHI@SF	2025	17	fanduel	1100	2025-12-30 16:40:38.486949-05
+2313	4430191	20251228_CHI@SF	2025	17	draftkings	1600	2025-12-30 16:40:38.486949-05
+2314	4430191	20251228_CHI@SF	2025	17	fanduel	1600	2025-12-30 16:40:38.486949-05
+2315	4685183	20251228_CHI@SF	2025	17	draftkings	1200	2025-12-30 16:40:38.486949-05
+2316	4685183	20251228_CHI@SF	2025	17	fanduel	1200	2025-12-30 16:40:38.486949-05
+2317	3052897	20251228_CHI@SF	2025	17	draftkings	2200	2025-12-30 16:40:38.486949-05
+2318	3052897	20251228_CHI@SF	2025	17	fanduel	2200	2025-12-30 16:40:38.486949-05
+2319	4360290	20251228_CHI@SF	2025	17	draftkings	3000	2025-12-30 16:40:38.486949-05
+2320	4360290	20251228_CHI@SF	2025	17	fanduel	3000	2025-12-30 16:40:38.486949-05
+2321	3916433	20251228_JAX@IND	2025	17	draftkings	150	2025-12-30 16:40:38.706116-05
+2322	3916433	20251228_JAX@IND	2025	17	fanduel	150	2025-12-30 16:40:38.706116-05
+2323	4432620	20251228_JAX@IND	2025	17	draftkings	240	2025-12-30 16:40:38.706116-05
+2324	4432620	20251228_JAX@IND	2025	17	fanduel	240	2025-12-30 16:40:38.706116-05
+2325	4430539	20251228_JAX@IND	2025	17	draftkings	220	2025-12-30 16:40:38.706116-05
+2326	4430539	20251228_JAX@IND	2025	17	fanduel	220	2025-12-30 16:40:38.706116-05
+2327	4432773	20251228_JAX@IND	2025	17	draftkings	190	2025-12-30 16:40:38.706116-05
+2328	4432773	20251228_JAX@IND	2025	17	fanduel	190	2025-12-30 16:40:38.706116-05
+2329	4431459	20251228_JAX@IND	2025	17	draftkings	170	2025-12-30 16:40:38.706116-05
+2330	4431459	20251228_JAX@IND	2025	17	fanduel	170	2025-12-30 16:40:38.706116-05
+2331	4360078	20251228_JAX@IND	2025	17	draftkings	290	2025-12-30 16:40:38.706116-05
+2332	4360078	20251228_JAX@IND	2025	17	fanduel	290	2025-12-30 16:40:38.706116-05
+2333	4035687	20251228_JAX@IND	2025	17	draftkings	270	2025-12-30 16:40:38.706116-05
+2334	4035687	20251228_JAX@IND	2025	17	fanduel	270	2025-12-30 16:40:38.706116-05
+2335	4688813	20251228_JAX@IND	2025	17	draftkings	295	2025-12-30 16:40:38.706116-05
+2336	4688813	20251228_JAX@IND	2025	17	fanduel	295	2025-12-30 16:40:38.706116-05
+2337	3134353	20251228_JAX@IND	2025	17	draftkings	850	2025-12-30 16:40:38.706116-05
+2338	3134353	20251228_JAX@IND	2025	17	fanduel	850	2025-12-30 16:40:38.706116-05
+2339	2998565	20251228_JAX@IND	2025	17	draftkings	1200	2025-12-30 16:40:38.706116-05
+2340	2998565	20251228_JAX@IND	2025	17	fanduel	1200	2025-12-30 16:40:38.706116-05
+2341	4061956	20251228_JAX@IND	2025	17	draftkings	1000	2025-12-30 16:40:38.706116-05
+2342	4061956	20251228_JAX@IND	2025	17	fanduel	1000	2025-12-30 16:40:38.706116-05
+2343	4244049	20251228_JAX@IND	2025	17	draftkings	2000	2025-12-30 16:40:38.706116-05
+2344	4244049	20251228_JAX@IND	2025	17	fanduel	2000	2025-12-30 16:40:38.706116-05
+2345	4362523	20251228_JAX@IND	2025	17	draftkings	2000	2025-12-30 16:40:38.706116-05
+2346	4362523	20251228_JAX@IND	2025	17	fanduel	2000	2025-12-30 16:40:38.706116-05
+2347	3052096	20251228_JAX@IND	2025	17	draftkings	1750	2025-12-30 16:40:38.706116-05
+2348	3052096	20251228_JAX@IND	2025	17	fanduel	1750	2025-12-30 16:40:38.706116-05
+2349	4361577	20251228_JAX@IND	2025	17	draftkings	2800	2025-12-30 16:40:38.706116-05
+2350	4361577	20251228_JAX@IND	2025	17	fanduel	2800	2025-12-30 16:40:38.706116-05
+2351	3051889	20251228_JAX@IND	2025	17	draftkings	3000	2025-12-30 16:40:38.706116-05
+2352	3051889	20251228_JAX@IND	2025	17	fanduel	3000	2025-12-30 16:40:38.706116-05
+2353	3046439	20251228_NE@NYJ	2025	17	draftkings	148	2025-12-30 16:40:39.010119-05
+2354	3046439	20251228_NE@NYJ	2025	17	fanduel	148	2025-12-30 16:40:39.010119-05
+2355	2976212	20251228_NE@NYJ	2025	17	draftkings	140	2025-12-30 16:40:39.010119-05
+2356	2976212	20251228_NE@NYJ	2025	17	fanduel	140	2025-12-30 16:40:39.010119-05
+2357	4613202	20251228_NE@NYJ	2025	17	draftkings	280	2025-12-30 16:40:39.010119-05
+2358	4613202	20251228_NE@NYJ	2025	17	fanduel	280	2025-12-30 16:40:39.010119-05
+2359	4427095	20251228_NE@NYJ	2025	17	draftkings	340	2025-12-30 16:40:39.010119-05
+2360	4427095	20251228_NE@NYJ	2025	17	fanduel	340	2025-12-30 16:40:39.010119-05
+2361	4597500	20251228_NE@NYJ	2025	17	draftkings	330	2025-12-30 16:40:39.010119-05
+2362	4597500	20251228_NE@NYJ	2025	17	fanduel	330	2025-12-30 16:40:39.010119-05
+2363	3043275	20251228_NE@NYJ	2025	17	draftkings	450	2025-12-30 16:40:39.010119-05
+2364	3043275	20251228_NE@NYJ	2025	17	fanduel	450	2025-12-30 16:40:39.010119-05
+2365	4567096	20251228_NE@NYJ	2025	17	draftkings	500	2025-12-30 16:40:39.010119-05
+2366	4567096	20251228_NE@NYJ	2025	17	fanduel	500	2025-12-30 16:40:39.010119-05
+2367	4569371	20251228_NE@NYJ	2025	17	draftkings	900	2025-12-30 16:40:39.010119-05
+2368	4569371	20251228_NE@NYJ	2025	17	fanduel	900	2025-12-30 16:40:39.010119-05
+2369	4695193	20251228_NE@NYJ	2025	17	draftkings	1000	2025-12-30 16:40:39.010119-05
+2370	4695193	20251228_NE@NYJ	2025	17	fanduel	1000	2025-12-30 16:40:39.010119-05
+2371	4361372	20251228_NE@NYJ	2025	17	draftkings	700	2025-12-30 16:40:39.010119-05
+2372	4361372	20251228_NE@NYJ	2025	17	fanduel	700	2025-12-30 16:40:39.010119-05
+2373	2310331	20251228_NE@NYJ	2025	17	draftkings	4000	2025-12-30 16:40:39.010119-05
+2374	2310331	20251228_NE@NYJ	2025	17	fanduel	4000	2025-12-30 16:40:39.010119-05
+2375	4250764	20251228_NE@NYJ	2025	17	draftkings	1400	2025-12-30 16:40:39.010119-05
+2376	4250764	20251228_NE@NYJ	2025	17	fanduel	1400	2025-12-30 16:40:39.010119-05
+2377	4361100	20251228_NE@NYJ	2025	17	draftkings	2200	2025-12-30 16:40:39.010119-05
+2378	4361100	20251228_NE@NYJ	2025	17	fanduel	2200	2025-12-30 16:40:39.010119-05
+2379	4241410	20251228_NE@NYJ	2025	17	draftkings	2500	2025-12-30 16:40:39.010119-05
+2380	4241410	20251228_NE@NYJ	2025	17	fanduel	2500	2025-12-30 16:40:39.010119-05
+2381	4596545	20251228_NE@NYJ	2025	17	draftkings	2700	2025-12-30 16:40:39.010119-05
+2382	4596545	20251228_NE@NYJ	2025	17	fanduel	2700	2025-12-30 16:40:39.010119-05
+2383	4429105	20251228_NE@NYJ	2025	17	draftkings	2500	2025-12-30 16:40:39.010119-05
+2384	4429105	20251228_NE@NYJ	2025	17	fanduel	2500	2025-12-30 16:40:39.010119-05
+2385	4361370	20251228_NO@TEN	2025	17	draftkings	115	2025-12-30 16:40:39.279578-05
+2386	4361370	20251228_NO@TEN	2025	17	fanduel	115	2025-12-30 16:40:39.279578-05
+2387	3929645	20251228_NO@TEN	2025	17	draftkings	200	2025-12-30 16:40:39.279578-05
+2388	3929645	20251228_NO@TEN	2025	17	fanduel	200	2025-12-30 16:40:39.279578-05
+2389	4431268	20251228_NO@TEN	2025	17	draftkings	260	2025-12-30 16:40:39.279578-05
+2390	4431268	20251228_NO@TEN	2025	17	fanduel	260	2025-12-30 16:40:39.279578-05
+2391	4883647	20251228_NO@TEN	2025	17	draftkings	425	2025-12-30 16:40:39.279578-05
+2392	4883647	20251228_NO@TEN	2025	17	fanduel	425	2025-12-30 16:40:39.279578-05
+2393	4372758	20251228_NO@TEN	2025	17	draftkings	500	2025-12-30 16:40:39.279578-05
+2394	4372758	20251228_NO@TEN	2025	17	fanduel	500	2025-12-30 16:40:39.279578-05
+2395	4686728	20251228_NO@TEN	2025	17	draftkings	440	2025-12-30 16:40:39.279578-05
+2396	4686728	20251228_NO@TEN	2025	17	fanduel	440	2025-12-30 16:40:39.279578-05
+2397	3930066	20251228_NO@TEN	2025	17	draftkings	500	2025-12-30 16:40:39.279578-05
+2398	3930066	20251228_NO@TEN	2025	17	fanduel	500	2025-12-30 16:40:39.279578-05
+2399	4360635	20251228_NO@TEN	2025	17	draftkings	380	2025-12-30 16:40:39.279578-05
+2400	4360635	20251228_NO@TEN	2025	17	fanduel	380	2025-12-30 16:40:39.279578-05
+2401	3127306	20251228_NO@TEN	2025	17	draftkings	750	2025-12-30 16:40:39.279578-05
+2402	3127306	20251228_NO@TEN	2025	17	fanduel	750	2025-12-30 16:40:39.279578-05
+2403	4034862	20251228_NO@TEN	2025	17	draftkings	900	2025-12-30 16:40:39.279578-05
+2404	4034862	20251228_NO@TEN	2025	17	fanduel	900	2025-12-30 16:40:39.279578-05
+2405	4372063	20251228_NO@TEN	2025	17	draftkings	1100	2025-12-30 16:40:39.279578-05
+2406	4372063	20251228_NO@TEN	2025	17	fanduel	1100	2025-12-30 16:40:39.279578-05
+2407	3916204	20251228_NO@TEN	2025	17	draftkings	1600	2025-12-30 16:40:39.279578-05
+2408	3916204	20251228_NO@TEN	2025	17	fanduel	1600	2025-12-30 16:40:39.279578-05
+2409	4057082	20251228_NO@TEN	2025	17	draftkings	3000	2025-12-30 16:40:39.279578-05
+2410	4057082	20251228_NO@TEN	2025	17	fanduel	3000	2025-12-30 16:40:39.279578-05
+2411	4360978	20251228_NO@TEN	2025	17	draftkings	2200	2025-12-30 16:40:39.279578-05
+2412	4360978	20251228_NO@TEN	2025	17	fanduel	2200	2025-12-30 16:40:39.279578-05
+2413	4432731	20251228_NO@TEN	2025	17	draftkings	1900	2025-12-30 16:40:39.279578-05
+2414	4432731	20251228_NO@TEN	2025	17	fanduel	1900	2025-12-30 16:40:39.279578-05
+2415	4569587	20251228_NYG@LV	2025	17	draftkings	210	2025-12-30 16:40:39.583762-05
+2416	4569587	20251228_NYG@LV	2025	17	fanduel	210	2025-12-30 16:40:39.583762-05
+2417	4428718	20251228_NYG@LV	2025	17	draftkings	220	2025-12-30 16:40:39.583762-05
+2418	4428718	20251228_NYG@LV	2025	17	fanduel	220	2025-12-30 16:40:39.583762-05
+2419	3916945	20251228_NYG@LV	2025	17	draftkings	270	2025-12-30 16:40:39.583762-05
+2420	3916945	20251228_NYG@LV	2025	17	fanduel	270	2025-12-30 16:40:39.583762-05
+2421	4429086	20251228_NYG@LV	2025	17	draftkings	325	2025-12-30 16:40:39.583762-05
+2422	4429086	20251228_NYG@LV	2025	17	fanduel	325	2025-12-30 16:40:39.583762-05
+2423	4361516	20251228_NYG@LV	2025	17	draftkings	350	2025-12-30 16:40:39.583762-05
+2424	4361516	20251228_NYG@LV	2025	17	fanduel	350	2025-12-30 16:40:39.583762-05
+2425	2577327	20251228_NYG@LV	2025	17	draftkings	480	2025-12-30 16:40:39.583762-05
+2426	2577327	20251228_NYG@LV	2025	17	fanduel	480	2025-12-30 16:40:39.583762-05
+2427	4242540	20251228_NYG@LV	2025	17	draftkings	550	2025-12-30 16:40:39.583762-05
+2428	4242540	20251228_NYG@LV	2025	17	fanduel	550	2025-12-30 16:40:39.583762-05
+2429	4432775	20251228_NYG@LV	2025	17	draftkings	750	2025-12-30 16:40:39.583762-05
+2430	4432775	20251228_NYG@LV	2025	17	fanduel	750	2025-12-30 16:40:39.583762-05
+2431	4045305	20251228_NYG@LV	2025	17	draftkings	575	2025-12-30 16:40:39.583762-05
+2432	4045305	20251228_NYG@LV	2025	17	fanduel	575	2025-12-30 16:40:39.583762-05
+2433	3919510	20251228_NYG@LV	2025	17	draftkings	1000	2025-12-30 16:40:39.583762-05
+2434	3919510	20251228_NYG@LV	2025	17	fanduel	1000	2025-12-30 16:40:39.583762-05
+2435	4424106	20251228_NYG@LV	2025	17	draftkings	1600	2025-12-30 16:40:39.583762-05
+2436	4424106	20251228_NYG@LV	2025	17	fanduel	1600	2025-12-30 16:40:39.583762-05
+2437	2531358	20251228_NYG@LV	2025	17	draftkings	2000	2025-12-30 16:40:39.583762-05
+2438	2531358	20251228_NYG@LV	2025	17	fanduel	2000	2025-12-30 16:40:39.583762-05
+2439	4746079	20251228_NYG@LV	2025	17	draftkings	1800	2025-12-30 16:40:39.583762-05
+2440	4746079	20251228_NYG@LV	2025	17	fanduel	1800	2025-12-30 16:40:39.583762-05
+2441	4361332	20251228_NYG@LV	2025	17	draftkings	1150	2025-12-30 16:40:39.583762-05
+2442	4361332	20251228_NYG@LV	2025	17	fanduel	1150	2025-12-30 16:40:39.583762-05
+2443	4570296	20251228_NYG@LV	2025	17	draftkings	1500	2025-12-30 16:40:39.583762-05
+2444	4570296	20251228_NYG@LV	2025	17	fanduel	1500	2025-12-30 16:40:39.583762-05
+2445	4369466	20251228_NYG@LV	2025	17	draftkings	1700	2025-12-30 16:40:39.583762-05
+2446	4369466	20251228_NYG@LV	2025	17	fanduel	1700	2025-12-30 16:40:39.583762-05
+2447	5155825	20251228_NYG@LV	2025	17	draftkings	5000	2025-12-30 16:40:39.583762-05
+2448	5155825	20251228_NYG@LV	2025	17	fanduel	5000	2025-12-30 16:40:39.583762-05
+2449	4047646	20251228_PHI@BUF	2025	17	draftkings	165	2025-12-30 16:40:39.785893-05
+2450	4047646	20251228_PHI@BUF	2025	17	fanduel	165	2025-12-30 16:40:39.785893-05
+2451	4241478	20251228_PHI@BUF	2025	17	draftkings	225	2025-12-30 16:40:39.785893-05
+2452	4241478	20251228_PHI@BUF	2025	17	fanduel	225	2025-12-30 16:40:39.785893-05
+2453	3930086	20251228_PHI@BUF	2025	17	draftkings	280	2025-12-30 16:40:39.785893-05
+2454	3930086	20251228_PHI@BUF	2025	17	fanduel	280	2025-12-30 16:40:39.785893-05
+2455	4373678	20251228_PHI@BUF	2025	17	draftkings	275	2025-12-30 16:40:39.785893-05
+2456	4373678	20251228_PHI@BUF	2025	17	fanduel	275	2025-12-30 16:40:39.785893-05
+2457	3121023	20251228_PHI@BUF	2025	17	draftkings	260	2025-12-30 16:40:39.785893-05
+2458	3121023	20251228_PHI@BUF	2025	17	fanduel	260	2025-12-30 16:40:39.785893-05
+2459	4573699	20251228_PHI@BUF	2025	17	draftkings	600	2025-12-30 16:40:39.785893-05
+2460	4573699	20251228_PHI@BUF	2025	17	fanduel	600	2025-12-30 16:40:39.785893-05
+2461	4242433	20251228_PHI@BUF	2025	17	draftkings	500	2025-12-30 16:40:39.785893-05
+2462	4242433	20251228_PHI@BUF	2025	17	fanduel	500	2025-12-30 16:40:39.785893-05
+2463	4241476	20251228_PHI@BUF	2025	17	draftkings	850	2025-12-30 16:40:39.785893-05
+2464	4241476	20251228_PHI@BUF	2025	17	fanduel	850	2025-12-30 16:40:39.785893-05
+2465	4243537	20251228_PHI@BUF	2025	17	draftkings	650	2025-12-30 16:40:39.785893-05
+2466	4243537	20251228_PHI@BUF	2025	17	fanduel	650	2025-12-30 16:40:39.785893-05
+2467	4361409	20251228_PHI@BUF	2025	17	draftkings	850	2025-12-30 16:40:39.785893-05
+2468	4361409	20251228_PHI@BUF	2025	17	fanduel	850	2025-12-30 16:40:39.785893-05
+2469	16731	20251228_PHI@BUF	2025	17	draftkings	750	2025-12-30 16:40:39.785893-05
+2470	16731	20251228_PHI@BUF	2025	17	fanduel	750	2025-12-30 16:40:39.785893-05
+2471	4688552	20251228_PHI@BUF	2025	17	draftkings	4000	2025-12-30 16:40:39.785893-05
+2472	4688552	20251228_PHI@BUF	2025	17	fanduel	4000	2025-12-30 16:40:39.785893-05
+2473	4241374	20251228_PHI@BUF	2025	17	draftkings	2500	2025-12-30 16:40:39.785893-05
+2474	4241374	20251228_PHI@BUF	2025	17	fanduel	2500	2025-12-30 16:40:39.785893-05
+2475	4715355	20251228_PHI@BUF	2025	17	draftkings	2500	2025-12-30 16:40:39.785893-05
+2476	4715355	20251228_PHI@BUF	2025	17	fanduel	2500	2025-12-30 16:40:39.785893-05
+2477	4039160	20251228_PHI@BUF	2025	17	draftkings	2500	2025-12-30 16:40:39.785893-05
+2478	4039160	20251228_PHI@BUF	2025	17	fanduel	2500	2025-12-30 16:40:39.785893-05
+2479	3926231	20251228_PHI@BUF	2025	17	draftkings	4000	2025-12-30 16:40:39.785893-05
+2480	3926231	20251228_PHI@BUF	2025	17	fanduel	4000	2025-12-30 16:40:39.785893-05
+2481	4372026	20251228_PHI@BUF	2025	17	draftkings	2900	2025-12-30 16:40:39.785893-05
+2482	4372026	20251228_PHI@BUF	2025	17	fanduel	2900	2025-12-30 16:40:39.785893-05
+2483	5083076	20251228_PIT@CLE	2025	17	draftkings	350	2025-12-30 16:40:40.238698-05
+2484	5083076	20251228_PIT@CLE	2025	17	fanduel	350	2025-12-30 16:40:40.238698-05
+2485	3051738	20251228_PIT@CLE	2025	17	draftkings	450	2025-12-30 16:40:40.238698-05
+2486	3051738	20251228_PIT@CLE	2025	17	fanduel	450	2025-12-30 16:40:40.238698-05
+2487	16460	20251228_PIT@CLE	2025	17	draftkings	475	2025-12-30 16:40:40.238698-05
+2488	16460	20251228_PIT@CLE	2025	17	fanduel	475	2025-12-30 16:40:40.238698-05
+2489	4430802	20251228_PIT@CLE	2025	17	draftkings	475	2025-12-30 16:40:40.238698-05
+2490	4430802	20251228_PIT@CLE	2025	17	fanduel	475	2025-12-30 16:40:40.238698-05
+2491	4361411	20251228_PIT@CLE	2025	17	draftkings	425	2025-12-30 16:40:40.238698-05
+2492	4361411	20251228_PIT@CLE	2025	17	fanduel	425	2025-12-30 16:40:40.238698-05
+2493	4241463	20251228_PIT@CLE	2025	17	draftkings	440	2025-12-30 16:40:40.238698-05
+2494	4241463	20251228_PIT@CLE	2025	17	fanduel	440	2025-12-30 16:40:40.238698-05
+2495	3054212	20251228_PIT@CLE	2025	17	draftkings	500	2025-12-30 16:40:40.238698-05
+2496	3054212	20251228_PIT@CLE	2025	17	fanduel	500	2025-12-30 16:40:40.238698-05
+2497	4613104	20251228_PIT@CLE	2025	17	draftkings	900	2025-12-30 16:40:40.238698-05
+2498	4613104	20251228_PIT@CLE	2025	17	fanduel	900	2025-12-30 16:40:40.238698-05
+2499	4808839	20251228_PIT@CLE	2025	17	draftkings	950	2025-12-30 16:40:40.238698-05
+2500	4808839	20251228_PIT@CLE	2025	17	fanduel	950	2025-12-30 16:40:40.238698-05
+2501	3914397	20251228_PIT@CLE	2025	17	draftkings	750	2025-12-30 16:40:40.238698-05
+2502	3914397	20251228_PIT@CLE	2025	17	fanduel	750	2025-12-30 16:40:40.238698-05
+2503	4369863	20251228_PIT@CLE	2025	17	draftkings	850	2025-12-30 16:40:40.238698-05
+2504	4369863	20251228_PIT@CLE	2025	17	fanduel	850	2025-12-30 16:40:40.238698-05
+2505	4431492	20251228_PIT@CLE	2025	17	draftkings	1100	2025-12-30 16:40:40.238698-05
+2506	4431492	20251228_PIT@CLE	2025	17	fanduel	1100	2025-12-30 16:40:40.238698-05
+2507	4241961	20251228_PIT@CLE	2025	17	draftkings	1100	2025-12-30 16:40:40.238698-05
+2508	4241961	20251228_PIT@CLE	2025	17	fanduel	1100	2025-12-30 16:40:40.238698-05
+2509	4035656	20251228_PIT@CLE	2025	17	draftkings	2250	2025-12-30 16:40:40.238698-05
+2510	4035656	20251228_PIT@CLE	2025	17	fanduel	2250	2025-12-30 16:40:40.238698-05
+2511	4362018	20251228_PIT@CLE	2025	17	draftkings	4000	2025-12-30 16:40:40.238698-05
+2512	4362018	20251228_PIT@CLE	2025	17	fanduel	4000	2025-12-30 16:40:40.238698-05
+2513	4877203	20251228_PIT@CLE	2025	17	draftkings	2000	2025-12-30 16:40:40.238698-05
+2514	4877203	20251228_PIT@CLE	2025	17	fanduel	2000	2025-12-30 16:40:40.238698-05
+2515	4362603	20251228_PIT@CLE	2025	17	draftkings	3000	2025-12-30 16:40:40.238698-05
+2516	4362603	20251228_PIT@CLE	2025	17	fanduel	3000	2025-12-30 16:40:40.238698-05
+2517	4430878	20251228_SEA@CAR	2025	17	draftkings	110	2025-12-30 16:40:40.439633-05
+2518	4430878	20251228_SEA@CAR	2025	17	fanduel	110	2025-12-30 16:40:40.439633-05
+2519	4576297	20251228_SEA@CAR	2025	17	draftkings	220	2025-12-30 16:40:40.439633-05
+2520	4576297	20251228_SEA@CAR	2025	17	fanduel	220	2025-12-30 16:40:40.439633-05
+2521	4685472	20251228_SEA@CAR	2025	17	draftkings	195	2025-12-30 16:40:40.439633-05
+2522	4685472	20251228_SEA@CAR	2025	17	fanduel	195	2025-12-30 16:40:40.439633-05
+2523	2977187	20251228_SEA@CAR	2025	17	draftkings	390	2025-12-30 16:40:40.439633-05
+2524	2977187	20251228_SEA@CAR	2025	17	fanduel	390	2025-12-30 16:40:40.439633-05
+2525	4032473	20251228_SEA@CAR	2025	17	draftkings	295	2025-12-30 16:40:40.439633-05
+2526	4032473	20251228_SEA@CAR	2025	17	fanduel	295	2025-12-30 16:40:40.439633-05
+2527	4695883	20251228_SEA@CAR	2025	17	draftkings	330	2025-12-30 16:40:40.439633-05
+2528	4695883	20251228_SEA@CAR	2025	17	fanduel	330	2025-12-30 16:40:40.439633-05
+2529	4430034	20251228_SEA@CAR	2025	17	draftkings	480	2025-12-30 16:40:40.439633-05
+2530	4430034	20251228_SEA@CAR	2025	17	fanduel	480	2025-12-30 16:40:40.439633-05
+2531	4431588	20251228_SEA@CAR	2025	17	draftkings	600	2025-12-30 16:40:40.439633-05
+2532	4431588	20251228_SEA@CAR	2025	17	fanduel	600	2025-12-30 16:40:40.439633-05
+2533	4683243	20251228_SEA@CAR	2025	17	draftkings	1500	2025-12-30 16:40:40.439633-05
+2534	4683243	20251228_SEA@CAR	2025	17	fanduel	1500	2025-12-30 16:40:40.439633-05
+2535	2975863	20251228_SEA@CAR	2025	17	draftkings	1000	2025-12-30 16:40:40.439633-05
+2536	2975863	20251228_SEA@CAR	2025	17	fanduel	1000	2025-12-30 16:40:40.439633-05
+2537	4372780	20251228_SEA@CAR	2025	17	draftkings	1000	2025-12-30 16:40:40.439633-05
+2538	4372780	20251228_SEA@CAR	2025	17	fanduel	1000	2025-12-30 16:40:40.439633-05
+2539	4708486	20251228_SEA@CAR	2025	17	draftkings	1700	2025-12-30 16:40:40.439633-05
+2540	4708486	20251228_SEA@CAR	2025	17	fanduel	1700	2025-12-30 16:40:40.439633-05
+2541	4360763	20251228_SEA@CAR	2025	17	draftkings	1900	2025-12-30 16:40:40.439633-05
+2542	4360763	20251228_SEA@CAR	2025	17	fanduel	1900	2025-12-30 16:40:40.439633-05
+2543	4360405	20251228_SEA@CAR	2025	17	draftkings	2500	2025-12-30 16:40:40.439633-05
+2544	4360405	20251228_SEA@CAR	2025	17	fanduel	2500	2025-12-30 16:40:40.439633-05
+2545	4569547	20251228_SEA@CAR	2025	17	draftkings	3500	2025-12-30 16:40:40.439633-05
+2546	4569547	20251228_SEA@CAR	2025	17	fanduel	3500	2025-12-30 16:40:40.439633-05
+2547	4241983	20251228_SEA@CAR	2025	17	draftkings	2800	2025-12-30 16:40:40.439633-05
+2548	4241983	20251228_SEA@CAR	2025	17	fanduel	2800	2025-12-30 16:40:40.439633-05
+2549	4401805	20251228_SEA@CAR	2025	17	draftkings	5000	2025-12-30 16:40:40.439633-05
+2550	4401805	20251228_SEA@CAR	2025	17	fanduel	5000	2025-12-30 16:40:40.439633-05
+2551	16737	20251228_TB@MIA	2025	17	draftkings	125	2025-12-30 16:40:40.669594-05
+2552	16737	20251228_TB@MIA	2025	17	fanduel	125	2025-12-30 16:40:40.669594-05
+2553	4372016	20251228_TB@MIA	2025	17	draftkings	215	2025-12-30 16:40:40.669594-05
+2554	4372016	20251228_TB@MIA	2025	17	fanduel	215	2025-12-30 16:40:40.669594-05
+2555	4567750	20251228_TB@MIA	2025	17	draftkings	280	2025-12-30 16:40:40.669594-05
+2556	4567750	20251228_TB@MIA	2025	17	fanduel	280	2025-12-30 16:40:40.669594-05
+2557	3116165	20251228_TB@MIA	2025	17	draftkings	280	2025-12-30 16:40:40.669594-05
+2558	3116165	20251228_TB@MIA	2025	17	fanduel	280	2025-12-30 16:40:40.669594-05
+2559	2576925	20251228_TB@MIA	2025	17	draftkings	260	2025-12-30 16:40:40.669594-05
+2560	2576925	20251228_TB@MIA	2025	17	fanduel	260	2025-12-30 16:40:40.669594-05
+2561	4243331	20251228_TB@MIA	2025	17	draftkings	370	2025-12-30 16:40:40.669594-05
+2562	4243331	20251228_TB@MIA	2025	17	fanduel	370	2025-12-30 16:40:40.669594-05
+2563	4430834	20251228_TB@MIA	2025	17	draftkings	600	2025-12-30 16:40:40.669594-05
+2564	4430834	20251228_TB@MIA	2025	17	fanduel	600	2025-12-30 16:40:40.669594-05
+2565	4569603	20251228_TB@MIA	2025	17	draftkings	500	2025-12-30 16:40:40.669594-05
+2566	4569603	20251228_TB@MIA	2025	17	fanduel	500	2025-12-30 16:40:40.669594-05
+2567	4367209	20251228_TB@MIA	2025	17	draftkings	750	2025-12-30 16:40:40.669594-05
+2568	4367209	20251228_TB@MIA	2025	17	fanduel	750	2025-12-30 16:40:40.669594-05
+2569	4608810	20251228_TB@MIA	2025	17	draftkings	1100	2025-12-30 16:40:40.669594-05
+2570	4608810	20251228_TB@MIA	2025	17	fanduel	1100	2025-12-30 16:40:40.669594-05
+2571	4365395	20251228_TB@MIA	2025	17	draftkings	1300	2025-12-30 16:40:40.669594-05
+2572	4365395	20251228_TB@MIA	2025	17	fanduel	1300	2025-12-30 16:40:40.669594-05
+2573	4372505	20251228_TB@MIA	2025	17	draftkings	1800	2025-12-30 16:40:40.669594-05
+2574	4372505	20251228_TB@MIA	2025	17	fanduel	1800	2025-12-30 16:40:40.669594-05
+2575	4036335	20251228_TB@MIA	2025	17	draftkings	1700	2025-12-30 16:40:40.669594-05
+2576	4036335	20251228_TB@MIA	2025	17	fanduel	1700	2025-12-30 16:40:40.669594-05
+2577	4426535	20251228_TB@MIA	2025	17	draftkings	1300	2025-12-30 16:40:40.669594-05
+2578	4426535	20251228_TB@MIA	2025	17	fanduel	1300	2025-12-30 16:40:40.669594-05
+2579	4567506	20251228_TB@MIA	2025	17	draftkings	1750	2025-12-30 16:40:40.669594-05
+2580	4567506	20251228_TB@MIA	2025	17	fanduel	1750	2025-12-30 16:40:40.669594-05
+2581	4361112	20251228_TB@MIA	2025	17	draftkings	2500	2025-12-30 16:40:40.669594-05
+2582	4361112	20251228_TB@MIA	2025	17	fanduel	2500	2025-12-30 16:40:40.669594-05
+2583	5097554	20251228_TB@MIA	2025	17	draftkings	3000	2025-12-30 16:40:40.669594-05
+2584	5097554	20251228_TB@MIA	2025	17	fanduel	3000	2025-12-30 16:40:40.669594-05
+2585	4426515	20251229_LAR@ATL	2025	17	draftkings	-175	2025-12-30 16:40:41.160442-05
+2586	4426515	20251229_LAR@ATL	2025	17	fanduel	-175	2025-12-30 16:40:41.160442-05
+2587	4426502	20251229_LAR@ATL	2025	17	draftkings	170	2025-12-30 16:40:41.160442-05
+2588	4426502	20251229_LAR@ATL	2025	17	fanduel	170	2025-12-30 16:40:41.160442-05
+2589	4242557	20251229_LAR@ATL	2025	17	draftkings	165	2025-12-30 16:40:41.160442-05
+2590	4242557	20251229_LAR@ATL	2025	17	fanduel	165	2025-12-30 16:40:41.160442-05
+2591	4360248	20251229_LAR@ATL	2025	17	draftkings	210	2025-12-30 16:40:41.160442-05
+2592	4360248	20251229_LAR@ATL	2025	17	fanduel	210	2025-12-30 16:40:41.160442-05
+2593	4570037	20251229_LAR@ATL	2025	17	draftkings	350	2025-12-30 16:40:41.160442-05
+2594	4570037	20251229_LAR@ATL	2025	17	fanduel	350	2025-12-30 16:40:41.160442-05
+2595	4710855	20251229_LAR@ATL	2025	17	draftkings	300	2025-12-30 16:40:41.160442-05
+2596	4710855	20251229_LAR@ATL	2025	17	fanduel	300	2025-12-30 16:40:41.160442-05
+2597	4426553	20251229_LAR@ATL	2025	17	draftkings	390	2025-12-30 16:40:41.160442-05
+2598	4426553	20251229_LAR@ATL	2025	17	fanduel	390	2025-12-30 16:40:41.160442-05
+2599	4040655	20251229_LAR@ATL	2025	17	draftkings	450	2025-12-30 16:40:41.160442-05
+2600	4040655	20251229_LAR@ATL	2025	17	fanduel	450	2025-12-30 16:40:41.160442-05
+2601	4386544	20251229_LAR@ATL	2025	17	draftkings	650	2025-12-30 16:40:41.160442-05
+2602	4386544	20251229_LAR@ATL	2025	17	fanduel	650	2025-12-30 16:40:41.160442-05
+2603	4360797	20251229_LAR@ATL	2025	17	draftkings	750	2025-12-30 16:40:41.160442-05
+2604	4360797	20251229_LAR@ATL	2025	17	fanduel	750	2025-12-30 16:40:41.160442-05
+2605	3871102	20251229_LAR@ATL	2025	17	draftkings	700	2025-12-30 16:40:41.160442-05
+2606	3871102	20251229_LAR@ATL	2025	17	fanduel	700	2025-12-30 16:40:41.160442-05
+2607	4569382	20251229_LAR@ATL	2025	17	draftkings	850	2025-12-30 16:40:41.160442-05
+2608	4569382	20251229_LAR@ATL	2025	17	fanduel	850	2025-12-30 16:40:41.160442-05
+2609	2576399	20251229_LAR@ATL	2025	17	draftkings	2200	2025-12-30 16:40:41.160442-05
+2610	2576399	20251229_LAR@ATL	2025	17	fanduel	2200	2025-12-30 16:40:41.160442-05
+2611	4363551	20251229_LAR@ATL	2025	17	draftkings	1600	2025-12-30 16:40:41.160442-05
+2612	4363551	20251229_LAR@ATL	2025	17	fanduel	1600	2025-12-30 16:40:41.160442-05
+2613	4035020	20251229_LAR@ATL	2025	17	draftkings	1400	2025-12-30 16:40:41.160442-05
+2614	4035020	20251229_LAR@ATL	2025	17	fanduel	1400	2025-12-30 16:40:41.160442-05
+2615	4374187	20251229_LAR@ATL	2025	17	draftkings	2000	2025-12-30 16:40:41.160442-05
+2616	4374187	20251229_LAR@ATL	2025	17	fanduel	2000	2025-12-30 16:40:41.160442-05
+2617	4034948	20251229_LAR@ATL	2025	17	draftkings	5000	2025-12-30 16:40:41.160442-05
+2618	4034948	20251229_LAR@ATL	2025	17	fanduel	5000	2025-12-30 16:40:41.160442-05
+2619	4374045	20251229_LAR@ATL	2025	17	draftkings	4000	2025-12-30 16:40:41.160442-05
+2620	4374045	20251229_LAR@ATL	2025	17	fanduel	4000	2025-12-30 16:40:41.160442-05
+\.
+
+
+--
+-- Data for Name: value_picks; Type: TABLE DATA; Schema: public; Owner: aaronangeles
+--
+
+COPY public.value_picks (id, player_id, season_year, week, sportsbook, model_odds, sportsbook_odds, model_probability, sportsbook_probability, weighted_value, created_at) FROM stdin;
+\.
+
+
+--
+-- Name: game_logs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: aaronangeles
+--
+
+SELECT pg_catalog.setval('public.game_logs_id_seq', 1416, true);
+
+
+--
+-- Name: game_results_id_seq; Type: SEQUENCE SET; Schema: public; Owner: aaronangeles
+--
+
+SELECT pg_catalog.setval('public.game_results_id_seq', 1, false);
+
+
+--
+-- Name: job_runs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: aaronangeles
+--
+
+SELECT pg_catalog.setval('public.job_runs_id_seq', 1, false);
+
+
+--
+-- Name: predictions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: aaronangeles
+--
+
+SELECT pg_catalog.setval('public.predictions_id_seq', 1172, true);
+
+
+--
+-- Name: schedule_id_seq; Type: SEQUENCE SET; Schema: public; Owner: aaronangeles
+--
+
+SELECT pg_catalog.setval('public.schedule_id_seq', 544, true);
+
+
+--
+-- Name: sportsbook_odds_id_seq; Type: SEQUENCE SET; Schema: public; Owner: aaronangeles
+--
+
+SELECT pg_catalog.setval('public.sportsbook_odds_id_seq', 2620, true);
+
+
+--
+-- Name: value_picks_id_seq; Type: SEQUENCE SET; Schema: public; Owner: aaronangeles
+--
+
+SELECT pg_catalog.setval('public.value_picks_id_seq', 1, false);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
