@@ -234,6 +234,56 @@ export default function SystemStatus() {
         <p className="text-gray-400">Data readiness and batch execution monitoring</p>
       </div>
 
+      {/* Admin Actions - Always visible at top */}
+      <div className="bg-gray-900/40 backdrop-blur-sm border border-gray-800 rounded-xl p-6 mb-6">
+        <h3 className="text-lg font-semibold mb-4">Admin Actions</h3>
+
+        {actionSuccess && (
+          <MuiAlert severity="success" sx={{ mb: 2 }} onClose={() => setActionSuccess(null)}>
+            {actionSuccess}
+          </MuiAlert>
+        )}
+
+        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 2 }}>
+          <Button
+            variant="contained"
+            onClick={() => handleActionClick('refresh-rosters')}
+            sx={{
+              bgcolor: '#9333ea',
+              '&:hover': { bgcolor: '#7e22ce' },
+              textTransform: 'none',
+              flex: 1
+            }}
+          >
+            Refresh Rosters
+          </Button>
+          <Button
+            variant="contained"
+            onClick={() => handleActionClick('backfill-odds')}
+            sx={{
+              bgcolor: '#9333ea',
+              '&:hover': { bgcolor: '#7e22ce' },
+              textTransform: 'none',
+              flex: 1
+            }}
+          >
+            Backfill Historical Odds
+          </Button>
+          <Button
+            variant="contained"
+            onClick={() => handleActionClick('batch-update')}
+            sx={{
+              bgcolor: '#9333ea',
+              '&:hover': { bgcolor: '#7e22ce' },
+              textTransform: 'none',
+              flex: 1
+            }}
+          >
+            Run Batch Update
+          </Button>
+        </Box>
+      </div>
+
       {/* Current Week Status Card */}
       <div className="bg-gray-900/40 backdrop-blur-sm border border-gray-800 rounded-xl p-6 mb-6">
         <div className="flex items-center justify-between mb-4">
@@ -454,56 +504,6 @@ export default function SystemStatus() {
           </div>
         </div>
       )}
-
-      {/* Admin Actions */}
-      <div className="bg-gray-900/40 backdrop-blur-sm border border-gray-800 rounded-xl p-6">
-        <h3 className="text-lg font-semibold mb-4">Admin Actions</h3>
-
-        {actionSuccess && (
-          <MuiAlert severity="success" sx={{ mb: 2 }} onClose={() => setActionSuccess(null)}>
-            {actionSuccess}
-          </MuiAlert>
-        )}
-
-        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 2 }}>
-          <Button
-            variant="contained"
-            onClick={() => handleActionClick('refresh-rosters')}
-            sx={{
-              bgcolor: '#9333ea',
-              '&:hover': { bgcolor: '#7e22ce' },
-              textTransform: 'none',
-              flex: 1
-            }}
-          >
-            Refresh Rosters
-          </Button>
-          <Button
-            variant="contained"
-            onClick={() => handleActionClick('backfill-odds')}
-            sx={{
-              bgcolor: '#9333ea',
-              '&:hover': { bgcolor: '#7e22ce' },
-              textTransform: 'none',
-              flex: 1
-            }}
-          >
-            Backfill Historical Odds
-          </Button>
-          <Button
-            variant="contained"
-            onClick={() => handleActionClick('batch-update')}
-            sx={{
-              bgcolor: '#9333ea',
-              '&:hover': { bgcolor: '#7e22ce' },
-              textTransform: 'none',
-              flex: 1
-            }}
-          >
-            Run Batch Update
-          </Button>
-        </Box>
-      </div>
 
       {/* Password Dialog */}
       <Dialog
