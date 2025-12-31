@@ -157,7 +157,15 @@ export default function SystemStatus() {
     setActionError(null);
 
     try {
-      const endpoint = `/api/admin/actions/${currentAction}`;
+      // Map action names to backend endpoint names
+      const actionMap: Record<string, string> = {
+        'refresh-rosters': 'refresh-rosters',
+        'backfill-odds': 'backfill-odds',
+        'batch-update': 'run-batch-update'
+      };
+
+      const backendAction = actionMap[currentAction] || currentAction;
+      const endpoint = `/api/admin/actions/${backendAction}`;
       const response = await fetch(`${API_URL}${endpoint}`, {
         method: 'POST',
         headers: {
