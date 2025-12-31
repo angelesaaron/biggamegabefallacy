@@ -1,5 +1,5 @@
 import { TrendingUp, TrendingDown, Remove } from '@mui/icons-material';
-import { Box, Card, Avatar, Typography, Chip, Grid, useTheme, useMediaQuery } from '@mui/material';
+import { Box, Card, Avatar, Typography, Chip, useTheme, useMediaQuery } from '@mui/material';
 
 interface ValuePlayerCardProps {
   player_id: string;
@@ -122,8 +122,8 @@ export function ValuePlayerCard({
           </Box>
 
           {/* Stats Grid */}
-          <Grid container spacing={1}>
-            <Grid item xs={6}>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+            <Box sx={{ flex: '1 1 calc(50% - 0.5 * 8px)', minWidth: 0 }}>
               <Box sx={{ textAlign: 'center', bgcolor: 'rgba(17, 24, 39, 0.5)', borderRadius: 2, p: 1.5 }}>
                 <Typography variant="caption" sx={{ color: '#6b7280', display: 'block', mb: 0.5 }}>
                   Model %
@@ -132,9 +132,9 @@ export function ValuePlayerCard({
                   {(td_likelihood * 100).toFixed(1)}%
                 </Typography>
               </Box>
-            </Grid>
+            </Box>
             {edge_value !== undefined && (
-              <Grid item xs={6}>
+              <Box sx={{ flex: '1 1 calc(50% - 0.5 * 8px)', minWidth: 0 }}>
                 <Box sx={{
                   textAlign: 'center',
                   bgcolor: getEdgeBgColor(),
@@ -155,9 +155,9 @@ export function ValuePlayerCard({
                     </Typography>
                   </Box>
                 </Box>
-              </Grid>
+              </Box>
             )}
-            <Grid item xs={6}>
+            <Box sx={{ flex: '1 1 calc(50% - 0.5 * 8px)', minWidth: 0 }}>
               <Box sx={{ textAlign: 'center', bgcolor: 'rgba(17, 24, 39, 0.5)', borderRadius: 2, p: 1.5 }}>
                 <Typography variant="caption" sx={{ color: '#6b7280', display: 'block', mb: 0.5 }}>
                   Model Odds
@@ -166,9 +166,9 @@ export function ValuePlayerCard({
                   {formatModelOdds(model_odds)}
                 </Typography>
               </Box>
-            </Grid>
+            </Box>
             {sportsbook_odds !== undefined && (
-              <Grid item xs={6}>
+              <Box sx={{ flex: '1 1 calc(50% - 0.5 * 8px)', minWidth: 0 }}>
                 <Box sx={{ textAlign: 'center', bgcolor: 'rgba(17, 24, 39, 0.5)', borderRadius: 2, p: 1.5 }}>
                   <Typography variant="caption" sx={{ color: '#6b7280', display: 'block', mb: 0.5 }}>
                     Sportsbook
@@ -177,9 +177,9 @@ export function ValuePlayerCard({
                     {formatSportsbookOdds(sportsbook_odds)}
                   </Typography>
                 </Box>
-              </Grid>
+              </Box>
             )}
-          </Grid>
+          </Box>
         </Box>
       ) : (
         /* Desktop Layout - Horizontal */
