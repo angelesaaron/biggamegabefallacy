@@ -201,17 +201,19 @@ async def update_data_readiness(
     Queries all relevant tables to determine what data is available.
     """
     # Normalize season_type to match database format
-    # Database uses full names: 'Regular Season', 'Post Season'
-    # But we often pass abbreviated: 'reg', 'post'
+    # Database uses abbreviated forms: 'reg', 'pre', 'post'
+    # Normalize any incoming variations to match database
     season_type_map = {
-        'reg': 'Regular Season',
-        'post': 'Post Season',
-        'Regular Season': 'Regular Season',
-        'Post Season': 'Post Season'
+        'reg': 'reg',
+        'post': 'post',
+        'pre': 'pre',
+        'Regular Season': 'reg',
+        'Post Season': 'post',
+        'Pre Season': 'pre'
     }
     db_season_type = season_type_map.get(season_type, season_type)
 
-    # Count available data (Schedule uses full season type names)
+    # Count available data (Schedule uses abbreviated season types)
     games_count = await db.scalar(
         select(func.count(Schedule.id))
         .where(
