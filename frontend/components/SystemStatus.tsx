@@ -184,7 +184,17 @@ export default function SystemStatus() {
       setShowPasswordDialog(false);
       setPassword('');
 
-      // Reload system status after a short delay
+      // Start polling for updates every 3 seconds
+      const pollInterval = setInterval(() => {
+        loadSystemStatus();
+      }, 3000);
+
+      // Stop polling after 5 minutes
+      setTimeout(() => {
+        clearInterval(pollInterval);
+      }, 300000);
+
+      // Initial reload
       setTimeout(() => {
         loadSystemStatus();
       }, 2000);
@@ -235,12 +245,75 @@ export default function SystemStatus() {
     dataReadiness?.predictions_available &&
     (dataReadiness?.draftkings_odds_available || dataReadiness?.fanduel_odds_available);
 
+  // Check batch status for live indicator
+  const isRunningBatch = latestBatch?.status === 'running';
+  const hasRecentFailure = latestBatch?.status === 'failed';
+  const hasWarnings = latestBatch?.status === 'partial';
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="mb-8">
         <h2 className="text-3xl text-white mb-2">System Status</h2>
         <p className="text-gray-400">Data readiness and batch execution monitoring</p>
       </div>
+
+      {/* Live Batch Status Indicator */}
+      {isRunningBatch && (
+        <MuiAlert
+          severity="info"
+          icon={<CircularProgress size={20} sx={{ color: '#3b82f6' }} />}
+          sx={{ mb: 3, bgcolor: 'rgba(59, 130, 246, 0.1)', border: '1px solid rgba(59, 130, 246, 0.3)' }}
+        >
+          <Box>
+            <strong>Batch Process Running:</strong> {latestBatch.batch_type?.replace('_', ' ')} • Week {latestBatch.week} • {latestBatch.batch_mode}
+            <br />
+            <span className="text-sm opacity-80">
+              Started {latestBatch.started_at ? new Date(latestBatch.started_at).toLocaleTimeString() : 'recently'} • Refreshing every 3 seconds...
+            </span>
+          </Box>
+        </MuiAlert>
+      )}
+
+      {/* Failed Batch Alert */}
+      {hasRecentFailure && (
+        <MuiAlert
+          severity="error"
+          sx={{ mb: 3, bgcolor: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.3)' }}
+          onClose={() => {}}
+        >
+          <Box>
+            <strong>Last Batch Failed:</strong> {latestBatch.batch_type?.replace('_', ' ')} • Week {latestBatch.week}
+            {latestBatch.error_message && (
+              <>
+                <br />
+                <span className="text-sm opacity-90">Error: {latestBatch.error_message}</span>
+              </>
+            )}
+          </Box>
+        </MuiAlert>
+      )}
+
+      {/* Partial Success (Warnings) Alert */}
+      {hasWarnings && (
+        <MuiAlert
+          severity="warning"
+          sx={{ mb: 3, bgcolor: 'rgba(245, 158, 11, 0.1)', border: '1px solid rgba(245, 158, 11, 0.3)' }}
+        >
+          <Box>
+            <strong>Last Batch Completed with Warnings:</strong> {latestBatch.batch_type?.replace('_', ' ')} • Week {latestBatch.week}
+            {latestBatch.warnings && latestBatch.warnings.length > 0 && (
+              <>
+                <br />
+                <span className="text-sm opacity-90">
+                  {latestBatch.warnings.map((w: any, i: number) => (
+                    <div key={i}>• {w.step}: {w.message}</div>
+                  ))}
+                </span>
+              </>
+            )}
+          </Box>
+        </MuiAlert>
+      )}
 
       {/* Admin Actions - Always visible at top */}
       <div className="bg-gray-900/40 backdrop-blur-sm border border-gray-800 rounded-xl p-6 mb-6">
