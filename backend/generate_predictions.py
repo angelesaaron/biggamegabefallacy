@@ -133,6 +133,10 @@ async def generate_predictions_for_week(season_year: int, week: int, force_regen
             season_type='reg',
             triggered_by=triggered_by
         ) as tracker:
+            # STEP 1: Start prediction generation
+            await tracker.start_step('predictions', step_order=1)
+            tracker.log_output(f"Starting prediction generation for {len(players_to_predict)} players...")
+
             for i, player in enumerate(players_to_predict, 1):
                 try:
                     # Get player data
@@ -201,6 +205,13 @@ async def generate_predictions_for_week(season_year: int, week: int, force_regen
 
             if failed > 0:
                 tracker.add_warning('prediction_generation', f'{failed} predictions failed to generate')
+
+            # Complete step tracking
+            tracker.log_output(f"Prediction generation complete: {successful} generated, {failed} failed")
+            await tracker.complete_step(
+                status='success' if failed == 0 else 'partial',
+                records_processed=successful
+            )
 
         print()
         print("=" * 60)

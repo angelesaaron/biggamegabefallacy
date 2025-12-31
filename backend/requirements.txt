@@ -29,6 +29,7 @@ apscheduler==3.10.4
 # Utilities
 python-dotenv==1.0.0
 pytz==2024.1
+slowapi==0.1.9
 
 # Development
 pytest==7.4.4

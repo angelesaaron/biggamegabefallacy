@@ -1,8 +1,9 @@
 """
 Batch Run Model - Tracks batch process executions
 """
-from sqlalchemy import Column, Integer, String, DateTime, Text, Boolean
+from sqlalchemy import Column, Integer, String, DateTime, Text, Boolean, ForeignKey
 from sqlalchemy.dialects.postgresql import JSONB
+from sqlalchemy.orm import relationship
 from datetime import datetime
 
 from app.database import Base
@@ -50,8 +51,54 @@ class BatchRun(Base):
     triggered_by = Column(String(100))  # github_actions, manual, api
     created_at = Column(DateTime, default=datetime.utcnow)
 
+    # Relationships
+    steps = relationship("BatchExecutionStep", back_populates="batch_run", cascade="all, delete-orphan")
+
     def __repr__(self):
         return f"<BatchRun {self.batch_type} {self.season_year}W{self.week} {self.status}>"
+
+
+class BatchExecutionStep(Base):
+    """
+    Individual step execution within a batch run.
+
+    Provides granular visibility into batch process steps:
+    - schedule: Fetch NFL schedule
+    - game_logs: Sync game logs
+    - odds: Fetch sportsbook odds
+    - predictions: Generate TD predictions
+    """
+    __tablename__ = "batch_execution_steps"
+
+    id = Column(Integer, primary_key=True, index=True)
+    batch_run_id = Column(Integer, ForeignKey("batch_runs.id", ondelete="CASCADE"), nullable=False, index=True)
+
+    # Step identification
+    step_name = Column(String(50), nullable=False)  # schedule, game_logs, odds, predictions
+    step_order = Column(Integer, nullable=False)  # 1, 2, 3, 4
+
+    # Execution tracking
+    status = Column(String(20), nullable=False, default='pending', index=True)  # pending, running, success, failed, skipped
+    started_at = Column(DateTime)
+    completed_at = Column(DateTime)
+    duration_seconds = Column(Integer)
+
+    # Step metrics
+    records_processed = Column(Integer, default=0)
+
+    # Diagnostics
+    error_message = Column(Text)
+    output_log = Column(Text)  # Last 100 lines of step output for debugging
+
+    # Timestamps
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    # Relationships
+    batch_run = relationship("BatchRun", back_populates="steps")
+
+    def __repr__(self):
+        return f"<BatchExecutionStep {self.step_name} ({self.status})>"
 
 
 class DataReadiness(Base):

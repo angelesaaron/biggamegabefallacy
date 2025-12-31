@@ -23,6 +23,7 @@ Usage:
 """
 import asyncio
 import sys
+import os
 from pathlib import Path
 from datetime import datetime
 import argparse
@@ -35,10 +36,11 @@ from app.models.schedule import Schedule
 from app.models.odds import SportsbookOdds
 from app.utils.tank01_client import Tank01Client
 from app.utils.nfl_calendar import get_current_nfl_week
+from app.services.batch_tracking import BatchTracker
 from sqlalchemy import select, delete
 
 
-async def backfill_odds_for_week(db, client: Tank01Client, season_year: int, week: int):
+async def backfill_odds_for_week(db, client: Tank01Client, season_year: int, week: int, skip_confirmation: bool = False):
     """
     Backfill odds for all games in a specific week.
 
@@ -47,6 +49,7 @@ async def backfill_odds_for_week(db, client: Tank01Client, season_year: int, wee
         client: Tank01 API client
         season_year: Season year
         week: Week number
+        skip_confirmation: Skip overwrite confirmation (for CI mode)
 
     Returns:
         Number of odds records saved
@@ -82,10 +85,13 @@ async def backfill_odds_for_week(db, client: Tank01Client, season_year: int, wee
 
     if existing_odds:
         print(f"  ⚠️  Found {len(existing_odds)} existing odds records")
-        response = input("  Overwrite existing odds? (yes/no): ")
-        if response.lower() not in ['yes', 'y']:
-            print(f"  Skipped Week {week}")
-            return 0
+        if not skip_confirmation:
+            response = input("  Overwrite existing odds? (yes/no): ")
+            if response.lower() not in ['yes', 'y']:
+                print(f"  Skipped Week {week}")
+                return 0
+        else:
+            print(f"  Auto-confirming overwrite (CI mode)")
 
         # Delete existing odds
         await db.execute(
@@ -228,11 +234,14 @@ async def main():
     parser.add_argument('--year', type=int, help='Season year (default: current season)')
     args = parser.parse_args()
 
+    # Check if running in CI mode
+    skip_confirmation = os.environ.get('CI', '').lower() == 'true'
+
     # Determine season year
     if args.year:
         season_year = args.year
     else:
-        season_year, _ = get_current_nfl_week()
+        season_year, _, _ = get_current_nfl_week()
 
     # Determine weeks to backfill
     if args.week:
@@ -243,7 +252,7 @@ async def main():
         weeks_to_backfill = list(range(args.start_week, 19))
     else:
         # Default: backfill all weeks from 1 to current week - 1
-        _, current_week = get_current_nfl_week()
+        _, current_week, _ = get_current_nfl_week()
         weeks_to_backfill = list(range(1, current_week))
 
     print("=" * 60)
@@ -263,24 +272,50 @@ async def main():
     print("   Tank01 API likely only has odds for recent weeks")
     print()
 
-    response = input("Continue? (yes/no): ")
-    if response.lower() not in ['yes', 'y']:
-        print("\nCancelled.")
-        return
-
-    print()
+    if not skip_confirmation:
+        response = input("Continue? (yes/no): ")
+        if response.lower() not in ['yes', 'y']:
+            print("\nCancelled.")
+            return
+        print()
+    else:
+        print("Running in CI/CD mode - auto-confirming...")
+        print()
 
     client = Tank01Client()
     total_odds = 0
     successful_weeks = 0
+    triggered_by = 'github_actions' if skip_confirmation else 'manual'
 
     try:
         async with AsyncSessionLocal() as db:
-            for week in weeks_to_backfill:
-                odds_count = await backfill_odds_for_week(db, client, season_year, week)
-                total_odds += odds_count
-                if odds_count > 0:
-                    successful_weeks += 1
+            # Use batch tracking for the first week (or single week if only one)
+            # This allows tracking in the UI
+            primary_week = weeks_to_backfill[0] if weeks_to_backfill else 1
+
+            async with BatchTracker(
+                db=db,
+                batch_type='odds_backfill',
+                season_year=season_year,
+                week=primary_week,
+                batch_mode=f"{len(weeks_to_backfill)}_weeks",
+                season_type='reg',
+                triggered_by=triggered_by
+            ) as tracker:
+                await tracker.start_step('backfill_odds', step_order=1)
+                tracker.log_output(f"Backfilling odds for {len(weeks_to_backfill)} weeks: {weeks_to_backfill}")
+
+                for week in weeks_to_backfill:
+                    tracker.log_output(f"Processing week {week}...")
+                    odds_count = await backfill_odds_for_week(db, client, season_year, week, skip_confirmation)
+                    total_odds += odds_count
+                    if odds_count > 0:
+                        successful_weeks += 1
+                    tracker.log_output(f"Week {week}: {odds_count} odds records saved")
+
+                tracker.increment_metric('odds_synced', total_odds)
+                tracker.log_output(f"Backfill complete: {successful_weeks}/{len(weeks_to_backfill)} weeks with odds, {total_odds} total records")
+                await tracker.complete_step(status='success', records_processed=total_odds)
 
         print()
         print("=" * 60)

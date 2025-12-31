@@ -3,7 +3,7 @@ Admin API Endpoints
 
 System status, batch run history, and data readiness indicators.
 """
-from fastapi import APIRouter, Depends, Query, HTTPException, Body
+from fastapi import APIRouter, Depends, Query, HTTPException, Body, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from typing import Optional
@@ -15,6 +15,12 @@ from app.database import get_db
 from app.models.batch_run import BatchRun, DataReadiness
 from app.utils.nfl_calendar import get_current_nfl_week
 from app.config import settings
+
+# Rate limiting
+from slowapi import Limiter
+from slowapi.util import get_remote_address
+
+limiter = Limiter(key_func=get_remote_address)
 
 router = APIRouter()
 
@@ -120,12 +126,21 @@ async def get_current_data_readiness(
     """Get data readiness for current NFL week"""
     year, week, season_type = get_current_nfl_week()
 
+    # Normalize season_type to abbreviated format used in data_readiness table
+    season_type_map = {
+        'Regular Season': 'reg',
+        'Post Season': 'post',
+        'reg': 'reg',
+        'post': 'post'
+    }
+    normalized_season_type = season_type_map.get(season_type, 'reg')
+
     result = await db.execute(
         select(DataReadiness)
         .where(
             DataReadiness.season_year == year,
             DataReadiness.week == week,
-            DataReadiness.season_type == season_type
+            DataReadiness.season_type == normalized_season_type
         )
     )
     readiness = result.scalar_one_or_none()
@@ -275,12 +290,15 @@ def verify_admin_password(password: str):
 
 
 @router.post("/actions/refresh-rosters")
+@limiter.limit("5/minute")
 async def trigger_refresh_rosters(
+    request: Request,
     password: str = Body(..., embed=True)
 ):
     """
     Trigger the refresh_rosters.py script
     Requires admin password
+    Rate limited: 5 requests per minute per IP
     """
     verify_admin_password(password)
 
@@ -292,12 +310,22 @@ async def trigger_refresh_rosters(
         if not script_path.exists():
             raise HTTPException(status_code=404, detail="refresh_rosters.py script not found")
 
+        # Get the Python executable from the current environment (venv)
+        python_exec = os.path.join(backend_dir, "venv", "bin", "python")
+        if not os.path.exists(python_exec):
+            python_exec = "python3"
+
+        # Set environment variables for the subprocess
+        env = os.environ.copy()
+        env['CI'] = 'true'  # Skip confirmation prompts
+
         # Run the script in the background
         process = subprocess.Popen(
-            ["python", str(script_path)],
+            [python_exec, str(script_path)],
             cwd=str(backend_dir),
             stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE
+            stderr=subprocess.PIPE,
+            env=env
         )
 
         return {
@@ -309,43 +337,85 @@ async def trigger_refresh_rosters(
         raise HTTPException(status_code=500, detail=f"Failed to start roster refresh: {str(e)}")
 
 
-@router.post("/actions/backfill-odds")
-async def trigger_backfill_odds(
-    password: str = Body(..., embed=True)
+@router.post("/actions/backfill-complete")
+@limiter.limit("5/minute")
+async def trigger_backfill_complete(
+    request: Request,
+    password: str = Body(..., embed=True),
+    weeks: Optional[int] = Body(None),
+    week: Optional[int] = Body(None),
+    year: Optional[int] = Body(None)
 ):
     """
-    Trigger the backfill_historical_odds.py script
+    Trigger the backfill_complete.py script (game logs, predictions, odds)
     Requires admin password
+    Rate limited: 5 requests per minute per IP
+
+    Optional parameters:
+    - weeks: Backfill last N weeks (e.g., weeks=5 for last 5 weeks)
+    - week: Specific week to backfill
+    - year: Season year (defaults to current season)
     """
     verify_admin_password(password)
 
     try:
         # Get the backend directory path
         backend_dir = Path(__file__).parent.parent.parent
-        script_path = backend_dir / "backfill_historical_odds.py"
+        script_path = backend_dir / "backfill_complete.py"
 
         if not script_path.exists():
-            raise HTTPException(status_code=404, detail="backfill_historical_odds.py script not found")
+            raise HTTPException(status_code=404, detail="backfill_complete.py script not found")
+
+        # Get the Python executable from the current environment (venv)
+        python_exec = os.path.join(backend_dir, "venv", "bin", "python")
+        if not os.path.exists(python_exec):
+            python_exec = "python3"
+
+        # Build command with optional parameters
+        cmd = [python_exec, str(script_path)]
+        if weeks is not None:
+            cmd.extend(["--weeks", str(weeks)])
+        elif week is not None:
+            cmd.extend(["--week", str(week)])
+        if year is not None:
+            cmd.extend(["--year", str(year)])
+
+        # Set environment variables for the subprocess
+        env = os.environ.copy()
+        env['CI'] = 'true'  # Skip confirmation prompts
 
         # Run the script in the background
         process = subprocess.Popen(
-            ["python", str(script_path)],
+            cmd,
             cwd=str(backend_dir),
             stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE
+            stderr=subprocess.PIPE,
+            env=env
         )
 
+        if weeks:
+            message = f"Complete backfill initiated for last {weeks} weeks"
+        elif week:
+            message = f"Complete backfill initiated for {year or 'current season'} Week {week}"
+        else:
+            message = "Complete backfill initiated for last 5 weeks (default)"
+
         return {
-            "message": "Historical odds backfill initiated",
+            "message": message,
             "process_id": process.pid,
-            "status": "running"
+            "status": "running",
+            "weeks": weeks,
+            "week": week,
+            "year": year
         }
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to start odds backfill: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to start complete backfill: {str(e)}")
 
 
 @router.post("/actions/run-batch-update")
+@limiter.limit("5/minute")
 async def trigger_batch_update(
+    request: Request,
     password: str = Body(..., embed=True),
     week: Optional[int] = Body(None),
     year: Optional[int] = Body(None)
@@ -353,6 +423,7 @@ async def trigger_batch_update(
     """
     Trigger the weekly batch update script
     Requires admin password
+    Rate limited: 5 requests per minute per IP
 
     Runs update_weekly.py followed by generate_predictions.py
     (same as GitHub Actions workflow)
@@ -373,8 +444,14 @@ async def trigger_batch_update(
                 detail=f"update_weekly.py script not found at {update_script}"
             )
 
+        # Get the Python executable from the current environment (venv)
+        python_exec = os.path.join(backend_dir, "venv", "bin", "python")
+        if not os.path.exists(python_exec):
+            # Fallback to system python if venv doesn't exist
+            python_exec = "python3"
+
         # Build command for update_weekly.py with optional week/year parameters
-        cmd = ["python", str(update_script)]
+        cmd = [python_exec, str(update_script)]
         if week is not None:
             cmd.extend(["--week", str(week)])
         if year is not None:
@@ -396,7 +473,7 @@ async def trigger_batch_update(
         # Run generate_predictions.py after (if it exists)
         # Note: This runs sequentially, but we return immediately to avoid timeout
         if predictions_script.exists():
-            pred_cmd = ["python", str(predictions_script)]
+            pred_cmd = [python_exec, str(predictions_script)]
             if week is not None:
                 pred_cmd.extend(["--week", str(week)])
             if year is not None:
@@ -434,3 +511,123 @@ async def trigger_batch_update(
             }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to start batch update: {str(e)}")
+
+
+@router.get("/batch-runs/{batch_run_id}/steps")
+async def get_batch_run_steps(
+    batch_run_id: int,
+    db: AsyncSession = Depends(get_db)
+):
+    """
+    Get all steps for a specific batch run.
+
+    Returns step-level execution details including:
+    - Step name and order
+    - Status (pending, running, success, failed, skipped)
+    - Duration and records processed
+    - Output logs for debugging
+    """
+    from app.models.batch_run import BatchExecutionStep
+
+    result = await db.execute(
+        select(BatchExecutionStep)
+        .where(BatchExecutionStep.batch_run_id == batch_run_id)
+        .order_by(BatchExecutionStep.step_order)
+    )
+    steps = result.scalars().all()
+
+    if not steps:
+        return {"steps": []}
+
+    return {
+        "batch_run_id": batch_run_id,
+        "steps": [
+            {
+                "id": step.id,
+                "step_name": step.step_name,
+                "step_order": step.step_order,
+                "status": step.status,
+                "started_at": step.started_at.isoformat() if step.started_at else None,
+                "completed_at": step.completed_at.isoformat() if step.completed_at else None,
+                "duration_seconds": step.duration_seconds,
+                "records_processed": step.records_processed,
+                "error_message": step.error_message,
+                "output_log": step.output_log
+            }
+            for step in steps
+        ]
+    }
+
+
+@router.get("/batch-runs/{batch_run_id}")
+async def get_batch_run_details(
+    batch_run_id: int,
+    include_steps: bool = Query(True, description="Include step details"),
+    db: AsyncSession = Depends(get_db)
+):
+    """
+    Get detailed information about a specific batch run.
+
+    Includes batch metadata, metrics, and optionally step-level details.
+    """
+    from app.models.batch_run import BatchExecutionStep
+
+    # Get batch run
+    result = await db.execute(
+        select(BatchRun).where(BatchRun.id == batch_run_id)
+    )
+    batch_run = result.scalar_one_or_none()
+
+    if not batch_run:
+        raise HTTPException(status_code=404, detail=f"Batch run {batch_run_id} not found")
+
+    response = {
+        "batch_run": {
+            "id": batch_run.id,
+            "batch_type": batch_run.batch_type,
+            "batch_mode": batch_run.batch_mode,
+            "season_year": batch_run.season_year,
+            "week": batch_run.week,
+            "season_type": batch_run.season_type,
+            "started_at": batch_run.started_at.isoformat() if batch_run.started_at else None,
+            "completed_at": batch_run.completed_at.isoformat() if batch_run.completed_at else None,
+            "duration_seconds": batch_run.duration_seconds,
+            "status": batch_run.status,
+            "api_calls_made": batch_run.api_calls_made,
+            "games_processed": batch_run.games_processed,
+            "game_logs_added": batch_run.game_logs_added,
+            "predictions_generated": batch_run.predictions_generated,
+            "predictions_skipped": batch_run.predictions_skipped,
+            "odds_synced": batch_run.odds_synced,
+            "errors_encountered": batch_run.errors_encountered,
+            "warnings": batch_run.warnings,
+            "error_message": batch_run.error_message,
+            "triggered_by": batch_run.triggered_by
+        }
+    }
+
+    # Include steps if requested
+    if include_steps:
+        step_result = await db.execute(
+            select(BatchExecutionStep)
+            .where(BatchExecutionStep.batch_run_id == batch_run_id)
+            .order_by(BatchExecutionStep.step_order)
+        )
+        steps = step_result.scalars().all()
+
+        response["steps"] = [
+            {
+                "id": step.id,
+                "step_name": step.step_name,
+                "step_order": step.step_order,
+                "status": step.status,
+                "started_at": step.started_at.isoformat() if step.started_at else None,
+                "completed_at": step.completed_at.isoformat() if step.completed_at else None,
+                "duration_seconds": step.duration_seconds,
+                "records_processed": step.records_processed,
+                "error_message": step.error_message
+            }
+            for step in steps
+        ]
+
+    return response
