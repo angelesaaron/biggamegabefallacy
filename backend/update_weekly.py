@@ -344,7 +344,12 @@ async def sync_odds_for_next_week(db, client, current_season, current_week):
 
     Note: current_week from get_current_nfl_week() is already the next upcoming week,
     so we fetch odds for current_week (not current_week + 1).
+
+    Uses UPSERT pattern (insert or update on conflict) to prevent data loss
+    if fetch fails mid-process. Old odds remain until successfully replaced.
     """
+    from sqlalchemy.dialects.postgresql import insert
+
     if current_week > 18:
         print(f"   Skipping odds sync - Week {current_week} is beyond regular season")
         return 0
@@ -367,21 +372,12 @@ async def sync_odds_for_next_week(db, client, current_season, current_week):
     valid_player_ids = {row[0] for row in player_result.all()}
     print(f"   Found {len(valid_player_ids)} valid players in database")
 
-    # Delete existing odds for current week (refresh)
-    await db.execute(
-        delete(SportsbookOdds)
-        .where(SportsbookOdds.season_year == current_season, SportsbookOdds.week == current_week)
-    )
-    await db.commit()
-
     total_saved = 0
     skipped_players = set()
+    all_odds_values = []  # Collect all odds for batch upsert
 
     for i, game in enumerate(games, 1):
-        game_id = game.game_id  # Store game_id before potential rollback
-
-        # Create a list to batch insert odds for this game
-        odds_to_add = []
+        game_id = game.game_id
 
         try:
             # Fetch odds using gameID
@@ -432,35 +428,44 @@ async def sync_odds_for_next_week(db, client, current_season, current_week):
 
                 # Create odds records for both DraftKings and FanDuel
                 for sportsbook in ['draftkings', 'fanduel']:
-                    odds_record = SportsbookOdds(
-                        player_id=player_id,
-                        game_id=game_id,
-                        season_year=current_season,
-                        week=current_week,
-                        sportsbook=sportsbook,
-                        anytime_td_odds=odds_value
-                    )
-                    odds_to_add.append(odds_record)
-
-            # Only add and commit if we have valid odds to insert
-            if odds_to_add:
-                for odds_record in odds_to_add:
-                    db.add(odds_record)
-                await db.commit()
-                total_saved += len(odds_to_add)
+                    all_odds_values.append({
+                        'player_id': player_id,
+                        'game_id': game_id,
+                        'season_year': current_season,
+                        'week': current_week,
+                        'sportsbook': sportsbook,
+                        'anytime_td_odds': odds_value
+                    })
 
             if i % 5 == 0:
-                print(f"   [{i}/{len(games)}] Synced {total_saved} odds records so far...")
+                print(f"   [{i}/{len(games)}] Fetched odds for {len(all_odds_values)} player-sportsbook combinations so far...")
 
         except Exception as e:
-            print(f"   ⚠️  Error syncing odds for game {game_id}: {str(e)}")
-            await db.rollback()
+            print(f"   ⚠️  Error fetching odds for game {game_id}: {str(e)}")
             continue
+
+    # ATOMIC UPSERT: Insert all odds at once, or update if already exists
+    if all_odds_values:
+        try:
+            stmt = insert(SportsbookOdds).values(all_odds_values)
+            stmt = stmt.on_conflict_do_update(
+                index_elements=['player_id', 'game_id', 'sportsbook'],
+                set_={'anytime_td_odds': stmt.excluded.anytime_td_odds}
+            )
+            await db.execute(stmt)
+            await db.commit()
+            total_saved = len(all_odds_values)
+            print(f"   ✅ Successfully upserted {total_saved} odds records for Week {current_week}")
+        except Exception as e:
+            print(f"   ❌ CRITICAL: Failed to upsert odds: {str(e)}")
+            await db.rollback()
+            raise
+    else:
+        print(f"   ⚠️  No valid odds found for Week {current_week}")
 
     if skipped_players:
         print(f"   ⚠️  Skipped {len(skipped_players)} players not in database (run roster sync to add them)")
 
-    print(f"   ✅ Synced {total_saved} odds records for Week {current_week}")
     return total_saved
 
 
@@ -574,30 +579,60 @@ async def main():
                 season_type=season_type,
                 triggered_by=triggered_by
             ) as tracker:
-                # SCHEDULE SYNC
+                # STEP 1: SCHEDULE SYNC
                 if args.mode in ['full', 'ingest_only', 'schedule_only']:
-                    games_added = await update_schedule(db, client, current_season, current_week)
-                    tracker.increment_metric('games_processed', games_added)
+                    await tracker.start_step('schedule', step_order=1)
+                    try:
+                        tracker.log_output("Starting schedule update...")
+                        games_added = await update_schedule(db, client, current_season, current_week)
+                        tracker.increment_metric('games_processed', games_added)
+                        tracker.log_output(f"Schedule update complete: {games_added} games processed")
+                        await tracker.complete_step(status='success', records_processed=games_added)
+                    except Exception as e:
+                        tracker.log_output(f"Schedule update failed: {str(e)}")
+                        await tracker.fail_step(error_message=str(e))
+                        raise
 
-                # GAME LOGS SYNC
+                # STEP 2: GAME LOGS SYNC
                 if args.mode in ['full', 'ingest_only']:
                     if season_type == 'reg':
-                        # Update game logs - choose method based on flag
-                        if use_box_scores:
-                            logs_added = await update_game_logs_from_box_scores(db, client, current_season, current_week)
+                        await tracker.start_step('game_logs', step_order=2)
+                        try:
+                            # Update game logs - choose method based on flag
+                            if use_box_scores:
+                                tracker.log_output("Fetching game logs from box scores (optimized)...")
+                                logs_added = await update_game_logs_from_box_scores(db, client, current_season, current_week)
+                            else:
+                                tracker.log_output("Fetching game logs from player endpoint...")
+                                logs_added = await update_game_logs(db, client, current_season, current_week)
+
                             tracker.increment_metric('game_logs_added', logs_added)
-                        else:
-                            logs_added = await update_game_logs(db, client, current_season, current_week)
-                            tracker.increment_metric('game_logs_added', logs_added)
+                            tracker.log_output(f"Game logs sync complete: {logs_added} logs added")
+                            await tracker.complete_step(status='success', records_processed=logs_added)
+                        except Exception as e:
+                            tracker.log_output(f"Game logs sync failed: {str(e)}")
+                            await tracker.fail_step(error_message=str(e))
+                            raise
                     else:
+                        await tracker.start_step('game_logs', step_order=2)
                         print("\n⚠️  Skipping game logs (playoffs - not supported for predictions)")
                         tracker.add_warning('game_logs', 'Skipped - playoffs not supported')
+                        await tracker.skip_step(reason="Playoffs not supported for predictions")
 
-                # ODDS SYNC
+                # STEP 3: ODDS SYNC
                 if args.mode in ['full', 'odds_only']:
-                    print(f"\n📊 Syncing Odds for Week {current_week}...")
-                    odds_synced = await sync_odds_for_next_week(db, client, current_season, current_week)
-                    tracker.increment_metric('odds_synced', odds_synced)
+                    await tracker.start_step('odds', step_order=3)
+                    try:
+                        tracker.log_output(f"Syncing odds for Week {current_week}...")
+                        print(f"\n📊 Syncing Odds for Week {current_week}...")
+                        odds_synced = await sync_odds_for_next_week(db, client, current_season, current_week)
+                        tracker.increment_metric('odds_synced', odds_synced)
+                        tracker.log_output(f"Odds sync complete: {odds_synced} odds records synced")
+                        await tracker.complete_step(status='success', records_processed=odds_synced)
+                    except Exception as e:
+                        tracker.log_output(f"Odds sync failed: {str(e)}")
+                        await tracker.fail_step(error_message=str(e))
+                        raise
 
         print()
         print("="*60)

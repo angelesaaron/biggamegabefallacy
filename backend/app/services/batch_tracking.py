@@ -9,7 +9,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, func
 from sqlalchemy.dialects.postgresql import insert
 
-from app.models.batch_run import BatchRun, DataReadiness
+from app.models.batch_run import BatchRun, DataReadiness, BatchExecutionStep
 from app.models.schedule import Schedule
 from app.models.game_log import GameLog
 from app.models.prediction import Prediction
@@ -41,6 +41,8 @@ class BatchTracker:
             triggered_by=triggered_by
         )
         self.warnings: List[Dict[str, str]] = []
+        self.current_step: Optional[BatchExecutionStep] = None
+        self.log_buffer: List[str] = []  # In-memory buffer for step logs
 
     async def __aenter__(self):
         """Start tracking batch run"""
@@ -82,6 +84,101 @@ class BatchTracker:
 
         return False  # Don't suppress exceptions
 
+    async def start_step(self, step_name: str, step_order: int) -> BatchExecutionStep:
+        """
+        Start tracking a new batch execution step.
+
+        Args:
+            step_name: Name of the step (e.g., 'schedule', 'game_logs', 'odds', 'predictions')
+            step_order: Order of execution (1, 2, 3, 4)
+
+        Returns:
+            BatchExecutionStep instance
+        """
+        # Complete any previous step
+        if self.current_step and self.current_step.status == 'running':
+            await self.complete_step()
+
+        # Create new step
+        step = BatchExecutionStep(
+            batch_run_id=self.batch_run.id,
+            step_name=step_name,
+            step_order=step_order,
+            status='running',
+            started_at=datetime.utcnow()
+        )
+
+        self.db.add(step)
+        await self.db.commit()
+        await self.db.refresh(step)
+
+        self.current_step = step
+        self.log_buffer = []  # Reset log buffer for new step
+
+        return step
+
+    async def complete_step(
+        self,
+        status: str = 'success',
+        records_processed: int = 0,
+        error_message: Optional[str] = None
+    ):
+        """
+        Complete the current step.
+
+        Args:
+            status: Step status ('success', 'failed', 'skipped')
+            records_processed: Number of records processed in this step
+            error_message: Optional error message if step failed
+        """
+        if not self.current_step:
+            return
+
+        self.current_step.status = status
+        self.current_step.completed_at = datetime.utcnow()
+        self.current_step.duration_seconds = int(
+            (self.current_step.completed_at - self.current_step.started_at).total_seconds()
+        )
+        self.current_step.records_processed = records_processed
+
+        if error_message:
+            self.current_step.error_message = error_message
+
+        # Store last 100 lines of output log
+        if self.log_buffer:
+            self.current_step.output_log = '\n'.join(self.log_buffer[-100:])
+
+        await self.db.commit()
+
+        # Clear current step
+        self.current_step = None
+        self.log_buffer = []
+
+    async def fail_step(self, error_message: str):
+        """Mark current step as failed with error message"""
+        await self.complete_step(status='failed', error_message=error_message)
+
+    async def skip_step(self, reason: str):
+        """Mark current step as skipped with reason"""
+        await self.complete_step(status='skipped', error_message=f"Skipped: {reason}")
+
+    def log_output(self, message: str):
+        """
+        Log a message for the current step.
+
+        Stores in memory buffer for later persistence.
+        Messages are also printed to stdout for real-time visibility.
+        """
+        # Add timestamp
+        timestamp = datetime.utcnow().strftime("%H:%M:%S")
+        formatted = f"[{timestamp}] {message}"
+
+        # Store in buffer
+        self.log_buffer.append(formatted)
+
+        # Print to stdout (for subprocess streaming)
+        print(formatted)
+
     def add_warning(self, step: str, message: str):
         """Add a warning to the batch run"""
         self.warnings.append({"step": step, "message": message})
@@ -103,21 +200,35 @@ async def update_data_readiness(
 
     Queries all relevant tables to determine what data is available.
     """
-    # Count available data
+    # Normalize season_type to match database format
+    # Database uses full names: 'Regular Season', 'Post Season'
+    # But we often pass abbreviated: 'reg', 'post'
+    season_type_map = {
+        'reg': 'Regular Season',
+        'post': 'Post Season',
+        'Regular Season': 'Regular Season',
+        'Post Season': 'Post Season'
+    }
+    db_season_type = season_type_map.get(season_type, season_type)
+
+    # Count available data (Schedule uses full season type names)
     games_count = await db.scalar(
         select(func.count(Schedule.id))
         .where(
             Schedule.season_year == season_year,
             Schedule.week == week,
-            Schedule.season_type == season_type
+            Schedule.season_type == db_season_type
         )
     ) or 0
 
+    # Game logs are for the PRIOR week (last completed week)
+    # For upcoming weeks, we check if the previous week has game logs
+    prior_week = week - 1 if week > 1 else week
     game_logs_count = await db.scalar(
         select(func.count(GameLog.id))
         .where(
             GameLog.season_year == season_year,
-            GameLog.week == week
+            GameLog.week == prior_week
         )
     ) or 0
 

@@ -1,10 +1,16 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from contextlib import asynccontextmanager
 
 from app.config import settings
 from app.database import engine, Base
 from app.api import players, predictions, odds, value_picks, performance, admin, game_logs, weeks
+
+# Rate limiting
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.util import get_remote_address
+from slowapi.errors import RateLimitExceeded
 
 
 @asynccontextmanager
@@ -13,34 +19,41 @@ async def lifespan(app: FastAPI):
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
 
-        # Apply batch tracking migration (idempotent - safe to run multiple times)
+        # Apply batch tracking migrations (idempotent - safe to run multiple times)
         from pathlib import Path
         from sqlalchemy import text
 
-        sql_file = Path(__file__).parent.parent / "create_batch_tracking_tables.sql"
-        if sql_file.exists():
-            with open(sql_file, 'r') as f:
-                sql_content = f.read()
+        # Migration files to apply in order
+        migration_files = [
+            "create_batch_tracking_tables.sql",
+            "create_batch_step_tracking.sql"
+        ]
 
-            # Parse and execute SQL statements
-            statements = []
-            current = []
-            for line in sql_content.split('\n'):
-                if line.strip().startswith('--'):
-                    continue
-                line = line.split('--')[0].strip()
-                if line:
-                    current.append(line)
-                    if line.endswith(';'):
-                        statements.append(' '.join(current))
-                        current = []
+        for migration_file in migration_files:
+            sql_file = Path(__file__).parent.parent / migration_file
+            if sql_file.exists():
+                with open(sql_file, 'r') as f:
+                    sql_content = f.read()
 
-            # Execute each statement
-            for statement in statements:
-                if statement.strip():
-                    await conn.execute(text(statement))
+                # Parse and execute SQL statements
+                statements = []
+                current = []
+                for line in sql_content.split('\n'):
+                    if line.strip().startswith('--'):
+                        continue
+                    line = line.split('--')[0].strip()
+                    if line:
+                        current.append(line)
+                        if line.endswith(';'):
+                            statements.append(' '.join(current))
+                            current = []
 
-            print("✅ Batch tracking tables verified/created")
+                # Execute each statement
+                for statement in statements:
+                    if statement.strip():
+                        await conn.execute(text(statement))
+
+                print(f"✅ {migration_file} verified/applied")
 
     # TODO: Initialize scheduler for jobs
     # from app.jobs.scheduler import start_scheduler
@@ -58,6 +71,11 @@ app = FastAPI(
     version="1.0.0",
     lifespan=lifespan
 )
+
+# Initialize rate limiter
+limiter = Limiter(key_func=get_remote_address)
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 # CORS middleware for frontend
 app.add_middleware(
