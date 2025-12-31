@@ -13,6 +13,35 @@ async def lifespan(app: FastAPI):
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
 
+        # Apply batch tracking migration (idempotent - safe to run multiple times)
+        from pathlib import Path
+        from sqlalchemy import text
+
+        sql_file = Path(__file__).parent.parent / "create_batch_tracking_tables.sql"
+        if sql_file.exists():
+            with open(sql_file, 'r') as f:
+                sql_content = f.read()
+
+            # Parse and execute SQL statements
+            statements = []
+            current = []
+            for line in sql_content.split('\n'):
+                if line.strip().startswith('--'):
+                    continue
+                line = line.split('--')[0].strip()
+                if line:
+                    current.append(line)
+                    if line.endswith(';'):
+                        statements.append(' '.join(current))
+                        current = []
+
+            # Execute each statement
+            for statement in statements:
+                if statement.strip():
+                    await conn.execute(text(statement))
+
+            print("✅ Batch tracking tables verified/created")
+
     # TODO: Initialize scheduler for jobs
     # from app.jobs.scheduler import start_scheduler
     # start_scheduler()
