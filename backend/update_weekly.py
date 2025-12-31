@@ -26,6 +26,7 @@ from app.models.schedule import Schedule
 from app.models.odds import SportsbookOdds
 from app.utils.tank01_client import Tank01Client, parse_game_log
 from app.utils.nfl_calendar import get_current_nfl_week
+from app.services.batch_tracking import BatchTracker
 from sqlalchemy import select, delete
 
 
@@ -560,27 +561,43 @@ async def main():
 
     try:
         async with AsyncSessionLocal() as db:
-            # Execute based on mode
+            # Determine who triggered this batch
+            triggered_by = 'github_actions' if os.environ.get('CI') else 'manual'
 
-            # SCHEDULE SYNC
-            if args.mode in ['full', 'ingest_only', 'schedule_only']:
-                await update_schedule(db, client, current_season, current_week)
+            # Track batch execution
+            async with BatchTracker(
+                db=db,
+                batch_type='weekly_update',
+                season_year=current_season,
+                week=current_week,
+                batch_mode=args.mode,
+                season_type=season_type,
+                triggered_by=triggered_by
+            ) as tracker:
+                # SCHEDULE SYNC
+                if args.mode in ['full', 'ingest_only', 'schedule_only']:
+                    games_added = await update_schedule(db, client, current_season, current_week)
+                    tracker.increment_metric('games_processed', games_added)
 
-            # GAME LOGS SYNC
-            if args.mode in ['full', 'ingest_only']:
-                if season_type == 'reg':
-                    # Update game logs - choose method based on flag
-                    if use_box_scores:
-                        await update_game_logs_from_box_scores(db, client, current_season, current_week)
+                # GAME LOGS SYNC
+                if args.mode in ['full', 'ingest_only']:
+                    if season_type == 'reg':
+                        # Update game logs - choose method based on flag
+                        if use_box_scores:
+                            logs_added = await update_game_logs_from_box_scores(db, client, current_season, current_week)
+                            tracker.increment_metric('game_logs_added', logs_added)
+                        else:
+                            logs_added = await update_game_logs(db, client, current_season, current_week)
+                            tracker.increment_metric('game_logs_added', logs_added)
                     else:
-                        await update_game_logs(db, client, current_season, current_week)
-                else:
-                    print("\n⚠️  Skipping game logs (playoffs - not supported for predictions)")
+                        print("\n⚠️  Skipping game logs (playoffs - not supported for predictions)")
+                        tracker.add_warning('game_logs', 'Skipped - playoffs not supported')
 
-            # ODDS SYNC
-            if args.mode in ['full', 'odds_only']:
-                print(f"\n📊 Syncing Odds for Week {current_week}...")
-                await sync_odds_for_next_week(db, client, current_season, current_week)
+                # ODDS SYNC
+                if args.mode in ['full', 'odds_only']:
+                    print(f"\n📊 Syncing Odds for Week {current_week}...")
+                    odds_synced = await sync_odds_for_next_week(db, client, current_season, current_week)
+                    tracker.increment_metric('odds_synced', odds_synced)
 
         print()
         print("="*60)
