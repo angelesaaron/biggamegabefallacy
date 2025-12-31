@@ -701,6 +701,11 @@ async def main():
                 if not batch_run:
                     raise ValueError(f"Batch run {existing_batch_id} not found")
 
+                # Use season info from the existing batch (don't re-detect)
+                current_season = batch_run.season_year
+                current_week = batch_run.week
+                season_type = batch_run.season_type
+
                 # Use existing batch with manual tracker management
                 tracker = BatchTracker(
                     db=db,
