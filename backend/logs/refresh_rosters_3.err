@@ -1,0 +1,106 @@
+/Users/aaronangeles/biggamegabefallacy/backend/refresh_rosters.py:79: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  start_time = datetime.utcnow()
+INFO:sqlalchemy.engine.Engine:select pg_catalog.version()
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:select current_schema()
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:show standard_conforming_strings
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.Engine:SELECT schedule.id, schedule.game_id, schedule.season_year, schedule.week, schedule.season_type, schedule.home_team, schedule.away_team, schedule.home_team_id, schedule.away_team_id, schedule.game_date, schedule.game_status, schedule.neutral_site, schedule.created_at, schedule.updated_at 
+FROM schedule 
+WHERE schedule.game_date >= %(game_date_1)s AND schedule.game_date <= %(game_date_2)s ORDER BY schedule.game_date, schedule.week 
+ LIMIT %(param_1)s
+INFO:sqlalchemy.engine.Engine:[generated in 0.00037s] {'game_date_1': '20251231', 'game_date_2': '20260104', 'param_1': 1}
+INFO:sqlalchemy.engine.Engine:ROLLBACK
+INFO:sqlalchemy.engine.Engine:select pg_catalog.version()
+INFO:sqlalchemy.engine.Engine:[raw sql] ()
+INFO:sqlalchemy.engine.Engine:select current_schema()
+INFO:sqlalchemy.engine.Engine:[raw sql] ()
+INFO:sqlalchemy.engine.Engine:show standard_conforming_strings
+INFO:sqlalchemy.engine.Engine:[raw sql] ()
+INFO:sqlalchemy.engine.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.Engine:SELECT batch_runs.id, batch_runs.batch_type, batch_runs.batch_mode, batch_runs.season_year, batch_runs.week, batch_runs.season_type, batch_runs.started_at, batch_runs.completed_at, batch_runs.duration_seconds, batch_runs.status, batch_runs.api_calls_made, batch_runs.games_processed, batch_runs.game_logs_added, batch_runs.predictions_generated, batch_runs.predictions_skipped, batch_runs.odds_synced, batch_runs.errors_encountered, batch_runs.warnings, batch_runs.error_message, batch_runs.extra_data, batch_runs.triggered_by, batch_runs.created_at 
+FROM batch_runs 
+WHERE batch_runs.id = $1::INTEGER
+INFO:sqlalchemy.engine.Engine:[generated in 0.00019s] (3,)
+INFO:sqlalchemy.engine.Engine:COMMIT
+INFO:sqlalchemy.engine.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.Engine:SELECT batch_runs.id, batch_runs.batch_type, batch_runs.batch_mode, batch_runs.season_year, batch_runs.week, batch_runs.season_type, batch_runs.started_at, batch_runs.completed_at, batch_runs.duration_seconds, batch_runs.status, batch_runs.api_calls_made, batch_runs.games_processed, batch_runs.game_logs_added, batch_runs.predictions_generated, batch_runs.predictions_skipped, batch_runs.odds_synced, batch_runs.errors_encountered, batch_runs.warnings, batch_runs.error_message, batch_runs.extra_data, batch_runs.triggered_by, batch_runs.created_at 
+FROM batch_runs 
+WHERE batch_runs.id = $1::INTEGER
+INFO:sqlalchemy.engine.Engine:[generated in 0.00019s] (3,)
+INFO:sqlalchemy.engine.Engine:INSERT INTO batch_execution_steps (batch_run_id, step_name, step_order, status, started_at, completed_at, duration_seconds, records_processed, error_message, output_log, created_at, updated_at) VALUES ($1::INTEGER, $2::VARCHAR, $3::INTEGER, $4::VARCHAR, $5::TIMESTAMP WITHOUT TIME ZONE, $6::TIMESTAMP WITHOUT TIME ZONE, $7::INTEGER, $8::INTEGER, $9::VARCHAR, $10::VARCHAR, $11::TIMESTAMP WITHOUT TIME ZONE, $12::TIMESTAMP WITHOUT TIME ZONE) RETURNING batch_execution_steps.id
+INFO:sqlalchemy.engine.Engine:[generated in 0.00025s] (3, 'fetch_rosters', 1, 'running', datetime.datetime(2025, 12, 31, 20, 16, 53, 89404), None, None, 0, None, None, datetime.datetime(2025, 12, 31, 20, 16, 53, 91167), datetime.datetime(2025, 12, 31, 20, 16, 53, 91171))
+INFO:sqlalchemy.engine.Engine:COMMIT
+INFO:sqlalchemy.engine.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.Engine:SELECT batch_execution_steps.id, batch_execution_steps.batch_run_id, batch_execution_steps.step_name, batch_execution_steps.step_order, batch_execution_steps.status, batch_execution_steps.started_at, batch_execution_steps.completed_at, batch_execution_steps.duration_seconds, batch_execution_steps.records_processed, batch_execution_steps.error_message, batch_execution_steps.output_log, batch_execution_steps.created_at, batch_execution_steps.updated_at 
+FROM batch_execution_steps 
+WHERE batch_execution_steps.id = $1::INTEGER
+INFO:sqlalchemy.engine.Engine:[generated in 0.00023s] (5,)
+INFO:httpx:HTTP Request: GET https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeamRoster?teamAbv=ARI&getStats=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeamRoster?teamAbv=ATL&getStats=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeamRoster?teamAbv=BAL&getStats=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeamRoster?teamAbv=BUF&getStats=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeamRoster?teamAbv=CAR&getStats=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeamRoster?teamAbv=CHI&getStats=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeamRoster?teamAbv=CIN&getStats=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeamRoster?teamAbv=CLE&getStats=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeamRoster?teamAbv=DAL&getStats=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeamRoster?teamAbv=DEN&getStats=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeamRoster?teamAbv=DET&getStats=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeamRoster?teamAbv=GB&getStats=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeamRoster?teamAbv=HOU&getStats=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeamRoster?teamAbv=IND&getStats=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeamRoster?teamAbv=JAX&getStats=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeamRoster?teamAbv=KC&getStats=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeamRoster?teamAbv=LAC&getStats=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeamRoster?teamAbv=LAR&getStats=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeamRoster?teamAbv=LV&getStats=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeamRoster?teamAbv=MIA&getStats=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeamRoster?teamAbv=MIN&getStats=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeamRoster?teamAbv=NE&getStats=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeamRoster?teamAbv=NO&getStats=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeamRoster?teamAbv=NYG&getStats=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeamRoster?teamAbv=NYJ&getStats=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeamRoster?teamAbv=PHI&getStats=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeamRoster?teamAbv=PIT&getStats=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeamRoster?teamAbv=SF&getStats=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeamRoster?teamAbv=SEA&getStats=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeamRoster?teamAbv=TB&getStats=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeamRoster?teamAbv=TEN&getStats=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://tank01-nfl-live-in-game-real-time-statistics-nfl.p.rapidapi.com/getNFLTeamRoster?teamAbv=WSH&getStats=false "HTTP/1.1 200 OK"
+INFO:sqlalchemy.engine.Engine:SELECT players.player_id 
+FROM players
+INFO:sqlalchemy.engine.Engine:[generated in 0.00022s] ()
+INFO:sqlalchemy.engine.Engine:UPDATE batch_execution_steps SET status=$1::VARCHAR, completed_at=$2::TIMESTAMP WITHOUT TIME ZONE, duration_seconds=$3::INTEGER, records_processed=$4::INTEGER, output_log=$5::VARCHAR, updated_at=$6::TIMESTAMP WITHOUT TIME ZONE WHERE batch_execution_steps.id = $7::INTEGER
+INFO:sqlalchemy.engine.Engine:[generated in 0.00029s] ('success', datetime.datetime(2025, 12, 31, 20, 17, 3, 363784), 10, 292, '[20:16:53] Fetching rosters from Tank01 (32 teams)...\n[20:17:03] Found 292 WR/TE players from API\n[20:17:03] Database has 430 existing players', datetime.datetime(2025, 12, 31, 20, 17, 3, 365563), 5)
+INFO:sqlalchemy.engine.Engine:COMMIT
+INFO:sqlalchemy.engine.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.Engine:UPDATE batch_runs SET completed_at=$1::TIMESTAMP WITHOUT TIME ZONE, duration_seconds=$2::INTEGER, status=$3::VARCHAR WHERE batch_runs.id = $4::INTEGER
+INFO:sqlalchemy.engine.Engine:[generated in 0.00017s] (datetime.datetime(2025, 12, 31, 20, 17, 3, 368264), 11, 'success', 3)
+INFO:sqlalchemy.engine.Engine:COMMIT
+INFO:sqlalchemy.engine.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.Engine:SELECT count(schedule.id) AS count_1 
+FROM schedule 
+WHERE schedule.season_year = $1::INTEGER AND schedule.week = $2::INTEGER AND schedule.season_type = $3::VARCHAR
+INFO:sqlalchemy.engine.Engine:[generated in 0.00019s] (2025, 18, 'Regular Season')
+INFO:sqlalchemy.engine.Engine:SELECT count(game_logs.id) AS count_1 
+FROM game_logs 
+WHERE game_logs.season_year = $1::INTEGER AND game_logs.week = $2::INTEGER
+INFO:sqlalchemy.engine.Engine:[generated in 0.00020s] (2025, 17)
+INFO:sqlalchemy.engine.Engine:SELECT count(predictions.id) AS count_1 
+FROM predictions 
+WHERE predictions.season_year = $1::INTEGER AND predictions.week = $2::INTEGER
+INFO:sqlalchemy.engine.Engine:[generated in 0.00021s] (2025, 18)
+INFO:sqlalchemy.engine.Engine:SELECT count(sportsbook_odds.id) AS count_1 
+FROM sportsbook_odds 
+WHERE sportsbook_odds.season_year = $1::INTEGER AND sportsbook_odds.week = $2::INTEGER AND sportsbook_odds.sportsbook = $3::VARCHAR
+INFO:sqlalchemy.engine.Engine:[generated in 0.00021s] (2025, 18, 'draftkings')
+INFO:sqlalchemy.engine.Engine:SELECT count(sportsbook_odds.id) AS count_1 
+FROM sportsbook_odds 
+WHERE sportsbook_odds.season_year = $1::INTEGER AND sportsbook_odds.week = $2::INTEGER AND sportsbook_odds.sportsbook = $3::VARCHAR
+INFO:sqlalchemy.engine.Engine:[cached since 0.004375s ago] (2025, 18, 'fanduel')
+INFO:sqlalchemy.engine.Engine:INSERT INTO data_readiness (season_year, week, season_type, schedule_complete, game_logs_available, predictions_available, draftkings_odds_available, fanduel_odds_available, games_count, game_logs_count, predictions_count, draftkings_odds_count, fanduel_odds_count, last_updated) VALUES ($1::INTEGER, $2::INTEGER, $3::VARCHAR, $4::BOOLEAN, $5::BOOLEAN, $6::BOOLEAN, $7::BOOLEAN, $8::BOOLEAN, $9::INTEGER, $10::INTEGER, $11::INTEGER, $12::INTEGER, $13::INTEGER, $14::TIMESTAMP WITHOUT TIME ZONE) ON CONFLICT (season_year, week, season_type) DO UPDATE SET schedule_complete = $15::BOOLEAN, game_logs_available = $16::BOOLEAN, predictions_available = $17::BOOLEAN, draftkings_odds_available = $18::BOOLEAN, fanduel_odds_available = $19::BOOLEAN, games_count = $20::INTEGER, game_logs_count = $21::INTEGER, predictions_count = $22::INTEGER, draftkings_odds_count = $23::INTEGER, fanduel_odds_count = $24::INTEGER, last_updated = $25::TIMESTAMP WITHOUT TIME ZONE RETURNING data_readiness.id
+INFO:sqlalchemy.engine.Engine:[no key 0.00028s] (2025, 18, 'reg', True, True, True, True, True, 16, 68, 430, 87, 87, datetime.datetime(2025, 12, 31, 20, 17, 3, 395595), True, True, True, True, True, 16, 68, 430, 87, 87, datetime.datetime(2025, 12, 31, 20, 17, 3, 395923))
+INFO:sqlalchemy.engine.Engine:COMMIT
