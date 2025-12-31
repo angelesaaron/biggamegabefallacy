@@ -491,6 +491,36 @@ async def trigger_batch_update(
     verify_admin_password(password)
 
     try:
+        from datetime import datetime
+
+        # Get current NFL week for batch tracking if not provided
+        if week is None or year is None:
+            detected_year, detected_week, detected_season_type = get_current_nfl_week()
+            season_year = year if year is not None else detected_year
+            target_week = week if week is not None else detected_week
+        else:
+            season_year = year
+            target_week = week
+            detected_season_type = 'reg'  # Default for manual runs
+
+        # Normalize season_type
+        season_type_normalized = 'reg' if detected_season_type in ['reg', 'Regular Season'] else 'post'
+
+        # Create BatchRun record immediately (before subprocess)
+        batch_run = BatchRun(
+            batch_type='weekly_update',
+            batch_mode='full',
+            season_year=season_year,
+            week=target_week,
+            season_type=season_type_normalized,
+            status='running',
+            started_at=datetime.utcnow(),
+            triggered_by='ui'
+        )
+        db.add(batch_run)
+        await db.commit()
+        await db.refresh(batch_run)
+
         # Get the backend directory path
         backend_dir = Path(__file__).parent.parent.parent
         update_script = backend_dir / "update_weekly.py"
@@ -516,15 +546,13 @@ async def trigger_batch_update(
         # Set environment variables for the subprocess
         env = os.environ.copy()
         env['CI'] = 'true'  # Skip confirmation prompts
-        # NOTE: update_weekly.py creates its own BatchRun record via BatchTracker
+        env['BATCH_RUN_ID'] = str(batch_run.id)  # Pass batch ID to subprocess
 
-        # Prepare log file paths (use timestamp since we don't have batch_id yet)
-        from datetime import datetime
+        # Prepare log file paths with batch_id
         log_dir = backend_dir / "logs"
         log_dir.mkdir(exist_ok=True)
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        stdout_log = log_dir / f"update_weekly_{timestamp}.out"
-        stderr_log = log_dir / f"update_weekly_{timestamp}.err"
+        stdout_log = log_dir / f"update_weekly_{batch_run.id}.out"
+        stderr_log = log_dir / f"update_weekly_{batch_run.id}.err"
 
         # Run update_weekly.py with output to log files
         with open(stdout_log, 'w') as out, open(stderr_log, 'w') as err:
@@ -538,11 +566,11 @@ async def trigger_batch_update(
 
         return {
             "message": "Weekly batch update initiated (includes schedule, game logs, predictions, and odds)",
+            "batch_id": batch_run.id,
             "process_id": process.pid,
             "status": "running",
-            "week": week,
-            "year": year,
-            "note": "Batch record will be created by update_weekly.py - check Action History in a few seconds"
+            "week": target_week,
+            "year": season_year
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to start batch update: {str(e)}")

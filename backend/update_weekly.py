@@ -25,6 +25,7 @@ from app.models.game_log import GameLog
 from app.models.schedule import Schedule
 from app.models.odds import SportsbookOdds
 from app.models.prediction import Prediction
+from app.models.batch_run import BatchRun
 from app.utils.tank01_client import Tank01Client, parse_game_log
 from app.utils.nfl_calendar import get_current_nfl_week
 from app.services.batch_tracking import BatchTracker
@@ -687,109 +688,51 @@ async def main():
             # Determine who triggered this batch
             triggered_by = 'github_actions' if os.environ.get('CI') else 'manual'
 
-            # Track batch execution
-            async with BatchTracker(
-                db=db,
-                batch_type='weekly_update',
-                season_year=current_season,
-                week=current_week,
-                batch_mode=args.mode,
-                season_type=season_type,
-                triggered_by=triggered_by
-            ) as tracker:
-                # STEP 1: SCHEDULE SYNC
-                if args.mode in ['full', 'ingest_only', 'schedule_only']:
-                    await tracker.start_step('schedule', step_order=1)
-                    try:
-                        tracker.log_output("Starting schedule update...")
-                        games_added = await update_schedule(db, client, current_season, current_week)
-                        tracker.increment_metric('games_processed', games_added)
-                        tracker.log_output(f"Schedule update complete: {games_added} games processed")
-                        await tracker.complete_step(status='success', records_processed=games_added)
-                    except Exception as e:
-                        tracker.log_output(f"Schedule update failed: {str(e)}")
-                        await tracker.fail_step(error_message=str(e))
-                        raise
+            # Check if batch ID was provided by API endpoint
+            existing_batch_id = os.environ.get('BATCH_RUN_ID')
 
-                # STEP 2: GAME LOGS SYNC
-                if args.mode in ['full', 'ingest_only']:
-                    if season_type == 'reg':
-                        await tracker.start_step('game_logs', step_order=2)
-                        try:
-                            # Update game logs - choose method based on flag
-                            if use_box_scores:
-                                tracker.log_output("Fetching game logs from box scores (optimized)...")
-                                logs_added = await update_game_logs_from_box_scores(db, client, current_season, current_week)
-                            else:
-                                tracker.log_output("Fetching game logs from player endpoint...")
-                                logs_added = await update_game_logs(db, client, current_season, current_week)
+            # If batch ID provided, fetch and reuse existing batch
+            if existing_batch_id:
+                result = await db.execute(
+                    select(BatchRun).where(BatchRun.id == int(existing_batch_id))
+                )
+                batch_run = result.scalar_one_or_none()
 
-                            tracker.increment_metric('game_logs_added', logs_added)
-                            tracker.log_output(f"Game logs sync complete: {logs_added} logs added")
-                            await tracker.complete_step(status='success', records_processed=logs_added)
-                        except Exception as e:
-                            tracker.log_output(f"Game logs sync failed: {str(e)}")
-                            await tracker.fail_step(error_message=str(e))
-                            raise
-                    else:
-                        await tracker.start_step('game_logs', step_order=2)
-                        print("\n⚠️  Skipping game logs (playoffs - not supported for predictions)")
-                        tracker.add_warning('game_logs', 'Skipped - playoffs not supported')
-                        await tracker.skip_step(reason="Playoffs not supported for predictions")
+                if not batch_run:
+                    raise ValueError(f"Batch run {existing_batch_id} not found")
 
-                # STEP 3: PREDICTIONS (FULL MODE ONLY)
-                if args.mode == 'full' and season_type == 'reg':
-                    await tracker.start_step('predictions', step_order=3)
-                    try:
-                        tracker.log_output(f"Generating predictions for Week {current_week}...")
-                        predictions_generated = await generate_predictions_for_week(db, current_season, current_week)
-                        tracker.increment_metric('predictions_generated', predictions_generated)
-                        tracker.log_output(f"Prediction generation complete: {predictions_generated} predictions generated")
-                        await tracker.complete_step(status='success', records_processed=predictions_generated)
-                    except Exception as e:
-                        tracker.log_output(f"Prediction generation failed: {str(e)}")
-                        await tracker.fail_step(error_message=str(e))
-                        raise
-
-                # STEP 4: ODDS SYNC
-                if args.mode in ['full', 'odds_only']:
-                    step_order = 4 if args.mode == 'full' else 3
-                    await tracker.start_step('odds', step_order=step_order)
-                    try:
-                        tracker.log_output(f"Syncing odds for Week {current_week}...")
-                        print(f"\n📊 Syncing Odds for Week {current_week}...")
-                        odds_synced = await sync_odds_for_next_week(db, client, current_season, current_week)
-                        tracker.increment_metric('odds_synced', odds_synced)
-                        tracker.log_output(f"Odds sync complete: {odds_synced} odds records synced")
-                        await tracker.complete_step(status='success', records_processed=odds_synced)
-                    except Exception as e:
-                        tracker.log_output(f"Odds sync failed: {str(e)}")
-                        await tracker.fail_step(error_message=str(e))
-                        raise
-
-        print()
-        print("="*60)
-        print(f"✅ Batch Complete ({args.mode.upper()})")
-        print("="*60)
-
-        # Next steps guidance
-        if args.mode == 'full' and season_type == 'reg':
-            print()
-            print("✅ Full batch complete!")
-            print(f"   Schedule, game logs, predictions, and odds are ready for Week {current_week}")
-            print()
-        elif args.mode == 'full' and season_type == 'post':
-            print()
-            print("⚠️  Playoffs detected - predictions not supported")
-            print("   Schedule and odds have been synced")
-            print()
-        elif args.mode == 'odds_only':
-            print()
-            print("✅ Odds refreshed successfully")
-            print(f"   Predictions remain unchanged (immutable)")
-            print()
-        else:
-            print()
+                # Use existing batch with manual tracker management
+                tracker = BatchTracker(
+                    db=db,
+                    batch_type='weekly_update',
+                    season_year=current_season,
+                    week=current_week,
+                    batch_mode=args.mode,
+                    season_type=season_type,
+                    triggered_by='ui'
+                )
+                # Override with existing batch
+                tracker.batch_run = batch_run
+                async with tracker:
+                    await _execute_batch_steps(
+                        db, tracker, client, current_season, current_week,
+                        season_type, args.mode, use_box_scores
+                    )
+            else:
+                # Create new batch via context manager
+                async with BatchTracker(
+                    db=db,
+                    batch_type='weekly_update',
+                    season_year=current_season,
+                    week=current_week,
+                    batch_mode=args.mode,
+                    season_type=season_type,
+                    triggered_by=triggered_by
+                ) as tracker:
+                    await _execute_batch_steps(
+                        db, tracker, client, current_season, current_week,
+                        season_type, args.mode, use_box_scores
+                    )
 
     except Exception as e:
         print()
@@ -801,6 +744,106 @@ async def main():
 
     finally:
         await client.close()
+
+
+async def _execute_batch_steps(
+        db, tracker, client, current_season, current_week,
+        season_type, mode, use_box_scores
+):
+    """Execute the batch update steps (extracted for reuse)"""
+    # STEP 1: SCHEDULE SYNC
+    if mode in ['full', 'ingest_only', 'schedule_only']:
+        await tracker.start_step('schedule', step_order=1)
+        try:
+            tracker.log_output("Starting schedule update...")
+            games_added = await update_schedule(db, client, current_season, current_week)
+            tracker.increment_metric('games_processed', games_added)
+            tracker.log_output(f"Schedule update complete: {games_added} games processed")
+            await tracker.complete_step(status='success', records_processed=games_added)
+        except Exception as e:
+            tracker.log_output(f"Schedule update failed: {str(e)}")
+            await tracker.fail_step(error_message=str(e))
+            raise
+
+    # STEP 2: GAME LOGS SYNC
+    if mode in ['full', 'ingest_only']:
+        if season_type == 'reg':
+            await tracker.start_step('game_logs', step_order=2)
+            try:
+                # Update game logs - choose method based on flag
+                if use_box_scores:
+                    tracker.log_output("Fetching game logs from box scores (optimized)...")
+                    logs_added = await update_game_logs_from_box_scores(db, client, current_season, current_week)
+                else:
+                    tracker.log_output("Fetching game logs from player endpoint...")
+                    logs_added = await update_game_logs(db, client, current_season, current_week)
+
+                tracker.increment_metric('game_logs_added', logs_added)
+                tracker.log_output(f"Game logs sync complete: {logs_added} logs added")
+                await tracker.complete_step(status='success', records_processed=logs_added)
+            except Exception as e:
+                tracker.log_output(f"Game logs sync failed: {str(e)}")
+                await tracker.fail_step(error_message=str(e))
+                raise
+        else:
+            await tracker.start_step('game_logs', step_order=2)
+            print("\n⚠️  Skipping game logs (playoffs - not supported for predictions)")
+            tracker.add_warning('game_logs', 'Skipped - playoffs not supported')
+            await tracker.skip_step(reason="Playoffs not supported for predictions")
+
+    # STEP 3: PREDICTIONS (FULL MODE ONLY)
+    if mode == 'full' and season_type == 'reg':
+        await tracker.start_step('predictions', step_order=3)
+        try:
+            tracker.log_output(f"Generating predictions for Week {current_week}...")
+            predictions_generated = await generate_predictions_for_week(db, current_season, current_week)
+            tracker.increment_metric('predictions_generated', predictions_generated)
+            tracker.log_output(f"Prediction generation complete: {predictions_generated} predictions generated")
+            await tracker.complete_step(status='success', records_processed=predictions_generated)
+        except Exception as e:
+            tracker.log_output(f"Prediction generation failed: {str(e)}")
+            await tracker.fail_step(error_message=str(e))
+            raise
+
+    # STEP 4: ODDS SYNC
+    if mode in ['full', 'odds_only']:
+        step_order = 4 if mode == 'full' else 3
+        await tracker.start_step('odds', step_order=step_order)
+        try:
+            tracker.log_output(f"Syncing odds for Week {current_week}...")
+            print(f"\n📊 Syncing Odds for Week {current_week}...")
+            odds_synced = await sync_odds_for_next_week(db, client, current_season, current_week)
+            tracker.increment_metric('odds_synced', odds_synced)
+            tracker.log_output(f"Odds sync complete: {odds_synced} odds records synced")
+            await tracker.complete_step(status='success', records_processed=odds_synced)
+        except Exception as e:
+            tracker.log_output(f"Odds sync failed: {str(e)}")
+            await tracker.fail_step(error_message=str(e))
+            raise
+
+    print()
+    print("="*60)
+    print(f"✅ Batch Complete ({mode.upper()})")
+    print("="*60)
+
+    # Next steps guidance
+    if mode == 'full' and season_type == 'reg':
+        print()
+        print("✅ Full batch complete!")
+        print(f"   Schedule, game logs, predictions, and odds are ready for Week {current_week}")
+        print()
+    elif mode == 'full' and season_type == 'post':
+        print()
+        print("⚠️  Playoffs detected - predictions not supported")
+        print("   Schedule and odds have been synced")
+        print()
+    elif mode == 'odds_only':
+        print()
+        print("✅ Odds refreshed successfully")
+        print(f"   Predictions remain unchanged (immutable)")
+        print()
+    else:
+        print()
 
 
 if __name__ == "__main__":
