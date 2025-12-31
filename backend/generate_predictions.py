@@ -22,6 +22,7 @@ from app.database import AsyncSessionLocal
 from app.models.player import Player
 from app.models.prediction import Prediction
 from app.services.data_service import get_data_service
+from app.services.batch_tracking import BatchTracker
 from app.ml.model_service import get_model_service
 from app.ml.feature_engineering import extract_prediction_features
 from app.utils.nfl_calendar import get_current_nfl_week
@@ -50,6 +51,9 @@ async def generate_predictions_for_week(season_year: int, week: int, force_regen
     print("=" * 60)
 
     model_service = get_model_service()
+
+    import os
+    triggered_by = 'github_actions' if os.environ.get('CI') else 'manual'
 
     async with AsyncSessionLocal() as db:
         # SAFETY CHECK: Check if predictions already exist
@@ -117,66 +121,86 @@ async def generate_predictions_for_week(season_year: int, week: int, force_regen
         successful = 0
         failed = 0
         week1_baseline = 0
+        skipped = len(existing_player_ids)
 
-        for i, player in enumerate(players_to_predict, 1):
+        # Track batch execution
+        async with BatchTracker(
+            db=db,
+            batch_type='prediction_generation',
+            season_year=season_year,
+            week=week,
+            batch_mode='incremental' if not force_regenerate else 'full',
+            season_type='reg',
+            triggered_by=triggered_by
+        ) as tracker:
+            for i, player in enumerate(players_to_predict, 1):
+                try:
+                    # Get player data
+                    _, game_logs, _ = await data_service.get_player_data_for_prediction(
+                        player_id=player.player_id,
+                        next_week=week
+                    )
+
+                    # Generate prediction
+                    if not game_logs:
+                        # Week 1 baseline
+                        td_prob, _, odds_val, favor = model_service.predict_week_1(week=week)
+                        week1_baseline += 1
+                    else:
+                        # Extract features and predict
+                        features = extract_prediction_features(game_logs, next_week=week)
+
+                        if features is None:
+                            logger.warning(f"Could not extract features for {player.full_name}")
+                            failed += 1
+                            tracker.increment_metric('errors_encountered')
+                            continue
+
+                        td_prob, _, odds_val, favor = model_service.predict_td_with_odds(features)
+
+                    # Save prediction to database
+                    prediction = Prediction(
+                        player_id=player.player_id,
+                        season_year=season_year,
+                        week=week,
+                        td_likelihood=td_prob,
+                        model_odds=odds_val,
+                        favor=favor,
+                        created_at=datetime.utcnow()
+                    )
+                    db.add(prediction)
+
+                    successful += 1
+
+                    if i % 50 == 0:
+                        try:
+                            await db.commit()
+                            print(f"[{i}/{len(players_to_predict)}] Generated {successful} predictions...")
+                        except Exception as commit_error:
+                            # Handle race condition - another process may have created prediction
+                            await db.rollback()
+                            logger.warning(f"Commit error (likely race condition): {commit_error}")
+
+                except Exception as e:
+                    logger.error(f"Failed to generate prediction for {player.full_name}: {str(e)}")
+                    await db.rollback()
+                    failed += 1
+                    tracker.increment_metric('errors_encountered')
+                    continue
+
+            # Final commit with error handling
             try:
-                # Get player data
-                _, game_logs, _ = await data_service.get_player_data_for_prediction(
-                    player_id=player.player_id,
-                    next_week=week
-                )
-
-                # Generate prediction
-                if not game_logs:
-                    # Week 1 baseline
-                    td_prob, _, odds_val, favor = model_service.predict_week_1(week=week)
-                    week1_baseline += 1
-                else:
-                    # Extract features and predict
-                    features = extract_prediction_features(game_logs, next_week=week)
-
-                    if features is None:
-                        logger.warning(f"Could not extract features for {player.full_name}")
-                        failed += 1
-                        continue
-
-                    td_prob, _, odds_val, favor = model_service.predict_td_with_odds(features)
-
-                # Save prediction to database
-                prediction = Prediction(
-                    player_id=player.player_id,
-                    season_year=season_year,
-                    week=week,
-                    td_likelihood=td_prob,
-                    model_odds=odds_val,
-                    favor=favor,
-                    created_at=datetime.utcnow()
-                )
-                db.add(prediction)
-
-                successful += 1
-
-                if i % 50 == 0:
-                    try:
-                        await db.commit()
-                        print(f"[{i}/{len(players_to_predict)}] Generated {successful} predictions...")
-                    except Exception as commit_error:
-                        # Handle race condition - another process may have created prediction
-                        await db.rollback()
-                        logger.warning(f"Commit error (likely race condition): {commit_error}")
-
+                await db.commit()
             except Exception as e:
-                logger.error(f"Failed to generate prediction for {player.full_name}: {str(e)}")
                 await db.rollback()
-                failed += 1
-                continue
+                logger.warning(f"Final commit error: {e}")
 
-        # Final commit with error handling
-        try:
-            await db.commit()
-        except Exception as e:
-            await db.rollback()
-            logger.warning(f"Final commit error: {e}")
+            # Update tracker metrics
+            tracker.increment_metric('predictions_generated', successful)
+            tracker.increment_metric('predictions_skipped', skipped)
+
+            if failed > 0:
+                tracker.add_warning('prediction_generation', f'{failed} predictions failed to generate')
 
         print()
         print("=" * 60)
