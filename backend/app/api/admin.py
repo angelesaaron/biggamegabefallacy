@@ -325,13 +325,16 @@ async def trigger_refresh_rosters(
         # Get current NFL week for batch tracking
         season_year, week, season_type = get_current_nfl_week()
 
+        # Normalize season_type (Schedule uses "Regular Season", BatchRun uses "reg")
+        season_type_normalized = 'reg' if season_type in ['reg', 'Regular Season'] else 'post'
+
         # Create BatchRun record immediately (before subprocess)
         batch_run = BatchRun(
             batch_type='roster_refresh',
             batch_mode='standard',
             season_year=season_year,
             week=week,
-            season_type=season_type,
+            season_type=season_type_normalized,
             status='running',
             started_at=datetime.utcnow(),
             triggered_by='ui'
