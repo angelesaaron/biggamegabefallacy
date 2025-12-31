@@ -2,6 +2,17 @@
 
 import { useEffect, useState } from 'react';
 import { CheckCircle, XCircle, AlertCircle, Clock, Database, TrendingUp } from 'lucide-react';
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  TextField,
+  Alert as MuiAlert,
+  CircularProgress
+} from '@mui/material';
 
 interface BatchRun {
   id: number;
@@ -50,35 +61,17 @@ export default function SystemStatus() {
   const [loading, setLoading] = useState(true);
   const [currentWeek, setCurrentWeek] = useState<{ year: number; week: number; season_type: string } | null>(null);
 
+  // Admin action state
+  const [showPasswordDialog, setShowPasswordDialog] = useState(false);
+  const [currentAction, setCurrentAction] = useState<'refresh-rosters' | 'backfill-odds' | 'batch-update' | null>(null);
+  const [password, setPassword] = useState('');
+  const [actionLoading, setActionLoading] = useState(false);
+  const [actionError, setActionError] = useState<string | null>(null);
+  const [actionSuccess, setActionSuccess] = useState<string | null>(null);
+
   const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
   useEffect(() => {
-    async function loadSystemStatus() {
-      try {
-        setLoading(true);
-
-        // Fetch latest batch run
-        const batchRes = await fetch(`${API_URL}/api/admin/batch-runs/latest`);
-        const batchData = await batchRes.json();
-        setLatestBatch(batchData.batch_run);
-
-        // Fetch current week data readiness
-        const readinessRes = await fetch(`${API_URL}/api/admin/data-readiness/current`);
-        const readinessData = await readinessRes.json();
-        setDataReadiness(readinessData.data_readiness);
-        setCurrentWeek(readinessData.current_week);
-
-        // Fetch batch history
-        const historyRes = await fetch(`${API_URL}/api/admin/batch-runs/history?limit=5`);
-        const historyData = await historyRes.json();
-        setBatchHistory(historyData.batch_runs || []);
-      } catch (err) {
-        console.error('Failed to load system status:', err);
-      } finally {
-        setLoading(false);
-      }
-    }
-
     loadSystemStatus();
     // Auto-refresh every 30 seconds
     const interval = setInterval(loadSystemStatus, 30000);
@@ -141,6 +134,83 @@ export default function SystemStatus() {
     if (diffHours > 0) return `${diffHours}h ago`;
     if (diffMins > 0) return `${diffMins}m ago`;
     return 'Just now';
+  };
+
+  const handleActionClick = (action: 'refresh-rosters' | 'backfill-odds' | 'batch-update') => {
+    setCurrentAction(action);
+    setPassword('');
+    setActionError(null);
+    setActionSuccess(null);
+    setShowPasswordDialog(true);
+  };
+
+  const handlePasswordDialogClose = () => {
+    setShowPasswordDialog(false);
+    setPassword('');
+    setActionError(null);
+  };
+
+  const handleExecuteAction = async () => {
+    if (!currentAction || !password) return;
+
+    setActionLoading(true);
+    setActionError(null);
+
+    try {
+      const endpoint = `/api/admin/actions/${currentAction}`;
+      const response = await fetch(`${API_URL}${endpoint}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ password }),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.detail || 'Action failed');
+      }
+
+      const result = await response.json();
+      setActionSuccess(result.message);
+      setShowPasswordDialog(false);
+      setPassword('');
+
+      // Reload system status after a short delay
+      setTimeout(() => {
+        loadSystemStatus();
+      }, 2000);
+    } catch (err: any) {
+      setActionError(err.message || 'Failed to execute action');
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
+  const loadSystemStatus = async () => {
+    try {
+      setLoading(true);
+
+      // Fetch latest batch run
+      const batchRes = await fetch(`${API_URL}/api/admin/batch-runs/latest`);
+      const batchData = await batchRes.json();
+      setLatestBatch(batchData.batch_run);
+
+      // Fetch current week data readiness
+      const readinessRes = await fetch(`${API_URL}/api/admin/data-readiness/current`);
+      const readinessData = await readinessRes.json();
+      setDataReadiness(readinessData.data_readiness);
+      setCurrentWeek(readinessData.current_week);
+
+      // Fetch batch history
+      const historyRes = await fetch(`${API_URL}/api/admin/batch-runs/history?limit=5`);
+      const historyData = await historyRes.json();
+      setBatchHistory(historyData.batch_runs || []);
+    } catch (err) {
+      console.error('Failed to load system status:', err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (loading) {
@@ -352,7 +422,7 @@ export default function SystemStatus() {
 
       {/* Batch History */}
       {batchHistory.length > 0 && (
-        <div className="bg-gray-900/40 backdrop-blur-sm border border-gray-800 rounded-xl p-6">
+        <div className="bg-gray-900/40 backdrop-blur-sm border border-gray-800 rounded-xl p-6 mb-6">
           <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
             <Database className="w-5 h-5" />
             Recent Batch History
@@ -384,6 +454,130 @@ export default function SystemStatus() {
           </div>
         </div>
       )}
+
+      {/* Admin Actions */}
+      <div className="bg-gray-900/40 backdrop-blur-sm border border-gray-800 rounded-xl p-6">
+        <h3 className="text-lg font-semibold mb-4">Admin Actions</h3>
+
+        {actionSuccess && (
+          <MuiAlert severity="success" sx={{ mb: 2 }} onClose={() => setActionSuccess(null)}>
+            {actionSuccess}
+          </MuiAlert>
+        )}
+
+        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 2 }}>
+          <Button
+            variant="contained"
+            onClick={() => handleActionClick('refresh-rosters')}
+            sx={{
+              bgcolor: '#9333ea',
+              '&:hover': { bgcolor: '#7e22ce' },
+              textTransform: 'none',
+              flex: 1
+            }}
+          >
+            Refresh Rosters
+          </Button>
+          <Button
+            variant="contained"
+            onClick={() => handleActionClick('backfill-odds')}
+            sx={{
+              bgcolor: '#9333ea',
+              '&:hover': { bgcolor: '#7e22ce' },
+              textTransform: 'none',
+              flex: 1
+            }}
+          >
+            Backfill Historical Odds
+          </Button>
+          <Button
+            variant="contained"
+            onClick={() => handleActionClick('batch-update')}
+            sx={{
+              bgcolor: '#9333ea',
+              '&:hover': { bgcolor: '#7e22ce' },
+              textTransform: 'none',
+              flex: 1
+            }}
+          >
+            Run Batch Update
+          </Button>
+        </Box>
+      </div>
+
+      {/* Password Dialog */}
+      <Dialog
+        open={showPasswordDialog}
+        onClose={handlePasswordDialogClose}
+        PaperProps={{
+          sx: {
+            bgcolor: '#1f2937',
+            color: 'white',
+            border: '1px solid #374151'
+          }
+        }}
+      >
+        <DialogTitle>Admin Authentication Required</DialogTitle>
+        <DialogContent>
+          <Box sx={{ pt: 2 }}>
+            {actionError && (
+              <MuiAlert severity="error" sx={{ mb: 2 }}>
+                {actionError}
+              </MuiAlert>
+            )}
+            <TextField
+              autoFocus
+              margin="dense"
+              label="Admin Password"
+              type="password"
+              fullWidth
+              variant="outlined"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              onKeyPress={(e) => {
+                if (e.key === 'Enter' && password) {
+                  handleExecuteAction();
+                }
+              }}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  color: 'white',
+                  '& fieldset': {
+                    borderColor: '#374151',
+                  },
+                  '&:hover fieldset': {
+                    borderColor: '#9333ea',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#9333ea',
+                  },
+                },
+                '& .MuiInputLabel-root': {
+                  color: '#9ca3af',
+                  '&.Mui-focused': {
+                    color: '#9333ea',
+                  },
+                },
+              }}
+            />
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handlePasswordDialogClose} sx={{ color: '#9ca3af' }}>
+            Cancel
+          </Button>
+          <Button
+            onClick={handleExecuteAction}
+            disabled={!password || actionLoading}
+            sx={{
+              color: '#9333ea',
+              '&:hover': { bgcolor: 'rgba(147, 51, 234, 0.1)' }
+            }}
+          >
+            {actionLoading ? <CircularProgress size={20} sx={{ color: '#9333ea' }} /> : 'Execute'}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
