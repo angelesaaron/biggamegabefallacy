@@ -7,6 +7,7 @@ import { PredictionSummary } from './PredictionSummary';
 import { ProbabilityChart } from './ProbabilityChart';
 import { GameLogTable } from './GameLogTable';
 import { GamblingDisclaimer } from './GamblingDisclaimer';
+import { PlayerWeekToggle } from './PlayerWeekToggle';
 
 // Player type matching Figma components
 interface Player {
@@ -31,12 +32,28 @@ export function PlayerModel({ initialPlayerId }: PlayerModelProps) {
   const [selectedPlayerId, setSelectedPlayerId] = useState('');
   const [selectedPlayerData, setSelectedPlayerData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [currentWeek, setCurrentWeek] = useState(18);
+  const [currentYear, setCurrentYear] = useState(2025);
+  const [selectedWeek, setSelectedWeek] = useState(18);
 
-  // Load all players on mount
+  // Load all players on mount - always uses current week
   useEffect(() => {
     async function loadPlayers() {
       try {
         const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+
+        // Fetch current week from data readiness (same as header and system status)
+        const readinessResponse = await fetch(`${API_URL}/api/admin/data-readiness/current`);
+        const readinessData = await readinessResponse.json();
+        const currentWeekData = readinessData.current_week;
+
+        if (currentWeekData) {
+          setCurrentWeek(currentWeekData.week);
+          setCurrentYear(currentWeekData.year);
+          setSelectedWeek(currentWeekData.week);
+        }
+
+        // Fetch predictions for player list
         const response = await fetch(`${API_URL}/api/predictions/current`);
         const data = await response.json();
 
@@ -78,7 +95,7 @@ export function PlayerModel({ initialPlayerId }: PlayerModelProps) {
     loadPlayers();
   }, [initialPlayerId]);
 
-  // Load selected player data when selection changes
+  // Load selected player data when selection changes or week changes
   useEffect(() => {
     async function loadPlayerData() {
       if (!selectedPlayerId) return;
@@ -86,17 +103,22 @@ export function PlayerModel({ initialPlayerId }: PlayerModelProps) {
       try {
         const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
+        // Fetch prediction for specific week
+        const predUrl = `${API_URL}/api/predictions/${selectedPlayerId}?week=${selectedWeek}&year=${currentYear}`;
+
         // Fetch prediction, odds, game logs, and historical predictions in parallel
-        const [predResp, oddsResp, logsResp, historyResp] = await Promise.all([
-          fetch(`${API_URL}/api/predictions/${selectedPlayerId}`),
-          fetch(`${API_URL}/api/predictions/${selectedPlayerId}`).then(r => r.json()).then(pred =>
-            fetch(`${API_URL}/api/odds/comparison/${selectedPlayerId}?week=${pred.week}&year=${pred.season_year}`)
-          ),
-          fetch(`${API_URL}/api/game-logs/${selectedPlayerId}?season=2025&limit=20`),
-          fetch(`${API_URL}/api/predictions/history/${selectedPlayerId}?season=2025&weeks=20`)
+        const [predResp, logsResp, historyResp] = await Promise.all([
+          fetch(predUrl),
+          fetch(`${API_URL}/api/game-logs/${selectedPlayerId}?season=${currentYear}&limit=20`),
+          fetch(`${API_URL}/api/predictions/history/${selectedPlayerId}?season=${currentYear}&weeks=20`)
         ]);
 
         const predData = await predResp.json();
+
+        // Fetch odds after getting prediction data
+        const oddsResp = await fetch(
+          `${API_URL}/api/odds/comparison/${selectedPlayerId}?week=${selectedWeek}&year=${currentYear}`
+        );
         const oddsData = await oddsResp.json();
         const logsData = await logsResp.json();
         const historyData = await historyResp.json();
@@ -176,7 +198,7 @@ export function PlayerModel({ initialPlayerId }: PlayerModelProps) {
     }
 
     loadPlayerData();
-  }, [selectedPlayerId, players]);
+  }, [selectedPlayerId, selectedWeek, players, currentYear]);
 
   const selectedPlayer = players.find(p => p.id === selectedPlayerId);
 
@@ -211,12 +233,20 @@ export function PlayerModel({ initialPlayerId }: PlayerModelProps) {
 
       {/* Content */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Player Selector */}
-        <div className="mb-8">
-          <PlayerSelector
-            players={players}
-            selectedPlayerId={selectedPlayerId}
-            onSelectPlayer={setSelectedPlayerId}
+        {/* Player Selector and Week Toggle */}
+        <div className="mb-8 flex items-center justify-between gap-4 max-md:flex-col max-md:items-stretch">
+          <div className="flex-1">
+            <PlayerSelector
+              players={players}
+              selectedPlayerId={selectedPlayerId}
+              onSelectPlayer={setSelectedPlayerId}
+            />
+          </div>
+          <PlayerWeekToggle
+            currentWeek={currentWeek}
+            currentYear={currentYear}
+            selectedWeek={selectedWeek}
+            onWeekChange={setSelectedWeek}
           />
         </div>
 

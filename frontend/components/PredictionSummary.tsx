@@ -1,4 +1,4 @@
-import { TrendingUp, TrendingDown, Minus } from 'lucide-react';
+import { TrendingUp, TrendingDown, Minus, AlertCircle } from 'lucide-react';
 
 interface Prediction {
   playerId: string;
@@ -16,6 +16,12 @@ interface PredictionSummaryProps {
 }
 
 export function PredictionSummary({ prediction }: PredictionSummaryProps) {
+  // Check if prediction data is missing/invalid
+  const isPredictionMissing =
+    isNaN(prediction.modelProbability) ||
+    prediction.modelImpliedOdds === 'NaN' ||
+    prediction.modelImpliedOdds === 'N/A';
+
   const getEdgeColor = () => {
     if (prediction.edge === 'positive') return 'text-green-500';
     if (prediction.edge === 'negative') return 'text-red-500';
@@ -34,10 +40,39 @@ export function PredictionSummary({ prediction }: PredictionSummaryProps) {
     return 'bg-gray-500/10 border-gray-500/20';
   };
 
+  // Show unavailable state if prediction data is missing
+  if (isPredictionMissing) {
+    return (
+      <div className="border border-gray-800 rounded-2xl p-8 max-md:p-4 bg-gray-900/40">
+        <div className="text-center">
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <AlertCircle className="w-6 h-6 text-yellow-500" />
+            <h3 className="text-xl text-yellow-500">Prediction Not Available</h3>
+          </div>
+          <p className="text-gray-400 mb-2">
+            {prediction.week && prediction.year
+              ? `Week ${prediction.week} predictions haven't been generated yet.`
+              : 'Prediction data is not available for this player.'}
+          </p>
+          <p className="text-sm text-gray-500">
+            Check back after the weekly batch job completes or try viewing a previous week.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={`border rounded-2xl p-8 max-md:p-4 ${getEdgeBg()}`}>
       <div className="text-center mb-6 max-md:mb-4">
-        <h3 className="text-gray-400 mb-3 max-md:text-sm max-md:mb-2">Model TD Probability</h3>
+        <div className="flex items-center justify-center gap-2 mb-3 max-md:mb-2">
+          <h3 className="text-gray-400 max-md:text-sm">Model TD Probability</h3>
+          {prediction.week && prediction.year && (
+            <span className="text-xs text-gray-500 px-2 py-0.5 bg-gray-800/50 rounded-md">
+              {prediction.year} Week {prediction.week}
+            </span>
+          )}
+        </div>
         <div className="text-7xl max-md:text-5xl text-white mb-2">{prediction.modelProbability}%</div>
         <div className="text-xl max-md:text-base text-gray-400">Implied Odds: {prediction.modelImpliedOdds}</div>
       </div>
@@ -71,11 +106,6 @@ export function PredictionSummary({ prediction }: PredictionSummaryProps) {
         <div className="text-center">
           <div className="text-sm max-md:text-xs text-gray-500 mb-2 max-md:mb-1">Sportsbook Odds</div>
           <div className="text-2xl max-md:text-lg text-white">{prediction.sportsbookOdds}</div>
-          {prediction.week && prediction.year && (
-            <div className="text-xs text-gray-500 mt-1">
-              {prediction.year} Week {prediction.week}
-            </div>
-          )}
         </div>
       </div>
 

@@ -3,21 +3,22 @@ import pytz
 from typing import Optional, Tuple
 
 
-def get_current_nfl_week_from_schedule(db_session=None) -> Tuple[int, int]:
+def get_current_nfl_week_from_schedule(db_session=None) -> Tuple[int, int, str]:
     """
     Dynamically determine current NFL week from schedule table.
 
     Logic:
     1. Query schedule table for games with status indicating current/upcoming
     2. Find the earliest upcoming game or most recent completed game
-    3. Return that week
-    4. If off-season (no games scheduled), return next season Week 1
+    3. Return that week with season type
+    4. Handles regular season → playoffs → off-season transitions correctly
 
     Args:
         db_session: Optional database session. If None, uses sync session.
 
     Returns:
-        (year, week) tuple
+        (year, week, season_type) tuple
+        season_type: 'reg' for regular season, 'post' for playoffs
     """
     from sqlalchemy import select
     from sqlalchemy.orm import Session
@@ -32,25 +33,24 @@ def get_current_nfl_week_from_schedule(db_session=None) -> Tuple[int, int]:
         should_close = True
 
     try:
+        from datetime import timedelta
         today = datetime.now().strftime("%Y%m%d")
-
-        # Find games happening today or within next 4 days
-        # NFL weeks run Thu-Mon, so 4-day window captures current week without jumping ahead
-        from datetime import datetime, timedelta
         today_dt = datetime.now()
-        two_days_from_now = (today_dt + timedelta(days=4)).strftime("%Y%m%d")
+        four_days_from_now = (today_dt + timedelta(days=4)).strftime("%Y%m%d")
 
+        # Find games happening within next 4 days
+        # NFL weeks run Thu-Mon, so 4-day window captures current week without jumping ahead
         result = db_session.execute(
             select(Schedule)
             .where(Schedule.game_date >= today)
-            .where(Schedule.game_date <= two_days_from_now)
+            .where(Schedule.game_date <= four_days_from_now)
             .order_by(Schedule.game_date, Schedule.week)
             .limit(1)
         )
         upcoming_game = result.scalar_one_or_none()
 
         if upcoming_game:
-            return upcoming_game.season_year, upcoming_game.week
+            return upcoming_game.season_year, upcoming_game.week, upcoming_game.season_type
 
         # No upcoming games - find most recent game
         result = db_session.execute(
@@ -61,31 +61,79 @@ def get_current_nfl_week_from_schedule(db_session=None) -> Tuple[int, int]:
         last_game = result.scalar_one_or_none()
 
         if last_game:
-            # If last game was Week 18, next season starts
-            if last_game.week == 18:
-                return last_game.season_year + 1, 1
-            else:
-                # Otherwise return next week
-                return last_game.season_year, last_game.week + 1
+            # Determine next week/season based on season_type
 
-        # No games at all - default to current year Week 1
-        return datetime.now().year, 1
+            # If last game was regular season Week 18 → Check for playoffs
+            if last_game.season_type == 'reg' and last_game.week == 18:
+                # Check if playoff schedule exists
+                playoff_check = db_session.execute(
+                    select(Schedule)
+                    .where(
+                        Schedule.season_year == last_game.season_year,
+                        Schedule.season_type == 'post'
+                    )
+                    .order_by(Schedule.week)
+                    .limit(1)
+                )
+                first_playoff = playoff_check.scalar_one_or_none()
+
+                if first_playoff:
+                    # Playoffs exist, return first playoff week
+                    return last_game.season_year, first_playoff.week, 'post'
+                else:
+                    # Playoffs not yet scheduled → off-season, next season starts
+                    return last_game.season_year + 1, 1, 'reg'
+
+            # If in playoffs (POST season)
+            elif last_game.season_type == 'post':
+                # Check if there's a next playoff week
+                next_playoff = db_session.execute(
+                    select(Schedule)
+                    .where(
+                        Schedule.season_year == last_game.season_year,
+                        Schedule.season_type == 'post',
+                        Schedule.week > last_game.week
+                    )
+                    .order_by(Schedule.week)
+                    .limit(1)
+                )
+                next_playoff_game = next_playoff.scalar_one_or_none()
+
+                if next_playoff_game:
+                    # More playoff rounds exist
+                    return last_game.season_year, next_playoff_game.week, 'post'
+                else:
+                    # Playoffs complete → next season starts
+                    return last_game.season_year + 1, 1, 'reg'
+
+            # Regular season (not Week 18) → next week
+            else:
+                return last_game.season_year, last_game.week + 1, 'reg'
+
+        # No games at all - default to current year Week 1 regular season
+        return datetime.now().year, 1, 'reg'
 
     finally:
         if should_close:
             db_session.close()
 
 
-def get_current_nfl_week() -> Tuple[int, int]:
+def get_current_nfl_week() -> Tuple[int, int, str]:
     """
     Get current NFL week using schedule table.
     Falls back to manual detection if DB unavailable.
+
+    Returns:
+        (year, week, season_type) tuple
+        season_type: 'reg' for regular season, 'post' for playoffs
     """
     try:
         return get_current_nfl_week_from_schedule()
-    except Exception as e:
+    except Exception:
         # Fallback: manual detection based on calendar
-        return _fallback_week_detection()
+        year, week = _fallback_week_detection()
+        # Fallback always assumes regular season (can't detect playoffs without DB)
+        return year, week, 'reg'
 
 
 def _fallback_week_detection() -> Tuple[int, int]:

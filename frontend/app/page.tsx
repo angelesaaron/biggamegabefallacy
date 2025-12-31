@@ -3,45 +3,36 @@
 import { useState, useEffect } from 'react';
 import WeeklyValue from '@/components/WeeklyValue';
 import { PlayerModel } from '@/components/PlayerModel';
-import { Calendar } from 'lucide-react';
+import SystemStatus from '@/components/SystemStatus';
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<'player' | 'weekly'>('player');
+  const [activeTab, setActiveTab] = useState<'player' | 'weekly' | 'status'>('player');
   const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
-  const [currentWeek, setCurrentWeek] = useState<{year: number; week: number} | null>(null);
+  const [currentWeek, setCurrentWeek] = useState<number | null>(null);
 
   const handlePlayerClick = (playerId: string) => {
     setSelectedPlayerId(playerId);
     setActiveTab('player');
   };
 
-  // Fetch current NFL week on mount
+  // Fetch current week on mount
   useEffect(() => {
     async function fetchCurrentWeek() {
       try {
         const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-        const response = await fetch(`${API_URL}/api/predictions/current`);
-        if (response.ok) {
-          const data = await response.json();
-          if (data && data.metadata) {
-            setCurrentWeek({
-              year: data.metadata.current_year,
-              week: data.metadata.current_week
-            });
-          } else if (data && Array.isArray(data)) {
-            // Old API format fallback
-            if (data.length > 0 && data[0].week) {
-              setCurrentWeek({
-                year: data[0].season_year,
-                week: data[0].week
-              });
-            }
-          }
+        // Use the same endpoint as System Status for consistency
+        const response = await fetch(`${API_URL}/api/admin/data-readiness/current`);
+        const data = await response.json();
+        const currentWeekData = data.current_week;
+
+        if (currentWeekData) {
+          setCurrentWeek(currentWeekData.week);
         }
-      } catch (err) {
-        // Silently fail - week indicator is optional
+      } catch (error) {
+        console.error('Failed to fetch current week:', error);
       }
     }
+
     fetchCurrentWeek();
   }, []);
 
@@ -83,15 +74,22 @@ export default function Home() {
                 >
                   Weekly Value
                 </button>
+                <button
+                  onClick={() => setActiveTab('status')}
+                  className={`px-4 py-2 text-sm rounded-md transition-all ${
+                    activeTab === 'status'
+                      ? 'bg-purple-600 text-white'
+                      : 'text-gray-400 hover:text-white'
+                  }`}
+                >
+                  System Status
+                </button>
               </div>
             </div>
-            {/* Week Indicator */}
+            {/* Current Week Indicator - always show */}
             {currentWeek && (
-              <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-900/50 rounded-lg border border-gray-800">
-                <Calendar className="w-4 h-4 text-purple-400" />
-                <span className="text-sm text-gray-300">
-                  Week {currentWeek.week}
-                </span>
+              <div className="text-4xl font-bold text-white">
+                {currentWeek}
               </div>
             )}
           </div>
@@ -99,11 +97,9 @@ export default function Home() {
       </nav>
 
       {/* Main Content */}
-      {activeTab === 'player' ? (
-        <PlayerModel initialPlayerId={selectedPlayerId} />
-      ) : (
-        <WeeklyValue onPlayerClick={handlePlayerClick} />
-      )}
+      {activeTab === 'player' && <PlayerModel initialPlayerId={selectedPlayerId} />}
+      {activeTab === 'weekly' && <WeeklyValue onPlayerClick={handlePlayerClick} />}
+      {activeTab === 'status' && <SystemStatus />}
     </div>
   );
 }

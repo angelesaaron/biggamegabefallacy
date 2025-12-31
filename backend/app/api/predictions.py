@@ -32,12 +32,16 @@ async def get_current_week_predictions(
     """
     Get all predictions for the current or specified NFL week with player details.
 
-    If no predictions exist for the requested week, falls back to the most recent week
-    with available predictions and includes metadata to inform the frontend.
+    When a specific week is requested, returns empty list if no predictions exist.
+    Only falls back to most recent week when no week is specified (defaults).
     """
+    # Track if week/year were explicitly provided
+    week_specified = week is not None
+    year_specified = year is not None
+
     # Use provided week/year or default to current
     if week is None or year is None:
-        current_year, current_week = get_current_nfl_week()
+        current_year, current_week, _ = get_current_nfl_week()
         if week is None:
             week = current_week
         if year is None:
@@ -72,8 +76,8 @@ async def get_current_week_predictions(
     fallback_year = year
     fallback_week = week
 
-    # If no predictions for current week, fall back to most recent week with data
-    if not rows:
+    # Only fall back if week/year were NOT explicitly specified
+    if not rows and not (week_specified and year_specified):
         logger.warning(f"No predictions found for {current_year} Week {current_week}, falling back to most recent week")
         is_fallback = True
 
@@ -142,7 +146,7 @@ async def get_player_prediction(
 ):
     """Get prediction for a specific player"""
     if not year or not week:
-        year, week = get_current_nfl_week()
+        year, week, _ = get_current_nfl_week()
 
     result = await db.execute(
         select(Prediction)
@@ -208,7 +212,7 @@ async def generate_prediction(
         Dict with prediction details including model odds, sportsbook odds, and EV
     """
     if not year or not week:
-        year, week = get_current_nfl_week()
+        year, week, _ = get_current_nfl_week()
 
     logger.info(f"Generating prediction for player {player_id}, {year} week {week}")
 
