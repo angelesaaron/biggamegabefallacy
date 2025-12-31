@@ -3,16 +3,23 @@ Admin API Endpoints
 
 System status, batch run history, and data readiness indicators.
 """
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Depends, Query, HTTPException, Body
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from typing import Optional
+import subprocess
+import os
+from pathlib import Path
 
 from app.database import get_db
 from app.models.batch_run import BatchRun, DataReadiness
 from app.utils.nfl_calendar import get_current_nfl_week
+from app.config import settings
 
 router = APIRouter()
+
+# Admin password - in production, use environment variable
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "changeme123")
 
 
 @router.get("/batch-runs/latest")
@@ -259,3 +266,142 @@ async def get_system_health_summary(
             "predictions_count": readiness.predictions_count if readiness else 0
         } if readiness else None
     }
+
+
+def verify_admin_password(password: str):
+    """Verify admin password"""
+    if password != ADMIN_PASSWORD:
+        raise HTTPException(status_code=401, detail="Invalid admin password")
+
+
+@router.post("/actions/refresh-rosters")
+async def trigger_refresh_rosters(
+    password: str = Body(..., embed=True)
+):
+    """
+    Trigger the refresh_rosters.py script
+    Requires admin password
+    """
+    verify_admin_password(password)
+
+    try:
+        # Get the backend directory path
+        backend_dir = Path(__file__).parent.parent.parent
+        script_path = backend_dir / "refresh_rosters.py"
+
+        if not script_path.exists():
+            raise HTTPException(status_code=404, detail="refresh_rosters.py script not found")
+
+        # Run the script in the background
+        process = subprocess.Popen(
+            ["python", str(script_path)],
+            cwd=str(backend_dir),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE
+        )
+
+        return {
+            "message": "Roster refresh initiated",
+            "process_id": process.pid,
+            "status": "running"
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to start roster refresh: {str(e)}")
+
+
+@router.post("/actions/backfill-odds")
+async def trigger_backfill_odds(
+    password: str = Body(..., embed=True)
+):
+    """
+    Trigger the backfill_historical_odds.py script
+    Requires admin password
+    """
+    verify_admin_password(password)
+
+    try:
+        # Get the backend directory path
+        backend_dir = Path(__file__).parent.parent.parent
+        script_path = backend_dir / "backfill_historical_odds.py"
+
+        if not script_path.exists():
+            raise HTTPException(status_code=404, detail="backfill_historical_odds.py script not found")
+
+        # Run the script in the background
+        process = subprocess.Popen(
+            ["python", str(script_path)],
+            cwd=str(backend_dir),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE
+        )
+
+        return {
+            "message": "Historical odds backfill initiated",
+            "process_id": process.pid,
+            "status": "running"
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to start odds backfill: {str(e)}")
+
+
+@router.post("/actions/run-batch-update")
+async def trigger_batch_update(
+    password: str = Body(..., embed=True),
+    week: Optional[int] = Body(None),
+    year: Optional[int] = Body(None)
+):
+    """
+    Trigger the weekly batch update script
+    Requires admin password
+    """
+    verify_admin_password(password)
+
+    try:
+        # Get the backend directory path
+        backend_dir = Path(__file__).parent.parent.parent
+
+        # Look for batch update script (adjust name as needed)
+        possible_scripts = [
+            "run_batch_update.py",
+            "batch_update.py",
+            "weekly_batch.py",
+            "update_week.py"
+        ]
+
+        script_path = None
+        for script_name in possible_scripts:
+            path = backend_dir / script_name
+            if path.exists():
+                script_path = path
+                break
+
+        if not script_path:
+            raise HTTPException(
+                status_code=404,
+                detail=f"Batch update script not found. Looked for: {', '.join(possible_scripts)}"
+            )
+
+        # Build command with optional week/year parameters
+        cmd = ["python", str(script_path)]
+        if week is not None:
+            cmd.extend(["--week", str(week)])
+        if year is not None:
+            cmd.extend(["--year", str(year)])
+
+        # Run the script in the background
+        process = subprocess.Popen(
+            cmd,
+            cwd=str(backend_dir),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE
+        )
+
+        return {
+            "message": "Batch update initiated",
+            "process_id": process.pid,
+            "status": "running",
+            "week": week,
+            "year": year
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to start batch update: {str(e)}")

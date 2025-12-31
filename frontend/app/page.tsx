@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import WeeklyValue from '@/components/WeeklyValue';
 import { PlayerModel } from '@/components/PlayerModel';
 import SystemStatus from '@/components/SystemStatus';
+import { Box, Tabs, Tab, Avatar, Typography, Container, AppBar } from '@mui/material';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<'player' | 'weekly' | 'status'>('player');
@@ -36,70 +37,104 @@ export default function Home() {
     fetchCurrentWeek();
   }, []);
 
+  const tabValue = activeTab === 'player' ? 0 : activeTab === 'weekly' ? 1 : 2;
+
+  const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
+    const tabs: ('player' | 'weekly' | 'status')[] = ['player', 'weekly', 'status'];
+    setActiveTab(tabs[newValue]);
+  };
+
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
+    <Box sx={{ minHeight: '100vh', bgcolor: '#0a0a0a', color: 'white' }}>
       {/* Top Navigation */}
-      <nav className="border-b border-gray-800 bg-black/40 backdrop-blur-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 gap-2">
-            <div className="flex items-center gap-8">
+      <AppBar
+        position="sticky"
+        sx={{
+          borderBottom: '1px solid #1f2937',
+          bgcolor: 'rgba(0, 0, 0, 0.4)',
+          backdropFilter: 'blur(8px)',
+          boxShadow: 'none'
+        }}
+      >
+        <Container maxWidth="xl">
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 64 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 2, sm: 4 }, flex: 1 }}>
               {/* Logo with Gabe Davis headshot */}
-              <div className="flex items-center gap-3">
-                <img
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                <Avatar
                   src="/gabe-davis-headshot.png"
                   alt="Gabe Davis"
-                  className="w-12 h-12 rounded-full object-cover border-2 border-purple-600"
+                  sx={{
+                    width: { xs: 40, sm: 48 },
+                    height: { xs: 40, sm: 48 },
+                    border: '2px solid #9333ea'
+                  }}
                 />
-                <h1 className="text-2xl tracking-tight text-white">BGGTDM</h1>
-              </div>
-              {/* Tab Buttons */}
-              <div className="flex gap-1 bg-gray-900/50 rounded-lg p-1">
-                <button
-                  onClick={() => setActiveTab('player')}
-                  className={`px-4 py-2 text-sm rounded-md transition-all ${
-                    activeTab === 'player'
-                      ? 'bg-purple-600 text-white'
-                      : 'text-gray-400 hover:text-white'
-                  }`}
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontWeight: 400,
+                    letterSpacing: '-0.025em',
+                    fontSize: { xs: '1.25rem', sm: '1.5rem' },
+                    display: { xs: 'none', sm: 'block' }
+                  }}
                 >
-                  Player Model
-                </button>
-                <button
-                  onClick={() => setActiveTab('weekly')}
-                  className={`px-4 py-2 text-sm rounded-md transition-all ${
-                    activeTab === 'weekly'
-                      ? 'bg-purple-600 text-white'
-                      : 'text-gray-400 hover:text-white'
-                  }`}
-                >
-                  Weekly Value
-                </button>
-                <button
-                  onClick={() => setActiveTab('status')}
-                  className={`px-4 py-2 text-sm rounded-md transition-all ${
-                    activeTab === 'status'
-                      ? 'bg-purple-600 text-white'
-                      : 'text-gray-400 hover:text-white'
-                  }`}
-                >
-                  System Status
-                </button>
-              </div>
-            </div>
-            {/* Current Week Indicator - always show */}
+                  BGGTDM
+                </Typography>
+              </Box>
+
+              {/* Tabs */}
+              <Tabs
+                value={tabValue}
+                onChange={handleTabChange}
+                sx={{
+                  minHeight: 48,
+                  '& .MuiTabs-indicator': {
+                    backgroundColor: '#9333ea',
+                  },
+                  '& .MuiTab-root': {
+                    color: '#9ca3af',
+                    minHeight: 48,
+                    textTransform: 'none',
+                    fontSize: { xs: '0.75rem', sm: '0.875rem' },
+                    px: { xs: 1.5, sm: 2 },
+                    minWidth: { xs: 'auto', sm: 120 },
+                    '&.Mui-selected': {
+                      color: '#fff',
+                    },
+                    '&:hover': {
+                      color: '#fff',
+                    }
+                  }
+                }}
+              >
+                <Tab label="Player Model" />
+                <Tab label="Weekly Value" />
+                <Tab label="System Status" />
+              </Tabs>
+            </Box>
+
+            {/* Current Week Indicator */}
             {currentWeek && (
-              <div className="text-4xl font-bold text-white">
+              <Typography
+                variant="h3"
+                sx={{
+                  fontWeight: 700,
+                  fontSize: { xs: '1.5rem', sm: '2.5rem' },
+                  ml: 2
+                }}
+              >
                 {currentWeek}
-              </div>
+              </Typography>
             )}
-          </div>
-        </div>
-      </nav>
+          </Box>
+        </Container>
+      </AppBar>
 
       {/* Main Content */}
       {activeTab === 'player' && <PlayerModel initialPlayerId={selectedPlayerId} />}
       {activeTab === 'weekly' && <WeeklyValue onPlayerClick={handlePlayerClick} />}
       {activeTab === 'status' && <SystemStatus />}
-    </div>
+    </Box>
   );
 }

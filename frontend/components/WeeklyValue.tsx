@@ -4,7 +4,20 @@ import { useEffect, useState } from 'react';
 import { ValuePlayerCard } from '@/components/ValuePlayerCard';
 import { GamblingDisclaimer } from '@/components/GamblingDisclaimer';
 import { PlayerWeekToggle } from '@/components/PlayerWeekToggle';
-import { TrendingUp, TrendingDown, AlertTriangle, AlertCircle, Loader2 } from 'lucide-react';
+import { TrendingUp, TrendingDown, Warning } from '@mui/icons-material';
+import {
+  Box,
+  Container,
+  Typography,
+  Card,
+  CircularProgress,
+  Alert,
+  ToggleButtonGroup,
+  ToggleButton,
+  Checkbox,
+  FormControlLabel,
+  Stack
+} from '@mui/material';
 
 interface Prediction {
   player_id: string;
@@ -163,170 +176,205 @@ export default function WeeklyValue({ onPlayerClick }: WeeklyValueProps) {
     loadPredictions();
   }, [selectedSportsbook, selectedWeek, currentYear]);
 
-  const filteredPredictions = showOnlyEdge
-    ? predictions.filter((p) => p.has_edge)
-    : predictions;
+  const filteredPredictions = predictions.filter((p) => {
+    // Filter by edge if enabled
+    if (showOnlyEdge && !p.has_edge) return false;
+
+    return true;
+  });
 
   return (
-    <div className="relative">
+    <Box sx={{ position: 'relative' }}>
       {/* Hero Background */}
-      <div
-        className="absolute top-0 left-0 w-full h-96 bg-cover bg-center"
-        style={{
+      <Box
+        sx={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: 384,
           backgroundImage: 'url(/gabe-davis-background.jpg)',
+          backgroundSize: 'cover',
           backgroundPosition: 'center 15%',
+          '&::after': {
+            content: '""',
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.75), #0a0a0a)',
+          }
         }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/75 to-[#0a0a0a]" />
-      </div>
+      />
 
       {/* Content */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <Container maxWidth="xl" sx={{ position: 'relative', py: 4 }}>
         {/* Header */}
-        <div className="mb-8 bg-gray-900/40 backdrop-blur-sm border border-gray-800 rounded-xl p-6 max-md:p-4">
-          <div className="flex items-center justify-between gap-4 mb-2 max-md:flex-col max-md:items-start">
-            <div className="flex-1">
-              <h2 className="text-3xl max-md:text-2xl text-white mb-2">
+        <Card
+          sx={{
+            mb: 4,
+            bgcolor: 'rgba(17, 24, 39, 0.4)',
+            backdropFilter: 'blur(8px)',
+            border: '1px solid #1f2937',
+            borderRadius: 3,
+            p: { xs: 2, md: 3 }
+          }}
+        >
+          <Box sx={{ display: 'flex', alignItems: { xs: 'flex-start', md: 'center' }, justifyContent: 'space-between', gap: 2, flexDirection: { xs: 'column', md: 'row' } }}>
+            <Box sx={{ flex: 1 }}>
+              <Typography variant="h4" sx={{ color: '#fff', mb: 1, fontSize: { xs: '1.5rem', md: '2rem' } }}>
                 Week {selectedWeek} Value Plays
-              </h2>
-              <p className="text-gray-400 max-md:text-sm">
+              </Typography>
+              <Typography variant="body2" sx={{ color: '#9ca3af', fontSize: { xs: '0.875rem', md: '1rem' } }}>
                 Players with the highest model edge vs sportsbook odds
-              </p>
-            </div>
+              </Typography>
+            </Box>
             <PlayerWeekToggle
               currentWeek={currentWeek}
               currentYear={currentYear}
               selectedWeek={selectedWeek}
               onWeekChange={setSelectedWeek}
             />
-          </div>
-        </div>
+          </Box>
+        </Card>
 
-      {/* Loading Overlay */}
-      {loading && (
-        <div className="mb-6 bg-gray-900/40 backdrop-blur-sm border border-gray-800 rounded-xl p-8 flex items-center justify-center">
-          <Loader2 className="w-8 h-8 text-purple-500 animate-spin mr-3" />
-          <span className="text-white text-lg">Loading predictions...</span>
-        </div>
-      )}
+        {/* Loading Overlay */}
+        {loading && (
+          <Card sx={{ mb: 3, bgcolor: 'rgba(17, 24, 39, 0.4)', backdropFilter: 'blur(8px)', border: '1px solid #1f2937', borderRadius: 3, p: 4 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <CircularProgress sx={{ color: '#a78bfa', mr: 2 }} />
+              <Typography variant="h6" sx={{ color: '#fff' }}>Loading predictions...</Typography>
+            </Box>
+          </Card>
+        )}
 
-      {/* Error State */}
-      {error && (
-        <div className="mb-6 bg-red-500/10 border border-red-500/30 rounded-xl p-6 text-center">
-          <p className="text-red-500 text-lg">Error: {error}</p>
-        </div>
-      )}
+        {/* Error State */}
+        {error && (
+          <Alert severity="error" sx={{ mb: 3, bgcolor: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.3)', borderRadius: 3 }}>
+            Error: {error}
+          </Alert>
+        )}
 
-      {/* No Predictions Available */}
-      {!loading && !error && predictions.length === 0 && (
-        <div className="bg-gray-900/40 backdrop-blur-sm border border-gray-800 rounded-xl p-12 text-center">
-          <div className="flex items-center justify-center gap-2 mb-4 mt-4">
-            <AlertCircle className="w-8 h-8 text-yellow-500" />
-            <h3 className="text-2xl text-yellow-500">Predictions Not Available</h3>
-          </div>
-          <p className="text-gray-400 mb-2">
-            Week {selectedWeek} predictions haven't been generated yet.
-          </p>
-          <p className="text-sm text-gray-500">
-            Check back after the weekly batch job completes or try viewing a previous week.
-          </p>
-        </div>
-      )}
+        {/* No Predictions Available */}
+        {!loading && !error && predictions.length === 0 && (
+          <Card sx={{ bgcolor: 'rgba(17, 24, 39, 0.4)', backdropFilter: 'blur(8px)', border: '1px solid #1f2937', borderRadius: 3, p: 6, textAlign: 'center' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1, mb: 2 }}>
+              <Warning sx={{ fontSize: 32, color: '#eab308' }} />
+              <Typography variant="h5" sx={{ color: '#eab308' }}>Predictions Not Available</Typography>
+            </Box>
+            <Typography variant="body1" sx={{ color: '#9ca3af', mb: 1 }}>
+              Week {selectedWeek} predictions haven't been generated yet.
+            </Typography>
+            <Typography variant="body2" sx={{ color: '#6b7280' }}>
+              Check back after the weekly batch job completes or try viewing a previous week.
+            </Typography>
+          </Card>
+        )}
 
-      {/* Filters - only show when we have data */}
-      {!loading && !error && predictions.length > 0 && (
-        <div className="mb-6 flex items-center gap-4 max-md:flex-col max-md:items-stretch max-md:gap-3 bg-gray-900/40 backdrop-blur-sm border border-gray-800 rounded-xl p-4 max-md:p-3">
-          <div className="flex gap-2 bg-gray-900/50 rounded-lg p-1 w-full md:w-auto">
-            <button
-              onClick={() => setSelectedSportsbook('draftkings')}
-              className={`flex-1 md:flex-initial px-4 py-2 max-md:px-3 max-md:py-1.5 max-md:text-sm rounded-md transition-all ${
-                selectedSportsbook === 'draftkings'
-                  ? 'bg-purple-600 text-white'
-                  : 'text-gray-400 hover:text-white'
-              }`}
-            >
-              DraftKings
-            </button>
-            <button
-              onClick={() => setSelectedSportsbook('fanduel')}
-              className={`flex-1 md:flex-initial px-4 py-2 max-md:px-3 max-md:py-1.5 max-md:text-sm rounded-md transition-all ${
-                selectedSportsbook === 'fanduel'
-                  ? 'bg-purple-600 text-white'
-                  : 'text-gray-400 hover:text-white'
-              }`}
-            >
-              FanDuel
-            </button>
-          </div>
+        {/* Filters - only show when we have data */}
+        {!loading && !error && predictions.length > 0 && (
+          <Card sx={{ mb: 3, bgcolor: 'rgba(17, 24, 39, 0.4)', backdropFilter: 'blur(8px)', border: '1px solid #1f2937', borderRadius: 3, p: 3 }}>
+            <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} alignItems={{ xs: 'stretch', md: 'center' }}>
+              <ToggleButtonGroup
+                value={selectedSportsbook}
+                exclusive
+                onChange={(_e, newValue) => newValue && setSelectedSportsbook(newValue)}
+                sx={{
+                  bgcolor: 'rgba(17, 24, 39, 0.5)',
+                  '& .MuiToggleButton-root': {
+                    color: '#9ca3af',
+                    border: 'none',
+                    px: { xs: 2, md: 3 },
+                    py: 1,
+                    fontSize: { xs: '0.875rem', md: '1rem' },
+                    '&.Mui-selected': {
+                      bgcolor: '#9333ea',
+                      color: '#fff',
+                      '&:hover': {
+                        bgcolor: '#7e22ce',
+                      }
+                    },
+                    '&:hover': {
+                      color: '#fff',
+                    }
+                  }
+                }}
+              >
+                <ToggleButton value="draftkings">DraftKings</ToggleButton>
+                <ToggleButton value="fanduel">FanDuel</ToggleButton>
+              </ToggleButtonGroup>
 
-          <label className="flex items-center gap-2 text-sm max-md:text-xs text-gray-400 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={showOnlyEdge}
-              onChange={(e) => setShowOnlyEdge(e.target.checked)}
-              className="w-4 h-4 rounded bg-gray-800 border-gray-700 text-purple-600 focus:ring-purple-600"
-            />
-            Show only +EV plays
-          </label>
-        </div>
-      )}
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={showOnlyEdge}
+                    onChange={(e) => setShowOnlyEdge(e.target.checked)}
+                    sx={{
+                      color: '#6b7280',
+                      '&.Mui-checked': {
+                        color: '#9333ea',
+                      }
+                    }}
+                  />
+                }
+                label={<Typography variant="body2" sx={{ color: '#9ca3af', fontSize: { xs: '0.875rem', md: '1rem' } }}>Show only +EV plays</Typography>}
+              />
+            </Stack>
+          </Card>
+        )}
 
-      {/* Value Player Cards */}
-      {!loading && !error && predictions.length > 0 && (
-        <>
-          {filteredPredictions.length === 0 ? (
-            <div className="bg-gray-900/40 backdrop-blur-sm border border-gray-800 rounded-xl p-12 text-center">
-              <p className="text-gray-400 text-lg">
-                No positive EV plays found for this sportsbook
-              </p>
-            </div>
-          ) : (
-            <div className="space-y-4">
-              {filteredPredictions.map((prediction, index) => (
-                <ValuePlayerCard
-                  key={prediction.player_id}
-                  player_id={prediction.player_id}
-                  player_name={prediction.player_name}
-                  team_name={prediction.team_name}
-                  position={prediction.position}
-                  headshot_url={prediction.headshot_url}
-                  td_likelihood={parseFloat(prediction.td_likelihood)}
-                  model_odds={prediction.model_odds}
-                  sportsbook_odds={prediction.sportsbook_odds}
-                  edge_value={prediction.expected_value}
-                  rank={index + 1}
-                  onClick={onPlayerClick}
-                />
-              ))}
-            </div>
-          )}
-        </>
-      )}
+        {/* Value Player Cards */}
+        {!loading && !error && predictions.length > 0 && (
+          <>
+            {filteredPredictions.length === 0 ? (
+              <Card sx={{ bgcolor: 'rgba(17, 24, 39, 0.4)', backdropFilter: 'blur(8px)', border: '1px solid #1f2937', borderRadius: 3, p: 6, textAlign: 'center' }}>
+                <Typography variant="h6" sx={{ color: '#9ca3af' }}>
+                  No positive EV plays found for this sportsbook
+                </Typography>
+              </Card>
+            ) : (
+              <Stack spacing={2}>
+                {filteredPredictions.map((prediction, index) => (
+                  <ValuePlayerCard
+                    key={prediction.player_id}
+                    player_id={prediction.player_id}
+                    player_name={prediction.player_name}
+                    team_name={prediction.team_name}
+                    position={prediction.position}
+                    headshot_url={prediction.headshot_url}
+                    td_likelihood={parseFloat(prediction.td_likelihood)}
+                    model_odds={prediction.model_odds}
+                    sportsbook_odds={prediction.sportsbook_odds}
+                    edge_value={prediction.expected_value}
+                    rank={index + 1}
+                    onClick={onPlayerClick}
+                  />
+                ))}
+              </Stack>
+            )}
+          </>
+        )}
 
-      {/* Legend */}
-      <div className="mt-8 bg-gray-900/40 backdrop-blur-sm border border-gray-800 rounded-xl p-4">
-        <div className="flex items-center gap-8 max-md:flex-col max-md:items-start max-md:gap-4 text-sm">
-          <div className="flex items-center gap-2">
-            <TrendingUp className="w-4 h-4 text-green-500" />
-            <span className="text-gray-400">Positive Edge (Model favored)</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <TrendingDown className="w-4 h-4 text-red-500" />
-            <span className="text-gray-400">
-              Negative Edge (Sportsbook favored)
-            </span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="text-gray-400">
-              Edge = Expected Value vs. Sportsbook
-            </div>
-          </div>
-        </div>
-      </div>
+        {/* Legend */}
+        <Card sx={{ mt: 4, bgcolor: 'rgba(17, 24, 39, 0.4)', backdropFilter: 'blur(8px)', border: '1px solid #1f2937', borderRadius: 3, p: 2 }}>
+          <Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 2, md: 4 }} sx={{ fontSize: '0.875rem' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <TrendingUp sx={{ fontSize: 16, color: '#10b981' }} />
+              <Typography variant="body2" sx={{ color: '#9ca3af' }}>Positive Edge (Model favored)</Typography>
+            </Box>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <TrendingDown sx={{ fontSize: 16, color: '#ef4444' }} />
+              <Typography variant="body2" sx={{ color: '#9ca3af' }}>Negative Edge (Sportsbook favored)</Typography>
+            </Box>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <Typography variant="body2" sx={{ color: '#9ca3af' }}>
+                Edge = Expected Value vs. Sportsbook
+              </Typography>
+            </Box>
+          </Stack>
+        </Card>
 
-      {/* Gambling Disclaimer */}
-      <GamblingDisclaimer />
-      </div>
-    </div>
+        {/* Gambling Disclaimer */}
+        <GamblingDisclaimer />
+      </Container>
+    </Box>
   );
 }
