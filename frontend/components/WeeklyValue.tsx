@@ -220,7 +220,7 @@ export default function WeeklyValue({ onPlayerClick }: WeeklyValueProps) {
       {/* No Predictions Available */}
       {!loading && !error && predictions.length === 0 && (
         <div className="bg-gray-900/40 backdrop-blur-sm border border-gray-800 rounded-xl p-12 text-center">
-          <div className="flex items-center justify-center gap-2 mb-4">
+          <div className="flex items-center justify-center gap-2 mb-4 mt-4">
             <AlertCircle className="w-8 h-8 text-yellow-500" />
             <h3 className="text-2xl text-yellow-500">Predictions Not Available</h3>
           </div>
