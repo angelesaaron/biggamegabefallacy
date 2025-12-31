@@ -8,7 +8,6 @@ import {
   TextField,
   Typography,
   Button,
-  Grid,
   Alert,
   AlertTitle,
   Select,
@@ -243,8 +242,8 @@ export default function ActionsTab() {
             One-click batch operations with default settings (current week auto-detected).
           </Typography>
 
-          <Grid container spacing={2}>
-            <Grid item xs={12} md={6}>
+          <Box sx={{ display: 'flex', gap: 2, flexDirection: { xs: 'column', md: 'row' } }}>
+            <Box sx={{ flex: 1 }}>
               <ActionButton
                 title="Run Full Batch Update"
                 description="Update schedule, game logs, and odds for current week"
@@ -252,9 +251,9 @@ export default function ActionsTab() {
                 loading={loading}
                 variant="primary"
               />
-            </Grid>
+            </Box>
 
-            <Grid item xs={12} md={6}>
+            <Box sx={{ flex: 1 }}>
               <ActionButton
                 title="Refresh Rosters"
                 description="Fetch latest player rosters and add new players"
@@ -262,9 +261,9 @@ export default function ActionsTab() {
                 loading={loading}
                 variant="secondary"
               />
-            </Grid>
+            </Box>
 
-          </Grid>
+          </Box>
         </CardContent>
       </Card>
 
@@ -279,8 +278,8 @@ export default function ActionsTab() {
           </Typography>
 
           {/* Week/Year Selection */}
-          <Grid container spacing={2} sx={{ mb: 3 }}>
-            <Grid item xs={6}>
+          <Box sx={{ display: 'flex', gap: 2, mb: 3 }}>
+            <Box sx={{ flex: 1 }}>
               <FormControl fullWidth>
                 <InputLabel
                   sx={{
@@ -340,9 +339,9 @@ export default function ActionsTab() {
                   ))}
                 </Select>
               </FormControl>
-            </Grid>
+            </Box>
 
-            <Grid item xs={6}>
+            <Box sx={{ flex: 1 }}>
               <FormControl fullWidth>
                 <InputLabel
                   sx={{
@@ -400,11 +399,11 @@ export default function ActionsTab() {
                   <MenuItem value={2026}>2026</MenuItem>
                 </Select>
               </FormControl>
-            </Grid>
-          </Grid>
+            </Box>
+          </Box>
 
-          <Grid container spacing={2}>
-            <Grid item xs={12} md={6}>
+          <Box sx={{ display: 'flex', gap: 2, flexDirection: { xs: 'column', md: 'row' } }}>
+            <Box sx={{ flex: 1 }}>
               <ActionButton
                 title="Backfill Last 5 Weeks (Current Season)"
                 description="Backfill last 5 weeks from current NFL week (~160 API calls)"
@@ -412,9 +411,9 @@ export default function ActionsTab() {
                 loading={loading}
                 variant="secondary"
               />
-            </Grid>
+            </Box>
 
-            <Grid item xs={12} md={6}>
+            <Box sx={{ flex: 1 }}>
               <ActionButton
                 title={`Backfill ${selectedYear} Week ${selectedWeek}`}
                 description={`Complete backfill for selected week (~32 API calls)`}
@@ -422,8 +421,8 @@ export default function ActionsTab() {
                 loading={loading}
                 variant="secondary"
               />
-            </Grid>
-          </Grid>
+            </Grid2>
+          </Grid2>
         </CardContent>
       </Card>
 
@@ -438,8 +437,8 @@ export default function ActionsTab() {
           </Typography>
 
           {/* Week/Year Selection */}
-          <Grid container spacing={2} sx={{ mb: 3 }}>
-            <Grid item xs={6}>
+          <Box sx={{ display: 'flex', gap: 2, mb: 3 }}>
+            <Box sx={{ flex: 1 }}>
               <FormControl fullWidth>
                 <InputLabel
                   sx={{
@@ -499,9 +498,9 @@ export default function ActionsTab() {
                   ))}
                 </Select>
               </FormControl>
-            </Grid>
+            </Box>
 
-            <Grid item xs={6}>
+            <Box sx={{ flex: 1 }}>
               <FormControl fullWidth>
                 <InputLabel
                   sx={{
@@ -559,12 +558,12 @@ export default function ActionsTab() {
                   <MenuItem value={2026}>2026</MenuItem>
                 </Select>
               </FormControl>
-            </Grid>
-          </Grid>
+            </Box>
+          </Box>
 
           {/* Advanced Action Buttons */}
-          <Grid container spacing={2}>
-            <Grid item xs={12} md={6}>
+          <Box sx={{ display: 'flex', gap: 2, flexDirection: { xs: 'column', md: 'row' } }}>
+            <Box sx={{ flex: 1 }}>
               <ActionButton
                 title="Update Specific Week"
                 description={`Run full batch for ${selectedYear} Week ${selectedWeek}`}
@@ -572,9 +571,9 @@ export default function ActionsTab() {
                 loading={loading}
                 variant="secondary"
               />
-            </Grid>
+            </Box>
 
-            <Grid item xs={12} md={6}>
+            <Box sx={{ flex: 1 }}>
               <ActionButton
                 title="Refresh Odds Only"
                 description={`Update odds for ${selectedYear} Week ${selectedWeek}`}
@@ -582,8 +581,8 @@ export default function ActionsTab() {
                 loading={loading}
                 variant="secondary"
               />
-            </Grid>
-          </Grid>
+            </Grid2>
+          </Grid2>
         </CardContent>
       </Card>
 
