@@ -24,10 +24,18 @@ from app.models.player import Player
 from app.models.game_log import GameLog
 from app.models.schedule import Schedule
 from app.models.odds import SportsbookOdds
+from app.models.prediction import Prediction
 from app.utils.tank01_client import Tank01Client, parse_game_log
 from app.utils.nfl_calendar import get_current_nfl_week
 from app.services.batch_tracking import BatchTracker
-from sqlalchemy import select, delete
+from app.services.data_service import get_data_service
+from app.ml.model_service import get_model_service
+from app.ml.feature_engineering import extract_prediction_features
+from sqlalchemy import select, delete, func
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 
 async def update_schedule(db, client, current_season, current_week):
@@ -469,6 +477,115 @@ async def sync_odds_for_next_week(db, client, current_season, current_week):
     return total_saved
 
 
+async def generate_predictions_for_week(db, current_season, current_week):
+    """
+    Generate predictions for all WR/TE players for the current week.
+    Only generates predictions for players who don't already have them (immutable).
+    Uses historical game logs from database (0 API calls).
+    """
+    print(f"\n🎯 Generating Predictions for Week {current_week}...")
+
+    model_service = get_model_service()
+    data_service = get_data_service(db)
+
+    # Get all active WR/TE players
+    result = await db.execute(
+        select(Player).where(
+            Player.active_status == True,
+            Player.position.in_(['WR', 'TE'])
+        )
+    )
+    players = result.scalars().all()
+
+    # Get existing predictions for this week to skip them
+    existing_predictions_result = await db.execute(
+        select(Prediction.player_id)
+        .where(Prediction.season_year == current_season, Prediction.week == current_week)
+    )
+    existing_player_ids = {row[0] for row in existing_predictions_result.all()}
+
+    if existing_player_ids:
+        print(f"   Found {len(existing_player_ids)} players with existing predictions (skipping)")
+
+    # Filter to only players WITHOUT predictions
+    players_to_predict = [p for p in players if p.player_id not in existing_player_ids]
+
+    if not players_to_predict:
+        print(f"   ✅ All {len(players)} players already have predictions. Nothing to do.")
+        return 0
+
+    print(f"   Generating predictions for {len(players_to_predict)} new players...")
+
+    successful = 0
+    failed = 0
+    week1_baseline = 0
+
+    for i, player in enumerate(players_to_predict, 1):
+        try:
+            # Get player data
+            _, game_logs, _ = await data_service.get_player_data_for_prediction(
+                player_id=player.player_id,
+                next_week=current_week
+            )
+
+            # Generate prediction
+            if not game_logs:
+                # Week 1 baseline
+                td_prob, _, odds_val, favor = model_service.predict_week_1(week=current_week)
+                week1_baseline += 1
+            else:
+                # Extract features and predict
+                features = extract_prediction_features(game_logs, next_week=current_week)
+
+                if features is None:
+                    logger.warning(f"Could not extract features for {player.full_name}")
+                    failed += 1
+                    continue
+
+                td_prob, _, odds_val, favor = model_service.predict_td_with_odds(features)
+
+            # Save prediction to database
+            prediction = Prediction(
+                player_id=player.player_id,
+                season_year=current_season,
+                week=current_week,
+                td_likelihood=td_prob,
+                model_odds=odds_val,
+                favor=favor,
+                created_at=datetime.utcnow()
+            )
+            db.add(prediction)
+
+            successful += 1
+
+            if i % 50 == 0:
+                try:
+                    await db.commit()
+                    print(f"   [{i}/{len(players_to_predict)}] Generated {successful} predictions...")
+                except Exception as commit_error:
+                    await db.rollback()
+                    logger.warning(f"Commit error (likely race condition): {commit_error}")
+
+        except Exception as e:
+            logger.error(f"Failed to generate prediction for {player.full_name}: {str(e)}")
+            await db.rollback()
+            failed += 1
+            continue
+
+    # Final commit
+    try:
+        await db.commit()
+    except Exception as e:
+        await db.rollback()
+        logger.warning(f"Final commit error: {e}")
+
+    print(f"   ✅ Generated {successful} predictions ({week1_baseline} Week 1 baselines)")
+    if failed > 0:
+        print(f"   ⚠️  {failed} predictions failed")
+
+    return successful
+
+
 async def main():
     """Run weekly update with configurable batch modes"""
     import argparse
@@ -516,28 +633,29 @@ async def main():
     print()
 
     # Mode descriptions
+    schedule_desc = f"1. Update schedule for Week {current_week}" + (f" and {current_week + 1}" if current_week < 18 else " (+ playoff schedule)" if current_week == 18 else "")
     mode_descriptions = {
         'full': [
-            f"1. Update schedule for current/next week",
+            schedule_desc,
             f"2. Fetch box scores for Week {current_week - 1} (completed)" if use_box_scores else f"2. Fetch game logs for Week {current_week - 1} (completed)",
-            f"3. Fetch odds for Week {current_week} (upcoming)",
-            f"4. Then run: python generate_predictions.py (separate step)"
+            f"3. Generate predictions for Week {current_week} (using Week {current_week - 1} data)",
+            f"4. Fetch odds for Week {current_week} (upcoming)"
         ],
         'odds_only': [
             f"1. Fetch odds for Week {current_week} ONLY",
-            f"2. Skip schedule and game logs",
+            f"2. Skip schedule, game logs, and predictions",
             f"3. Safe to run mid-week to refresh odds",
             f"4. Does NOT regenerate predictions"
         ],
         'ingest_only': [
             f"1. Update schedule",
             f"2. Fetch box scores for Week {current_week - 1}" if use_box_scores else f"2. Fetch game logs for Week {current_week - 1}",
-            f"3. Skip odds sync",
+            f"3. Skip predictions and odds sync",
             f"4. Use for data corrections"
         ],
         'schedule_only': [
             f"1. Update schedule ONLY",
-            f"2. Skip box scores and odds",
+            f"2. Skip box scores, predictions, and odds",
             f"3. Use for schedule fixes"
         ]
     }
@@ -619,9 +737,24 @@ async def main():
                         tracker.add_warning('game_logs', 'Skipped - playoffs not supported')
                         await tracker.skip_step(reason="Playoffs not supported for predictions")
 
-                # STEP 3: ODDS SYNC
+                # STEP 3: PREDICTIONS (FULL MODE ONLY)
+                if args.mode == 'full' and season_type == 'reg':
+                    await tracker.start_step('predictions', step_order=3)
+                    try:
+                        tracker.log_output(f"Generating predictions for Week {current_week}...")
+                        predictions_generated = await generate_predictions_for_week(db, current_season, current_week)
+                        tracker.increment_metric('predictions_generated', predictions_generated)
+                        tracker.log_output(f"Prediction generation complete: {predictions_generated} predictions generated")
+                        await tracker.complete_step(status='success', records_processed=predictions_generated)
+                    except Exception as e:
+                        tracker.log_output(f"Prediction generation failed: {str(e)}")
+                        await tracker.fail_step(error_message=str(e))
+                        raise
+
+                # STEP 4: ODDS SYNC
                 if args.mode in ['full', 'odds_only']:
-                    await tracker.start_step('odds', step_order=3)
+                    step_order = 4 if args.mode == 'full' else 3
+                    await tracker.start_step('odds', step_order=step_order)
                     try:
                         tracker.log_output(f"Syncing odds for Week {current_week}...")
                         print(f"\n📊 Syncing Odds for Week {current_week}...")
@@ -642,9 +775,8 @@ async def main():
         # Next steps guidance
         if args.mode == 'full' and season_type == 'reg':
             print()
-            print("Next steps:")
-            print(f"  python generate_predictions.py --week {current_week} --year {current_season}")
-            print(f"  (Will generate predictions ONLY for new players)")
+            print("✅ Full batch complete!")
+            print(f"   Schedule, game logs, predictions, and odds are ready for Week {current_week}")
             print()
         elif args.mode == 'full' and season_type == 'post':
             print()

@@ -190,18 +190,11 @@ export default function OverviewTab() {
               </Typography>
             </Box>
             <Box sx={{ textAlign: 'right' }}>
-              {isHealthy ? (
+              {isHealthy && (
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, color: '#10b981' }}>
                   <CheckCircle sx={{ fontSize: 32 }} />
                   <Typography variant="h5" sx={{ fontWeight: 700 }}>
                     READY
-                  </Typography>
-                </Box>
-              ) : (
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, color: '#eab308' }}>
-                  <Warning sx={{ fontSize: 32 }} />
-                  <Typography variant="h5" sx={{ fontWeight: 700 }}>
-                    PARTIAL
                   </Typography>
                 </Box>
               )}

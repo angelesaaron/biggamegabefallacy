@@ -39,7 +39,10 @@ from app.models.player import Player
 from app.models.game_log import GameLog
 from app.models.schedule import Schedule
 from app.utils.tank01_client import Tank01Client, parse_player_from_roster, parse_game_log
+from app.services.batch_tracking import BatchTracker
+from app.utils.nfl_calendar import get_current_nfl_week
 from sqlalchemy import select, func
+import os
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -74,199 +77,241 @@ async def refresh_rosters(
     client = Tank01Client()
     start_time = datetime.utcnow()
 
+    # Determine if running in CI mode
+    skip_confirmation = os.environ.get('CI', '').lower() == 'true'
+    triggered_by = 'github_actions' if skip_confirmation else 'manual'
+
+    # Get current NFL week for batch tracking
+    season_year, week, season_type = get_current_nfl_week()
+
     try:
         async with AsyncSessionLocal() as db:
-            # Fetch all rosters from Tank01 (32 teams)
-            print("Fetching rosters from Tank01 (32 teams)...")
-            all_roster_players = await client.get_all_rosters(positions=positions)
-            print(f"Found {len(all_roster_players)} {'/'.join(positions)} players from API\n")
+            async with BatchTracker(
+                db=db,
+                batch_type='roster_refresh',
+                season_year=season_year,
+                week=week,
+                batch_mode='standard',
+                season_type=season_type,
+                triggered_by=triggered_by
+            ) as tracker:
+                # STEP 1: Fetch rosters
+                await tracker.start_step('fetch_rosters', step_order=1)
+                tracker.log_output("Fetching rosters from Tank01 (32 teams)...")
 
-            # Get existing players from database
-            result = await db.execute(select(Player.player_id))
-            existing_player_ids = {row[0] for row in result.all()}
-            print(f"Database has {len(existing_player_ids)} existing players\n")
+                # Fetch all rosters from Tank01 (32 teams)
+                print("Fetching rosters from Tank01 (32 teams)...")
+                all_roster_players = await client.get_all_rosters(positions=positions)
+                print(f"Found {len(all_roster_players)} {'/'.join(positions)} players from API\n")
+                tracker.log_output(f"Found {len(all_roster_players)} {'/'.join(positions)} players from API")
 
-            # Find new players
-            new_players = [
-                p for p in all_roster_players
-                if p.get("playerID") not in existing_player_ids
-            ]
+                # Get existing players from database
+                result = await db.execute(select(Player.player_id))
+                existing_player_ids = {row[0] for row in result.all()}
+                print(f"Database has {len(existing_player_ids)} existing players\n")
+                tracker.log_output(f"Database has {len(existing_player_ids)} existing players")
 
-            if not new_players:
-                print("✅ No new players detected. Roster is up to date.")
-                print()
-                return
+                # Find new players
+                new_players = [
+                    p for p in all_roster_players
+                    if p.get("playerID") not in existing_player_ids
+                ]
 
-            print(f"🆕 Detected {len(new_players)} NEW players:")
-            for i, p in enumerate(new_players[:10], 1):  # Show first 10
-                print(f"   {i}. {p.get('longName')} ({p.get('pos')}, {p.get('team')})")
-            if len(new_players) > 10:
-                print(f"   ... and {len(new_players) - 10} more")
-            print()
+                await tracker.complete_step(status='success', records_processed=len(all_roster_players))
 
-            # Estimate API calls
-            api_calls = 32  # Rosters already fetched
-            if backfill_history:
-                api_calls += len(new_players)  # 1 per player for game logs
-
-            print(f"Estimated API calls: {api_calls}")
-            if backfill_history:
-                print(f"  - 32 roster calls (already made)")
-                print(f"  - {len(new_players)} game log calls (1 per new player)")
-            print()
-
-            # DRY RUN - exit without changes
-            if dry_run:
-                print("=" * 60)
-                print("DRY RUN - No changes will be made")
-                print("=" * 60)
-                print()
-                print("To apply changes, run without --dry-run:")
-                print(f"  python refresh_rosters.py")
-                if backfill_history:
-                    print(f"  python refresh_rosters.py --backfill")
-                print()
-                return
-
-            # Confirm if high API usage
-            if len(new_players) > 20 and backfill_history:
-                print("⚠️  WARNING: Large number of new players with backfill enabled")
-                response = input(f"Add {len(new_players)} players with historical backfill? (yes/no): ")
-                if response.lower() not in ['yes', 'y']:
-                    print("\nCancelled.")
+                if not new_players:
+                    tracker.log_output("No new players detected. Roster is up to date.")
+                    print("✅ No new players detected. Roster is up to date.")
+                    print()
                     return
+
+                tracker.log_output(f"Detected {len(new_players)} new players")
+
+                print(f"🆕 Detected {len(new_players)} NEW players:")
+                for i, p in enumerate(new_players[:10], 1):  # Show first 10
+                    print(f"   {i}. {p.get('longName')} ({p.get('pos')}, {p.get('team')})")
+                if len(new_players) > 10:
+                    print(f"   ... and {len(new_players) - 10} more")
                 print()
 
-            # PHASE 1: Insert new players
-            print("Adding new players to database...")
-            players_added = 0
+                # Estimate API calls
+                api_calls = 32  # Rosters already fetched
+                if backfill_history:
+                    api_calls += len(new_players)  # 1 per player for game logs
 
-            for player_data in new_players:
-                try:
-                    parsed = parse_player_from_roster(player_data)
-
-                    new_player = Player(**parsed)
-                    db.add(new_player)
-                    players_added += 1
-                except Exception as e:
-                    logger.error(f"Failed to add player {player_data.get('longName')}: {e}")
-                    continue
-
-            await db.commit()
-            print(f"✅ Added {players_added} new players\n")
-
-            # PHASE 2: Historical backfill (OPTIONAL)
-            backfilled_logs = 0
-
-            if backfill_history:
-                print(f"Starting historical backfill for {players_added} players...")
-                print(f"(Limited to {max_backfill_weeks} most recent weeks)")
+                print(f"Estimated API calls: {api_calls}")
+                if backfill_history:
+                    print(f"  - 32 roster calls (already made)")
+                    print(f"  - {len(new_players)} game log calls (1 per new player)")
                 print()
 
-                # Get schedule for week mapping
-                schedule_result = await db.execute(select(Schedule))
-                all_schedules = schedule_result.scalars().all()
-                game_id_to_week = {
-                    s.game_id: (s.season_year, s.week)
-                    for s in all_schedules
-                }
+                # DRY RUN - exit without changes
+                if dry_run:
+                    tracker.log_output("DRY RUN - No changes made")
+                    print("=" * 60)
+                    print("DRY RUN - No changes will be made")
+                    print("=" * 60)
+                    print()
+                    print("To apply changes, run without --dry-run:")
+                    print(f"  python refresh_rosters.py")
+                    if backfill_history:
+                        print(f"  python refresh_rosters.py --backfill")
+                    print()
+                    return
 
-                for i, player_data in enumerate(new_players, 1):
-                    player_id = player_data.get("playerID")
-                    player_name = player_data.get("longName")
+                # Confirm if high API usage (skip in CI mode)
+                if len(new_players) > 20 and backfill_history and not skip_confirmation:
+                    print("⚠️  WARNING: Large number of new players with backfill enabled")
+                    response = input(f"Add {len(new_players)} players with historical backfill? (yes/no): ")
+                    if response.lower() not in ['yes', 'y']:
+                        tracker.log_output("Operation cancelled by user")
+                        print("\nCancelled.")
+                        return
+                    print()
 
+                # STEP 2: Insert new players
+                await tracker.start_step('add_players', step_order=2)
+                tracker.log_output(f"Adding {len(new_players)} new players to database...")
+                print("Adding new players to database...")
+                players_added = 0
+
+                for player_data in new_players:
                     try:
-                        # Fetch game logs from API
-                        raw_logs = await client.get_games_for_player(
-                            player_id=player_id,
-                            limit=max_backfill_weeks
-                        )
+                        parsed = parse_player_from_roster(player_data)
 
-                        if not raw_logs:
-                            if i % 10 == 0:
-                                print(f"[{i}/{players_added}] Backfilled {backfilled_logs} logs so far...")
-                            continue
-
-                        player_logs = 0
-
-                        for raw_log in raw_logs:
-                            parsed = parse_game_log(raw_log)
-                            game_id = parsed.get("game_id")
-
-                            # Get week info from schedule
-                            if game_id and game_id in game_id_to_week:
-                                season_year, week = game_id_to_week[game_id]
-                                parsed["week"] = week
-                                parsed["season_year"] = season_year
-                            else:
-                                continue
-
-                            # Check if log already exists
-                            existing_log = await db.execute(
-                                select(GameLog).where(
-                                    GameLog.player_id == player_id,
-                                    GameLog.game_id == game_id
-                                )
-                            )
-                            if existing_log.scalar_one_or_none():
-                                continue
-
-                            # Insert game log
-                            game_log = GameLog(
-                                player_id=parsed["player_id"],
-                                game_id=parsed["game_id"],
-                                season_year=parsed["season_year"],
-                                week=parsed["week"],
-                                team=parsed["team"],
-                                team_id=parsed["team_id"],
-                                receptions=parsed["receptions"],
-                                receiving_yards=parsed["receiving_yards"],
-                                receiving_touchdowns=parsed["receiving_touchdowns"],
-                                targets=parsed["targets"],
-                                long_reception=parsed["long_reception"],
-                                yards_per_reception=parsed["yards_per_reception"]
-                            )
-                            db.add(game_log)
-                            player_logs += 1
-                            backfilled_logs += 1
-
-                        if player_logs > 0:
-                            await db.commit()
-
-                        if i % 10 == 0:
-                            print(f"[{i}/{players_added}] Backfilled {backfilled_logs} logs so far...")
-
-                        # Rate limiting - 500ms delay between players
-                        await asyncio.sleep(0.5)
-
+                        new_player = Player(**parsed)
+                        db.add(new_player)
+                        players_added += 1
                     except Exception as e:
-                        logger.error(f"Failed to backfill {player_name}: {e}")
-                        await db.rollback()
+                        logger.error(f"Failed to add player {player_data.get('longName')}: {e}")
+                        tracker.increment_metric('errors_encountered')
                         continue
 
-                print(f"✅ Backfilled {backfilled_logs} historical game logs\n")
+                await db.commit()
+                print(f"✅ Added {players_added} new players\n")
+                tracker.log_output(f"Added {players_added} new players")
+                tracker.increment_metric('players_added', players_added)
+                await tracker.complete_step(status='success', records_processed=players_added)
 
-            # Calculate duration
-            end_time = datetime.utcnow()
-            duration_seconds = int((end_time - start_time).total_seconds())
+                # STEP 3: Historical backfill (OPTIONAL)
+                backfilled_logs = 0
 
-            # Summary
-            print("=" * 60)
-            print("✅ Roster Refresh Complete")
-            print("=" * 60)
-            print()
-            print(f"Players scanned: {len(all_roster_players)}")
-            print(f"Players added: {players_added}")
-            if backfill_history:
-                print(f"Game logs backfilled: {backfilled_logs}")
-            print(f"Duration: {duration_seconds}s")
-            print()
+                if backfill_history:
+                    await tracker.start_step('backfill_history', step_order=3)
+                    tracker.log_output(f"Starting historical backfill for {players_added} players...")
+                    print(f"Starting historical backfill for {players_added} players...")
+                    print(f"(Limited to {max_backfill_weeks} most recent weeks)")
+                    print()
 
-            if players_added > 0:
-                print("Next steps:")
-                print("  1. Run weekly batch to generate predictions for new players:")
-                print("     python generate_predictions.py")
+                    # Get schedule for week mapping
+                    schedule_result = await db.execute(select(Schedule))
+                    all_schedules = schedule_result.scalars().all()
+                    game_id_to_week = {
+                        s.game_id: (s.season_year, s.week)
+                        for s in all_schedules
+                    }
+
+                    for i, player_data in enumerate(new_players, 1):
+                        player_id = player_data.get("playerID")
+                        player_name = player_data.get("longName")
+
+                        try:
+                            # Fetch game logs from API
+                            raw_logs = await client.get_games_for_player(
+                                player_id=player_id,
+                                limit=max_backfill_weeks
+                            )
+
+                            if not raw_logs:
+                                if i % 10 == 0:
+                                    print(f"[{i}/{players_added}] Backfilled {backfilled_logs} logs so far...")
+                                continue
+
+                            player_logs = 0
+
+                            for raw_log in raw_logs:
+                                parsed = parse_game_log(raw_log)
+                                game_id = parsed.get("game_id")
+
+                                # Get week info from schedule
+                                if game_id and game_id in game_id_to_week:
+                                    season_year, week = game_id_to_week[game_id]
+                                    parsed["week"] = week
+                                    parsed["season_year"] = season_year
+                                else:
+                                    continue
+
+                                # Check if log already exists
+                                existing_log = await db.execute(
+                                    select(GameLog).where(
+                                        GameLog.player_id == player_id,
+                                        GameLog.game_id == game_id
+                                    )
+                                )
+                                if existing_log.scalar_one_or_none():
+                                    continue
+
+                                # Insert game log
+                                game_log = GameLog(
+                                    player_id=parsed["player_id"],
+                                    game_id=parsed["game_id"],
+                                    season_year=parsed["season_year"],
+                                    week=parsed["week"],
+                                    team=parsed["team"],
+                                    team_id=parsed["team_id"],
+                                    receptions=parsed["receptions"],
+                                    receiving_yards=parsed["receiving_yards"],
+                                    receiving_touchdowns=parsed["receiving_touchdowns"],
+                                    targets=parsed["targets"],
+                                    long_reception=parsed["long_reception"],
+                                    yards_per_reception=parsed["yards_per_reception"]
+                                )
+                                db.add(game_log)
+                                player_logs += 1
+                                backfilled_logs += 1
+
+                            if player_logs > 0:
+                                await db.commit()
+
+                            if i % 10 == 0:
+                                print(f"[{i}/{players_added}] Backfilled {backfilled_logs} logs so far...")
+
+                            # Rate limiting - 500ms delay between players
+                            await asyncio.sleep(0.5)
+
+                        except Exception as e:
+                            logger.error(f"Failed to backfill {player_name}: {e}")
+                            await db.rollback()
+                            continue
+
+                    print(f"✅ Backfilled {backfilled_logs} historical game logs\n")
+                    tracker.log_output(f"Backfilled {backfilled_logs} historical game logs")
+                    tracker.increment_metric('game_logs_added', backfilled_logs)
+                    await tracker.complete_step(status='success', records_processed=backfilled_logs)
+
+                # Calculate duration
+                end_time = datetime.utcnow()
+                duration_seconds = int((end_time - start_time).total_seconds())
+
+                # Summary
+                print("=" * 60)
+                print("✅ Roster Refresh Complete")
+                print("=" * 60)
                 print()
+                print(f"Players scanned: {len(all_roster_players)}")
+                print(f"Players added: {players_added}")
+                if backfill_history:
+                    print(f"Game logs backfilled: {backfilled_logs}")
+                print(f"Duration: {duration_seconds}s")
+                print()
+
+                tracker.log_output(f"Roster refresh complete: {players_added} players added")
+
+                if players_added > 0:
+                    print("Next steps:")
+                    print("  1. Run weekly batch to generate predictions for new players:")
+                    print("     python generate_predictions.py")
+                    print()
 
     finally:
         await client.close()
