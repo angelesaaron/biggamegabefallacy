@@ -353,6 +353,9 @@ async def trigger_batch_update(
     """
     Trigger the weekly batch update script
     Requires admin password
+
+    Runs update_weekly.py followed by generate_predictions.py
+    (same as GitHub Actions workflow)
     """
     verify_admin_password(password)
 
@@ -360,48 +363,74 @@ async def trigger_batch_update(
         # Get the backend directory path
         backend_dir = Path(__file__).parent.parent.parent
 
-        # Look for batch update script (adjust name as needed)
-        possible_scripts = [
-            "run_batch_update.py",
-            "batch_update.py",
-            "weekly_batch.py",
-            "update_week.py"
-        ]
+        # Look for the main update script
+        update_script = backend_dir / "update_weekly.py"
+        predictions_script = backend_dir / "generate_predictions.py"
 
-        script_path = None
-        for script_name in possible_scripts:
-            path = backend_dir / script_name
-            if path.exists():
-                script_path = path
-                break
-
-        if not script_path:
+        if not update_script.exists():
             raise HTTPException(
                 status_code=404,
-                detail=f"Batch update script not found. Looked for: {', '.join(possible_scripts)}"
+                detail=f"update_weekly.py script not found at {update_script}"
             )
 
-        # Build command with optional week/year parameters
-        cmd = ["python", str(script_path)]
+        # Build command for update_weekly.py with optional week/year parameters
+        cmd = ["python", str(update_script)]
         if week is not None:
             cmd.extend(["--week", str(week)])
         if year is not None:
             cmd.extend(["--year", str(year)])
 
-        # Run the script in the background
-        process = subprocess.Popen(
+        # Set environment variables for the subprocess
+        env = os.environ.copy()
+        env['CI'] = 'true'  # Skip confirmation prompts
+
+        # Run update_weekly.py first
+        update_process = subprocess.Popen(
             cmd,
             cwd=str(backend_dir),
             stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE
+            stderr=subprocess.PIPE,
+            env=env
         )
 
-        return {
-            "message": "Batch update initiated",
-            "process_id": process.pid,
-            "status": "running",
-            "week": week,
-            "year": year
-        }
+        # Run generate_predictions.py after (if it exists)
+        # Note: This runs sequentially, but we return immediately to avoid timeout
+        if predictions_script.exists():
+            pred_cmd = ["python", str(predictions_script)]
+            if week is not None:
+                pred_cmd.extend(["--week", str(week)])
+            if year is not None:
+                pred_cmd.extend(["--year", str(year)])
+
+            # Chain the prediction script to run after update completes
+            # Using shell to run sequentially: update_weekly.py && generate_predictions.py
+            combined_cmd = f"cd {backend_dir} && {' '.join(cmd)} && {' '.join(pred_cmd)}"
+
+            process = subprocess.Popen(
+                combined_cmd,
+                shell=True,
+                cwd=str(backend_dir),
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                env=env
+            )
+
+            return {
+                "message": "Batch update and predictions initiated",
+                "process_id": process.pid,
+                "status": "running",
+                "week": week,
+                "year": year,
+                "scripts": ["update_weekly.py", "generate_predictions.py"]
+            }
+        else:
+            return {
+                "message": "Batch update initiated (predictions script not found)",
+                "process_id": update_process.pid,
+                "status": "running",
+                "week": week,
+                "year": year,
+                "scripts": ["update_weekly.py"]
+            }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to start batch update: {str(e)}")
