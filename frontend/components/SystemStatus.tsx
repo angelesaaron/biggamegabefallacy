@@ -50,7 +50,7 @@ export default function SystemStatus() {
         >
           <Tab label="Overview" />
           <Tab label="Actions" />
-          <Tab label="Batch History" />
+          <Tab label="Action History" />
         </Tabs>
       </Box>
 

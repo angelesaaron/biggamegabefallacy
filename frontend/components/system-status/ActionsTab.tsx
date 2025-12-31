@@ -226,7 +226,7 @@ export default function ActionsTab() {
           {result.message}
           {result.type === 'success' && (
             <Typography variant="caption" sx={{ display: 'block', mt: 1, color: '#9ca3af' }}>
-              Check the Batch History tab to monitor execution progress.
+              Check the Action History tab to monitor execution progress.
             </Typography>
           )}
         </Alert>
@@ -246,7 +246,7 @@ export default function ActionsTab() {
             <Box sx={{ flex: 1 }}>
               <ActionButton
                 title="Run Full Batch Update"
-                description="Update schedule, game logs, and odds for current week"
+                description="Update schedule, game logs, predictions, and odds for current week"
                 onClick={() => triggerBatchUpdate()}
                 loading={loading}
                 variant="primary"
@@ -566,7 +566,7 @@ export default function ActionsTab() {
             <Box sx={{ flex: 1 }}>
               <ActionButton
                 title="Update Specific Week"
-                description={`Run full batch for ${selectedYear} Week ${selectedWeek}`}
+                description={`Schedule, logs, predictions, and odds for ${selectedYear} Week ${selectedWeek}`}
                 onClick={() => triggerBatchUpdate(undefined, selectedWeek, selectedYear)}
                 loading={loading}
                 variant="secondary"
@@ -601,10 +601,10 @@ export default function ActionsTab() {
       >
         <AlertTitle sx={{ fontWeight: 600, color: '#93c5fd' }}>Important Notes:</AlertTitle>
         <Box component="ul" sx={{ pl: 2, m: 0, fontSize: '0.75rem', color: '#93c5fd' }}>
-          <li>Batch processes run in the background and may take several minutes</li>
-          <li>Monitor progress in the Batch History tab (auto-refreshes every 30 seconds)</li>
+          <li>Actions run in the background and may take several minutes</li>
+          <li>Monitor progress in the Action History tab (auto-refreshes every 30 seconds)</li>
           <li>Actions are rate-limited to 5 requests per minute per IP</li>
-          <li>Only one batch can run at a time to prevent conflicts</li>
+          <li>Only one action can run at a time to prevent conflicts</li>
         </Box>
       </Alert>
     </Box>

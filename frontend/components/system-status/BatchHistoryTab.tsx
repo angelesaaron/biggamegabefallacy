@@ -241,12 +241,12 @@ export default function BatchHistoryTab() {
         </CardContent>
       </Card>
 
-      {/* Batch History */}
+      {/* Action History */}
       <Card sx={{ bgcolor: 'rgba(17, 24, 39, 0.4)', backdropFilter: 'blur(8px)', border: '1px solid #1f2937' }}>
         {filteredHistory.length === 0 ? (
           <CardContent>
             <Typography sx={{ color: '#9ca3af', textAlign: 'center', py: 4 }}>
-              No batch runs found for the selected filter.
+              No actions found for the selected filter.
             </Typography>
           </CardContent>
         ) : (

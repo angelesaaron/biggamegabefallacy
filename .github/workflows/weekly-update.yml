@@ -37,11 +37,9 @@ jobs:
           NFL_SEASON_YEAR: 2025
           CI: true
         run: |
-          echo "Starting weekly update..."
+          echo "Starting full weekly update..."
+          echo "This will: update schedule, fetch game logs, generate predictions, and sync odds"
           python update_weekly.py
-
-          echo "Generating predictions (immutable mode - new players only)..."
-          python generate_predictions.py
 
           echo "Weekly update complete!"
 

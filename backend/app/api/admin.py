@@ -146,8 +146,24 @@ async def get_current_data_readiness(
     readiness = result.scalar_one_or_none()
 
     if not readiness:
+        # Return default object with zeros instead of None
         return {
-            "data_readiness": None,
+            "data_readiness": {
+                "season_year": year,
+                "week": week,
+                "season_type": normalized_season_type,
+                "schedule_complete": False,
+                "game_logs_available": False,
+                "predictions_available": False,
+                "draftkings_odds_available": False,
+                "fanduel_odds_available": False,
+                "games_count": 0,
+                "game_logs_count": 0,
+                "predictions_count": 0,
+                "draftkings_odds_count": 0,
+                "fanduel_odds_count": 0,
+                "last_updated": None
+            },
             "current_week": {"year": year, "week": week, "season_type": season_type}
         }
 
