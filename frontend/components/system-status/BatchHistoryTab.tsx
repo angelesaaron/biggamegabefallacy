@@ -57,7 +57,10 @@ interface BatchRun {
   games_processed?: number;
   game_logs_added?: number;
   predictions_generated?: number;
+  predictions_skipped?: number;
   odds_synced?: number;
+  api_calls_made?: number;
+  errors_encountered?: number;
   triggered_by?: string;
   steps?: BatchStep[];
 }
@@ -308,12 +311,61 @@ export default function BatchHistoryTab() {
 
                 {/* Expanded Step Details */}
                 <Collapse in={expandedRows.has(batch.id)} timeout="auto" unmountOnExit>
-                  {batch.steps && (
-                    <Box sx={{ bgcolor: 'rgba(31, 41, 55, 0.2)', borderTop: '1px solid #1f2937', p: 2 }}>
-                      <Typography variant="body2" sx={{ color: '#d1d5db', fontWeight: 500, mb: 2 }}>
-                        Execution Steps:
-                      </Typography>
-                      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                  <Box sx={{ bgcolor: 'rgba(31, 41, 55, 0.2)', borderTop: '1px solid #1f2937', p: 2 }}>
+                    {/* Batch Metrics Summary */}
+                    {(batch.games_processed || batch.game_logs_added || batch.predictions_generated || batch.odds_synced || batch.errors_encountered) && (
+                      <Box sx={{ mb: 3 }}>
+                        <Typography variant="body2" sx={{ color: '#d1d5db', fontWeight: 500, mb: 1.5 }}>
+                          Batch Metrics:
+                        </Typography>
+                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
+                          {batch.games_processed !== undefined && batch.games_processed > 0 && (
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                              <Typography variant="body2" sx={{ color: '#9ca3af' }}>Games:</Typography>
+                              <Typography variant="body2" sx={{ color: 'white', fontWeight: 500 }}>{batch.games_processed}</Typography>
+                            </Box>
+                          )}
+                          {batch.game_logs_added !== undefined && batch.game_logs_added > 0 && (
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                              <Typography variant="body2" sx={{ color: '#9ca3af' }}>Game Logs:</Typography>
+                              <Typography variant="body2" sx={{ color: 'white', fontWeight: 500 }}>{batch.game_logs_added}</Typography>
+                            </Box>
+                          )}
+                          {batch.predictions_generated !== undefined && batch.predictions_generated > 0 && (
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                              <Typography variant="body2" sx={{ color: '#9ca3af' }}>Predictions:</Typography>
+                              <Typography variant="body2" sx={{ color: 'white', fontWeight: 500 }}>{batch.predictions_generated}</Typography>
+                            </Box>
+                          )}
+                          {batch.odds_synced !== undefined && batch.odds_synced > 0 && (
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                              <Typography variant="body2" sx={{ color: '#9ca3af' }}>Odds:</Typography>
+                              <Typography variant="body2" sx={{ color: 'white', fontWeight: 500 }}>{batch.odds_synced}</Typography>
+                            </Box>
+                          )}
+                          {batch.api_calls_made !== undefined && batch.api_calls_made > 0 && (
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                              <Typography variant="body2" sx={{ color: '#9ca3af' }}>API Calls:</Typography>
+                              <Typography variant="body2" sx={{ color: 'white', fontWeight: 500 }}>{batch.api_calls_made}</Typography>
+                            </Box>
+                          )}
+                          {batch.errors_encountered !== undefined && batch.errors_encountered > 0 && (
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                              <Typography variant="body2" sx={{ color: '#f87171' }}>Errors:</Typography>
+                              <Typography variant="body2" sx={{ color: '#f87171', fontWeight: 500 }}>{batch.errors_encountered}</Typography>
+                            </Box>
+                          )}
+                        </Box>
+                      </Box>
+                    )}
+
+                    {/* Execution Steps */}
+                    {batch.steps && (
+                      <Box>
+                        <Typography variant="body2" sx={{ color: '#d1d5db', fontWeight: 500, mb: 2 }}>
+                          Execution Steps:
+                        </Typography>
+                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
                         {batch.steps.map((step) => (
                           <Card
                             key={step.id}
@@ -375,9 +427,10 @@ export default function BatchHistoryTab() {
                             </CardContent>
                           </Card>
                         ))}
+                        </Box>
                       </Box>
-                    </Box>
-                  )}
+                    )}
+                  </Box>
                 </Collapse>
               </Box>
             ))}
