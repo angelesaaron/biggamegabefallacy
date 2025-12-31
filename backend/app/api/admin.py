@@ -309,7 +309,8 @@ def verify_admin_password(password: str):
 @limiter.limit("5/minute")
 async def trigger_refresh_rosters(
     request: Request,
-    password: str = Body(..., embed=True)
+    password: str = Body(..., embed=True),
+    db: AsyncSession = Depends(get_db)
 ):
     """
     Trigger the refresh_rosters.py script
@@ -319,6 +320,26 @@ async def trigger_refresh_rosters(
     verify_admin_password(password)
 
     try:
+        from datetime import datetime
+
+        # Get current NFL week for batch tracking
+        season_year, week, season_type = get_current_nfl_week()
+
+        # Create BatchRun record immediately (before subprocess)
+        batch_run = BatchRun(
+            batch_type='roster_refresh',
+            batch_mode='standard',
+            season_year=season_year,
+            week=week,
+            season_type=season_type,
+            status='running',
+            started_at=datetime.utcnow(),
+            triggered_by='ui'
+        )
+        db.add(batch_run)
+        await db.commit()
+        await db.refresh(batch_run)
+
         # Get the backend directory path
         backend_dir = Path(__file__).parent.parent.parent
         script_path = backend_dir / "refresh_rosters.py"
@@ -334,18 +355,27 @@ async def trigger_refresh_rosters(
         # Set environment variables for the subprocess
         env = os.environ.copy()
         env['CI'] = 'true'  # Skip confirmation prompts
+        env['BATCH_RUN_ID'] = str(batch_run.id)  # Pass batch ID to subprocess
 
-        # Run the script in the background
-        process = subprocess.Popen(
-            [python_exec, str(script_path)],
-            cwd=str(backend_dir),
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            env=env
-        )
+        # Prepare log file paths
+        log_dir = backend_dir / "logs"
+        log_dir.mkdir(exist_ok=True)
+        stdout_log = log_dir / f"refresh_rosters_{batch_run.id}.out"
+        stderr_log = log_dir / f"refresh_rosters_{batch_run.id}.err"
+
+        # Run the script in the background with output to log files
+        with open(stdout_log, 'w') as out, open(stderr_log, 'w') as err:
+            process = subprocess.Popen(
+                [python_exec, str(script_path)],
+                cwd=str(backend_dir),
+                stdout=out,
+                stderr=err,
+                env=env
+            )
 
         return {
             "message": "Roster refresh initiated",
+            "batch_id": batch_run.id,
             "process_id": process.pid,
             "status": "running"
         }
@@ -399,15 +429,25 @@ async def trigger_backfill_complete(
         # Set environment variables for the subprocess
         env = os.environ.copy()
         env['CI'] = 'true'  # Skip confirmation prompts
+        # NOTE: backfill_complete.py creates its own BatchRun record via BatchTracker
 
-        # Run the script in the background
-        process = subprocess.Popen(
-            cmd,
-            cwd=str(backend_dir),
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            env=env
-        )
+        # Prepare log file paths (use timestamp since we don't have batch_id yet)
+        from datetime import datetime
+        log_dir = backend_dir / "logs"
+        log_dir.mkdir(exist_ok=True)
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        stdout_log = log_dir / f"backfill_complete_{timestamp}.out"
+        stderr_log = log_dir / f"backfill_complete_{timestamp}.err"
+
+        # Run the script in the background with output to log files
+        with open(stdout_log, 'w') as out, open(stderr_log, 'w') as err:
+            process = subprocess.Popen(
+                cmd,
+                cwd=str(backend_dir),
+                stdout=out,
+                stderr=err,
+                env=env
+            )
 
         if weeks:
             message = f"Complete backfill initiated for last {weeks} weeks"
@@ -422,7 +462,8 @@ async def trigger_backfill_complete(
             "status": "running",
             "weeks": weeks,
             "week": week,
-            "year": year
+            "year": year,
+            "note": "Batch record will be created by backfill_complete.py - check Action History in a few seconds"
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to start complete backfill: {str(e)}")
@@ -434,25 +475,22 @@ async def trigger_batch_update(
     request: Request,
     password: str = Body(..., embed=True),
     week: Optional[int] = Body(None),
-    year: Optional[int] = Body(None)
+    year: Optional[int] = Body(None),
+    db: AsyncSession = Depends(get_db)
 ):
     """
     Trigger the weekly batch update script
     Requires admin password
     Rate limited: 5 requests per minute per IP
 
-    Runs update_weekly.py followed by generate_predictions.py
-    (same as GitHub Actions workflow)
+    Runs update_weekly.py (which now includes predictions)
     """
     verify_admin_password(password)
 
     try:
         # Get the backend directory path
         backend_dir = Path(__file__).parent.parent.parent
-
-        # Look for the main update script
         update_script = backend_dir / "update_weekly.py"
-        predictions_script = backend_dir / "generate_predictions.py"
 
         if not update_script.exists():
             raise HTTPException(
@@ -463,7 +501,6 @@ async def trigger_batch_update(
         # Get the Python executable from the current environment (venv)
         python_exec = os.path.join(backend_dir, "venv", "bin", "python")
         if not os.path.exists(python_exec):
-            # Fallback to system python if venv doesn't exist
             python_exec = "python3"
 
         # Build command for update_weekly.py with optional week/year parameters
@@ -476,55 +513,34 @@ async def trigger_batch_update(
         # Set environment variables for the subprocess
         env = os.environ.copy()
         env['CI'] = 'true'  # Skip confirmation prompts
+        # NOTE: update_weekly.py creates its own BatchRun record via BatchTracker
 
-        # Run update_weekly.py first
-        update_process = subprocess.Popen(
-            cmd,
-            cwd=str(backend_dir),
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            env=env
-        )
+        # Prepare log file paths (use timestamp since we don't have batch_id yet)
+        from datetime import datetime
+        log_dir = backend_dir / "logs"
+        log_dir.mkdir(exist_ok=True)
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        stdout_log = log_dir / f"update_weekly_{timestamp}.out"
+        stderr_log = log_dir / f"update_weekly_{timestamp}.err"
 
-        # Run generate_predictions.py after (if it exists)
-        # Note: This runs sequentially, but we return immediately to avoid timeout
-        if predictions_script.exists():
-            pred_cmd = [python_exec, str(predictions_script)]
-            if week is not None:
-                pred_cmd.extend(["--week", str(week)])
-            if year is not None:
-                pred_cmd.extend(["--year", str(year)])
-
-            # Chain the prediction script to run after update completes
-            # Using shell to run sequentially: update_weekly.py && generate_predictions.py
-            combined_cmd = f"cd {backend_dir} && {' '.join(cmd)} && {' '.join(pred_cmd)}"
-
+        # Run update_weekly.py with output to log files
+        with open(stdout_log, 'w') as out, open(stderr_log, 'w') as err:
             process = subprocess.Popen(
-                combined_cmd,
-                shell=True,
+                cmd,
                 cwd=str(backend_dir),
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
+                stdout=out,
+                stderr=err,
                 env=env
             )
 
-            return {
-                "message": "Batch update and predictions initiated",
-                "process_id": process.pid,
-                "status": "running",
-                "week": week,
-                "year": year,
-                "scripts": ["update_weekly.py", "generate_predictions.py"]
-            }
-        else:
-            return {
-                "message": "Batch update initiated (predictions script not found)",
-                "process_id": update_process.pid,
-                "status": "running",
-                "week": week,
-                "year": year,
-                "scripts": ["update_weekly.py"]
-            }
+        return {
+            "message": "Weekly batch update initiated (includes schedule, game logs, predictions, and odds)",
+            "process_id": process.pid,
+            "status": "running",
+            "week": week,
+            "year": year,
+            "note": "Batch record will be created by update_weekly.py - check Action History in a few seconds"
+        }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to start batch update: {str(e)}")
 
