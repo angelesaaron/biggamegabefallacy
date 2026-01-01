@@ -67,7 +67,7 @@ export function PredictionSummary({ prediction }: PredictionSummaryProps) {
       <div className="text-center mb-6 max-md:mb-4">
         {prediction.week && prediction.year && (
           <div className="mb-2 max-md:mb-1">
-            <span className="text-xs text-gray-500 px-2 py-0.5 bg-gray-800/50 rounded-md">
+            <span className="text-xs text-gray-500">
               {prediction.year} Week {prediction.week}
             </span>
           </div>
