@@ -75,12 +75,16 @@ class BatchTracker:
 
         # Update data readiness after batch completes
         if self.batch_run.status in ['success', 'partial']:
-            await update_data_readiness(
-                self.db,
-                self.batch_run.season_year,
-                self.batch_run.week,
-                self.batch_run.season_type
-            )
+            try:
+                await update_data_readiness(
+                    self.db,
+                    self.batch_run.season_year,
+                    self.batch_run.week,
+                    self.batch_run.season_type
+                )
+            except Exception as e:
+                logger.error(f"Failed to update data readiness: {str(e)}")
+                # Don't fail the batch if data readiness update fails
 
         return False  # Don't suppress exceptions
 
