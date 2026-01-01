@@ -269,7 +269,7 @@ async def update_data_readiness(
     stmt = insert(DataReadiness).values(
         season_year=season_year,
         week=week,
-        season_type=season_type,
+        season_type=db_season_type,
         schedule_complete=schedule_complete,
         game_logs_available=game_logs_count > 0,
         predictions_available=predictions_count > 0,

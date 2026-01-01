@@ -65,6 +65,7 @@ class Settings(BaseSettings):
     class Config:
         env_file = ".env"
         case_sensitive = True
+        extra = "ignore"  # Ignore MODEL_PATH in .env since it's defined as a property
 
 
 settings = Settings()
