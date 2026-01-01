@@ -67,8 +67,22 @@ async def sync_schedule():
                             print(f"  Week {week:2d}: No games found")
                             continue
 
+                        # Normalize season type to database format
+                        season_type_map = {
+                            'Regular Season': 'reg',
+                            'Post Season': 'post',
+                            'Pre Season': 'pre',
+                            'reg': 'reg',
+                            'post': 'post',
+                            'pre': 'pre'
+                        }
+
                         # Store in database
                         for game in games:
+                            # Normalize season_type
+                            raw_season_type = game.get("seasonType", "Regular Season")
+                            normalized_season_type = season_type_map.get(raw_season_type, 'reg')
+
                             # Check if exists
                             result = await db.execute(
                                 select(Schedule).where(Schedule.game_id == game.get("gameID"))
@@ -78,6 +92,7 @@ async def sync_schedule():
                             if existing:
                                 # Update
                                 existing.week = week
+                                existing.season_type = normalized_season_type
                                 existing.game_status = game.get("gameStatus")
                             else:
                                 # Create new
@@ -85,7 +100,7 @@ async def sync_schedule():
                                     game_id=game.get("gameID"),
                                     season_year=season,
                                     week=week,
-                                    season_type=game.get("seasonType", "Regular Season"),
+                                    season_type=normalized_season_type,
                                     home_team=game.get("home"),
                                     away_team=game.get("away"),
                                     home_team_id=game.get("teamIDHome"),
