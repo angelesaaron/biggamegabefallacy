@@ -272,7 +272,7 @@ export default function WeeklyValue({ onPlayerClick }: WeeklyValueProps) {
         {/* Filters - only show when we have data */}
         {!loading && !error && predictions.length > 0 && (
           <Card sx={{ mb: 3, bgcolor: 'rgba(17, 24, 39, 0.4)', backdropFilter: 'blur(8px)', border: '1px solid #1f2937', borderRadius: 3, p: 2.5 }}>
-            <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} alignItems={{ xs: 'stretch', md: 'center' }}>
+            <Stack direction="row" spacing={2} alignItems="center" flexWrap="wrap">
               <ToggleButtonGroup
                 value={selectedSportsbook}
                 exclusive
@@ -281,6 +281,7 @@ export default function WeeklyValue({ onPlayerClick }: WeeklyValueProps) {
                   bgcolor: 'rgba(17, 24, 39, 0.5)',
                   border: '1px solid #374151',
                   borderRadius: 2,
+                  width: 'fit-content',
                   '& .MuiToggleButton-root': {
                     border: 'none',
                     px: 2,
