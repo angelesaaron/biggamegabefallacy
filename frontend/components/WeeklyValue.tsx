@@ -271,7 +271,7 @@ export default function WeeklyValue({ onPlayerClick }: WeeklyValueProps) {
 
         {/* Filters - only show when we have data */}
         {!loading && !error && predictions.length > 0 && (
-          <Card sx={{ mb: 3, bgcolor: 'rgba(17, 24, 39, 0.4)', backdropFilter: 'blur(8px)', border: '1px solid #1f2937', borderRadius: 3, p: 3 }}>
+          <Card sx={{ mb: 3, bgcolor: 'rgba(17, 24, 39, 0.4)', backdropFilter: 'blur(8px)', border: '1px solid #1f2937', borderRadius: 3, p: 2.5 }}>
             <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} alignItems={{ xs: 'stretch', md: 'center' }}>
               <ToggleButtonGroup
                 value={selectedSportsbook}
@@ -279,27 +279,44 @@ export default function WeeklyValue({ onPlayerClick }: WeeklyValueProps) {
                 onChange={(_e, newValue) => newValue && setSelectedSportsbook(newValue)}
                 sx={{
                   bgcolor: 'rgba(17, 24, 39, 0.5)',
+                  border: '1px solid #374151',
+                  borderRadius: 2,
                   '& .MuiToggleButton-root': {
-                    color: '#9ca3af',
                     border: 'none',
-                    px: { xs: 2, md: 3 },
+                    px: 2,
                     py: 1,
-                    fontSize: { xs: '0.875rem', md: '1rem' },
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 1,
                     '&.Mui-selected': {
-                      bgcolor: '#9333ea',
-                      color: '#fff',
+                      bgcolor: 'rgba(147, 51, 234, 0.2)',
+                      borderBottom: '2px solid #9333ea',
                       '&:hover': {
-                        bgcolor: '#7e22ce',
+                        bgcolor: 'rgba(147, 51, 234, 0.3)',
                       }
                     },
                     '&:hover': {
-                      color: '#fff',
+                      bgcolor: 'rgba(147, 51, 234, 0.1)',
                     }
                   }
                 }}
               >
-                <ToggleButton value="draftkings">DraftKings</ToggleButton>
-                <ToggleButton value="fanduel">FanDuel</ToggleButton>
+                <ToggleButton value="draftkings">
+                  <Box
+                    component="img"
+                    src="/dk-logo-small.png"
+                    alt="DraftKings"
+                    sx={{ height: 20, width: 'auto', objectFit: 'contain' }}
+                  />
+                </ToggleButton>
+                <ToggleButton value="fanduel">
+                  <Box
+                    component="img"
+                    src="/fd-logo-small.svg"
+                    alt="FanDuel"
+                    sx={{ height: 20, width: 'auto', objectFit: 'contain' }}
+                  />
+                </ToggleButton>
               </ToggleButtonGroup>
 
               <FormControlLabel
@@ -315,7 +332,7 @@ export default function WeeklyValue({ onPlayerClick }: WeeklyValueProps) {
                     }}
                   />
                 }
-                label={<Typography variant="body2" sx={{ color: '#9ca3af', fontSize: { xs: '0.875rem', md: '1rem' } }}>Show only +EV plays</Typography>}
+                label={<Typography variant="body2" sx={{ color: '#9ca3af', fontSize: '0.875rem' }}>+EV only</Typography>}
               />
             </Stack>
           </Card>

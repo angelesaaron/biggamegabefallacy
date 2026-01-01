@@ -5,6 +5,7 @@ interface Prediction {
   modelProbability: number;
   modelImpliedOdds: string;
   sportsbookOdds: string;
+  sportsbook?: 'draftkings' | 'fanduel';
   edge: 'positive' | 'neutral' | 'negative';
   edgeValue: number;
   week?: number;
@@ -105,7 +106,16 @@ export function PredictionSummary({ prediction }: PredictionSummaryProps) {
         </div>
         <div className="text-center">
           <div className="text-sm max-md:text-xs text-gray-500 mb-2 max-md:mb-1">Sportsbook Odds</div>
-          <div className="text-2xl max-md:text-lg text-white">{prediction.sportsbookOdds}</div>
+          <div className="flex items-center justify-center gap-2">
+            <div className="text-2xl max-md:text-lg text-white">{prediction.sportsbookOdds}</div>
+            {prediction.sportsbookOdds !== 'N/A' && prediction.sportsbook && (
+              <img
+                src={prediction.sportsbook === 'draftkings' ? '/dk-logo-small.png' : '/fd-logo-small.svg'}
+                alt={prediction.sportsbook === 'draftkings' ? 'DraftKings' : 'FanDuel'}
+                className="h-4 max-md:h-3 w-auto object-contain opacity-70"
+              />
+            )}
+          </div>
         </div>
       </div>
 

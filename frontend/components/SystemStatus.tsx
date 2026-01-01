@@ -15,42 +15,42 @@ export default function SystemStatus() {
 
   return (
     <Container maxWidth="xl" sx={{ py: 4 }}>
-      <Box sx={{ mb: 4 }}>
-        <Typography variant="h4" sx={{ color: 'white', mb: 1, fontWeight: 600 }}>
-          System Status & Admin
-        </Typography>
-        <Typography variant="body2" sx={{ color: '#9ca3af' }}>
-          Data readiness, batch execution, and admin controls
+      <Box sx={{ mb: 3 }}>
+        <Typography variant="h5" sx={{ color: 'white', fontWeight: 500 }}>
+          System Status
         </Typography>
       </Box>
 
       {/* Tabs */}
-      <Box sx={{ borderBottom: 1, borderColor: '#1f2937', mb: 4 }}>
+      <Box sx={{ borderBottom: 1, borderColor: '#1f2937', mb: 3 }}>
         <Tabs
           value={activeTab}
           onChange={handleTabChange}
           sx={{
+            minHeight: 44,
             '& .MuiTabs-indicator': {
               backgroundColor: '#9333ea',
+              height: 2,
             },
             '& .MuiTab-root': {
               color: '#9ca3af',
               textTransform: 'none',
               fontSize: '0.875rem',
               fontWeight: 500,
-              minHeight: 48,
+              minHeight: 44,
+              px: 2,
               '&.Mui-selected': {
                 color: '#9333ea',
               },
               '&:hover': {
-                color: '#d8b4fe',
+                color: '#a855f7',
               }
             }
           }}
         >
           <Tab label="Overview" />
           <Tab label="Actions" />
-          <Tab label="Action History" />
+          <Tab label="History" />
         </Tabs>
       </Box>
 

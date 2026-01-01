@@ -171,32 +171,36 @@ export default function OverviewTab() {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
       {/* Current Week Status Card */}
-      <Card sx={{ bgcolor: 'rgba(17, 24, 39, 0.4)', backdropFilter: 'blur(8px)', border: '1px solid #1f2937' }}>
+      <Card sx={{ bgcolor: 'rgba(17, 24, 39, 0.4)', backdropFilter: 'blur(8px)', border: '1px solid #1f2937', borderRadius: 3 }}>
         <CardContent>
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 3 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2.5 }}>
             <Box>
-              <Typography variant="h4" sx={{ color: 'white', fontWeight: 600 }}>
+              <Typography variant="h5" sx={{ color: 'white', fontWeight: 500 }}>
                 {currentWeek && `${currentWeek.year} Week ${currentWeek.week}`}
                 {currentWeek?.season_type === 'post' && (
                   <Chip
                     label="Playoffs"
                     size="small"
-                    sx={{ ml: 2, bgcolor: '#eab308', color: '#000', fontWeight: 600 }}
+                    sx={{ ml: 1.5, bgcolor: '#eab308', color: '#000', fontWeight: 600, height: 24 }}
                   />
                 )}
               </Typography>
-              <Typography variant="body2" sx={{ color: '#9ca3af', mt: 0.5 }}>
+              <Typography variant="body2" sx={{ color: '#9ca3af', mt: 0.25, fontSize: '0.875rem' }}>
                 Current NFL Week
               </Typography>
             </Box>
             <Box sx={{ textAlign: 'right' }}>
               {isHealthy && (
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, color: '#10b981' }}>
-                  <CheckCircle sx={{ fontSize: 32 }} />
-                  <Typography variant="h5" sx={{ fontWeight: 700 }}>
-                    READY
-                  </Typography>
-                </Box>
+                <Chip
+                  label="READY"
+                  sx={{
+                    bgcolor: 'rgba(16, 185, 129, 0.15)',
+                    color: '#10b981',
+                    fontWeight: 600,
+                    fontSize: '0.75rem',
+                    border: '1px solid rgba(16, 185, 129, 0.3)'
+                  }}
+                />
               )}
             </Box>
           </Box>
@@ -255,39 +259,41 @@ export default function OverviewTab() {
 
       {/* Latest Batch Run */}
       {latestBatch && (
-        <Card sx={{ bgcolor: 'rgba(17, 24, 39, 0.4)', backdropFilter: 'blur(8px)', border: '1px solid #1f2937' }}>
+        <Card sx={{ bgcolor: 'rgba(17, 24, 39, 0.4)', backdropFilter: 'blur(8px)', border: '1px solid #1f2937', borderRadius: 3 }}>
           <CardContent>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 3 }}>
-              <TrendingUp sx={{ color: '#9333ea' }} />
-              <Typography variant="h6" sx={{ color: 'white', fontWeight: 600 }}>
-                Latest Batch Run
-              </Typography>
-            </Box>
+            <Typography variant="body1" sx={{ color: 'white', fontWeight: 500, mb: 2 }}>
+              Latest Batch Run
+            </Typography>
 
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
               <InfoRow label="Status">
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-                  {getStatusIcon(latestBatch.status)}
-                  <Typography sx={{ color: getStatusColor(latestBatch.status), fontWeight: 600 }}>
-                    {latestBatch.status.toUpperCase()}
-                  </Typography>
-                </Box>
+                <Chip
+                  label={latestBatch.status.toUpperCase()}
+                  size="small"
+                  sx={{
+                    bgcolor: `${getStatusColor(latestBatch.status)}20`,
+                    color: getStatusColor(latestBatch.status),
+                    fontWeight: 600,
+                    fontSize: '0.75rem',
+                    border: `1px solid ${getStatusColor(latestBatch.status)}40`
+                  }}
+                />
               </InfoRow>
 
               <InfoRow label="Type">
-                <Typography sx={{ color: 'white' }}>
+                <Typography sx={{ color: 'white', fontSize: '0.875rem' }}>
                   {latestBatch.batch_type.replace('_', ' ')}
                 </Typography>
               </InfoRow>
 
               {latestBatch.batch_mode && (
                 <InfoRow label="Mode">
-                  <Typography sx={{ color: 'white' }}>{latestBatch.batch_mode}</Typography>
+                  <Typography sx={{ color: 'white', fontSize: '0.875rem' }}>{latestBatch.batch_mode}</Typography>
                 </InfoRow>
               )}
 
               <InfoRow label="Week">
-                <Typography sx={{ color: 'white' }}>
+                <Typography sx={{ color: 'white', fontSize: '0.875rem' }}>
                   {latestBatch.season_year} Week {latestBatch.week}
                 </Typography>
               </InfoRow>
@@ -299,38 +305,35 @@ export default function OverviewTab() {
               </InfoRow>
 
               <InfoRow label="Duration">
-                <Typography sx={{ color: 'white' }}>{formatDuration(latestBatch.duration_seconds)}</Typography>
+                <Typography sx={{ color: 'white', fontSize: '0.875rem' }}>{formatDuration(latestBatch.duration_seconds)}</Typography>
               </InfoRow>
 
               {/* Metrics */}
               {(latestBatch.games_processed || latestBatch.predictions_generated) && (
-                <Box sx={{ borderTop: '1px solid #374151', pt: 2, mt: 1 }}>
-                  <Typography variant="body2" sx={{ color: '#9ca3af', mb: 1.5 }}>
-                    Metrics
-                  </Typography>
-                  <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', fontSize: '0.875rem' }}>
-                    {latestBatch.games_processed && (
-                      <Box sx={{ flex: '1 1 calc(50% - 8px)' }}>
-                        <Typography component="span" sx={{ color: '#9ca3af' }}>Games: </Typography>
-                        <Typography component="span" sx={{ color: 'white' }}>{latestBatch.games_processed}</Typography>
+                <Box sx={{ borderTop: '1px solid #374151', pt: 1.5, mt: 0.5 }}>
+                  <Box sx={{ display: 'flex', gap: 3, flexWrap: 'wrap', fontSize: '0.875rem' }}>
+                    {latestBatch.games_processed !== undefined && latestBatch.games_processed > 0 && (
+                      <Box>
+                        <Typography component="span" sx={{ color: '#9ca3af', fontSize: '0.75rem' }}>Games </Typography>
+                        <Typography component="span" sx={{ color: 'white', fontWeight: 500 }}>{latestBatch.games_processed}</Typography>
                       </Box>
                     )}
-                    {latestBatch.game_logs_added && (
-                      <Box sx={{ flex: '1 1 calc(50% - 8px)' }}>
-                        <Typography component="span" sx={{ color: '#9ca3af' }}>Logs Added: </Typography>
-                        <Typography component="span" sx={{ color: 'white' }}>{latestBatch.game_logs_added}</Typography>
+                    {latestBatch.game_logs_added !== undefined && latestBatch.game_logs_added > 0 && (
+                      <Box>
+                        <Typography component="span" sx={{ color: '#9ca3af', fontSize: '0.75rem' }}>Logs </Typography>
+                        <Typography component="span" sx={{ color: 'white', fontWeight: 500 }}>{latestBatch.game_logs_added}</Typography>
                       </Box>
                     )}
-                    {latestBatch.predictions_generated && (
-                      <Box sx={{ flex: '1 1 calc(50% - 8px)' }}>
-                        <Typography component="span" sx={{ color: '#9ca3af' }}>Predictions: </Typography>
-                        <Typography component="span" sx={{ color: 'white' }}>{latestBatch.predictions_generated}</Typography>
+                    {latestBatch.predictions_generated !== undefined && latestBatch.predictions_generated > 0 && (
+                      <Box>
+                        <Typography component="span" sx={{ color: '#9ca3af', fontSize: '0.75rem' }}>Predictions </Typography>
+                        <Typography component="span" sx={{ color: 'white', fontWeight: 500 }}>{latestBatch.predictions_generated}</Typography>
                       </Box>
                     )}
-                    {latestBatch.odds_synced && (
-                      <Box sx={{ flex: '1 1 calc(50% - 8px)' }}>
-                        <Typography component="span" sx={{ color: '#9ca3af' }}>Odds: </Typography>
-                        <Typography component="span" sx={{ color: 'white' }}>{latestBatch.odds_synced}</Typography>
+                    {latestBatch.odds_synced !== undefined && latestBatch.odds_synced > 0 && (
+                      <Box>
+                        <Typography component="span" sx={{ color: '#9ca3af', fontSize: '0.75rem' }}>Odds </Typography>
+                        <Typography component="span" sx={{ color: 'white', fontWeight: 500 }}>{latestBatch.odds_synced}</Typography>
                       </Box>
                     )}
                   </Box>
@@ -339,15 +342,12 @@ export default function OverviewTab() {
 
               {/* Warnings */}
               {latestBatch.warnings && latestBatch.warnings.length > 0 && (
-                <Box sx={{ borderTop: '1px solid #374151', pt: 2, mt: 1 }}>
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.5 }}>
-                    <Warning sx={{ color: '#eab308', fontSize: 18 }} />
-                    <Typography variant="body2" sx={{ color: '#eab308', fontWeight: 500 }}>
-                      Warnings
-                    </Typography>
-                  </Box>
+                <Box sx={{ borderTop: '1px solid #374151', pt: 1.5, mt: 0.5 }}>
+                  <Typography variant="caption" sx={{ color: '#eab308', fontWeight: 500, display: 'block', mb: 1 }}>
+                    Warnings
+                  </Typography>
                   {latestBatch.warnings.map((warning, idx) => (
-                    <Typography key={idx} variant="body2" sx={{ color: '#9ca3af', mb: 0.5 }}>
+                    <Typography key={idx} variant="caption" sx={{ color: '#9ca3af', mb: 0.5, display: 'block', fontSize: '0.75rem' }}>
                       <Typography component="span" sx={{ color: '#6b7280' }}>
                         [{warning.step}]
                       </Typography>{' '}
@@ -359,14 +359,11 @@ export default function OverviewTab() {
 
               {/* Error */}
               {latestBatch.error_message && (
-                <Box sx={{ borderTop: '1px solid #374151', pt: 2, mt: 1 }}>
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.5 }}>
-                    <Cancel sx={{ color: '#ef4444', fontSize: 18 }} />
-                    <Typography variant="body2" sx={{ color: '#ef4444', fontWeight: 500 }}>
-                      Error
-                    </Typography>
-                  </Box>
-                  <Typography variant="body2" sx={{ color: '#9ca3af' }}>
+                <Box sx={{ borderTop: '1px solid #374151', pt: 1.5, mt: 0.5 }}>
+                  <Typography variant="caption" sx={{ color: '#ef4444', fontWeight: 500, display: 'block', mb: 1 }}>
+                    Error
+                  </Typography>
+                  <Typography variant="caption" sx={{ color: '#9ca3af', fontSize: '0.75rem' }}>
                     {latestBatch.error_message}
                   </Typography>
                 </Box>
@@ -381,26 +378,22 @@ export default function OverviewTab() {
 
 function DataIndicator({ label, available, count, subtitle }: { label: string; available: boolean; count: number; subtitle?: string }) {
   return (
-    <Card sx={{ bgcolor: 'rgba(31, 41, 55, 0.4)', border: '1px solid #374151' }}>
-      <CardContent sx={{ p: 2, '&:last-child': { pb: 2 } }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
-          {available ? (
-            <CheckCircle sx={{ color: '#10b981', fontSize: 16 }} />
-          ) : (
-            <Cancel sx={{ color: '#4b5563', fontSize: 16 }} />
-          )}
-          <Box sx={{ flex: 1 }}>
-            <Typography variant="caption" sx={{ color: '#9ca3af', display: 'block' }}>
-              {label}
-            </Typography>
-            {subtitle && (
-              <Typography variant="caption" sx={{ color: '#6b7280', fontSize: '0.65rem', fontStyle: 'italic' }}>
-                {subtitle}
-              </Typography>
-            )}
-          </Box>
+    <Card sx={{ bgcolor: 'rgba(31, 41, 55, 0.4)', border: '1px solid #374151', borderRadius: 2 }}>
+      <CardContent sx={{ p: 1.75, '&:last-child': { pb: 1.75 } }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 0.75 }}>
+          <Typography variant="caption" sx={{ color: '#9ca3af', fontSize: '0.75rem' }}>
+            {label}
+          </Typography>
+          <Box
+            sx={{
+              width: 6,
+              height: 6,
+              borderRadius: '50%',
+              bgcolor: available ? '#10b981' : '#4b5563'
+            }}
+          />
         </Box>
-        <Typography variant="h5" sx={{ color: 'white', fontWeight: 700 }}>
+        <Typography variant="h6" sx={{ color: 'white', fontWeight: 600 }}>
           {count}
         </Typography>
       </CardContent>
@@ -411,7 +404,7 @@ function DataIndicator({ label, available, count, subtitle }: { label: string; a
 function InfoRow({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-      <Typography sx={{ color: '#9ca3af' }}>{label}</Typography>
+      <Typography sx={{ color: '#9ca3af', fontSize: '0.875rem' }}>{label}</Typography>
       {children}
     </Box>
   );
