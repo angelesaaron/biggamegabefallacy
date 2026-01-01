@@ -80,11 +80,16 @@ export function PlayerModel({ initialPlayerId }: PlayerModelProps) {
         }, []);
 
         setPlayers(uniquePlayers);
-        // Set initial player: use initialPlayerId if provided, otherwise first player
+        // Set initial player: use initialPlayerId if provided, otherwise Gabe Davis, otherwise first player
         if (initialPlayerId && uniquePlayers.find((p: Player) => p.id === initialPlayerId)) {
           setSelectedPlayerId(initialPlayerId);
-        } else if (uniquePlayers.length > 0) {
-          setSelectedPlayerId(uniquePlayers[0].id);
+        } else {
+          const gabeDavis = uniquePlayers.find((p: Player) => p.name === 'Gabe Davis');
+          if (gabeDavis) {
+            setSelectedPlayerId(gabeDavis.id);
+          } else if (uniquePlayers.length > 0) {
+            setSelectedPlayerId(uniquePlayers[0].id);
+          }
         }
         setLoading(false);
       } catch (err) {

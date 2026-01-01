@@ -33,8 +33,6 @@ export function PlayerHeader({ player }: PlayerHeaderProps) {
             <span>{player.team}</span>
             <span>•</span>
             <span>{player.position}</span>
-            <span>•</span>
-            <span>#{player.jersey}</span>
           </div>
 
           {/* Quick Stats */}
