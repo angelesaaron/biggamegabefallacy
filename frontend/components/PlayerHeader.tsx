@@ -1,3 +1,5 @@
+import { Box, Avatar, Typography, Card, useTheme, useMediaQuery } from '@mui/material';
+
 interface Player {
   id: string;
   name: string;
@@ -16,46 +18,169 @@ interface PlayerHeaderProps {
 }
 
 export function PlayerHeader({ player }: PlayerHeaderProps) {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
   return (
-    <div className="bg-gray-900/40 backdrop-blur-sm border border-gray-800 rounded-2xl p-6 max-md:p-4">
-      <div className="flex items-start gap-6 max-md:flex-col max-md:items-center max-md:gap-4">
+    <Card
+      sx={{
+        bgcolor: 'rgba(17, 24, 39, 0.4)',
+        backdropFilter: 'blur(8px)',
+        border: '1px solid #1f2937',
+        borderRadius: 3,
+        p: { xs: 2, md: 3 },
+      }}
+    >
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'flex-start',
+          gap: { xs: 2, md: 3 },
+          flexDirection: { xs: 'column', md: 'row' },
+          ...(isMobile && {
+            alignItems: 'center',
+          }),
+        }}
+      >
         {/* Player Image */}
-        <img
+        <Avatar
           src={player.imageUrl}
           alt={player.name}
-          className="w-24 h-24 max-md:w-20 max-md:h-20 rounded-full object-cover border-2 border-purple-600"
+          sx={{
+            width: { xs: 80, md: 96 },
+            height: { xs: 80, md: 96 },
+            border: '2px solid #9333ea',
+            flexShrink: 0,
+          }}
         />
 
         {/* Player Info */}
-        <div className="flex-1 max-md:text-center">
-          <h2 className="text-3xl max-md:text-2xl text-white mb-2">{player.name}</h2>
-          <div className="flex items-center gap-4 max-md:justify-center max-md:gap-3 text-gray-400 max-md:text-sm mb-4">
-            <span>{player.team}</span>
-            <span>•</span>
-            <span>{player.position}</span>
-          </div>
+        <Box
+          sx={{
+            flex: 1,
+            width: '100%',
+            ...(isMobile && {
+              textAlign: 'center',
+            }),
+          }}
+        >
+          <Typography
+            variant={isMobile ? 'h5' : 'h4'}
+            sx={{
+              color: '#fff',
+              mb: 1,
+              fontWeight: 500,
+            }}
+          >
+            {player.name}
+          </Typography>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: { xs: 1.5, md: 2 },
+              color: '#9ca3af',
+              fontSize: { xs: '0.875rem', md: '1rem' },
+              mb: { xs: 2, md: 2 },
+              ...(isMobile && {
+                justifyContent: 'center',
+              }),
+            }}
+          >
+            <Typography variant="body2" sx={{ color: '#9ca3af' }}>
+              {player.team}
+            </Typography>
+            <Typography variant="body2" sx={{ color: '#9ca3af' }}>
+              •
+            </Typography>
+            <Typography variant="body2" sx={{ color: '#9ca3af' }}>
+              {player.position}
+            </Typography>
+          </Box>
 
           {/* Quick Stats */}
-          <div className="grid grid-cols-4 gap-6 max-md:grid-cols-2 max-md:gap-4">
-            <div>
-              <div className="text-2xl max-md:text-xl text-white">{player.tdsThisSeason}</div>
-              <div className="text-sm max-md:text-xs text-gray-500">TDs This Season</div>
-            </div>
-            <div>
-              <div className="text-2xl max-md:text-xl text-white">{player.gamesPlayed}</div>
-              <div className="text-sm max-md:text-xs text-gray-500">Games Played</div>
-            </div>
-            <div>
-              <div className="text-2xl max-md:text-xl text-white">{player.targets}</div>
-              <div className="text-sm max-md:text-xs text-gray-500">Targets</div>
-            </div>
-            <div>
-              <div className="text-2xl max-md:text-xl text-white">{player.tdRate}</div>
-              <div className="text-sm max-md:text-xs text-gray-500">TD Rate</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+          <Box
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: { xs: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' },
+              gap: { xs: 2, md: 3 },
+            }}
+          >
+            <Box>
+              <Typography
+                variant={isMobile ? 'h6' : 'h5'}
+                sx={{ color: '#fff', fontWeight: 600 }}
+              >
+                {player.tdsThisSeason}
+              </Typography>
+              <Typography
+                variant="caption"
+                sx={{
+                  color: '#6b7280',
+                  display: 'block',
+                  fontSize: { xs: '0.7rem', md: '0.875rem' },
+                }}
+              >
+                TDs This Season
+              </Typography>
+            </Box>
+            <Box>
+              <Typography
+                variant={isMobile ? 'h6' : 'h5'}
+                sx={{ color: '#fff', fontWeight: 600 }}
+              >
+                {player.gamesPlayed}
+              </Typography>
+              <Typography
+                variant="caption"
+                sx={{
+                  color: '#6b7280',
+                  display: 'block',
+                  fontSize: { xs: '0.7rem', md: '0.875rem' },
+                }}
+              >
+                Games Played
+              </Typography>
+            </Box>
+            <Box>
+              <Typography
+                variant={isMobile ? 'h6' : 'h5'}
+                sx={{ color: '#fff', fontWeight: 600 }}
+              >
+                {player.targets}
+              </Typography>
+              <Typography
+                variant="caption"
+                sx={{
+                  color: '#6b7280',
+                  display: 'block',
+                  fontSize: { xs: '0.7rem', md: '0.875rem' },
+                }}
+              >
+                Targets
+              </Typography>
+            </Box>
+            <Box>
+              <Typography
+                variant={isMobile ? 'h6' : 'h5'}
+                sx={{ color: '#fff', fontWeight: 600 }}
+              >
+                {player.tdRate}
+              </Typography>
+              <Typography
+                variant="caption"
+                sx={{
+                  color: '#6b7280',
+                  display: 'block',
+                  fontSize: { xs: '0.7rem', md: '0.875rem' },
+                }}
+              >
+                TD Rate
+              </Typography>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+    </Card>
   );
 }
