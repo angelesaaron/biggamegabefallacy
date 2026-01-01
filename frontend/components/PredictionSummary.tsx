@@ -65,14 +65,14 @@ export function PredictionSummary({ prediction }: PredictionSummaryProps) {
   return (
     <div className={`border rounded-2xl p-8 max-md:p-4 ${getEdgeBg()}`}>
       <div className="text-center mb-6 max-md:mb-4">
-        <div className="flex items-center justify-center gap-2 mb-3 max-md:mb-2">
-          <h3 className="text-gray-400 max-md:text-sm">Model TD Probability</h3>
-          {prediction.week && prediction.year && (
+        {prediction.week && prediction.year && (
+          <div className="mb-2 max-md:mb-1">
             <span className="text-xs text-gray-500 px-2 py-0.5 bg-gray-800/50 rounded-md">
               {prediction.year} Week {prediction.week}
             </span>
-          )}
-        </div>
+          </div>
+        )}
+        <h3 className="text-gray-400 max-md:text-sm mb-3 max-md:mb-2">Model TD Probability</h3>
         <div className="text-7xl max-md:text-5xl text-white mb-2">{prediction.modelProbability}%</div>
         <div className="text-xl max-md:text-base text-gray-400">Implied Odds: {prediction.modelImpliedOdds}</div>
       </div>
