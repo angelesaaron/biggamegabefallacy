@@ -23,10 +23,12 @@ export function PlayerSelector({ players, selectedPlayerId, onSelectPlayer }: Pl
 
   const selectedPlayer = players.find(p => p.id === selectedPlayerId);
 
-  const filteredPlayers = players.filter(player =>
-    player.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    player.team.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredPlayers = players
+    .filter(player =>
+      player.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      player.team.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+    .sort((a, b) => a.name.localeCompare(b.name));
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -61,7 +63,7 @@ export function PlayerSelector({ players, selectedPlayerId, onSelectPlayer }: Pl
             <div className="text-left">
               <div className="text-white">{selectedPlayer.name}</div>
               <div className="text-sm text-gray-400">
-                {selectedPlayer.team} • {selectedPlayer.position} • #{selectedPlayer.jersey}
+                {selectedPlayer.team} • {selectedPlayer.position}
               </div>
             </div>
           </div>
@@ -99,7 +101,7 @@ export function PlayerSelector({ players, selectedPlayerId, onSelectPlayer }: Pl
                 <div className="text-left flex-1">
                   <div className="text-white">{player.name}</div>
                   <div className="text-sm text-gray-400">
-                    {player.team} • {player.position} • #{player.jersey}
+                    {player.team} • {player.position}
                   </div>
                 </div>
               </button>
