@@ -138,7 +138,11 @@ export function PlayerModel({ initialPlayerId }: PlayerModelProps) {
         const modelOdds = parseFloat(predData.model_odds);
         const modelOddsStr = modelOdds > 0 ? `+${Math.round(modelOdds)}` : `${Math.round(modelOdds)}`;
 
-        const sbOdds = oddsData?.sportsbook_odds?.draftkings;
+        // Try DraftKings first, then FanDuel
+        const dkOdds = oddsData?.sportsbook_odds?.draftkings;
+        const fdOdds = oddsData?.sportsbook_odds?.fanduel;
+        const sbOdds = dkOdds || fdOdds;
+        const sportsbook = dkOdds ? 'draftkings' : fdOdds ? 'fanduel' : undefined;
         const sbOddsStr = sbOdds ? (sbOdds > 0 ? `+${sbOdds}` : `${sbOdds}`) : 'N/A';
 
         let edge: 'positive' | 'neutral' | 'negative' = 'neutral';
@@ -155,6 +159,7 @@ export function PlayerModel({ initialPlayerId }: PlayerModelProps) {
           modelProbability: Math.round(modelProb),
           modelImpliedOdds: modelOddsStr,
           sportsbookOdds: sbOddsStr,
+          sportsbook,
           edge,
           edgeValue,
           week: predData.week,

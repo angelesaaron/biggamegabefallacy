@@ -9,19 +9,13 @@ import {
   Typography,
   Button,
   Alert,
-  AlertTitle,
   Select,
   MenuItem,
   FormControl,
   InputLabel,
   CircularProgress,
+  Divider,
 } from '@mui/material';
-import {
-  PlayArrow,
-  Info,
-  CheckCircle as CheckCircleIcon,
-  Error as ErrorIcon,
-} from '@mui/icons-material';
 
 export default function ActionsTab() {
   const [password, setPassword] = useState('');
@@ -168,15 +162,16 @@ export default function ActionsTab() {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
       {/* Password Input */}
-      <Card sx={{ bgcolor: 'rgba(17, 24, 39, 0.4)', backdropFilter: 'blur(8px)', border: '1px solid #1f2937' }}>
-        <CardContent>
+      <Card sx={{ bgcolor: 'rgba(17, 24, 39, 0.4)', backdropFilter: 'blur(8px)', border: '1px solid #1f2937', borderRadius: 3 }}>
+        <CardContent sx={{ py: 2.5 }}>
           <TextField
             type="password"
             label="Admin Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter admin password"
+            placeholder="Required for all actions"
             fullWidth
+            size="small"
             variant="outlined"
             sx={{
               '& .MuiOutlinedInput-root': {
@@ -200,9 +195,6 @@ export default function ActionsTab() {
               },
             }}
           />
-          <Typography variant="caption" sx={{ color: '#6b7280', mt: 1, display: 'block' }}>
-            Required for all admin actions. Password is cleared after successful execution.
-          </Typography>
         </CardContent>
       </Card>
 
@@ -210,43 +202,32 @@ export default function ActionsTab() {
       {result && (
         <Alert
           severity={result.type === 'success' ? 'success' : 'error'}
-          icon={result.type === 'success' ? <CheckCircleIcon /> : <ErrorIcon />}
           sx={{
             bgcolor: result.type === 'success' ? 'rgba(5, 150, 105, 0.1)' : 'rgba(239, 68, 68, 0.1)',
             border: `1px solid ${result.type === 'success' ? '#059669' : '#dc2626'}`,
             color: result.type === 'success' ? '#10b981' : '#ef4444',
+            borderRadius: 2,
             '& .MuiAlert-icon': {
               color: result.type === 'success' ? '#10b981' : '#ef4444',
             },
           }}
         >
-          <AlertTitle sx={{ fontWeight: 600 }}>
-            {result.type === 'success' ? 'Success!' : 'Error'}
-          </AlertTitle>
           {result.message}
-          {result.type === 'success' && (
-            <Typography variant="caption" sx={{ display: 'block', mt: 1, color: '#9ca3af' }}>
-              Check the Action History tab to monitor execution progress.
-            </Typography>
-          )}
         </Alert>
       )}
 
       {/* Quick Actions */}
-      <Card sx={{ bgcolor: 'rgba(17, 24, 39, 0.4)', backdropFilter: 'blur(8px)', border: '1px solid #1f2937' }}>
+      <Card sx={{ bgcolor: 'rgba(17, 24, 39, 0.4)', backdropFilter: 'blur(8px)', border: '1px solid #1f2937', borderRadius: 3 }}>
         <CardContent>
-          <Typography variant="h6" sx={{ color: 'white', fontWeight: 600, mb: 1 }}>
+          <Typography variant="body1" sx={{ color: 'white', fontWeight: 500, mb: 2 }}>
             Quick Actions
-          </Typography>
-          <Typography variant="body2" sx={{ color: '#9ca3af', mb: 3 }}>
-            One-click batch operations with default settings (current week auto-detected).
           </Typography>
 
           <Box sx={{ display: 'flex', gap: 2, flexDirection: { xs: 'column', md: 'row' } }}>
             <Box sx={{ flex: 1 }}>
               <ActionButton
                 title="Run Full Batch Update"
-                description="Update schedule, game logs, predictions, and odds for current week"
+                description="Schedule, logs, predictions, and odds"
                 onClick={() => triggerBatchUpdate()}
                 loading={loading}
                 variant="primary"
@@ -256,7 +237,7 @@ export default function ActionsTab() {
             <Box sx={{ flex: 1 }}>
               <ActionButton
                 title="Refresh Rosters"
-                description="Fetch latest player rosters and add new players"
+                description="Fetch latest player data"
                 onClick={triggerRefreshRosters}
                 loading={loading}
                 variant="secondary"
@@ -268,19 +249,16 @@ export default function ActionsTab() {
       </Card>
 
       {/* Complete Backfill with Parameters */}
-      <Card sx={{ bgcolor: 'rgba(17, 24, 39, 0.4)', backdropFilter: 'blur(8px)', border: '1px solid #1f2937' }}>
+      <Card sx={{ bgcolor: 'rgba(17, 24, 39, 0.4)', backdropFilter: 'blur(8px)', border: '1px solid #1f2937', borderRadius: 3 }}>
         <CardContent>
-          <Typography variant="h6" sx={{ color: 'white', fontWeight: 600, mb: 1 }}>
-            Complete Historical Backfill
-          </Typography>
-          <Typography variant="body2" sx={{ color: '#9ca3af', mb: 3 }}>
-            Backfill game logs, predictions, and odds for historical weeks. Efficient and idempotent.
+          <Typography variant="body1" sx={{ color: 'white', fontWeight: 500, mb: 2 }}>
+            Historical Backfill
           </Typography>
 
           {/* Week/Year Selection */}
-          <Box sx={{ display: 'flex', gap: 2, mb: 3 }}>
+          <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
             <Box sx={{ flex: 1 }}>
-              <FormControl fullWidth>
+              <FormControl fullWidth size="small">
                 <InputLabel
                   sx={{
                     color: '#9ca3af',
@@ -342,7 +320,7 @@ export default function ActionsTab() {
             </Box>
 
             <Box sx={{ flex: 1 }}>
-              <FormControl fullWidth>
+              <FormControl fullWidth size="small">
                 <InputLabel
                   sx={{
                     color: '#9ca3af',
@@ -405,8 +383,8 @@ export default function ActionsTab() {
           <Box sx={{ display: 'flex', gap: 2, flexDirection: { xs: 'column', md: 'row' } }}>
             <Box sx={{ flex: 1 }}>
               <ActionButton
-                title="Backfill Last 5 Weeks (Current Season)"
-                description="Backfill last 5 weeks from current NFL week (~160 API calls)"
+                title="Backfill Last 5 Weeks"
+                description="Current season"
                 onClick={() => triggerBackfillComplete(5)}
                 loading={loading}
                 variant="secondary"
@@ -416,7 +394,7 @@ export default function ActionsTab() {
             <Box sx={{ flex: 1 }}>
               <ActionButton
                 title={`Backfill ${selectedYear} Week ${selectedWeek}`}
-                description={`Complete backfill for selected week (~32 API calls)`}
+                description="Selected week"
                 onClick={() => triggerBackfillComplete(undefined, selectedWeek, selectedYear)}
                 loading={loading}
                 variant="secondary"
@@ -427,19 +405,16 @@ export default function ActionsTab() {
       </Card>
 
       {/* Advanced Actions */}
-      <Card sx={{ bgcolor: 'rgba(17, 24, 39, 0.4)', backdropFilter: 'blur(8px)', border: '1px solid #1f2937' }}>
+      <Card sx={{ bgcolor: 'rgba(17, 24, 39, 0.4)', backdropFilter: 'blur(8px)', border: '1px solid #1f2937', borderRadius: 3 }}>
         <CardContent>
-          <Typography variant="h6" sx={{ color: 'white', fontWeight: 600, mb: 1 }}>
+          <Typography variant="body1" sx={{ color: 'white', fontWeight: 500, mb: 2 }}>
             Advanced Actions
-          </Typography>
-          <Typography variant="body2" sx={{ color: '#9ca3af', mb: 3 }}>
-            Custom batch operations with week/year parameters.
           </Typography>
 
           {/* Week/Year Selection */}
-          <Box sx={{ display: 'flex', gap: 2, mb: 3 }}>
+          <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
             <Box sx={{ flex: 1 }}>
-              <FormControl fullWidth>
+              <FormControl fullWidth size="small">
                 <InputLabel
                   sx={{
                     color: '#9ca3af',
@@ -501,7 +476,7 @@ export default function ActionsTab() {
             </Box>
 
             <Box sx={{ flex: 1 }}>
-              <FormControl fullWidth>
+              <FormControl fullWidth size="small">
                 <InputLabel
                   sx={{
                     color: '#9ca3af',
@@ -566,7 +541,7 @@ export default function ActionsTab() {
             <Box sx={{ flex: 1 }}>
               <ActionButton
                 title="Update Specific Week"
-                description={`Schedule, logs, predictions, and odds for ${selectedYear} Week ${selectedWeek}`}
+                description={`${selectedYear} Week ${selectedWeek}`}
                 onClick={() => triggerBatchUpdate(undefined, selectedWeek, selectedYear)}
                 loading={loading}
                 variant="secondary"
@@ -576,7 +551,7 @@ export default function ActionsTab() {
             <Box sx={{ flex: 1 }}>
               <ActionButton
                 title="Refresh Odds Only"
-                description={`Update odds for ${selectedYear} Week ${selectedWeek}`}
+                description={`${selectedYear} Week ${selectedWeek}`}
                 onClick={() => triggerBatchUpdate('odds_only', selectedWeek, selectedYear)}
                 loading={loading}
                 variant="secondary"
@@ -585,28 +560,6 @@ export default function ActionsTab() {
           </Box>
         </CardContent>
       </Card>
-
-      {/* Info Panel */}
-      <Alert
-        severity="info"
-        icon={<Info />}
-        sx={{
-          bgcolor: 'rgba(59, 130, 246, 0.1)',
-          border: '1px solid #1e40af',
-          color: '#93c5fd',
-          '& .MuiAlert-icon': {
-            color: '#60a5fa',
-          },
-        }}
-      >
-        <AlertTitle sx={{ fontWeight: 600, color: '#93c5fd' }}>Important Notes:</AlertTitle>
-        <Box component="ul" sx={{ pl: 2, m: 0, fontSize: '0.75rem', color: '#93c5fd' }}>
-          <li>Actions run in the background and may take several minutes</li>
-          <li>Monitor progress in the Action History tab (auto-refreshes every 30 seconds)</li>
-          <li>Actions are rate-limited to 5 requests per minute per IP</li>
-          <li>Only one action can run at a time to prevent conflicts</li>
-        </Box>
-      </Alert>
     </Box>
   );
 }
@@ -626,41 +579,39 @@ function ActionButton({ title, description, onClick, loading, variant }: ActionB
       disabled={loading}
       fullWidth
       sx={{
-        p: 2,
+        px: 2.5,
+        py: 1.75,
         textAlign: 'left',
         display: 'flex',
-        alignItems: 'flex-start',
-        justifyContent: 'flex-start',
+        alignItems: 'center',
+        justifyContent: 'space-between',
         textTransform: 'none',
         bgcolor: variant === 'primary' ? '#9333ea' : '#1f2937',
         border: `1px solid ${variant === 'primary' ? '#7e22ce' : '#374151'}`,
+        borderRadius: 2,
         color: 'white',
-        transition: 'all 0.2s',
+        transition: 'all 0.15s ease',
         '&:hover': {
           bgcolor: variant === 'primary' ? '#7e22ce' : '#374151',
-          transform: 'scale(1.02)',
+          borderColor: variant === 'primary' ? '#6b21a8' : '#4b5563',
         },
         '&:disabled': {
-          opacity: 0.5,
+          opacity: 0.6,
           cursor: 'not-allowed',
           bgcolor: variant === 'primary' ? '#9333ea' : '#1f2937',
           color: 'white',
         },
       }}
     >
-      <Box sx={{ display: 'flex', gap: 2, alignItems: 'flex-start', width: '100%' }}>
-        <Box sx={{ flexShrink: 0, mt: 0.5 }}>
-          {loading ? <CircularProgress size={20} sx={{ color: 'white' }} /> : <PlayArrow />}
-        </Box>
-        <Box sx={{ flex: 1 }}>
-          <Typography variant="body1" sx={{ fontWeight: 500, mb: 0.5 }}>
-            {title}
-          </Typography>
-          <Typography variant="body2" sx={{ color: '#9ca3af', fontSize: '0.875rem' }}>
-            {description}
-          </Typography>
-        </Box>
+      <Box sx={{ flex: 1 }}>
+        <Typography variant="body2" sx={{ fontWeight: 500, mb: 0.25, fontSize: '0.875rem' }}>
+          {title}
+        </Typography>
+        <Typography variant="caption" sx={{ color: '#9ca3af', fontSize: '0.75rem' }}>
+          {description}
+        </Typography>
       </Box>
+      {loading && <CircularProgress size={16} sx={{ color: 'white', ml: 2 }} />}
     </Button>
   );
 }

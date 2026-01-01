@@ -140,16 +140,29 @@ export default function BatchHistoryTab() {
   };
 
   const getStepStatusChip = (status: string) => {
-    const statusConfig: Record<string, { label: string; color: any }> = {
-      success: { label: '✓ Success', color: 'success' },
-      failed: { label: '✗ Failed', color: 'error' },
-      running: { label: '⏳ Running', color: 'info' },
-      skipped: { label: '⊘ Skipped', color: 'default' },
-      pending: { label: '⏸ Pending', color: 'default' },
+    const statusConfig: Record<string, { label: string; color: string; bgcolor: string }> = {
+      success: { label: 'Success', color: '#10b981', bgcolor: 'rgba(16, 185, 129, 0.15)' },
+      failed: { label: 'Failed', color: '#ef4444', bgcolor: 'rgba(239, 68, 68, 0.15)' },
+      running: { label: 'Running', color: '#3b82f6', bgcolor: 'rgba(59, 130, 246, 0.15)' },
+      skipped: { label: 'Skipped', color: '#6b7280', bgcolor: 'rgba(107, 114, 128, 0.15)' },
+      pending: { label: 'Pending', color: '#6b7280', bgcolor: 'rgba(107, 114, 128, 0.15)' },
     };
 
     const config = statusConfig[status] || statusConfig.pending;
-    return <Chip label={config.label} color={config.color} size="small" />;
+    return (
+      <Chip
+        label={config.label}
+        size="small"
+        sx={{
+          bgcolor: config.bgcolor,
+          color: config.color,
+          fontSize: '0.7rem',
+          fontWeight: 500,
+          height: 20,
+          border: `1px solid ${config.color}40`
+        }}
+      />
+    );
   };
 
   const formatDuration = (seconds?: number) => {
@@ -203,52 +216,48 @@ export default function BatchHistoryTab() {
   return (
     <Box>
       {/* Filters */}
-      <Card sx={{ mb: 3, bgcolor: 'rgba(17, 24, 39, 0.4)', backdropFilter: 'blur(8px)', border: '1px solid #1f2937' }}>
-        <CardContent>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-            <Typography variant="body2" sx={{ color: '#9ca3af' }}>
-              Filter by status:
-            </Typography>
-            <ToggleButtonGroup
-              value={filter}
-              exclusive
-              onChange={handleFilterChange}
-              size="small"
-              sx={{
-                '& .MuiToggleButton-root': {
-                  color: '#9ca3af',
-                  borderColor: '#374151',
-                  textTransform: 'capitalize',
-                  px: 2,
-                  py: 0.5,
-                  '&.Mui-selected': {
-                    bgcolor: '#9333ea',
-                    color: 'white',
-                    '&:hover': {
-                      bgcolor: '#7e22ce',
-                    }
-                  },
+      <Card sx={{ mb: 3, bgcolor: 'rgba(17, 24, 39, 0.4)', backdropFilter: 'blur(8px)', border: '1px solid #1f2937', borderRadius: 3 }}>
+        <CardContent sx={{ py: 2 }}>
+          <ToggleButtonGroup
+            value={filter}
+            exclusive
+            onChange={handleFilterChange}
+            size="small"
+            sx={{
+              '& .MuiToggleButton-root': {
+                color: '#9ca3af',
+                border: 'none',
+                textTransform: 'capitalize',
+                px: 2,
+                py: 0.75,
+                fontSize: '0.875rem',
+                '&.Mui-selected': {
+                  bgcolor: '#9333ea',
+                  color: 'white',
                   '&:hover': {
-                    bgcolor: '#374151',
+                    bgcolor: '#7e22ce',
                   }
+                },
+                '&:hover': {
+                  color: 'white',
                 }
-              }}
-            >
-              <ToggleButton value="all">All</ToggleButton>
-              <ToggleButton value="success">Success</ToggleButton>
-              <ToggleButton value="partial">Partial</ToggleButton>
-              <ToggleButton value="failed">Failed</ToggleButton>
-              <ToggleButton value="running">Running</ToggleButton>
-            </ToggleButtonGroup>
-          </Box>
+              }
+            }}
+          >
+            <ToggleButton value="all">All</ToggleButton>
+            <ToggleButton value="success">Success</ToggleButton>
+            <ToggleButton value="partial">Partial</ToggleButton>
+            <ToggleButton value="failed">Failed</ToggleButton>
+            <ToggleButton value="running">Running</ToggleButton>
+          </ToggleButtonGroup>
         </CardContent>
       </Card>
 
       {/* Action History */}
-      <Card sx={{ bgcolor: 'rgba(17, 24, 39, 0.4)', backdropFilter: 'blur(8px)', border: '1px solid #1f2937' }}>
+      <Card sx={{ bgcolor: 'rgba(17, 24, 39, 0.4)', backdropFilter: 'blur(8px)', border: '1px solid #1f2937', borderRadius: 3 }}>
         {filteredHistory.length === 0 ? (
           <CardContent>
-            <Typography sx={{ color: '#9ca3af', textAlign: 'center', py: 4 }}>
+            <Typography sx={{ color: '#9ca3af', textAlign: 'center', py: 4, fontSize: '0.875rem' }}>
               No actions found for the selected filter.
             </Typography>
           </CardContent>
@@ -262,37 +271,50 @@ export default function BatchHistoryTab() {
                   sx={{
                     p: 2,
                     cursor: 'pointer',
-                    transition: 'background-color 0.2s',
+                    transition: 'background-color 0.15s',
                     '&:hover': {
-                      bgcolor: 'rgba(55, 65, 81, 0.4)',
+                      bgcolor: 'rgba(55, 65, 81, 0.3)',
                     }
                   }}
                 >
                   <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flex: 1 }}>
-                      {getStatusIcon(batch.status)}
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, flex: 1 }}>
+                      <Box
+                        sx={{
+                          width: 8,
+                          height: 8,
+                          borderRadius: '50%',
+                          bgcolor:
+                            batch.status === 'success' ? '#10b981' :
+                            batch.status === 'partial' ? '#eab308' :
+                            batch.status === 'failed' ? '#ef4444' :
+                            batch.status === 'running' ? '#3b82f6' :
+                            '#6b7280',
+                          flexShrink: 0
+                        }}
+                      />
 
                       <Box sx={{ flex: 1 }}>
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 0.5 }}>
-                          <Typography variant="body1" sx={{ color: 'white', fontWeight: 500 }}>
-                            {batch.batch_type.replace('_', ' ').toUpperCase()}
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 0.25 }}>
+                          <Typography variant="body2" sx={{ color: 'white', fontWeight: 500, fontSize: '0.875rem' }}>
+                            {batch.batch_type.replace('_', ' ')}
                           </Typography>
                           {batch.batch_mode && (
                             <Chip
                               label={batch.batch_mode}
                               size="small"
-                              sx={{ bgcolor: '#374151', color: '#d1d5db', height: 20, fontSize: '0.7rem' }}
+                              sx={{ bgcolor: '#374151', color: '#d1d5db', height: 18, fontSize: '0.65rem' }}
                             />
                           )}
                         </Box>
-                        <Typography variant="body2" sx={{ color: '#9ca3af' }}>
-                          {batch.season_year} Week {batch.week} • {getTimeAgo(batch.started_at)}
+                        <Typography variant="caption" sx={{ color: '#9ca3af', fontSize: '0.75rem' }}>
+                          {batch.season_year} Week {batch.week} · {getTimeAgo(batch.started_at)}
                         </Typography>
                       </Box>
                     </Box>
 
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
-                      <Typography variant="body2" sx={{ color: '#9ca3af' }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                      <Typography variant="caption" sx={{ color: '#9ca3af', fontSize: '0.75rem' }}>
                         {formatDuration(batch.duration_seconds)}
                       </Typography>
                       <IconButton
@@ -300,10 +322,10 @@ export default function BatchHistoryTab() {
                         sx={{
                           color: '#9ca3af',
                           transform: expandedRows.has(batch.id) ? 'rotate(180deg)' : 'rotate(0deg)',
-                          transition: 'transform 0.3s',
+                          transition: 'transform 0.2s',
                         }}
                       >
-                        <ExpandMoreIcon />
+                        <ExpandMoreIcon fontSize="small" />
                       </IconButton>
                     </Box>
                   </Box>
@@ -314,45 +336,42 @@ export default function BatchHistoryTab() {
                   <Box sx={{ bgcolor: 'rgba(31, 41, 55, 0.2)', borderTop: '1px solid #1f2937', p: 2 }}>
                     {/* Batch Metrics Summary */}
                     {(batch.games_processed || batch.game_logs_added || batch.predictions_generated || batch.odds_synced || batch.errors_encountered) && (
-                      <Box sx={{ mb: 3 }}>
-                        <Typography variant="body2" sx={{ color: '#d1d5db', fontWeight: 500, mb: 1.5 }}>
-                          Batch Metrics:
-                        </Typography>
-                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
+                      <Box sx={{ mb: 2 }}>
+                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3 }}>
                           {batch.games_processed !== undefined && batch.games_processed > 0 && (
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                              <Typography variant="body2" sx={{ color: '#9ca3af' }}>Games:</Typography>
-                              <Typography variant="body2" sx={{ color: 'white', fontWeight: 500 }}>{batch.games_processed}</Typography>
+                            <Box>
+                              <Typography component="span" sx={{ color: '#9ca3af', fontSize: '0.75rem' }}>Games </Typography>
+                              <Typography component="span" sx={{ color: 'white', fontWeight: 500, fontSize: '0.875rem' }}>{batch.games_processed}</Typography>
                             </Box>
                           )}
                           {batch.game_logs_added !== undefined && batch.game_logs_added > 0 && (
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                              <Typography variant="body2" sx={{ color: '#9ca3af' }}>Game Logs:</Typography>
-                              <Typography variant="body2" sx={{ color: 'white', fontWeight: 500 }}>{batch.game_logs_added}</Typography>
+                            <Box>
+                              <Typography component="span" sx={{ color: '#9ca3af', fontSize: '0.75rem' }}>Logs </Typography>
+                              <Typography component="span" sx={{ color: 'white', fontWeight: 500, fontSize: '0.875rem' }}>{batch.game_logs_added}</Typography>
                             </Box>
                           )}
                           {batch.predictions_generated !== undefined && batch.predictions_generated > 0 && (
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                              <Typography variant="body2" sx={{ color: '#9ca3af' }}>Predictions:</Typography>
-                              <Typography variant="body2" sx={{ color: 'white', fontWeight: 500 }}>{batch.predictions_generated}</Typography>
+                            <Box>
+                              <Typography component="span" sx={{ color: '#9ca3af', fontSize: '0.75rem' }}>Predictions </Typography>
+                              <Typography component="span" sx={{ color: 'white', fontWeight: 500, fontSize: '0.875rem' }}>{batch.predictions_generated}</Typography>
                             </Box>
                           )}
                           {batch.odds_synced !== undefined && batch.odds_synced > 0 && (
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                              <Typography variant="body2" sx={{ color: '#9ca3af' }}>Odds:</Typography>
-                              <Typography variant="body2" sx={{ color: 'white', fontWeight: 500 }}>{batch.odds_synced}</Typography>
+                            <Box>
+                              <Typography component="span" sx={{ color: '#9ca3af', fontSize: '0.75rem' }}>Odds </Typography>
+                              <Typography component="span" sx={{ color: 'white', fontWeight: 500, fontSize: '0.875rem' }}>{batch.odds_synced}</Typography>
                             </Box>
                           )}
                           {batch.api_calls_made !== undefined && batch.api_calls_made > 0 && (
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                              <Typography variant="body2" sx={{ color: '#9ca3af' }}>API Calls:</Typography>
-                              <Typography variant="body2" sx={{ color: 'white', fontWeight: 500 }}>{batch.api_calls_made}</Typography>
+                            <Box>
+                              <Typography component="span" sx={{ color: '#9ca3af', fontSize: '0.75rem' }}>API Calls </Typography>
+                              <Typography component="span" sx={{ color: 'white', fontWeight: 500, fontSize: '0.875rem' }}>{batch.api_calls_made}</Typography>
                             </Box>
                           )}
                           {batch.errors_encountered !== undefined && batch.errors_encountered > 0 && (
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                              <Typography variant="body2" sx={{ color: '#f87171' }}>Errors:</Typography>
-                              <Typography variant="body2" sx={{ color: '#f87171', fontWeight: 500 }}>{batch.errors_encountered}</Typography>
+                            <Box>
+                              <Typography component="span" sx={{ color: '#f87171', fontSize: '0.75rem' }}>Errors </Typography>
+                              <Typography component="span" sx={{ color: '#f87171', fontWeight: 500, fontSize: '0.875rem' }}>{batch.errors_encountered}</Typography>
                             </Box>
                           )}
                         </Box>
@@ -362,8 +381,8 @@ export default function BatchHistoryTab() {
                     {/* Execution Steps */}
                     {batch.steps && (
                       <Box>
-                        <Typography variant="body2" sx={{ color: '#d1d5db', fontWeight: 500, mb: 2 }}>
-                          Execution Steps:
+                        <Typography variant="caption" sx={{ color: '#d1d5db', fontWeight: 500, mb: 1.5, display: 'block' }}>
+                          Steps
                         </Typography>
                         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
                         {batch.steps.map((step) => (
@@ -372,24 +391,25 @@ export default function BatchHistoryTab() {
                             sx={{
                               bgcolor: 'rgba(17, 24, 39, 0.4)',
                               border: '1px solid #374151',
+                              borderRadius: 1.5
                             }}
                           >
-                            <CardContent sx={{ p: 2, '&:last-child': { pb: 2 } }}>
+                            <CardContent sx={{ p: 1.5, '&:last-child': { pb: 1.5 } }}>
                               <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flex: 1 }}>
-                                  <Typography variant="body2" sx={{ color: '#6b7280', minWidth: 24 }}>
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, flex: 1 }}>
+                                  <Typography variant="caption" sx={{ color: '#6b7280', minWidth: 20, fontSize: '0.7rem' }}>
                                     {step.step_order}
                                   </Typography>
 
                                   <Box sx={{ flex: 1 }}>
                                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: step.error_message ? 0.5 : 0 }}>
-                                      <Typography variant="body2" sx={{ color: 'white', fontWeight: 500 }}>
+                                      <Typography variant="caption" sx={{ color: 'white', fontWeight: 500, fontSize: '0.8rem' }}>
                                         {step.step_name}
                                       </Typography>
                                       {getStepStatusChip(step.status)}
                                     </Box>
                                     {step.error_message && (
-                                      <Typography variant="caption" sx={{ color: '#f87171' }}>
+                                      <Typography variant="caption" sx={{ color: '#f87171', fontSize: '0.7rem' }}>
                                         {step.error_message}
                                       </Typography>
                                     )}
@@ -397,29 +417,31 @@ export default function BatchHistoryTab() {
                                 </Box>
 
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                                  <Typography variant="body2" sx={{ color: '#9ca3af' }}>
+                                  <Typography variant="caption" sx={{ color: '#9ca3af', fontSize: '0.7rem' }}>
                                     {formatDuration(step.duration_seconds)}
                                   </Typography>
-                                  <Typography variant="body2" sx={{ color: '#9ca3af' }}>
-                                    {step.records_processed} records
+                                  <Typography variant="caption" sx={{ color: '#9ca3af', fontSize: '0.7rem' }}>
+                                    {step.records_processed} rec
                                   </Typography>
                                   {step.output_log && (
                                     <Button
                                       size="small"
-                                      startIcon={<VisibilityIcon />}
                                       onClick={(e) => {
                                         e.stopPropagation();
                                         setSelectedLog({ stepName: step.step_name, log: step.output_log! });
                                       }}
                                       sx={{
-                                        color: '#c084fc',
+                                        color: '#9333ea',
                                         textTransform: 'none',
+                                        minWidth: 'auto',
+                                        px: 1,
+                                        fontSize: '0.7rem',
                                         '&:hover': {
-                                          color: '#e9d5ff',
+                                          color: '#a855f7',
                                         }
                                       }}
                                     >
-                                      View Logs
+                                      Logs
                                     </Button>
                                   )}
                                 </Box>
