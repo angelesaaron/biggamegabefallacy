@@ -1,0 +1,14 @@
+{
+  "current_season": {
+    "year": 2025,
+    "week": 18,
+    "season_type": "reg"
+  },
+  "override_enabled": true,
+  "notes": {
+    "description": "Manual override for NFL season detection during off-season",
+    "usage": "Set 'override_enabled' to false to resume dynamic week detection",
+    "season_type_values": "'reg' for regular season, 'post' for playoffs",
+    "last_updated": "2026-01-08"
+  }
+}
