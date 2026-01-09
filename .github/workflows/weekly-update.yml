@@ -1,10 +1,12 @@
 name: Weekly NFL Data Update
 
 on:
-  schedule:
-    # Every Tuesday at 12:00 PM UTC (7 AM EST / 4 AM PST)
-    # Runs after Monday Night Football is complete
-    - cron: '0 12 * * 2'
+  # DISABLED: Automatic weekly updates disabled for off-season
+  # Uncomment schedule block below when ready to resume automatic updates
+  # schedule:
+  #   # Every Tuesday at 12:00 PM UTC (7 AM EST / 4 AM PST)
+  #   # Runs after Monday Night Football is complete
+  #   - cron: '0 12 * * 2'
 
   # Allows manual triggering from GitHub Actions tab
   workflow_dispatch:
