@@ -261,7 +261,7 @@ export default function WeeklyValue({ onPlayerClick }: WeeklyValueProps) {
               <Typography variant="h5" sx={{ color: '#eab308' }}>Predictions Not Available</Typography>
             </Box>
             <Typography variant="body1" sx={{ color: '#9ca3af', mb: 1 }}>
-              Week {selectedWeek} predictions haven't been generated yet.
+              Week {selectedWeek} predictions haven&apos;t been generated yet.
             </Typography>
             <Typography variant="body2" sx={{ color: '#6b7280' }}>
               Check back after the weekly batch job completes or try viewing a previous week.
