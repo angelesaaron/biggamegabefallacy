@@ -1,9 +1,0 @@
-joblib==1.3.2
-streamlit==1.22.0
-numpy>=1.21.6
-scipy>=1.7.3
-scikit-learn
-matplotlib
-seaborn
-requests
-plotly

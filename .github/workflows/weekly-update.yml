@@ -41,7 +41,7 @@ jobs:
         run: |
           echo "Starting full weekly update..."
           echo "This will: update schedule, fetch game logs, generate predictions, and sync odds"
-          python update_weekly.py
+          python scripts/update_weekly.py
 
           echo "Weekly update complete!"
 

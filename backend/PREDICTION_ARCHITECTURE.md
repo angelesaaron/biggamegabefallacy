@@ -223,10 +223,44 @@ curl "http://localhost:8000/api/predictions/history/15795?season=2025&weeks=20"
    - Never bypass the service layer
    - All prediction logic lives in one place
 
+## Sportsbook Odds Integration
+
+### Data Flow
+Odds are synced weekly from Tank01 API and stored in the `sportsbook_odds` table. Predictions read odds from the database (zero API calls at prediction time).
+
+```
+Tuesday Sync (update_weekly.py):
+1. For each game in current week → call getNFLBettingOdds with gameID
+2. Parse playerProps → anytime TD odds
+3. Store in sportsbook_odds table (DraftKings + FanDuel)
+
+Prediction Generation:
+1. Read game logs from DB
+2. Read sportsbook odds from DB (no API calls)
+3. Generate model prediction → calculate EV and has_edge
+```
+
+### Sportsbook Odds Schema
+| Column | Type | Description |
+|--------|------|-------------|
+| `player_id` | String | FK to players |
+| `game_id` | String | FK to schedule |
+| `season_year` | Integer | Season year |
+| `week` | Integer | Week number |
+| `sportsbook` | String | 'draftkings' or 'fanduel' |
+| `anytime_td_odds` | Integer | American odds (+175, -140, etc.) |
+| `fetched_at` | DateTime | When odds were fetched |
+
+**Unique Constraint:** `(player_id, game_id, sportsbook)`
+
+### Automatic Week Detection
+The system auto-detects the current NFL week via `app.utils.nfl_calendar.get_current_nfl_week()`, which queries the schedule table for the next upcoming game. Falls back to calendar-based calculation if the database is unavailable.
+
 ## Future Enhancements
 
 - [ ] Add prediction confidence intervals
 - [ ] Store feature values alongside predictions for debugging
 - [ ] Add prediction version tracking for model updates
 - [ ] Implement prediction performance metrics
-- [ ] Add automatic weekly prediction generation (cron job)
+- [ ] Line movement tracking (odds changes over time)
+- [ ] Best line finding across multiple sportsbooks

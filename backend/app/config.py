@@ -16,8 +16,6 @@ class Settings(BaseSettings):
     CORS_ORIGINS: List[str] = ["http://localhost:3000", "http://localhost:3001"]
 
     # API Keys
-    RAPIDAPI_KEY: str = ""  # Legacy - no longer used
-    ODDS_API_KEY: str = ""   # Legacy - no longer used
     TANK01_API_KEY: str = "" # Tank01 NFL API (primary data source)
 
     # Model
@@ -29,8 +27,7 @@ class Settings(BaseSettings):
         Checks in order:
         1. MODEL_PATH environment variable
         2. /app/models/wr-model.pkl (Docker/production)
-        3. ../models/wr-model.pkl (relative to backend dir, dev)
-        4. ../../models/wr-model.pkl (relative to app dir, dev)
+        3. backend/models/wr-model.pkl (relative to backend dir, dev)
         """
         # Check environment variable first
         env_path = os.getenv("MODEL_PATH")
@@ -49,11 +46,6 @@ class Settings(BaseSettings):
         dev_path1 = config_file.parent.parent / "models" / "wr-model.pkl"
         if dev_path1.exists():
             return str(dev_path1)
-
-        # From backend/app/config.py -> ../../models/wr-model.pkl (project root)
-        dev_path2 = config_file.parent.parent.parent / "models" / "wr-model.pkl"
-        if dev_path2.exists():
-            return str(dev_path2)
 
         # Fallback to relative path
         return "models/wr-model.pkl"
