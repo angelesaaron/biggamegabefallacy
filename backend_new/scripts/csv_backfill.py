@@ -25,7 +25,7 @@ from pathlib import Path
 # Add backend_new/ to sys.path so app imports work
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 
 from app.database import AsyncSessionLocal
@@ -100,7 +100,7 @@ async def run(years: list[int]) -> None:
                     .values(**game_data)
                     .on_conflict_do_update(
                         index_elements=["game_id"],
-                        set_={"status": "final"},
+                        set_={"status": "final", "updated_at": func.now()},
                     )
                 )
                 await db.execute(stmt)

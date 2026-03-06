@@ -11,6 +11,7 @@ to pick up status changes (scheduled → final).
 import logging
 from datetime import date
 
+from sqlalchemy import func
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -67,6 +68,7 @@ class ScheduleSyncService:
                                 "home_team": data["home_team"],
                                 "away_team": data["away_team"],
                                 "game_date": data["game_date"],
+                                "updated_at": func.now(),
                             },
                         )
                     )

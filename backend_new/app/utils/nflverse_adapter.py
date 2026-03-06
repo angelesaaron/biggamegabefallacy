@@ -20,12 +20,14 @@ Team abbreviation normalisation:
 
 import asyncio
 import logging
+import os
 from dataclasses import dataclass
 from typing import Callable
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.config import settings
 from app.models.player import Player
 from app.models.player_alias import PlayerAlias
 
@@ -157,12 +159,20 @@ def _fetch_snap_counts(seasons: list[int]) -> list[dict]:
     """
     Download snap count data via nfl_data_py.
     Returns list of dicts with keys: player, team, season, week, offense_pct.
-    nfl_data_py caches parquet locally after first download.
+
+    Cache behaviour:
+      nfl_data_py saves parquet files to NFLVERSE_CACHE_DIR (default ~/.bggtdm_cache/nflverse).
+      On ephemeral hosting (e.g. Render free tier), this cache is wiped on each deploy.
+      First ingest after a cold deploy will re-download. For production, mount a persistent
+      disk and point NFLVERSE_CACHE_DIR at it.
     """
     import nfl_data_py as nfl  # import here to avoid startup cost if not used
 
-    logger.info("Fetching nflverse snap counts for seasons: %s", seasons)
-    df = nfl.import_snap_counts(seasons)
+    cache_dir = settings.NFLVERSE_CACHE_DIR
+    os.makedirs(cache_dir, exist_ok=True)
+
+    logger.info("Fetching nflverse snap counts for seasons: %s (cache: %s)", seasons, cache_dir)
+    df = nfl.import_snap_counts(seasons, cache=True, alt_path=cache_dir)
     df = df[df["position"].isin(["WR", "TE"])][
         ["player", "season", "week", "team", "offense_pct"]
     ].copy()
@@ -181,11 +191,19 @@ def _fetch_rz_pbp(seasons: list[int]) -> tuple[list[dict], list[dict]]:
       player_rows — per-player/game: name_short, team, season, week, rz_targets, rz_tds
       team_rows   — per-team/game (ALL positions): team, season, week, team_rz_targets
                     Used as the denominator for rz_target_share — matches training.
+
+    Cache behaviour: same as _fetch_snap_counts — see that docstring.
     """
     import nfl_data_py as nfl
 
-    logger.info("Fetching nflverse PBP for seasons: %s (may be slow on first run)", seasons)
-    pbp = nfl.import_pbp_data(seasons)
+    cache_dir = settings.NFLVERSE_CACHE_DIR
+    os.makedirs(cache_dir, exist_ok=True)
+
+    logger.info(
+        "Fetching nflverse PBP for seasons: %s (may be slow on first run; cache: %s)",
+        seasons, cache_dir,
+    )
+    pbp = nfl.import_pbp_data(seasons, cache=True, alt_path=cache_dir)
 
     # Filter to red zone pass plays with a named receiver
     rz = pbp[

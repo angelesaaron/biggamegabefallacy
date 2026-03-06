@@ -10,6 +10,7 @@ via a separate source (e.g. nfl_data_py import_ids()).
 
 import logging
 
+from sqlalchemy import func
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -63,6 +64,7 @@ class RosterSyncService:
                                 "experience": data["experience"],
                                 "active": data["active"],
                                 "headshot_url": data["headshot_url"],
+                                "updated_at": func.now(),
                             },
                         )
                     )

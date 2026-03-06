@@ -59,3 +59,7 @@ frontend/.next/
 
 # Streamlit (legacy)
 .streamlit/secrets.toml
+
+# nflverse parquet cache (~300MB PBP downloads)
+.bggtdm_cache/
+data/nflverse_cache/

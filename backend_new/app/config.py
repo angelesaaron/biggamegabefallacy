@@ -37,6 +37,13 @@ class Settings(BaseSettings):
     MODEL_PATH: str = "../ml/model/wr_te_model_v2.pkl"
     MODEL_VERSION: str = "v2_xgb"
 
+    # nflverse cache
+    # nfl_data_py downloads ~300MB of PBP parquet files on first use.
+    # On ephemeral hosting (e.g. Render free tier), this cache is wiped on each deploy.
+    # First ingest after a cold deploy will re-download ~300MB.
+    # For production, mount a persistent disk and point NFLVERSE_CACHE_DIR at it.
+    NFLVERSE_CACHE_DIR: str = str(Path.home() / ".bggtdm_cache" / "nflverse")
+
     def resolved_model_path(self) -> Path:
         p = Path(self.MODEL_PATH)
         if p.is_absolute():
