@@ -162,12 +162,12 @@ class GameLogIngestService:
                 result.n_failed += 1
 
         # Aggregate team totals and upsert team_game_stats
-        await self._upsert_team_game_stats(game.game_id, season, week, result)
+        await self._upsert_team_game_stats(game.game_id, season, week, nflverse, result)
 
         return result
 
     async def _upsert_team_game_stats(
-        self, game_id: str, season: int, week: int, result: SyncResult
+        self, game_id: str, season: int, week: int, nflverse: NflverseResult, result: SyncResult
     ) -> None:
         """
         Query the just-written player_game_logs for this game and aggregate
@@ -203,6 +203,9 @@ class GameLogIngestService:
                 teams[t]["team_rz_tds"] += row.rz_rec_tds
 
         for team, totals in teams.items():
+            all_pos_key = (team, season, week)
+            team_rz_all_pos = nflverse.team_rz_all_pos.get(all_pos_key)
+
             data: dict[str, Any] = {
                 "game_id": game_id,
                 "team": team,
@@ -212,6 +215,7 @@ class GameLogIngestService:
                 "team_rec_tds": totals["team_rec_tds"],
                 "team_rz_targets": totals["team_rz_targets"] if totals["has_rz"] else None,
                 "team_rz_tds": totals["team_rz_tds"] if totals["has_rz"] else None,
+                "team_rz_targets_all_pos": team_rz_all_pos,
             }
             try:
                 stmt = (
@@ -224,6 +228,7 @@ class GameLogIngestService:
                             "team_rec_tds": data["team_rec_tds"],
                             "team_rz_targets": data["team_rz_targets"],
                             "team_rz_tds": data["team_rz_tds"],
+                            "team_rz_targets_all_pos": data["team_rz_targets_all_pos"],
                         },
                     )
                 )

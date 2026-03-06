@@ -62,6 +62,9 @@ class NflverseResult:
     # Keyed by (player_id, season, week)
     snap: dict[tuple[str, int, int], SnapRecord]
     rz: dict[tuple[str, int, int], RZRecord]
+    # All-position team RZ targets — keyed by (team, season, week).
+    # Used as the denominator for rz_target_share (matches training methodology).
+    team_rz_all_pos: dict[tuple[str, int, int], int]
     # Names that failed resolution
     snap_unmatched: list[str]
     rz_unmatched: list[str]
@@ -99,13 +102,14 @@ class NflverseAdapter:
         pbp_resolver = _build_pbp_resolver(pbp_aliases, players)
 
         # Fetch data in thread pool (nfl_data_py is sync)
-        snap_data, rz_data = await asyncio.gather(
+        snap_data, (rz_data, team_rz_data) = await asyncio.gather(
             asyncio.to_thread(_fetch_snap_counts, seasons),
             asyncio.to_thread(_fetch_rz_pbp, seasons),
         )
 
         snap_result, snap_unmatched = _resolve_snap(snap_data, snap_resolver)
         rz_result, rz_unmatched = _resolve_rz(rz_data, pbp_resolver)
+        team_rz_all_pos = _build_team_rz_all_pos(team_rz_data)
 
         if snap_unmatched:
             logger.warning(
@@ -123,6 +127,7 @@ class NflverseAdapter:
         return NflverseResult(
             snap=snap_result,
             rz=rz_result,
+            team_rz_all_pos=team_rz_all_pos,
             snap_unmatched=snap_unmatched,
             rz_unmatched=rz_unmatched,
         )
@@ -168,10 +173,14 @@ def _fetch_snap_counts(seasons: list[int]) -> list[dict]:
     return df.to_dict("records")
 
 
-def _fetch_rz_pbp(seasons: list[int]) -> list[dict]:
+def _fetch_rz_pbp(seasons: list[int]) -> tuple[list[dict], list[dict]]:
     """
-    Download PBP data and aggregate red zone (≤20 yard line) pass targets per player/game.
-    Returns list of dicts with keys: name_short, team, season, week, rz_targets, rz_tds.
+    Download PBP data and aggregate red zone (≤20 yard line) pass targets.
+
+    Returns (player_rows, team_rows):
+      player_rows — per-player/game: name_short, team, season, week, rz_targets, rz_tds
+      team_rows   — per-team/game (ALL positions): team, season, week, team_rz_targets
+                    Used as the denominator for rz_target_share — matches training.
     """
     import nfl_data_py as nfl
 
@@ -189,15 +198,26 @@ def _fetch_rz_pbp(seasons: list[int]) -> list[dict]:
     rz["week"] = rz["week"].astype(int)
     rz["posteam"] = rz["posteam"].replace(_TEAM_MAP)
 
-    agg = (
+    # Player-level aggregation (WR/TE resolved via alias table downstream)
+    player_agg = (
         rz.groupby(["receiver_player_name", "posteam", "season", "week"])
         .agg(rz_targets=("receiver_player_name", "count"), rz_tds=("touchdown", "sum"))
         .reset_index()
         .rename(columns={"receiver_player_name": "name_short", "posteam": "team"})
     )
-    agg["rz_targets"] = agg["rz_targets"].astype(int)
-    agg["rz_tds"] = agg["rz_tds"].astype(int)
-    return agg.to_dict("records")
+    player_agg["rz_targets"] = player_agg["rz_targets"].astype(int)
+    player_agg["rz_tds"] = player_agg["rz_tds"].astype(int)
+
+    # Team-level aggregation — ALL positions, correct denominator for rz_target_share
+    team_agg = (
+        rz.groupby(["posteam", "season", "week"])
+        .agg(team_rz_targets=("receiver_player_name", "count"))
+        .reset_index()
+        .rename(columns={"posteam": "team"})
+    )
+    team_agg["team_rz_targets"] = team_agg["team_rz_targets"].astype(int)
+
+    return player_agg.to_dict("records"), team_agg.to_dict("records")
 
 
 # ── Name resolution ───────────────────────────────────────────────────────────
@@ -257,6 +277,19 @@ def _to_short(full_name: str) -> str:
     if len(parts) >= 2:
         return f"{parts[0][0]}.{' '.join(parts[1:])}"
     return full_name
+
+
+# ── Team RZ all-position aggregation ─────────────────────────────────────────
+
+def _build_team_rz_all_pos(
+    rows: list[dict],
+) -> dict[tuple[str, int, int], int]:
+    """Build (team, season, week) → total all-position RZ targets dict."""
+    result: dict[tuple[str, int, int], int] = {}
+    for row in rows:
+        key = (row["team"], int(row["season"]), int(row["week"]))
+        result[key] = int(row["team_rz_targets"])
+    return result
 
 
 # ── Resolution helpers ────────────────────────────────────────────────────────

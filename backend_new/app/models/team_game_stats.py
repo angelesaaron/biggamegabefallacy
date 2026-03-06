@@ -38,8 +38,10 @@ class TeamGameStats(Base):
     team_rec_tds: Mapped[int] = mapped_column(Integer, nullable=False)
 
     # Nullable: only populated when nflverse RZ data is available for the game
-    team_rz_targets: Mapped[Optional[int]] = mapped_column(Integer)
-    team_rz_tds: Mapped[Optional[int]] = mapped_column(Integer)
+    team_rz_targets: Mapped[Optional[int]] = mapped_column(Integer)           # WR/TE only
+    team_rz_tds: Mapped[Optional[int]] = mapped_column(Integer)               # WR/TE only
+    # All-position RZ targets — correct denominator for rz_target_share (matches training)
+    team_rz_targets_all_pos: Mapped[Optional[int]] = mapped_column(Integer)
 
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now(), nullable=False

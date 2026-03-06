@@ -27,6 +27,7 @@ from app.ml.model_bundle import get_eb_params
 from app.models.player import Player
 from app.models.player_game_log import PlayerGameLog
 from app.models.player_season_state import PlayerSeasonState
+from app.models.team_game_stats import TeamGameStats
 from app.services.sync_result import SyncResult
 
 logger = logging.getLogger(__name__)
@@ -70,27 +71,35 @@ class SeasonStateService:
             result.add_event(f"no_game_logs_found_for_season_{season}")
             return result
 
-        # Build team cumulative totals from log.team — not player.team.
+        # Build team cumulative WR/TE targets from log.team — not player.team.
+        # This is the correct denominator for target_share (WR/TE only, matches training).
         team_cum_targets: dict[str, int] = defaultdict(int)
-        team_cum_rz_targets: dict[str, int] = defaultdict(int)
         for log in all_logs:
             if log.team and log.player_id in players:
                 team_cum_targets[log.team] += log.targets
-                team_cum_rz_targets[log.team] += (log.rz_targets or 0)
+
+        # All-position RZ denominator from team_game_stats — matches training methodology.
+        team_cum_rz_all_pos = await self._get_team_rz_all_pos(season)
 
         for pid, plogs in player_logs.items():
             player = players[pid]
             # Use the player's last recorded team from their game logs
             current_team = plogs[-1].team
+            rz_denom = team_cum_rz_all_pos.get(current_team, 0)
 
             try:
                 feat = compute_features_from_logs(
                     logs=plogs,
                     is_te=player.is_te,
                     team_cum_targets=team_cum_targets.get(current_team, 0),
-                    team_cum_rz_targets=team_cum_rz_targets.get(current_team, 0),
+                    team_cum_rz_targets=rz_denom,
                     eb=eb,
                 )
+                # Guard: if no all-pos RZ data for this team, store 0.0 — consistent
+                # with feature_math.py which returns 0.0 when team_cum_rz_targets == 0.
+                # Matches training distribution; avoids NaN shift vs what model saw.
+                if rz_denom == 0:
+                    feat["rz_target_share"] = 0.0
                 await self._upsert_state(pid, season, feat, player, current_team)
                 result.n_written += 1
             except Exception as exc:
@@ -104,6 +113,24 @@ class SeasonStateService:
             season, result.n_written, result.n_skipped, result.n_failed,
         )
         return result
+
+    async def _get_team_rz_all_pos(self, season: int) -> dict[str, int]:
+        """
+        Cumulative all-position RZ targets per team for the full season,
+        summed from team_game_stats.team_rz_targets_all_pos.
+
+        This is the correct denominator for rz_target_share — matches how the
+        model was trained (feature_prep.py uses all-position PBP denominator).
+        """
+        rows = await self._db.execute(
+            select(TeamGameStats.team, TeamGameStats.team_rz_targets_all_pos)
+            .where(TeamGameStats.season == season)
+            .where(TeamGameStats.team_rz_targets_all_pos.isnot(None))
+        )
+        totals: dict[str, int] = defaultdict(int)
+        for row in rows:
+            totals[row.team] += row.team_rz_targets_all_pos
+        return totals
 
     async def _upsert_state(
         self, player_id: str, season: int, feat: dict, player: Player, last_team: str | None

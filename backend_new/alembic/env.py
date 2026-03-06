@@ -68,8 +68,7 @@ async def run_async_migrations() -> None:
         config.get_section(config.config_ini_section, {}),
         prefix="sqlalchemy.",
         poolclass=pool.NullPool,
-        # Re-inject the sync URL for the Alembic async runner
-        url=_sync_url,
+        url=settings.DATABASE_URL,
     )
     async with connectable.connect() as connection:
         await connection.run_sync(do_run_migrations)

@@ -29,6 +29,7 @@ from app.models.player_features import PlayerFeatures
 from app.models.player_game_log import PlayerGameLog
 from app.models.player_season_state import PlayerSeasonState
 from app.models.rookie_bucket import RookieBucket
+from app.models.team_game_stats import TeamGameStats
 from app.services.sync_result import SyncResult
 
 logger = logging.getLogger(__name__)
@@ -113,6 +114,21 @@ class FeatureComputeService:
         )
         return list(rows.scalars().all())
 
+    async def _get_team_rz_all_pos_before(
+        self, season: int, week: int
+    ) -> dict[str, int]:
+        """Cumulative all-position RZ targets per team for weeks < week."""
+        rows = await self._db.execute(
+            select(TeamGameStats.team, TeamGameStats.team_rz_targets_all_pos)
+            .where(TeamGameStats.season == season)
+            .where(TeamGameStats.week < week)
+            .where(TeamGameStats.team_rz_targets_all_pos.isnot(None))
+        )
+        totals: dict[str, int] = defaultdict(int)
+        for row in rows:
+            totals[row.team] += row.team_rz_targets_all_pos
+        return totals
+
     async def _get_season_logs_before(
         self, season: int, week: int
     ) -> list[PlayerGameLog]:
@@ -145,6 +161,8 @@ class FeatureComputeService:
         result: SyncResult,
     ) -> None:
         logs = await self._get_season_logs_before(season, week)
+        # All-position team RZ totals — correct denominator for rz_target_share
+        team_cum_rz_all_pos = await self._get_team_rz_all_pos_before(season, week)
 
         # Group logs by player_id (sorted by week via query ORDER BY)
         player_logs: dict[str, list[PlayerGameLog]] = defaultdict(list)
@@ -155,11 +173,9 @@ class FeatureComputeService:
         # A mid-season trade means old-team logs must count toward the old
         # team's denominator so target_share is correct for each team.
         team_cum_targets: dict[str, int] = defaultdict(int)
-        team_cum_rz_targets: dict[str, int] = defaultdict(int)
         for log in logs:
             if log.team:
                 team_cum_targets[log.team] += log.targets
-                team_cum_rz_targets[log.team] += (log.rz_targets or 0)
 
         for player in players:
             pid = player.player_id
@@ -178,7 +194,7 @@ class FeatureComputeService:
                     logs=plogs,
                     is_te=player.is_te,
                     team_cum_targets=team_cum_targets.get(current_team, 0),
-                    team_cum_rz_targets=team_cum_rz_targets.get(current_team, 0),
+                    team_cum_rz_targets=team_cum_rz_all_pos.get(current_team, 0),
                     eb=eb,
                 )
                 score = _completeness_score(feat)
