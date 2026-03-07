@@ -22,6 +22,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.config import settings
 from app.database import get_db
 from app.services.alias_seed import AliasSeedService
+from app.services.draft_sync import DraftSyncService
 from app.services.feature_compute import FeatureComputeService
 from app.services.game_log_ingest import GameLogIngestService
 from app.services.inference_service import InferenceService
@@ -95,6 +96,34 @@ async def sync_roster(db: AsyncSession = Depends(get_db)) -> SyncResponse:
     """
     async with Tank01Client() as tank01:
         result = await RosterSyncService(db, tank01).run()
+    return _to_response(result)
+
+
+# ── Draft rounds ─────────────────────────────────────────────────────────────
+
+@router.post("/sync/draft", response_model=SyncResponse, dependencies=[Depends(require_admin)])
+async def sync_draft_rounds(
+    force_update: bool = False,
+    db: AsyncSession = Depends(get_db),
+) -> SyncResponse:
+    """
+    Populate players.draft_round from the nflverse player registry.
+
+    Tank01 does not return draft data. nflverse espn_id == Tank01 playerID,
+    so matching is exact — no name fuzzing.
+
+    Run after roster sync at the start of each season and after the annual draft
+    to populate draft_round for incoming rookies.
+
+    draft_round values written: 1-7 = drafted round, 0 = UDFA (confirmed undrafted).
+    Players not found in nflverse are skipped (draft_round stays NULL, treated as
+    UDFA bucket by feature_compute).
+
+    Args:
+        force_update: If True, overwrite existing draft_round values.
+                      Default False — only updates NULL rows.
+    """
+    result = await DraftSyncService(db).run(force_update=force_update)
     return _to_response(result)
 
 
