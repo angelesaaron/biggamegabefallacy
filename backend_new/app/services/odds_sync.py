@@ -18,6 +18,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.models.game import Game
 from app.models.sportsbook_odds import SportsbookOdds
 from app.services.sync_result import SyncResult
+from app.utils.db_utils import execute_upsert
 from app.utils.odds_utils import implied_prob_from_american
 from app.utils.tank01_client import Tank01Client, parse_anytime_td_odds
 
@@ -84,16 +85,16 @@ class OddsSyncService:
                             },
                         )
                     )
-                    await self._db.execute(stmt)
-                    result.n_written += 1
+                    w, u = await execute_upsert(self._db, stmt)
+                    result.n_written += w
+                    result.n_updated += u
                 except Exception as exc:
                     logger.error("OddsUpsert failed %s %s: %s", prop["player_id"], game_id, exc)
                     result.n_failed += 1
 
-        await self._db.commit()
         logger.info(
-            "OddsSync S%dW%d: %d written, %d failed",
-            season, week, result.n_written, result.n_failed,
+            "OddsSync S%dW%d: %d written, %d updated, %d failed",
+            season, week, result.n_written, result.n_updated, result.n_failed,
         )
         return result
 

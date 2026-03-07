@@ -22,6 +22,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.models.player import Player
 from app.models.player_alias import PlayerAlias
 from app.services.sync_result import SyncResult
+from app.utils.db_utils import execute_upsert
 
 logger = logging.getLogger(__name__)
 
@@ -92,16 +93,16 @@ class AliasSeedService:
                             set_={"alias_name": alias_name, "active": True},
                         )
                     )
-                    await self._db.execute(stmt)
-                    result.n_written += 1
+                    w, u = await execute_upsert(self._db, stmt)
+                    result.n_written += w
+                    result.n_updated += u
                     logger.debug("Seeded alias: %s → %s (%s)", tank01_name_lower, alias_name, source)
                 except Exception as exc:
                     logger.error("Alias seed failed %s/%s: %s", tank01_name_lower, source, exc)
                     result.n_failed += 1
 
-        await self._db.commit()
         logger.info(
-            "AliasSeed complete: %d written, %d failed",
-            result.n_written, result.n_failed,
+            "AliasSeed complete: %d written, %d updated, %d failed",
+            result.n_written, result.n_updated, result.n_failed,
         )
         return result

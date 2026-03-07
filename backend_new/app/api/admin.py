@@ -68,8 +68,15 @@ class SyncResponse(BaseModel):
 
 
 def _to_response(result: SyncResult, success_msg: str = "completed") -> SyncResponse:
+    total_ok = result.n_written + result.n_updated
+    if result.n_failed > 0 and total_ok == 0:
+        status = "failed"
+    elif result.n_failed > 0:
+        status = "partial"
+    else:
+        status = success_msg
     return SyncResponse(
-        status="failed" if result.n_failed > 0 and result.n_written == 0 else success_msg,
+        status=status,
         n_written=result.n_written,
         n_updated=result.n_updated,
         n_skipped=result.n_skipped,

@@ -1,9 +1,9 @@
 """
-NflverseAdapter — wraps nfl_data_py to provide snap count and red zone PBP data.
+NflverseAdapter — wraps nflreadpy to provide snap count and red zone PBP data.
 
 Two data sources, two name formats:
-  nflverse_snap  — import_snap_counts()  → player column is FULL NAME ("D.K. Metcalf")
-  nflverse_pbp   — import_pbp_data()    → receiver_player_name is SHORT NAME ("D.Metcalf")
+  nflverse_snap  — load_snap_counts()  → player column is FULL NAME ("D.K. Metcalf")
+  nflverse_pbp   — load_pbp()         → receiver_player_name is SHORT NAME ("D.Metcalf")
 
 Alias resolution:
   1. Check player_aliases table (source='nflverse_snap' or 'nflverse_pbp')
@@ -11,8 +11,12 @@ Alias resolution:
   3. For PBP: fall back to auto-derived short format ("First Last" → "F.Last")
   4. No match → emit DataQualityEvent, skip player
 
-nfl_data_py is a synchronous library (parquet downloads). All calls are run via
+nflreadpy is a synchronous library (parquet downloads). All calls are run via
 asyncio.to_thread() so the FastAPI event loop stays unblocked.
+
+Caching:
+  nflreadpy uses update_config(cache_mode="filesystem", cache_dir=...) instead of
+  per-call parameters. Configured once per fetch call inside the thread.
 
 Team abbreviation normalisation:
   nflverse uses 'LA' for Rams and 'WAS' for Washington; Tank01 uses 'LAR' / 'WSH'.
@@ -103,7 +107,7 @@ class NflverseAdapter:
         snap_resolver = _build_snap_resolver(snap_aliases, players)
         pbp_resolver = _build_pbp_resolver(pbp_aliases, players)
 
-        # Fetch data in thread pool (nfl_data_py is sync)
+        # Fetch data in thread pool (nflreadpy is sync)
         snap_data, (rz_data, team_rz_data) = await asyncio.gather(
             asyncio.to_thread(_fetch_snap_counts, seasons),
             asyncio.to_thread(_fetch_rz_pbp, seasons),
@@ -153,26 +157,34 @@ class NflverseAdapter:
         return list(rows.scalars().all())
 
 
-# ── nfl_data_py fetch functions (sync, run in thread pool) ────────────────────
+# ── nflreadpy fetch functions (sync, run in thread pool) ─────────────────────
+
+def _configure_nflreadpy_cache(cache_dir: str) -> None:
+    """Configure nflreadpy filesystem cache. Called once per thread before any load_*."""
+    from pathlib import Path
+    from nflreadpy.config import update_config
+    update_config(cache_mode="filesystem", cache_dir=Path(cache_dir))
+
 
 def _fetch_snap_counts(seasons: list[int]) -> list[dict]:
     """
-    Download snap count data via nfl_data_py.
+    Download snap count data via nflreadpy.
     Returns list of dicts with keys: player, team, season, week, offense_pct.
 
     Cache behaviour:
-      nfl_data_py saves parquet files to NFLVERSE_CACHE_DIR (default ~/.bggtdm_cache/nflverse).
+      nflreadpy saves parquet files to NFLVERSE_CACHE_DIR (default ~/.bggtdm_cache/nflverse).
       On ephemeral hosting (e.g. Render free tier), this cache is wiped on each deploy.
       First ingest after a cold deploy will re-download. For production, mount a persistent
       disk and point NFLVERSE_CACHE_DIR at it.
     """
-    import nfl_data_py as nfl  # import here to avoid startup cost if not used
+    import nflreadpy as nfl  # import here to avoid startup cost if not used
 
     cache_dir = settings.NFLVERSE_CACHE_DIR
     os.makedirs(cache_dir, exist_ok=True)
+    _configure_nflreadpy_cache(cache_dir)
 
-    logger.info("Fetching nflverse snap counts for seasons: %s (cache: %s)", seasons, cache_dir)
-    df = nfl.import_snap_counts(seasons, cache=True, alt_path=cache_dir)
+    logger.info("Fetching nflverse snap counts for seasons: %s (cache_dir: %s)", seasons, cache_dir)
+    df = nfl.load_snap_counts(seasons).to_pandas()
     df = df[df["position"].isin(["WR", "TE"])][
         ["player", "season", "week", "team", "offense_pct"]
     ].copy()
@@ -194,16 +206,17 @@ def _fetch_rz_pbp(seasons: list[int]) -> tuple[list[dict], list[dict]]:
 
     Cache behaviour: same as _fetch_snap_counts — see that docstring.
     """
-    import nfl_data_py as nfl
+    import nflreadpy as nfl
 
     cache_dir = settings.NFLVERSE_CACHE_DIR
     os.makedirs(cache_dir, exist_ok=True)
+    _configure_nflreadpy_cache(cache_dir)
 
     logger.info(
         "Fetching nflverse PBP for seasons: %s (may be slow on first run; cache: %s)",
         seasons, cache_dir,
     )
-    pbp = nfl.import_pbp_data(seasons, cache=True, alt_path=cache_dir)
+    pbp = nfl.load_pbp(seasons).to_pandas()
 
     # Filter to red zone pass plays with a named receiver
     rz = pbp[

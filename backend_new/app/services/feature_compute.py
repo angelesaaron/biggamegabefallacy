@@ -31,6 +31,7 @@ from app.models.player_season_state import PlayerSeasonState
 from app.models.rookie_bucket import RookieBucket
 from app.models.team_game_stats import TeamGameStats
 from app.services.sync_result import SyncResult
+from app.utils.db_utils import execute_upsert
 
 logger = logging.getLogger(__name__)
 
@@ -97,10 +98,9 @@ class FeatureComputeService:
         else:
             await self._compute_regular_season(players, season, week, eb, result)
 
-        await self._db.commit()
         logger.info(
-            "FeatureCompute S%d W%d: written=%d skipped=%d failed=%d",
-            season, week, result.n_written, result.n_skipped, result.n_failed,
+            "FeatureCompute S%d W%d: written=%d updated=%d skipped=%d failed=%d",
+            season, week, result.n_written, result.n_updated, result.n_skipped, result.n_failed,
         )
         return result
 
@@ -198,7 +198,7 @@ class FeatureComputeService:
                     eb=eb,
                 )
                 score = _completeness_score(feat)
-                await self._upsert_features(
+                w, u = await self._upsert_features(
                     player_id=pid,
                     season=season,
                     week=week,
@@ -207,7 +207,8 @@ class FeatureComputeService:
                     is_early_season=False,
                     carry_forward_used=False,
                 )
-                result.n_written += 1
+                result.n_written += w
+                result.n_updated += u
             except Exception as exc:
                 logger.error(
                     "Feature compute failed %s S%d W%d: %s", pid, season, week, exc
@@ -274,7 +275,7 @@ class FeatureComputeService:
 
             try:
                 score = _completeness_score(feat)
-                await self._upsert_features(
+                w, u = await self._upsert_features(
                     player_id=pid,
                     season=season,
                     week=week,
@@ -283,7 +284,8 @@ class FeatureComputeService:
                     is_early_season=True,
                     carry_forward_used=carry_used,
                 )
-                result.n_written += 1
+                result.n_written += w
+                result.n_updated += u
             except Exception as exc:
                 logger.error(
                     "Early-season feature upsert failed %s S%d W%d: %s",
@@ -366,7 +368,7 @@ class FeatureComputeService:
         completeness_score: float,
         is_early_season: bool,
         carry_forward_used: bool,
-    ) -> None:
+    ) -> tuple[int, int]:
         values = {
             "player_id": player_id,
             "season": season,
@@ -406,4 +408,4 @@ class FeatureComputeService:
             .values(**values)
             .on_conflict_do_update(constraint="uq_player_features", set_=update_cols)
         )
-        await self._db.execute(stmt)
+        return await execute_upsert(self._db, stmt)

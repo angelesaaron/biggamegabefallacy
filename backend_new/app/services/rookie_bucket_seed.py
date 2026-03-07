@@ -16,6 +16,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.rookie_bucket import RookieBucket
 from app.services.sync_result import SyncResult
+from app.utils.db_utils import execute_upsert
 
 logger = logging.getLogger(__name__)
 
@@ -58,8 +59,9 @@ class RookieBucketSeedService:
                 )
             )
             try:
-                await self._db.execute(stmt)
-                result.n_written += 1
+                w, u = await execute_upsert(self._db, stmt)
+                result.n_written += w
+                result.n_updated += u
             except Exception as exc:
                 logger.error(
                     "RookieBucketSeed failed round=%s pos=%s: %s",
@@ -67,9 +69,8 @@ class RookieBucketSeedService:
                 )
                 result.n_failed += 1
 
-        await self._db.commit()
         logger.info(
-            "RookieBucketSeed: %d written, %d failed",
-            result.n_written, result.n_failed,
+            "RookieBucketSeed: %d written, %d updated, %d failed",
+            result.n_written, result.n_updated, result.n_failed,
         )
         return result

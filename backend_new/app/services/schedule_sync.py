@@ -17,6 +17,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.game import Game
 from app.services.sync_result import SyncResult
+from app.utils.db_utils import execute_upsert
 from app.utils.tank01_client import Tank01Client, parse_game_from_schedule
 
 logger = logging.getLogger(__name__)
@@ -72,15 +73,15 @@ class ScheduleSyncService:
                             },
                         )
                     )
-                    await self._db.execute(stmt)
-                    result.n_written += 1
+                    w, u = await execute_upsert(self._db, stmt)
+                    result.n_written += w
+                    result.n_updated += u
                 except Exception as exc:
                     logger.error("Game upsert failed %s: %s", data.get("game_id"), exc)
                     result.n_failed += 1
 
-        await self._db.commit()
         logger.info(
-            "ScheduleSync S%d complete: %d written, %d failed",
-            season, result.n_written, result.n_failed,
+            "ScheduleSync S%d complete: %d written, %d updated, %d failed",
+            season, result.n_written, result.n_updated, result.n_failed,
         )
         return result

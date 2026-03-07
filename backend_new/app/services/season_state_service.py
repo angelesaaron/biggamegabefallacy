@@ -29,6 +29,7 @@ from app.models.player_game_log import PlayerGameLog
 from app.models.player_season_state import PlayerSeasonState
 from app.models.team_game_stats import TeamGameStats
 from app.services.sync_result import SyncResult
+from app.utils.db_utils import execute_upsert
 
 logger = logging.getLogger(__name__)
 
@@ -100,17 +101,17 @@ class SeasonStateService:
                 # Matches training distribution; avoids NaN shift vs what model saw.
                 if rz_denom == 0:
                     feat["rz_target_share"] = 0.0
-                await self._upsert_state(pid, season, feat, player, current_team)
-                result.n_written += 1
+                w, u = await self._upsert_state(pid, season, feat, player, current_team)
+                result.n_written += w
+                result.n_updated += u
             except Exception as exc:
                 logger.error("SeasonState failed %s S%d: %s", pid, season, exc)
                 result.n_failed += 1
                 result.add_event(f"state_error:{pid}:{exc}")
 
-        await self._db.commit()
         logger.info(
-            "SeasonState S%d: written=%d skipped=%d failed=%d",
-            season, result.n_written, result.n_skipped, result.n_failed,
+            "SeasonState S%d: written=%d updated=%d skipped=%d failed=%d",
+            season, result.n_written, result.n_updated, result.n_skipped, result.n_failed,
         )
         return result
 
@@ -134,7 +135,7 @@ class SeasonStateService:
 
     async def _upsert_state(
         self, player_id: str, season: int, feat: dict, player: Player, last_team: str | None
-    ) -> None:
+    ) -> tuple[int, int]:
         values = {
             "player_id": player_id,
             "season": season,
@@ -169,4 +170,4 @@ class SeasonStateService:
             .values(**values)
             .on_conflict_do_update(constraint="uq_player_season_state", set_=update_cols)
         )
-        await self._db.execute(stmt)
+        return await execute_upsert(self._db, stmt)

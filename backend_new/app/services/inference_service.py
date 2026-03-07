@@ -29,6 +29,7 @@ from app.ml.model_bundle import load_bundle
 from app.models.player_features import PlayerFeatures
 from app.models.prediction import Prediction
 from app.services.sync_result import SyncResult
+from app.utils.db_utils import execute_upsert
 
 logger = logging.getLogger(__name__)
 
@@ -157,8 +158,9 @@ class InferenceService:
                         constraint="uq_prediction", set_=update_cols
                     )
                 )
-                await self._db.execute(stmt)
-                result.n_written += 1
+                w, u = await execute_upsert(self._db, stmt)
+                result.n_written += w
+                result.n_updated += u
             except Exception as exc:
                 logger.error(
                     "Prediction upsert failed %s S%d W%d: %s",
@@ -167,11 +169,10 @@ class InferenceService:
                 result.n_failed += 1
                 result.add_event(f"prediction_error:{feat_row.player_id}:{exc}")
 
-        await self._db.commit()
         logger.info(
-            "InferenceService S%d W%d: written=%d failed=%d "
+            "InferenceService S%d W%d: written=%d updated=%d failed=%d "
             "scalar=%.4f cal=%s n_players=%d",
-            season, week, result.n_written, result.n_failed,
+            season, week, result.n_written, result.n_updated, result.n_failed,
             week_scalar, best_cal, n_rows,
         )
         result.add_event(

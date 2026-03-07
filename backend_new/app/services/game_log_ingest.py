@@ -31,6 +31,7 @@ from app.models.player import Player
 from app.models.player_game_log import PlayerGameLog
 from app.models.team_game_stats import TeamGameStats
 from app.services.sync_result import SyncResult
+from app.utils.db_utils import execute_upsert
 from app.utils.nflverse_adapter import NflverseAdapter, NflverseResult
 from app.utils.tank01_client import Tank01Client, parse_game_logs_from_box_score
 
@@ -66,7 +67,6 @@ class GameLogIngestService:
             )
             result.merge(game_result)
 
-        await self._db.commit()
         logger.info(
             "GameLogIngest S%dW%d: %d written, %d updated, %d skipped, %d failed",
             season, week, result.n_written, result.n_updated, result.n_skipped, result.n_failed,
@@ -155,8 +155,9 @@ class GameLogIngestService:
                         },
                     )
                 )
-                await self._db.execute(stmt)
-                result.n_written += 1
+                w, u = await execute_upsert(self._db, stmt)
+                result.n_written += w
+                result.n_updated += u
             except Exception as exc:
                 logger.error("PlayerGameLog upsert failed %s %s: %s", player_id, game.game_id, exc)
                 result.n_failed += 1
@@ -232,7 +233,9 @@ class GameLogIngestService:
                         },
                     )
                 )
-                await self._db.execute(stmt)
+                w, u = await execute_upsert(self._db, stmt)
+                result.n_written += w
+                result.n_updated += u
             except Exception as exc:
                 logger.error("TeamGameStats upsert failed %s %s: %s", game_id, team, exc)
                 result.n_failed += 1

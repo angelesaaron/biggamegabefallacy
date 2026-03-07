@@ -16,6 +16,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.player import Player
 from app.services.sync_result import SyncResult
+from app.utils.db_utils import execute_upsert
 from app.utils.tank01_client import Tank01Client, NFL_TEAMS, parse_player_from_roster
 
 logger = logging.getLogger(__name__)
@@ -68,15 +69,15 @@ class RosterSyncService:
                             },
                         )
                     )
-                    await self._db.execute(stmt)
-                    result.n_written += 1
+                    w, u = await execute_upsert(self._db, stmt)
+                    result.n_written += w
+                    result.n_updated += u
                 except Exception as exc:
                     logger.error("Player upsert failed %s: %s", data.get("player_id"), exc)
                     result.n_failed += 1
 
-        await self._db.commit()
         logger.info(
-            "RosterSync complete: %d written, %d failed, %d skipped",
-            result.n_written, result.n_failed, result.n_skipped,
+            "RosterSync complete: %d written, %d updated, %d failed, %d skipped",
+            result.n_written, result.n_updated, result.n_failed, result.n_skipped,
         )
         return result
