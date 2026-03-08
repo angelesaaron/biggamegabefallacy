@@ -9,13 +9,13 @@ Pipeline per game:
   5. Enrich with nflverse RZ data (via NflverseAdapter)
   6. Upsert player_game_logs
   7. Aggregate and upsert team_game_stats
-  8. Emit DataQualityEvent for every name that failed alias resolution
+  8. Emit DataQualityEvent for every player not found in ID bridge
 
 Idempotent: safe to re-run for any week. Existing rows are updated in-place.
 
 Trigger:
   - Manually via admin endpoint after a week is complete
-  - Re-run to backfill missing snap/RZ data after alias table updates
+  - Re-run after nflverse updates load_players() to pick up newly registered players
 """
 
 import logging
@@ -57,8 +57,8 @@ class GameLogIngestService:
         known_player_ids = await self._get_known_player_ids()
 
         # Download + resolve nflverse data for this season (covers all weeks)
-        nflverse = await NflverseAdapter(self._db).load(seasons=[season])
-        await self._emit_alias_events(nflverse, season, week, result)
+        nflverse = await NflverseAdapter().load(seasons=[season])
+        await self._emit_unresolved_events(nflverse, season, week, result)
 
         # Process each game
         for game in games:
@@ -240,32 +240,32 @@ class GameLogIngestService:
                 logger.error("TeamGameStats upsert failed %s %s: %s", game_id, team, exc)
                 result.n_failed += 1
 
-    async def _emit_alias_events(
+    async def _emit_unresolved_events(
         self,
         nflverse: NflverseResult,
         season: int,
         week: int,
         result: SyncResult,
     ) -> None:
-        """Write DataQualityEvent rows for every unresolved nflverse name."""
+        """Write DataQualityEvent rows for players absent from nflverse load_players() bridge."""
         for name in nflverse.snap_unmatched:
             event = DataQualityEvent(
-                event_type="alias_match_failure",
+                event_type="nflverse_unresolved",
                 season=season,
                 week=week,
-                detail=f"nflverse_snap name unresolved: '{name}' — add to player_aliases",
-                auto_resolvable=False,
+                detail=f"snap: '{name}' not in load_players() bridge (new player or registry lag)",
+                auto_resolvable=True,
             )
             self._db.add(event)
-            result.add_event(f"alias_match_failure (snap): {name}")
+            result.add_event(f"nflverse_unresolved (snap): {name}")
 
         for name in nflverse.rz_unmatched:
             event = DataQualityEvent(
-                event_type="alias_match_failure",
+                event_type="nflverse_unresolved",
                 season=season,
                 week=week,
-                detail=f"nflverse_pbp name unresolved: '{name}' — add to player_aliases",
-                auto_resolvable=False,
+                detail=f"pbp: '{name}' not in load_players() bridge (new player or registry lag)",
+                auto_resolvable=True,
             )
             self._db.add(event)
-            result.add_event(f"alias_match_failure (pbp): {name}")
+            result.add_event(f"nflverse_unresolved (pbp): {name}")

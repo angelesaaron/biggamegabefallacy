@@ -36,7 +36,6 @@ class Player(Base):
     )
 
     # Relationships
-    aliases: Mapped[list["PlayerAlias"]] = relationship(back_populates="player")
     game_logs: Mapped[list["PlayerGameLog"]] = relationship(back_populates="player")
     features: Mapped[list["PlayerFeatures"]] = relationship(back_populates="player")
     season_states: Mapped[list["PlayerSeasonState"]] = relationship(back_populates="player")

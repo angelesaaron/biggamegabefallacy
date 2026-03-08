@@ -24,7 +24,7 @@ class PlayerGameLog(Base):
     Raw box score stats per player per game.
 
     Tank01 supplies the core receiving stats. nflverse supplies snap
-    count and red zone stats via the player_aliases join — those columns
+    count and red zone stats via the ID bridge (load_players()) — those columns
     are nullable and their presence is flagged in data_source_flags.
 
     Rows are written by ingest and never mutated after a game is final.

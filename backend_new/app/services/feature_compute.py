@@ -229,6 +229,24 @@ class FeatureComputeService:
         prior_states = await self._get_prior_states(season)
         buckets = await self._get_rookie_buckets()
 
+        # Hard gate: if there are experienced players but zero prior state rows,
+        # season-state was never run for the prior season. Every veteran would silently
+        # get rookie bucket features — wrong model inputs, bad predictions.
+        # Refuse to run until season-state is populated.
+        veterans = [p for p in players if p.experience and p.experience > 0]
+        if veterans and not prior_states:
+            msg = (
+                f"early_season_no_prior_state: {len(veterans)} experienced players found "
+                f"but no player_season_state rows exist for join_season={season}. "
+                f"Run POST /admin/compute/season-state/{season - 1} first, "
+                f"then re-run this endpoint. "
+                f"Refusing to produce features — veterans would get rookie bucket values."
+            )
+            logger.error(msg)
+            result.n_failed += len(veterans)
+            result.add_event(msg)
+            return
+
         counts: dict[str, int] = {
             "carry_forward": 0, "team_changer": 0, "rookie": 0, "skipped": 0,
         }

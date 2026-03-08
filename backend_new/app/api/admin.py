@@ -21,7 +21,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.config import settings
 from app.database import get_db
-from app.services.alias_seed import AliasSeedService
 from app.services.draft_sync import DraftSyncService
 from app.services.feature_compute import FeatureComputeService
 from app.services.game_log_ingest import GameLogIngestService
@@ -149,7 +148,7 @@ async def ingest_game_logs(season: SeasonPath, week: WeekPath, db: AsyncSession 
     snap + RZ data, and write player_game_logs + team_game_stats.
 
     Prerequisite: schedule must be synced (games need status='final').
-    Safe to re-run after alias table updates to backfill null snap/RZ data.
+    Safe to re-run — nflverse enrichment is idempotent.
 
     Note: nflverse PBP download is ~300 MB on first run (cached locally after).
     """
@@ -238,53 +237,3 @@ async def run_predictions(season: SeasonPath, week: WeekPath, db: AsyncSession =
     """
     result = await InferenceService(db).run(season, week)
     return _to_response(result)
-
-
-# ── Alias management ──────────────────────────────────────────────────────────
-
-@router.post("/aliases/seed", response_model=SyncResponse, dependencies=[Depends(require_admin)])
-async def seed_aliases(db: AsyncSession = Depends(get_db)) -> SyncResponse:
-    """
-    Seed player_aliases with known Tank01 → nflverse name mismatches.
-    Run once after initial roster sync. Safe to re-run.
-
-    After seeding, re-run ingest/gamelogs to backfill previously null
-    snap/RZ data for the affected players.
-    """
-    result = await AliasSeedService(db).run()
-    return _to_response(result)
-
-
-@router.get("/aliases/unresolved", dependencies=[Depends(require_admin)])
-async def list_unresolved_aliases(
-    season: int = Query(ge=2020, le=2035, description="NFL season year"),
-    week: int | None = Query(default=None, ge=1, le=18, description="Filter to a single week"),
-    db: AsyncSession = Depends(get_db),
-) -> dict:
-    """
-    List recent alias_match_failure events so you know which players
-    to add to the alias table.
-    """
-    from sqlalchemy import select
-    from app.models.data_quality_event import DataQualityEvent
-
-    q = (
-        select(DataQualityEvent)
-        .where(DataQualityEvent.event_type == "alias_match_failure")
-        .where(DataQualityEvent.season == season)
-        .where(DataQualityEvent.resolved_at.is_(None))
-        .order_by(DataQualityEvent.created_at.desc())
-    )
-    if week is not None:
-        q = q.where(DataQualityEvent.week == week)
-
-    rows = await db.execute(q)
-    events = rows.scalars().all()
-
-    return {
-        "count": len(events),
-        "events": [
-            {"id": e.id, "week": e.week, "detail": e.detail, "created_at": str(e.created_at)}
-            for e in events
-        ],
-    }

@@ -1,15 +1,15 @@
 """
 NflverseAdapter — wraps nflreadpy to provide snap count and red zone PBP data.
 
-Two data sources, two name formats:
-  nflverse_snap  — load_snap_counts()  → player column is FULL NAME ("D.K. Metcalf")
-  nflverse_pbp   — load_pbp()         → receiver_player_name is SHORT NAME ("D.Metcalf")
+ID bridge resolution (espn_id in nflverse == playerID in Tank01):
+  nflverse_snap  — load_snap_counts()  → pfr_player_id  → pfr_to_tank01  dict → Tank01 player_id
+  nflverse_pbp   — load_pbp()         → receiver_player_id (GSIS) → gsis_to_tank01 dict → Tank01 player_id
 
-Alias resolution:
-  1. Check player_aliases table (source='nflverse_snap' or 'nflverse_pbp')
-  2. For snap: fall back to exact match on players.full_name
-  3. For PBP: fall back to auto-derived short format ("First Last" → "F.Last")
-  4. No match → emit DataQualityEvent, skip player
+Bridge is built once per load() call via nflreadpy.load_players() (cross-reference table),
+fetched concurrently with snap/PBP data. No DB queries needed for resolution.
+
+Unmatched players (absent from load_players() — typically brand-new rookies before nflverse
+updates its registry) are returned in snap_unmatched / rz_unmatched for DQE logging.
 
 nflreadpy is a synchronous library (parquet downloads). All calls are run via
 asyncio.to_thread() so the FastAPI event loop stays unblocked.
@@ -28,12 +28,7 @@ import os
 from dataclasses import dataclass
 from typing import Callable
 
-from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncSession
-
 from app.config import settings
-from app.models.player import Player
-from app.models.player_alias import PlayerAlias
 
 logger = logging.getLogger(__name__)
 
@@ -71,7 +66,7 @@ class NflverseResult:
     # All-position team RZ targets — keyed by (team, season, week).
     # Used as the denominator for rz_target_share (matches training methodology).
     team_rz_all_pos: dict[tuple[str, int, int], int]
-    # Names that failed resolution
+    # IDs/names that failed resolution (absent from load_players() bridge)
     snap_unmatched: list[str]
     rz_unmatched: list[str]
 
@@ -86,32 +81,29 @@ class NflverseAdapter:
         adapter = NflverseAdapter(db)
         result = await adapter.load(seasons=[2025])
         snap = result.snap.get((player_id, 2025, 7))
-    """
 
-    def __init__(self, db: AsyncSession) -> None:
-        self._db = db
+    Resolution is entirely ID-bridge based (nflreadpy.load_players cross-reference).
+    No DB access needed.
+    """
 
     async def load(self, seasons: list[int]) -> NflverseResult:
         """
-        Download snap + PBP data for the given seasons and resolve all names
-        to player_ids via the alias table.
+        Download snap + PBP data for the given seasons and resolve all players
+        to Tank01 player_ids via the nflverse ID bridge.
 
-        This is the single entry point for the ingest service.
+        All three network calls (load_players, load_snap_counts, load_pbp) run
+        concurrently in the thread pool.
         """
-        # Load alias lookup tables from DB (one query each)
-        snap_aliases = await self._load_aliases("nflverse_snap")
-        pbp_aliases = await self._load_aliases("nflverse_pbp")
-        players = await self._load_players()
-
-        # Build resolvers
-        snap_resolver = _build_snap_resolver(snap_aliases, players)
-        pbp_resolver = _build_pbp_resolver(pbp_aliases, players)
-
-        # Fetch data in thread pool (nflreadpy is sync)
-        snap_data, (rz_data, team_rz_data) = await asyncio.gather(
-            asyncio.to_thread(_fetch_snap_counts, seasons),
-            asyncio.to_thread(_fetch_rz_pbp, seasons),
+        (gsis_to_tank01, pfr_to_tank01), snap_data, (rz_data, team_rz_data) = (
+            await asyncio.gather(
+                asyncio.to_thread(_fetch_player_bridge, settings.NFLVERSE_CACHE_DIR),
+                asyncio.to_thread(_fetch_snap_counts, seasons),
+                asyncio.to_thread(_fetch_rz_pbp, seasons),
+            )
         )
+
+        snap_resolver = _build_snap_resolver(pfr_to_tank01)
+        pbp_resolver = _build_pbp_resolver(gsis_to_tank01)
 
         snap_result, snap_unmatched = _resolve_snap(snap_data, snap_resolver)
         rz_result, rz_unmatched = _resolve_rz(rz_data, pbp_resolver)
@@ -119,13 +111,13 @@ class NflverseAdapter:
 
         if snap_unmatched:
             logger.warning(
-                "nflverse_snap: %d unresolved names (add to player_aliases): %s",
+                "nflverse_snap: %d unresolved players (not in load_players() bridge): %s",
                 len(snap_unmatched),
                 snap_unmatched[:10],
             )
         if rz_unmatched:
             logger.warning(
-                "nflverse_pbp: %d unresolved names: %s",
+                "nflverse_pbp: %d unresolved players (not in load_players() bridge): %s",
                 len(rz_unmatched),
                 rz_unmatched[:10],
             )
@@ -138,25 +130,6 @@ class NflverseAdapter:
             rz_unmatched=rz_unmatched,
         )
 
-    # ── DB helpers ────────────────────────────────────────────────────────────
-
-    async def _load_aliases(self, source: str) -> dict[str, str]:
-        """Returns {alias_name_lower: player_id} for the given source."""
-        rows = await self._db.execute(
-            select(PlayerAlias.alias_name, PlayerAlias.player_id)
-            .where(PlayerAlias.source == source)
-            .where(PlayerAlias.active.is_(True))
-        )
-        return {row.alias_name.lower(): row.player_id for row in rows}
-
-    async def _load_players(self) -> list[Player]:
-        """Load all WR/TE players (active and inactive) for alias resolution.
-        Inactive players are included so historical game logs can still be resolved."""
-        rows = await self._db.execute(
-            select(Player).where(Player.position.in_(["WR", "TE"]))
-        )
-        return list(rows.scalars().all())
-
 
 # ── nflreadpy fetch functions (sync, run in thread pool) ─────────────────────
 
@@ -167,10 +140,47 @@ def _configure_nflreadpy_cache(cache_dir: str) -> None:
     update_config(cache_mode="filesystem", cache_dir=Path(cache_dir))
 
 
+def _fetch_player_bridge(cache_dir: str) -> tuple[dict[str, str], dict[str, str]]:
+    """
+    Build Tank01 player ID lookup tables from nflreadpy cross-reference data.
+    espn_id in nflverse == playerID in Tank01 (canonical system key).
+
+    Returns:
+        gsis_to_tank01: {gsis_id: tank01_player_id}  — for PBP resolution
+        pfr_to_tank01:  {pfr_id: tank01_player_id}   — for snap resolution
+    """
+    import nflreadpy as nfl
+
+    os.makedirs(cache_dir, exist_ok=True)
+    _configure_nflreadpy_cache(cache_dir)
+
+    logger.info("Fetching nflverse player bridge (cache_dir: %s)", cache_dir)
+    df = nfl.load_players().to_pandas()
+    df = df[df["espn_id"].notna()].copy()
+    # espn_id arrives as float from parquet (e.g. 4047646.0) — cast via int to drop ".0"
+    df["espn_id"] = df["espn_id"].astype(float).astype(int).astype(str)
+
+    gsis_to_tank01 = (
+        df[df["gsis_id"].notna()]
+        .set_index("gsis_id")["espn_id"]
+        .to_dict()
+    )
+    pfr_to_tank01 = (
+        df[df["pfr_id"].notna()]
+        .set_index("pfr_id")["espn_id"]
+        .to_dict()
+    )
+    logger.info(
+        "Player bridge built: %d GSIS entries, %d PFR entries",
+        len(gsis_to_tank01), len(pfr_to_tank01),
+    )
+    return gsis_to_tank01, pfr_to_tank01
+
+
 def _fetch_snap_counts(seasons: list[int]) -> list[dict]:
     """
     Download snap count data via nflreadpy.
-    Returns list of dicts with keys: player, team, season, week, offense_pct.
+    Returns list of dicts with keys: player, pfr_player_id, team, season, week, offense_pct.
 
     Cache behaviour:
       nflreadpy saves parquet files to NFLVERSE_CACHE_DIR (default ~/.bggtdm_cache/nflverse).
@@ -178,7 +188,7 @@ def _fetch_snap_counts(seasons: list[int]) -> list[dict]:
       First ingest after a cold deploy will re-download. For production, mount a persistent
       disk and point NFLVERSE_CACHE_DIR at it.
     """
-    import nflreadpy as nfl  # import here to avoid startup cost if not used
+    import nflreadpy as nfl
 
     cache_dir = settings.NFLVERSE_CACHE_DIR
     os.makedirs(cache_dir, exist_ok=True)
@@ -187,7 +197,7 @@ def _fetch_snap_counts(seasons: list[int]) -> list[dict]:
     logger.info("Fetching nflverse snap counts for seasons: %s (cache_dir: %s)", seasons, cache_dir)
     df = nfl.load_snap_counts(seasons).to_pandas()
     df = df[df["position"].isin(["WR", "TE"])][
-        ["player", "season", "week", "team", "offense_pct"]
+        ["player", "pfr_player_id", "season", "week", "team", "offense_pct"]
     ].copy()
     df["season"] = df["season"].astype(int)
     df["week"] = df["week"].astype(int)
@@ -201,7 +211,7 @@ def _fetch_rz_pbp(seasons: list[int]) -> tuple[list[dict], list[dict]]:
     Download PBP data and aggregate red zone (≤20 yard line) pass targets.
 
     Returns (player_rows, team_rows):
-      player_rows — per-player/game: name_short, team, season, week, rz_targets, rz_tds
+      player_rows — per-player/game: gsis_id, name_short, team, season, week, rz_targets, rz_tds
       team_rows   — per-team/game (ALL positions): team, season, week, team_rz_targets
                     Used as the denominator for rz_target_share — matches training.
 
@@ -224,18 +234,22 @@ def _fetch_rz_pbp(seasons: list[int]) -> tuple[list[dict], list[dict]]:
         (pbp["play_type"] == "pass")
         & (pbp["yardline_100"] <= 20)
         & pbp["receiver_player_id"].notna()
-    ][["receiver_player_name", "posteam", "season", "week", "touchdown"]].copy()
+    ][["receiver_player_id", "receiver_player_name", "posteam", "season", "week", "touchdown"]].copy()
 
     rz["season"] = rz["season"].astype(int)
     rz["week"] = rz["week"].astype(int)
     rz["posteam"] = rz["posteam"].replace(_TEAM_MAP)
 
-    # Player-level aggregation (WR/TE resolved via alias table downstream)
+    # Player-level aggregation — gsis_id is 1:1 with receiver_player_name, safe to include
     player_agg = (
-        rz.groupby(["receiver_player_name", "posteam", "season", "week"])
+        rz.groupby(["receiver_player_id", "receiver_player_name", "posteam", "season", "week"])
         .agg(rz_targets=("receiver_player_name", "count"), rz_tds=("touchdown", "sum"))
         .reset_index()
-        .rename(columns={"receiver_player_name": "name_short", "posteam": "team"})
+        .rename(columns={
+            "receiver_player_id": "gsis_id",
+            "receiver_player_name": "name_short",
+            "posteam": "team",
+        })
     )
     player_agg["rz_targets"] = player_agg["rz_targets"].astype(int)
     player_agg["rz_tds"] = player_agg["rz_tds"].astype(int)
@@ -252,63 +266,28 @@ def _fetch_rz_pbp(seasons: list[int]) -> tuple[list[dict], list[dict]]:
     return player_agg.to_dict("records"), team_agg.to_dict("records")
 
 
-# ── Name resolution ───────────────────────────────────────────────────────────
+# ── ID resolution ─────────────────────────────────────────────────────────────
 
 def _build_snap_resolver(
-    aliases: dict[str, str],
-    players: list[Player],
-) -> Callable[[str], str | None]:
-    """
-    Returns a function that maps a nflverse_snap name → player_id.
-
-    Priority:
-      1. player_aliases table (source='nflverse_snap')
-      2. Exact match on players.full_name (lowercase)
-    """
-    direct = {p.full_name.lower(): p.player_id for p in players}
-
-    def resolve(name: str) -> str | None:
-        norm = name.lower().strip()
-        return aliases.get(norm) or direct.get(norm)
-
+    pfr_to_tank01: dict[str, str],
+) -> Callable[[str | None], str | None]:
+    """Maps pfr_player_id → Tank01 player_id. Returns None if absent from bridge."""
+    def resolve(pfr_id: str | None) -> str | None:
+        if pfr_id:
+            return pfr_to_tank01.get(pfr_id)
+        return None
     return resolve
 
 
 def _build_pbp_resolver(
-    aliases: dict[str, str],
-    players: list[Player],
-) -> Callable[[str], str | None]:
-    """
-    Returns a function that maps a nflverse_pbp short name → player_id.
-
-    Priority:
-      1. player_aliases table (source='nflverse_pbp')
-      2. Auto-derive: "First Last" → "F.Last" lookup against all player full names
-    """
-    # Build short_name → player_id from all players
-    short_lookup: dict[str, str] = {}
-    for p in players:
-        short = _to_short(p.full_name).lower()
-        # Keep the first match only (rare collision — edge cases go in alias table)
-        if short not in short_lookup:
-            short_lookup[short] = p.player_id
-
-    def resolve(name: str) -> str | None:
-        norm = name.lower().strip()
-        return aliases.get(norm) or short_lookup.get(norm)
-
+    gsis_to_tank01: dict[str, str],
+) -> Callable[[str | None], str | None]:
+    """Maps receiver_player_id (GSIS) → Tank01 player_id. Returns None if absent from bridge."""
+    def resolve(gsis_id: str | None) -> str | None:
+        if gsis_id:
+            return gsis_to_tank01.get(gsis_id)
+        return None
     return resolve
-
-
-def _to_short(full_name: str) -> str:
-    """
-    Convert "First Last" to "F.Last" (nflverse PBP short format).
-    Handles multi-word last names: "Brian Thomas Jr" → "B.Thomas Jr"
-    """
-    parts = full_name.strip().split()
-    if len(parts) >= 2:
-        return f"{parts[0][0]}.{' '.join(parts[1:])}"
-    return full_name
 
 
 # ── Team RZ all-position aggregation ─────────────────────────────────────────
@@ -328,14 +307,14 @@ def _build_team_rz_all_pos(
 
 def _resolve_snap(
     rows: list[dict],
-    resolve: Callable[[str], str | None],
+    resolve: Callable[[str | None], str | None],
 ) -> tuple[dict[tuple[str, int, int], SnapRecord], list[str]]:
     resolved: dict[tuple[str, int, int], SnapRecord] = {}
     unmatched: list[str] = []
     seen_unmatched: set[str] = set()
 
     for row in rows:
-        player_id = resolve(row["player"])
+        player_id = resolve(row.get("pfr_player_id"))
         if player_id is None:
             name = row["player"]
             if name not in seen_unmatched:
@@ -357,14 +336,14 @@ def _resolve_snap(
 
 def _resolve_rz(
     rows: list[dict],
-    resolve: Callable[[str], str | None],
+    resolve: Callable[[str | None], str | None],
 ) -> tuple[dict[tuple[str, int, int], RZRecord], list[str]]:
     resolved: dict[tuple[str, int, int], RZRecord] = {}
     unmatched: list[str] = []
     seen_unmatched: set[str] = set()
 
     for row in rows:
-        player_id = resolve(row["name_short"])
+        player_id = resolve(row.get("gsis_id"))
         if player_id is None:
             name = row["name_short"]
             if name not in seen_unmatched:

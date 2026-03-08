@@ -24,13 +24,12 @@ class DataQualityEvent(Base):
     prediction.
 
     A batch run summary queries this table to surface:
-        "8 alias match failures this week — these players have null snap features."
-    Fix the alias table, re-run the feature job, nulls go away.
-    No more invisible model degradation.
+        "8 unresolved players this week — snap/RZ data null for these players."
+    Re-run ingest after nflverse updates its load_players() registry. No more invisible model degradation.
 
     event_type values:
-        'alias_match_failure'  — nflverse name could not be resolved
-        'null_snap_pct'        — snap data missing after alias resolution
+        'nflverse_unresolved'  — player not found in nflverse ID bridge (load_players())
+        'null_snap_pct'        — snap data missing after ID bridge resolution
         'null_rz_data'         — red zone data missing
         'low_completeness'     — player_features.completeness_score < threshold
         'prediction_skipped'   — prediction not generated (data insufficient)

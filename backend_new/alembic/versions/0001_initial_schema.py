@@ -1,4 +1,4 @@
-"""Initial schema — all 11 tables.
+"""Initial schema — all 10 tables.
 
 Revision ID: 0001
 Revises:
@@ -83,24 +83,6 @@ def upgrade() -> None:
         sa.Column("rz_td_rate_eb", sa.Float, nullable=True),
         sa.UniqueConstraint("draft_round", "pos", name="uq_rookie_bucket"),
     )
-
-    # ── player_aliases ────────────────────────────────────────────────────────
-    op.create_table(
-        "player_aliases",
-        sa.Column("id", sa.Integer, primary_key=True, autoincrement=True),
-        sa.Column(
-            "player_id", sa.String(50),
-            sa.ForeignKey("players.player_id", ondelete="CASCADE"),
-            nullable=False,
-        ),
-        sa.Column("source", sa.String(50), nullable=False),
-        sa.Column("alias_name", sa.String(150), nullable=False),
-        sa.Column("match_type", sa.String(20), nullable=False),
-        sa.Column("active", sa.Boolean, nullable=False, server_default="true"),
-        sa.Column("created_at", sa.DateTime(timezone=True), server_default=sa.text("now()"), nullable=False),
-        sa.UniqueConstraint("player_id", "source", name="uq_player_alias_player_source"),
-    )
-    op.create_index("ix_player_aliases_player_id", "player_aliases", ["player_id"])
 
     # ── player_game_logs ──────────────────────────────────────────────────────
     op.create_table(
@@ -343,7 +325,6 @@ def downgrade() -> None:
     op.drop_table("player_season_state")
     op.drop_table("team_game_stats")
     op.drop_table("player_game_logs")
-    op.drop_table("player_aliases")
     op.drop_table("rookie_buckets")
     op.drop_table("games")
     op.drop_table("players")

@@ -205,16 +205,6 @@ class TestSeedRookieBuckets:
         assert resp.json()["n_written"] == 15
 
 
-class TestSeedAliases:
-    async def test_success(self, admin_client):
-        with patch("app.api.admin.AliasSeedService") as MockSvc:
-            MockSvc.return_value.run = AsyncMock(return_value=SyncResult(n_written=9))
-            resp = await admin_client.post("/admin/aliases/seed", headers=ADMIN_HEADERS)
-
-        assert resp.status_code == 200
-        assert resp.json()["n_written"] == 9
-
-
 # ── Feature computation ───────────────────────────────────────────────────────
 
 class TestComputeFeatures:
@@ -285,57 +275,6 @@ class TestRunPredictions:
                 "/admin/run/predictions/2025/3", headers=ADMIN_HEADERS
             )
         MockSvc.return_value.run.assert_awaited_once_with(2025, 3)
-
-
-# ── Unresolved aliases ────────────────────────────────────────────────────────
-
-class TestListUnresolvedAliases:
-    async def test_returns_empty_list_when_none(self, admin_client, mock_db):
-        mock_result = MagicMock()
-        mock_result.scalars.return_value.all.return_value = []
-        mock_db.execute = AsyncMock(return_value=mock_result)
-
-        resp = await admin_client.get(
-            "/admin/aliases/unresolved?season=2025", headers=ADMIN_HEADERS
-        )
-        assert resp.status_code == 200
-        body = resp.json()
-        assert body["count"] == 0
-        assert body["events"] == []
-
-    async def test_returns_events_when_present(self, admin_client, mock_db):
-        from types import SimpleNamespace
-        from datetime import datetime
-
-        event = SimpleNamespace(
-            id=1,
-            week=7,
-            detail="nflverse_snap name unresolved: 'Gabe Davis'",
-            created_at=datetime(2025, 11, 7, 12, 0, 0),
-            resolved_at=None,
-        )
-        mock_result = MagicMock()
-        mock_result.scalars.return_value.all.return_value = [event]
-        mock_db.execute = AsyncMock(return_value=mock_result)
-
-        resp = await admin_client.get(
-            "/admin/aliases/unresolved?season=2025", headers=ADMIN_HEADERS
-        )
-        assert resp.status_code == 200
-        body = resp.json()
-        assert body["count"] == 1
-        assert body["events"][0]["id"] == 1
-        assert body["events"][0]["week"] == 7
-
-    async def test_week_filter_passed(self, admin_client, mock_db):
-        mock_result = MagicMock()
-        mock_result.scalars.return_value.all.return_value = []
-        mock_db.execute = AsyncMock(return_value=mock_result)
-
-        resp = await admin_client.get(
-            "/admin/aliases/unresolved?season=2025&week=7", headers=ADMIN_HEADERS
-        )
-        assert resp.status_code == 200
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
