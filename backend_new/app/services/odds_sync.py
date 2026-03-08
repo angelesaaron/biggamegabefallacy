@@ -85,9 +85,9 @@ class OddsSyncService:
                             },
                         )
                     )
-                    w, u = await execute_upsert(self._db, stmt)
-                    result.n_written += w
-                    result.n_updated += u
+                    n_w, n_u = await execute_upsert(self._db, stmt)
+                    result.n_written += n_w
+                    result.n_updated += n_u
                 except Exception as exc:
                     logger.error("OddsUpsert failed %s %s: %s", prop["player_id"], game_id, exc)
                     result.n_failed += 1

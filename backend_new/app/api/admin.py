@@ -15,7 +15,7 @@ Endpoints are intentionally NOT auto-cascading:
 import logging
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, Header, HTTPException, Path, status
+from fastapi import APIRouter, Depends, Header, HTTPException, Path, Query, status
 from pydantic import BaseModel
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -257,8 +257,8 @@ async def seed_aliases(db: AsyncSession = Depends(get_db)) -> SyncResponse:
 
 @router.get("/aliases/unresolved", dependencies=[Depends(require_admin)])
 async def list_unresolved_aliases(
-    season: int,
-    week: int | None = None,
+    season: int = Query(ge=2020, le=2035, description="NFL season year"),
+    week: int | None = Query(default=None, ge=1, le=18, description="Filter to a single week"),
     db: AsyncSession = Depends(get_db),
 ) -> dict:
     """

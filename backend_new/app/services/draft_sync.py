@@ -101,8 +101,6 @@ class DraftSyncService:
                 )
                 result.n_failed += 1
 
-        await self._db.commit()
-
         logger.info(
             "DraftSync complete: %d updated, %d skipped, %d failed",
             result.n_updated, result.n_skipped, result.n_failed,

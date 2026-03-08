@@ -150,7 +150,8 @@ class NflverseAdapter:
         return {row.alias_name.lower(): row.player_id for row in rows}
 
     async def _load_players(self) -> list[Player]:
-        """Load all active WR/TE players."""
+        """Load all WR/TE players (active and inactive) for alias resolution.
+        Inactive players are included so historical game logs can still be resolved."""
         rows = await self._db.execute(
             select(Player).where(Player.position.in_(["WR", "TE"]))
         )
