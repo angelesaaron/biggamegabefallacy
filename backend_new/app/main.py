@@ -57,6 +57,8 @@ async def unhandled_exception_handler(request: Request, exc: Exception) -> JSONR
 
 @app.get("/health")
 async def health() -> dict:
+    from app.ml.model_bundle import _bundle_cache
+
     db_ok = False
     try:
         async with AsyncSessionLocal() as session:
@@ -65,8 +67,12 @@ async def health() -> dict:
     except Exception:
         logger.exception("Health check DB probe failed")
 
+    model_loaded = _bundle_cache is not None
+    all_ok = db_ok and model_loaded
+
     return {
-        "status": "ok" if db_ok else "degraded",
+        "status": "ok" if all_ok else "degraded",
         "version": "2.0.0",
         "db": "ok" if db_ok else "unavailable",
+        "model_loaded": model_loaded,
     }

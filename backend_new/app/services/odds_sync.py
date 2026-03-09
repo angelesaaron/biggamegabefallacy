@@ -6,6 +6,10 @@ computes implied_prob on write, upserts into sportsbook_odds.
 
 Tank01 returns a single consensus line, stored as sportsbook='consensus'.
 Idempotent: safe to re-run to refresh stale odds.
+
+Ordering requirement: Roster sync must run before odds sync — any player_id not
+present in the players table will be logged as n_failed. Re-run after roster sync
+if n_failed > 0 on first run.
 """
 
 import logging

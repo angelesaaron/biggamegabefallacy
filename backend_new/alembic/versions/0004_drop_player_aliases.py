@@ -20,8 +20,8 @@ depends_on = None
 
 
 def upgrade() -> None:
-    op.drop_index("ix_player_aliases_player_id", table_name="player_aliases")
-    op.drop_table("player_aliases")
+    op.execute("DROP INDEX IF EXISTS ix_player_aliases_player_id")
+    op.execute("DROP TABLE IF EXISTS player_aliases")
 
 
 def downgrade() -> None:

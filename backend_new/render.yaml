@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: bggtdm-api
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    preDeployCommand: alembic upgrade head
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: TANK01_API_KEY
+        sync: false
+      - key: ADMIN_KEY
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false
+      - key: MODEL_PATH
+        sync: false
+      - key: NFLVERSE_CACHE_DIR
+        sync: false
+      - key: DEBUG
+        value: "false"

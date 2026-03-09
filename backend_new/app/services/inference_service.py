@@ -34,7 +34,13 @@ from app.utils.db_utils import execute_upsert
 logger = logging.getLogger(__name__)
 
 # Snap features are expected to be NaN for some players — not an error.
-_SNAP_FEATURES = frozenset({"lag_snap_pct", "roll3_snap_pct"})
+_SNAP_FEATURES = frozenset({
+    "lag_snap_pct",
+    "roll3_snap_pct",
+    "roll3_rz_targets",
+    "rz_target_share",
+    "rz_td_rate_eb",
+})
 
 
 class InferenceService:

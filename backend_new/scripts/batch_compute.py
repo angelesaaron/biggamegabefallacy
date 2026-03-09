@@ -65,15 +65,18 @@ async def run(seasons: list[int]) -> None:
             async with AsyncSessionLocal() as db:
                 svc = SeasonStateService(db)
                 r = await svc.run(prev_season)
+                await db.commit()
                 print(f"    season_state {prev_season}: {r.n_written} written, {r.n_failed} failed")
 
         async with AsyncSessionLocal() as db:
             feat_svc = FeatureComputeService(db)
             feat_result = await feat_svc.run(season, week)
+            await db.commit()
 
         async with AsyncSessionLocal() as db:
             pred_svc = InferenceService(db)
             pred_result = await pred_svc.run(season, week)
+            await db.commit()
 
         total_features += feat_result.n_written
         total_preds += pred_result.n_written
@@ -91,6 +94,7 @@ async def run(seasons: list[int]) -> None:
         async with AsyncSessionLocal() as db:
             svc = SeasonStateService(db)
             r = await svc.run(prev_season)
+            await db.commit()
             print(f"    season_state {prev_season}: {r.n_written} written, {r.n_failed} failed")
 
     # Run season_state for all completed seasons (except the current one — 2025 is done too)
@@ -99,6 +103,7 @@ async def run(seasons: list[int]) -> None:
         async with AsyncSessionLocal() as db:
             svc = SeasonStateService(db)
             r = await svc.run(s)
+            await db.commit()
             print(f"    season_state {s}: {r.n_written} written, {r.n_updated} updated, {r.n_failed} failed")
 
     print(f"\n=== Done ===")
