@@ -23,7 +23,7 @@ export function ProbabilityChart({ data }: ProbabilityChartProps) {
                 <stop offset="95%" stopColor="#a855f7" stopOpacity={0} />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
             <XAxis
               dataKey="week"
               stroke="#9ca3af"
@@ -31,17 +31,13 @@ export function ProbabilityChart({ data }: ProbabilityChartProps) {
               label={{ value: 'Week', position: 'insideBottom', offset: -5, fill: '#9ca3af' }}
             />
             <YAxis
+              domain={[0, 60]}
               stroke="#9ca3af"
               tick={{ fill: '#9ca3af', fontSize: 12 }}
               label={{ value: 'Probability (%)', angle: -90, position: 'insideLeft', fill: '#9ca3af' }}
             />
             <Tooltip
-              contentStyle={{
-                backgroundColor: '#1f2937',
-                border: '1px solid #374151',
-                borderRadius: '8px',
-                color: '#fff',
-              }}
+              contentStyle={{ background: 'rgba(15,15,20,0.95)', border: '1px solid rgba(147,51,234,0.4)', borderRadius: '8px' }}
               formatter={(value: number | undefined, _name: string | undefined, props: any) => {
                 if (value === undefined) return ['', ''];
                 const scored = props.payload.scored;

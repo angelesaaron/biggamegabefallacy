@@ -5,7 +5,6 @@ interface Prediction {
   modelProbability: number;
   modelImpliedOdds: string;
   sportsbookOdds: string;
-  sportsbook?: 'draftkings' | 'fanduel';
   edge: 'positive' | 'neutral' | 'negative';
   edgeValue: number;
   week?: number;
@@ -68,14 +67,14 @@ export function PredictionSummary({ prediction }: PredictionSummaryProps) {
       <div className="text-center mb-6 max-md:mb-4">
         {prediction.week && prediction.year && (
           <div className="mb-2 max-md:mb-1">
-            <span className="text-xs text-gray-500">
+            <span className="text-xs text-gray-500 nums">
               {prediction.year} Week {prediction.week}
             </span>
           </div>
         )}
         <h3 className="text-gray-400 max-md:text-sm mb-3 max-md:mb-2">Model TD Probability</h3>
-        <div className="text-7xl max-md:text-5xl text-white mb-2">{prediction.modelProbability}%</div>
-        <div className="text-xl max-md:text-base text-gray-400">Implied Odds: {prediction.modelImpliedOdds}</div>
+        <div className="text-7xl max-md:text-5xl text-white mb-2 nums">{prediction.modelProbability}%</div>
+        <div className="text-xl max-md:text-base text-gray-400">Implied Odds: <span className="nums">{prediction.modelImpliedOdds}</span></div>
       </div>
 
       {/* Probability Bar */}
@@ -92,12 +91,12 @@ export function PredictionSummary({ prediction }: PredictionSummaryProps) {
       <div className="grid grid-cols-3 gap-6 max-md:gap-3 mb-6 max-md:mb-4">
         <div className="text-center">
           <div className="text-sm max-md:text-xs text-gray-500 mb-2 max-md:mb-1">Model Odds</div>
-          <div className="text-2xl max-md:text-lg text-purple-400">{prediction.modelImpliedOdds}</div>
+          <div className="text-2xl max-md:text-lg text-purple-400 nums">{prediction.modelImpliedOdds}</div>
         </div>
         <div className="text-center flex flex-col items-center justify-center">
           <div className={`${getEdgeColor()} flex items-center gap-2 max-md:gap-1`}>
             {getEdgeIcon()}
-            <span className="text-xl max-md:text-base">
+            <span className="text-xl max-md:text-base nums">
               {prediction.edge === 'positive' ? '+' : ''}
               {prediction.edgeValue.toFixed(1)}%
             </span>
@@ -107,13 +106,9 @@ export function PredictionSummary({ prediction }: PredictionSummaryProps) {
         <div className="text-center">
           <div className="text-sm max-md:text-xs text-gray-500 mb-2 max-md:mb-1">Sportsbook Odds</div>
           <div className="flex items-center justify-center gap-2">
-            <div className="text-2xl max-md:text-lg text-white">{prediction.sportsbookOdds}</div>
-            {prediction.sportsbookOdds !== 'N/A' && prediction.sportsbook && (
-              <img
-                src={prediction.sportsbook === 'draftkings' ? '/dk-logo-small.png' : '/fd-logo-small.svg'}
-                alt={prediction.sportsbook === 'draftkings' ? 'DraftKings' : 'FanDuel'}
-                className="h-4 max-md:h-3 w-auto object-contain opacity-70"
-              />
+            <div className="text-2xl max-md:text-lg text-white nums">{prediction.sportsbookOdds}</div>
+            {prediction.sportsbookOdds !== 'N/A' && (
+              <span className="text-xs text-sr-text-muted ml-1">Consensus</span>
             )}
           </div>
         </div>

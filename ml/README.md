@@ -418,7 +418,6 @@ Week 1 AUC of 0.53 is expected. Prior-season carry-forward captures usage role w
 
 **Calibration compression.** 95th percentile probability is 0.484 — top players don't reach 0.50+ except in extreme situations. This is a characteristic of the beta calibration fit, not incorrect calibration. Observed TD rate for top-decile predictions matches predicted probability within 1–2%.
 
-**Snap % match rate.** ~10% of rows have NaN snap features due to name mismatches between Tank01 and nflverse data sources. XGBoost handles these via its missing value split logic. Player names can be added to `NAME_OVERRIDES` in `05_new_features.ipynb`.
 
 ---
 

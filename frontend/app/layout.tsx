@@ -5,22 +5,22 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "BGGTDM - Big Game Gabe TD Model",
-  description: "NFL Touchdown Prediction Model - Find value in anytime TD scorer odds",
+  title: "Big Game Gabe — NFL TD Model",
+  description: "NFL anytime touchdown probability model for WR and TE",
   icons: {
-    icon: "/gabe-davis-headshot.png",
+    icon: "/favicon.svg",
   },
   openGraph: {
-    title: "BGGTDM - Big Game Gabe TD Model",
-    description: "NFL Touchdown Prediction Model - Find value in anytime TD scorer odds",
-    images: ["/gabe-davis-background.jpg"],
+    title: "Big Game Gabe — NFL TD Model",
+    description: "NFL anytime touchdown probability model for WR and TE",
+    images: ["/og-image.svg"],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "BGGTDM - Big Game Gabe TD Model",
-    description: "NFL Touchdown Prediction Model - Find value in anytime TD scorer odds",
-    images: ["/gabe-davis-background.jpg"],
+    title: "Big Game Gabe — NFL TD Model",
+    description: "NFL anytime touchdown probability model for WR and TE",
+    images: ["/og-image.svg"],
   },
 };
 

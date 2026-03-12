@@ -1,4 +1,4 @@
-import { Box, Avatar, Typography, Card, useTheme, useMediaQuery } from '@mui/material';
+import { SurfaceCard } from '@/components/ui/SurfaceCard';
 
 interface Player {
   id: string;
@@ -17,170 +17,56 @@ interface PlayerHeaderProps {
   player: Player;
 }
 
-export function PlayerHeader({ player }: PlayerHeaderProps) {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+const STATS = [
+  { key: 'tdsThisSeason', label: 'TDs This Season' },
+  { key: 'gamesPlayed', label: 'Games Played' },
+  { key: 'targets', label: 'Targets' },
+  { key: 'tdRate', label: 'TD Rate' },
+] as const;
 
+export function PlayerHeader({ player }: PlayerHeaderProps) {
   return (
-    <Card
-      sx={{
-        bgcolor: 'rgba(17, 24, 39, 0.4)',
-        backdropFilter: 'blur(8px)',
-        border: '1px solid #1f2937',
-        borderRadius: 3,
-        p: { xs: 2, md: 3 },
-      }}
-    >
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'flex-start',
-          gap: { xs: 2, md: 3 },
-          flexDirection: { xs: 'column', md: 'row' },
-          ...(isMobile && {
-            alignItems: 'center',
-          }),
-        }}
-      >
+    <SurfaceCard className="p-4 md:p-6">
+      <div className="flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-6">
         {/* Player Image */}
-        <Avatar
-          src={player.imageUrl}
-          alt={player.name}
-          sx={{
-            width: { xs: 80, md: 96 },
-            height: { xs: 80, md: 96 },
-            border: '2px solid #9333ea',
-            flexShrink: 0,
-          }}
-        />
+        {player.imageUrl ? (
+          <img
+            src={player.imageUrl}
+            alt={player.name}
+            className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-2 border-sr-primary flex-shrink-0"
+          />
+        ) : (
+          <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-sr-surface border-2 border-sr-primary flex-shrink-0 flex items-center justify-center">
+            <span className="text-sr-text-muted text-2xl font-bold">
+              {player.name.charAt(0)}
+            </span>
+          </div>
+        )}
 
         {/* Player Info */}
-        <Box
-          sx={{
-            flex: 1,
-            width: '100%',
-            ...(isMobile && {
-              textAlign: 'center',
-            }),
-          }}
-        >
-          <Typography
-            variant={isMobile ? 'h5' : 'h4'}
-            sx={{
-              color: '#fff',
-              mb: 1,
-              fontWeight: 500,
-            }}
-          >
-            {player.name}
-          </Typography>
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: { xs: 1.5, md: 2 },
-              color: '#9ca3af',
-              fontSize: { xs: '0.875rem', md: '1rem' },
-              mb: { xs: 2, md: 2 },
-              ...(isMobile && {
-                justifyContent: 'center',
-              }),
-            }}
-          >
-            <Typography variant="body2" sx={{ color: '#9ca3af' }}>
-              {player.team}
-            </Typography>
-            <Typography variant="body2" sx={{ color: '#9ca3af' }}>
-              •
-            </Typography>
-            <Typography variant="body2" sx={{ color: '#9ca3af' }}>
-              {player.position}
-            </Typography>
-          </Box>
+        <div className="flex-1 w-full text-center md:text-left">
+          <h2 className="text-lg font-medium text-white mb-1">{player.name}</h2>
+          <div className="flex items-center gap-2 text-sr-text-muted text-sm mb-4 justify-center md:justify-start">
+            <span>{player.team}</span>
+            <span>•</span>
+            <span>{player.position}</span>
+          </div>
 
           {/* Quick Stats */}
-          <Box
-            sx={{
-              display: 'grid',
-              gridTemplateColumns: { xs: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' },
-              gap: { xs: 2, md: 3 },
-            }}
-          >
-            <Box>
-              <Typography
-                variant={isMobile ? 'h6' : 'h5'}
-                sx={{ color: '#fff', fontWeight: 600 }}
-              >
-                {player.tdsThisSeason}
-              </Typography>
-              <Typography
-                variant="caption"
-                sx={{
-                  color: '#6b7280',
-                  display: 'block',
-                  fontSize: { xs: '0.7rem', md: '0.875rem' },
-                }}
-              >
-                TDs This Season
-              </Typography>
-            </Box>
-            <Box>
-              <Typography
-                variant={isMobile ? 'h6' : 'h5'}
-                sx={{ color: '#fff', fontWeight: 600 }}
-              >
-                {player.gamesPlayed}
-              </Typography>
-              <Typography
-                variant="caption"
-                sx={{
-                  color: '#6b7280',
-                  display: 'block',
-                  fontSize: { xs: '0.7rem', md: '0.875rem' },
-                }}
-              >
-                Games Played
-              </Typography>
-            </Box>
-            <Box>
-              <Typography
-                variant={isMobile ? 'h6' : 'h5'}
-                sx={{ color: '#fff', fontWeight: 600 }}
-              >
-                {player.targets}
-              </Typography>
-              <Typography
-                variant="caption"
-                sx={{
-                  color: '#6b7280',
-                  display: 'block',
-                  fontSize: { xs: '0.7rem', md: '0.875rem' },
-                }}
-              >
-                Targets
-              </Typography>
-            </Box>
-            <Box>
-              <Typography
-                variant={isMobile ? 'h6' : 'h5'}
-                sx={{ color: '#fff', fontWeight: 600 }}
-              >
-                {player.tdRate}
-              </Typography>
-              <Typography
-                variant="caption"
-                sx={{
-                  color: '#6b7280',
-                  display: 'block',
-                  fontSize: { xs: '0.7rem', md: '0.875rem' },
-                }}
-              >
-                TD Rate
-              </Typography>
-            </Box>
-          </Box>
-        </Box>
-      </Box>
-    </Card>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {STATS.map(({ key, label }) => (
+              <div key={key} className="text-center">
+                <p className="text-xs text-sr-text-muted uppercase tracking-wide mb-1">
+                  {label}
+                </p>
+                <p className="text-base font-semibold text-white nums">
+                  {player[key]}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </SurfaceCard>
   );
 }

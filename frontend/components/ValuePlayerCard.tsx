@@ -1,5 +1,5 @@
-import { TrendingUp, TrendingDown, Remove } from '@mui/icons-material';
-import { Box, Card, Avatar, Typography, Chip, useTheme, useMediaQuery } from '@mui/material';
+import { TrendingUp, TrendingDown, Minus } from 'lucide-react';
+import { ConsensusBadge } from '@/components/ui/ConsensusBadge';
 
 interface ValuePlayerCardProps {
   player_id: string;
@@ -29,237 +29,99 @@ export function ValuePlayerCard({
   onClick,
 }: ValuePlayerCardProps) {
   const edgeType =
-    edge_value && edge_value > 0
+    edge_value !== undefined && edge_value > 0
       ? 'positive'
-      : edge_value && edge_value < 0
+      : edge_value !== undefined && edge_value < 0
       ? 'negative'
       : 'neutral';
 
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const edgePillClass =
+    edgeType === 'positive'
+      ? 'text-sr-success bg-sr-success/10'
+      : edgeType === 'negative'
+      ? 'text-sr-danger bg-sr-danger/10'
+      : 'text-sr-text-dim bg-sr-surface/40';
 
-  const getEdgeColor = () => {
-    if (edgeType === 'positive') return '#10b981';
-    if (edgeType === 'negative') return '#ef4444';
-    return '#6b7280';
-  };
+  const EdgeIcon =
+    edgeType === 'positive'
+      ? TrendingUp
+      : edgeType === 'negative'
+      ? TrendingDown
+      : Minus;
 
-  const getEdgeIcon = () => {
-    const iconProps = { sx: { fontSize: 20 } };
-    if (edgeType === 'positive') return <TrendingUp {...iconProps} />;
-    if (edgeType === 'negative') return <TrendingDown {...iconProps} />;
-    return <Remove {...iconProps} />;
-  };
-
-  const getEdgeBgColor = () => {
-    if (edgeType === 'positive') return 'rgba(16, 185, 129, 0.1)';
-    if (edgeType === 'negative') return 'rgba(239, 68, 68, 0.1)';
-    return 'rgba(107, 114, 128, 0.1)';
-  };
-
-  const getEdgeBorderColor = () => {
-    if (edgeType === 'positive') return 'rgba(16, 185, 129, 0.3)';
-    if (edgeType === 'negative') return 'rgba(239, 68, 68, 0.3)';
-    return 'rgba(107, 114, 128, 0.3)';
-  };
-
-  // Format sportsbook odds to American odds string
-  const formatSportsbookOdds = (odds?: number) => {
-    if (!odds) return 'N/A';
-    return odds > 0 ? `+${odds}` : `${odds}`;
-  };
-
-  // Format model odds to American odds string with + prefix and rounding
+  // Format model odds to American odds string
   const formatModelOdds = (odds: string) => {
-    const numOdds = parseFloat(odds);
-    if (isNaN(numOdds)) return odds;
-    const rounded = Math.round(numOdds);
-    return rounded > 0 ? `+${rounded}` : `${rounded}`;
+    const n = parseFloat(odds);
+    if (isNaN(n)) return odds;
+    const r = Math.round(n);
+    return r > 0 ? `+${r}` : `${r}`;
   };
+
+  const sbOdds = sportsbook_odds;
+  const sbOddsStr =
+    sbOdds !== undefined && sbOdds !== null
+      ? sbOdds > 0
+        ? `+${sbOdds}`
+        : `${sbOdds}`
+      : null;
 
   return (
-    <Card
+    <div
+      className="flex items-center gap-3 p-4 bg-sr-surface/40 border border-sr-border rounded-card hover:border-sr-primary/40 transition-colors cursor-pointer"
       onClick={() => onClick?.(player_id)}
-      sx={{
-        bgcolor: 'rgba(17, 24, 39, 0.4)',
-        backdropFilter: 'blur(8px)',
-        border: '1px solid #1f2937',
-        borderRadius: 3,
-        p: { xs: 2, md: 3 },
-        cursor: 'pointer',
-        transition: 'all 0.2s',
-        '&:hover': {
-          borderColor: 'rgba(147, 51, 234, 0.5)',
-        }
-      }}
     >
-      {isMobile ? (
-        /* Mobile Layout - Stacked */
-        <Box>
-          {/* Top Row: Rank + Player Info */}
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
-            <Typography variant="h5" sx={{ color: '#6b7280', width: 40, textAlign: 'center', flexShrink: 0 }}>
-              #{rank}
-            </Typography>
-            <Avatar
-              src={headshot_url || '/placeholder-player.png'}
-              alt={player_name}
-              sx={{
-                width: 48,
-                height: 48,
-                border: '2px solid #374151',
-                flexShrink: 0
-              }}
-            />
-            <Box sx={{ minWidth: 0, flex: 1 }}>
-              <Typography variant="body1" sx={{ color: '#fff', fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                {player_name}
-              </Typography>
-              <Typography variant="body2" sx={{ color: '#9ca3af' }}>
-                {team_name || 'N/A'} • {position || 'N/A'}
-              </Typography>
-            </Box>
-          </Box>
+      {/* Rank */}
+      <span className="text-sr-text-dim text-sm w-6 text-center nums flex-shrink-0">
+        {rank}
+      </span>
 
-          {/* Stats Grid */}
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-            <Box sx={{ flex: '1 1 calc(50% - 0.5 * 8px)', minWidth: 0 }}>
-              <Box sx={{ textAlign: 'center', bgcolor: 'rgba(17, 24, 39, 0.5)', borderRadius: 2, p: 1.5 }}>
-                <Typography variant="caption" sx={{ color: '#6b7280', display: 'block', mb: 0.5 }}>
-                  Model %
-                </Typography>
-                <Typography variant="h6" sx={{ color: '#a78bfa', fontWeight: 600 }}>
-                  {(td_likelihood * 100).toFixed(1)}%
-                </Typography>
-              </Box>
-            </Box>
-            {edge_value !== undefined && (
-              <Box sx={{ flex: '1 1 calc(50% - 0.5 * 8px)', minWidth: 0 }}>
-                <Box sx={{
-                  textAlign: 'center',
-                  bgcolor: getEdgeBgColor(),
-                  border: `1px solid ${getEdgeBorderColor()}`,
-                  borderRadius: 2,
-                  p: 1.5
-                }}>
-                  <Typography variant="caption" sx={{ color: '#6b7280', display: 'block', mb: 0.5 }}>
-                    Edge
-                  </Typography>
-                  <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 0.5 }}>
-                    <Box sx={{ color: getEdgeColor(), display: 'flex' }}>
-                      {getEdgeIcon()}
-                    </Box>
-                    <Typography variant="h6" sx={{ color: getEdgeColor(), fontWeight: 600 }}>
-                      {edgeType === 'positive' ? '+' : ''}
-                      {(edge_value * 100).toFixed(1)}%
-                    </Typography>
-                  </Box>
-                </Box>
-              </Box>
-            )}
-            <Box sx={{ flex: '1 1 calc(50% - 0.5 * 8px)', minWidth: 0 }}>
-              <Box sx={{ textAlign: 'center', bgcolor: 'rgba(17, 24, 39, 0.5)', borderRadius: 2, p: 1.5 }}>
-                <Typography variant="caption" sx={{ color: '#6b7280', display: 'block', mb: 0.5 }}>
-                  Model Odds
-                </Typography>
-                <Typography variant="h6" sx={{ color: '#a78bfa', fontWeight: 600 }}>
-                  {formatModelOdds(model_odds)}
-                </Typography>
-              </Box>
-            </Box>
-            {sportsbook_odds !== undefined && (
-              <Box sx={{ flex: '1 1 calc(50% - 0.5 * 8px)', minWidth: 0 }}>
-                <Box sx={{ textAlign: 'center', bgcolor: 'rgba(17, 24, 39, 0.5)', borderRadius: 2, p: 1.5 }}>
-                  <Typography variant="caption" sx={{ color: '#6b7280', display: 'block', mb: 0.5 }}>
-                    Sportsbook
-                  </Typography>
-                  <Typography variant="h6" sx={{ color: '#fff', fontWeight: 600 }}>
-                    {formatSportsbookOdds(sportsbook_odds)}
-                  </Typography>
-                </Box>
-              </Box>
-            )}
-          </Box>
-        </Box>
+      {/* Avatar */}
+      {headshot_url ? (
+        <img
+          src={headshot_url}
+          alt={player_name}
+          className="w-10 h-10 rounded-full object-cover flex-shrink-0"
+        />
       ) : (
-        /* Desktop Layout - Horizontal */
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
-          <Typography variant="h4" sx={{ color: '#6b7280', width: 48, textAlign: 'center', flexShrink: 0 }}>
-            #{rank}
-          </Typography>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flex: 1, minWidth: 0 }}>
-            <Avatar
-              src={headshot_url || '/placeholder-player.png'}
-              alt={player_name}
-              sx={{
-                width: 64,
-                height: 64,
-                border: '2px solid #374151',
-                flexShrink: 0
-              }}
-            />
-            <Box sx={{ minWidth: 0, flex: 1 }}>
-              <Typography variant="h6" sx={{ color: '#fff', fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                {player_name}
-              </Typography>
-              <Typography variant="body2" sx={{ color: '#9ca3af' }}>
-                {team_name || 'N/A'} • {position || 'N/A'}
-              </Typography>
-            </Box>
-          </Box>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
-            <Box sx={{ textAlign: 'center' }}>
-              <Typography variant="caption" sx={{ color: '#6b7280', display: 'block', mb: 0.5 }}>
-                Model %
-              </Typography>
-              <Typography variant="h5" sx={{ color: '#a78bfa', fontWeight: 600 }}>
-                {(td_likelihood * 100).toFixed(1)}%
-              </Typography>
-            </Box>
-            {edge_value !== undefined && (
-              <Box sx={{
-                textAlign: 'center',
-                bgcolor: getEdgeBgColor(),
-                border: `1px solid ${getEdgeBorderColor()}`,
-                borderRadius: 2,
-                px: 3,
-                py: 1.5
-              }}>
-                <Typography variant="caption" sx={{ color: '#6b7280', display: 'block', mb: 0.5 }}>
-                  Edge
-                </Typography>
-                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
-                  <Box sx={{ color: getEdgeColor(), display: 'flex' }}>
-                    {getEdgeIcon()}
-                  </Box>
-                  <Typography variant="h6" sx={{ color: getEdgeColor(), fontWeight: 600 }}>
-                    {edgeType === 'positive' ? '+' : ''}
-                    {(edge_value * 100).toFixed(1)}%
-                  </Typography>
-                </Box>
-              </Box>
-            )}
-            <Box sx={{ textAlign: 'center' }}>
-              <Typography variant="caption" sx={{ color: '#6b7280', display: 'block', mb: 0.5 }}>
-                Model Odds
-              </Typography>
-              <Typography variant="h6" sx={{ color: '#a78bfa', fontWeight: 600 }}>
-                {formatModelOdds(model_odds)}
-              </Typography>
-            </Box>
-            {sportsbook_odds !== undefined && (
-              <Box sx={{ textAlign: 'center' }}>
-                <Typography variant="caption" sx={{ color: '#6b7280', display: 'block', mb: 0.5 }}>
-                  Sportsbook
-                </Typography>
-                <Typography variant="h6" sx={{ color: '#fff', fontWeight: 600 }}>
-                  {formatSportsbookOdds(sportsbook_odds)}
-                </Typography>
-              </Box>
-            )}
-          </Box>
-        </Box>
+        <div className="w-10 h-10 rounded-full bg-sr-surface flex-shrink-0 flex items-center justify-center">
+          <span className="text-sr-text-muted text-sm font-bold">
+            {player_name.charAt(0)}
+          </span>
+        </div>
       )}
-    </Card>
+
+      {/* Name + team */}
+      <div className="flex-1 min-w-0">
+        <p className="text-white font-medium text-sm truncate">{player_name}</p>
+        <p className="text-sr-text-muted text-xs">
+          {team_name ?? 'N/A'} · {position ?? 'N/A'}
+        </p>
+      </div>
+
+      {/* Edge pill */}
+      {edge_value !== undefined && (
+        <span
+          className={`text-xs font-semibold px-2 py-0.5 rounded-badge nums flex items-center gap-1 flex-shrink-0 ${edgePillClass}`}
+        >
+          <EdgeIcon size={12} />
+          {edgeType === 'positive' ? '+' : ''}
+          {(edge_value * 100).toFixed(1)}%
+        </span>
+      )}
+
+      {/* Model % */}
+      <div className="text-right min-w-[4rem] flex-shrink-0">
+        <p className="text-sr-primary font-semibold text-sm nums">
+          {(td_likelihood * 100).toFixed(0)}%
+        </p>
+        <p className="text-sr-text-muted text-xs nums">{formatModelOdds(model_odds)}</p>
+      </div>
+
+      {/* Consensus */}
+      <div className="text-right min-w-[4rem] hidden sm:block flex-shrink-0">
+        <p className="text-white text-sm nums">{sbOddsStr ?? 'N/A'}</p>
+        <ConsensusBadge />
+      </div>
+    </div>
   );
 }

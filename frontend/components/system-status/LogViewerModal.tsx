@@ -1,21 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  IconButton,
-  Button,
-  Typography,
-  Box,
-} from '@mui/material';
-import {
-  Close as CloseIcon,
-  ContentCopy as CopyIcon,
-  CheckCircle as CheckCircleIcon,
-} from '@mui/icons-material';
+import { X, Copy, CheckCircle } from 'lucide-react';
 
 interface LogViewerModalProps {
   stepName: string;
@@ -33,125 +19,60 @@ export default function LogViewerModal({ stepName, log, onClose }: LogViewerModa
   };
 
   return (
-    <Dialog
-      open={true}
-      onClose={onClose}
-      maxWidth="md"
-      fullWidth
-      PaperProps={{
-        sx: {
-          bgcolor: '#111827',
-          border: '1px solid #1f2937',
-          maxHeight: '80vh',
-        },
-      }}
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      style={{ background: 'rgba(0,0,0,0.7)' }}
+      onClick={onClose}
     >
-      <DialogTitle
-        sx={{
-          bgcolor: '#111827',
-          borderBottom: '1px solid #1f2937',
-          color: 'white',
-          pr: 8,
-        }}
+      <div
+        className="relative w-full max-w-2xl max-h-[80vh] flex flex-col bg-sr-surface border border-sr-border rounded-card overflow-hidden"
+        onClick={(e) => e.stopPropagation()}
       >
-        <Typography variant="h6" sx={{ fontWeight: 600 }}>
-          Step Output Log
-        </Typography>
-        <Typography variant="body2" sx={{ color: '#9ca3af', mt: 0.5 }}>
-          {stepName}
-        </Typography>
-        <IconButton
-          onClick={onClose}
-          sx={{
-            position: 'absolute',
-            right: 8,
-            top: 8,
-            color: '#9ca3af',
-            '&:hover': {
-              bgcolor: '#1f2937',
-            },
-          }}
-        >
-          <CloseIcon />
-        </IconButton>
-      </DialogTitle>
-
-      <DialogContent
-        sx={{
-          bgcolor: '#0a0a0a',
-          p: 0,
-          fontFamily: 'monospace',
-          fontSize: '0.875rem',
-        }}
-      >
-        {log ? (
-          <Box
-            component="pre"
-            sx={{
-              color: '#d1d5db',
-              whiteSpace: 'pre-wrap',
-              wordBreak: 'break-word',
-              m: 0,
-              p: 3,
-            }}
-          >
-            {log}
-          </Box>
-        ) : (
-          <Box
-            sx={{
-              color: '#6b7280',
-              textAlign: 'center',
-              py: 8,
-            }}
-          >
-            No output logs available for this step
-          </Box>
-        )}
-      </DialogContent>
-
-      <DialogActions
-        sx={{
-          bgcolor: '#111827',
-          borderTop: '1px solid #1f2937',
-          px: 3,
-          py: 2,
-          justifyContent: 'space-between',
-        }}
-      >
-        <Typography variant="caption" sx={{ color: '#6b7280' }}>
-          Showing last 100 lines of output
-        </Typography>
-        <Box sx={{ display: 'flex', gap: 1 }}>
-          <Button
-            onClick={copyToClipboard}
-            startIcon={copied ? <CheckCircleIcon /> : <CopyIcon />}
-            sx={{
-              color: copied ? '#10b981' : '#9ca3af',
-              bgcolor: '#1f2937',
-              textTransform: 'none',
-              '&:hover': {
-                bgcolor: '#374151',
-              },
-            }}
-          >
-            {copied ? 'Copied!' : 'Copy'}
-          </Button>
-          <Button
+        {/* Header */}
+        <div className="flex items-start justify-between p-4 border-b border-sr-border">
+          <div>
+            <p className="text-white font-semibold text-sm">Step Output Log</p>
+            <p className="text-sr-text-muted text-xs mt-0.5">{stepName}</p>
+          </div>
+          <button
             onClick={onClose}
-            sx={{
-              bgcolor: '#9333ea',
-              color: 'white',
-              textTransform: 'none',
-              '&:hover': {
-                bgcolor: '#7e22ce',
-              },
-            }}
+            className="text-sr-text-muted hover:text-white transition-colors ml-4"
           >
-            Close
-          </Button>
-        </Box>
-      </DialogActions>
-    </Dialog>
+            <X size={18} />
+          </button>
+        </div>
+
+        {/* Log content */}
+        <div className="flex-1 overflow-y-auto bg-sr-bg p-4 font-mono text-sm">
+          {log ? (
+            <pre className="text-gray-300 whitespace-pre-wrap break-words m-0">{log}</pre>
+          ) : (
+            <p className="text-sr-text-dim text-center py-12">
+              No output logs available for this step
+            </p>
+          )}
+        </div>
+
+        {/* Footer */}
+        <div className="flex items-center justify-between p-3 border-t border-sr-border bg-sr-surface">
+          <span className="text-xs text-sr-text-dim">Showing last 100 lines of output</span>
+          <div className="flex gap-2">
+            <button
+              onClick={copyToClipboard}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-lg bg-[#1f2937] text-sr-text-muted hover:text-white transition-colors"
+            >
+              {copied ? <CheckCircle size={14} className="text-sr-success" /> : <Copy size={14} />}
+              {copied ? 'Copied!' : 'Copy'}
+            </button>
+            <button
+              onClick={onClose}
+              className="px-3 py-1.5 text-xs rounded-lg bg-sr-primary text-white hover:bg-sr-primary/90 transition-colors"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

@@ -72,7 +72,7 @@ export function PlayerSelector({ players, selectedPlayerId, onSelectPlayer }: Pl
       </button>
 
       {isOpen && (
-        <div className="absolute top-full mt-2 w-full bg-gray-900 border border-gray-800 rounded-xl overflow-hidden z-50 shadow-2xl">
+        <div className="absolute top-full mt-2 w-full max-w-[calc(100vw-2rem)] bg-gray-900 border border-gray-800 rounded-xl overflow-hidden z-50 shadow-2xl">
           <div className="p-3 border-b border-gray-800">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
@@ -82,7 +82,6 @@ export function PlayerSelector({ players, selectedPlayerId, onSelectPlayer }: Pl
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full bg-gray-800 border border-gray-700 rounded-lg pl-10 pr-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:border-purple-600"
-                autoFocus
               />
             </div>
           </div>

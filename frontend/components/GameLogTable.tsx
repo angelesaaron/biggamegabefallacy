@@ -15,7 +15,7 @@ interface GameLogTableProps {
 }
 
 export function GameLogTable({ data }: GameLogTableProps) {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(true);
 
   return (
     <div className="bg-gray-900/40 backdrop-blur-sm border border-gray-800 rounded-2xl overflow-hidden">
@@ -58,19 +58,19 @@ export function GameLogTable({ data }: GameLogTableProps) {
                         {game.td > 0 && (
                           <div className="w-2 h-2 rounded-full bg-green-500" />
                         )}
-                        {game.week}
+                        <span className="nums">{game.week}</span>
                       </div>
                     </td>
                     <td className="px-6 py-4 max-md:px-3 max-md:py-3 max-md:text-sm text-gray-300">{game.opponent}</td>
-                    <td className="px-6 py-4 max-md:px-3 max-md:py-3 text-right max-md:text-sm text-gray-300">{game.targets}</td>
-                    <td className="px-6 py-4 max-md:px-3 max-md:py-3 text-right max-md:text-sm text-gray-300">{game.yards}</td>
+                    <td className="px-6 py-4 max-md:px-3 max-md:py-3 text-right max-md:text-sm text-gray-300"><span className="nums">{game.targets}</span></td>
+                    <td className="px-6 py-4 max-md:px-3 max-md:py-3 text-right max-md:text-sm text-gray-300"><span className="nums">{game.yards}</span></td>
                     <td className="px-6 py-4 max-md:px-3 max-md:py-3 text-right max-md:text-sm">
-                      <span className={game.td > 0 ? 'text-green-400' : 'text-gray-500'}>
+                      <span className={`nums ${game.td > 0 ? 'text-green-400' : 'text-gray-500'}`}>
                         {game.td}
                       </span>
                     </td>
                     <td className="px-6 py-4 max-md:px-3 max-md:py-3 text-right max-md:text-sm text-purple-400">
-                      {game.modelProbability}%
+                      <span className="nums">{game.modelProbability}%</span>
                     </td>
                   </tr>
                 ))}

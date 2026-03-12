@@ -42,8 +42,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(admin_router)
-app.include_router(public_router)
+app.include_router(admin_router, prefix="/api")
+app.include_router(public_router, prefix="/api")
 
 
 @app.exception_handler(Exception)

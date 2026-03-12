@@ -9,6 +9,14 @@ import { GameLogTable } from './GameLogTable';
 import { GamblingDisclaimer } from './GamblingDisclaimer';
 import { PlayerWeekToggle } from './PlayerWeekToggle';
 
+interface PlayerRow {
+  player_id: string;
+  full_name: string;
+  position: string;
+  team: string | null;
+  headshot_url: string | null;
+}
+
 // Player type matching Figma components
 interface Player {
   id: string;
@@ -25,192 +33,181 @@ interface Player {
 
 interface PlayerModelProps {
   initialPlayerId?: string | null;
+  currentWeek?: number | null;
+  currentYear?: number | null;
 }
 
-export function PlayerModel({ initialPlayerId }: PlayerModelProps) {
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? '';
+
+export function PlayerModel({ initialPlayerId, currentWeek, currentYear }: PlayerModelProps) {
   const [players, setPlayers] = useState<Player[]>([]);
   const [selectedPlayerId, setSelectedPlayerId] = useState('');
   const [selectedPlayerData, setSelectedPlayerData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [currentWeek, setCurrentWeek] = useState(18);
-  const [currentYear, setCurrentYear] = useState(2025);
-  const [selectedWeek, setSelectedWeek] = useState(18);
+  const [selectedWeek, setSelectedWeek] = useState(currentWeek ?? 18);
 
-  // Load all players on mount - always uses current week
+  const effectiveWeek = currentWeek ?? 18;
+  const effectiveYear = currentYear ?? 2025;
+
+  // Sync selectedWeek when prop arrives
+  useEffect(() => {
+    if (currentWeek !== null && currentWeek !== undefined) {
+      setSelectedWeek(currentWeek);
+    }
+  }, [currentWeek]);
+
+  // Effect A: load player roster once on mount (no week dependency)
   useEffect(() => {
     async function loadPlayers() {
       try {
-        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+        const resp = await fetch(`${API_URL}/api/players`);
+        if (!resp.ok) return;
+        const playersData: PlayerRow[] = await resp.json();
 
-        // Fetch current week from data readiness (same as header and system status)
-        const readinessResponse = await fetch(`${API_URL}/api/admin/data-readiness/current`);
-        const readinessData = await readinessResponse.json();
-        const currentWeekData = readinessData.current_week;
+        const playerList: Player[] = playersData.map((p: PlayerRow) => ({
+          id: p.player_id,
+          name: p.full_name,
+          team: p.team ?? 'N/A',
+          position: p.position,
+          jersey: 0,
+          imageUrl: p.headshot_url ?? '',
+          tdsThisSeason: 0,
+          gamesPlayed: 0,
+          targets: 0,
+          tdRate: '0%',
+        }));
 
-        if (currentWeekData) {
-          setCurrentWeek(currentWeekData.week);
-          setCurrentYear(currentWeekData.year);
-          setSelectedWeek(currentWeekData.week);
-        }
-
-        // Fetch predictions for player list
-        const response = await fetch(`${API_URL}/api/predictions/current`);
-        const data = await response.json();
-
-        // Handle new API format (object with predictions array) or old format (direct array)
-        const predictions = data.predictions || data;
-
-        // Transform to Player format
-        const uniquePlayers = predictions.reduce((acc: Player[], pred: any) => {
-          if (!acc.find(p => p.id === pred.player_id)) {
-            acc.push({
-              id: pred.player_id,
-              name: pred.player_name,
-              team: pred.team_name || 'N/A',
-              position: pred.position || 'WR',
-              jersey: parseInt(pred.jersey_number) || 0,
-              imageUrl: pred.headshot_url || '',
-              tdsThisSeason: 0,
-              gamesPlayed: 0,
-              targets: 0,
-              tdRate: '0%',
-            });
-          }
-          return acc;
-        }, []);
-
-        setPlayers(uniquePlayers);
-        // Set initial player: use initialPlayerId if provided, otherwise Gabe Davis, otherwise first player
-        if (initialPlayerId && uniquePlayers.find((p: Player) => p.id === initialPlayerId)) {
+        setPlayers(playerList);
+        if (initialPlayerId && playerList.find((p: Player) => p.id === initialPlayerId)) {
           setSelectedPlayerId(initialPlayerId);
-        } else {
-          const gabeDavis = uniquePlayers.find((p: Player) => p.name === 'Gabe Davis');
-          if (gabeDavis) {
-            setSelectedPlayerId(gabeDavis.id);
-          } else if (uniquePlayers.length > 0) {
-            setSelectedPlayerId(uniquePlayers[0].id);
-          }
+        } else if (playerList.length > 0) {
+          setSelectedPlayerId(playerList[0].id);
         }
         setLoading(false);
-      } catch (err) {
+      } catch {
         setLoading(false);
       }
     }
-
     loadPlayers();
   }, [initialPlayerId]);
 
-  // Load selected player data when selection changes or week changes
+  // Effect B: load season-level data when player changes (game logs + full history)
+  // These are season-wide — not week-specific. Always render regardless of prediction.
   useEffect(() => {
-    async function loadPlayerData() {
+    async function loadSeasonData() {
       if (!selectedPlayerId) return;
-
       try {
-        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-
-        // Fetch prediction for specific week
-        const predUrl = `${API_URL}/api/predictions/${selectedPlayerId}?week=${selectedWeek}&year=${currentYear}`;
-
-        // Fetch prediction, odds, game logs, and historical predictions in parallel
-        const [predResp, logsResp, historyResp] = await Promise.all([
-          fetch(predUrl),
-          fetch(`${API_URL}/api/game-logs/${selectedPlayerId}?season=${currentYear}&limit=20`),
-          fetch(`${API_URL}/api/predictions/history/${selectedPlayerId}?season=${currentYear}&weeks=20`)
+        const [logsResp, historyResp] = await Promise.all([
+          fetch(`${API_URL}/api/players/${selectedPlayerId}/game-logs?season=${effectiveYear}&limit=30`),
+          fetch(`${API_URL}/api/players/${selectedPlayerId}/history?season=${effectiveYear}`),
         ]);
 
-        const predData = await predResp.json();
-
-        // Fetch odds after getting prediction data
-        const oddsResp = await fetch(
-          `${API_URL}/api/odds/comparison/${selectedPlayerId}?week=${selectedWeek}&year=${currentYear}`
-        );
-        const oddsData = await oddsResp.json();
         const logsData = await logsResp.json();
-        const historyData = await historyResp.json();
+        const historyData: any[] = await historyResp.json();
 
-        // Create a map of week -> prediction probability for quick lookup
+        // Backend returns GameLogsResponse: { player_id, season, game_logs: [] }
+        const logs: any[] = logsData.game_logs ?? [];
+
+        // Prediction history: flat array of { week, final_prob, model_odds, ... }
         const predictionsByWeek = new Map<number, number>(
-          historyData.map((pred: any) => [pred.week, pred.td_likelihood * 100] as [number, number])
+          historyData.map((h) => [h.week, h.final_prob * 100] as [number, number])
         );
 
-        // Transform prediction data to match Figma format
-        const modelProb = parseFloat(predData.td_likelihood) * 100;
-        const modelOdds = parseFloat(predData.model_odds);
-        const modelOddsStr = modelOdds > 0 ? `+${Math.round(modelOdds)}` : `${Math.round(modelOdds)}`;
+        // Season totals from game logs
+        const tdsThisSeason = logs.reduce((s, l) => s + (l.rec_tds ?? 0), 0);
+        const totalTargets = logs.reduce((s, l) => s + (l.targets ?? 0), 0);
+        const gamesWithTD = logs.filter((l) => (l.rec_tds ?? 0) > 0).length;
+        const tdRate = logs.length > 0
+          ? `${Math.round((gamesWithTD / logs.length) * 100)}%`
+          : '0%';
 
-        // Try DraftKings first, then FanDuel
-        const dkOdds = oddsData?.sportsbook_odds?.draftkings;
-        const fdOdds = oddsData?.sportsbook_odds?.fanduel;
-        const sbOdds = dkOdds || fdOdds;
-        const sportsbook = dkOdds ? 'draftkings' : fdOdds ? 'fanduel' : undefined;
-        const sbOddsStr = sbOdds ? (sbOdds > 0 ? `+${sbOdds}` : `${sbOdds}`) : 'N/A';
+        setPlayers((prev) =>
+          prev.map((p) =>
+            p.id === selectedPlayerId
+              ? { ...p, tdsThisSeason, gamesPlayed: logs.length, targets: totalTargets, tdRate }
+              : p
+          )
+        );
+
+        // Game log table rows (model probability overlaid from history)
+        const gameLogs = logs.map((log) => ({
+          week: log.week,
+          opponent: log.opponent ?? 'OPP',
+          targets: log.targets ?? 0,
+          yards: log.rec_yards ?? 0,
+          td: log.rec_tds ?? 0,
+          modelProbability: Math.round(predictionsByWeek.get(log.week) ?? 0),
+        }));
+
+        // Probability chart data (week × predicted prob × actual outcome)
+        const weeklyData = logs.map((log) => ({
+          week: log.week,
+          probability: predictionsByWeek.get(log.week) ?? 0,
+          scored: (log.rec_tds ?? 0) > 0,
+        }));
+
+        setSelectedPlayerData((prev: any) => ({ ...prev, gameLogs, weeklyData }));
+      } catch {
+        // silently handle
+      }
+    }
+    loadSeasonData();
+  }, [selectedPlayerId, effectiveYear]);
+
+  // Effect C: load this week's prediction when player OR week changes (null-safe)
+  useEffect(() => {
+    async function loadWeekPrediction() {
+      if (!selectedPlayerId) return;
+      try {
+        const resp = await fetch(
+          `${API_URL}/api/predictions/${effectiveYear}/${selectedWeek}?player_id=${selectedPlayerId}`
+        );
+        if (!resp.ok) {
+          setSelectedPlayerData((prev: any) => ({ ...prev, prediction: null }));
+          return;
+        }
+        const predData = await resp.json();
+        const predRow = predData.predictions?.[0] ?? null;
+
+        if (!predRow) {
+          setSelectedPlayerData((prev: any) => ({ ...prev, prediction: null }));
+          return;
+        }
+
+        const modelProb = predRow.final_prob * 100;
+        const modelOdds = predRow.model_odds;
+        const modelOddsStr = modelOdds > 0 ? `+${modelOdds}` : `${modelOdds}`;
+        const sbOdds = predRow.sportsbook_odds;
+        const sbOddsStr = sbOdds !== null ? (sbOdds > 0 ? `+${sbOdds}` : `${sbOdds}`) : 'N/A';
 
         let edge: 'positive' | 'neutral' | 'negative' = 'neutral';
         let edgeValue = 0;
-        if (sbOdds) {
-          const sbImpliedProb = sbOdds > 0 ? 100 / (sbOdds + 100) : Math.abs(sbOdds) / (Math.abs(sbOdds) + 100);
-          const modelProbDecimal = parseFloat(predData.td_likelihood);
-          edgeValue = ((modelProbDecimal - sbImpliedProb) * 100);
+        if (predRow.favor !== null) {
+          edgeValue = predRow.favor * 100;
           edge = edgeValue > 0 ? 'positive' : edgeValue < 0 ? 'negative' : 'neutral';
         }
 
-        const prediction = {
-          playerId: selectedPlayerId,
-          modelProbability: Math.round(modelProb),
-          modelImpliedOdds: modelOddsStr,
-          sportsbookOdds: sbOddsStr,
-          sportsbook,
-          edge,
-          edgeValue,
-          week: predData.week,
-          year: predData.season_year,
-        };
-
-        // Transform game logs and calculate player stats
-        const gameLogs = logsData.map((log: any) => {
-          const modelProb = predictionsByWeek.get(log.week) ?? 0;
-          return {
-            week: log.week,
-            opponent: log.opponent || 'OPP',
-            targets: log.targets,
-            yards: log.receiving_yards,
-            td: log.receiving_touchdowns,
-            modelProbability: Math.round(modelProb), // Use historical prediction
-          };
-        });
-
-        // Calculate stats from game logs
-        const tdsThisSeason = logsData.reduce((sum: number, log: any) => sum + log.receiving_touchdowns, 0);
-        const totalTargets = logsData.reduce((sum: number, log: any) => sum + log.targets, 0);
-        const gamesWithTD = logsData.filter((log: any) => log.receiving_touchdowns > 0).length;
-        const tdRate = logsData.length > 0 ? `${Math.round((gamesWithTD / logsData.length) * 100)}%` : '0%';
-
-        // Update player with stats
-        const updatedPlayer = players.find(p => p.id === selectedPlayerId);
-        if (updatedPlayer) {
-          updatedPlayer.tdsThisSeason = tdsThisSeason;
-          updatedPlayer.gamesPlayed = logsData.length;
-          updatedPlayer.targets = totalTargets;
-          updatedPlayer.tdRate = tdRate;
-        }
-
-        // Weekly predictions chart data using historical predictions
-        const weeklyData = gameLogs.map((log: any) => ({
-          week: log.week,
-          probability: predictionsByWeek.get(log.week) ?? 0, // Use real historical predictions
-          scored: log.td > 0,
+        setSelectedPlayerData((prev: any) => ({
+          ...prev,
+          prediction: {
+            playerId: selectedPlayerId,
+            modelProbability: Math.round(modelProb),
+            modelImpliedOdds: modelOddsStr,
+            sportsbookOdds: sbOddsStr,
+            edge,
+            edgeValue,
+            week: predRow.week,
+            year: predRow.season,
+          },
         }));
-
-        setSelectedPlayerData({ prediction, gameLogs, weeklyData });
-      } catch (err) {
-        // Silently handle errors
+      } catch {
+        setSelectedPlayerData((prev: any) => ({ ...prev, prediction: null }));
       }
     }
+    loadWeekPrediction();
+  }, [selectedPlayerId, selectedWeek, effectiveYear]);
 
-    loadPlayerData();
-  }, [selectedPlayerId, selectedWeek, players, currentYear]);
-
-  const selectedPlayer = players.find(p => p.id === selectedPlayerId);
+  const selectedPlayer = players.find((p) => p.id === selectedPlayerId);
 
   if (loading) {
     return (
@@ -231,15 +228,7 @@ export function PlayerModel({ initialPlayerId }: PlayerModelProps) {
   return (
     <div className="relative">
       {/* Hero Background */}
-      <div
-        className="absolute top-0 left-0 w-full h-96 bg-cover bg-center"
-        style={{
-          backgroundImage: 'url(/gabe-davis-background.jpg)',
-          backgroundPosition: 'center 15%',
-        }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/75 to-[#0a0a0a]" />
-      </div>
+      <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-purple-900/20 via-[#0a0a0a]/80 to-[#0a0a0a]" />
 
       {/* Content */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -253,8 +242,8 @@ export function PlayerModel({ initialPlayerId }: PlayerModelProps) {
             />
           </div>
           <PlayerWeekToggle
-            currentWeek={currentWeek}
-            currentYear={currentYear}
+            currentWeek={effectiveWeek}
+            currentYear={effectiveYear}
             selectedWeek={selectedWeek}
             onWeekChange={setSelectedWeek}
           />

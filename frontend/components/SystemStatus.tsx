@@ -1,65 +1,44 @@
 'use client';
 
 import { useState } from 'react';
-import { Container, Box, Tabs, Tab, Typography } from '@mui/material';
 import OverviewTab from '@/components/system-status/OverviewTab';
 import ActionsTab from '@/components/system-status/ActionsTab';
 import BatchHistoryTab from '@/components/system-status/BatchHistoryTab';
 
+const TABS = ['Overview', 'Actions', 'History'];
+
 export default function SystemStatus() {
   const [activeTab, setActiveTab] = useState(0);
 
-  const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
-    setActiveTab(newValue);
-  };
-
   return (
-    <Container maxWidth="xl" sx={{ py: 4 }}>
-      <Box sx={{ mb: 3 }}>
-        <Typography variant="h5" sx={{ color: 'white', fontWeight: 500 }}>
-          System Status
-        </Typography>
-      </Box>
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+      <div className="mb-4">
+        <h2 className="text-xl font-medium text-white">System Status</h2>
+      </div>
 
       {/* Tabs */}
-      <Box sx={{ borderBottom: 1, borderColor: '#1f2937', mb: 3 }}>
-        <Tabs
-          value={activeTab}
-          onChange={handleTabChange}
-          sx={{
-            minHeight: 44,
-            '& .MuiTabs-indicator': {
-              backgroundColor: '#9333ea',
-              height: 2,
-            },
-            '& .MuiTab-root': {
-              color: '#9ca3af',
-              textTransform: 'none',
-              fontSize: '0.875rem',
-              fontWeight: 500,
-              minHeight: 44,
-              px: 2,
-              '&.Mui-selected': {
-                color: '#9333ea',
-              },
-              '&:hover': {
-                color: '#a855f7',
-              }
+      <div className="flex border-b border-sr-border mb-6">
+        {TABS.map((label, i) => (
+          <button
+            key={label}
+            onClick={() => setActiveTab(i)}
+            className={
+              activeTab === i
+                ? 'px-4 py-2 text-sm font-medium text-sr-primary border-b-2 border-sr-primary transition-colors'
+                : 'px-4 py-2 text-sm font-medium text-sr-text-muted hover:text-white transition-colors'
             }
-          }}
-        >
-          <Tab label="Overview" />
-          <Tab label="Actions" />
-          <Tab label="History" />
-        </Tabs>
-      </Box>
+          >
+            {label}
+          </button>
+        ))}
+      </div>
 
       {/* Tab Content */}
-      <Box>
+      <div>
         {activeTab === 0 && <OverviewTab />}
         {activeTab === 1 && <ActionsTab />}
         {activeTab === 2 && <BatchHistoryTab />}
-      </Box>
-    </Container>
+      </div>
+    </div>
   );
 }

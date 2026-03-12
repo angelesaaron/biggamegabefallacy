@@ -33,7 +33,7 @@ export function PlayerWeekToggle({
 
       <div className="px-4 py-1 text-sm text-white min-w-[80px] text-center">
         <span className="text-gray-300">Week</span>{' '}
-        <span className="font-semibold">{selectedWeek}</span>
+        <span className="font-semibold nums">{selectedWeek}</span>
       </div>
 
       <button
