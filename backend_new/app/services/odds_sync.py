@@ -7,15 +7,14 @@ computes implied_prob on write, upserts into sportsbook_odds.
 Tank01 returns a single consensus line, stored as sportsbook='consensus'.
 Idempotent: safe to re-run to refresh stale odds.
 
-Ordering requirement: Roster sync must run before odds sync — any player_id not
-present in the players table will be logged as n_failed. Re-run after roster sync
-if n_failed > 0 on first run.
+Tank01 returns props for ALL positions (QB, RB, WR, TE, etc.). Props for
+player_ids not present in the players table are silently skipped (n_skipped),
+since our model only targets WR/TE.
 """
 
 import logging
-from datetime import date
 
-from sqlalchemy import select
+from sqlalchemy import select, text
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -45,6 +44,10 @@ class OddsSyncService:
             result.add_event(f"no_games_found: S{season}W{week} — sync schedule first")
             return result
 
+        # Pre-fetch known player_ids to skip non-WR/TE props without FK errors.
+        # Tank01 returns props for all positions; we only store WR/TE.
+        known_player_ids = await self._get_known_player_ids()
+
         # Tank01 odds API is per game-date. Get unique dates.
         game_dates = sorted({g.game_date.strftime("%Y%m%d") for g in games if g.game_date})
         # Build game_id lookup: game_id → (season, week)
@@ -63,6 +66,11 @@ class OddsSyncService:
             for prop in props:
                 game_id = prop["game_id"]
                 if game_id not in game_meta:
+                    result.n_skipped += 1
+                    continue
+
+                # Skip players not in our WR/TE roster (QB, RB, etc.)
+                if prop["player_id"] not in known_player_ids:
                     result.n_skipped += 1
                     continue
 
@@ -97,8 +105,8 @@ class OddsSyncService:
                     result.n_failed += 1
 
         logger.info(
-            "OddsSync S%dW%d: %d written, %d updated, %d failed",
-            season, week, result.n_written, result.n_updated, result.n_failed,
+            "OddsSync S%dW%d: %d written, %d updated, %d skipped, %d failed",
+            season, week, result.n_written, result.n_updated, result.n_skipped, result.n_failed,
         )
         return result
 
@@ -109,3 +117,8 @@ class OddsSyncService:
             .where(Game.week == week)
         )
         return list(rows.scalars().all())
+
+    async def _get_known_player_ids(self) -> frozenset[str]:
+        """Return all player_ids currently in the players table."""
+        rows = await self._db.execute(text("SELECT player_id FROM players"))
+        return frozenset(str(row[0]) for row in rows.fetchall())
