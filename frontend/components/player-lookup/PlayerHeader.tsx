@@ -1,17 +1,6 @@
+import Image from 'next/image';
 import { SurfaceCard } from '@/components/ui/SurfaceCard';
-
-interface Player {
-  id: string;
-  name: string;
-  team: string;
-  position: string;
-  jersey: number;
-  imageUrl: string;
-  tdsThisSeason: number;
-  gamesPlayed: number;
-  targets: number;
-  tdRate: string;
-}
+import type { Player } from '@/types/ui';
 
 interface PlayerHeaderProps {
   player: Player;
@@ -30,9 +19,11 @@ export function PlayerHeader({ player }: PlayerHeaderProps) {
       <div className="flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-6">
         {/* Player Image */}
         {player.imageUrl ? (
-          <img
+          <Image
             src={player.imageUrl}
             alt={player.name}
+            width={96}
+            height={96}
             className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-2 border-sr-primary flex-shrink-0"
           />
         ) : (

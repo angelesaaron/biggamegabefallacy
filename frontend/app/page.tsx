@@ -1,10 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { NavBar } from '@/components/NavBar';
-import { WeeklyValue } from '@/components/WeeklyValue';
-import { PlayerModel } from '@/components/PlayerModel';
-import { TrackRecord } from '@/components/TrackRecord';
+import { NavBar } from '@/components/shared/NavBar';
+import { WeeklyValue } from '@/components/weekly/WeeklyValue';
+import { PlayerModel } from '@/components/player-lookup/PlayerModel';
+import { TrackRecord } from '@/components/track-record/TrackRecord';
 
 type Tab = 'weekly' | 'player' | 'track';
 

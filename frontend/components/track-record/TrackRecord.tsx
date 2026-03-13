@@ -12,9 +12,9 @@ import {
   Cell,
   ResponsiveContainer,
 } from 'recharts';
-import { MetricCard } from './ui/MetricCard';
-import { SurfaceCard } from './ui/SurfaceCard';
-import { PaywallGate } from './PaywallGate';
+import { MetricCard } from '@/components/ui/MetricCard';
+import { SurfaceCard } from '@/components/ui/SurfaceCard';
+import { PaywallGate } from '@/components/shared/PaywallGate';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? '';
 

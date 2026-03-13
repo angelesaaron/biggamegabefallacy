@@ -1,30 +1,16 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { ValuePlayerCard } from '@/components/ValuePlayerCard';
-import { GamblingDisclaimer } from '@/components/GamblingDisclaimer';
-import { PlayerWeekToggle } from '@/components/PlayerWeekToggle';
+import { ValuePlayerCard } from '@/components/weekly/ValuePlayerCard';
+import { GamblingDisclaimer } from '@/components/shared/GamblingDisclaimer';
+import { PlayerWeekToggle } from '@/components/weekly/PlayerWeekToggle';
 import { SurfaceCard } from '@/components/ui/SurfaceCard';
 import { Checkbox } from '@/components/ui/checkbox';
 import Image from 'next/image';
 import { TrendingUp, TrendingDown, AlertTriangle } from 'lucide-react';
+import type { PredictionResponse } from '@/types/backend';
 
-interface Prediction {
-  player_id: string;
-  full_name: string;
-  position: string | null;
-  team: string | null;
-  headshot_url: string | null;
-  final_prob: number;
-  model_odds: number;
-  sportsbook_odds: number | null;
-  implied_prob: number | null;
-  favor: number | null;
-  is_low_confidence: boolean;
-  model_version: string;
-}
-
-interface ValuePick extends Prediction {
+interface ValuePick extends PredictionResponse {
   expected_value: number;
   has_edge: boolean;
 }
@@ -66,7 +52,7 @@ export function WeeklyValue({ currentWeek, currentYear, onPlayerClick }: WeeklyV
         if (!response.ok) throw new Error('Failed to fetch predictions');
 
         const data = await response.json();
-        const preds: Prediction[] = data.predictions || [];
+        const preds: PredictionResponse[] = data.predictions || [];
 
         if (!preds || preds.length === 0) {
           setPredictions([]);
@@ -74,7 +60,7 @@ export function WeeklyValue({ currentWeek, currentYear, onPlayerClick }: WeeklyV
           return;
         }
 
-        const predsWithValues: ValuePick[] = preds.map((pred: Prediction) => {
+        const predsWithValues: ValuePick[] = preds.map((pred: PredictionResponse) => {
           const hasEdge = pred.favor !== null && pred.favor > 0;
           const ev = pred.favor ?? 0;
           return {

@@ -6,30 +6,10 @@ import { PlayerHeader } from './PlayerHeader';
 import { PredictionSummary } from './PredictionSummary';
 import { ProbabilityChart } from './ProbabilityChart';
 import { GameLogTable } from './GameLogTable';
-import { GamblingDisclaimer } from './GamblingDisclaimer';
-import { PlayerWeekToggle } from './PlayerWeekToggle';
-
-interface PlayerRow {
-  player_id: string;
-  full_name: string;
-  position: string;
-  team: string | null;
-  headshot_url: string | null;
-}
-
-// Player type matching Figma components
-interface Player {
-  id: string;
-  name: string;
-  team: string;
-  position: string;
-  jersey: number;
-  imageUrl: string;
-  tdsThisSeason: number;
-  gamesPlayed: number;
-  targets: number;
-  tdRate: string;
-}
+import { GamblingDisclaimer } from '@/components/shared/GamblingDisclaimer';
+import { PlayerWeekToggle } from '@/components/weekly/PlayerWeekToggle';
+import type { PlayerResponse, GameLogsResponse, GameLogEntry, PredictionHistoryEntry } from '@/types/backend';
+import type { Player, PlayerPrediction, GameLogRow, WeeklyChartPoint } from '@/types/ui';
 
 interface PlayerModelProps {
   initialPlayerId?: string | null;
@@ -42,7 +22,12 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL ?? '';
 export function PlayerModel({ initialPlayerId, currentWeek, currentYear }: PlayerModelProps) {
   const [players, setPlayers] = useState<Player[]>([]);
   const [selectedPlayerId, setSelectedPlayerId] = useState('');
-  const [selectedPlayerData, setSelectedPlayerData] = useState<any>(null);
+  interface PlayerData {
+    gameLogs?: GameLogRow[];
+    weeklyData?: WeeklyChartPoint[];
+    prediction?: PlayerPrediction | null;
+  }
+  const [selectedPlayerData, setSelectedPlayerData] = useState<PlayerData | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedWeek, setSelectedWeek] = useState(currentWeek ?? 18);
 
@@ -62,9 +47,9 @@ export function PlayerModel({ initialPlayerId, currentWeek, currentYear }: Playe
       try {
         const resp = await fetch(`${API_URL}/api/players`);
         if (!resp.ok) return;
-        const playersData: PlayerRow[] = await resp.json();
+        const playersData: PlayerResponse[] = await resp.json();
 
-        const playerList: Player[] = playersData.map((p: PlayerRow) => ({
+        const playerList: Player[] = playersData.map((p: PlayerResponse) => ({
           id: p.player_id,
           name: p.full_name,
           team: p.team ?? 'N/A',
@@ -102,11 +87,11 @@ export function PlayerModel({ initialPlayerId, currentWeek, currentYear }: Playe
           fetch(`${API_URL}/api/players/${selectedPlayerId}/history?season=${effectiveYear}`),
         ]);
 
-        const logsData = await logsResp.json();
-        const historyData: any[] = await historyResp.json();
+        const logsData: GameLogsResponse = await logsResp.json();
+        const historyData: PredictionHistoryEntry[] = await historyResp.json();
 
         // Backend returns GameLogsResponse: { player_id, season, game_logs: [] }
-        const logs: any[] = logsData.game_logs ?? [];
+        const logs: GameLogEntry[] = logsData.game_logs ?? [];
 
         // Prediction history: flat array of { week, final_prob, model_odds, ... }
         const predictionsByWeek = new Map<number, number>(
@@ -146,7 +131,7 @@ export function PlayerModel({ initialPlayerId, currentWeek, currentYear }: Playe
           scored: (log.rec_tds ?? 0) > 0,
         }));
 
-        setSelectedPlayerData((prev: any) => ({ ...prev, gameLogs, weeklyData }));
+        setSelectedPlayerData((prev) => ({ ...prev, gameLogs, weeklyData }));
       } catch {
         // silently handle
       }
@@ -163,14 +148,14 @@ export function PlayerModel({ initialPlayerId, currentWeek, currentYear }: Playe
           `${API_URL}/api/predictions/${effectiveYear}/${selectedWeek}?player_id=${selectedPlayerId}`
         );
         if (!resp.ok) {
-          setSelectedPlayerData((prev: any) => ({ ...prev, prediction: null }));
+          setSelectedPlayerData((prev) => ({ ...prev, prediction: null }));
           return;
         }
         const predData = await resp.json();
         const predRow = predData.predictions?.[0] ?? null;
 
         if (!predRow) {
-          setSelectedPlayerData((prev: any) => ({ ...prev, prediction: null }));
+          setSelectedPlayerData((prev) => ({ ...prev, prediction: null }));
           return;
         }
 
@@ -187,7 +172,7 @@ export function PlayerModel({ initialPlayerId, currentWeek, currentYear }: Playe
           edge = edgeValue > 0 ? 'positive' : edgeValue < 0 ? 'negative' : 'neutral';
         }
 
-        setSelectedPlayerData((prev: any) => ({
+        setSelectedPlayerData((prev) => ({
           ...prev,
           prediction: {
             playerId: selectedPlayerId,

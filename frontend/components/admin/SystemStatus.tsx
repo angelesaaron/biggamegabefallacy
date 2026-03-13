@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import OverviewTab from '@/components/system-status/OverviewTab';
-import ActionsTab from '@/components/system-status/ActionsTab';
-import BatchHistoryTab from '@/components/system-status/BatchHistoryTab';
+import OverviewTab from '@/components/admin/OverviewTab';
+import ActionsTab from '@/components/admin/ActionsTab';
+import BatchHistoryTab from '@/components/admin/BatchHistoryTab';
 
 const TABS = ['Overview', 'Actions', 'History'];
 

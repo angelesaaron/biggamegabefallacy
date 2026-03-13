@@ -77,10 +77,12 @@ export function ValuePlayerCard({
 
       {/* Avatar */}
       {headshot_url ? (
-        <img
+        <Image
           src={headshot_url}
           alt={player_name}
-          className="w-10 h-10 rounded-full object-cover flex-shrink-0"
+          width={40}
+          height={40}
+          className="rounded-full object-cover flex-shrink-0"
         />
       ) : (
         <div className="w-10 h-10 rounded-full bg-sr-surface flex-shrink-0 flex items-center justify-center">

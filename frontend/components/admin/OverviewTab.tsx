@@ -69,11 +69,11 @@ function DataIndicator({
   count: number;
 }) {
   return (
-    <div className="bg-sr-surface/40 border border-[#374151] rounded-xl p-3">
+    <div className="bg-sr-surface/40 border border-sr-border rounded-xl p-3">
       <div className="flex items-center justify-between mb-1">
         <span className="text-xs text-sr-text-muted">{label}</span>
         <span
-          className={`w-2 h-2 rounded-full ${available ? 'bg-sr-success' : 'bg-[#4b5563]'}`}
+          className={`w-2 h-2 rounded-full ${available ? 'bg-sr-success' : 'bg-sr-text-dim'}`}
         />
       </div>
       <span className="text-base font-semibold text-white nums">{count}</span>
@@ -255,7 +255,7 @@ export default function OverviewTab() {
             </InfoRow>
 
             {(latestBatch.games_processed || latestBatch.predictions_generated) && (
-              <div className="border-t border-[#374151] pt-3 mt-1">
+              <div className="border-t border-sr-border pt-3 mt-1">
                 <div className="flex gap-4 flex-wrap text-sm">
                   {latestBatch.games_processed != null && latestBatch.games_processed > 0 && (
                     <span>
@@ -286,7 +286,7 @@ export default function OverviewTab() {
             )}
 
             {latestBatch.warnings && latestBatch.warnings.length > 0 && (
-              <div className="border-t border-[#374151] pt-3 mt-1">
+              <div className="border-t border-sr-border pt-3 mt-1">
                 <p className="text-xs font-medium text-yellow-400 mb-2">Warnings</p>
                 {latestBatch.warnings.map((w, idx) => (
                   <p key={idx} className="text-xs text-sr-text-muted mb-1">
@@ -297,7 +297,7 @@ export default function OverviewTab() {
             )}
 
             {latestBatch.error_message && (
-              <div className="border-t border-[#374151] pt-3 mt-1">
+              <div className="border-t border-sr-border pt-3 mt-1">
                 <p className="text-xs font-medium text-sr-danger mb-1">Error</p>
                 <p className="text-xs text-sr-text-muted">{latestBatch.error_message}</p>
               </div>
