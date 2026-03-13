@@ -132,13 +132,13 @@ async def get_predictions(
     if not pred_rows:
         return PredictionsResponse(season=season, week=week, count=0, predictions=[])
 
-    # Fetch consensus odds for all relevant players in one query
+    # Fetch DraftKings odds for all relevant players in one query
     player_ids = [p.player_id for _, p in pred_rows]
     odds_q = (
         select(SportsbookOdds)
         .where(SportsbookOdds.season == season)
         .where(SportsbookOdds.week == week)
-        .where(SportsbookOdds.sportsbook == "consensus")
+        .where(SportsbookOdds.sportsbook == "draftkings")
         .where(SportsbookOdds.player_id.in_(player_ids))
     )
     odds_rows = (await db.execute(odds_q)).scalars().all()
@@ -427,7 +427,7 @@ async def get_player_odds(
         .where(SportsbookOdds.player_id == player_id)
         .where(SportsbookOdds.season == season)
         .where(SportsbookOdds.week == week)
-        .where(SportsbookOdds.sportsbook == "consensus")
+        .where(SportsbookOdds.sportsbook == "draftkings")
         .limit(1)
     )
     odds_row = (await db.execute(q)).scalars().first()

@@ -4,7 +4,7 @@ OddsSyncService — Tank01 → sportsbook_odds table.
 Fetches player props (anytime TD) for every game on each game date in a week,
 computes implied_prob on write, upserts into sportsbook_odds.
 
-Tank01 returns a single consensus line, stored as sportsbook='consensus'.
+Tank01 returns a single line (sourced from DraftKings player props), stored as sportsbook='draftkings'.
 Idempotent: safe to re-run to refresh stale odds.
 
 Tank01 returns props for ALL positions (QB, RB, WR, TE, etc.). Props for
@@ -27,7 +27,7 @@ from app.utils.tank01_client import Tank01Client, parse_anytime_td_odds
 
 logger = logging.getLogger(__name__)
 
-_SPORTSBOOK = "consensus"
+_SPORTSBOOK = "draftkings"
 
 
 class OddsSyncService:

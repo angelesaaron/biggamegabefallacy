@@ -35,12 +35,10 @@ interface DataReadiness {
   game_logs_available: boolean;
   predictions_available: boolean;
   draftkings_odds_available: boolean;
-  fanduel_odds_available: boolean;
   games_count: number;
   game_logs_count: number;
   predictions_count: number;
   draftkings_odds_count: number;
-  fanduel_odds_count: number;
   last_updated?: string;
 }
 
@@ -157,7 +155,7 @@ export default function OverviewTab() {
   const isHealthy =
     dataReadiness?.schedule_complete &&
     dataReadiness?.predictions_available &&
-    (dataReadiness?.draftkings_odds_available || dataReadiness?.fanduel_odds_available);
+    dataReadiness?.draftkings_odds_available;
 
   if (loading) {
     return (
@@ -213,11 +211,6 @@ export default function OverviewTab() {
                 label="DraftKings"
                 available={dataReadiness.draftkings_odds_available}
                 count={dataReadiness.draftkings_odds_count}
-              />
-              <DataIndicator
-                label="FanDuel"
-                available={dataReadiness.fanduel_odds_available}
-                count={dataReadiness.fanduel_odds_count}
               />
             </div>
             {dataReadiness.last_updated && (

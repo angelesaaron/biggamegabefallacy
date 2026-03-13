@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { TrendingUp, TrendingDown, Minus, AlertCircle } from 'lucide-react';
 
 interface Prediction {
@@ -108,7 +109,7 @@ export function PredictionSummary({ prediction }: PredictionSummaryProps) {
           <div className="flex items-center justify-center gap-2">
             <div className="text-2xl max-md:text-lg text-white nums">{prediction.sportsbookOdds}</div>
             {prediction.sportsbookOdds !== 'N/A' && (
-              <span className="text-xs text-sr-text-muted ml-1">Consensus</span>
+              <Image src="/dk-logo-small.png" alt="DraftKings" width={16} height={16} className="ml-1" />
             )}
           </div>
         </div>

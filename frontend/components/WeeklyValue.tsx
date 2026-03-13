@@ -5,8 +5,8 @@ import { ValuePlayerCard } from '@/components/ValuePlayerCard';
 import { GamblingDisclaimer } from '@/components/GamblingDisclaimer';
 import { PlayerWeekToggle } from '@/components/PlayerWeekToggle';
 import { SurfaceCard } from '@/components/ui/SurfaceCard';
-import { ConsensusBadge } from '@/components/ui/ConsensusBadge';
 import { Checkbox } from '@/components/ui/checkbox';
+import Image from 'next/image';
 import { TrendingUp, TrendingDown, AlertTriangle } from 'lucide-react';
 
 interface Prediction {
@@ -121,8 +121,10 @@ export function WeeklyValue({ currentWeek, currentYear, onPlayerClick }: WeeklyV
               <h1 className="text-xl md:text-3xl font-semibold text-white mb-1">
                 Week {selectedWeek} Value Plays
               </h1>
-              <p className="text-sm text-sr-text-muted">
-                Players with the highest model edge vs consensus odds
+              <p className="text-sm text-sr-text-muted flex items-center gap-1.5">
+                Players with the highest model edge vs
+                <Image src="/dk-logo-small.png" alt="DraftKings" width={18} height={18} className="inline-block" />
+                DraftKings odds
               </p>
             </div>
             <PlayerWeekToggle
@@ -171,9 +173,6 @@ export function WeeklyValue({ currentWeek, currentYear, onPlayerClick }: WeeklyV
         {!loading && !error && predictions.length > 0 && (
           <SurfaceCard className="mb-4 p-4">
             <div className="flex items-center gap-4 flex-wrap">
-              {/* Consensus badge — replaces sportsbook toggle */}
-              <ConsensusBadge />
-
               {/* EV filter */}
               <label className="flex items-center gap-2 cursor-pointer">
                 <Checkbox
@@ -231,7 +230,7 @@ export function WeeklyValue({ currentWeek, currentYear, onPlayerClick }: WeeklyV
                 <span className="text-sr-text-muted">Negative Edge (Sportsbook favored)</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-sr-text-muted">Edge = Expected Value vs. Consensus</span>
+                <span className="text-sr-text-muted">Edge = Expected Value vs. DraftKings</span>
               </div>
             </div>
           </SurfaceCard>

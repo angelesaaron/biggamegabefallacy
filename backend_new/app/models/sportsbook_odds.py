@@ -26,7 +26,7 @@ class SportsbookOdds(Base):
     Stored so UI edge calc (model_prob vs market_prob) is a direct
     numeric comparison — no conversion at query time.
 
-    Tank01 returns a single consensus line, stored as sportsbook='consensus'.
+    Tank01 returns a single line (DraftKings player props), stored as sportsbook='draftkings'.
     """
 
     __tablename__ = "sportsbook_odds"

@@ -35,6 +35,5 @@ export interface GameLog {
 export interface OddsComparison {
   sportsbook_odds: {
     draftkings?: number;
-    fanduel?: number;
   };
 }

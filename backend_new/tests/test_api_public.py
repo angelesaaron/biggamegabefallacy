@@ -62,7 +62,7 @@ def make_odds(
     game_id="20251107_MIN@CHI",
     season=2025,
     week=7,
-    sportsbook="consensus",
+    sportsbook="draftkings",
     odds=250,
     implied_prob=0.2857,
 ):
