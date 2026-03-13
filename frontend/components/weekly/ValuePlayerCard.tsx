@@ -111,16 +111,16 @@ export function ValuePlayerCard({
         </span>
       )}
 
-      {/* Model % */}
-      <div className="text-right min-w-[4rem] flex-shrink-0">
-        <p className="text-sr-primary font-semibold text-sm nums">{formatModelOdds(model_odds)}</p>
-        <p className="text-white text-xs nums">{(td_likelihood * 100).toFixed(0)}%</p>
-      </div>
-
-      {/* DraftKings */}
-      <div className="text-right min-w-[4rem] hidden sm:block flex-shrink-0 ml-3">
-        <p className="text-white font-semibold text-sm nums">{sbOddsStr ?? 'N/A'}</p>
-        <Image src="/dk-logo-small.png" alt="DraftKings" width={16} height={16} className="inline-block mt-0.5" />
+      {/* Odds block: fixed-width columns prevent digit-count shifting */}
+      <div className="grid gap-x-6 flex-shrink-0" style={{ gridTemplateColumns: '3rem 3rem' }}>
+        {/* Row 1: odds */}
+        <span className="text-sr-primary font-semibold text-sm nums text-right">{formatModelOdds(model_odds)}</span>
+        <span className="text-white font-semibold text-sm nums text-right hidden sm:block">{sbOddsStr ?? 'N/A'}</span>
+        {/* Row 2: secondary */}
+        <span className="text-sr-text-muted text-xs nums text-right leading-4">{(td_likelihood * 100).toFixed(0)}%</span>
+        <div className="hidden sm:flex w-full justify-end pr-2">
+          <Image src="/dk-logo-small.png" alt="DraftKings" width={16} height={16} />
+        </div>
       </div>
     </div>
   );
