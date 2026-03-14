@@ -4,7 +4,9 @@
       "Bash(TZ='US/Eastern' date:*)",
       "Bash(chmod:*)",
       "Bash(./start-dev.sh)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Write",
+      "Edit"
     ]
   }
 }

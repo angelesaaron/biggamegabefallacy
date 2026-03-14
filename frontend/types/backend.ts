@@ -1,5 +1,19 @@
 // Backend API response types — shapes returned by the FastAPI server
 
+export type PredictionTier =
+  | 'high_conviction'
+  | 'value_play'
+  | 'on_the_radar'
+  | 'fade_volume_trap'
+  | 'fade_overpriced'
+  | null;
+
+export interface WeekStatusResponse {
+  season: number;
+  week: number;
+  is_early_season: boolean;
+}
+
 export interface PlayerResponse {
   player_id: string;
   full_name: string;
@@ -21,6 +35,8 @@ export interface PredictionResponse {
   favor: number | null;
   is_low_confidence: boolean;
   model_version: string;
+  tier: PredictionTier;
+  completeness_score: number | null;
 }
 
 export interface GameLogEntry {

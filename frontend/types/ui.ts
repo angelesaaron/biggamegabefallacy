@@ -22,6 +22,7 @@ export interface PlayerPrediction {
   edgeValue: number;
   week?: number;
   year?: number;
+  tier?: string | null;
 }
 
 export interface GameLogRow {

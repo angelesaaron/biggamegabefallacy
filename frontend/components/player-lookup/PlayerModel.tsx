@@ -7,6 +7,7 @@ import { PredictionSummary } from './PredictionSummary';
 import { ProbabilityChart } from './ProbabilityChart';
 import { GameLogTable } from './GameLogTable';
 import { GamblingDisclaimer } from '@/components/shared/GamblingDisclaimer';
+import { PaywallGate } from '@/components/shared/PaywallGate';
 import { PlayerWeekToggle } from '@/components/weekly/PlayerWeekToggle';
 import type { PlayerResponse, GameLogsResponse, GameLogEntry, PredictionHistoryEntry } from '@/types/backend';
 import type { Player, PlayerPrediction, GameLogRow, WeeklyChartPoint } from '@/types/ui';
@@ -183,6 +184,7 @@ export function PlayerModel({ initialPlayerId, currentWeek, currentYear }: Playe
             edgeValue,
             week: predRow.week,
             year: predRow.season,
+            tier: predRow.tier ?? null,
           },
         }));
       } catch {
@@ -246,10 +248,16 @@ export function PlayerModel({ initialPlayerId, currentWeek, currentYear }: Playe
           </div>
         )}
 
-        {/* Probability Chart */}
+        {/* Probability Chart — paid feature */}
         {selectedPlayerData?.weeklyData && (
           <div className="mb-8">
-            <ProbabilityChart data={selectedPlayerData.weeklyData} />
+            <PaywallGate
+              feature="season-trend"
+              ctaTitle="Season probability trend"
+              ctaBody="See how the model has rated this player week-by-week all season."
+            >
+              <ProbabilityChart data={selectedPlayerData.weeklyData} />
+            </PaywallGate>
           </div>
         )}
 

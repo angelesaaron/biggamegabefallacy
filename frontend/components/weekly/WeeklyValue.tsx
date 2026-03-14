@@ -1,19 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { ValuePlayerCard } from '@/components/weekly/ValuePlayerCard';
+import { TierSection } from '@/components/weekly/TierSection';
+import { TierPlayerCard } from '@/components/weekly/TierPlayerCard';
 import { GamblingDisclaimer } from '@/components/shared/GamblingDisclaimer';
 import { PlayerWeekToggle } from '@/components/weekly/PlayerWeekToggle';
 import { SurfaceCard } from '@/components/ui/SurfaceCard';
-import { Checkbox } from '@/components/ui/checkbox';
-import Image from 'next/image';
-import { TrendingUp, TrendingDown, AlertTriangle } from 'lucide-react';
+import { AlertTriangle } from 'lucide-react';
 import type { PredictionResponse } from '@/types/backend';
-
-interface ValuePick extends PredictionResponse {
-  expected_value: number;
-  has_edge: boolean;
-}
 
 interface WeeklyValueProps {
   currentWeek: number | null;
@@ -23,94 +17,91 @@ interface WeeklyValueProps {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? '';
 
+function FadeGate({ count, children }: { count: number; children: React.ReactNode }) {
+  const devBypass = process.env.NEXT_PUBLIC_DEV_BYPASS_PAYWALL === 'true';
+  if (devBypass) return <>{children}</>;
+  return (
+    <div className="relative overflow-hidden rounded-card mt-2">
+      <div className="pointer-events-none select-none" style={{ filter: 'blur(6px)' }} aria-hidden="true">
+        {children}
+      </div>
+      <div
+        className="absolute inset-0 flex flex-col items-center justify-end pb-10"
+        style={{ background: 'linear-gradient(to bottom, transparent 0%, rgba(10,10,10,0.95) 30%)' }}
+      >
+        <div className="text-center px-6 max-w-md">
+          <h3 className="text-white text-lg font-semibold mb-2">
+            {count} player{count !== 1 ? 's' : ''} flagged as fades this week
+          </h3>
+          <p className="text-sr-text-muted text-sm mb-5">Know who to avoid →</p>
+          <button className="bg-sr-primary text-white px-8 py-2.5 rounded-card font-semibold hover:bg-purple-600 transition-colors text-sm">
+            Get Access
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function WeeklyValue({ currentWeek, currentYear, onPlayerClick }: WeeklyValueProps) {
-  const [predictions, setPredictions] = useState<ValuePick[]>([]);
+  const [predictions, setPredictions] = useState<PredictionResponse[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [showOnlyEdge, setShowOnlyEdge] = useState(true);
   const [selectedWeek, setSelectedWeek] = useState<number>(18);
 
-  // Sync selectedWeek when currentWeek prop arrives
   useEffect(() => {
-    if (currentWeek !== null) {
-      setSelectedWeek(currentWeek);
-    }
+    if (currentWeek !== null) setSelectedWeek(currentWeek);
   }, [currentWeek]);
 
   const effectiveYear = currentYear ?? 2025;
+  const isEarlySeason = selectedWeek <= 3;
 
-  // Load predictions when week changes
   useEffect(() => {
     async function loadPredictions() {
       try {
         setLoading(true);
         setError(null);
-
-        const url = `${API_URL}/api/predictions/${effectiveYear}/${selectedWeek}`;
-
-        const response = await fetch(url);
-        if (!response.ok) throw new Error('Failed to fetch predictions');
-
-        const data = await response.json();
-        const preds: PredictionResponse[] = data.predictions || [];
-
-        if (!preds || preds.length === 0) {
-          setPredictions([]);
-          setLoading(false);
-          return;
-        }
-
-        const predsWithValues: ValuePick[] = preds.map((pred: PredictionResponse) => {
-          const hasEdge = pred.favor !== null && pred.favor > 0;
-          const ev = pred.favor ?? 0;
-          return {
-            ...pred,
-            expected_value: ev,
-            has_edge: hasEdge,
-          };
-        });
-
-        const sorted = predsWithValues.sort((a, b) => b.expected_value - a.expected_value);
-        setPredictions(sorted);
+        const res = await fetch(`${API_URL}/api/predictions/${effectiveYear}/${selectedWeek}`);
+        if (!res.ok) throw new Error('Failed to fetch predictions');
+        const data = await res.json();
+        setPredictions(data.predictions ?? []);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load predictions');
       } finally {
         setLoading(false);
       }
     }
-
     loadPredictions();
   }, [selectedWeek, effectiveYear]);
 
-  const filteredPredictions = predictions.filter((p) => {
-    if (showOnlyEdge && !p.has_edge) return false;
-    return true;
-  });
+  const tier1 = predictions.filter((p) => p.tier === 'high_conviction');
+  const tier2 = predictions.filter((p) => p.tier === 'value_play');
+  const tier3 = predictions.filter((p) => p.tier === 'on_the_radar');
+  const fadeVolumeTraps = predictions.filter((p) => p.tier === 'fade_volume_trap');
+  const fadeOverpriced = predictions.filter((p) => p.tier === 'fade_overpriced');
+  const hasFades = fadeVolumeTraps.length > 0 || fadeOverpriced.length > 0;
 
   return (
     <div className="relative">
-      {/* Hero gradient background */}
+      {/* Hero gradient */}
       <div
         className="absolute top-0 left-0 w-full hidden md:block"
         style={{
-          height: 384,
+          height: 320,
           background: 'linear-gradient(135deg, #1a0533 0%, #0d1117 40%, #0a0a0a 100%)',
         }}
       />
 
-      {/* Content */}
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
-        {/* Header */}
+        {/* Page header */}
         <SurfaceCard className="mb-4 p-4 md:p-6">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div className="flex-1">
               <h1 className="text-xl md:text-3xl font-semibold text-white mb-1">
-                Week {selectedWeek} Value Plays
+                Week {selectedWeek} — ATTD Targets
               </h1>
-              <p className="text-sm text-sr-text-muted flex items-center gap-1.5">
-                Players with the highest model edge vs
-                <Image src="/dk-logo-small.png" alt="DraftKings" width={18} height={18} className="inline-block" />
-                DraftKings odds
+              <p className="text-sm text-sr-text-muted">
+                Model-ranked anytime TD plays for Week {selectedWeek}. Updated Tuesday.
               </p>
             </div>
             <PlayerWeekToggle
@@ -122,107 +113,142 @@ export function WeeklyValue({ currentWeek, currentYear, onPlayerClick }: WeeklyV
           </div>
         </SurfaceCard>
 
-        {/* Loading State */}
+        {/* Early season banner */}
+        {isEarlySeason && !loading && !error && predictions.length > 0 && (
+          <div className="mb-4 rounded-card border border-amber-500/40 bg-amber-500/10 p-4 text-sm">
+            <p className="text-amber-400 font-semibold mb-1">
+              Projection Mode — Week {selectedWeek}
+            </p>
+            <p className="text-sr-text-muted">
+              Predictions use prior-season carry-forward data. Model transitions to live rolling
+              features from Week 4. Confidence intervals are wider than mid-season.
+            </p>
+          </div>
+        )}
+
+        {/* Loading */}
         {loading && (
           <div className="flex flex-col gap-2 mb-4">
-            {[...Array(4)].map((_, i) => (
+            {[...Array(5)].map((_, i) => (
               <div key={i} className="h-16 rounded-card bg-sr-surface animate-pulse" />
             ))}
           </div>
         )}
 
-        {/* Error State */}
+        {/* Error */}
         {error && (
           <div className="mb-4 bg-sr-danger/10 border border-sr-danger/30 rounded-card p-4 text-sr-danger flex items-center gap-2">
             <AlertTriangle size={16} />
-            <span>Error: {error}</span>
+            <span>{error}</span>
           </div>
         )}
 
-        {/* No Predictions */}
+        {/* No predictions */}
         {!loading && !error && predictions.length === 0 && (
           <SurfaceCard className="p-12 text-center mb-4">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <AlertTriangle size={24} className="text-yellow-500" />
-              <h2 className="text-lg text-yellow-500">Predictions Not Available</h2>
-            </div>
-            <p className="text-sr-text-muted mb-1">
-              Week {selectedWeek} predictions haven&apos;t been generated yet.
-            </p>
-            <p className="text-sm text-sr-text-dim">
-              Check back after the weekly batch job completes or try viewing a previous week.
+            <AlertTriangle size={24} className="text-yellow-500 mx-auto mb-2" />
+            <p className="text-sr-text-muted">
+              Week {selectedWeek} predictions haven&apos;t been generated yet. Check back after
+              Thursday&apos;s pipeline run.
             </p>
           </SurfaceCard>
         )}
 
-        {/* Filters */}
-        {!loading && !error && predictions.length > 0 && (
-          <SurfaceCard className="mb-4 p-4">
-            <div className="flex items-center gap-4 flex-wrap">
-              {/* EV filter */}
-              <label className="flex items-center gap-2 cursor-pointer">
-                <Checkbox
-                  checked={showOnlyEdge}
-                  onCheckedChange={setShowOnlyEdge}
-                />
-                <span className="text-sm text-sr-text-muted">+EV only</span>
-              </label>
-            </div>
-          </SurfaceCard>
-        )}
-
-        {/* Value Player Cards */}
+        {/* Tier sections */}
         {!loading && !error && predictions.length > 0 && (
           <>
-            {filteredPredictions.length === 0 ? (
-              <SurfaceCard className="p-12 text-center mb-4">
-                <p className="text-sr-text-muted">
-                  No positive EV plays found for this week
-                </p>
-              </SurfaceCard>
-            ) : (
-              <div className="flex flex-col gap-2">
-                {filteredPredictions.map((prediction, index) => (
-                  <ValuePlayerCard
-                    key={prediction.player_id}
-                    player_id={prediction.player_id}
-                    player_name={prediction.full_name}
-                    team_name={prediction.team}
-                    position={prediction.position}
-                    headshot_url={prediction.headshot_url}
-                    td_likelihood={prediction.final_prob}
-                    model_odds={String(prediction.model_odds)}
-                    sportsbook_odds={prediction.sportsbook_odds ?? undefined}
-                    edge_value={prediction.expected_value}
-                    rank={index + 1}
-                    onClick={onPlayerClick}
-                  />
-                ))}
+            {/* Tier 1 — High Conviction (paid) */}
+            <TierSection
+              tier="high_conviction"
+              label="High Conviction"
+              descriptor="Model's highest-confidence plays this week."
+              accentClass="border-sr-success/40"
+              headerTextClass="text-sr-success"
+              predictions={tier1}
+              isPaywalled
+              ctaTitle={`${tier1.length} high conviction play${tier1.length !== 1 ? 's' : ''} this week`}
+              ctaBody="Subscribe to see them →"
+              onPlayerClick={onPlayerClick}
+            />
+
+            {/* Tier 2 — Value Plays (paid) */}
+            <TierSection
+              tier="value_play"
+              label="Value Plays"
+              descriptor="Positive edge, meaningful model confidence."
+              accentClass="border-amber-500/40"
+              headerTextClass="text-amber-400"
+              predictions={tier2}
+              isPaywalled
+              ctaTitle={`${tier2.length} value play${tier2.length !== 1 ? 's' : ''} identified`}
+              ctaBody="See the full list →"
+              onPlayerClick={onPlayerClick}
+            />
+
+            {/* Tier 3 — On the Radar (free) */}
+            <TierSection
+              tier="on_the_radar"
+              label="On the Radar"
+              descriptor="Model is warm. Not a strong signal, but worth knowing."
+              accentClass="border-sr-border"
+              headerTextClass="text-white"
+              predictions={tier3}
+              isPaywalled={false}
+              onPlayerClick={onPlayerClick}
+            />
+
+            {/* Tier 4 — Fade List (paid) */}
+            <section className="mb-8">
+              <div className="flex items-baseline gap-3 mb-3 pb-2 border-b border-sr-danger/40">
+                <h2 className="text-base font-semibold text-sr-danger">Fade List</h2>
+                <span className="text-sr-text-dim text-xs">
+                  Players the model is cold on. Book may be overpricing them.
+                </span>
               </div>
-            )}
+
+              {!hasFades ? (
+                <p className="text-sr-text-muted text-sm py-4 px-2">
+                  No fade plays identified this week.
+                </p>
+              ) : (
+                <FadeGate count={fadeVolumeTraps.length + fadeOverpriced.length}>
+                  {fadeVolumeTraps.length > 0 && (
+                    <div className="mb-4">
+                      <p className="text-xs font-semibold text-sr-danger/70 uppercase tracking-wide mb-2 px-1">
+                        Volume Traps
+                      </p>
+                      <p className="text-xs text-sr-text-dim mb-2 px-1">
+                        High-profile players the model doesn&apos;t trust this week.
+                      </p>
+                      <div className="flex flex-col gap-2">
+                        {fadeVolumeTraps.map((pred) => (
+                          <TierPlayerCard key={pred.player_id} prediction={pred} onClick={onPlayerClick} />
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {fadeOverpriced.length > 0 && (
+                    <div>
+                      <p className="text-xs font-semibold text-sr-danger/70 uppercase tracking-wide mb-2 px-1">
+                        Overpriced Depth
+                      </p>
+                      <p className="text-xs text-sr-text-dim mb-2 px-1">
+                        Book is pricing these players too high relative to model.
+                      </p>
+                      <div className="flex flex-col gap-2">
+                        {fadeOverpriced.map((pred) => (
+                          <TierPlayerCard key={pred.player_id} prediction={pred} onClick={onPlayerClick} />
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </FadeGate>
+              )}
+            </section>
           </>
         )}
 
-        {/* Legend */}
-        {!loading && predictions.length > 0 && (
-          <SurfaceCard className="mt-4 p-4">
-            <div className="flex flex-col md:flex-row gap-4 text-sm">
-              <div className="flex items-center gap-2">
-                <TrendingUp size={16} className="text-sr-success" />
-                <span className="text-sr-text-muted">Positive Edge (Model favored)</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <TrendingDown size={16} className="text-sr-danger" />
-                <span className="text-sr-text-muted">Negative Edge (Sportsbook favored)</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-sr-text-muted">Edge = Expected Value vs. DraftKings</span>
-              </div>
-            </div>
-          </SurfaceCard>
-        )}
-
-        {/* Gambling Disclaimer */}
         <GamblingDisclaimer />
       </div>
     </div>

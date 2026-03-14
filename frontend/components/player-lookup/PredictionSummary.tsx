@@ -55,6 +55,14 @@ export function PredictionSummary({ prediction }: PredictionSummaryProps) {
     );
   }
 
+  const TIER_CONFIG: Record<string, { label: string; className: string }> = {
+    high_conviction: { label: 'High Conviction', className: 'bg-sr-success/20 text-sr-success border border-sr-success/30' },
+    value_play: { label: 'Value Play', className: 'bg-amber-500/20 text-amber-400 border border-amber-500/30' },
+    on_the_radar: { label: 'On the Radar', className: 'bg-sr-surface text-sr-text-muted border border-sr-border' },
+    fade_volume_trap: { label: 'Fade — Volume Trap', className: 'bg-sr-danger/20 text-sr-danger border border-sr-danger/30' },
+    fade_overpriced: { label: 'Fade — Overpriced', className: 'bg-sr-danger/20 text-sr-danger border border-sr-danger/30' },
+  };
+
   return (
     <div className={`border rounded-card p-8 max-md:p-4 ${edgeBorderClass}`}>
       <div className="text-center mb-6 max-md:mb-4">
@@ -62,6 +70,13 @@ export function PredictionSummary({ prediction }: PredictionSummaryProps) {
           <div className="mb-2 max-md:mb-1">
             <span className="text-xs text-sr-text-dim nums">
               {prediction.year} Week {prediction.week}
+            </span>
+          </div>
+        )}
+        {prediction.tier && TIER_CONFIG[prediction.tier] && (
+          <div className="mb-3">
+            <span className={`text-xs font-semibold px-3 py-1 rounded-badge ${TIER_CONFIG[prediction.tier].className}`}>
+              {TIER_CONFIG[prediction.tier].label}
             </span>
           </div>
         )}

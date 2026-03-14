@@ -17,6 +17,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.database import get_db
 from app.models.game import Game
 from app.models.player import Player
+from app.models.player_features import PlayerFeatures
 from app.models.player_game_log import PlayerGameLog
 from app.models.prediction import Prediction
 from app.models.sportsbook_odds import SportsbookOdds
@@ -43,6 +44,8 @@ class PredictionRow(BaseModel):
     favor: Optional[float]           # final_prob - implied_prob (positive = model likes it)
     is_low_confidence: bool
     model_version: str
+    tier: Optional[str]              # high_conviction | value_play | on_the_radar | fade_volume_trap | fade_overpriced | None
+    completeness_score: Optional[float]
 
 
 class PredictionsResponse(BaseModel):
@@ -77,6 +80,99 @@ def _safe_american(prob: float) -> int:
     """american_from_prob clamped so extreme probs don't raise."""
     clamped = max(0.001, min(0.999, prob))
     return american_from_prob(clamped)
+
+
+def _assign_tiers(rows: list[PredictionRow]) -> list[PredictionRow]:
+    """
+    Assign tier labels in priority order.
+    Thresholds use fraction form (0.0–1.0) since final_prob and implied_prob are fractions.
+    favor = final_prob - implied_prob, so -0.10 == spec's '-10 percentage points'.
+    """
+    sorted_rows = sorted(rows, key=lambda r: r.final_prob, reverse=True)
+
+    tier1_ids: set[str] = set()
+    tier2_ids: set[str] = set()
+    tier3_ids: set[str] = set()
+    fade_a_ids: set[str] = set()
+    fade_b_ids: set[str] = set()
+
+    # Tier 1 — High Conviction (up to 5)
+    for r in sorted_rows:
+        if len(tier1_ids) >= 5:
+            break
+        if (
+            r.final_prob >= 0.45
+            and r.favor is not None and r.favor > 0
+            and r.completeness_score is not None and r.completeness_score >= 0.8
+            and r.sportsbook_odds is not None
+            and not r.is_low_confidence
+        ):
+            tier1_ids.add(r.player_id)
+
+    # Tier 2 — Value Plays (up to 8)
+    for r in sorted_rows:
+        if len(tier2_ids) >= 8:
+            break
+        if r.player_id in tier1_ids:
+            continue
+        if (
+            0.35 <= r.final_prob < 0.45
+            and r.favor is not None and r.favor > 0
+            and r.implied_prob is not None and r.implied_prob <= 0.33
+            and r.sportsbook_odds is not None
+            and not r.is_low_confidence
+        ):
+            tier2_ids.add(r.player_id)
+
+    # Tier 3 — On the Radar (up to 10)
+    for r in sorted_rows:
+        if len(tier3_ids) >= 10:
+            break
+        if r.player_id in tier1_ids or r.player_id in tier2_ids:
+            continue
+        if 0.30 <= r.final_prob < 0.35 and r.sportsbook_odds is not None:
+            tier3_ids.add(r.player_id)
+
+    # Fade A — Volume Traps (up to 5): high implied prob, low model prob
+    fade_a_candidates = sorted(
+        [r for r in rows if r.sportsbook_odds is not None],
+        key=lambda r: (r.implied_prob or 0),
+        reverse=True,
+    )
+    for r in fade_a_candidates:
+        if len(fade_a_ids) >= 5:
+            break
+        if r.final_prob < 0.35 and r.implied_prob is not None and r.implied_prob >= 0.35:
+            fade_a_ids.add(r.player_id)
+
+    # Fade B — Overpriced Depth (up to 5, exclude fade_a)
+    fade_b_candidates = sorted(
+        [r for r in rows if r.sportsbook_odds is not None and r.player_id not in fade_a_ids],
+        key=lambda r: (r.favor or 0),
+    )
+    for r in fade_b_candidates:
+        if len(fade_b_ids) >= 5:
+            break
+        if r.final_prob < 0.25 and r.favor is not None and r.favor < -0.10:
+            fade_b_ids.add(r.player_id)
+
+    # Assign
+    tier_map: dict[str, Optional[str]] = {}
+    for r in rows:
+        if r.player_id in tier1_ids:
+            tier_map[r.player_id] = "high_conviction"
+        elif r.player_id in tier2_ids:
+            tier_map[r.player_id] = "value_play"
+        elif r.player_id in tier3_ids:
+            tier_map[r.player_id] = "on_the_radar"
+        elif r.player_id in fade_a_ids:
+            tier_map[r.player_id] = "fade_volume_trap"
+        elif r.player_id in fade_b_ids:
+            tier_map[r.player_id] = "fade_overpriced"
+        else:
+            tier_map[r.player_id] = None
+
+    return [r.model_copy(update={"tier": tier_map[r.player_id]}) for r in rows]
 
 
 # ── Predictions ───────────────────────────────────────────────────────────────
@@ -132,8 +228,22 @@ async def get_predictions(
     if not pred_rows:
         return PredictionsResponse(season=season, week=week, count=0, predictions=[])
 
-    # Fetch DraftKings odds for all relevant players in one query
+    # Batch-fetch completeness_score from player_features
     player_ids = [p.player_id for _, p in pred_rows]
+    features_q = (
+        select(PlayerFeatures.player_id, PlayerFeatures.completeness_score)
+        .where(PlayerFeatures.player_id.in_(player_ids))
+        .where(PlayerFeatures.season == season)
+        .where(PlayerFeatures.week == week)
+    )
+    feature_rows = (await db.execute(features_q)).all()
+    completeness_by_player: dict[str, float] = {
+        row.player_id: float(row.completeness_score)
+        for row in feature_rows
+        if row.completeness_score is not None
+    }
+
+    # Fetch DraftKings odds for all relevant players in one query
     odds_q = (
         select(SportsbookOdds)
         .where(SportsbookOdds.season == season)
@@ -172,8 +282,12 @@ async def get_predictions(
                 favor=favor,
                 is_low_confidence=pred.is_low_confidence,
                 model_version=pred.model_version,
+                tier=None,
+                completeness_score=completeness_by_player.get(pred.player_id),
             )
         )
+
+    result = _assign_tiers(result)
 
     return PredictionsResponse(
         season=season,
@@ -461,6 +575,7 @@ _DEFAULT_WEEK = 1
 class WeekStatusResponse(BaseModel):
     season: int
     week: int
+    is_early_season: bool  # True when week <= 3
 
 
 @router.get(
@@ -488,7 +603,11 @@ async def get_status_week(
     )
     games_row = (await db.execute(games_q)).first()
     if games_row is not None:
-        return WeekStatusResponse(season=games_row.season, week=games_row.week)
+        return WeekStatusResponse(
+            season=games_row.season,
+            week=games_row.week,
+            is_early_season=games_row.week <= 3,
+        )
 
     preds_q = (
         select(Prediction.season, Prediction.week)
@@ -497,9 +616,13 @@ async def get_status_week(
     )
     preds_row = (await db.execute(preds_q)).first()
     if preds_row is not None:
-        return WeekStatusResponse(season=preds_row.season, week=preds_row.week)
+        return WeekStatusResponse(
+            season=preds_row.season,
+            week=preds_row.week,
+            is_early_season=preds_row.week <= 3,
+        )
 
-    return WeekStatusResponse(season=_DEFAULT_SEASON, week=_DEFAULT_WEEK)
+    return WeekStatusResponse(season=_DEFAULT_SEASON, week=_DEFAULT_WEEK, is_early_season=True)
 
 
 # ── Track record ───────────────────────────────────────────────────────────────
@@ -525,8 +648,22 @@ class SeasonSummary(BaseModel):
     mean_calibration_error: float
 
 
+class TierBucket(BaseModel):
+    hits: int
+    total: int
+    hit_rate: Optional[float]
+
+
+class TierSummary(BaseModel):
+    top_picks: TierBucket
+    high_conviction: TierBucket
+    value_play: TierBucket
+    fade: TierBucket
+
+
 class TrackRecordResponse(BaseModel):
     season: int
+    tier_summary: TierSummary
     weeks: list[WeekTrackRecord]
     season_summary: SeasonSummary
 
@@ -558,6 +695,13 @@ async def get_track_record(
     from collections import defaultdict
 
     # Resolve season
+    _empty_tier_summary = TierSummary(
+        top_picks=TierBucket(hits=0, total=0, hit_rate=None),
+        high_conviction=TierBucket(hits=0, total=0, hit_rate=None),
+        value_play=TierBucket(hits=0, total=0, hit_rate=None),
+        fade=TierBucket(hits=0, total=0, hit_rate=None),
+    )
+
     if season is not None:
         resolved_season = season
     else:
@@ -566,6 +710,7 @@ async def get_track_record(
         if max_season is None:
             return TrackRecordResponse(
                 season=_DEFAULT_SEASON,
+                tier_summary=_empty_tier_summary,
                 weeks=[],
                 season_summary=SeasonSummary(
                     total_predictions=0,
@@ -609,6 +754,7 @@ async def get_track_record(
     if not rows:
         return TrackRecordResponse(
             season=resolved_season,
+            tier_summary=_empty_tier_summary,
             weeks=[],
             season_summary=SeasonSummary(
                 total_predictions=0,
@@ -676,9 +822,50 @@ async def get_track_record(
         total_high_conf_hits += week_high_conf_hits
         calibration_errors.extend(week_cal_errors)
 
+    # Tier summary — bucketed from historical final_prob
+    tp_hits = tp_total = hc_hits = hc_total = vp_hits = vp_total = fd_hits = fd_total = 0
+
+    # Top picks: per week, top 3 by final_prob
+    for entries in week_data.values():
+        sorted_entries = sorted(entries, key=lambda e: e[0], reverse=True)
+        for fp, rec_tds, has_log in sorted_entries[:3]:
+            if has_log:
+                tp_total += 1
+                if rec_tds >= 1:
+                    tp_hits += 1
+
+    for entries in week_data.values():
+        for fp, rec_tds, has_log in entries:
+            if not has_log:
+                continue
+            scored = rec_tds >= 1
+            if fp >= 0.40:
+                hc_total += 1
+                if scored:
+                    hc_hits += 1
+            elif 0.35 <= fp < 0.40:
+                vp_total += 1
+                if scored:
+                    vp_hits += 1
+            if fp < 0.25:
+                fd_total += 1
+                if scored:
+                    fd_hits += 1
+
+    def _bucket(h: int, t: int) -> TierBucket:
+        return TierBucket(hits=h, total=t, hit_rate=round(h / t, 4) if t else None)
+
+    tier_summary = TierSummary(
+        top_picks=_bucket(tp_hits, tp_total),
+        high_conviction=_bucket(hc_hits, hc_total),
+        value_play=_bucket(vp_hits, vp_total),
+        fade=_bucket(fd_hits, fd_total),
+    )
+
     actionable_total = total_hits + total_misses
     return TrackRecordResponse(
         season=resolved_season,
+        tier_summary=tier_summary,
         weeks=week_records,
         season_summary=SeasonSummary(
             total_predictions=total_predictions,
