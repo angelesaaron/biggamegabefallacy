@@ -131,14 +131,20 @@ export function TierPlayerCard({
         </span>
       )}
 
-      {/* Fade: show implied vs model gap instead of odds columns */}
-      {isFade && implied_prob !== null && (
-        <span className="text-xs text-sr-text-muted flex-shrink-0 nums hidden sm:block">
-          Book:{' '}
-          <span className="text-white font-semibold">{Math.round(implied_prob * 100)}%</span>
-          {' · '}Model:{' '}
-          <span className="text-sr-danger font-semibold">{Math.round(final_prob * 100)}%</span>
-        </span>
+      {/* Fade: book odds vs model odds */}
+      {isFade && (
+        <div className="grid gap-x-6 flex-shrink-0" style={{ gridTemplateColumns: '3.5rem 3.5rem' }}>
+          <span className="text-sr-danger font-semibold text-sm nums text-right">
+            {formatOdds(model_odds)}
+          </span>
+          <span className="text-white font-semibold text-sm nums text-right hidden sm:block">
+            {sbOddsStr ?? '—'}
+          </span>
+          <span className="text-sr-text-dim text-xs nums text-right leading-4">Model</span>
+          <div className="hidden sm:flex w-full justify-end pr-1 items-center">
+            <Image src="/dk-logo-small.png" alt="DraftKings" width={14} height={14} />
+          </div>
+        </div>
       )}
 
       {/* Paid fields: edge + model odds + model % */}
