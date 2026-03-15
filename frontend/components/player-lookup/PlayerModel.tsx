@@ -6,7 +6,6 @@ import { useAuthModal } from '@/contexts/AuthModalContext';
 import { PlayerSelector } from './PlayerSelector';
 import { PlayerHeader } from './PlayerHeader';
 import { PredictionSummary } from './PredictionSummary';
-import { HistoricalResultCard } from './HistoricalResultCard';
 import { ProbabilityChart } from './ProbabilityChart';
 import { GameLogTable } from './GameLogTable';
 import { GamblingDisclaimer } from '@/components/shared/GamblingDisclaimer';
@@ -274,32 +273,13 @@ export function PlayerModel({ initialPlayerId, currentWeek, currentYear }: Playe
           <PlayerHeader player={selectedPlayer} />
         </div>
 
-        {/* Prediction Summary / Historical Result */}
+        {/* Prediction Summary */}
         {selectedPlayerData?.prediction && (
           <div className="mb-8">
-            {isHistorical && (
-              <div className="mb-3 flex items-center gap-2">
-                <span className="text-xs px-3 py-1 rounded-badge bg-sr-primary/15 text-sr-primary/80">
-                  Week {selectedWeek} — Historical
-                </span>
-              </div>
-            )}
-            {isHistorical ? (
-              <HistoricalResultCard
-                week={selectedPlayerData.prediction.week ?? selectedWeek}
-                year={selectedPlayerData.prediction.year ?? effectiveYear}
-                tier={selectedPlayerData.prediction.tier ?? null}
-                modelProbability={selectedPlayerData.prediction.modelProbability}
-                td={(() => {
-                  const log = selectedPlayerData.gameLogs?.find((l) => l.week === selectedWeek);
-                  return log ? log.td > 0 : false;
-                })()}
-                edge={selectedPlayerData.prediction.edge}
-                edgeValue={selectedPlayerData.prediction.edgeValue}
-              />
-            ) : (
-              <PredictionSummary prediction={selectedPlayerData.prediction} />
-            )}
+            <PredictionSummary
+              prediction={selectedPlayerData.prediction}
+              tdCount={isHistorical ? (selectedPlayerData.gameLogs?.find((l) => l.week === selectedWeek)?.td ?? null) : null}
+            />
           </div>
         )}
 

@@ -43,6 +43,7 @@ export interface PredictionResponse {
   model_version: string;
   tier: PredictionTier;
   completeness_score: number | null;
+  td_count: number | null;
 }
 
 export interface PredictionsApiResponse {

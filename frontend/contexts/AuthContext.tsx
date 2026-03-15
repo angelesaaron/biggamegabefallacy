@@ -25,6 +25,7 @@ export interface AuthContextValue {
   register: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   refreshToken: () => Promise<boolean>;
+  refreshUser: () => Promise<void>;
   getToken: () => string | null;
 }
 
@@ -150,8 +151,11 @@ interface TokenResponse {
 interface MeResponse {
   id: string;
   email: string;
+  first_name: string | null;
+  last_name: string | null;
   is_subscriber: boolean;
   is_active: boolean;
+  member_since: string;
 }
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
@@ -200,7 +204,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     async (token: string): Promise<boolean> => {
       try {
         const me = await apiFetch<MeResponse>('/api/auth/me', {}, token);
-        setUser({ id: me.id, email: me.email, is_subscriber: me.is_subscriber });
+        setUser({
+          id: me.id,
+          email: me.email,
+          first_name: me.first_name,
+          last_name: me.last_name,
+          is_subscriber: me.is_subscriber,
+          member_since: me.member_since,
+        });
         scheduleRefresh(token);
         return true;
       } catch {
@@ -372,6 +383,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return true;
   }, [performRefresh]);
 
+  // ---------------------------------------------------------------------------
+  // Public API: refreshUser (re-fetches /me with the current stored token)
+  // ---------------------------------------------------------------------------
+  const refreshUser = useCallback(async (): Promise<void> => {
+    const token = loadToken();
+    if (!token) return;
+    await hydrateUser(token);
+  }, [hydrateUser]);
+
   const value: AuthContextValue = {
     user,
     isLoading,
@@ -380,6 +400,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     register,
     logout,
     refreshToken,
+    refreshUser,
     getToken: loadToken,
   };
 

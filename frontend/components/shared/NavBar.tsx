@@ -1,7 +1,8 @@
 'use client';
 
+import Image from 'next/image';
 import { WeekBadge } from './WeekBadge';
-import { UserPill } from './UserPill';
+import { NavUserMenu } from './NavUserMenu';
 import { useAuth } from '../../hooks/useAuth';
 import { useAuthModal } from '../../contexts/AuthModalContext';
 
@@ -27,9 +28,18 @@ export function NavBar({ activeTab, onTabChange, currentWeek }: NavBarProps) {
     <nav className="sticky top-0 z-50 h-16 bg-sr-bg/80 backdrop-blur-md border-b border-sr-border">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
         {/* Wordmark */}
-        <span className="text-white font-bold text-lg tracking-tight">
-          Big Game Gabe
-        </span>
+        <div className="flex items-center gap-2">
+          <Image
+            src="/biggamegabeicon.png"
+            alt="Big Game Gabe"
+            width={32}
+            height={32}
+            className="rounded-sm"
+          />
+          <span className="text-white font-bold text-lg tracking-tight">
+            Big Game Gabe
+          </span>
+        </div>
 
         {/* Tabs */}
         <div className="flex items-center gap-1">
@@ -54,7 +64,7 @@ export function NavBar({ activeTab, onTabChange, currentWeek }: NavBarProps) {
           {isLoading ? (
             <div className="w-8 h-8 rounded-full bg-sr-border animate-pulse" />
           ) : user ? (
-            <UserPill />
+            <NavUserMenu />
           ) : (
             <button
               type="button"

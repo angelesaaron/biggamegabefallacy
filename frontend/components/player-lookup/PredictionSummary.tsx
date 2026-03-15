@@ -3,8 +3,20 @@ import { TrendingUp, TrendingDown, Minus, AlertCircle } from 'lucide-react';
 import { SurfaceCard } from '@/components/ui/SurfaceCard';
 import type { PlayerPrediction } from '@/types/ui';
 
+function FootballIcon() {
+  return (
+    <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4 inline-block" aria-hidden="true">
+      <ellipse cx="8" cy="8" rx="5" ry="7" fill="#b45309" />
+      <line x1="5" y1="8" x2="11" y2="8" stroke="white" strokeWidth="1" strokeLinecap="round" />
+      <line x1="6.5" y1="6" x2="6.5" y2="10" stroke="white" strokeWidth="0.8" strokeLinecap="round" />
+      <line x1="9.5" y1="6" x2="9.5" y2="10" stroke="white" strokeWidth="0.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 interface PredictionSummaryProps {
   prediction: PlayerPrediction;
+  tdCount?: number | null;
 }
 
 const TIER_CONFIG: Record<string, { label: string; className: string }> = {
@@ -15,7 +27,7 @@ const TIER_CONFIG: Record<string, { label: string; className: string }> = {
   fade_overpriced: { label: 'Fade — Overpriced', className: 'bg-sr-danger/20 text-sr-danger border border-sr-danger/30' },
 };
 
-export function PredictionSummary({ prediction }: PredictionSummaryProps) {
+export function PredictionSummary({ prediction, tdCount }: PredictionSummaryProps) {
   const isPredictionMissing =
     prediction.modelProbability === null ||
     prediction.modelImpliedOdds === null ||
@@ -65,7 +77,14 @@ export function PredictionSummary({ prediction }: PredictionSummaryProps) {
       : 'bg-sr-surface/40 border-sr-border';
 
   return (
-    <div className={`border rounded-card p-8 max-md:p-4 ${edgeBorderClass}`}>
+    <div className={`relative border rounded-card p-8 max-md:p-4 ${edgeBorderClass}`}>
+      {tdCount !== null && tdCount > 0 && (
+        <div className="absolute top-3 right-4 flex gap-1">
+          {Array.from({ length: tdCount }).map((_, i) => (
+            <FootballIcon key={i} />
+          ))}
+        </div>
+      )}
       <div className="text-center mb-6 max-md:mb-4">
         {prediction.week && prediction.year && (
           <div className="mb-2 max-md:mb-1">

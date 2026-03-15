@@ -13,7 +13,7 @@ interface TeaserBannerProps {
 }
 
 export function TeaserBanner({ label, count, noun, accentClass, headerTextClass, descriptor }: TeaserBannerProps) {
-  const { openRegister } = useAuthModal();
+  const { openRegister, openLogin } = useAuthModal();
   const plural = count !== 1 ? `${noun}s` : noun;
 
   return (
@@ -29,12 +29,20 @@ export function TeaserBanner({ label, count, noun, accentClass, headerTextClass,
             {count} {plural} identified this week
           </span>
         </div>
-        <button
-          onClick={openRegister}
-          className="bg-sr-primary text-white px-4 py-2 rounded-card text-xs font-semibold hover:bg-sr-primary/80 transition-colors flex-shrink-0"
-        >
-          Get Access
-        </button>
+        <div className="flex items-center gap-3 flex-shrink-0">
+          <button
+            onClick={openLogin}
+            className="text-xs text-sr-text-muted hover:text-white underline underline-offset-2 transition-colors"
+          >
+            Sign in
+          </button>
+          <button
+            onClick={openRegister}
+            className="bg-sr-primary text-white px-4 py-2 rounded-card text-xs font-semibold hover:bg-sr-primary/80 transition-colors"
+          >
+            Get Access
+          </button>
+        </div>
       </div>
     </section>
   );

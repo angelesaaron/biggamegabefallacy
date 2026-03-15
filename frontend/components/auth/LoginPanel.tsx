@@ -7,9 +7,10 @@ import { useAuth } from '../../hooks/useAuth';
 interface LoginPanelProps {
   onSuccess: () => void;
   onSwitchToRegister: () => void;
+  onForgotPassword: () => void;
 }
 
-export function LoginPanel({ onSuccess, onSwitchToRegister }: LoginPanelProps) {
+export function LoginPanel({ onSuccess, onSwitchToRegister, onForgotPassword }: LoginPanelProps) {
   const { login } = useAuth();
 
   const [email, setEmail] = useState('');
@@ -100,6 +101,17 @@ export function LoginPanel({ onSuccess, onSwitchToRegister }: LoginPanelProps) {
                 )}
               </button>
             </div>
+          </div>
+
+          {/* Forgot password link */}
+          <div className="flex justify-end mt-1.5">
+            <button
+              type="button"
+              onClick={onForgotPassword}
+              className="text-xs text-sr-text-muted hover:text-sr-primary transition-colors"
+            >
+              Forgot your password?
+            </button>
           </div>
         </div>
 

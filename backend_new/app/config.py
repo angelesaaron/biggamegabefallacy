@@ -38,9 +38,23 @@ class Settings(BaseSettings):
             )
         return self
 
+    @model_validator(mode="after")
+    def check_resend_api_key(self) -> "Settings":
+        import os
+        if not self.RESEND_API_KEY and os.environ.get("PYTEST_CURRENT_TEST") is None:
+            raise ValueError(
+                "RESEND_API_KEY must be set. Obtain one from https://resend.com/api-keys"
+            )
+        return self
+
     # API Keys
     TANK01_API_KEY: str = ""
     ADMIN_KEY: str = ""  # Required for all /admin/* endpoints
+
+    # Email (Resend)
+    RESEND_API_KEY: str = ""
+    EMAIL_FROM: str = "noreply@biggamegabe.com"
+    FRONTEND_URL: str = "http://localhost:3000"
 
     # JWT — generate JWT_SECRET_KEY with: openssl rand -hex 32
     JWT_SECRET_KEY: str = ""

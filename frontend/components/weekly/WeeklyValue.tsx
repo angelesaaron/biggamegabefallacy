@@ -27,6 +27,7 @@ export function WeeklyValue({ currentWeek, currentYear, onPlayerClick }: WeeklyV
 
   const effectiveYear = currentYear ?? 2025;
   const isEarlySeason = selectedWeek <= 3;
+  const isHistorical = currentWeek !== null && selectedWeek < currentWeek;
 
   const { predictions, teaser, loading, error } = usePredictions(effectiveYear, selectedWeek);
 
@@ -50,7 +51,7 @@ export function WeeklyValue({ currentWeek, currentYear, onPlayerClick }: WeeklyV
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
         {/* Page header */}
-        <SurfaceCard className="mb-4 p-4 md:p-6">
+        <SurfaceCard className={`mb-4 p-4 md:p-6${isHistorical ? ' border-sr-primary/30' : ''}`}>
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div className="flex-1">
               <h1 className="text-xl md:text-3xl font-semibold text-white mb-1">

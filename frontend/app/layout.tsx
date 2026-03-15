@@ -11,19 +11,20 @@ export const metadata: Metadata = {
   title: "Big Game Gabe — NFL TD Model",
   description: "NFL anytime touchdown probability model for WR and TE",
   icons: {
-    icon: "/favicon.svg",
+    icon: "/biggamegabeicon.png",
+    apple: "/biggamegabeicon.png",
   },
   openGraph: {
     title: "Big Game Gabe — NFL TD Model",
     description: "NFL anytime touchdown probability model for WR and TE",
-    images: ["/og-image.svg"],
+    images: ["/biggamegabeicon.png"],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Big Game Gabe — NFL TD Model",
     description: "NFL anytime touchdown probability model for WR and TE",
-    images: ["/og-image.svg"],
+    images: ["/biggamegabeicon.png"],
   },
 };
 

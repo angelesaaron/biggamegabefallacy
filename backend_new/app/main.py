@@ -13,6 +13,7 @@ from app.limiter import limiter
 from app.api.auth import router as auth_router
 from app.api.admin import router as admin_router
 from app.api.public import router as public_router
+from app.api import users as users_api
 from app.database import AsyncSessionLocal
 
 logger = logging.getLogger(__name__)
@@ -49,7 +50,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.CORS_ORIGINS,
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE"],
+    allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE"],
     allow_headers=["Authorization", "Content-Type", "X-Admin-Key"],
 )
 
@@ -77,6 +78,7 @@ async def add_security_headers(request: Request, call_next):
 # Routers — auth first so login/token routes resolve before public/admin.
 # ---------------------------------------------------------------------------
 app.include_router(auth_router, prefix="/api")
+app.include_router(users_api.router, prefix="/api")
 app.include_router(admin_router, prefix="/api")
 app.include_router(public_router, prefix="/api")
 

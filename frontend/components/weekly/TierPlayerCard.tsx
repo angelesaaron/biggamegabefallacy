@@ -1,39 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import type { PredictionResponse, PredictionTier } from '@/types/backend';
+import type { PredictionResponse } from '@/types/backend';
 
 interface TierPlayerCardProps {
   prediction: PredictionResponse;
   rank?: number;
   onClick?: (playerId: string) => void;
 }
-
-const TIER_BADGE: Record<
-  NonNullable<PredictionTier>,
-  { label: string; className: string }
-> = {
-  high_conviction: {
-    label: 'High Conv.',
-    className: 'bg-sr-success/20 text-sr-success border border-sr-success/30',
-  },
-  value_play: {
-    label: 'Value',
-    className: 'bg-amber-500/20 text-amber-400 border border-amber-500/30',
-  },
-  on_the_radar: {
-    label: 'Radar',
-    className: 'bg-sr-surface text-sr-text-muted border border-sr-border',
-  },
-  fade_volume_trap: {
-    label: 'Fade',
-    className: 'bg-sr-danger/20 text-sr-danger border border-sr-danger/30',
-  },
-  fade_overpriced: {
-    label: 'Fade',
-    className: 'bg-sr-danger/20 text-sr-danger border border-sr-danger/30',
-  },
-};
 
 function formatOdds(n: number | null): string {
   if (n === null) return '--';
@@ -55,14 +29,12 @@ export function TierPlayerCard({
     final_prob,
     model_odds,
     sportsbook_odds,
-    implied_prob,
     favor,
     tier,
+    td_count,
   } = prediction;
 
   const isFade = tier === 'fade_volume_trap' || tier === 'fade_overpriced';
-
-  const badge = tier ? TIER_BADGE[tier] : null;
 
   const edgeSign = favor !== null && favor > 0 ? '+' : '';
   const edgePct = favor !== null ? `${edgeSign}${(favor * 100).toFixed(1)}%` : null;
@@ -78,9 +50,14 @@ export function TierPlayerCard({
       ? formatOdds(sportsbook_odds)
       : null;
 
-  const cardBg = isFade
-    ? 'bg-sr-danger/5 border-sr-danger/20 hover:border-sr-danger/40'
-    : 'bg-sr-surface/40 border-sr-border hover:border-sr-primary/40';
+  const cardBg =
+    td_count !== null && td_count > 0
+      ? 'bg-sr-success/5 border-sr-success/30 hover:border-sr-success/50'
+      : td_count === 0
+      ? 'bg-sr-danger/5 border-sr-danger/20 hover:border-sr-danger/40'
+      : isFade
+      ? 'bg-sr-danger/5 border-sr-danger/20 hover:border-sr-danger/40'
+      : 'bg-sr-surface/40 border-sr-border hover:border-sr-primary/40';
 
   return (
     <div
@@ -116,15 +93,6 @@ export function TierPlayerCard({
           {team ?? 'N/A'} · {position ?? 'N/A'}
         </p>
       </div>
-
-      {/* Tier badge */}
-      {badge && (
-        <span
-          className={`text-xs font-semibold px-2 py-0.5 rounded-badge flex-shrink-0 ${badge.className}`}
-        >
-          {badge.label}
-        </span>
-      )}
 
       {/* Fade: book odds vs model odds */}
       {isFade && (

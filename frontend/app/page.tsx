@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { NavBar } from '@/components/shared/NavBar';
 import { WeeklyValue } from '@/components/weekly/WeeklyValue';
 import { PlayerModel } from '@/components/player-lookup/PlayerModel';
@@ -9,8 +10,14 @@ import { useCurrentWeek } from '@/hooks/useCurrentWeek';
 
 type Tab = 'weekly' | 'player' | 'track';
 
-export default function Home() {
-  const [activeTab, setActiveTab] = useState<Tab>('weekly');
+const VALID_TABS: Tab[] = ['weekly', 'player', 'track'];
+
+function HomeContent() {
+  const searchParams = useSearchParams();
+  const tabParam = searchParams.get('tab') as Tab | null;
+  const initialTab: Tab = tabParam && VALID_TABS.includes(tabParam) ? tabParam : 'weekly';
+
+  const [activeTab, setActiveTab] = useState<Tab>(initialTab);
   const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
   const { week: currentWeek, season: currentYear } = useCurrentWeek();
 
@@ -42,5 +49,13 @@ export default function Home() {
         )}
       </main>
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-sr-bg" />}>
+      <HomeContent />
+    </Suspense>
   );
 }

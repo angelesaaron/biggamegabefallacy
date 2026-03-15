@@ -48,6 +48,7 @@ class PredictionRow(BaseModel):
     model_version: str
     tier: Optional[str]                  # high_conviction | value_play | on_the_radar | fade_volume_trap | fade_overpriced | None
     completeness_score: Optional[float]
+    td_count: Optional[int] = None       # TD count for historical weeks; None for current/future
 
 
 class TeaserCounts(BaseModel):
@@ -281,6 +282,18 @@ async def get_predictions(
     odds_rows = (await db.execute(odds_q)).scalars().all()
     odds_by_player: dict[str, SportsbookOdds] = {o.player_id: o for o in odds_rows}
 
+    # Batch-fetch game log outcomes for historical weeks (any logs present = week is final)
+    logs_q = (
+        select(PlayerGameLog.player_id, PlayerGameLog.rec_tds)
+        .where(PlayerGameLog.season == season)
+        .where(PlayerGameLog.week == week)
+        .where(PlayerGameLog.player_id.in_(player_ids))
+    )
+    log_rows = (await db.execute(logs_q)).all()
+    td_count_by_player: dict[str, int] = {
+        row.player_id: int(row.rec_tds or 0) for row in log_rows
+    }
+
     # Build response rows
     result: list[PredictionRow] = []
     for pred, player in pred_rows:
@@ -311,6 +324,7 @@ async def get_predictions(
                 model_version=pred.model_version,
                 tier=None,
                 completeness_score=completeness_by_player.get(pred.player_id),
+                td_count=td_count_by_player.get(pred.player_id),
             )
         )
 

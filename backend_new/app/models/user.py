@@ -26,6 +26,8 @@ class User(Base):
     )
     email: Mapped[str] = mapped_column(Text, nullable=False, unique=True, index=True)
     hashed_password: Mapped[str] = mapped_column(Text, nullable=False)
+    first_name: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
+    last_name: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
     is_subscriber: Mapped[bool] = mapped_column(Boolean, nullable=False, server_default="true")
     stripe_customer_id: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     last_refresh_token: Mapped[Optional[str]] = mapped_column(
