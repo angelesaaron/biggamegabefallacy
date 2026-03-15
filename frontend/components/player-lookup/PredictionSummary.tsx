@@ -78,7 +78,7 @@ export function PredictionSummary({ prediction, tdCount }: PredictionSummaryProp
 
   return (
     <div className={`relative border rounded-card p-8 max-md:p-4 ${edgeBorderClass}`}>
-      {tdCount !== null && tdCount > 0 && (
+      {tdCount != null && tdCount > 0 && (
         <div className="absolute top-3 right-4 flex gap-1">
           {Array.from({ length: tdCount }).map((_, i) => (
             <FootballIcon key={i} />
