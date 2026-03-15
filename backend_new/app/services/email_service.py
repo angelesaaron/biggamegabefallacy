@@ -1,20 +1,5 @@
-import base64
-from pathlib import Path
-
 import resend
 from app.config import settings
-
-_LOGO_PATH = Path(__file__).parent.parent.parent / "static" / "biggamegabeicon.png"
-_LOGO_CID = "bggtdm-logo"
-
-
-def _logo_attachment() -> dict:
-    data = _LOGO_PATH.read_bytes()
-    return {
-        "filename": "biggamegabeicon.png",
-        "content": base64.b64encode(data).decode(),
-        "content_id": _LOGO_CID,
-    }
 
 
 class EmailService:
@@ -27,7 +12,6 @@ class EmailService:
             "to": to_email,
             "subject": "Reset your password — link expires in 60 minutes",
             "html": self._reset_template(reset_url),
-            "attachments": [_logo_attachment()],
         })
 
     async def send_email_verification(self, to_email: str, verify_url: str) -> None:
@@ -36,11 +20,9 @@ class EmailService:
             "to": to_email,
             "subject": "Verify your email to activate your account",
             "html": self._verify_email_template(verify_url),
-            "attachments": [_logo_attachment()],
         })
 
     def _reset_template(self, url: str) -> str:
-        logo_src = f"cid:{_LOGO_CID}"
         return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,7 +42,7 @@ class EmailService:
               <table width="100%" cellpadding="0" cellspacing="0" border="0">
                 <tr>
                   <td>
-                    <img src="{logo_src}" alt="Big Game Gabe" width="32" height="32"
+                    <img src="https://biggamegabetd.app/biggamegabeicon.png" alt="" width="28" height="28"
                       style="display:inline-block;vertical-align:middle;border-radius:4px;" />
                     <span style="display:inline-block;vertical-align:middle;margin-left:10px;color:#ffffff;font-size:17px;font-weight:700;letter-spacing:-0.3px;">Big Game Gabe</span>
                   </td>
@@ -163,7 +145,6 @@ class EmailService:
 </html>"""
 
     def _verify_email_template(self, url: str) -> str:
-        logo_src = f"cid:{_LOGO_CID}"
         return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -183,7 +164,7 @@ class EmailService:
               <table width="100%" cellpadding="0" cellspacing="0" border="0">
                 <tr>
                   <td>
-                    <img src="{logo_src}" alt="Big Game Gabe" width="32" height="32"
+                    <img src="https://biggamegabetd.app/biggamegabeicon.png" alt="" width="28" height="28"
                       style="display:inline-block;vertical-align:middle;border-radius:4px;" />
                     <span style="display:inline-block;vertical-align:middle;margin-left:10px;color:#ffffff;font-size:17px;font-weight:700;letter-spacing:-0.3px;">Big Game Gabe</span>
                   </td>

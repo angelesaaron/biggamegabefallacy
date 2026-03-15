@@ -1,11 +1,14 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '../../hooks/useAuth';
+import { NavBar } from '../../components/shared/NavBar';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 const TOKEN_KEY = 'bggtdm_access_token';
+
+type Tab = 'weekly' | 'player' | 'track';
 
 interface TokenResponse {
   access_token: string;
@@ -14,31 +17,49 @@ interface TokenResponse {
 
 type VerifyState = 'loading' | 'success' | 'error' | 'no-token';
 
-export default function VerifyEmailPage() {
+// ---------------------------------------------------------------------------
+// Inner component — uses useSearchParams, must be inside Suspense
+// ---------------------------------------------------------------------------
+
+function VerifyEmailContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { refreshUser } = useAuth();
 
-  const [state, setState] = useState<VerifyState>('loading');
+  const rawToken = searchParams.get('token');
+
+  const [state, setState] = useState<VerifyState>(rawToken ? 'loading' : 'no-token');
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [currentWeek, setCurrentWeek] = useState<number | null>(null);
+
+  useEffect(() => {
+    async function fetchWeek() {
+      try {
+        const resp = await fetch(`${API_URL}/api/status/week`);
+        if (!resp.ok) return;
+        const data = await resp.json();
+        setCurrentWeek(data.week ?? null);
+      } catch {
+        // currentWeek handles null gracefully
+      }
+    }
+    fetchWeek();
+  }, []);
 
   // Guard against double-run in React StrictMode
   const hasRun = useRef(false);
 
   useEffect(() => {
-    if (hasRun.current) return;
-    hasRun.current = true;
-
-    const token = searchParams.get('token');
-
-    if (!token) {
+    if (!rawToken) {
       setState('no-token');
       return;
     }
 
+    if (hasRun.current) return;
+    hasRun.current = true;
+
     async function verify() {
       try {
-        // Read any existing access token for the auth header
         let authToken: string | null = null;
         try {
           authToken = localStorage.getItem(TOKEN_KEY);
@@ -55,7 +76,7 @@ export default function VerifyEmailPage() {
           method: 'POST',
           credentials: 'include',
           headers,
-          body: JSON.stringify({ token }),
+          body: JSON.stringify({ token: rawToken }),
         });
 
         if (!res.ok) {
@@ -71,7 +92,6 @@ export default function VerifyEmailPage() {
           return;
         }
 
-        // The endpoint returns a new JWT — store it, then refresh user state
         try {
           const data = await res.json() as TokenResponse;
           if (data?.access_token) {
@@ -79,12 +99,11 @@ export default function VerifyEmailPage() {
               localStorage.setItem(TOKEN_KEY, data.access_token);
             } catch { /* ignore */ }
           }
-        } catch { /* ignore — response may be 204 */ }
+        } catch { /* 204 or non-JSON — ignore */ }
 
         await refreshUser();
         setState('success');
 
-        // Redirect to account after 2 seconds
         setTimeout(() => {
           router.replace('/account');
         }, 2000);
@@ -95,11 +114,16 @@ export default function VerifyEmailPage() {
     }
 
     verify();
-  }, [searchParams, refreshUser, router]);
+  // rawToken is a stable string — safe as a dependency
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rawToken]);
 
   return (
-    <div className="min-h-screen bg-sr-bg flex items-center justify-center px-4">
+    <div className="min-h-screen bg-sr-bg">
+      <NavBar activeTab="weekly" onTabChange={(tab) => router.push(`/?tab=${tab}`)} currentWeek={currentWeek} />
+      <div className="flex items-center justify-center px-4 py-16">
       <div className="bg-sr-surface border border-sr-border rounded-card p-8 w-full max-w-sm text-center">
+
         {state === 'loading' && (
           <>
             <div className="w-10 h-10 rounded-full border-2 border-sr-primary border-t-transparent animate-spin mx-auto mb-4" aria-hidden="true" />
@@ -154,7 +178,28 @@ export default function VerifyEmailPage() {
             </button>
           </>
         )}
+
+      </div>
       </div>
     </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Page export — Suspense boundary required by Next.js 14 for useSearchParams
+// ---------------------------------------------------------------------------
+
+export default function VerifyEmailPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-sr-bg flex items-center justify-center px-4">
+        <div className="bg-sr-surface border border-sr-border rounded-card p-8 w-full max-w-sm text-center">
+          <div className="w-10 h-10 rounded-full border-2 border-sr-primary border-t-transparent animate-spin mx-auto mb-4" aria-hidden="true" />
+          <p className="text-white font-semibold mb-1">Loading&hellip;</p>
+        </div>
+      </div>
+    }>
+      <VerifyEmailContent />
+    </Suspense>
   );
 }
