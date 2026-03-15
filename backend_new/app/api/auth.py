@@ -112,6 +112,7 @@ class MeResponse(BaseModel):
     last_name: Optional[str]
     is_subscriber: bool
     is_active: bool
+    is_admin: bool
     member_since: str  # ISO date string, e.g. "2025-01-14"
 
 
@@ -298,6 +299,7 @@ async def me(
         last_name=current_user.last_name,
         is_subscriber=current_user.is_subscriber,
         is_active=current_user.is_active,
+        is_admin=current_user.is_admin,
         member_since=current_user.created_at.date().isoformat(),
     )
 

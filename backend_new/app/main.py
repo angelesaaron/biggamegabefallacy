@@ -14,6 +14,7 @@ from app.api.auth import router as auth_router
 from app.api.admin import router as admin_router
 from app.api.public import router as public_router
 from app.api import users as users_api
+from app.api.admin_users import router as admin_ui_router
 from app.database import AsyncSessionLocal
 
 logger = logging.getLogger(__name__)
@@ -81,6 +82,7 @@ app.include_router(auth_router, prefix="/api")
 app.include_router(users_api.router, prefix="/api")
 app.include_router(admin_router, prefix="/api")
 app.include_router(public_router, prefix="/api")
+app.include_router(admin_ui_router, prefix="/api")
 
 
 # ---------------------------------------------------------------------------

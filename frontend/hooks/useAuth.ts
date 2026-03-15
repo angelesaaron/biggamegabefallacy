@@ -10,3 +10,7 @@ export function useAuth() {
 export function useIsSubscriber(): boolean {
   return useAuth().isSubscriber;
 }
+
+export function useIsAdmin(): boolean {
+  return useAuth().isAdmin;
+}

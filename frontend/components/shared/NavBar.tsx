@@ -3,10 +3,10 @@
 import Image from 'next/image';
 import { WeekBadge } from './WeekBadge';
 import { NavUserMenu } from './NavUserMenu';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth, useIsAdmin } from '../../hooks/useAuth';
 import { useAuthModal } from '../../contexts/AuthModalContext';
 
-type Tab = 'weekly' | 'player' | 'track';
+type Tab = 'weekly' | 'player' | 'track' | 'admin';
 
 interface NavBarProps {
   activeTab: Tab;
@@ -23,6 +23,7 @@ const TABS: { id: Tab; label: string }[] = [
 export function NavBar({ activeTab, onTabChange, currentWeek }: NavBarProps) {
   const { user, isLoading } = useAuth();
   const { openLogin } = useAuthModal();
+  const isAdmin = useIsAdmin();
 
   return (
     <nav className="sticky top-0 z-50 h-16 bg-sr-bg/80 backdrop-blur-md border-b border-sr-border">
@@ -56,6 +57,18 @@ export function NavBar({ activeTab, onTabChange, currentWeek }: NavBarProps) {
               {tab.label}
             </button>
           ))}
+          {isAdmin && (
+            <button
+              onClick={() => onTabChange('admin')}
+              className={
+                activeTab === 'admin'
+                  ? 'px-4 py-2 text-sm font-medium text-white border-b-2 border-sr-primary transition-colors'
+                  : 'px-4 py-2 text-sm font-medium text-sr-text-muted hover:text-white transition-colors'
+              }
+            >
+              Admin
+            </button>
+          )}
         </div>
 
         {/* Right zone: week badge + auth */}

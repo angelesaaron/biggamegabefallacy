@@ -21,6 +21,7 @@ export interface AuthContextValue {
   user: AuthUser | null;
   isLoading: boolean;
   isSubscriber: boolean;
+  isAdmin: boolean;
   login: (email: string, password: string) => Promise<void>;
   register: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
@@ -154,6 +155,7 @@ interface MeResponse {
   first_name: string | null;
   last_name: string | null;
   is_subscriber: boolean;
+  is_admin: boolean;
   is_active: boolean;
   member_since: string;
 }
@@ -210,6 +212,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           first_name: me.first_name,
           last_name: me.last_name,
           is_subscriber: me.is_subscriber,
+          is_admin: me.is_admin,
           member_since: me.member_since,
         });
         scheduleRefresh(token);
@@ -396,6 +399,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     user,
     isLoading,
     isSubscriber: user !== null && user.is_subscriber,
+    isAdmin: user !== null && user.is_admin,
     login,
     register,
     logout,

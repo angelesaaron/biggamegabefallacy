@@ -72,6 +72,7 @@ def create_access_token(user: User) -> str:
         "sub": str(user.id),
         "email": user.email,
         "is_subscriber": user.is_subscriber,
+        "is_admin": user.is_admin,
         "exp": expire,
     }
     return jwt.encode(

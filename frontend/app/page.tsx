@@ -6,10 +6,11 @@ import { NavBar } from '@/components/shared/NavBar';
 import { WeeklyValue } from '@/components/weekly/WeeklyValue';
 import { PlayerModel } from '@/components/player-lookup/PlayerModel';
 import { TrackRecord } from '@/components/track-record/TrackRecord';
+import AdminPage from '@/app/admin/page';
 import { useCurrentWeek } from '@/hooks/useCurrentWeek';
 
-type Tab = 'weekly' | 'player' | 'track';
-const VALID_TABS: Tab[] = ['weekly', 'player', 'track'];
+type Tab = 'weekly' | 'player' | 'track' | 'admin';
+const VALID_TABS: Tab[] = ['weekly', 'player', 'track', 'admin'];
 
 function HomeContent() {
   const searchParams = useSearchParams();
@@ -43,6 +44,11 @@ function HomeContent() {
           />
         )}
         {activeTab === 'track' && <TrackRecord />}
+        {activeTab === 'admin' && (
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
+            <AdminPage />
+          </div>
+        )}
       </main>
     </div>
   );
