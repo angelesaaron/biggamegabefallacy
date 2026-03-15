@@ -97,11 +97,12 @@ def _mock_execute(mock_db, *side_effects):
 
 class TestGetPredictions:
     async def test_returns_empty_when_no_predictions(self, public_client, mock_db):
+        # Empty pred_rows → early return; only 1 execute call needed
         pred_result = MagicMock()
         pred_result.all.return_value = []
         mock_db.execute = AsyncMock(return_value=pred_result)
 
-        resp = await public_client.get("/predictions/2025/7")
+        resp = await public_client.get("/api/predictions/2025/7")
         assert resp.status_code == 200
         body = resp.json()
         assert body["season"] == 2025
@@ -119,13 +120,17 @@ class TestGetPredictions:
         pred_result = MagicMock()
         pred_result.all.return_value = [(pred1, player1), (pred2, player2)]
 
-        # Second execute: odds query (empty — no odds available)
+        # Second execute: features query (empty — no completeness scores)
+        features_result = MagicMock()
+        features_result.all.return_value = []
+
+        # Third execute: odds query (empty — no odds available)
         odds_result = MagicMock()
         odds_result.scalars.return_value.all.return_value = []
 
-        mock_db.execute = AsyncMock(side_effect=[pred_result, odds_result])
+        mock_db.execute = AsyncMock(side_effect=[pred_result, features_result, odds_result])
 
-        resp = await public_client.get("/predictions/2025/7")
+        resp = await public_client.get("/api/predictions/2025/7")
         assert resp.status_code == 200
         body = resp.json()
         assert body["count"] == 2
@@ -138,11 +143,13 @@ class TestGetPredictions:
 
         pred_result = MagicMock()
         pred_result.all.return_value = [(pred, player)]
+        features_result = MagicMock()
+        features_result.all.return_value = []
         odds_result = MagicMock()
         odds_result.scalars.return_value.all.return_value = []
-        mock_db.execute = AsyncMock(side_effect=[pred_result, odds_result])
+        mock_db.execute = AsyncMock(side_effect=[pred_result, features_result, odds_result])
 
-        resp = await public_client.get("/predictions/2025/7")
+        resp = await public_client.get("/api/predictions/2025/7")
         body = resp.json()
         # prob=0.25 → +300 American
         assert body["predictions"][0]["model_odds"] == 300
@@ -154,11 +161,13 @@ class TestGetPredictions:
 
         pred_result = MagicMock()
         pred_result.all.return_value = [(pred, player)]
+        features_result = MagicMock()
+        features_result.all.return_value = []
         odds_result = MagicMock()
         odds_result.scalars.return_value.all.return_value = [market_odds]
-        mock_db.execute = AsyncMock(side_effect=[pred_result, odds_result])
+        mock_db.execute = AsyncMock(side_effect=[pred_result, features_result, odds_result])
 
-        resp = await public_client.get("/predictions/2025/7")
+        resp = await public_client.get("/api/predictions/2025/7")
         row = resp.json()["predictions"][0]
         # favor = 0.30 - 0.25 = 0.05
         assert row["favor"] == pytest.approx(0.05, abs=1e-4)
@@ -171,11 +180,13 @@ class TestGetPredictions:
 
         pred_result = MagicMock()
         pred_result.all.return_value = [(pred, player)]
+        features_result = MagicMock()
+        features_result.all.return_value = []
         odds_result = MagicMock()
         odds_result.scalars.return_value.all.return_value = []
-        mock_db.execute = AsyncMock(side_effect=[pred_result, odds_result])
+        mock_db.execute = AsyncMock(side_effect=[pred_result, features_result, odds_result])
 
-        resp = await public_client.get("/predictions/2025/7")
+        resp = await public_client.get("/api/predictions/2025/7")
         row = resp.json()["predictions"][0]
         assert row["favor"] is None
         assert row["sportsbook_odds"] is None
@@ -186,11 +197,13 @@ class TestGetPredictions:
 
         pred_result = MagicMock()
         pred_result.all.return_value = [(pred, player)]
+        features_result = MagicMock()
+        features_result.all.return_value = []
         odds_result = MagicMock()
         odds_result.scalars.return_value.all.return_value = []
-        mock_db.execute = AsyncMock(side_effect=[pred_result, odds_result])
+        mock_db.execute = AsyncMock(side_effect=[pred_result, features_result, odds_result])
 
-        resp = await public_client.get("/predictions/2025/7")
+        resp = await public_client.get("/api/predictions/2025/7")
         row = resp.json()["predictions"][0]
         assert row["full_name"] == "Travis Kelce"
         assert row["position"] == "TE"
@@ -198,15 +211,15 @@ class TestGetPredictions:
         assert row["model_version"] == "v2_xgb"
 
     async def test_season_below_range_rejected(self, public_client):
-        resp = await public_client.get("/predictions/2019/7")
+        resp = await public_client.get("/api/predictions/2019/7")
         assert resp.status_code == 422
 
     async def test_week_above_range_rejected(self, public_client):
-        resp = await public_client.get("/predictions/2025/19")
+        resp = await public_client.get("/api/predictions/2025/19")
         assert resp.status_code == 422
 
     async def test_week_zero_rejected(self, public_client):
-        resp = await public_client.get("/predictions/2025/0")
+        resp = await public_client.get("/api/predictions/2025/0")
         assert resp.status_code == 422
 
 
@@ -222,7 +235,7 @@ class TestListPlayers:
         mock_result.scalars.return_value.all.return_value = players
         mock_db.execute = AsyncMock(return_value=mock_result)
 
-        resp = await public_client.get("/players")
+        resp = await public_client.get("/api/players")
         assert resp.status_code == 200
         body = resp.json()
         assert len(body) == 2
@@ -242,7 +255,7 @@ class TestListPlayers:
         mock_result.scalars.return_value.all.return_value = [player]
         mock_db.execute = AsyncMock(return_value=mock_result)
 
-        resp = await public_client.get("/players")
+        resp = await public_client.get("/api/players")
         body = resp.json()
         row = body[0]
         assert row["player_id"] == "p1"
@@ -258,7 +271,7 @@ class TestListPlayers:
         mock_result.scalars.return_value.all.return_value = []
         mock_db.execute = AsyncMock(return_value=mock_result)
 
-        resp = await public_client.get("/players")
+        resp = await public_client.get("/api/players")
         assert resp.status_code == 200
         assert resp.json() == []
 
@@ -270,7 +283,7 @@ class TestGetPlayer:
         player = make_player(player_id="p1", full_name="Justin Jefferson")
         mock_db.get = AsyncMock(return_value=player)
 
-        resp = await public_client.get("/players/p1")
+        resp = await public_client.get("/api/players/p1")
         assert resp.status_code == 200
         body = resp.json()
         assert body["player_id"] == "p1"
@@ -279,7 +292,7 @@ class TestGetPlayer:
     async def test_returns_404_when_not_found(self, public_client, mock_db):
         mock_db.get = AsyncMock(return_value=None)
 
-        resp = await public_client.get("/players/nonexistent")
+        resp = await public_client.get("/api/players/nonexistent")
         assert resp.status_code == 404
         assert "not found" in resp.json()["detail"].lower()
 
@@ -287,7 +300,7 @@ class TestGetPlayer:
         player = make_player(player_id="p1", team=None, draft_round=None, headshot_url=None)
         mock_db.get = AsyncMock(return_value=player)
 
-        resp = await public_client.get("/players/p1")
+        resp = await public_client.get("/api/players/p1")
         body = resp.json()
         assert body["team"] is None
         assert body["draft_round"] is None
@@ -307,7 +320,7 @@ class TestGetPlayerHistory:
         history_result.scalars.return_value.all.return_value = [pred_w7, pred_w6]
         mock_db.execute = AsyncMock(return_value=history_result)
 
-        resp = await public_client.get("/players/p1/history")
+        resp = await public_client.get("/api/players/p1/history")
         assert resp.status_code == 200
         body = resp.json()
         assert len(body) == 2
@@ -317,7 +330,7 @@ class TestGetPlayerHistory:
     async def test_returns_404_for_unknown_player(self, public_client, mock_db):
         mock_db.get = AsyncMock(return_value=None)
 
-        resp = await public_client.get("/players/nonexistent/history")
+        resp = await public_client.get("/api/players/nonexistent/history")
         assert resp.status_code == 404
 
     async def test_history_row_has_model_odds(self, public_client, mock_db):
@@ -329,7 +342,7 @@ class TestGetPlayerHistory:
         history_result.scalars.return_value.all.return_value = [pred]
         mock_db.execute = AsyncMock(return_value=history_result)
 
-        resp = await public_client.get("/players/p1/history")
+        resp = await public_client.get("/api/players/p1/history")
         body = resp.json()
         # model_odds computed from final_prob=0.25 → +300
         assert body[0]["model_odds"] == 300
@@ -343,7 +356,7 @@ class TestGetPlayerHistory:
         history_result.scalars.return_value.all.return_value = [pred]
         mock_db.execute = AsyncMock(return_value=history_result)
 
-        resp = await public_client.get("/players/p1/history")
+        resp = await public_client.get("/api/players/p1/history")
         assert resp.json()[0]["is_low_confidence"] is True
 
     async def test_season_filter_accepted(self, public_client, mock_db):
@@ -353,7 +366,7 @@ class TestGetPlayerHistory:
         history_result.scalars.return_value.all.return_value = []
         mock_db.execute = AsyncMock(return_value=history_result)
 
-        resp = await public_client.get("/players/p1/history?season=2025")
+        resp = await public_client.get("/api/players/p1/history?season=2025")
         assert resp.status_code == 200
 
     async def test_empty_history_returns_empty_list(self, public_client, mock_db):
@@ -363,7 +376,7 @@ class TestGetPlayerHistory:
         history_result.scalars.return_value.all.return_value = []
         mock_db.execute = AsyncMock(return_value=history_result)
 
-        resp = await public_client.get("/players/p1/history")
+        resp = await public_client.get("/api/players/p1/history")
         assert resp.status_code == 200
         assert resp.json() == []
 

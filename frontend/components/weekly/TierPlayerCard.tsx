@@ -6,7 +6,6 @@ import type { PredictionResponse, PredictionTier } from '@/types/backend';
 interface TierPlayerCardProps {
   prediction: PredictionResponse;
   rank?: number;
-  isSubscribed?: boolean;
   onClick?: (playerId: string) => void;
 }
 
@@ -36,7 +35,8 @@ const TIER_BADGE: Record<
   },
 };
 
-function formatOdds(n: number): string {
+function formatOdds(n: number | null): string {
+  if (n === null) return '--';
   const r = Math.round(n);
   return r > 0 ? `+${r}` : `${r}`;
 }
@@ -44,7 +44,6 @@ function formatOdds(n: number): string {
 export function TierPlayerCard({
   prediction,
   rank,
-  isSubscribed = false,
   onClick,
 }: TierPlayerCardProps) {
   const {
@@ -62,10 +61,6 @@ export function TierPlayerCard({
   } = prediction;
 
   const isFade = tier === 'fade_volume_trap' || tier === 'fade_overpriced';
-  const isOnRadar = tier === 'on_the_radar';
-  const devBypass = process.env.NEXT_PUBLIC_DEV_BYPASS_PAYWALL === 'true';
-  // On the Radar is the free tier — model % is blurred, no odds shown (unless dev bypass)
-  const showPaidFields = isSubscribed || devBypass || !isOnRadar;
 
   const badge = tier ? TIER_BADGE[tier] : null;
 
@@ -147,11 +142,11 @@ export function TierPlayerCard({
         </div>
       )}
 
-      {/* Paid fields: edge + model odds + model % */}
+      {/* Edge + model odds + model % */}
       {!isFade && (
         <>
           {/* Edge pill */}
-          {edgePct !== null && showPaidFields && (
+          {edgePct !== null && (
             <span
               className={`text-xs font-semibold px-2 py-0.5 rounded-badge nums flex-shrink-0 ${edgeColor}`}
               title="Edge = model probability minus book's implied probability. Positive means model sees more value than the line offered."
@@ -165,20 +160,10 @@ export function TierPlayerCard({
             className="grid gap-x-6 flex-shrink-0"
             style={{ gridTemplateColumns: '3.5rem 3.5rem' }}
           >
-            {/* Model odds / model % */}
-            {showPaidFields ? (
-              <span className="text-sr-primary font-semibold text-sm nums text-right">
-                {formatOdds(model_odds)}
-              </span>
-            ) : (
-              <span
-                className="text-sr-primary font-semibold text-sm nums text-right select-none"
-                style={{ filter: 'blur(5px)' }}
-                aria-hidden="true"
-              >
-                +250
-              </span>
-            )}
+            {/* Model odds */}
+            <span className="text-sr-primary font-semibold text-sm nums text-right">
+              {formatOdds(model_odds)}
+            </span>
 
             {/* Book odds — always visible */}
             <span className="text-white font-semibold text-sm nums text-right hidden sm:block">
@@ -186,19 +171,9 @@ export function TierPlayerCard({
             </span>
 
             {/* Model % row */}
-            {showPaidFields ? (
-              <span className="text-sr-text-muted text-xs nums text-right leading-4">
-                {Math.round(final_prob * 100)}%
-              </span>
-            ) : (
-              <span
-                className="text-sr-text-muted text-xs nums text-right leading-4 select-none"
-                style={{ filter: 'blur(5px)' }}
-                aria-hidden="true"
-              >
-                28%
-              </span>
-            )}
+            <span className="text-sr-text-muted text-xs nums text-right leading-4">
+              {final_prob !== null ? `${Math.round(final_prob * 100)}%` : '--'}
+            </span>
 
             {/* DK logo row */}
             <div className="hidden sm:flex w-full justify-end pr-1 items-center">

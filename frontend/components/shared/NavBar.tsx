@@ -1,6 +1,9 @@
 'use client';
 
 import { WeekBadge } from './WeekBadge';
+import { UserPill } from './UserPill';
+import { useAuth } from '../../hooks/useAuth';
+import { useAuthModal } from '../../contexts/AuthModalContext';
 
 type Tab = 'weekly' | 'player' | 'track';
 
@@ -17,6 +20,9 @@ const TABS: { id: Tab; label: string }[] = [
 ];
 
 export function NavBar({ activeTab, onTabChange, currentWeek }: NavBarProps) {
+  const { user, isLoading } = useAuth();
+  const { openLogin } = useAuthModal();
+
   return (
     <nav className="sticky top-0 z-50 h-16 bg-sr-bg/80 backdrop-blur-md border-b border-sr-border">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
@@ -42,8 +48,23 @@ export function NavBar({ activeTab, onTabChange, currentWeek }: NavBarProps) {
           ))}
         </div>
 
-        {/* Week badge */}
-        <WeekBadge week={currentWeek} />
+        {/* Right zone: week badge + auth */}
+        <div className="flex items-center gap-3">
+          <WeekBadge week={currentWeek} />
+          {isLoading ? (
+            <div className="w-8 h-8 rounded-full bg-sr-border animate-pulse" />
+          ) : user ? (
+            <UserPill />
+          ) : (
+            <button
+              type="button"
+              onClick={() => openLogin()}
+              className="border border-sr-border text-sm font-medium text-white px-4 py-1.5 rounded-lg hover:border-sr-primary hover:text-sr-primary transition-colors"
+            >
+              Sign In
+            </button>
+          )}
+        </div>
       </div>
     </nav>
   );

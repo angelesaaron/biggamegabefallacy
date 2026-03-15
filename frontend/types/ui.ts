@@ -15,14 +15,15 @@ export interface Player {
 
 export interface PlayerPrediction {
   playerId: string;
-  modelProbability: number;
-  modelImpliedOdds: string;
+  modelProbability: number | null;
+  modelImpliedOdds: string | null;
   sportsbookOdds: string;
   edge: 'positive' | 'neutral' | 'negative';
-  edgeValue: number;
+  edgeValue: number | null;
   week?: number;
   year?: number;
   tier?: string | null;
+  locked?: boolean;
 }
 
 export interface GameLogRow {

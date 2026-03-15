@@ -19,11 +19,11 @@ from tests.conftest import ADMIN_HEADERS, ADMIN_KEY
 
 class TestRequireAdmin:
     async def test_no_header_returns_403(self, admin_client):
-        resp = await admin_client.post("/admin/sync/roster")
+        resp = await admin_client.post("/api/admin/sync/roster")
         assert resp.status_code == 403
 
     async def test_wrong_key_returns_403(self, admin_client):
-        resp = await admin_client.post("/admin/sync/roster", headers={"X-Admin-Key": "wrong"})
+        resp = await admin_client.post("/api/admin/sync/roster", headers={"X-Admin-Key": "wrong"})
         assert resp.status_code == 403
 
     async def test_correct_key_passes_auth(self, admin_client):
@@ -31,13 +31,13 @@ class TestRequireAdmin:
              patch("app.api.admin.RosterSyncService") as MockSvc:
             _setup_tank01_ctx(MockClient)
             MockSvc.return_value.run = AsyncMock(return_value=SyncResult())
-            resp = await admin_client.post("/admin/sync/roster", headers=ADMIN_HEADERS)
+            resp = await admin_client.post("/api/admin/sync/roster", headers=ADMIN_HEADERS)
         assert resp.status_code == 200
 
     async def test_unconfigured_admin_key_returns_503(self, admin_client):
         with patch("app.api.admin.settings") as mock_settings:
             mock_settings.ADMIN_KEY = ""
-            resp = await admin_client.post("/admin/sync/roster", headers=ADMIN_HEADERS)
+            resp = await admin_client.post("/api/admin/sync/roster", headers=ADMIN_HEADERS)
         assert resp.status_code == 503
 
 
@@ -51,7 +51,7 @@ class TestSyncResponseSchema:
             MockSvc.return_value.run = AsyncMock(
                 return_value=SyncResult(n_written=3, n_updated=1, n_skipped=2, n_failed=0, events=["ok"])
             )
-            resp = await admin_client.post("/admin/sync/roster", headers=ADMIN_HEADERS)
+            resp = await admin_client.post("/api/admin/sync/roster", headers=ADMIN_HEADERS)
 
         assert resp.status_code == 200
         body = resp.json()
@@ -63,7 +63,7 @@ class TestSyncResponseSchema:
              patch("app.api.admin.RosterSyncService") as MockSvc:
             _setup_tank01_ctx(MockClient)
             MockSvc.return_value.run = AsyncMock(return_value=SyncResult(n_written=5))
-            resp = await admin_client.post("/admin/sync/roster", headers=ADMIN_HEADERS)
+            resp = await admin_client.post("/api/admin/sync/roster", headers=ADMIN_HEADERS)
 
         assert resp.json()["status"] == "completed"
 
@@ -74,7 +74,7 @@ class TestSyncResponseSchema:
             MockSvc.return_value.run = AsyncMock(
                 return_value=SyncResult(n_written=3, n_failed=2)
             )
-            resp = await admin_client.post("/admin/sync/roster", headers=ADMIN_HEADERS)
+            resp = await admin_client.post("/api/admin/sync/roster", headers=ADMIN_HEADERS)
 
         assert resp.json()["status"] == "partial"
 
@@ -83,7 +83,7 @@ class TestSyncResponseSchema:
              patch("app.api.admin.RosterSyncService") as MockSvc:
             _setup_tank01_ctx(MockClient)
             MockSvc.return_value.run = AsyncMock(return_value=SyncResult(n_failed=5))
-            resp = await admin_client.post("/admin/sync/roster", headers=ADMIN_HEADERS)
+            resp = await admin_client.post("/api/admin/sync/roster", headers=ADMIN_HEADERS)
 
         assert resp.json()["status"] == "failed"
 
@@ -96,7 +96,7 @@ class TestSyncRoster:
              patch("app.api.admin.RosterSyncService") as MockSvc:
             _setup_tank01_ctx(MockClient)
             MockSvc.return_value.run = AsyncMock(return_value=SyncResult(n_written=45))
-            resp = await admin_client.post("/admin/sync/roster", headers=ADMIN_HEADERS)
+            resp = await admin_client.post("/api/admin/sync/roster", headers=ADMIN_HEADERS)
 
         assert resp.status_code == 200
         assert resp.json()["n_written"] == 45
@@ -108,7 +108,7 @@ class TestSyncDraft:
     async def test_success_default_force(self, admin_client):
         with patch("app.api.admin.DraftSyncService") as MockSvc:
             MockSvc.return_value.run = AsyncMock(return_value=SyncResult(n_updated=30))
-            resp = await admin_client.post("/admin/sync/draft", headers=ADMIN_HEADERS)
+            resp = await admin_client.post("/api/admin/sync/draft", headers=ADMIN_HEADERS)
 
         assert resp.status_code == 200
         assert resp.json()["n_updated"] == 30
@@ -118,7 +118,7 @@ class TestSyncDraft:
         with patch("app.api.admin.DraftSyncService") as MockSvc:
             MockSvc.return_value.run = AsyncMock(return_value=SyncResult(n_updated=50))
             await admin_client.post(
-                "/admin/sync/draft?force_update=true", headers=ADMIN_HEADERS
+                "/api/admin/sync/draft?force_update=true", headers=ADMIN_HEADERS
             )
         MockSvc.return_value.run.assert_awaited_once_with(force_update=True)
 
@@ -131,17 +131,17 @@ class TestSyncSchedule:
              patch("app.api.admin.ScheduleSyncService") as MockSvc:
             _setup_tank01_ctx(MockClient)
             MockSvc.return_value.run = AsyncMock(return_value=SyncResult(n_written=18))
-            resp = await admin_client.post("/admin/sync/schedule/2025", headers=ADMIN_HEADERS)
+            resp = await admin_client.post("/api/admin/sync/schedule/2025", headers=ADMIN_HEADERS)
 
         assert resp.status_code == 200
         assert resp.json()["n_written"] == 18
 
     async def test_season_below_range_rejected(self, admin_client):
-        resp = await admin_client.post("/admin/sync/schedule/2019", headers=ADMIN_HEADERS)
+        resp = await admin_client.post("/api/admin/sync/schedule/2019", headers=ADMIN_HEADERS)
         assert resp.status_code == 422
 
     async def test_season_above_range_rejected(self, admin_client):
-        resp = await admin_client.post("/admin/sync/schedule/2036", headers=ADMIN_HEADERS)
+        resp = await admin_client.post("/api/admin/sync/schedule/2036", headers=ADMIN_HEADERS)
         assert resp.status_code == 422
 
 
@@ -156,7 +156,7 @@ class TestIngestGameLogs:
                 return_value=SyncResult(n_written=120, n_updated=5)
             )
             resp = await admin_client.post(
-                "/admin/ingest/gamelogs/2025/7", headers=ADMIN_HEADERS
+                "/api/admin/ingest/gamelogs/2025/7", headers=ADMIN_HEADERS
             )
 
         assert resp.status_code == 200
@@ -166,13 +166,13 @@ class TestIngestGameLogs:
 
     async def test_week_out_of_range_rejected(self, admin_client):
         resp = await admin_client.post(
-            "/admin/ingest/gamelogs/2025/19", headers=ADMIN_HEADERS
+            "/api/admin/ingest/gamelogs/2025/19", headers=ADMIN_HEADERS
         )
         assert resp.status_code == 422
 
     async def test_week_zero_rejected(self, admin_client):
         resp = await admin_client.post(
-            "/admin/ingest/gamelogs/2025/0", headers=ADMIN_HEADERS
+            "/api/admin/ingest/gamelogs/2025/0", headers=ADMIN_HEADERS
         )
         assert resp.status_code == 422
 
@@ -186,7 +186,7 @@ class TestSyncOdds:
             _setup_tank01_ctx(MockClient)
             MockSvc.return_value.run = AsyncMock(return_value=SyncResult(n_written=60))
             resp = await admin_client.post(
-                "/admin/sync/odds/2025/7", headers=ADMIN_HEADERS
+                "/api/admin/sync/odds/2025/7", headers=ADMIN_HEADERS
             )
 
         assert resp.status_code == 200
@@ -199,7 +199,7 @@ class TestSeedRookieBuckets:
     async def test_success(self, admin_client):
         with patch("app.api.admin.RookieBucketSeedService") as MockSvc:
             MockSvc.return_value.run = AsyncMock(return_value=SyncResult(n_written=15))
-            resp = await admin_client.post("/admin/seed/rookie-buckets", headers=ADMIN_HEADERS)
+            resp = await admin_client.post("/api/admin/seed/rookie-buckets", headers=ADMIN_HEADERS)
 
         assert resp.status_code == 200
         assert resp.json()["n_written"] == 15
@@ -214,7 +214,7 @@ class TestComputeFeatures:
                 return_value=SyncResult(n_written=180, n_skipped=5)
             )
             resp = await admin_client.post(
-                "/admin/compute/features/2025/7", headers=ADMIN_HEADERS
+                "/api/admin/compute/features/2025/7", headers=ADMIN_HEADERS
             )
 
         assert resp.status_code == 200
@@ -226,7 +226,7 @@ class TestComputeFeatures:
         with patch("app.api.admin.FeatureComputeService") as MockSvc:
             MockSvc.return_value.run = AsyncMock(return_value=SyncResult())
             await admin_client.post(
-                "/admin/compute/features/2024/12", headers=ADMIN_HEADERS
+                "/api/admin/compute/features/2024/12", headers=ADMIN_HEADERS
             )
         MockSvc.return_value.run.assert_awaited_once_with(2024, 12)
 
@@ -236,7 +236,7 @@ class TestComputeSeasonState:
         with patch("app.api.admin.SeasonStateService") as MockSvc:
             MockSvc.return_value.run = AsyncMock(return_value=SyncResult(n_written=200))
             resp = await admin_client.post(
-                "/admin/compute/season-state/2025", headers=ADMIN_HEADERS
+                "/api/admin/compute/season-state/2025", headers=ADMIN_HEADERS
             )
 
         assert resp.status_code == 200
@@ -246,7 +246,7 @@ class TestComputeSeasonState:
         with patch("app.api.admin.SeasonStateService") as MockSvc:
             MockSvc.return_value.run = AsyncMock(return_value=SyncResult())
             await admin_client.post(
-                "/admin/compute/season-state/2024", headers=ADMIN_HEADERS
+                "/api/admin/compute/season-state/2024", headers=ADMIN_HEADERS
             )
         MockSvc.return_value.run.assert_awaited_once_with(2024)
 
@@ -260,7 +260,7 @@ class TestRunPredictions:
                 return_value=SyncResult(n_written=175, events=["week_scalar=1.0000 calibration=beta n_players=175 snap_nan=8"])
             )
             resp = await admin_client.post(
-                "/admin/run/predictions/2025/7", headers=ADMIN_HEADERS
+                "/api/admin/run/predictions/2025/7", headers=ADMIN_HEADERS
             )
 
         assert resp.status_code == 200
@@ -272,7 +272,7 @@ class TestRunPredictions:
         with patch("app.api.admin.InferenceService") as MockSvc:
             MockSvc.return_value.run = AsyncMock(return_value=SyncResult())
             await admin_client.post(
-                "/admin/run/predictions/2025/3", headers=ADMIN_HEADERS
+                "/api/admin/run/predictions/2025/3", headers=ADMIN_HEADERS
             )
         MockSvc.return_value.run.assert_awaited_once_with(2025, 3)
 

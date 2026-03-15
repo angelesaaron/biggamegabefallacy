@@ -4,9 +4,10 @@ import type { GameLogRow } from '@/types/ui';
 
 interface GameLogTableProps {
   data: GameLogRow[];
+  currentWeek: number;
 }
 
-export function GameLogTable({ data }: GameLogTableProps) {
+export function GameLogTable({ data, currentWeek }: GameLogTableProps) {
   const [isExpanded, setIsExpanded] = useState(true);
 
   return (
@@ -65,8 +66,11 @@ export function GameLogTable({ data }: GameLogTableProps) {
                         {game.td}
                       </span>
                     </td>
-                    <td className="px-6 py-4 max-md:px-3 max-md:py-3 text-right max-md:text-sm text-sr-primary">
-                      <span className="nums">{game.modelProbability}%</span>
+                    <td className="px-6 py-4 max-md:px-3 max-md:py-3 text-right max-md:text-sm">
+                      {game.modelProbability
+                        ? <span className="nums text-sr-primary">{game.modelProbability}%</span>
+                        : <span className="text-sr-text-dim">—</span>
+                      }
                     </td>
                   </tr>
                 ))}

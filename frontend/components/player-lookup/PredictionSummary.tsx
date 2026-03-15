@@ -7,32 +7,20 @@ interface PredictionSummaryProps {
   prediction: PlayerPrediction;
 }
 
+const TIER_CONFIG: Record<string, { label: string; className: string }> = {
+  high_conviction: { label: 'High Conviction', className: 'bg-sr-success/20 text-sr-success border border-sr-success/30' },
+  value_play: { label: 'Value Play', className: 'bg-amber-500/20 text-amber-400 border border-amber-500/30' },
+  on_the_radar: { label: 'On the Radar', className: 'bg-sr-surface text-sr-text-muted border border-sr-border' },
+  fade_volume_trap: { label: 'Fade — Volume Trap', className: 'bg-sr-danger/20 text-sr-danger border border-sr-danger/30' },
+  fade_overpriced: { label: 'Fade — Overpriced', className: 'bg-sr-danger/20 text-sr-danger border border-sr-danger/30' },
+};
+
 export function PredictionSummary({ prediction }: PredictionSummaryProps) {
   const isPredictionMissing =
-    isNaN(prediction.modelProbability) ||
+    prediction.modelProbability === null ||
+    prediction.modelImpliedOdds === null ||
     prediction.modelImpliedOdds === 'NaN' ||
     prediction.modelImpliedOdds === 'N/A';
-
-  const edgeColor =
-    prediction.edge === 'positive'
-      ? 'text-sr-success'
-      : prediction.edge === 'negative'
-      ? 'text-sr-danger'
-      : 'text-sr-text-dim';
-
-  const EdgeIcon =
-    prediction.edge === 'positive'
-      ? TrendingUp
-      : prediction.edge === 'negative'
-      ? TrendingDown
-      : Minus;
-
-  const edgeBorderClass =
-    prediction.edge === 'positive'
-      ? 'bg-sr-success/10 border-sr-success/20'
-      : prediction.edge === 'negative'
-      ? 'bg-sr-danger/10 border-sr-danger/20'
-      : 'bg-sr-surface/40 border-sr-border';
 
   if (isPredictionMissing) {
     return (
@@ -55,13 +43,26 @@ export function PredictionSummary({ prediction }: PredictionSummaryProps) {
     );
   }
 
-  const TIER_CONFIG: Record<string, { label: string; className: string }> = {
-    high_conviction: { label: 'High Conviction', className: 'bg-sr-success/20 text-sr-success border border-sr-success/30' },
-    value_play: { label: 'Value Play', className: 'bg-amber-500/20 text-amber-400 border border-amber-500/30' },
-    on_the_radar: { label: 'On the Radar', className: 'bg-sr-surface text-sr-text-muted border border-sr-border' },
-    fade_volume_trap: { label: 'Fade — Volume Trap', className: 'bg-sr-danger/20 text-sr-danger border border-sr-danger/30' },
-    fade_overpriced: { label: 'Fade — Overpriced', className: 'bg-sr-danger/20 text-sr-danger border border-sr-danger/30' },
-  };
+  const edgeColor =
+    prediction.edge === 'positive'
+      ? 'text-sr-success'
+      : prediction.edge === 'negative'
+      ? 'text-sr-danger'
+      : 'text-sr-text-dim';
+
+  const EdgeIcon =
+    prediction.edge === 'positive'
+      ? TrendingUp
+      : prediction.edge === 'negative'
+      ? TrendingDown
+      : Minus;
+
+  const edgeBorderClass =
+    prediction.edge === 'positive'
+      ? 'bg-sr-success/10 border-sr-success/20'
+      : prediction.edge === 'negative'
+      ? 'bg-sr-danger/10 border-sr-danger/20'
+      : 'bg-sr-surface/40 border-sr-border';
 
   return (
     <div className={`border rounded-card p-8 max-md:p-4 ${edgeBorderClass}`}>
@@ -81,9 +82,12 @@ export function PredictionSummary({ prediction }: PredictionSummaryProps) {
           </div>
         )}
         <h3 className="text-sr-text-muted max-md:text-sm mb-3 max-md:mb-2">Model TD Probability</h3>
-        <div className="text-7xl max-md:text-5xl text-white mb-2 nums">{prediction.modelProbability}%</div>
+        <div className="text-7xl max-md:text-5xl text-white mb-2 nums">
+          {prediction.modelProbability !== null ? `${prediction.modelProbability}%` : '--'}
+        </div>
         <div className="text-xl max-md:text-base text-sr-text-muted">
-          Implied Odds: <span className="nums">{prediction.modelImpliedOdds}</span>
+          Implied Odds:{' '}
+          <span className="nums">{prediction.modelImpliedOdds}</span>
         </div>
       </div>
 
@@ -92,7 +96,7 @@ export function PredictionSummary({ prediction }: PredictionSummaryProps) {
         <div className="h-3 max-md:h-2 bg-sr-surface rounded-full overflow-hidden">
           <div
             className="h-full bg-gradient-to-r from-sr-primary to-sr-primary/60 rounded-full transition-all"
-            style={{ width: `${prediction.modelProbability}%` }}
+            style={{ width: prediction.modelProbability !== null ? `${prediction.modelProbability}%` : '0%' }}
           />
         </div>
       </div>
@@ -101,14 +105,17 @@ export function PredictionSummary({ prediction }: PredictionSummaryProps) {
       <div className="grid grid-cols-3 gap-6 max-md:gap-3 mb-6 max-md:mb-4">
         <div className="text-center">
           <div className="text-sm max-md:text-xs text-sr-text-dim mb-2 max-md:mb-1">Model Odds</div>
-          <div className="text-2xl max-md:text-lg text-sr-primary nums">{prediction.modelImpliedOdds}</div>
+          <div className="text-2xl max-md:text-lg text-sr-primary nums">
+            {prediction.modelImpliedOdds}
+          </div>
         </div>
         <div className="text-center flex flex-col items-center justify-center">
           <div className={`${edgeColor} flex items-center gap-2 max-md:gap-1`}>
             <EdgeIcon className="w-6 h-6" />
             <span className="text-xl max-md:text-base nums">
-              {prediction.edge === 'positive' ? '+' : ''}
-              {prediction.edgeValue.toFixed(1)}%
+              {prediction.edgeValue !== null
+                ? `${prediction.edge === 'positive' ? '+' : ''}${prediction.edgeValue.toFixed(1)}%`
+                : '--'}
             </span>
           </div>
           <div className="text-xs text-sr-text-dim mt-1">Edge</div>
@@ -127,9 +134,11 @@ export function PredictionSummary({ prediction }: PredictionSummaryProps) {
       {/* Edge Indicator */}
       <div className={`text-center p-4 max-md:p-3 rounded-xl ${edgeBorderClass}`}>
         <span className={`${edgeColor} max-md:text-xs`}>
-          {prediction.edge === 'positive' && '✓ Model shows value — Consider this bet'}
-          {prediction.edge === 'negative' && '⚠ Sportsbook favored — Avoid this bet'}
-          {prediction.edge === 'neutral' && '○ Neutral value — No clear edge'}
+          {prediction.edge === 'positive'
+            ? '✓ Model shows value — Consider this bet'
+            : prediction.edge === 'negative'
+            ? '⚠ Sportsbook favored — Avoid this bet'
+            : '○ Neutral value — No clear edge'}
         </span>
       </div>
     </div>

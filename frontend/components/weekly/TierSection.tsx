@@ -1,6 +1,5 @@
 'use client';
 
-import { PaywallGate } from '@/components/shared/PaywallGate';
 import { TierPlayerCard } from '@/components/weekly/TierPlayerCard';
 import type { PredictionResponse, PredictionTier } from '@/types/backend';
 
@@ -11,24 +10,17 @@ interface TierSectionProps {
   accentClass: string;
   headerTextClass: string;
   predictions: PredictionResponse[];
-  isPaywalled: boolean;
-  ctaTitle?: string;
-  ctaBody?: string;
   startRank?: number;
   onPlayerClick?: (playerId: string) => void;
   children?: React.ReactNode;
 }
 
 export function TierSection({
-  tier,
   label,
   descriptor,
   accentClass,
   headerTextClass,
   predictions,
-  isPaywalled,
-  ctaTitle,
-  ctaBody,
   startRank = 1,
   onPlayerClick,
   children,
@@ -61,18 +53,7 @@ export function TierSection({
         <span className="text-sr-text-dim text-xs">{descriptor}</span>
       </div>
 
-      {/* Cards — gated or free */}
-      {isPaywalled ? (
-        <PaywallGate
-          feature={tier ?? 'tier'}
-          ctaTitle={ctaTitle}
-          ctaBody={ctaBody}
-        >
-          {cards}
-        </PaywallGate>
-      ) : (
-        cards
-      )}
+      {cards}
     </section>
   );
 }

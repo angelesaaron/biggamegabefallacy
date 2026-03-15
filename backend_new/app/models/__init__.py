@@ -11,6 +11,7 @@ from app.models.prediction import Prediction
 from app.models.sportsbook_odds import SportsbookOdds
 from app.models.data_quality_event import DataQualityEvent
 from app.models.rookie_bucket import RookieBucket
+from app.models.user import User
 
 __all__ = [
     "Player",
@@ -23,4 +24,5 @@ __all__ = [
     "SportsbookOdds",
     "DataQualityEvent",
     "RookieBucket",
+    "User",
 ]

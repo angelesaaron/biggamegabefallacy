@@ -1,13 +1,15 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useAuth } from '@/hooks/useAuth';
+import { usePredictions } from '@/hooks/usePredictions';
 import { TierSection } from '@/components/weekly/TierSection';
+import { TeaserBanner } from '@/components/weekly/TeaserBanner';
 import { TierPlayerCard } from '@/components/weekly/TierPlayerCard';
 import { GamblingDisclaimer } from '@/components/shared/GamblingDisclaimer';
 import { PlayerWeekToggle } from '@/components/weekly/PlayerWeekToggle';
 import { SurfaceCard } from '@/components/ui/SurfaceCard';
 import { AlertTriangle } from 'lucide-react';
-import type { PredictionResponse } from '@/types/backend';
 
 interface WeeklyValueProps {
   currentWeek: number | null;
@@ -15,38 +17,8 @@ interface WeeklyValueProps {
   onPlayerClick: (playerId: string) => void;
 }
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? '';
-
-function FadeGate({ count, children }: { count: number; children: React.ReactNode }) {
-  const devBypass = process.env.NEXT_PUBLIC_DEV_BYPASS_PAYWALL === 'true';
-  if (devBypass) return <>{children}</>;
-  return (
-    <div className="relative overflow-hidden rounded-card mt-2">
-      <div className="pointer-events-none select-none" style={{ filter: 'blur(6px)' }} aria-hidden="true">
-        {children}
-      </div>
-      <div
-        className="absolute inset-0 flex flex-col items-center justify-end pb-10"
-        style={{ background: 'linear-gradient(to bottom, transparent 0%, rgba(10,10,10,0.95) 30%)' }}
-      >
-        <div className="text-center px-6 max-w-md">
-          <h3 className="text-white text-lg font-semibold mb-2">
-            {count} player{count !== 1 ? 's' : ''} flagged as fades this week
-          </h3>
-          <p className="text-sr-text-muted text-sm mb-5">Know who to avoid →</p>
-          <button className="bg-sr-primary text-white px-8 py-2.5 rounded-card font-semibold hover:bg-purple-600 transition-colors text-sm">
-            Get Access
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export function WeeklyValue({ currentWeek, currentYear, onPlayerClick }: WeeklyValueProps) {
-  const [predictions, setPredictions] = useState<PredictionResponse[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { isSubscriber } = useAuth();
   const [selectedWeek, setSelectedWeek] = useState<number>(18);
 
   useEffect(() => {
@@ -56,23 +28,7 @@ export function WeeklyValue({ currentWeek, currentYear, onPlayerClick }: WeeklyV
   const effectiveYear = currentYear ?? 2025;
   const isEarlySeason = selectedWeek <= 3;
 
-  useEffect(() => {
-    async function loadPredictions() {
-      try {
-        setLoading(true);
-        setError(null);
-        const res = await fetch(`${API_URL}/api/predictions/${effectiveYear}/${selectedWeek}`);
-        if (!res.ok) throw new Error('Failed to fetch predictions');
-        const data = await res.json();
-        setPredictions(data.predictions ?? []);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to load predictions');
-      } finally {
-        setLoading(false);
-      }
-    }
-    loadPredictions();
-  }, [selectedWeek, effectiveYear]);
+  const { predictions, teaser, loading, error } = usePredictions(effectiveYear, selectedWeek);
 
   const tier1 = predictions.filter((p) => p.tier === 'high_conviction');
   const tier2 = predictions.filter((p) => p.tier === 'value_play');
@@ -158,34 +114,50 @@ export function WeeklyValue({ currentWeek, currentYear, onPlayerClick }: WeeklyV
         {!loading && !error && predictions.length > 0 && (
           <>
             {/* Tier 1 — High Conviction (paid) */}
-            <TierSection
-              tier="high_conviction"
-              label="High Conviction"
-              descriptor="Model's highest-confidence plays this week."
-              accentClass="border-sr-success/40"
-              headerTextClass="text-sr-success"
-              predictions={tier1}
-              isPaywalled
-              ctaTitle={`${tier1.length} high conviction play${tier1.length !== 1 ? 's' : ''} this week`}
-              ctaBody="Subscribe to see them →"
-              onPlayerClick={onPlayerClick}
-            />
+            {isSubscriber ? (
+              <TierSection
+                tier="high_conviction"
+                label="High Conviction"
+                descriptor="Model's highest-confidence plays this week."
+                accentClass="border-sr-success/40"
+                headerTextClass="text-sr-success"
+                predictions={tier1}
+                onPlayerClick={onPlayerClick}
+              />
+            ) : (
+              <TeaserBanner
+                label="High Conviction"
+                count={teaser?.high_conviction ?? 0}
+                noun="play"
+                accentClass="border-sr-success/40"
+                headerTextClass="text-sr-success"
+                descriptor="Model's highest-confidence plays this week."
+              />
+            )}
 
             {/* Tier 2 — Value Plays (paid) */}
-            <TierSection
-              tier="value_play"
-              label="Value Plays"
-              descriptor="Positive edge, meaningful model confidence."
-              accentClass="border-amber-500/40"
-              headerTextClass="text-amber-400"
-              predictions={tier2}
-              isPaywalled
-              ctaTitle={`${tier2.length} value play${tier2.length !== 1 ? 's' : ''} identified`}
-              ctaBody="See the full list →"
-              onPlayerClick={onPlayerClick}
-            />
+            {isSubscriber ? (
+              <TierSection
+                tier="value_play"
+                label="Value Plays"
+                descriptor="Positive edge, meaningful model confidence."
+                accentClass="border-amber-500/40"
+                headerTextClass="text-amber-400"
+                predictions={tier2}
+                onPlayerClick={onPlayerClick}
+              />
+            ) : (
+              <TeaserBanner
+                label="Value Plays"
+                count={teaser?.value_play ?? 0}
+                noun="play"
+                accentClass="border-amber-500/40"
+                headerTextClass="text-amber-400"
+                descriptor="Positive edge, meaningful model confidence."
+              />
+            )}
 
-            {/* Tier 3 — On the Radar (free) */}
+            {/* Tier 3 — On the Radar (always visible to everyone) */}
             <TierSection
               tier="on_the_radar"
               label="On the Radar"
@@ -193,64 +165,71 @@ export function WeeklyValue({ currentWeek, currentYear, onPlayerClick }: WeeklyV
               accentClass="border-sr-border"
               headerTextClass="text-white"
               predictions={tier3}
-              isPaywalled={false}
               onPlayerClick={onPlayerClick}
             />
 
             {/* Tier 4 — Fade List (paid) */}
-            <section className="mb-8">
-              <div className="flex items-baseline gap-3 mb-3 pb-2 border-b border-sr-danger/40">
-                <h2 className="text-base font-semibold text-sr-danger">Fade List</h2>
-                <span className="text-sr-text-dim text-xs">
-                  Players the model is cold on. Book may be overpricing them.
-                </span>
-              </div>
-
-              {!hasFades ? (
-                <p className="text-sr-text-muted text-sm py-4 px-2">
-                  No fade plays identified this week.
-                </p>
-              ) : (
-                <FadeGate count={fadeVolumeTraps.length + fadeOverpriced.length}>
-                  {fadeVolumeTraps.length > 0 && (
-                    <div className="mb-4">
-                      <p className="text-xs font-semibold text-sr-danger/70 uppercase tracking-wide mb-2 px-1">
-                        Volume Traps
-                      </p>
-                      <p className="text-xs text-sr-text-dim mb-2 px-1">
-                        High-profile players the model doesn&apos;t trust this week.
-                      </p>
-                      <div className="flex flex-col gap-2">
-                        {fadeVolumeTraps.map((pred) => (
-                          <TierPlayerCard key={pred.player_id} prediction={pred} onClick={onPlayerClick} />
-                        ))}
+            {isSubscriber ? (
+              <TierSection
+                tier="fade_volume_trap"
+                label="Fade List"
+                descriptor="Players the model is cold on. Book may be overpricing them."
+                accentClass="border-sr-danger/40"
+                headerTextClass="text-sr-danger"
+                predictions={[]}
+                onPlayerClick={onPlayerClick}
+              >
+                {hasFades && (
+                  <>
+                    {fadeVolumeTraps.length > 0 && (
+                      <div className="mb-4">
+                        <p className="text-xs font-semibold text-sr-danger/70 uppercase tracking-wide mb-2 px-1">
+                          Volume Traps
+                        </p>
+                        <p className="text-xs text-sr-text-dim mb-2 px-1">
+                          High-profile players the model doesn&apos;t trust this week.
+                        </p>
+                        <div className="flex flex-col gap-2">
+                          {fadeVolumeTraps.map((pred) => (
+                            <TierPlayerCard key={pred.player_id} prediction={pred} onClick={onPlayerClick} />
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  )}
-
-                  {fadeOverpriced.length > 0 && (
-                    <div>
-                      <p className="text-xs font-semibold text-sr-danger/70 uppercase tracking-wide mb-2 px-1">
-                        Overpriced Depth
-                      </p>
-                      <p className="text-xs text-sr-text-dim mb-2 px-1">
-                        Book is pricing these players too high relative to model.
-                      </p>
-                      <div className="flex flex-col gap-2">
-                        {fadeOverpriced.map((pred) => (
-                          <TierPlayerCard key={pred.player_id} prediction={pred} onClick={onPlayerClick} />
-                        ))}
+                    )}
+                    {fadeOverpriced.length > 0 && (
+                      <div>
+                        <p className="text-xs font-semibold text-sr-danger/70 uppercase tracking-wide mb-2 px-1">
+                          Overpriced Depth
+                        </p>
+                        <p className="text-xs text-sr-text-dim mb-2 px-1">
+                          Book is pricing these players too high relative to model.
+                        </p>
+                        <div className="flex flex-col gap-2">
+                          {fadeOverpriced.map((pred) => (
+                            <TierPlayerCard key={pred.player_id} prediction={pred} onClick={onPlayerClick} />
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  )}
-                </FadeGate>
-              )}
-            </section>
+                    )}
+                  </>
+                )}
+              </TierSection>
+            ) : (
+              <TeaserBanner
+                label="Fade List"
+                count={teaser?.fade ?? 0}
+                noun="player"
+                accentClass="border-sr-danger/40"
+                headerTextClass="text-sr-danger"
+                descriptor="Players the model is cold on."
+              />
+            )}
           </>
         )}
 
         <GamblingDisclaimer />
       </div>
+
     </div>
   );
 }

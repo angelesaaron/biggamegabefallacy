@@ -14,7 +14,6 @@ import {
 } from 'recharts';
 import { MetricCard } from '@/components/ui/MetricCard';
 import { SurfaceCard } from '@/components/ui/SurfaceCard';
-import { PaywallGate } from '@/components/shared/PaywallGate';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? '';
 
@@ -61,7 +60,6 @@ export function TrackRecord() {
   const [data, setData] = useState<TrackRecordData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -169,7 +167,7 @@ export function TrackRecord() {
                   borderRadius: '8px',
                 }}
                 labelStyle={{ color: '#f9fafb' }}
-                formatter={(value: number) => [`${value}%`, 'Hit Rate'] as [string, string]}
+                formatter={(value: number | undefined) => [`${value ?? 0}%`, 'Hit Rate'] as [string, string]}
               />
               <ReferenceLine
                 y={22}
@@ -221,13 +219,8 @@ export function TrackRecord() {
         </div>
       )}
 
-      {/* Section 4: Week-by-week table — paywalled */}
-      <PaywallGate
-        feature="track-record-weekly"
-        ctaTitle="Full week-by-week breakdown"
-        ctaBody="Subscribe for complete history →"
-      >
-        <SurfaceCard className="p-6">
+      {/* Section 4: Week-by-week table */}
+      <SurfaceCard className="p-6">
           <h3 className="text-lg font-medium text-white mb-4">Week-by-Week Results</h3>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
@@ -267,8 +260,7 @@ export function TrackRecord() {
               </tbody>
             </table>
           </div>
-        </SurfaceCard>
-      </PaywallGate>
+      </SurfaceCard>
 
       {/* Section 5: The inverse argument */}
       <SurfaceCard className="p-6">

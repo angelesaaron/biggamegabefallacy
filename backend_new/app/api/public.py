@@ -1,20 +1,22 @@
 """
 Public API router — user-facing prediction and player endpoints.
 
-No auth required. All computed fields (model_odds, favor) are derived at
-query time so stored predictions never need to be rewritten after odds update.
+Tier-gated auth is applied at the content level — see inline comments per
+endpoint. All computed fields (model_odds, favor) are derived at query time
+so stored predictions never need to be rewritten after odds update.
 """
-
-from __future__ import annotations
 
 from typing import Annotated, Optional
 
-from fastapi import APIRouter, Depends, HTTPException, Path, Query, status
+from fastapi import APIRouter, Depends, HTTPException, Path, Query, Request, status
 from pydantic import BaseModel
 from sqlalchemy import select, func, cast, Float, case
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.api.deps import get_optional_user, require_subscriber
+from app.limiter import limiter
 from app.database import get_db
+from app.models.user import User
 from app.models.game import Game
 from app.models.player import Player
 from app.models.player_features import PlayerFeatures
@@ -38,14 +40,20 @@ class PredictionRow(BaseModel):
     team: Optional[str]
     headshot_url: Optional[str]
     final_prob: float
-    model_odds: int                  # American odds derived from final_prob
-    sportsbook_odds: Optional[int]   # American odds from market (None if unavailable)
-    implied_prob: Optional[float]    # Market implied probability (None if unavailable)
-    favor: Optional[float]           # final_prob - implied_prob (positive = model likes it)
+    model_odds: int
+    sportsbook_odds: Optional[int]       # American odds from market (None if unavailable)
+    implied_prob: Optional[float]
+    favor: Optional[float]
     is_low_confidence: bool
     model_version: str
-    tier: Optional[str]              # high_conviction | value_play | on_the_radar | fade_volume_trap | fade_overpriced | None
+    tier: Optional[str]                  # high_conviction | value_play | on_the_radar | fade_volume_trap | fade_overpriced | None
     completeness_score: Optional[float]
+
+
+class TeaserCounts(BaseModel):
+    high_conviction: int
+    value_play: int
+    fade: int
 
 
 class PredictionsResponse(BaseModel):
@@ -53,6 +61,7 @@ class PredictionsResponse(BaseModel):
     week: int
     count: int
     predictions: list[PredictionRow]
+    teaser: TeaserCounts
 
 
 class PlayerRow(BaseModel):
@@ -72,6 +81,15 @@ class HistoryRow(BaseModel):
     model_odds: int
     is_low_confidence: bool
     model_version: str
+
+
+class SeasonStatsResponse(BaseModel):
+    player_id: str
+    season: int
+    games_played: int
+    tds_this_season: int
+    targets: int
+    td_rate: float          # 0.0–1.0, e.g. 0.25 = 25%
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
@@ -182,13 +200,16 @@ def _assign_tiers(rows: list[PredictionRow]) -> list[PredictionRow]:
     response_model=PredictionsResponse,
     summary="Ranked TD predictions for a week",
 )
+@limiter.limit("30/minute")
 async def get_predictions(
+    request: Request,
     season: SeasonPath,
     week: WeekPath,
     position: Optional[str] = Query(default=None, description="Filter by WR or TE"),
     team: Optional[str] = Query(default=None, description="Filter by team abbreviation"),
     player_id: Optional[str] = Query(default=None, description="Filter to a single player ID"),
     db: AsyncSession = Depends(get_db),
+    current_user: Optional[User] = Depends(get_optional_user),
 ) -> PredictionsResponse:
     """
     Returns one prediction row per player, ranked by final_prob descending.
@@ -226,7 +247,13 @@ async def get_predictions(
     pred_rows = (await db.execute(pred_q)).all()
 
     if not pred_rows:
-        return PredictionsResponse(season=season, week=week, count=0, predictions=[])
+        return PredictionsResponse(
+            season=season,
+            week=week,
+            count=0,
+            predictions=[],
+            teaser=TeaserCounts(high_conviction=0, value_play=0, fade=0),
+        )
 
     # Batch-fetch completeness_score from player_features
     player_ids = [p.player_id for _, p in pred_rows]
@@ -289,11 +316,36 @@ async def get_predictions(
 
     result = _assign_tiers(result)
 
+    teaser = TeaserCounts(
+        high_conviction=sum(1 for r in result if r.tier == "high_conviction"),
+        value_play=sum(1 for r in result if r.tier == "value_play"),
+        fade=sum(1 for r in result if r.tier in ("fade_volume_trap", "fade_overpriced")),
+    )
+
+    is_subscriber = current_user is not None and current_user.is_subscriber
+    if not is_subscriber:
+        public_rows = [r for r in result if r.tier == "on_the_radar"]
+        public_rows = [
+            r.model_copy(update={
+                "favor": None,
+                "completeness_score": None,
+            })
+            for r in public_rows
+        ]
+        return PredictionsResponse(
+            season=season,
+            week=week,
+            count=len(public_rows),
+            predictions=public_rows,
+            teaser=teaser,
+        )
+
     return PredictionsResponse(
         season=season,
         week=week,
         count=len(result),
         predictions=result,
+        teaser=teaser,
     )
 
 
@@ -304,7 +356,9 @@ async def get_predictions(
     response_model=list[PlayerRow],
     summary="Active WR/TE player list",
 )
+@limiter.limit("60/minute")
 async def list_players(
+    request: Request,
     position: Optional[str] = Query(default=None, description="WR or TE"),
     team: Optional[str] = Query(default=None, description="Team abbreviation"),
     db: AsyncSession = Depends(get_db),
@@ -341,7 +395,9 @@ async def list_players(
     response_model=PlayerRow,
     summary="Single player details",
 )
+@limiter.limit("60/minute")
 async def get_player(
+    request: Request,
     player_id: str,
     db: AsyncSession = Depends(get_db),
 ) -> PlayerRow:
@@ -359,6 +415,61 @@ async def get_player(
     )
 
 
+@router.get(
+    "/players/{player_id}/season-stats",
+    response_model=SeasonStatsResponse,
+    summary="Season stat totals for a player — public",
+)
+@limiter.limit("60/minute")
+async def get_player_season_stats(
+    request: Request,
+    player_id: str,
+    season: Optional[int] = Query(default=None, description="Season year. Defaults to most recent."),
+    db: AsyncSession = Depends(get_db),
+) -> SeasonStatsResponse:
+    """
+    Aggregated season stats from game logs. No auth required.
+    Returns totals for display in player header (TDs, games, targets, TD rate).
+    If no logs exist, returns zeros rather than 404 — the player exists, they just have no data.
+    """
+    if await db.get(Player, player_id) is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Player not found.")
+
+    # Resolve season
+    if season is not None:
+        resolved_season = season
+    else:
+        max_q = select(func.max(PlayerGameLog.season)).where(PlayerGameLog.player_id == player_id)
+        result = (await db.execute(max_q)).scalar_one_or_none()
+        resolved_season = int(result) if result is not None else 2025
+
+    q = (
+        select(
+            func.count(PlayerGameLog.id).label("games_played"),
+            func.coalesce(func.sum(PlayerGameLog.rec_tds), 0).label("tds"),
+            func.coalesce(func.sum(PlayerGameLog.targets), 0).label("targets"),
+            func.coalesce(
+                func.sum(case((PlayerGameLog.rec_tds > 0, 1), else_=0)), 0
+            ).label("games_with_td"),
+        )
+        .where(PlayerGameLog.player_id == player_id)
+        .where(PlayerGameLog.season == resolved_season)
+    )
+    row = (await db.execute(q)).one()
+
+    games_played = int(row.games_played)
+    td_rate = (int(row.games_with_td) / games_played) if games_played > 0 else 0.0
+
+    return SeasonStatsResponse(
+        player_id=player_id,
+        season=resolved_season,
+        games_played=games_played,
+        tds_this_season=int(row.tds),
+        targets=int(row.targets),
+        td_rate=round(td_rate, 4),
+    )
+
+
 # ── Player history ────────────────────────────────────────────────────────────
 
 @router.get(
@@ -366,18 +477,27 @@ async def get_player(
     response_model=list[HistoryRow],
     summary="Season prediction history for a player",
 )
+@limiter.limit("30/minute")
 async def get_player_history(
+    request: Request,
     player_id: str,
     season: Optional[int] = Query(default=None, description="Filter to a single season"),
     db: AsyncSession = Depends(get_db),
+    current_user: Optional[User] = Depends(get_optional_user),
 ) -> list[HistoryRow]:
     """
     Returns every prediction for this player, newest-first.
     When multiple model versions exist for the same week, only the latest is returned.
+
+    Anonymous and free-tier users receive at most the last 2 seasons of history.
+    Pro users receive the full history.
     """
     # Verify player exists
     if await db.get(Player, player_id) is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Player not found.")
+
+    if current_user is None or not current_user.is_subscriber:
+        return []
 
     # Latest prediction id per (season, week) for this player
     latest_sq = (
@@ -435,11 +555,14 @@ class GameLogsResponse(BaseModel):
     response_model=GameLogsResponse,
     summary="Recent game logs for a player",
 )
+@limiter.limit("30/minute")
 async def get_player_game_logs(
+    request: Request,
     player_id: str,
     season: Optional[int] = Query(default=None, description="Filter to a season (default: most recent with logs)"),
     limit: int = Query(default=20, ge=1, le=30, description="Max rows to return (default 20, max 30)"),
     db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(require_subscriber),
 ) -> GameLogsResponse:
     """
     Returns recent game logs for a player, most-recent first.
@@ -521,7 +644,9 @@ class PlayerOddsResponse(BaseModel):
     response_model=PlayerOddsResponse,
     summary="Current week sportsbook odds for a player",
 )
+@limiter.limit("30/minute")
 async def get_player_odds(
+    request: Request,
     player_id: str,
     season: int = Query(description="NFL season year"),
     week: int = Query(ge=1, le=18, description="Regular season week (1–18)"),
@@ -583,7 +708,9 @@ class WeekStatusResponse(BaseModel):
     response_model=WeekStatusResponse,
     summary="Current season and week",
 )
+@limiter.limit("60/minute")
 async def get_status_week(
+    request: Request,
     db: AsyncSession = Depends(get_db),
 ) -> WeekStatusResponse:
     """
@@ -673,7 +800,9 @@ class TrackRecordResponse(BaseModel):
     response_model=TrackRecordResponse,
     summary="Model accuracy track record by week",
 )
+@limiter.limit("30/minute")
 async def get_track_record(
+    request: Request,
     season: Optional[int] = Query(
         default=None,
         description="NFL season year. Defaults to the most recent season with predictions.",

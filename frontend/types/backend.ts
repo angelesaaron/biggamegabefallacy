@@ -1,5 +1,11 @@
 // Backend API response types — shapes returned by the FastAPI server
 
+export interface TeaserCounts {
+  high_conviction: number;
+  value_play: number;
+  fade: number;
+}
+
 export type PredictionTier =
   | 'high_conviction'
   | 'value_play'
@@ -28,8 +34,8 @@ export interface PredictionResponse {
   position: string | null;
   team: string | null;
   headshot_url: string | null;
-  final_prob: number;
-  model_odds: number;
+  final_prob: number | null;
+  model_odds: number | null;
   sportsbook_odds: number | null;
   implied_prob: number | null;
   favor: number | null;
@@ -37,6 +43,14 @@ export interface PredictionResponse {
   model_version: string;
   tier: PredictionTier;
   completeness_score: number | null;
+}
+
+export interface PredictionsApiResponse {
+  season: number;
+  week: number;
+  count: number;
+  predictions: PredictionResponse[];
+  teaser: TeaserCounts;
 }
 
 export interface GameLogEntry {
@@ -55,7 +69,16 @@ export interface GameLogsResponse {
 
 export interface PredictionHistoryEntry {
   week: number;
-  final_prob: number;
-  model_odds: number;
+  final_prob: number | null;
+  model_odds: number | null;
   season: number;
+}
+
+export interface SeasonStatsResponse {
+  player_id: string;
+  season: number;
+  games_played: number;
+  tds_this_season: number;
+  targets: number;
+  td_rate: number;   // 0.0–1.0
 }

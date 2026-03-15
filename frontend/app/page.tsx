@@ -1,35 +1,18 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { NavBar } from '@/components/shared/NavBar';
 import { WeeklyValue } from '@/components/weekly/WeeklyValue';
 import { PlayerModel } from '@/components/player-lookup/PlayerModel';
 import { TrackRecord } from '@/components/track-record/TrackRecord';
+import { useCurrentWeek } from '@/hooks/useCurrentWeek';
 
 type Tab = 'weekly' | 'player' | 'track';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? '';
-
 export default function Home() {
   const [activeTab, setActiveTab] = useState<Tab>('weekly');
-  const [currentWeek, setCurrentWeek] = useState<number | null>(null);
-  const [currentYear, setCurrentYear] = useState<number | null>(null);
   const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchWeek = async () => {
-      try {
-        const response = await fetch(`${API_URL}/api/status/week`);
-        if (!response.ok) return;
-        const data = await response.json();
-        setCurrentWeek(data.week ?? null);
-        setCurrentYear(data.season ?? null);
-      } catch {
-        // silent — week badge just won't render
-      }
-    };
-    fetchWeek();
-  }, []);
+  const { week: currentWeek, season: currentYear } = useCurrentWeek();
 
   const handlePlayerClick = (playerId: string) => {
     setSelectedPlayerId(playerId);

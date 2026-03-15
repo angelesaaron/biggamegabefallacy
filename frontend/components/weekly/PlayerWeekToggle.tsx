@@ -1,3 +1,5 @@
+'use client';
+
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface PlayerWeekToggleProps {
@@ -5,6 +7,7 @@ interface PlayerWeekToggleProps {
   currentYear: number;
   selectedWeek: number;
   onWeekChange: (week: number) => void;
+  lockedToCurrentWeek?: boolean;
 }
 
 export function PlayerWeekToggle({
@@ -12,21 +15,34 @@ export function PlayerWeekToggle({
   currentYear,
   selectedWeek,
   onWeekChange,
+  lockedToCurrentWeek = false,
 }: PlayerWeekToggleProps) {
   const canGoBack = selectedWeek > 1;
-  const canGoForward = selectedWeek < 18; // Allow up to week 18
+  const canGoForward = selectedWeek < 18;
+  const backIsLocked = lockedToCurrentWeek && selectedWeek <= currentWeek;
+  const backDisabled = !canGoBack || backIsLocked;
+
+  function handleBack() {
+    if (backDisabled) return;
+    onWeekChange(selectedWeek - 1);
+  }
+
+  function handleForward() {
+    if (!canGoForward) return;
+    onWeekChange(selectedWeek + 1);
+  }
 
   return (
     <div className="flex items-center gap-2 bg-gray-900/60 border border-gray-800/50 rounded-lg p-1">
       <button
-        onClick={() => onWeekChange(selectedWeek - 1)}
-        disabled={!canGoBack}
+        onClick={handleBack}
+        disabled={backDisabled}
         className={`p-2 rounded-md transition-all ${
-          canGoBack
-            ? 'text-gray-300 hover:text-white hover:bg-gray-800'
-            : 'text-gray-700 cursor-not-allowed'
+          backDisabled
+            ? 'text-gray-700 cursor-not-allowed'
+            : 'text-gray-300 hover:text-white hover:bg-gray-800'
         }`}
-        title="Previous week"
+        aria-label="Previous week"
       >
         <ChevronLeft className="w-4 h-4" />
       </button>
@@ -37,14 +53,14 @@ export function PlayerWeekToggle({
       </div>
 
       <button
-        onClick={() => onWeekChange(selectedWeek + 1)}
+        onClick={handleForward}
         disabled={!canGoForward}
         className={`p-2 rounded-md transition-all ${
           canGoForward
             ? 'text-gray-300 hover:text-white hover:bg-gray-800'
             : 'text-gray-700 cursor-not-allowed'
         }`}
-        title="Next week"
+        aria-label="Next week"
       >
         <ChevronRight className="w-4 h-4" />
       </button>

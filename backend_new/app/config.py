@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import List
 
-from pydantic import field_validator
+from pydantic import field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -29,9 +29,24 @@ class Settings(BaseSettings):
             return [o.strip() for o in v.split(",")]
         return v
 
+    @model_validator(mode="after")
+    def check_jwt_secret(self) -> "Settings":
+        import os
+        if not self.JWT_SECRET_KEY and os.environ.get("PYTEST_CURRENT_TEST") is None:
+            raise ValueError(
+                "JWT_SECRET_KEY must be set. Generate one with: openssl rand -hex 32"
+            )
+        return self
+
     # API Keys
     TANK01_API_KEY: str = ""
     ADMIN_KEY: str = ""  # Required for all /admin/* endpoints
+
+    # JWT — generate JWT_SECRET_KEY with: openssl rand -hex 32
+    JWT_SECRET_KEY: str = ""
+    JWT_ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 15
+    REFRESH_TOKEN_EXPIRE_DAYS: int = 7
 
     # ML Model
     MODEL_PATH: str = "../ml/model/wr_te_model_v2.pkl"

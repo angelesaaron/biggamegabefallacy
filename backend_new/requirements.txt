@@ -31,6 +31,13 @@ httpx==0.28.1
 nflreadpy==0.1.5
 pyarrow==18.1.0
 
+# Auth
+PyJWT>=2.8.0
+bcrypt>=4.0.0
+cryptography>=42.0.0
+pydantic[email]>=2.0.0
+python-multipart>=0.0.9
+
 # Utilities
 python-dotenv==1.0.1
 slowapi==0.1.9
