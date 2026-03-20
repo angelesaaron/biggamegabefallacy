@@ -67,6 +67,23 @@ interface WeekOverrideData {
   week: number | null;
 }
 
+interface PreSeasonStepResult {
+  step: string;
+  status: 'ok' | 'partial' | 'failed' | 'skipped';
+  n_written: number;
+  n_updated: number;
+  n_failed: number;
+  events: string[];
+}
+
+interface PreSeasonSetupResponse {
+  new_season: number;
+  prior_season: number;
+  overall_status: 'ok' | 'partial' | 'failed';
+  steps: PreSeasonStepResult[];
+  errors: string[];
+}
+
 // ---------------------------------------------------------------------------
 // Accounts Panel
 // ---------------------------------------------------------------------------
@@ -517,6 +534,7 @@ interface RunEntry {
   week?: number;
   status: 'running' | 'completed' | 'partial' | 'failed' | 'error';
   result?: ActionResult;
+  preSeasonResult?: PreSeasonSetupResponse;
   errorMessage?: string;
   startedAt: Date;
   completedAt?: Date;
@@ -536,6 +554,8 @@ function PipelinePanel() {
   const [season, setSeason] = useState(2025);
   const [week, setWeek] = useState(1);
   const [runningAction, setRunningAction] = useState<string | null>(null);
+  const [preSeasonNewSeason, setPreSeasonNewSeason] = useState(2026);
+  const [preSeasonPriorSeason, setPreSeasonPriorSeason] = useState(2025);
 
   async function trigger(action: string, url: string, params: { season?: number; week?: number }) {
     const id = crypto.randomUUID();
@@ -569,6 +589,61 @@ function PipelinePanel() {
       setRuns((prev) =>
         prev.map((r) =>
           r.id === id ? { ...r, status: resolved, result: data, completedAt: new Date() } : r
+        )
+      );
+    } catch (err) {
+      setRuns((prev) =>
+        prev.map((r) =>
+          r.id === id
+            ? {
+                ...r,
+                status: 'error',
+                errorMessage: err instanceof Error ? err.message : 'Failed',
+                completedAt: new Date(),
+              }
+            : r
+        )
+      );
+    } finally {
+      setRunningAction(null);
+    }
+  }
+
+  async function triggerPreSeason() {
+    const id = crypto.randomUUID();
+    const entry: RunEntry = {
+      id,
+      action: 'Pre-Season Setup',
+      season: preSeasonNewSeason,
+      status: 'running',
+      startedAt: new Date(),
+    };
+    setRuns((prev) => [entry, ...prev]);
+    setRunningAction('Pre-Season Setup');
+    try {
+      const token = getToken();
+      const res = await fetch(`${API_URL}/api/admin-ui/pipeline/preseason-setup`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          new_season: preSeasonNewSeason,
+          prior_season: preSeasonPriorSeason,
+        }),
+      });
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({})) as { detail?: string };
+        throw new Error(body.detail ?? `Request failed: ${res.status}`);
+      }
+      const data = await res.json() as PreSeasonSetupResponse;
+      const resolved: RunEntry['status'] =
+        data.overall_status === 'ok' ? 'completed'
+        : data.overall_status === 'partial' ? 'partial'
+        : 'failed';
+      setRuns((prev) =>
+        prev.map((r) =>
+          r.id === id
+            ? { ...r, status: resolved, preSeasonResult: data, completedAt: new Date() }
+            : r
         )
       );
     } catch (err) {
@@ -746,6 +821,61 @@ function PipelinePanel() {
             <span className="text-[10px] text-sr-text-dim">ext. API</span>
           </div>
         </div>
+
+        {/* SETUP section */}
+        <div className="space-y-2">
+          <p className={SECTION_LABEL}>Setup</p>
+          <div className="border-t border-sr-border" />
+
+          {/* Season inputs */}
+          <div className="space-y-1.5 py-0.5">
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-sr-text-muted font-mono w-20">New season</span>
+              <input
+                type="number"
+                value={preSeasonNewSeason}
+                onChange={(e) => setPreSeasonNewSeason(Number(e.target.value))}
+                min={2020}
+                max={2035}
+                className={INPUT_CLS}
+              />
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-sr-text-muted font-mono w-20">Prior season</span>
+              <input
+                type="number"
+                value={preSeasonPriorSeason}
+                onChange={(e) => setPreSeasonPriorSeason(Number(e.target.value))}
+                min={2019}
+                max={2034}
+                className={INPUT_CLS}
+              />
+            </div>
+            {preSeasonPriorSeason !== preSeasonNewSeason - 1 && (
+              <p className="text-[10px] text-red-400 font-mono">
+                Prior must equal new − 1
+              </p>
+            )}
+          </div>
+
+          {/* Pre-Season Setup button */}
+          <div className="flex items-center gap-2 py-0.5">
+            <button
+              disabled={busy || preSeasonPriorSeason !== preSeasonNewSeason - 1}
+              onClick={() => triggerPreSeason()}
+              className={GHOST_BTN}
+              aria-label="Run Pre-Season Setup"
+            >
+              {runningAction === 'Pre-Season Setup' ? (
+                <span className="inline-block w-2 h-2 rounded-full bg-current animate-pulse" />
+              ) : (
+                '▶ run'
+              )}
+            </button>
+            <span className="text-sm text-white flex-1">Pre-Season Setup</span>
+            <span className="text-[10px] text-sr-text-dim">ext. API</span>
+          </div>
+        </div>
       </div>
 
       {/* Right column — Run Log */}
@@ -837,9 +967,93 @@ function RunLogEntry({ run }: { run: RunEntry }) {
         </>
       )}
 
+      {run.preSeasonResult && (
+        <div className="space-y-0.5 mt-1">
+          {run.preSeasonResult.steps.map((step) => {
+            const stepColor =
+              step.status === 'ok' ? 'text-green-400'
+              : step.status === 'partial' ? 'text-yellow-400'
+              : step.status === 'skipped' ? 'text-sr-text-dim'
+              : 'text-red-400';
+            return (
+              <div key={step.step} className="flex items-baseline gap-2">
+                <span className={`text-xs font-mono ${stepColor}`}>{step.status}</span>
+                <span className="text-xs font-mono text-sr-text-muted">{step.step.replace(/_/g, ' ')}</span>
+                <span className="text-xs font-mono text-sr-text-dim">
+                  +{step.n_written} ~{step.n_updated} ✗{step.n_failed}
+                </span>
+              </div>
+            );
+          })}
+          {run.preSeasonResult.errors.length > 0 && (
+            <ul className="space-y-0.5 mt-1">
+              {run.preSeasonResult.errors.map((e, i) => (
+                <li key={i} className="text-xs font-mono text-red-400 truncate">· {e}</li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
+
       {(run.status === 'error' || run.status === 'failed') && run.errorMessage && (
         <p className="text-xs font-mono text-red-400">{run.errorMessage}</p>
       )}
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Pipeline Week Status component
+// ---------------------------------------------------------------------------
+
+function PipelineWeekStatus() {
+  const { getToken } = useAuth();
+  const [data, setData] = useState<{ active: boolean; season: number | null; week: number | null; updated_at: string | null } | null>(null);
+  const [clearing, setClearing] = useState(false);
+
+  useEffect(() => {
+    async function fetch_() {
+      const token = getToken();
+      const res = await fetch(`${API_URL}/api/admin-ui/active-display-week`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (res.ok) setData(await res.json());
+    }
+    fetch_();
+  }, [getToken]);
+
+  async function handleClear() {
+    setClearing(true);
+    const token = getToken();
+    const res = await fetch(`${API_URL}/api/admin-ui/active-display-week`, {
+      method: 'DELETE',
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (res.ok) setData(await res.json());
+    setClearing(false);
+  }
+
+  if (!data) return <p className="text-xs font-mono text-sr-text-dim">Loading...</p>;
+
+  if (!data.active) {
+    return <p className="text-xs font-mono text-sr-text-muted">Not set (pipeline hasn&apos;t run)</p>;
+  }
+
+  return (
+    <div className="flex items-center gap-2 flex-wrap">
+      <span className="text-sm font-mono text-white">S{data.season} W{data.week}</span>
+      {data.updated_at && (
+        <span className="text-[10px] text-sr-text-dim font-mono">
+          {new Date(data.updated_at).toLocaleString()}
+        </span>
+      )}
+      <button
+        onClick={handleClear}
+        disabled={clearing}
+        className="text-xs text-sr-text-dim hover:text-red-400 underline transition-colors disabled:opacity-50 ml-1"
+      >
+        {clearing ? 'clearing...' : 'clear'}
+      </button>
     </div>
   );
 }
@@ -985,6 +1199,13 @@ function WeekOverridePanel() {
             {saving ? 'applying...' : 'apply'}
           </button>
         </div>
+      </div>
+
+      {/* Pipeline week */}
+      <div>
+        <p className={SECTION_LABEL}>Pipeline Set</p>
+        <div className="border-t border-sr-border my-2" />
+        <PipelineWeekStatus />
       </div>
 
       <p className="text-[10px] text-sr-text-dim font-mono mt-4">

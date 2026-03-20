@@ -18,7 +18,7 @@ export function PlayerWeekToggle({
   lockedToCurrentWeek = false,
 }: PlayerWeekToggleProps) {
   const canGoBack = selectedWeek > 1;
-  const canGoForward = selectedWeek < 18;
+  const canGoForward = selectedWeek < currentWeek;
   const backIsLocked = lockedToCurrentWeek && selectedWeek <= currentWeek;
   const backDisabled = !canGoBack || backIsLocked;
 
@@ -50,6 +50,7 @@ export function PlayerWeekToggle({
       <div className="px-4 py-1 text-sm text-white min-w-[80px] text-center">
         <span className="text-sr-text-muted">Week</span>{' '}
         <span className="font-semibold nums">{selectedWeek}</span>
+        <span className="text-xs text-sr-text-dim ml-1 nums">'{String(currentYear).slice(-2)}</span>
       </div>
 
       <button

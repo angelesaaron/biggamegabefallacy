@@ -18,7 +18,7 @@ function HomeContent() {
 
   const [activeTab, setActiveTab] = useState<Tab>(initialTab);
   const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
-  const { week: currentWeek, season: currentYear } = useCurrentWeek();
+  const { week: currentWeek, season: currentYear, source: weekSource } = useCurrentWeek();
 
   const handlePlayerClick = (playerId: string) => {
     setSelectedPlayerId(playerId);
@@ -33,6 +33,7 @@ function HomeContent() {
           <WeeklyValue
             currentWeek={currentWeek}
             currentYear={currentYear}
+            weekSource={weekSource}
             onPlayerClick={handlePlayerClick}
           />
         )}

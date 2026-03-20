@@ -1,41 +1,46 @@
 """
-Resolve the current NFL week, respecting any admin override in system_config.
+Resolve the current NFL week for internal backend use.
 
-Usage:
-    week, season = await resolve_current_week(db)
+Priority:
+  1. system_config 'current_week_override' (admin-set)
+  2. system_config 'active_display_week' (pipeline-set on success)
+  3. Hard fallback: week=1, season=2026
+
+Never queries games, predictions, or player_game_logs.
 """
+import logging
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.models.system_config import SystemConfig
 
+logger = logging.getLogger(__name__)
+
+
+def _parse_season_week(value: str) -> tuple[int, int] | None:
+    try:
+        season_str, week_str = value.split(":")
+        season = int(season_str)
+        week = int(week_str)
+        if 2020 <= season <= 2035 and 1 <= week <= 22:
+            return week, season  # NOTE: (week, season) to match all existing call sites
+    except (ValueError, AttributeError):
+        pass
+    return None
+
 
 async def resolve_current_week(db: AsyncSession) -> tuple[int, int]:
     """
-    Returns (week, season).
-    If system_config has a current_week_override, use that.
-    Otherwise fall back to max(season)/max(week) from player_game_logs.
+    Returns (week, season) — NOT (season, week).
+    This order matches all existing call sites throughout the codebase.
+    Do not change call sites.
     """
-    result = await db.execute(
-        select(SystemConfig).where(SystemConfig.key == "current_week_override")
-    )
-    row = result.scalars().first()
-    if row and row.value:
-        try:
-            season_str, week_str = row.value.split(":")
-            return int(week_str), int(season_str)
-        except (ValueError, AttributeError):
-            pass
+    for key in ("current_week_override", "active_display_week"):
+        row = (await db.execute(
+            select(SystemConfig).where(SystemConfig.key == key)
+        )).scalars().first()
+        if row and row.value:
+            parsed = _parse_season_week(row.value)
+            if parsed:
+                return parsed  # (week, season)
 
-    # Fallback: max from player_game_logs
-    from app.models.player_game_log import PlayerGameLog
-    from sqlalchemy import func
-    season_res = await db.execute(
-        select(func.max(PlayerGameLog.season))
-    )
-    season = season_res.scalar_one_or_none() or 2025
-    week_res = await db.execute(
-        select(func.max(PlayerGameLog.week))
-        .where(PlayerGameLog.season == season)
-    )
-    week = week_res.scalar_one_or_none() or 1
-    return week, season
+    return 1, 2026  # hard fallback

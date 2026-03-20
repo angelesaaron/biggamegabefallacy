@@ -11,7 +11,7 @@ interface PredictionsState {
   error: string | null;
 }
 
-export function usePredictions(season: number, week: number): PredictionsState {
+export function usePredictions(season: number, week: number | null): PredictionsState {
   const { user, getToken } = useAuth();
   const [state, setState] = useState<PredictionsState>({
     predictions: [],
@@ -21,6 +21,9 @@ export function usePredictions(season: number, week: number): PredictionsState {
   });
 
   useEffect(() => {
+    // Don't fetch until week is resolved from the API
+    if (week === null) return;
+
     async function load() {
       setState((prev) => ({ ...prev, loading: true, error: null }));
       try {

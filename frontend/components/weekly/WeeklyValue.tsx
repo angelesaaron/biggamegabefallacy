@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { usePredictions } from '@/hooks/usePredictions';
 import { TierSection } from '@/components/weekly/TierSection';
@@ -14,20 +14,25 @@ import { AlertTriangle } from 'lucide-react';
 interface WeeklyValueProps {
   currentWeek: number | null;
   currentYear: number | null;
+  weekSource: 'admin_override' | 'pipeline' | 'default' | null;
   onPlayerClick: (playerId: string) => void;
 }
 
-export function WeeklyValue({ currentWeek, currentYear, onPlayerClick }: WeeklyValueProps) {
+export function WeeklyValue({ currentWeek, currentYear, weekSource, onPlayerClick }: WeeklyValueProps) {
   const { isSubscriber } = useAuth();
-  const [selectedWeek, setSelectedWeek] = useState<number>(18);
+  const [selectedWeek, setSelectedWeek] = useState<number | null>(null);
+  const initialized = useRef(false);
 
   useEffect(() => {
-    if (currentWeek !== null) setSelectedWeek(currentWeek);
+    if (!initialized.current && currentWeek !== null) {
+      setSelectedWeek(currentWeek);
+      initialized.current = true;
+    }
   }, [currentWeek]);
 
-  const effectiveYear = currentYear ?? 2025;
-  const isEarlySeason = selectedWeek <= 3;
-  const isHistorical = currentWeek !== null && selectedWeek < currentWeek;
+  const effectiveYear = currentYear ?? 2026;
+  const isEarlySeason = selectedWeek !== null && selectedWeek <= 3;
+  const isHistorical = currentWeek !== null && selectedWeek !== null && selectedWeek < currentWeek;
 
   const { predictions, teaser, loading, error } = usePredictions(effectiveYear, selectedWeek);
 
@@ -55,23 +60,27 @@ export function WeeklyValue({ currentWeek, currentYear, onPlayerClick }: WeeklyV
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div className="flex-1">
               <h1 className="text-xl md:text-3xl font-semibold text-white mb-1">
-                Week {selectedWeek} — ATTD Targets
+                {selectedWeek !== null ? `Week ${selectedWeek}` : 'Loading…'} — ATTD Targets
               </h1>
               <p className="text-sm text-sr-text-muted">
-                Model-ranked anytime TD plays for Week {selectedWeek}. Updated Tuesday.
+                {selectedWeek !== null
+                  ? `Model-ranked anytime TD plays for Week ${selectedWeek}. Updated Tuesday.`
+                  : 'Fetching current week…'}
               </p>
             </div>
-            <PlayerWeekToggle
-              currentWeek={currentWeek ?? 18}
-              currentYear={effectiveYear}
-              selectedWeek={selectedWeek}
-              onWeekChange={setSelectedWeek}
-            />
+            {selectedWeek !== null && (
+              <PlayerWeekToggle
+                currentWeek={currentWeek ?? selectedWeek}
+                currentYear={effectiveYear}
+                selectedWeek={selectedWeek}
+                onWeekChange={setSelectedWeek}
+              />
+            )}
           </div>
         </SurfaceCard>
 
         {/* Early season banner */}
-        {isEarlySeason && !loading && !error && predictions.length > 0 && (
+        {isEarlySeason && selectedWeek !== null && !loading && !error && predictions.length > 0 && (
           <div className="mb-4 rounded-card border border-amber-500/40 bg-amber-500/10 p-4 text-sm">
             <p className="text-amber-400 font-semibold mb-1">
               Projection Mode — Week {selectedWeek}

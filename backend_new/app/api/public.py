@@ -707,20 +707,36 @@ async def get_player_odds(
 
 # ── Status / week ─────────────────────────────────────────────────────────────
 
-_DEFAULT_SEASON = 2025
-_DEFAULT_WEEK = 1
+from app.models.system_config import SystemConfig
+
+
+def _parse_season_week(value: str) -> tuple[int, int] | None:
+    """
+    Parse "YYYY:WW" into (season, week). Returns None if malformed.
+    Caller falls through to next priority level on None.
+    """
+    try:
+        season_str, week_str = value.split(":")
+        season = int(season_str)
+        week = int(week_str)
+        if 2020 <= season <= 2035 and 1 <= week <= 22:
+            return season, week
+    except (ValueError, AttributeError):
+        pass
+    return None
 
 
 class WeekStatusResponse(BaseModel):
     season: int
     week: int
-    is_early_season: bool  # True when week <= 3
+    is_early_season: bool
+    source: str  # "admin_override" | "pipeline" | "default"
 
 
 @router.get(
     "/status/week",
     response_model=WeekStatusResponse,
-    summary="Current season and week",
+    summary="Current season and week for display",
 )
 @limiter.limit("60/minute")
 async def get_status_week(
@@ -728,42 +744,34 @@ async def get_status_week(
     db: AsyncSession = Depends(get_db),
 ) -> WeekStatusResponse:
     """
-    Returns the season and week of the most recently completed (final) game.
+    Returns the season and week the UI should display by default.
 
-    Strategy:
-      1. Query games table for latest (season, week) where status='final' and season_type='reg'.
-      2. Fall back to latest (season, week) in predictions table.
-      3. Return hard-coded default (2025, week 1) if no data exists.
+    Resolution order (highest to lowest priority):
+      1. system_config 'current_week_override' — set manually by admin
+      2. system_config 'active_display_week' — set by pipeline on success
+      3. Hard fallback: season=2026, week=1
+
+    Never queries games, predictions, or player_game_logs.
     """
-    games_q = (
-        select(Game.season, Game.week)
-        .where(Game.status == "final")
-        .where(Game.season_type == "reg")
-        .order_by(Game.season.desc(), Game.week.desc())
-        .limit(1)
-    )
-    games_row = (await db.execute(games_q)).first()
-    if games_row is not None:
-        return WeekStatusResponse(
-            season=games_row.season,
-            week=games_row.week,
-            is_early_season=games_row.week <= 3,
-        )
+    for key, source in [
+        ("current_week_override", "admin_override"),
+        ("active_display_week", "pipeline"),
+    ]:
+        row = (await db.execute(
+            select(SystemConfig).where(SystemConfig.key == key)
+        )).scalars().first()
+        if row and row.value:
+            parsed = _parse_season_week(row.value)
+            if parsed:
+                season, week = parsed
+                return WeekStatusResponse(
+                    season=season,
+                    week=week,
+                    is_early_season=week <= 3,
+                    source=source,
+                )
 
-    preds_q = (
-        select(Prediction.season, Prediction.week)
-        .order_by(Prediction.season.desc(), Prediction.week.desc())
-        .limit(1)
-    )
-    preds_row = (await db.execute(preds_q)).first()
-    if preds_row is not None:
-        return WeekStatusResponse(
-            season=preds_row.season,
-            week=preds_row.week,
-            is_early_season=preds_row.week <= 3,
-        )
-
-    return WeekStatusResponse(season=_DEFAULT_SEASON, week=_DEFAULT_WEEK, is_early_season=True)
+    return WeekStatusResponse(season=2026, week=1, is_early_season=True, source="default")
 
 
 # ── Track record ───────────────────────────────────────────────────────────────
@@ -852,7 +860,7 @@ async def get_track_record(
         max_season = (await db.execute(max_season_q)).scalar_one_or_none()
         if max_season is None:
             return TrackRecordResponse(
-                season=_DEFAULT_SEASON,
+                season=2026,
                 tier_summary=_empty_tier_summary,
                 weeks=[],
                 season_summary=SeasonSummary(

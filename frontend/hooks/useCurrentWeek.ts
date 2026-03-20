@@ -6,6 +6,7 @@ interface WeekStatus {
   week: number | null;
   season: number | null;
   isEarlySeason: boolean;
+  source: 'admin_override' | 'pipeline' | 'default' | null; // null = loading
 }
 
 export function useCurrentWeek(): WeekStatus {
@@ -13,6 +14,7 @@ export function useCurrentWeek(): WeekStatus {
     week: null,
     season: null,
     isEarlySeason: false,
+    source: null,
   });
 
   useEffect(() => {
@@ -25,6 +27,7 @@ export function useCurrentWeek(): WeekStatus {
           week: data.week ?? null,
           season: data.season ?? null,
           isEarlySeason: data.is_early_season ?? false,
+          source: data.source ?? null,
         });
       } catch {
         // silent — components handle null week gracefully

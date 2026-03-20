@@ -645,3 +645,264 @@ async def clear_week_override(
     await db.execute(stmt)
     await db.commit()
     return WeekOverrideResponse(override_active=False, season=None, week=None)
+
+
+# ---------------------------------------------------------------------------
+# Active Display Week — pipeline-set week
+# ---------------------------------------------------------------------------
+
+class ActiveDisplayWeekResponse(BaseModel):
+    active: bool
+    season: Optional[int]
+    week: Optional[int]
+    updated_at: Optional[str]  # ISO datetime — shows when pipeline last ran successfully
+
+
+@router.get("/active-display-week", response_model=ActiveDisplayWeekResponse)
+async def get_active_display_week(
+    _admin: User = Depends(require_admin_user),
+    db: AsyncSession = Depends(get_db),
+) -> ActiveDisplayWeekResponse:
+    """
+    Returns the pipeline-set active display week.
+    Written automatically by the weekly pipeline on full successful completion.
+    Use /week-override to manually force a week instead of editing this.
+    """
+    row = (await db.execute(
+        select(SystemConfig).where(SystemConfig.key == "active_display_week")
+    )).scalars().first()
+    if row and row.value:
+        try:
+            season_str, week_str = row.value.split(":")
+            return ActiveDisplayWeekResponse(
+                active=True,
+                season=int(season_str),
+                week=int(week_str),
+                updated_at=row.updated_at.isoformat() if row.updated_at else None,
+            )
+        except (ValueError, AttributeError):
+            pass
+    return ActiveDisplayWeekResponse(active=False, season=None, week=None, updated_at=None)
+
+
+@router.delete("/active-display-week", response_model=ActiveDisplayWeekResponse)
+async def clear_active_display_week(
+    _admin: User = Depends(require_admin_user),
+    db: AsyncSession = Depends(get_db),
+) -> ActiveDisplayWeekResponse:
+    """
+    Clears the pipeline-set active display week.
+    After clearing, the UI falls back to current_week_override (if set) or
+    the hard default. Use this if a bad pipeline run wrote an incorrect week.
+    """
+    stmt = (
+        pg_insert(SystemConfig)
+        .values(key="active_display_week", value=None)
+        .on_conflict_do_update(
+            index_elements=["key"],
+            set_={"value": None, "updated_at": func.now()},
+        )
+    )
+    await db.execute(stmt)
+    await db.commit()
+    return ActiveDisplayWeekResponse(active=False, season=None, week=None, updated_at=None)
+
+
+# ---------------------------------------------------------------------------
+# Pre-season setup
+# ---------------------------------------------------------------------------
+
+class PreSeasonSetupRequest(BaseModel):
+    new_season: int = Field(..., ge=2020, le=2035, description="Season being set up e.g. 2026")
+    prior_season: int = Field(..., ge=2019, le=2034, description="Season that just ended e.g. 2025")
+
+
+class PreSeasonStepResult(BaseModel):
+    step: str
+    status: str   # "ok" | "partial" | "failed" | "skipped"
+    n_written: int
+    n_updated: int
+    n_failed: int
+    events: list[str]
+
+
+class PreSeasonSetupResponse(BaseModel):
+    new_season: int
+    prior_season: int
+    overall_status: str  # "ok" | "partial" | "failed"
+    steps: list[PreSeasonStepResult]
+    errors: list[str]
+
+
+@router.post("/pipeline/preseason-setup", response_model=PreSeasonSetupResponse)
+async def preseason_setup(
+    body: PreSeasonSetupRequest,
+    _admin: User = Depends(require_admin_user),
+    db: AsyncSession = Depends(get_db),
+) -> PreSeasonSetupResponse:
+    """
+    Full pre-season setup sequence for a new NFL season.
+    Run once per year after the NFL Draft (~late April).
+
+    Steps (in order):
+      1. Season state  — carry-forward from prior_season
+      2. Roster sync   — current rosters including drafted rookies
+      3. Draft sync    — populate draft_round from nflverse (cache busted)
+      4. Rookie buckets — re-seed feature buckets
+
+    new_season must equal prior_season + 1. Both are required explicitly.
+    Safe to re-run — all steps are idempotent.
+    """
+    from app.services.season_state_service import SeasonStateService
+    from app.services.rookie_bucket_seed import RookieBucketSeedService
+    import logging
+    logger = logging.getLogger(__name__)
+
+    steps: list[PreSeasonStepResult] = []
+    errors: list[str] = []
+
+    if body.prior_season != body.new_season - 1:
+        return PreSeasonSetupResponse(
+            new_season=body.new_season,
+            prior_season=body.prior_season,
+            overall_status="failed",
+            steps=[],
+            errors=[
+                f"prior_season must equal new_season - 1. "
+                f"Expected {body.new_season - 1}, got {body.prior_season}."
+            ],
+        )
+
+    roster_sync_ok = False
+
+    # ── Step 1: Season State ────────────────────────────────────────────────
+    try:
+        result = await SeasonStateService(db).run(body.prior_season)
+        await db.commit()
+        ok = result.n_written + result.n_updated
+        step_status = "ok" if result.n_failed == 0 else ("partial" if ok > 0 else "failed")
+        if step_status == "failed":
+            errors.append(f"Season state failed: {result.events}")
+        steps.append(PreSeasonStepResult(
+            step="season_state", status=step_status,
+            n_written=result.n_written, n_updated=result.n_updated,
+            n_failed=result.n_failed, events=result.events,
+        ))
+    except Exception as exc:
+        await db.rollback()
+        msg = f"Season state exception: {exc}"
+        errors.append(msg)
+        logger.error(msg, exc_info=True)
+        steps.append(PreSeasonStepResult(
+            step="season_state", status="failed",
+            n_written=0, n_updated=0, n_failed=1, events=[msg],
+        ))
+
+    # ── Step 2: Roster Sync ─────────────────────────────────────────────────
+    try:
+        async with Tank01Client() as tank01:
+            result = await RosterSyncService(db, tank01).run()
+        await db.commit()
+        ok = result.n_written + result.n_updated
+        step_status = "ok" if result.n_failed == 0 else ("partial" if ok > 0 else "failed")
+        if step_status == "failed":
+            errors.append(f"Roster sync failed: {result.events}")
+        roster_sync_ok = step_status in ("ok", "partial")
+        steps.append(PreSeasonStepResult(
+            step="roster_sync", status=step_status,
+            n_written=result.n_written, n_updated=result.n_updated,
+            n_failed=result.n_failed, events=result.events,
+        ))
+    except Exception as exc:
+        await db.rollback()
+        msg = f"Roster sync exception: {exc}"
+        errors.append(msg)
+        logger.error(msg, exc_info=True)
+        steps.append(PreSeasonStepResult(
+            step="roster_sync", status="failed",
+            n_written=0, n_updated=0, n_failed=1, events=[msg],
+        ))
+
+    # ── Step 3: Draft Sync ──────────────────────────────────────────────────
+    if not roster_sync_ok:
+        steps.append(PreSeasonStepResult(
+            step="draft_sync", status="skipped",
+            n_written=0, n_updated=0, n_failed=0,
+            events=["Skipped: roster sync did not succeed"],
+        ))
+    else:
+        try:
+            _bust_players_cache()
+            result = await DraftSyncService(db).run(force_update=True)
+            await db.commit()
+            ok = result.n_written + result.n_updated
+            step_status = "ok" if result.n_failed == 0 else ("partial" if ok > 0 else "failed")
+            if step_status == "failed":
+                errors.append(f"Draft sync failed: {result.events}")
+            steps.append(PreSeasonStepResult(
+                step="draft_sync", status=step_status,
+                n_written=result.n_written, n_updated=result.n_updated,
+                n_failed=result.n_failed, events=result.events,
+            ))
+        except Exception as exc:
+            await db.rollback()
+            msg = f"Draft sync exception: {exc}"
+            errors.append(msg)
+            logger.error(msg, exc_info=True)
+            steps.append(PreSeasonStepResult(
+                step="draft_sync", status="failed",
+                n_written=0, n_updated=0, n_failed=1, events=[msg],
+            ))
+
+    # ── Step 4: Rookie Bucket Seed ──────────────────────────────────────────
+    try:
+        result = await RookieBucketSeedService(db).run()
+        await db.commit()
+        ok = result.n_written + result.n_updated
+        step_status = "ok" if result.n_failed == 0 else ("partial" if ok > 0 else "failed")
+        steps.append(PreSeasonStepResult(
+            step="rookie_bucket_seed", status=step_status,
+            n_written=result.n_written, n_updated=result.n_updated,
+            n_failed=result.n_failed, events=result.events,
+        ))
+    except Exception as exc:
+        await db.rollback()
+        msg = f"Rookie bucket seed exception: {exc}"
+        errors.append(msg)
+        logger.error(msg, exc_info=True)
+        steps.append(PreSeasonStepResult(
+            step="rookie_bucket_seed", status="failed",
+            n_written=0, n_updated=0, n_failed=1, events=[msg],
+        ))
+
+    # ── Overall status ──────────────────────────────────────────────────────
+    statuses = {s.status for s in steps}
+    if statuses <= {"failed", "skipped"}:
+        overall = "failed"
+    elif "failed" in statuses or "partial" in statuses or "skipped" in statuses:
+        overall = "partial"
+    else:
+        overall = "ok"
+
+    return PreSeasonSetupResponse(
+        new_season=body.new_season,
+        prior_season=body.prior_season,
+        overall_status=overall,
+        steps=steps,
+        errors=errors,
+    )
+
+
+def _bust_players_cache() -> None:
+    """Delete nflverse load_players cache to force fresh post-draft download."""
+    import os
+    import logging
+    from pathlib import Path
+    from app.config import settings
+    _log = logging.getLogger(__name__)
+    cache_path = Path(settings.NFLVERSE_CACHE_DIR) / "load_players.parquet"
+    if cache_path.exists():
+        os.remove(cache_path)
+        _log.info("Busted nflverse players cache: %s", cache_path)
+    else:
+        _log.info("nflverse players cache not found (fresh download on next call): %s", cache_path)
